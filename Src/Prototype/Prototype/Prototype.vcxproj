@@ -81,7 +81,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\Godot\NativeLibs\$(Configuration)\Prototype</OutDir>
-    <IncludePath>C:\Users\Alex\Documents\GodotProjects\includes\godot-cpp-bindings\godot_headers;C:\Users\Alex\Documents\GodotProjects\includes\godot-cpp-bindings\include;C:\Users\Alex\Documents\GodotProjects\includes\godot-cpp-bindings\include\gen;C:\Users\Alex\Documents\GodotProjects\includes\godot-master;C:\Users\Alex\Documents\GodotProjects\includes\godot-master\platform\windows;C:\Users\Alex\Documents\GodotProjects\includes\entt-master\src;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Alex\Documents\GodotProjects\includes\godot-cpp-bindings\godot_headers;C:\Users\Alex\Documents\GodotProjects\includes\godot-cpp-bindings\include;C:\Users\Alex\Documents\GodotProjects\includes\godot-cpp-bindings\include\gen;C:\Users\Alex\Documents\GodotProjects\includes\godot-master;C:\Users\Alex\Documents\GodotProjects\includes\godot-master\platform\windows;C:\Users\Alex\Documents\GodotProjects\includes\entt-master\src;C:\Users\Alex\Documents\GodotProjects\includes\godot-cpp-bindings\include\core;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Alex\Documents\GodotProjects\includes\godot-cpp-bindings\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -151,6 +151,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp" />
+    <ClCompile Include="Systems\KinematicMovementSystem.cpp" />
+    <ClCompile Include="Systems\PlayerFlatVelocitySystem.cpp" />
+    <ClCompile Include="World.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Components\Player.h" />
+    <ClInclude Include="Components\SimpleComponents.h" />
+    <ClInclude Include="Systems\BaseSystem.h" />
+    <ClInclude Include="Systems\KinematicMovementSystem.h" />
+    <ClInclude Include="Systems\PlayerFlatVelocitySystem.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
