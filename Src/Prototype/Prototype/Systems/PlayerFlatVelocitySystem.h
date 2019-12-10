@@ -5,13 +5,10 @@
 
 namespace godot
 {
-	extern "C"
+	class TESTABLE_CLASS PlayerFlatVelocitySystem : public BaseSystem
 	{
-		class PlayerFlatVelocitySystem : public BaseSystem
-		{
-		public:
-			__declspec(dllexport) void Update(FlatVelocityComponent& movement, SpeedComponent& speed, float delta, int directionMask);
-			__declspec(dllexport) virtual void operator()(float delta, entt::registry& registry) override;
-		};
-	}
+	public:
+		void Update(FlatVelocityComponent& movement, SpeedComponent& speed, float delta, int directionMask);
+		virtual void operator()(float delta, entt::registry& registry) override;
+	};
 }
