@@ -103,3 +103,5 @@ TEST_CASE("PlayerFlatVelocitySystem test")
 		CHECK_FLOAT_EQ(flatVel.y, diag.y);
 	}
 }
+
+//TODO: try to dllimport godot bindings and test KinematicMovementSystem

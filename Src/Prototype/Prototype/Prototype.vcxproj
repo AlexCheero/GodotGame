@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp" />
+    <ClCompile Include="Systems\GravitySystem.cpp" />
     <ClCompile Include="Systems\KinematicMovementSystem.cpp" />
     <ClCompile Include="Systems\PlayerFlatVelocitySystem.cpp" />
     <ClCompile Include="World.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Components\Player.h" />
     <ClInclude Include="Components\SimpleComponents.h" />
     <ClInclude Include="Systems\BaseSystem.h" />
+    <ClInclude Include="Systems\GravitySystem.h" />
     <ClInclude Include="Systems\KinematicMovementSystem.h" />
     <ClInclude Include="Systems\PlayerFlatVelocitySystem.h" />
     <ClInclude Include="World.h" />
