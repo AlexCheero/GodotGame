@@ -81,8 +81,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>..\..\..\Godot\NativeLibs\$(Configuration)\Prototype</OutDir>
-    <IncludePath>C:\Users\Alex\Documents\GodotProjects\includes\godot-cpp-bindings\godot_headers;C:\Users\Alex\Documents\GodotProjects\includes\godot-cpp-bindings\include;C:\Users\Alex\Documents\GodotProjects\includes\godot-cpp-bindings\include\gen;C:\Users\Alex\Documents\GodotProjects\includes\godot-master;C:\Users\Alex\Documents\GodotProjects\includes\godot-master\platform\windows;C:\Users\Alex\Documents\GodotProjects\includes\entt-master\src;C:\Users\Alex\Documents\GodotProjects\includes\godot-cpp-bindings\include\core;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Alex\Documents\GodotProjects\includes\godot-cpp-bindings\bin;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(GodotIncludes)godot-cpp-bindings\godot_headers;$(GodotIncludes)godot-cpp-bindings\include;$(GodotIncludes)godot-cpp-bindings\include\gen;$(GodotIncludes)godot-master;$(GodotIncludes)godot-master\platform\windows;$(GodotIncludes)entt-master\src;$(GodotIncludes)godot-cpp-bindings\include\core;$(IncludePath)</IncludePath>
+    <LibraryPath>$(GodotIncludes)godot-cpp-bindings\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>..\..\..\Godot\NativeLibs\$(Configuration)\Prototype</OutDir>

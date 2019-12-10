@@ -72,8 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Alex\Documents\GodotProjects\includes\godot-cpp-bindings\godot_headers;C:\Users\Alex\Documents\GodotProjects\includes\godot-cpp-bindings\include;C:\Users\Alex\Documents\GodotProjects\includes\godot-cpp-bindings\include\gen;C:\Users\Alex\Documents\GodotProjects\includes\godot-cpp-bindings\include\core;C:\Users\Alex\Documents\GodotProjects\includes\godot-master;C:\Users\Alex\Documents\GodotProjects\includes\godot-master\platform\windows;C:\Users\Alex\Documents\GodotProjects\includes\entt-master\src;C:\Users\Alex\Documents\GodotProjects\includes\doctest-master\doctest;C:\Users\Alex\Documents\GodotProjects\Projects\GodotGame\Src\Prototype\Prototype;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Alex\Documents\GodotProjects\Projects\GodotGame\Godot\NativeLibs\Debug\Prototype;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(GodotIncludes)godot-cpp-bindings\godot_headers;$(GodotIncludes)godot-cpp-bindings\include;$(GodotIncludes)godot-cpp-bindings\include\gen;$(GodotIncludes)godot-cpp-bindings\include\core;$(GodotIncludes)godot-master;$(GodotIncludes)godot-master\platform\windows;$(GodotIncludes)entt-master\src;$(GodotIncludes)doctest-master\doctest;$(GodotProjects)Projects\GodotGame\Src\Prototype\Prototype;$(IncludePath)</IncludePath>
+    <LibraryPath>$(GodotProjects)Projects\GodotGame\Godot\NativeLibs\Debug\Prototype;$(LibraryPath)</LibraryPath>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -95,6 +95,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
