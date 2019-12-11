@@ -22,11 +22,9 @@
 
 using namespace godot;
 
-//TODO: implement with inline functions
-#define CHECK_FLOAT_EQ_PRECISION(a, b, epsilon) CHECK(Math::absf(a - b) <= epsilon)
-#define CHECK_FLOAT_EQ(a, b) CHECK_FLOAT_EQ_PRECISION(a, b, CMP_EPSILON)
+inline void checkFloatEq(float a, float b, float epsilon = CMP_EPSILON) { CHECK(Math::absf(a - b) <= epsilon); }
 //TODO: generate random values for tests and run tests multiple times
-#define FLOAT_RAND() static_cast<float>(rand()) / static_cast<float>(RAND_MAX) + rand()
+inline float floatRand() { return (static_cast<float>(rand()) / static_cast<float>(RAND_MAX)) + rand(); }
 
 __declspec(dllimport) class godot::PlayerVelocitySystem;
 __declspec(dllimport) class godot::GravitySystem;
@@ -41,46 +39,46 @@ TEST_CASE("PlayerVelocitySystem test")
 	SUBCASE("Move left test")
 	{
 		playerVelSystem.Update(velocityComp, speedComp, delta, 1);
-		CHECK_FLOAT_EQ(velocityComp.velocity.x, -speedComp.speed * delta);
+		checkFloatEq(velocityComp.velocity.x, -speedComp.speed * delta);
 	}
 
 	SUBCASE("Move right test")
 	{
 		playerVelSystem.Update(velocityComp, speedComp, delta, 1 << 1);
-		CHECK_FLOAT_EQ(velocityComp.velocity.x, speedComp.speed * delta);
+		checkFloatEq(velocityComp.velocity.x, speedComp.speed * delta);
 	}
 
 	SUBCASE("Move forward test")
 	{
 		playerVelSystem.Update(velocityComp, speedComp, delta, 1 << 2);
-		CHECK_FLOAT_EQ(velocityComp.velocity.z, -speedComp.speed * delta);
+		checkFloatEq(velocityComp.velocity.z, -speedComp.speed * delta);
 	}
 
 	SUBCASE("Move backward test")
 	{
 		playerVelSystem.Update(velocityComp, speedComp, delta, 1 << 3);
-		CHECK_FLOAT_EQ(velocityComp.velocity.z, speedComp.speed * delta);
+		checkFloatEq(velocityComp.velocity.z, speedComp.speed * delta);
 	}
 
 	SUBCASE("Stand still test")
 	{
 		playerVelSystem.Update(velocityComp, speedComp, delta, 0);
-		CHECK_FLOAT_EQ(velocityComp.velocity.x, 0);
-		CHECK_FLOAT_EQ(velocityComp.velocity.z, 0);
+		checkFloatEq(velocityComp.velocity.x, 0);
+		checkFloatEq(velocityComp.velocity.z, 0);
 	}
 
 	SUBCASE("Move left right test")
 	{
 		playerVelSystem.Update(velocityComp, speedComp, delta, 1 | 1 << 1);
-		CHECK_FLOAT_EQ(velocityComp.velocity.x, 0);
-		CHECK_FLOAT_EQ(velocityComp.velocity.z, 0);
+		checkFloatEq(velocityComp.velocity.x, 0);
+		checkFloatEq(velocityComp.velocity.z, 0);
 	}
 
 	SUBCASE("Move fwd bwd test")
 	{
 		playerVelSystem.Update(velocityComp, speedComp, delta, 1 << 2| 1 << 3);
-		CHECK_FLOAT_EQ(velocityComp.velocity.x, 0);
-		CHECK_FLOAT_EQ(velocityComp.velocity.z, 0);
+		checkFloatEq(velocityComp.velocity.x, 0);
+		checkFloatEq(velocityComp.velocity.z, 0);
 	}
 
 	Vector2 diag(1, 1);
@@ -90,36 +88,36 @@ TEST_CASE("PlayerVelocitySystem test")
 	{
 		playerVelSystem.Update(velocityComp, speedComp, delta, 1 | 1 << 2);
 		velocityComp.velocity.y = 0;
-		CHECK_FLOAT_EQ(velocityComp.velocity.length(), diag.length());
-		CHECK_FLOAT_EQ(velocityComp.velocity.x, -diag.x);
-		CHECK_FLOAT_EQ(velocityComp.velocity.z, -diag.y);
+		checkFloatEq(velocityComp.velocity.length(), diag.length());
+		checkFloatEq(velocityComp.velocity.x, -diag.x);
+		checkFloatEq(velocityComp.velocity.z, -diag.y);
 	}
 
 	SUBCASE("Move fwd right test")
 	{
 		playerVelSystem.Update(velocityComp, speedComp, delta, 1 << 2 | 1 << 1);
 		velocityComp.velocity.y = 0;
-		CHECK_FLOAT_EQ(velocityComp.velocity.length(), diag.length());
-		CHECK_FLOAT_EQ(velocityComp.velocity.x, diag.x);
-		CHECK_FLOAT_EQ(velocityComp.velocity.z, -diag.y);
+		checkFloatEq(velocityComp.velocity.length(), diag.length());
+		checkFloatEq(velocityComp.velocity.x, diag.x);
+		checkFloatEq(velocityComp.velocity.z, -diag.y);
 	}
 
 	SUBCASE("Move bwd left test")
 	{
 		playerVelSystem.Update(velocityComp, speedComp, delta, 1 << 3 | 1);
 		velocityComp.velocity.y = 0;
-		CHECK_FLOAT_EQ(velocityComp.velocity.length(), diag.length());
-		CHECK_FLOAT_EQ(velocityComp.velocity.x, -diag.x);
-		CHECK_FLOAT_EQ(velocityComp.velocity.z, diag.y);
+		checkFloatEq(velocityComp.velocity.length(), diag.length());
+		checkFloatEq(velocityComp.velocity.x, -diag.x);
+		checkFloatEq(velocityComp.velocity.z, diag.y);
 	}
 
 	SUBCASE("Move bwd right test")
 	{
 		playerVelSystem.Update(velocityComp, speedComp, delta, 1 << 3 | 1 << 1);
 		velocityComp.velocity.y = 0;
-		CHECK_FLOAT_EQ(velocityComp.velocity.length(), diag.length());
-		CHECK_FLOAT_EQ(velocityComp.velocity.x, diag.x);
-		CHECK_FLOAT_EQ(velocityComp.velocity.z, diag.y);
+		checkFloatEq(velocityComp.velocity.length(), diag.length());
+		checkFloatEq(velocityComp.velocity.x, diag.x);
+		checkFloatEq(velocityComp.velocity.z, diag.y);
 	}
 }
 
@@ -134,7 +132,7 @@ TEST_CASE("GravitySystem test")
 		VelocityComponent velocityComp{ Vector3{ 0, 0, 0 } };
 		system.Update(velocityComp, gravityComp, delta, false);
 		float expectedSpeed = -gravityComp.accDown * delta;
-		CHECK_FLOAT_EQ(velocityComp.velocity.y, expectedSpeed);
+		checkFloatEq(velocityComp.velocity.y, expectedSpeed);
 	}
 
 	SUBCASE("Flying up test")
@@ -143,7 +141,7 @@ TEST_CASE("GravitySystem test")
 		VelocityComponent velocityComp{ Vector3{ 0, 0, 0 } };
 		system.Update(velocityComp, gravityComp, delta, false);
 		float expectedSpeed = initialSpeed - gravityComp.accUp;
-		CHECK_FLOAT_EQ(velocityComp.velocity.y, expectedSpeed);
+		checkFloatEq(velocityComp.velocity.y, expectedSpeed);
 	}
 
 	SUBCASE("Standing test")
@@ -151,8 +149,6 @@ TEST_CASE("GravitySystem test")
 		VelocityComponent velocityComp{ Vector3{ 0, 0, 0 } };
 		system.Update(velocityComp, gravityComp, delta, true);
 		float expectedSpeed = -gravityComp.accDown * delta;
-		CHECK_FLOAT_EQ(velocityComp.velocity.y, 0);
+		checkFloatEq(velocityComp.velocity.y, 0);
 	}
 }
-
-//TODO: try to dllimport godot bindings and test KinematicMovementSystem
