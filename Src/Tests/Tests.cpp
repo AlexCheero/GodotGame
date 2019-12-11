@@ -124,8 +124,8 @@ TEST_CASE("PlayerVelocitySystem test")
 TEST_CASE("GravitySystem test")
 {
 	GravitySystem system;
-	GravityComponent gravityComp{ 30, 20 };
-	float delta = 1.f;
+	GravityComponent gravityComp{ floatRand(), floatRand() };
+	float delta = floatRand();
 
 	SUBCASE("Falling down test")
 	{
@@ -137,10 +137,10 @@ TEST_CASE("GravitySystem test")
 
 	SUBCASE("Flying up test")
 	{
-		const float initialSpeed = 10;
-		VelocityComponent velocityComp{ Vector3{ 0, 0, 0 } };
+		float initialSpeed = Math::abs(floatRand());
+		VelocityComponent velocityComp{ Vector3{ 0, initialSpeed, 0 } };
 		system.Update(velocityComp, gravityComp, delta, false);
-		float expectedSpeed = initialSpeed - gravityComp.accUp;
+		float expectedSpeed = initialSpeed - gravityComp.accUp * delta;
 		checkFloatEq(velocityComp.velocity.y, expectedSpeed);
 	}
 
