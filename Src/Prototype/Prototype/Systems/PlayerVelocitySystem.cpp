@@ -1,6 +1,6 @@
 #include "PlayerVelocitySystem.h"
 
-void godot::PlayerVelocitySystem::Update(VelocityComponent& velocityComp, SpeedComponent speedComp, float delta, int directionMask)
+void godot::PlayerVelocitySystem::Update(VelocityComponent& velocityComp, SpeedComponent speedComp, int directionMask)
 {
 	Vector2 flatVelocity = Vector2(0, 0);
 	if (directionMask & (1 << 0))
@@ -34,6 +34,6 @@ void godot::PlayerVelocitySystem::operator()(float delta, entt::registry& regist
 
 	registry.view<VelocityComponent, SpeedComponent>().each([&](VelocityComponent& velocity, SpeedComponent speedComp)
 	{
-		Update(velocity, speedComp, delta, mask);
+		Update(velocity, speedComp, mask);
 	});
 }
