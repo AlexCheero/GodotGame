@@ -2,9 +2,8 @@
 
 void godot::KinematicMovementSystem::operator()(float delta, entt::registry& registry)
 {
-	registry.view<FlatVelocityComponent, KinematicBody*>().each([](FlatVelocityComponent& flatVel, KinematicBody* pNode)
+	registry.view<VelocityComponent, KinematicBody*>().each([](VelocityComponent& vel, KinematicBody* pNode)
 	{
-		Vector3 movement(flatVel.x, 0, flatVel.y);
-		pNode->move_and_slide(movement, Vector3(0, 1, 0));
+		pNode->move_and_slide(vel, Vector3(0, 1, 0));
 	});
 }

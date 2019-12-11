@@ -154,7 +154,7 @@
     <ClCompile Include="GodotLibrary.cpp" />
     <ClCompile Include="Systems\GravitySystem.cpp" />
     <ClCompile Include="Systems\KinematicMovementSystem.cpp" />
-    <ClCompile Include="Systems\PlayerFlatVelocitySystem.cpp" />
+    <ClCompile Include="Systems\PlayerVelocitySystem.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -163,7 +163,7 @@
     <ClInclude Include="Systems\BaseSystem.h" />
     <ClInclude Include="Systems\GravitySystem.h" />
     <ClInclude Include="Systems\KinematicMovementSystem.h" />
-    <ClInclude Include="Systems\PlayerFlatVelocitySystem.h" />
+    <ClInclude Include="Systems\PlayerVelocitySystem.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

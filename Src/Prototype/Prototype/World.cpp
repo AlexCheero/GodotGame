@@ -3,8 +3,9 @@
 #include <SceneTree.hpp>
 #include <KinematicBody.hpp>
 
-#include "Systems/PlayerFlatVelocitySystem.h"
+#include "Systems/PlayerVelocitySystem.h"
 #include "Systems/KinematicMovementSystem.h"
+#include "Systems/GravitySystem.h";
 
 void godot::World::CleanUpSystems(std::vector<BaseSystem*>& systems)
 {
@@ -41,24 +42,22 @@ void godot::World::_register_methods()
 void godot::World::_init()
 {
 	//set up systems
-	m_physics_systems.insert(m_physics_systems.end(), new PlayerFlatVelocitySystem());
+	m_physics_systems.insert(m_physics_systems.end(), new PlayerVelocitySystem());
 	m_physics_systems.insert(m_physics_systems.end(), new KinematicMovementSystem());
+	m_physics_systems.insert(m_physics_systems.end(), new GravitySystem());
 }
 
 void godot::World::_ready()
 {
 	//create entities and components
-	//entt::entity entity = registry.create();
-	//registry.assign<MyComponent>(entity, /*component or its ctor args*/);
-	//for godot specific use ptrs:
-	//Player* pPlayerNode = Object::cast_to<Player>(get_node("Player"));
-	//registry.assign<Player*>(entity, pPlayerNode);
-
+	//<Player entity
 	entt::entity entity = registry.create();
-	registry.assign<FlatVelocityComponent>(entity);
-	registry.assign<SpeedComponent>(entity, 600.f);
+	registry.assign<VelocityComponent>(entity);
+	registry.assign<SpeedComponent>(entity, 30.f);
 	KinematicBody* pBody = Object::cast_to<KinematicBody>(get_node("Player"));
 	registry.assign<KinematicBody*>(entity, pBody);
+	registry.assign<GravityComponent>(entity, GravityComponent{ 30, 20 });
+	//Player entity>
 }
 
 void godot::World::HandleInputEvent(InputEvent* e)
