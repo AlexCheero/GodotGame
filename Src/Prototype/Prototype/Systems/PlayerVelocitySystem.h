@@ -8,7 +8,7 @@ namespace godot
 	class TESTABLE_CLASS PlayerVelocitySystem : public BaseSystem
 	{
 	public:
-		void Update(VelocityComponent& velocity, SpeedComponent& speed, float delta, int directionMask);
+		void Update(VelocityComponent& velocityComp, SpeedComponent speedComp, float delta, int directionMask);
 		virtual void operator()(float delta, entt::registry& registry) override;
 	};
 }

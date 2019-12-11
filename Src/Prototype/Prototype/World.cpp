@@ -6,6 +6,7 @@
 #include "Systems/PlayerVelocitySystem.h"
 #include "Systems/KinematicMovementSystem.h"
 #include "Systems/GravitySystem.h";
+#include "Systems/JumpSystem.h";
 
 void godot::World::CleanUpSystems(std::vector<BaseSystem*>& systems)
 {
@@ -45,6 +46,8 @@ void godot::World::_init()
 	m_physics_systems.insert(m_physics_systems.end(), new PlayerVelocitySystem());
 	m_physics_systems.insert(m_physics_systems.end(), new KinematicMovementSystem());
 	m_physics_systems.insert(m_physics_systems.end(), new GravitySystem());
+	//TODO: must always follow GravitySystem. find a way to enforce such behaviour in entt
+	m_physics_systems.insert(m_physics_systems.end(), new JumpSystem());
 }
 
 void godot::World::_ready()
@@ -57,6 +60,7 @@ void godot::World::_ready()
 	KinematicBody* pBody = Object::cast_to<KinematicBody>(get_node("Player"));
 	registry.assign<KinematicBody*>(entity, pBody);
 	registry.assign<GravityComponent>(entity, GravityComponent{ 30, 20 });
+	registry.assign<JumpSpeedComponent>(entity, JumpSpeedComponent{ 10 });
 	//Player entity>
 }
 

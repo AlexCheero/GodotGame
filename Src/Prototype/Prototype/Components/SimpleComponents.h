@@ -4,9 +4,9 @@
 
 namespace godot
 {
-	using VelocityComponent = Vector3;
-	using SpeedComponent = float;
-
+	struct VelocityComponent { Vector3 velocity; };
+	struct SpeedComponent { float speed; };
+	struct JumpSpeedComponent { float speed; };
 	struct GravityComponent
 	{
 		float accUp;
