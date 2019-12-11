@@ -5,6 +5,7 @@
 namespace godot
 {
 	struct VelocityComponent { Vector3 velocity; };
+	struct RotationComponent { };
 	struct SpeedComponent { float speed; };
 	struct JumpSpeedComponent { float speed; };
 	struct GravityComponent

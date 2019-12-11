@@ -2,11 +2,15 @@
 
 #include <SceneTree.hpp>
 #include <KinematicBody.hpp>
+#include <Node.hpp>
+
+#include "Components/Player.h"
 
 #include "Systems/PlayerVelocitySystem.h"
 #include "Systems/KinematicMovementSystem.h"
 #include "Systems/GravitySystem.h";
 #include "Systems/JumpSystem.h";
+#include "Systems/PlayerRotationSystem.h"
 
 void godot::World::CleanUpSystems(std::vector<BaseSystem*>& systems)
 {
@@ -48,6 +52,7 @@ void godot::World::_init()
 	m_physics_systems.insert(m_physics_systems.end(), new GravitySystem());
 	//TODO: must always follow GravitySystem. find a way to enforce such behaviour in entt
 	m_physics_systems.insert(m_physics_systems.end(), new JumpSystem());
+	m_physics_systems.insert(m_physics_systems.end(), new PlayerRotationSystem());
 }
 
 void godot::World::_ready()
@@ -55,12 +60,20 @@ void godot::World::_ready()
 	//create entities and components
 	//<Player entity
 	entt::entity entity = registry.create();
+	
+	Node* pPlayerNode = get_node("Player");
+	
+	Player* pPlayer = Object::cast_to<Player>(pPlayerNode);
+	registry.assign<Player*>(entity, pPlayer);
+	
+	KinematicBody* pBody = Object::cast_to<KinematicBody>(pPlayerNode);
+	registry.assign<KinematicBody*>(entity, pBody);
+	
+	registry.assign<GravityComponent>(entity, GravityComponent{ 30, 20 });
+	registry.assign<JumpSpeedComponent>(entity, JumpSpeedComponent{ 30 });//find a way to set these values via editor
+	registry.assign<RotationComponent>(entity);
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<SpeedComponent>(entity, 30.f);
-	KinematicBody* pBody = Object::cast_to<KinematicBody>(get_node("Player"));
-	registry.assign<KinematicBody*>(entity, pBody);
-	registry.assign<GravityComponent>(entity, GravityComponent{ 30, 20 });
-	registry.assign<JumpSpeedComponent>(entity, JumpSpeedComponent{ 10 });
 	//Player entity>
 }
 

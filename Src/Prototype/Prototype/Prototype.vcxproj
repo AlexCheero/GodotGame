@@ -155,6 +155,7 @@
     <ClCompile Include="Systems\GravitySystem.cpp" />
     <ClCompile Include="Systems\JumpSystem.cpp" />
     <ClCompile Include="Systems\KinematicMovementSystem.cpp" />
+    <ClCompile Include="Systems\PlayerRotationSystem.cpp" />
     <ClCompile Include="Systems\PlayerVelocitySystem.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -165,6 +166,7 @@
     <ClInclude Include="Systems\GravitySystem.h" />
     <ClInclude Include="Systems\JumpSystem.h" />
     <ClInclude Include="Systems\KinematicMovementSystem.h" />
+    <ClInclude Include="Systems\PlayerRotationSystem.h" />
     <ClInclude Include="Systems\PlayerVelocitySystem.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

@@ -23,15 +23,16 @@ void godot::PlayerVelocitySystem::operator()(float delta, entt::registry& regist
 {
 	Input* pInput = Input::get_singleton();
 	int mask = 0;
-	if (pInput->is_action_pressed("ui_left"))
+	if (pInput->is_action_pressed("move_left"))
 		mask |= 1;
-	if (pInput->is_action_pressed("ui_right"))
+	if (pInput->is_action_pressed("move_right"))
 		mask |= 1 << 1;
-	if (pInput->is_action_pressed("ui_up"))
+	if (pInput->is_action_pressed("move_up"))
 		mask |= 1 << 2;
-	if (pInput->is_action_pressed("ui_down"))
+	if (pInput->is_action_pressed("move_down"))
 		mask |= 1 << 3;
 
+	//TODO: probably use Player* component to distinct from others
 	registry.view<VelocityComponent, SpeedComponent>().each([&](VelocityComponent& velocity, SpeedComponent speedComp)
 	{
 		Update(velocity, speedComp, mask);

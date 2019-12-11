@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.0352478, 0.130448, 0.644531, 1 )
@@ -7,6 +7,12 @@ albedo_color = Color( 0.0352478, 0.130448, 0.644531, 1 )
 material = SubResource( 1 )
 
 [sub_resource type="CapsuleShape" id=3]
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 1, 0.184314, 0.184314, 1 )
+
+[sub_resource type="CylinderMesh" id=5]
+material = SubResource( 4 )
 
 [node name="Player" type="KinematicBody"]
 
@@ -18,3 +24,11 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0, 0 )
 shape = SubResource( 3 )
+
+[node name="Nose" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.647744, -1.2839 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Nose"]
+transform = Transform( 0.1, 0, 0, 0, -2.18557e-008, -0.1, 0, 0.5, -4.37114e-009, 0, 0, 0 )
+mesh = SubResource( 5 )
+material/0 = null
