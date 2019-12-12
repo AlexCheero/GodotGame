@@ -64,31 +64,32 @@ void godot::World::_ready()
 {
 	//create entities and components
 	//<Player entity
-	entt::entity entity = registry.create();
+	entt::entity playerEntity = registry.create();
 	
 	Node* pPlayerNode = get_node("Player");
 	
 	Player* pPlayer = Object::cast_to<Player>(pPlayerNode);
-	registry.assign<Player*>(entity, pPlayer);
+	registry.assign<Player*>(playerEntity, pPlayer);
 	
 	KinematicBody* pBody = Object::cast_to<KinematicBody>(pPlayerNode);
-	registry.assign<KinematicBody*>(entity, pBody);
+	registry.assign<KinematicBody*>(playerEntity, pBody);
 	
-	registry.assign<GravityComponent>(entity, GravityComponent{ 30, 20 });
-	registry.assign<JumpSpeedComponent>(entity, JumpSpeedComponent{ 30 });//find a way to set these values via editor
-	registry.assign<RotationComponent>(entity);
-	registry.assign<VelocityComponent>(entity);
-	registry.assign<SpeedComponent>(entity, 30.f);
+	registry.assign<GravityComponent>(playerEntity, GravityComponent{ 30, 20 });
+	registry.assign<JumpSpeedComponent>(playerEntity, JumpSpeedComponent{ 30 });//find a way to set these values via editor
+	registry.assign<RotationComponent>(playerEntity);
+	registry.assign<VelocityComponent>(playerEntity);
+	registry.assign<SpeedComponent>(playerEntity, 30.f);
 	//Player entity>
 
 	//<Camera entity
-	entity = registry.create();
+	entt::entity cameraEntity = registry.create();
 	
 	Camera* pCamera = Object::cast_to<Camera>(get_node("Camera"));
-	registry.assign<Camera*>(entity, pCamera);
+	registry.assign<Camera*>(cameraEntity, pCamera);
+	registry.assign<Camera*>(playerEntity, pCamera);
 	
-	registry.assign<CamRelativePositionComponent>(entity, CamRelativePositionComponent{ 15, 30, 45 });
-	registry.assign<Spatial*>(entity, Object::cast_to<Spatial>(pPlayerNode));
+	registry.assign<CamRelativePositionComponent>(cameraEntity, CamRelativePositionComponent{ 15, 30, 45 });
+	registry.assign<Spatial*>(cameraEntity, Object::cast_to<Spatial>(pPlayerNode));
 	//Camera entity>
 }
 

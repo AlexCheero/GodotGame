@@ -1,22 +1,25 @@
 #include "PlayerVelocitySystem.h"
 
-void godot::PlayerVelocitySystem::Update(VelocityComponent& velocityComp, SpeedComponent speedComp, int directionMask)
+#include "../Components/Player.h"
+
+void godot::PlayerVelocitySystem::Update(VelocityComponent& velocityComp, SpeedComponent speedComp, Camera* pCam, int directionMask)
 {
-	Vector2 flatVelocity = Vector2(0, 0);
+	Basis camBasis = pCam->get_transform().get_basis();
+	Vector3 flatVelocity = Vector3(0, 0, 0);
 	if (directionMask & (1 << 0))
-		flatVelocity.x -= 1;
+		flatVelocity -= camBasis.x;
 	if (directionMask & (1 << 1))
-		flatVelocity.x += 1;
+		flatVelocity += camBasis.x;
 	if (directionMask & (1 << 2))
-		flatVelocity.y -= 1;
+		flatVelocity -= camBasis.z;
 	if (directionMask & (1 << 3))
-		flatVelocity.y += 1;
+		flatVelocity += camBasis.z;
 
 	flatVelocity.normalize();
 	flatVelocity *= speedComp.speed;
 
 	velocityComp.velocity.x = flatVelocity.x;
-	velocityComp.velocity.z = flatVelocity.y;
+	velocityComp.velocity.z = flatVelocity.z;
 }
 
 void godot::PlayerVelocitySystem::operator()(float delta, entt::registry& registry)
@@ -32,9 +35,8 @@ void godot::PlayerVelocitySystem::operator()(float delta, entt::registry& regist
 	if (pInput->is_action_pressed("move_down"))
 		mask |= 1 << 3;
 
-	//TODO: probably use Player* component to distinct from others
-	registry.view<VelocityComponent, SpeedComponent>().each([&](VelocityComponent& velocity, SpeedComponent speedComp)
+	registry.view<VelocityComponent, SpeedComponent, Player*, Camera*>().each([&](VelocityComponent& velocity, SpeedComponent speedComp, Player* pPlayer, Camera* pCam)
 	{
-		Update(velocity, speedComp, mask);
+		Update(velocity, speedComp, pCam, mask);
 	});
 }
