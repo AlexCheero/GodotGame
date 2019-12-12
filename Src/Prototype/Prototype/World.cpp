@@ -87,7 +87,7 @@ void godot::World::_ready()
 	Camera* pCamera = Object::cast_to<Camera>(get_node("Camera"));
 	registry.assign<Camera*>(entity, pCamera);
 	
-	registry.assign<CamRelativePositionComponent>(entity, CamRelativePositionComponent{ 15, 30 });
+	registry.assign<CamRelativePositionComponent>(entity, CamRelativePositionComponent{ 15, 30, 45 });
 	registry.assign<Spatial*>(entity, Object::cast_to<Spatial>(pPlayerNode));
 	//Camera entity>
 }
@@ -96,10 +96,8 @@ void godot::World::HandleInputEvent(InputEvent* e)
 {
 	if (e->is_action_pressed("ui_accept"))
 	{
-		//<todo reload registry
 		registry.reset();
 		_ready();
-		//todo reload registry>
 		get_tree()->reload_current_scene();
 	}
 	else if (e->is_action_pressed("ui_cancel"))

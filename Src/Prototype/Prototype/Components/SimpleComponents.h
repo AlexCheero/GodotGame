@@ -18,6 +18,7 @@ namespace godot
 	struct CamRelativePositionComponent
 	{
 		float distance;
-		float angle;
+		float xAngle;
+		float yAngle;
 	};
 }
