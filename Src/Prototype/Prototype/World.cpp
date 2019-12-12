@@ -3,6 +3,7 @@
 #include <SceneTree.hpp>
 #include <KinematicBody.hpp>
 #include <Node.hpp>
+#include <Camera.hpp>
 
 #include "Components/Player.h"
 
@@ -11,6 +12,7 @@
 #include "Systems/GravitySystem.h";
 #include "Systems/JumpSystem.h";
 #include "Systems/PlayerRotationSystem.h"
+#include "Systems/CameraFollowSystem.h"
 
 void godot::World::CleanUpSystems(std::vector<BaseSystem*>& systems)
 {
@@ -46,13 +48,16 @@ void godot::World::_register_methods()
 
 void godot::World::_init()
 {
-	//set up systems
+	//setup physics systems
 	m_physics_systems.insert(m_physics_systems.end(), new PlayerVelocitySystem());
 	m_physics_systems.insert(m_physics_systems.end(), new KinematicMovementSystem());
 	m_physics_systems.insert(m_physics_systems.end(), new GravitySystem());
 	//TODO: must always follow GravitySystem. find a way to enforce such behaviour in entt
 	m_physics_systems.insert(m_physics_systems.end(), new JumpSystem());
 	m_physics_systems.insert(m_physics_systems.end(), new PlayerRotationSystem());
+
+	//setup systems
+	m_process_systems.insert(m_process_systems.end(), new CameraFollowSystem());
 }
 
 void godot::World::_ready()
@@ -75,6 +80,16 @@ void godot::World::_ready()
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<SpeedComponent>(entity, 30.f);
 	//Player entity>
+
+	//<Camera entity
+	entity = registry.create();
+	
+	Camera* pCamera = Object::cast_to<Camera>(get_node("Camera"));
+	registry.assign<Camera*>(entity, pCamera);
+	
+	registry.assign<CamRelativePositionComponent>(entity, CamRelativePositionComponent{ 15, 30 });
+	registry.assign<Spatial*>(entity, Object::cast_to<Spatial>(pPlayerNode));
+	//Camera entity>
 }
 
 void godot::World::HandleInputEvent(InputEvent* e)
