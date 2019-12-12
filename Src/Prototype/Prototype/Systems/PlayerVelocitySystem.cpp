@@ -35,7 +35,7 @@ void godot::PlayerVelocitySystem::operator()(float delta, entt::registry& regist
 	if (pInput->is_action_pressed("move_down"))
 		mask |= 1 << 3;
 
-	registry.view<VelocityComponent, SpeedComponent, Player*, Camera*>().each([&](VelocityComponent& velocity, SpeedComponent speedComp, Player* pPlayer, Camera* pCam)
+	registry.view<VelocityComponent, SpeedComponent, Player*, Camera*>().each([this, mask](VelocityComponent& velocity, SpeedComponent speedComp, Player* pPlayer, Camera* pCam)
 	{
 		Update(velocity, speedComp, pCam, mask);
 	});

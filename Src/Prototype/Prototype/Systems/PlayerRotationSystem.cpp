@@ -8,8 +8,7 @@
 void godot::PlayerRotationSystem::operator()(float delta, entt::registry& registry)
 {
 	Input* pInput = Input::get_singleton();
-	//TODO: check captures of all systems so far
-	registry.view<RotationComponent, Player*, Camera*>().each([&](RotationComponent rotationComp, Player* pPlayer, Camera* pCam)
+	registry.view<RotationComponent, Player*, Camera*>().each([pInput](RotationComponent rotationComp, Player* pPlayer, Camera* pCam)
 	{
 		Basis camBasis = pCam->get_global_transform().get_basis();
 		Vector3 dir{ 0, 0, 0 };

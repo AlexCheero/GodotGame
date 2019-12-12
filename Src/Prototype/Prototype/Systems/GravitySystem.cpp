@@ -15,7 +15,7 @@ void godot::GravitySystem::Update(VelocityComponent& velocityComp, GravityCompon
 
 void godot::GravitySystem::operator()(float delta, entt::registry& registry)
 {
-	registry.view<VelocityComponent, GravityComponent, KinematicBody*>().each([&](VelocityComponent& velocityComp, GravityComponent& gravity, KinematicBody* pBody)
+	registry.view<VelocityComponent, GravityComponent, KinematicBody*>().each([this, delta](VelocityComponent& velocityComp, GravityComponent& gravity, KinematicBody* pBody)
 	{
 		Update(velocityComp, gravity, delta, pBody->is_on_floor());
 	});
