@@ -29,5 +29,8 @@
     <ClInclude Include="GravitySystemTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="JumpSystemTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

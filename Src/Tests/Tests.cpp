@@ -3,3 +3,4 @@
 
 #include "PlayerVelocitySystemTest.h"
 #include "GravitySystemTest.h"
+#include "JumpSystemTest.h"

@@ -8,7 +8,7 @@ namespace godot
 	class TESTABLE_CLASS JumpSystem : public BaseSystem
 	{
 	public:
-		void Update(VelocityComponent& velocityComp, JumpSpeedComponent jump, float delta);
+		void Update(VelocityComponent& velocityComp, JumpSpeedComponent jump);
 		virtual void operator()(float delta, entt::registry& registry) override;
 	};
 }
