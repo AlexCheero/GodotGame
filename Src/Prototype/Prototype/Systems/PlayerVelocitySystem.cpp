@@ -2,9 +2,8 @@
 
 #include "../Components/Player.h"
 
-void godot::PlayerVelocitySystem::Update(VelocityComponent& velocityComp, SpeedComponent speedComp, Camera* pCam, int directionMask)
+void godot::PlayerVelocitySystem::Update(VelocityComponent& velocityComp, SpeedComponent speedComp, Basis camBasis, int directionMask)
 {
-	Basis camBasis = pCam->get_transform().get_basis();
 	Vector3 flatVelocity = Vector3(0, 0, 0);
 	if (directionMask & (1 << 0))
 		flatVelocity -= camBasis.x;
@@ -37,6 +36,6 @@ void godot::PlayerVelocitySystem::operator()(float delta, entt::registry& regist
 
 	registry.view<VelocityComponent, SpeedComponent, Player*, Camera*>().each([this, mask](VelocityComponent& velocity, SpeedComponent speedComp, Player* pPlayer, Camera* pCam)
 	{
-		Update(velocity, speedComp, pCam, mask);
+		Update(velocity, speedComp, pCam->get_transform().get_basis(), mask);
 	});
 }

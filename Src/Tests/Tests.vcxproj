@@ -72,8 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(GodotIncludes)godot-cpp-bindings\godot_headers;$(GodotIncludes)godot-cpp-bindings\include;$(GodotIncludes)godot-cpp-bindings\include\gen;$(GodotIncludes)godot-cpp-bindings\include\core;$(GodotIncludes)godot-master;$(GodotIncludes)godot-master\platform\windows;$(GodotIncludes)entt-master\src;$(GodotIncludes)doctest-master\doctest;$(GodotProjects)Projects\GodotGame\Src\Prototype\Prototype;$(IncludePath)</IncludePath>
-    <LibraryPath>$(GodotProjects)Projects\GodotGame\Godot\NativeLibs\Debug\Prototype;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(GodotIncludes)godot-cpp-bindings\godot_headers;$(GodotIncludes)godot-cpp-bindings\include;$(GodotIncludes)godot-cpp-bindings\include\gen;$(GodotIncludes)godot-cpp-bindings\include\core;$(GodotIncludes)godot-master;$(GodotIncludes)godot-master\platform\windows;$(GodotIncludes)entt-master\src;$(GodotIncludes)doctest-master\doctest;$(GodotProjects)Projects\Prototype\Src\Prototype\Prototype;$(IncludePath)</IncludePath>
+    <LibraryPath>$(GodotProjects)Projects\Prototype\Godot\NativeLibs\Debug\Prototype;$(GodotIncludes)godot-cpp-bindings\bin;$(LibraryPath)</LibraryPath>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -100,7 +100,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Prototype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Prototype.lib;libgodot-cpp.windows.$(Platform).$(Configuration).lib;%(AdditionalDependencies)</AdditionalDependencies>
       <DelayLoadDLLs>%(DelayLoadDLLs)</DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>
