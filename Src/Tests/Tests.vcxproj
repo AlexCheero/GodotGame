@@ -72,12 +72,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(GodotIncludes)godot-cpp-bindings\godot_headers;$(GodotIncludes)godot-cpp-bindings\include;$(GodotIncludes)godot-cpp-bindings\include\gen;$(GodotIncludes)godot-cpp-bindings\include\core;$(GodotIncludes)godot-master;$(GodotIncludes)godot-master\platform\windows;$(GodotIncludes)entt-master\src;$(GodotIncludes)doctest-master\doctest;$(GodotProjects)Projects\Prototype\Src\Prototype\Prototype;$(IncludePath)</IncludePath>
-    <LibraryPath>$(GodotProjects)Projects\Prototype\Godot\NativeLibs\Debug\Prototype;$(GodotIncludes)godot-cpp-bindings\bin;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)..\..\..\..\includes\godot-cpp-bindings\godot_headers;$(SolutionDir)..\..\..\..\includes\godot-cpp-bindings\include;$(SolutionDir)..\..\..\..\includes\godot-cpp-bindings\include\gen;$(SolutionDir)..\..\..\..\includes\godot-cpp-bindings\include\core;$(SolutionDir)..\..\..\..\includes\godot-master;$(SolutionDir)..\..\..\..\includes\godot-master\platform\windows;$(SolutionDir)..\..\..\..\includes\entt-master\src;$(SolutionDir)..\..\..\..\includes\doctest;$(SolutionDir)..\..\..\..\Projects\Prototype\Src\Prototype\Prototype;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\..\..\..\includes\godot-cpp-bindings\bin;$(SolutionDir)..\..\..\..\Projects\Prototype\Godot\NativeLibs\Debug\Prototype;$(LibraryPath)</LibraryPath>
     <SourcePath>$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)..\..\..\..\includes\godot-cpp-bindings\godot_headers;$(SolutionDir)..\..\..\..\includes\godot-cpp-bindings\include;$(SolutionDir)..\..\..\..\includes\godot-cpp-bindings\include\gen;$(SolutionDir)..\..\..\..\includes\godot-cpp-bindings\include\core;$(SolutionDir)..\..\..\..\includes\godot-master;$(SolutionDir)..\..\..\..\includes\godot-master\platform\windows;$(SolutionDir)..\..\..\..\includes\entt-master\src;$(SolutionDir)..\..\..\..\includes\doctest;$(SolutionDir)..\..\..\..\Projects\Prototype\Src\Prototype\Prototype;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\..\..\..\includes\godot-cpp-bindings\bin;$(SolutionDir)..\..\..\..\Projects\Prototype\Godot\NativeLibs\Debug\Prototype;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -100,7 +102,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Prototype.lib;libgodot-cpp.windows.$(Platform).$(Configuration).lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libgodot-cpp.windows.$(Platform).$(Configuration).lib;Prototype.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <DelayLoadDLLs>%(DelayLoadDLLs)</DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>
@@ -117,6 +119,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libgodot-cpp.windows.$(Platform).$(Configuration).lib;Prototype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
