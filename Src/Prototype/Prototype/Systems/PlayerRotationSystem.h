@@ -7,8 +7,10 @@ namespace godot
 {
 	class TESTABLE_CLASS PlayerRotationSystem : public BaseSystem
 	{
+	private:
+		Vector2 GetInputDir(int directionMask);
 	public:
-		//void Update(RotationComponent& velocityComp, int directionMask);
+		Vector3 GetTargetDirection(Vector2 inputDir, Basis camBasis);
 		virtual void operator()(float delta, entt::registry& registry) override;
 	};
 }

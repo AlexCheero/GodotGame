@@ -5,3 +5,4 @@
 #include "GravitySystemTest.h"
 #include "JumpSystemTest.h"
 #include "CameraFollowSystemTest.h"
+#include "PlayerRotationSystemTest.h"
