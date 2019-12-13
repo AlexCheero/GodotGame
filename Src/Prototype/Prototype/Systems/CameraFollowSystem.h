@@ -5,10 +5,10 @@
 
 namespace godot
 {
-	//TODO: remove TESTABLE_CLASS macro from not tested classes
 	class TESTABLE_CLASS CameraFollowSystem : public BaseSystem
 	{
 	public:
+		Vector3 NewCamPosition(Vector3 targetPosition, CamPositionComponent relPos);
 		virtual void operator()(float delta, entt::registry& registry) override;
 	};
 }

@@ -161,6 +161,7 @@
     <ClCompile Include="Tests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CameraFollowSystemTest.h" />
     <ClInclude Include="CommonIncludes.h" />
     <ClInclude Include="GravitySystemTest.h" />
     <ClInclude Include="JumpSystemTest.h" />

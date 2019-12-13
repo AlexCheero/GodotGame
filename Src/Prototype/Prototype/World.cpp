@@ -88,7 +88,7 @@ void godot::World::_ready()
 	registry.assign<Camera*>(cameraEntity, pCamera);
 	registry.assign<Camera*>(playerEntity, pCamera);
 	
-	registry.assign<CamPositionComponent>(cameraEntity, CamPositionComponent{ 15, 30, 45 });
+	registry.assign<CamPositionComponent>(cameraEntity, CamPositionComponent{ 15, -30, -45 });
 	registry.assign<Spatial*>(cameraEntity, Object::cast_to<Spatial>(pPlayerNode));
 	//Camera entity>
 }
