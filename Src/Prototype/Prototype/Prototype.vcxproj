@@ -152,7 +152,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp" />
+    <ClCompile Include="Systems\AttackSystem.cpp" />
     <ClCompile Include="Systems\CameraFollowSystem.cpp" />
+    <ClCompile Include="Systems\DestroyDeadSystem.cpp" />
     <ClCompile Include="Systems\GravitySystem.cpp" />
     <ClCompile Include="Systems\JumpSystem.cpp" />
     <ClCompile Include="Systems\KinematicMovementSystem.cpp" />
@@ -161,10 +163,13 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\Enemy.h" />
     <ClInclude Include="Components\Player.h" />
     <ClInclude Include="Components\SimpleComponents.h" />
+    <ClInclude Include="Systems\AttackSystem.h" />
     <ClInclude Include="Systems\BaseSystem.h" />
     <ClInclude Include="Systems\CameraFollowSystem.h" />
+    <ClInclude Include="Systems\DestroyDeadSystem.h" />
     <ClInclude Include="Systems\GravitySystem.h" />
     <ClInclude Include="Systems\JumpSystem.h" />
     <ClInclude Include="Systems\KinematicMovementSystem.h" />

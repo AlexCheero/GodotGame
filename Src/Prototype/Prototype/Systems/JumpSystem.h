@@ -5,6 +5,7 @@
 
 namespace godot
 {
+	//TODO: rename to PlayerJumpSystem or abstract player input somehow
 	class TESTABLE_CLASS JumpSystem : public BaseSystem
 	{
 	public:

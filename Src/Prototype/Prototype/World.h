@@ -18,6 +18,10 @@ namespace godot
 
 		void CleanUpSystems(std::vector<BaseSystem*>& systems);
 		void UpdateSystems(float delta, std::vector<BaseSystem*>& systems);
+
+		void PreparePlayerEntity();
+		void PrepareCameraEntity();
+		void PrepareEnemyEntity();
 	public:
 		World() = default;
 		virtual ~World();

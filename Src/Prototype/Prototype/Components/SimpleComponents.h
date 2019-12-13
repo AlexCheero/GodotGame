@@ -8,6 +8,9 @@ namespace godot
 	struct RotationComponent { };
 	struct SpeedComponent { float speed; };
 	struct JumpSpeedComponent { float speed; };
+	struct HealthComponent { float hp; };
+	struct DeadComponent { };
+	struct PendingDeleteComponent { };
 	
 	struct GravityComponent
 	{
@@ -20,5 +23,12 @@ namespace godot
 		float distance;
 		float xAngle;
 		float yAngle;
+	};
+
+	struct AttackComponent
+	{
+		//TODO: godot units is not meters
+		float distance;
+		float damage;
 	};
 }

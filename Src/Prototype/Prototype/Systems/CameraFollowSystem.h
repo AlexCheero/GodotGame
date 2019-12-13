@@ -5,6 +5,7 @@
 
 namespace godot
 {
+	//TODO: abstract from camera
 	class TESTABLE_CLASS CameraFollowSystem : public BaseSystem
 	{
 	public:

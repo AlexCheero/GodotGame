@@ -5,7 +5,7 @@
 
 namespace godot
 {
-	//try to made this component-convertible
+	//TODO: try to made this component-convertible
 	class Player : public KinematicBody
 	{
 		GODOT_CLASS(Player, KinematicBody)

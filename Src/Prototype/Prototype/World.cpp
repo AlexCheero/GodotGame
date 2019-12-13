@@ -6,6 +6,7 @@
 #include <Camera.hpp>
 
 #include "Components/Player.h"
+#include "Components/Enemy.h"
 
 #include "Systems/PlayerVelocitySystem.h"
 #include "Systems/KinematicMovementSystem.h"
@@ -13,6 +14,8 @@
 #include "Systems/JumpSystem.h";
 #include "Systems/PlayerRotationSystem.h"
 #include "Systems/CameraFollowSystem.h"
+#include "Systems/AttackSystem.h"
+#include "Systems/DestroyDeadSystem.h"
 
 void godot::World::CleanUpSystems(std::vector<BaseSystem*>& systems)
 {
@@ -29,6 +32,60 @@ void godot::World::UpdateSystems(float delta, std::vector<BaseSystem*>& systems)
 {
 	for (BaseSystem* system : systems)
 		(*system)(delta, registry);
+}
+
+void godot::World::PreparePlayerEntity()
+{
+	entt::entity entity = registry.create();
+
+	Node* pPlayerNode = get_node("Player");
+	registry.assign<Node*>(entity, pPlayerNode);
+
+	Player* pPlayer = Object::cast_to<Player>(pPlayerNode);
+	registry.assign<Player*>(entity, pPlayer);
+
+	KinematicBody* pBody = Object::cast_to<KinematicBody>(pPlayerNode);
+	registry.assign<KinematicBody*>(entity, pBody);
+
+	Spatial* pSpatial = Object::cast_to<Spatial>(pPlayerNode);
+	registry.assign<Spatial*>(entity, pSpatial);
+
+	Camera* pCamera = Object::cast_to<Camera>(get_node("Camera"));
+	registry.assign<Camera*>(entity, pCamera);
+
+	registry.assign<GravityComponent>(entity, GravityComponent{ 30, 20 });
+	registry.assign<JumpSpeedComponent>(entity, JumpSpeedComponent{ 30 });//find a way to set these values via editor
+	registry.assign<RotationComponent>(entity);
+	registry.assign<VelocityComponent>(entity);
+	registry.assign<SpeedComponent>(entity, 30.f);
+	registry.assign<HealthComponent>(entity, 100.f);
+	registry.assign<AttackComponent>(entity, 20.f, 50.f);
+}
+
+void godot::World::PrepareCameraEntity()
+{
+	entt::entity entity = registry.create();
+
+	Camera* pCamera = Object::cast_to<Camera>(get_node("Camera"));
+	registry.assign<Camera*>(entity, pCamera);
+	registry.assign<CamPositionComponent>(entity, CamPositionComponent{ 15, -30, -45 });
+	registry.assign<Spatial*>(entity, Object::cast_to<Spatial>(get_node("Player")));
+}
+
+void godot::World::PrepareEnemyEntity()
+{
+	entt::entity entity = registry.create();
+
+	Node* pEnemyNode = get_node("Enemy");
+	registry.assign<Node*>(entity, pEnemyNode);
+
+	Enemy* pEnemy = Object::cast_to<Enemy>(pEnemyNode);
+	registry.assign<Enemy*>(entity, pEnemy);
+
+	Spatial* pSpatial = Object::cast_to<Spatial>(pEnemyNode);
+	registry.assign<Spatial*>(entity, pSpatial);
+
+	registry.assign<HealthComponent>(entity, 100.f);
 }
 
 godot::World::~World()
@@ -58,39 +115,16 @@ void godot::World::_init()
 
 	//setup systems
 	m_process_systems.insert(m_process_systems.end(), new CameraFollowSystem());
+	m_process_systems.insert(m_process_systems.end(), new AttackSystem());
+	m_process_systems.insert(m_process_systems.end(), new DestroyDeadSystem());
 }
 
 void godot::World::_ready()
 {
 	//create entities and components
-	//<Player entity
-	entt::entity playerEntity = registry.create();
-	
-	Node* pPlayerNode = get_node("Player");
-	
-	Player* pPlayer = Object::cast_to<Player>(pPlayerNode);
-	registry.assign<Player*>(playerEntity, pPlayer);
-	
-	KinematicBody* pBody = Object::cast_to<KinematicBody>(pPlayerNode);
-	registry.assign<KinematicBody*>(playerEntity, pBody);
-	
-	registry.assign<GravityComponent>(playerEntity, GravityComponent{ 30, 20 });
-	registry.assign<JumpSpeedComponent>(playerEntity, JumpSpeedComponent{ 30 });//find a way to set these values via editor
-	registry.assign<RotationComponent>(playerEntity);
-	registry.assign<VelocityComponent>(playerEntity);
-	registry.assign<SpeedComponent>(playerEntity, 30.f);
-	//Player entity>
-
-	//<Camera entity
-	entt::entity cameraEntity = registry.create();
-	
-	Camera* pCamera = Object::cast_to<Camera>(get_node("Camera"));
-	registry.assign<Camera*>(cameraEntity, pCamera);
-	registry.assign<Camera*>(playerEntity, pCamera);
-	
-	registry.assign<CamPositionComponent>(cameraEntity, CamPositionComponent{ 15, -30, -45 });
-	registry.assign<Spatial*>(cameraEntity, Object::cast_to<Spatial>(pPlayerNode));
-	//Camera entity>
+	PreparePlayerEntity();
+	PrepareCameraEntity();
+	PrepareEnemyEntity();
 }
 
 void godot::World::HandleInputEvent(InputEvent* e)
