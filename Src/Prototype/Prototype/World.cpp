@@ -59,7 +59,7 @@ void godot::World::PreparePlayerEntity()
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<SpeedComponent>(entity, 30.f);
 	registry.assign<HealthComponent>(entity, 100.f);
-	registry.assign<AttackComponent>(entity, 4.f, 50.f);
+	registry.assign<AttackComponent>(entity, 4.f, 50.f, 90.f);
 }
 
 void godot::World::PrepareCameraEntity()

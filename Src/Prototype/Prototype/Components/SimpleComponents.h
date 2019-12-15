@@ -29,5 +29,6 @@ namespace godot
 	{
 		float distance;
 		float damage;
+		float angle;
 	};
 }
