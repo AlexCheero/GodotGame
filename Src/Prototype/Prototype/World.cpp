@@ -81,6 +81,7 @@ void godot::World::PrepareEnemyEntity()
 
 	Enemy* pEnemy = Object::cast_to<Enemy>(pEnemyNode);
 	registry.assign<Enemy*>(entity, pEnemy);
+	pEnemy->SetEntity(entity);
 
 	Spatial* pSpatial = Object::cast_to<Spatial>(pEnemyNode);
 	registry.assign<Spatial*>(entity, pSpatial);
