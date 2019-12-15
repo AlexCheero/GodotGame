@@ -59,7 +59,7 @@ void godot::World::PreparePlayerEntity()
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<SpeedComponent>(entity, 30.f);
 	registry.assign<HealthComponent>(entity, 100.f);
-	registry.assign<AttackComponent>(entity, 20.f, 50.f);
+	registry.assign<AttackComponent>(entity, 4.f, 50.f);
 }
 
 void godot::World::PrepareCameraEntity()
@@ -112,10 +112,10 @@ void godot::World::_init()
 	//TODO: must always follow GravitySystem. find a way to enforce such behaviour in entt
 	m_physics_systems.insert(m_physics_systems.end(), new JumpSystem());
 	m_physics_systems.insert(m_physics_systems.end(), new PlayerRotationSystem());
+	m_physics_systems.insert(m_physics_systems.end(), new AttackSystem());
 
 	//setup systems
 	m_process_systems.insert(m_process_systems.end(), new CameraFollowSystem());
-	m_process_systems.insert(m_process_systems.end(), new AttackSystem());
 	m_process_systems.insert(m_process_systems.end(), new DestroyDeadSystem());
 }
 

@@ -27,7 +27,6 @@ namespace godot
 
 	struct AttackComponent
 	{
-		//TODO: godot units is not meters
 		float distance;
 		float damage;
 	};
