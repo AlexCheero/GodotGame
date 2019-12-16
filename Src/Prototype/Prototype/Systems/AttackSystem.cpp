@@ -9,13 +9,14 @@
 #include "core/math/math_funcs.h"
 
 #include "../Components/Enemy.h"
+#include "../Utils.h"
 
 const float INTERSECT_RESULTS_NUM = 16.f;
 
 godot::AttackSystem::AttackSystem()
 {
 	m_params = (Ref<PhysicsShapeQueryParameters>)PhysicsShapeQueryParameters::_new();
-	m_params->set_collision_mask(1 << 2);//Enemy layer TODO: make util to get mask/layer by name
+	m_params->set_collision_mask(utils::GetLayerByName("Enemy"));//Enemy layer TODO: make util to get mask/layer by name
 	m_params->set_collide_with_areas(false);
 	m_params->set_collide_with_bodies(true);
 }
@@ -54,12 +55,9 @@ void godot::AttackSystem::operator()(float delta, entt::registry& registry)
 
 		if (enemyHealthComp.hp <= 0)
 		{
-			Godot::print("Killed!");
 			enemyHealthComp.hp = 0;
 			registry.assign<DeadComponent>(enemyEntity);
 		}
-		else
-			Godot::print("Hit!");
 	});
 }
 

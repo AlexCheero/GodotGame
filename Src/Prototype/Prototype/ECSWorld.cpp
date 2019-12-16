@@ -17,6 +17,8 @@
 #include "Systems/AttackSystem.h"
 #include "Systems/DestroyDeadSystem.h"
 
+#include "Utils.h"
+
 void godot::ECSWorld::CleanUpSystems(std::vector<BaseSystem*>& systems)
 {
 	for (BaseSystem* system : systems)
@@ -106,6 +108,8 @@ void godot::ECSWorld::_register_methods()
 
 void godot::ECSWorld::_init()
 {
+	utils::InitPhysicLayers();
+
 	//setup physics systems
 	m_physics_systems.insert(m_physics_systems.end(), new PlayerVelocitySystem());
 	m_physics_systems.insert(m_physics_systems.end(), new KinematicMovementSystem());
