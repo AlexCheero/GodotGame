@@ -1,3 +1,4 @@
+//TODO: probably have to change all #pragma once to include guards, to compile with other compiler
 #pragma once
 
 #include <core/Godot.hpp>
