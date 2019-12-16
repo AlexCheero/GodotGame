@@ -16,7 +16,7 @@ const float INTERSECT_RESULTS_NUM = 16.f;
 godot::AttackSystem::AttackSystem()
 {
 	m_params = (Ref<PhysicsShapeQueryParameters>)PhysicsShapeQueryParameters::_new();
-	m_params->set_collision_mask(utils::GetLayerByName("Enemy"));//Enemy layer TODO: make util to get mask/layer by name
+	m_params->set_collision_mask(utils::GetLayerByName("Enemy"));
 	m_params->set_collide_with_areas(false);
 	m_params->set_collide_with_bodies(true);
 }
