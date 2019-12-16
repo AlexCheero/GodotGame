@@ -136,7 +136,6 @@ void godot::ECSWorld::HandleInputEvent(InputEvent* e)
 {
 	if (e->is_action_pressed("ui_accept"))
 	{
-		//TODO: crashes
 		registry.reset();
 		_ready();
 		get_tree()->reload_current_scene();
