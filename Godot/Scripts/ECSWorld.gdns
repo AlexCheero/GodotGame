@@ -4,5 +4,5 @@
 
 [resource]
 resource_name = "World"
-class_name = "World"
+class_name = "ECSWorld"
 library = ExtResource( 1 )
