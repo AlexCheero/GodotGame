@@ -15,6 +15,7 @@ namespace godot
 	class BaseSystem
 	{
 	public:
+		virtual ~BaseSystem() {};
 		virtual void operator()(float delta, entt::registry& registry) = 0;
 	};
 }

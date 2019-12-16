@@ -14,7 +14,6 @@ namespace godot
 		Ref<PhysicsShapeQueryParameters> m_params;
 	public:
 		AttackSystem();
-		~AttackSystem();
 		virtual void operator()(float delta, entt::registry& registry) override;
 		bool CheckAttackAngle(Transform attackerTransform, Vector3 enemyPosition, float maxAngle);
 	};

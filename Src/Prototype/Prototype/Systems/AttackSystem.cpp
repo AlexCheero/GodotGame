@@ -6,8 +6,6 @@
 #include <Dictionary.hpp>
 #include <SphereShape.hpp>
 
-//#include <string>
-
 #include "core/math/math_funcs.h"
 
 #include "../Components/Enemy.h"
@@ -16,18 +14,10 @@ const float INTERSECT_RESULTS_NUM = 16.f;
 
 godot::AttackSystem::AttackSystem()
 {
-	//WARNING: cleanup: ObjectDB Instances still exist!
-	//	  At: core / object.cpp : 2087
 	m_params = (Ref<PhysicsShapeQueryParameters>)PhysicsShapeQueryParameters::_new();
 	m_params->set_collision_mask(1 << 2);//Enemy layer TODO: make util to get mask/layer by name
 	m_params->set_collide_with_areas(false);
 	m_params->set_collide_with_bodies(true);
-}
-
-godot::AttackSystem::~AttackSystem()
-{
-	std::cout << "~AttackSystem";
-	m_params->free();
 }
 
 void godot::AttackSystem::operator()(float delta, entt::registry& registry)
