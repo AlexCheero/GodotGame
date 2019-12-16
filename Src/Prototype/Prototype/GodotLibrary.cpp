@@ -1,6 +1,6 @@
 #include <core/Godot.hpp>
 
-#include "World.h"
+#include "ECSWorld.h"
 #include "Components/Player.h"
 #include "Components/Enemy.h"
 
@@ -19,7 +19,7 @@ extern "C" void GDN_EXPORT godot_gdnative_terminate(godot_gdnative_terminate_opt
 extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 {
 	Godot::nativescript_init(handle);
-	register_class<World>();
+	register_class<ECSWorld>();
 	register_class<Player>();
 	register_class<Enemy>();
 }

@@ -8,9 +8,9 @@
 
 namespace godot
 {
-	class World : public Node
+	class ECSWorld : public Node
 	{
-		GODOT_CLASS(World, Node)
+		GODOT_CLASS(ECSWorld, Node)
 	private:
 		entt::registry registry;
 		std::vector<BaseSystem*> m_physics_systems;
@@ -23,8 +23,8 @@ namespace godot
 		void PrepareCameraEntity();
 		void PrepareEnemyEntity();
 	public:
-		World() = default;
-		virtual ~World();
+		ECSWorld() = default;
+		virtual ~ECSWorld();
 
 		static void _register_methods();
 		void _init();

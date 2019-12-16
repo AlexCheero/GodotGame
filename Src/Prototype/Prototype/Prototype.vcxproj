@@ -160,7 +160,7 @@
     <ClCompile Include="Systems\KinematicMovementSystem.cpp" />
     <ClCompile Include="Systems\PlayerRotationSystem.cpp" />
     <ClCompile Include="Systems\PlayerVelocitySystem.cpp" />
-    <ClCompile Include="World.cpp" />
+    <ClCompile Include="ECSWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\Enemy.h" />
@@ -175,7 +175,7 @@
     <ClInclude Include="Systems\KinematicMovementSystem.h" />
     <ClInclude Include="Systems\PlayerRotationSystem.h" />
     <ClInclude Include="Systems\PlayerVelocitySystem.h" />
-    <ClInclude Include="World.h" />
+    <ClInclude Include="ECSWorld.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

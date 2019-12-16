@@ -1,4 +1,4 @@
-#include "World.h"
+#include "ECSWorld.h"
 
 #include <SceneTree.hpp>
 #include <KinematicBody.hpp>
@@ -17,7 +17,7 @@
 #include "Systems/AttackSystem.h"
 #include "Systems/DestroyDeadSystem.h"
 
-void godot::World::CleanUpSystems(std::vector<BaseSystem*>& systems)
+void godot::ECSWorld::CleanUpSystems(std::vector<BaseSystem*>& systems)
 {
 	for (BaseSystem* system : systems)
 	{
@@ -28,13 +28,13 @@ void godot::World::CleanUpSystems(std::vector<BaseSystem*>& systems)
 	}
 }
 
-void godot::World::UpdateSystems(float delta, std::vector<BaseSystem*>& systems)
+void godot::ECSWorld::UpdateSystems(float delta, std::vector<BaseSystem*>& systems)
 {
 	for (BaseSystem* system : systems)
 		(*system)(delta, registry);
 }
 
-void godot::World::PreparePlayerEntity()
+void godot::ECSWorld::PreparePlayerEntity()
 {
 	entt::entity entity = registry.create();
 
@@ -62,7 +62,7 @@ void godot::World::PreparePlayerEntity()
 	registry.assign<AttackComponent>(entity, 4.f, 50.f, 90.f);
 }
 
-void godot::World::PrepareCameraEntity()
+void godot::ECSWorld::PrepareCameraEntity()
 {
 	entt::entity entity = registry.create();
 
@@ -72,7 +72,7 @@ void godot::World::PrepareCameraEntity()
 	registry.assign<Spatial*>(entity, Object::cast_to<Spatial>(get_node("Player")));
 }
 
-void godot::World::PrepareEnemyEntity()
+void godot::ECSWorld::PrepareEnemyEntity()
 {
 	entt::entity entity = registry.create();
 
@@ -89,22 +89,22 @@ void godot::World::PrepareEnemyEntity()
 	registry.assign<HealthComponent>(entity, 100.f);
 }
 
-godot::World::~World()
+godot::ECSWorld::~ECSWorld()
 {
 	CleanUpSystems(m_process_systems);
 	CleanUpSystems(m_physics_systems);
 }
 
-void godot::World::_register_methods()
+void godot::ECSWorld::_register_methods()
 {
-	register_method((char*)"_init", &World::_init);
-	register_method((char*)"_ready", &World::_ready);
-	register_method((char*)"_input", &World::HandleInputEvent);
-	register_method((char*)"_process", &World::_process);
-	register_method((char*)"_physics_process", &World::_physics_process);
+	register_method((char*)"_init", &ECSWorld::_init);
+	register_method((char*)"_ready", &ECSWorld::_ready);
+	register_method((char*)"_input", &ECSWorld::HandleInputEvent);
+	register_method((char*)"_process", &ECSWorld::_process);
+	register_method((char*)"_physics_process", &ECSWorld::_physics_process);
 }
 
-void godot::World::_init()
+void godot::ECSWorld::_init()
 {
 	//setup physics systems
 	m_physics_systems.insert(m_physics_systems.end(), new PlayerVelocitySystem());
@@ -120,7 +120,7 @@ void godot::World::_init()
 	m_process_systems.insert(m_process_systems.end(), new DestroyDeadSystem());
 }
 
-void godot::World::_ready()
+void godot::ECSWorld::_ready()
 {
 	//create entities and components
 	PreparePlayerEntity();
@@ -128,7 +128,7 @@ void godot::World::_ready()
 	PrepareEnemyEntity();
 }
 
-void godot::World::HandleInputEvent(InputEvent* e)
+void godot::ECSWorld::HandleInputEvent(InputEvent* e)
 {
 	if (e->is_action_pressed("ui_accept"))
 	{
@@ -140,12 +140,12 @@ void godot::World::HandleInputEvent(InputEvent* e)
 		get_tree()->quit();
 }
 
-void godot::World::_process(float delta)
+void godot::ECSWorld::_process(float delta)
 {
 	UpdateSystems(delta, m_process_systems);
 }
 
-void godot::World::_physics_process(float delta)
+void godot::ECSWorld::_physics_process(float delta)
 {
 	UpdateSystems(delta, m_physics_systems);
 }
