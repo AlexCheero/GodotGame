@@ -4,6 +4,8 @@
 #include "../Components/SimpleComponents.h"
 
 #include <PhysicsShapeQueryParameters.hpp>
+#include <Spatial.hpp>
+#include <SphereShape.hpp>
 
 namespace godot
 {
@@ -12,6 +14,8 @@ namespace godot
 	class TESTABLE_CLASS AttackSystem : public BaseSystem
 	{
 		Ref<PhysicsShapeQueryParameters> m_params;
+		Ref<SphereShape> m_attackShape;
+		Array GetIntersects(Spatial* pAttackerSpatial, float distance);
 	public:
 		AttackSystem();
 		virtual void operator()(float delta, entt::registry& registry) override;
