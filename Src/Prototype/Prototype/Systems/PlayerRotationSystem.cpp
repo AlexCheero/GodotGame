@@ -2,6 +2,7 @@
 
 #include <Transform.hpp>
 #include <Camera.hpp>
+#include <Input.hpp>
 
 #include "../Components/Player.h"
 

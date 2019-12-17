@@ -3,6 +3,7 @@
 #include <World.hpp>
 #include <PhysicsDirectSpaceState.hpp>
 #include <Dictionary.hpp>
+#include <Input.hpp>
 
 #include "core/math/math_funcs.h"
 

@@ -1,5 +1,7 @@
 #include "PlayerVelocitySystem.h"
 
+#include <Input.hpp>
+
 #include "../Components/Player.h"
 
 void godot::PlayerVelocitySystem::Update(VelocityComponent& velocityComp, SpeedComponent speedComp, Basis camBasis, int directionMask)

@@ -1,6 +1,7 @@
 #include "JumpSystem.h"
 
 #include <KinematicBody.hpp>
+#include <Input.hpp>
 
 void godot::JumpSystem::Update(VelocityComponent& velocityComp, JumpSpeedComponent jump)
 {

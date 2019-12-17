@@ -7,6 +7,7 @@
 
 namespace godot
 {
+	//TODO: abstract from player's input
 	class TESTABLE_CLASS PlayerVelocitySystem : public BaseSystem
 	{
 	public:

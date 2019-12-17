@@ -5,6 +5,7 @@
 
 namespace godot
 {
+	//TODO: abstract from player's input
 	class TESTABLE_CLASS PlayerRotationSystem : public BaseSystem
 	{
 	private:
