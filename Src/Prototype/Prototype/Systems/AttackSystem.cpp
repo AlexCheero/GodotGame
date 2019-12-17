@@ -60,9 +60,12 @@ void godot::AttackSystem::operator()(float delta, entt::registry& registry)
 
 		if (enemyHealthComp.hp <= 0)
 		{
+			Godot::print("Kill!");
 			enemyHealthComp.hp = 0;
 			registry.assign<DeadComponent>(enemyEntity);
 		}
+		else
+			Godot::print("Hit!");
 	});
 }
 
