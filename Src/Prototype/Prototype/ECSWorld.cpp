@@ -19,20 +19,9 @@
 
 #include "Utils.h"
 
-void godot::ECSWorld::CleanUpSystems(std::vector<BaseSystem*>& systems)
+void godot::ECSWorld::UpdateSystems(float delta, SystemsVec& systems)
 {
-	for (BaseSystem* system : systems)
-	{
-		if (!system)
-			continue;
-		delete system;
-		system = nullptr;
-	}
-}
-
-void godot::ECSWorld::UpdateSystems(float delta, std::vector<BaseSystem*>& systems)
-{
-	for (BaseSystem* system : systems)
+	for (auto& system : systems)
 		(*system)(delta, registry);
 }
 
@@ -91,12 +80,6 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	registry.assign<HealthComponent>(entity, 100.f);
 }
 
-godot::ECSWorld::~ECSWorld()
-{
-	CleanUpSystems(m_process_systems);
-	CleanUpSystems(m_physics_systems);
-}
-
 void godot::ECSWorld::_register_methods()
 {
 	register_method((char*)"_init", &ECSWorld::_init);
@@ -111,17 +94,17 @@ void godot::ECSWorld::_init()
 	utils::InitPhysicLayers();
 
 	//setup physics systems
-	m_physics_systems.insert(m_physics_systems.end(), new PlayerVelocitySystem());
-	m_physics_systems.insert(m_physics_systems.end(), new KinematicMovementSystem());
-	m_physics_systems.insert(m_physics_systems.end(), new GravitySystem());
+	m_physics_systems.insert(m_physics_systems.end(), std::unique_ptr<BaseSystem>(new PlayerVelocitySystem()));
+	m_physics_systems.insert(m_physics_systems.end(), std::unique_ptr<BaseSystem>(new KinematicMovementSystem()));
+	m_physics_systems.insert(m_physics_systems.end(), std::unique_ptr<BaseSystem>(new GravitySystem()));
 	//TODO: must always follow GravitySystem. find a way to enforce such behaviour in entt
-	m_physics_systems.insert(m_physics_systems.end(), new JumpSystem());
-	m_physics_systems.insert(m_physics_systems.end(), new PlayerRotationSystem());
-	m_physics_systems.insert(m_physics_systems.end(), new AttackSystem());
-
+	m_physics_systems.insert(m_physics_systems.end(), std::unique_ptr<BaseSystem>(new JumpSystem()));
+	m_physics_systems.insert(m_physics_systems.end(), std::unique_ptr<BaseSystem>(new PlayerRotationSystem()));
+	m_physics_systems.insert(m_physics_systems.end(), std::unique_ptr<BaseSystem>(new AttackSystem()));
+	
 	//setup systems
-	m_process_systems.insert(m_process_systems.end(), new CameraFollowSystem());
-	m_process_systems.insert(m_process_systems.end(), new DestroyDeadSystem());
+	m_process_systems.insert(m_process_systems.end(), std::unique_ptr<BaseSystem>(new CameraFollowSystem()));
+	m_process_systems.insert(m_process_systems.end(), std::unique_ptr<BaseSystem>(new DestroyDeadSystem()));
 }
 
 void godot::ECSWorld::_ready()

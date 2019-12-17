@@ -14,19 +14,16 @@ namespace godot
 		GODOT_CLASS(ECSWorld, Node)
 	private:
 		entt::registry registry;
-		std::vector<BaseSystem*> m_physics_systems;
-		std::vector<BaseSystem*> m_process_systems;
+		using SystemsVec = std::vector<std::unique_ptr<BaseSystem>>;
+		SystemsVec m_physics_systems;
+		SystemsVec m_process_systems;
 
-		void CleanUpSystems(std::vector<BaseSystem*>& systems);
-		void UpdateSystems(float delta, std::vector<BaseSystem*>& systems);
+		void UpdateSystems(float delta, SystemsVec& systems);
 
 		void PreparePlayerEntity();
 		void PrepareCameraEntity();
 		void PrepareEnemyEntity();
 	public:
-		ECSWorld() = default;
-		virtual ~ECSWorld();
-
 		static void _register_methods();
 		void _init();
 		void _ready();
