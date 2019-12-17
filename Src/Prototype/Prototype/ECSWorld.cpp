@@ -44,13 +44,13 @@ void godot::ECSWorld::PreparePlayerEntity()
 	Camera* pCamera = Object::cast_to<Camera>(get_node("Camera"));
 	registry.assign<Camera*>(entity, pCamera);
 
-	registry.assign<GravityComponent>(entity, GravityComponent{ 30, 20 });
-	registry.assign<JumpSpeedComponent>(entity, JumpSpeedComponent{ 30 });//find a way to set these values via editor
+	registry.assign<GravityComponent>(entity, 30.f, 20.f);
+	registry.assign<JumpSpeedComponent>(entity, 30.f);//TODO: find a way to set these values via editor
 	registry.assign<RotationComponent>(entity);
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<SpeedComponent>(entity, 30.f);
 	registry.assign<HealthComponent>(entity, 100.f);
-	registry.assign<AttackComponent>(entity, 4.f, 10.f, 90.f);
+	registry.assign<AttackComponent>(entity, 4.f, 10.f, 90.f, 0.5f);
 }
 
 void godot::ECSWorld::PrepareCameraEntity()
@@ -59,7 +59,7 @@ void godot::ECSWorld::PrepareCameraEntity()
 
 	Camera* pCamera = Object::cast_to<Camera>(get_node("Camera"));
 	registry.assign<Camera*>(entity, pCamera);
-	registry.assign<CamPositionComponent>(entity, CamPositionComponent{ 15, -30, -45 });
+	registry.assign<CamPositionComponent>(entity, 15.f, -30.f, -45.f);
 	registry.assign<Spatial*>(entity, Object::cast_to<Spatial>(get_node("Player")));
 }
 

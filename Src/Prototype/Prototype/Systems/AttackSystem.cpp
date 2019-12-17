@@ -4,6 +4,7 @@
 #include <PhysicsDirectSpaceState.hpp>
 #include <Dictionary.hpp>
 #include <Input.hpp>
+#include <OS.hpp>
 
 #include "core/math/math_funcs.h"
 
@@ -36,11 +37,16 @@ godot::AttackSystem::AttackSystem()
 void godot::AttackSystem::operator()(float delta, entt::registry& registry)
 {
 	Input* pInput = Input::get_singleton();
-	if (!pInput->is_action_just_pressed("attack"))
+	if (!pInput->is_action_pressed("attack"))
 		return;
 
-	registry.view<AttackComponent, Spatial*>().each([&registry, this](AttackComponent attackComp, Spatial* pAttackerSpatial)
+	registry.view<AttackComponent, Spatial*>().each([&registry, this](AttackComponent& attackComp, Spatial* pAttackerSpatial)
 	{
+		int64_t currTime = godot::OS::get_singleton()->get_ticks_msec();
+		if (attackComp.prevHitTime + utils::SecondsToMillis(attackComp.attackTime) > currTime)
+			return;
+		attackComp.prevHitTime = currTime;
+
 		Array intersects = GetIntersects(pAttackerSpatial, attackComp.distance);
 		if (intersects.size() == 0)
 			return;

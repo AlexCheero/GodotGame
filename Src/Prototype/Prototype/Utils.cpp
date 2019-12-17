@@ -29,3 +29,9 @@ int utils::GetLayerByName(const char* name)
 	}
 	return 0;
 }
+
+//TODO: find out why I can't inline this func
+int64_t utils::SecondsToMillis(float seconds)
+{
+	return static_cast<int64_t>(static_cast<double>(seconds) * 1000);
+}
