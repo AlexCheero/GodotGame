@@ -5,6 +5,7 @@
 
 namespace godot
 {
+	//TODO: show fields of godot-related components in editor
 	class Player : public KinematicBody
 	{
 		GODOT_CLASS(Player, KinematicBody)
