@@ -9,18 +9,18 @@ namespace godot
 	struct JumpSpeedComponent { float speed; };
 	struct HealthComponent { float hp; };
 	
-	//TODO: use entt::tag<"tag_name"_hs> instead
 	//<Tags
-	struct RotationTag { };
-	struct DeadTag { };
-	struct PendingDeleteTag { };
+	constexpr entt::hashed_string RotationTag = "RotationTag"_hs;
+	constexpr entt::hashed_string DeadTag = "DeadTag"_hs;
+	constexpr entt::hashed_string PendingDeleteTag = "PendingDeleteTag"_hs;
 	//Tags>
 
-	//<Input components
-	struct PlayerInputTag { };
-	struct AttackedInputTag { };
-	struct JumpedInputTag { };
-	//Input components>
+	//<Input tags
+	constexpr entt::hashed_string PlayerInputTag = "PlayerInputTag"_hs;
+
+	constexpr entt::hashed_string AttackedInputTag = "AttackedInputTag"_hs;
+	constexpr entt::hashed_string JumpedInputTag = "JumpedInputTag"_hs;
+	//Input tags>
 	
 	struct GravityComponent
 	{
