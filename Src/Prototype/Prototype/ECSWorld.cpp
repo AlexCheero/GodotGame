@@ -7,6 +7,7 @@
 
 #include "Components/Player.h"
 #include "Components/Enemy.h"
+#include "Components/AttackComponent.h"
 
 #include "Systems/PlayerVelocitySystem.h"
 #include "Systems/KinematicMovementSystem.h"

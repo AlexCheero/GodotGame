@@ -9,6 +9,7 @@
 #include "core/math/math_funcs.h"
 
 #include "../Components/Enemy.h"
+#include "../Components/AttackComponent.h"
 #include "../Utils.h"
 
 const float INTERSECT_RESULTS_NUM = 16.f;

@@ -2,8 +2,6 @@
 
 #include <core/Godot.hpp>
 
-#include "../Utils.h"
-
 namespace godot
 {
 	struct VelocityComponent { Vector3 velocity; };
@@ -25,16 +23,5 @@ namespace godot
 		float distance;
 		float xAngle;
 		float yAngle;
-	};
-
-	//TODO: move this component and #include "../Utils.h" to separate file
-	struct AttackComponent
-	{
-		float distance;
-		float damage;
-		float angle;
-		float attackTime;
-		//int64_t prevHitTime = static_cast<int64_t>(-static_cast<double>(attackTime) * 1000);
-		int64_t prevHitTime = -utils::SecondsToMillis(attackTime);
 	};
 }
