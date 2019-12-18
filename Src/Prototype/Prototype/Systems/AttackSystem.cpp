@@ -37,8 +37,8 @@ godot::AttackSystem::AttackSystem()
 
 void godot::AttackSystem::operator()(float delta, entt::registry& registry)
 {
-	registry.view<AttackComponent, AttackedInputTag, Spatial*>().each(
-	[&registry, this](entt::entity entity, AttackComponent& attackComp, AttackedInputTag tag, Spatial* pAttackerSpatial)
+	auto view = registry.view<AttackComponent, AttackedInputTag, Spatial*>();
+	view.each([&registry, this](entt::entity entity, AttackComponent& attackComp, AttackedInputTag tag, Spatial* pAttackerSpatial)
 	{
 		int64_t currTime = godot::OS::get_singleton()->get_ticks_msec();
 		if (attackComp.prevHitTime + utils::SecondsToMillis(attackComp.attackTime) > currTime)
