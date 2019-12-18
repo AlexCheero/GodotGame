@@ -15,12 +15,14 @@ namespace godot
 	constexpr entt::hashed_string PendingDeleteTag = "PendingDeleteTag"_hs;
 	//Tags>
 
-	//<Input tags
+	//<Input components
 	constexpr entt::hashed_string PlayerInputTag = "PlayerInputTag"_hs;
 
 	constexpr entt::hashed_string AttackedInputTag = "AttackedInputTag"_hs;
 	constexpr entt::hashed_string JumpedInputTag = "JumpedInputTag"_hs;
-	//Input tags>
+
+	struct InputDirectionComponent { Vector2 dir; };
+	//Input components>
 	
 	struct GravityComponent
 	{

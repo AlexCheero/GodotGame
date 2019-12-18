@@ -5,11 +5,9 @@
 
 namespace godot
 {
-	//TODO: abstract from player's input
+	//TODO: try to abstract from player
 	class TESTABLE_CLASS PlayerRotationSystem : public BaseSystem
 	{
-	private:
-		Vector2 GetInputDir(int directionMask);
 	public:
 		Vector3 GetTargetDirection(Vector2 inputDir, Basis camBasis);
 		virtual void operator()(float delta, entt::registry& registry) override;
