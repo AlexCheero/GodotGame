@@ -6,3 +6,4 @@
 #include "JumpSystemTest.h"
 #include "CameraFollowSystemTest.h"
 #include "PlayerRotationSystemTest.h"
+#include "AttackSystemTest.h"

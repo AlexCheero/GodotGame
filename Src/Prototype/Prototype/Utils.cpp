@@ -35,3 +35,8 @@ int64_t utils::SecondsToMillis(float seconds)
 {
 	return static_cast<int64_t>(static_cast<double>(seconds) * 1000);
 }
+
+godot::Vector2 utils::FlatVector(godot::Vector3 vec3)
+{
+	return godot::Vector2{ vec3.x, vec3.z };
+}

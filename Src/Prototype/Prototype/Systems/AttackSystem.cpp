@@ -56,7 +56,7 @@ void godot::AttackSystem::operator()(float delta, entt::registry& registry)
 		
 		Vector3 enemyPosition = Object::cast_to<Spatial>(pObj)->get_global_transform().origin;
 		Transform attackerTransform = pAttackerSpatial->get_global_transform();
-		if (!CheckAttackAngle(attackerTransform, enemyPosition, attackComp.angle))
+		if (!CheckAttackAngle(attackerTransform.origin, -attackerTransform.basis.z, enemyPosition, attackComp.angle))
 			return;
 
 		entt::entity enemyEntity = Object::cast_to<Enemy>(pObj)->GetEntity();
@@ -75,11 +75,27 @@ void godot::AttackSystem::operator()(float delta, entt::registry& registry)
 	});
 }
 
-bool godot::AttackSystem::CheckAttackAngle(Transform attackerTransform, Vector3 enemyPosition, float maxAngle)
+/*
+bool godot::AttackSystem::CheckAttackAngle(Vector3 attackerPosition, Vector3 attackerDirection, Vector3 targetPosition, float maxAngle)
 {
-	Vector3 toEnemyDirection = enemyPosition - attackerTransform.origin;
+	Vector3 toEnemyDirection = targetPosition - attackerPosition;
 	toEnemyDirection.normalize();
-	float angleCos = toEnemyDirection.dot(-attackerTransform.basis.z);
+	float angleCos = toEnemyDirection.dot(attackerDirection);
+	float angle = Math::rad2deg(Math::acos(angleCos));
+
+	return angle <= maxAngle;
+}
+*/
+
+//check only flat (in (x,z) plane) angle. without considering y position of target
+bool godot::AttackSystem::CheckAttackAngle(Vector3 attackerPosition, Vector3 attackerDirection, Vector3 targetPosition, float maxAngle)
+{
+	Vector2 targetFlatPosition = utils::FlatVector(targetPosition);
+	Vector2 attackerFlatPosition = utils::FlatVector(attackerPosition);
+	Vector2 toEnemyFlatDirection = targetFlatPosition - attackerFlatPosition;
+	toEnemyFlatDirection.normalize();
+	Vector2 attackerFlatDirection = utils::FlatVector(attackerDirection);
+	float angleCos = toEnemyFlatDirection.dot(attackerFlatDirection);
 	float angle = Math::rad2deg(Math::acos(angleCos));
 
 	return angle <= maxAngle;

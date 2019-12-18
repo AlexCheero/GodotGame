@@ -19,6 +19,6 @@ namespace godot
 	public:
 		AttackSystem();
 		virtual void operator()(float delta, entt::registry& registry) override;
-		bool CheckAttackAngle(Transform attackerTransform, Vector3 enemyPosition, float maxAngle);
+		static bool CheckAttackAngle(Vector3 attackerPosition, Vector3 attackerDirection, Vector3 targetPosition, float maxAngle);
 	};
 }
