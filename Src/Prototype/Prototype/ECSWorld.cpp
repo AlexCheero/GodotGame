@@ -14,7 +14,7 @@
 #include "Systems/GravitySystem.h";
 #include "Systems/JumpSystem.h";
 #include "Systems/PlayerRotationSystem.h"
-#include "Systems/CameraFollowSystem.h"
+#include "Systems/SimpleFollowSystem.h"
 #include "Systems/AttackSystem.h"
 #include "Systems/DestroyDeadSystem.h"
 
@@ -60,7 +60,7 @@ void godot::ECSWorld::PrepareCameraEntity()
 
 	Camera* pCamera = Object::cast_to<Camera>(get_node("Camera"));
 	registry.assign<Camera*>(entity, pCamera);
-	registry.assign<CamPositionComponent>(entity, 15.f, -30.f, -45.f);
+	registry.assign<SimpleFollowComponent>(entity, 15.f, -30.f, -45.f);
 	registry.assign<Spatial*>(entity, Object::cast_to<Spatial>(get_node("Player")));
 }
 
@@ -104,7 +104,7 @@ void godot::ECSWorld::_init()
 	m_physics_systems.insert(m_physics_systems.end(), std::unique_ptr<BaseSystem>(new AttackSystem()));
 	
 	//setup systems
-	m_process_systems.insert(m_process_systems.end(), std::unique_ptr<BaseSystem>(new CameraFollowSystem()));
+	m_process_systems.insert(m_process_systems.end(), std::unique_ptr<BaseSystem>(new SimpleFollowSystem()));
 	m_process_systems.insert(m_process_systems.end(), std::unique_ptr<BaseSystem>(new DestroyDeadSystem()));
 }
 

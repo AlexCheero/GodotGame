@@ -3,7 +3,7 @@
 
 #include "core/math/math_funcs.h"
 
-#include "Systems/CameraFollowSystem.h"
+#include "Systems/SimpleFollowSystem.h"
 
 //TODO: find a way to proper test this system
 TEST_CASE("CameraFollowSystem test")
@@ -13,12 +13,12 @@ TEST_CASE("CameraFollowSystem test")
 	const Vector3 globalZ = Vector3{ 0, 0, 1 };
 
 	Vector3 targetPosition{ floatRand(), floatRand(), floatRand() };
-	CamPositionComponent relPos{ floatRand(), floatRand(), floatRand() };
+	SimpleFollowComponent relPos{ floatRand(), floatRand(), floatRand() };
 
 	Vector3 expectedCamDirection = globalZ.rotated(globalY, Math::deg2rad(relPos.yAngle));
 	expectedCamDirection = expectedCamDirection.rotated(globalX, Math::deg2rad(relPos.xAngle));
 	Vector3 expectedCamPosition = targetPosition + expectedCamDirection.normalized() * relPos.distance;
-	Vector3 realCamPosition = CameraFollowSystem::NewCamPosition(targetPosition, relPos);
+	Vector3 realCamPosition = SimpleFollowSystem::NewCamPosition(targetPosition, relPos);
 	
 	CHECK(expectedCamPosition.length() == doctest::Approx(realCamPosition.length()));
 	CHECK(expectedCamPosition.x == doctest::Approx(realCamPosition.x));

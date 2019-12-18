@@ -32,13 +32,13 @@
     <ClInclude Include="JumpSystemTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CameraFollowSystemTest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerRotationSystemTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AttackSystemTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleFollowSystemTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

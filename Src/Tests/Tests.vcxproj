@@ -165,7 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AttackSystemTest.h" />
-    <ClInclude Include="CameraFollowSystemTest.h" />
+    <ClInclude Include="SimpleFollowSystemTest.h" />
     <ClInclude Include="CommonIncludes.h" />
     <ClInclude Include="GravitySystemTest.h" />
     <ClInclude Include="JumpSystemTest.h" />

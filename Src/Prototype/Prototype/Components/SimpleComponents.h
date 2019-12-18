@@ -18,7 +18,7 @@ namespace godot
 		float accDown;
 	};
 
-	struct CamPositionComponent
+	struct SimpleFollowComponent
 	{
 		float distance;
 		float xAngle;
