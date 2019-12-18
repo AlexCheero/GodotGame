@@ -9,7 +9,6 @@
 
 namespace godot
 {
-	//TODO: rename to PlayerAttackSystem or abstract player input somehow
 	class TESTABLE_CLASS AttackSystem : public BaseSystem
 	{
 		Ref<PhysicsShapeQueryParameters> m_params;

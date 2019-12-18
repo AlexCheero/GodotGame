@@ -44,7 +44,7 @@ void godot::PlayerRotationSystem::operator()(float delta, entt::registry& regist
 	if (pInput->is_action_pressed("ui_down"))
 		directionMask |= 1 << 3;
 
-	registry.view<RotationComponent, Player*, Camera*>().each([this, directionMask](RotationComponent rotationComp, Player* pPlayer, Camera* pCam)
+	registry.view<RotationTag, Player*, Camera*>().each([this, directionMask](RotationTag rotationComp, Player* pPlayer, Camera* pCam)
 	{
 		Basis camBasis = pCam->get_global_transform().get_basis();
 		Vector3 dir = GetTargetDirection(GetInputDir(directionMask), camBasis);

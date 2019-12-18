@@ -17,6 +17,7 @@
 #include "Systems/SimpleFollowSystem.h"
 #include "Systems/AttackSystem.h"
 #include "Systems/DestroyDeadSystem.h"
+#include "Systems/PlayerInputSystem.h"
 
 #include "Utils.h"
 
@@ -47,11 +48,13 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	registry.assign<GravityComponent>(entity, 30.f, 20.f);
 	registry.assign<JumpSpeedComponent>(entity, 30.f);//TODO: find a way to set these values via editor
-	registry.assign<RotationComponent>(entity);
+	registry.assign<RotationTag>(entity);
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<SpeedComponent>(entity, 30.f);
 	registry.assign<HealthComponent>(entity, 100.f);
 	registry.assign<AttackComponent>(entity, 4.f, 10.f, 90.f, 0.5f);
+
+	registry.assign<PlayerInputTag>(entity);
 }
 
 void godot::ECSWorld::PrepareCameraEntity()
@@ -106,6 +109,7 @@ void godot::ECSWorld::_init()
 	//setup systems
 	m_process_systems.insert(m_process_systems.end(), std::unique_ptr<BaseSystem>(new SimpleFollowSystem()));
 	m_process_systems.insert(m_process_systems.end(), std::unique_ptr<BaseSystem>(new DestroyDeadSystem()));
+	m_process_systems.insert(m_process_systems.end(), std::unique_ptr<BaseSystem>(new PlayerInputSystem()));
 }
 
 void godot::ECSWorld::_ready()

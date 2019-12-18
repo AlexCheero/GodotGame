@@ -5,12 +5,20 @@
 namespace godot
 {
 	struct VelocityComponent { Vector3 velocity; };
-	struct RotationComponent { };
 	struct SpeedComponent { float speed; };
 	struct JumpSpeedComponent { float speed; };
 	struct HealthComponent { float hp; };
-	struct DeadComponent { };
-	struct PendingDeleteComponent { };
+	
+	//<Tags
+	struct RotationTag { };
+	struct DeadTag { };
+	struct PendingDeleteTag { };
+	//Tags>
+
+	//<Input components
+	struct PlayerInputTag { };
+	struct AttackedInputTag { };
+	//Input components>
 	
 	struct GravityComponent
 	{

@@ -57,6 +57,9 @@
     <ClCompile Include="Systems\SimpleFollowSystem.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\PlayerInputSystem.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -102,6 +105,9 @@
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Systems\SimpleFollowSystem.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\PlayerInputSystem.h">
       <Filter>Header Files\Systems</Filter>
     </ClInclude>
   </ItemGroup>
