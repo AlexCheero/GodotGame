@@ -48,13 +48,13 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	registry.assign<GravityComponent>(entity, 30.f, 20.f);
 	registry.assign<JumpSpeedComponent>(entity, 30.f);//TODO: find a way to set these values via editor
-	registry.assign<RotationTag>(entity);
+	registry.assign<entt::tag<RotationTag> >(entity);
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<SpeedComponent>(entity, 30.f);
 	registry.assign<HealthComponent>(entity, 100.f);
 	registry.assign<AttackComponent>(entity, 4.f, 10.f, 90.f, 0.5f);
 
-	registry.assign<PlayerInputTag>(entity);
+	registry.assign<entt::tag<PlayerInputTag> >(entity);
 }
 
 void godot::ECSWorld::PrepareCameraEntity()

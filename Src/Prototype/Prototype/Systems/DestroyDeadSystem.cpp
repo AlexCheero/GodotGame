@@ -4,16 +4,16 @@
 
 void godot::DestroyDeadSystem::operator()(float delta, entt::registry& registry)
 {
-	registry.view<DeadTag, Node*>().each([&registry](entt::entity entity, DeadTag deadComp, Node* pNode)
+	registry.view<entt::tag<DeadTag>, Node*>().each([&registry](entt::entity entity, entt::tag <DeadTag> deadComp, Node* pNode)
 	{
-		if (registry.has<PendingDeleteTag>(entity))
+		if (registry.has<entt::tag<PendingDeleteTag> >(entity))
 			return;
 
-		registry.assign<PendingDeleteTag>(entity);
+		registry.assign<entt::tag<PendingDeleteTag> >(entity);
 		pNode->queue_free();
 	});
 
 	//TODO: use on_construct OnPendingDeleteComponentConstructed (from my test project) when compilation fixed instead
-	auto viewToDelete = registry.view<PendingDeleteTag>();
+	auto viewToDelete = registry.view<entt::tag<PendingDeleteTag> >();
 	registry.destroy(viewToDelete.begin(), viewToDelete.end());
 }

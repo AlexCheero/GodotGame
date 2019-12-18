@@ -37,8 +37,8 @@ godot::AttackSystem::AttackSystem()
 
 void godot::AttackSystem::operator()(float delta, entt::registry& registry)
 {
-	auto view = registry.view<AttackComponent, AttackedInputTag, Spatial*>();
-	view.each([&registry, this](entt::entity entity, AttackComponent& attackComp, AttackedInputTag tag, Spatial* pAttackerSpatial)
+	auto view = registry.view<AttackComponent, entt::tag<AttackedInputTag>, Spatial*>();
+	view.each([&registry, this](entt::entity entity, AttackComponent& attackComp, entt::tag<AttackedInputTag> tag, Spatial* pAttackerSpatial)
 	{
 		int64_t currTime = godot::OS::get_singleton()->get_ticks_msec();
 		if (attackComp.prevHitTime + utils::SecondsToMillis(attackComp.attackTime) > currTime)
@@ -62,12 +62,12 @@ void godot::AttackSystem::operator()(float delta, entt::registry& registry)
 		HealthComponent& enemyHealthComp = registry.get<HealthComponent>(enemyEntity);
 		enemyHealthComp.hp -= attackComp.damage;
 
-		registry.remove<AttackedInputTag>(entity);
+		registry.remove<entt::tag<AttackedInputTag> >(entity);
 		if (enemyHealthComp.hp <= 0)
 		{
 			Godot::print("Kill!");
 			enemyHealthComp.hp = 0;
-			registry.assign<DeadTag>(enemyEntity);
+			registry.assign<entt::tag<DeadTag> >(enemyEntity);
 		}
 		else
 			Godot::print("Hit!");
