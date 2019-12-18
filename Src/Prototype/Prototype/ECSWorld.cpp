@@ -114,8 +114,6 @@ void godot::ECSWorld::_ready()
 	PreparePlayerEntity();
 	PrepareCameraEntity();
 	PrepareEnemyEntity();
-
-	Godot::print("ECSWorld::_ready");
 }
 
 void godot::ECSWorld::HandleInputEvent(InputEvent* e)
