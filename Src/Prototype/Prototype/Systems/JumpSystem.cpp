@@ -11,10 +11,13 @@ void godot::JumpSystem::Update(VelocityComponent& velocityComp, JumpSpeedCompone
 void godot::JumpSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<VelocityComponent, JumpSpeedComponent, entt::tag<JumpedInputTag>, KinematicBody*>();
-	view.each([&registry, this](entt::entity entity, VelocityComponent& velocityComp, JumpSpeedComponent jump, entt::tag<JumpedInputTag> tag, KinematicBody* pBody)
+	view.each([&registry](entt::entity entity, VelocityComponent& velocityComp, JumpSpeedComponent jump, entt::tag<JumpedInputTag> tag, KinematicBody* pBody)
 	{
 		if (!pBody->is_on_floor())
+		{
+			//registry.remove<entt::tag<JumpedInputTag> >(entity);
 			return;
+		}
 		
 		Update(velocityComp, jump);
 		registry.remove<entt::tag<JumpedInputTag> >(entity);

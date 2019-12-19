@@ -9,52 +9,37 @@ __declspec(dllimport) class godot::PlayerVelocitySystem;
 
 TEST_CASE("PlayerVelocitySystem test")
 {
-	PlayerVelocitySystem playerVelSystem;
 	VelocityComponent velocityComp;
 	SpeedComponent speedComp{ floatRand() };
 	Basis basis(Vector3{ 1, 0, 0 }, Vector3{ 0, 1, 0 }, Vector3{ 0, 0, 1 });
 
 	SUBCASE("Move left test")
 	{
-		playerVelSystem.Update(velocityComp, speedComp, basis, 1);
+		PlayerVelocitySystem::Update(velocityComp, speedComp, basis, Vector2{ 1.f, 0.f });
 		CHECK(velocityComp.velocity.x == doctest::Approx(-speedComp.speed));
 	}
 
 	SUBCASE("Move right test")
 	{
-		playerVelSystem.Update(velocityComp, speedComp, basis, 1 << 1);
+		PlayerVelocitySystem::Update(velocityComp, speedComp, basis, Vector2{ -1.f, 0.f });
 		CHECK(velocityComp.velocity.x == doctest::Approx(speedComp.speed));
 	}
 
 	SUBCASE("Move forward test")
 	{
-		playerVelSystem.Update(velocityComp, speedComp, basis, 1 << 2);
+		PlayerVelocitySystem::Update(velocityComp, speedComp, basis, Vector2{ 0.f, 1.f });
 		CHECK(velocityComp.velocity.z == doctest::Approx(-speedComp.speed));
 	}
 
 	SUBCASE("Move backward test")
 	{
-		playerVelSystem.Update(velocityComp, speedComp, basis, 1 << 3);
+		PlayerVelocitySystem::Update(velocityComp, speedComp, basis, Vector2{ 0.f, -1.f });
 		CHECK(velocityComp.velocity.z == doctest::Approx(speedComp.speed));
 	}
 
 	SUBCASE("Stand still test")
 	{
-		playerVelSystem.Update(velocityComp, speedComp, basis, 0);
-		CHECK(velocityComp.velocity.x == doctest::Approx(0));
-		CHECK(velocityComp.velocity.z == doctest::Approx(0));
-	}
-
-	SUBCASE("Move left right test")
-	{
-		playerVelSystem.Update(velocityComp, speedComp, basis, 1 | 1 << 1);
-		CHECK(velocityComp.velocity.x == doctest::Approx(0));
-		CHECK(velocityComp.velocity.z == doctest::Approx(0));
-	}
-
-	SUBCASE("Move fwd bwd test")
-	{
-		playerVelSystem.Update(velocityComp, speedComp, basis, 1 << 2 | 1 << 3);
+		PlayerVelocitySystem::Update(velocityComp, speedComp, basis, Vector2{ 0.f, 0.f });
 		CHECK(velocityComp.velocity.x == doctest::Approx(0));
 		CHECK(velocityComp.velocity.z == doctest::Approx(0));
 	}
@@ -65,7 +50,7 @@ TEST_CASE("PlayerVelocitySystem test")
 
 	SUBCASE("Move fwd left test")
 	{
-		playerVelSystem.Update(velocityComp, speedComp, basis, 1 | 1 << 2);
+		PlayerVelocitySystem::Update(velocityComp, speedComp, basis, Vector2{ 1.f, 1.f });
 		velocityComp.velocity.y = 0;
 
 		CHECK(velocityComp.velocity.length() == doctest::Approx(diag.length()));
@@ -75,7 +60,7 @@ TEST_CASE("PlayerVelocitySystem test")
 
 	SUBCASE("Move fwd right test")
 	{
-		playerVelSystem.Update(velocityComp, speedComp, basis, 1 << 2 | 1 << 1);
+		PlayerVelocitySystem::Update(velocityComp, speedComp, basis, Vector2{ -1.f, 1.f });
 		velocityComp.velocity.y = 0;
 
 		CHECK(velocityComp.velocity.length() == doctest::Approx(diag.length()));
@@ -85,7 +70,7 @@ TEST_CASE("PlayerVelocitySystem test")
 
 	SUBCASE("Move bwd left test")
 	{
-		playerVelSystem.Update(velocityComp, speedComp, basis, 1 << 3 | 1);
+		PlayerVelocitySystem::Update(velocityComp, speedComp, basis, Vector2{ 1.f, -1.f });
 		velocityComp.velocity.y = 0;
 
 		CHECK(velocityComp.velocity.length() == doctest::Approx(diag.length()));
@@ -95,7 +80,7 @@ TEST_CASE("PlayerVelocitySystem test")
 
 	SUBCASE("Move bwd right test")
 	{
-		playerVelSystem.Update(velocityComp, speedComp, basis, 1 << 3 | 1 << 1);
+		PlayerVelocitySystem::Update(velocityComp, speedComp, basis, Vector2{ -1.f, -1.f });
 		velocityComp.velocity.y = 0;
 
 		CHECK(velocityComp.velocity.length() == doctest::Approx(diag.length()));

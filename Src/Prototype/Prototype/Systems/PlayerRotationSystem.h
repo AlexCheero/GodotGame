@@ -9,7 +9,7 @@ namespace godot
 	class TESTABLE_CLASS PlayerRotationSystem : public BaseSystem
 	{
 	public:
-		Vector3 GetTargetDirection(Vector2 inputDir, Basis camBasis);
+		static Vector3 GetTargetDirection(Vector2 inputDir, Basis camBasis);
 		virtual void operator()(float delta, entt::registry& registry) override;
 	};
 }

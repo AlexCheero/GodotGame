@@ -7,11 +7,11 @@
 
 namespace godot
 {
-	//TODO: abstract from player's input
+	//TODO: try to abstract from player
 	class TESTABLE_CLASS PlayerVelocitySystem : public BaseSystem
 	{
 	public:
-		void Update(VelocityComponent& velocityComp, SpeedComponent speedComp, Basis camBasis, int directionMask);
+		static void Update(VelocityComponent& velocityComp, SpeedComponent speedComp, Basis camBasis, Vector2 input);
 		virtual void operator()(float delta, entt::registry& registry) override;
 	};
 }

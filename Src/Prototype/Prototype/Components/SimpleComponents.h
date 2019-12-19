@@ -21,7 +21,8 @@ namespace godot
 	constexpr entt::hashed_string AttackedInputTag = "AttackedInputTag"_hs;
 	constexpr entt::hashed_string JumpedInputTag = "JumpedInputTag"_hs;
 
-	struct InputDirectionComponent { Vector2 dir; };
+	struct InputRotationComponent { Vector2 dir; };
+	struct InputVelocityComponent { Vector2 dir; };
 	//Input components>
 	
 	struct GravityComponent

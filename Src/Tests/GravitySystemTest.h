@@ -9,14 +9,13 @@ __declspec(dllimport) class godot::GravitySystem;
 
 TEST_CASE("GravitySystem test")
 {
-	GravitySystem system;
 	GravityComponent gravityComp{ floatRand(), floatRand() };
 	float delta = floatRand();
 
 	SUBCASE("Falling down test")
 	{
 		VelocityComponent velocityComp{ Vector3{ 0, 0, 0 } };
-		system.Update(velocityComp, gravityComp, delta, false);
+		GravitySystem::Update(velocityComp, gravityComp, delta, false);
 		float expectedSpeed = -gravityComp.accDown * delta;
 
 		CHECK(velocityComp.velocity.y == doctest::Approx(expectedSpeed));
@@ -26,7 +25,7 @@ TEST_CASE("GravitySystem test")
 	{
 		float initialSpeed = Math::abs(floatRand());
 		VelocityComponent velocityComp{ Vector3{ 0, initialSpeed, 0 } };
-		system.Update(velocityComp, gravityComp, delta, false);
+		GravitySystem::Update(velocityComp, gravityComp, delta, false);
 		float expectedSpeed = initialSpeed - gravityComp.accUp * delta;
 
 		CHECK(velocityComp.velocity.y == doctest::Approx(expectedSpeed));
@@ -35,7 +34,7 @@ TEST_CASE("GravitySystem test")
 	SUBCASE("Standing test")
 	{
 		VelocityComponent velocityComp{ Vector3{ 0, 0, 0 } };
-		system.Update(velocityComp, gravityComp, delta, true);
+		GravitySystem::Update(velocityComp, gravityComp, delta, true);
 		float expectedSpeed = -gravityComp.accDown * delta;
 
 		CHECK(velocityComp.velocity.y == doctest::Approx(0));

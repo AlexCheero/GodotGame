@@ -6,7 +6,6 @@
 //TODO: find a way to proper test this system
 TEST_CASE("PlayerRotationSystem test")
 {
-	PlayerRotationSystem system;
 	Vector2 inputDir{ floatRand(), floatRand() };
 	Basis basis(floatRand(), floatRand(), floatRand(),
 				floatRand(), floatRand(), floatRand(),
@@ -16,7 +15,7 @@ TEST_CASE("PlayerRotationSystem test")
 	expectedDir += basis.x * inputDir.x + basis.z * inputDir.y;
 	expectedDir.y = 0;
 
-	Vector3 realDir = system.GetTargetDirection(inputDir, basis);
+	Vector3 realDir = PlayerRotationSystem::GetTargetDirection(inputDir, basis);
 
 	CHECK(expectedDir.length() == doctest::Approx(realDir.length()));
 	CHECK(expectedDir.x == doctest::Approx(realDir.x));
