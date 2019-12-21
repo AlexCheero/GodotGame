@@ -112,7 +112,6 @@ void godot::ECSWorld::_init()
 	//setup systems
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new SimpleFollowSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new DestroyDeadSystem()));
-	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new PlayerInputSystem()));
 }
 
 void godot::ECSWorld::_ready()
@@ -125,6 +124,9 @@ void godot::ECSWorld::_ready()
 
 void godot::ECSWorld::HandleInputEvent(InputEvent* e)
 {
+	PlayerInputSystem inputSystem;
+	inputSystem(registry, e);
+
 	if (e->is_action_pressed("ui_accept"))
 	{
 		registry.reset();

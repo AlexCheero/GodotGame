@@ -2,33 +2,45 @@
 
 #include "../Components/InputComponents.h"
 
-inline godot::Vector2 godot::PlayerInputSystem::GetInputDirection(Input* pInput, const char* actionPrefix)
+inline void godot::PlayerInputSystem::GetInputDirection(Vector2& dir, InputEvent* e, const char* actionPrefix)
 {
-	Vector2 direction{ 0.f, 0.f };
-	if (pInput->is_action_pressed(actionPrefix + String("_left")))
-		direction.x += 1;
-	if (pInput->is_action_pressed(actionPrefix + String("_right")))
-		direction.x -= 1;
-	if (pInput->is_action_pressed(actionPrefix + String("_up")))
-		direction.y += 1;
-	if (pInput->is_action_pressed(actionPrefix + String("_down")))
-		direction.y -= 1;
+	if (e->is_action_pressed(actionPrefix + String("_left")))
+		dir.x = 1;
+	else if (e->is_action_released(actionPrefix + String("_left")))
+		dir.x = 0;
 
-	return direction;
+	if (e->is_action_pressed(actionPrefix + String("_right")))
+		dir.x = -1;
+	else if (e->is_action_released(actionPrefix + String("_right")))
+		dir.x = 0;
+
+	if (e->is_action_pressed(actionPrefix + String("_up")))
+		dir.y = 1;
+	else if (e->is_action_released(actionPrefix + String("_up")))
+		dir.y = 0;
+
+	if (e->is_action_pressed(actionPrefix + String("_down")))
+		dir.y = -1;
+	else if (e->is_action_released(actionPrefix + String("_down")))
+		dir.y = 0;
 }
 
-//TODO: update in ECSWorld's input callback
-void godot::PlayerInputSystem::operator()(float delta, entt::registry& registry)
+void godot::PlayerInputSystem::operator()(entt::registry& registry, InputEvent* e)
 {
-	Input* pInput = Input::get_singleton();
-
 	//TODO: read once more about differences between groups and view and, probably, use group instead
-	registry.view<InputComponent, entt::tag<PlayerInputTag> >().each([&registry, pInput](entt::entity entity, InputComponent& comp, entt::tag<PlayerInputTag> tag)
+	registry.view<InputComponent, entt::tag<PlayerInputTag> >().each([&registry, e](entt::entity entity, InputComponent& comp, entt::tag<PlayerInputTag> tag)
 	{
-		comp.Set(EInput::Attack, pInput->is_action_pressed("attack"));
-		comp.Set(EInput::Jump, pInput->is_action_pressed("jump"));
-		
-		comp.rotation = GetInputDirection(pInput, "ui");
-		comp.moveDir = GetInputDirection(pInput, "move");
+		if (e->is_action_pressed("attack"))
+			comp.Set(EInput::Attack, true);
+		else if (e->is_action_released("attack"))
+			comp.Set(EInput::Attack, false);
+
+		if (e->is_action_pressed("jump"))
+			comp.Set(EInput::Jump, true);
+		else if (e->is_action_released("jump"))
+			comp.Set(EInput::Jump, false);
+
+		GetInputDirection(comp.rotation, e, "ui");
+		GetInputDirection(comp.moveDir, e, "move");
 	});
 }
