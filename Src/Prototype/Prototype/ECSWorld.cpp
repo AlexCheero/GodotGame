@@ -56,6 +56,8 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	registry.assign<entt::tag<PlayerInputTag> >(entity);
 
+	registry.assign<InputComponent>(entity);
+
 	//<input directions
 	registry.assign<InputRotationComponent>(entity);
 	registry.assign<InputVelocityComponent>(entity);
@@ -102,6 +104,7 @@ void godot::ECSWorld::_init()
 {
 	utils::InitPhysicLayers();
 
+	//TODO: try to use push back
 	//setup physics systems
 	m_physics_systems.insert(m_physics_systems.end(), std::unique_ptr<BaseSystem>(new PlayerVelocitySystem()));
 	m_physics_systems.insert(m_physics_systems.end(), std::unique_ptr<BaseSystem>(new KinematicMovementSystem()));

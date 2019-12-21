@@ -18,11 +18,17 @@ namespace godot
 	//<Input components
 	constexpr entt::hashed_string PlayerInputTag = "PlayerInputTag"_hs;
 
-	constexpr entt::hashed_string AttackedInputTag = "AttackedInputTag"_hs;
-	constexpr entt::hashed_string JumpedInputTag = "JumpedInputTag"_hs;
-
+	//TODO: move this components into InputComponent as fields
 	struct InputRotationComponent { Vector2 dir; };
 	struct InputVelocityComponent { Vector2 dir; };
+
+	//TODO: make input bitmask
+	struct InputComponent
+	{
+		bool attack;
+		bool jump;
+	};
+
 	//Input components>
 	
 	struct GravityComponent
