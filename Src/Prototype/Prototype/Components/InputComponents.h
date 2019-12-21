@@ -10,10 +10,6 @@ namespace godot
 {
 	constexpr entt::hashed_string PlayerInputTag = "PlayerInputTag"_hs;
 
-	//TODO: move this components into InputComponent as fields
-	struct InputRotationComponent { Vector2 dir; };
-	struct InputVelocityComponent { Vector2 dir; };
-
 	enum class EInput
 	{
 		Attack,
@@ -26,6 +22,8 @@ namespace godot
 	struct InputComponent
 	{
 		std::bitset<static_cast<int>(EInput::End)> inputSet;
+		Vector2 rotation;
+		Vector2 moveDir;
 
 		void Set(EInput input, bool value) { inputSet.set(static_cast<int>(input), value); }
 		bool Test(EInput input) { return inputSet.test(static_cast<int>(input)); }

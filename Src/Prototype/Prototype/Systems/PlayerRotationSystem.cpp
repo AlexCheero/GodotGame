@@ -19,11 +19,11 @@ inline godot::Vector3 godot::PlayerRotationSystem::GetTargetDirection(Vector2 in
 
 void godot::PlayerRotationSystem::operator()(float delta, entt::registry& registry)
 {
-	auto view = registry.view<entt::tag<RotationTag>, InputRotationComponent, Player*, Camera*>();
-	view.each([&registry](entt::entity entity, entt::tag<RotationTag> rotationComp, InputRotationComponent input, Player* pPlayer, Camera* pCam)
+	auto view = registry.view<entt::tag<RotationTag>, InputComponent, Player*, Camera*>();
+	view.each([&registry](entt::entity entity, entt::tag<RotationTag> rotationComp, InputComponent input, Player* pPlayer, Camera* pCam)
 	{
 		Basis camBasis = pCam->get_global_transform().get_basis();
-		Vector3 dir = GetTargetDirection(input.dir, camBasis);
+		Vector3 dir = GetTargetDirection(input.rotation, camBasis);
 
 		if (dir.length_squared() == 0)
 			return;

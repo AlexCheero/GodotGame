@@ -28,8 +28,7 @@ void godot::PlayerInputSystem::operator()(float delta, entt::registry& registry)
 		comp.Set(EInput::Attack, pInput->is_action_pressed("attack"));
 		comp.Set(EInput::Jump, pInput->is_action_pressed("jump"));
 		
-		registry.get<InputRotationComponent&>(entity).dir = GetInputDirection(pInput, "ui");
-		registry.get<InputVelocityComponent&>(entity).dir = GetInputDirection(pInput, "move");
-		
+		comp.rotation = GetInputDirection(pInput, "ui");
+		comp.moveDir = GetInputDirection(pInput, "move");
 	});
 }

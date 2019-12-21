@@ -58,11 +58,6 @@ void godot::ECSWorld::PreparePlayerEntity()
 	registry.assign<entt::tag<PlayerInputTag> >(entity);
 
 	registry.assign<InputComponent>(entity);
-
-	//<input directions
-	registry.assign<InputRotationComponent>(entity);
-	registry.assign<InputVelocityComponent>(entity);
-	//input directions>
 }
 
 void godot::ECSWorld::PrepareCameraEntity()
