@@ -100,20 +100,19 @@ void godot::ECSWorld::_init()
 {
 	utils::InitPhysicLayers();
 
-	//TODO: try to use push back
 	//setup physics systems
-	m_physics_systems.insert(m_physics_systems.end(), std::unique_ptr<BaseSystem>(new PlayerVelocitySystem()));
-	m_physics_systems.insert(m_physics_systems.end(), std::unique_ptr<BaseSystem>(new KinematicMovementSystem()));
-	m_physics_systems.insert(m_physics_systems.end(), std::unique_ptr<BaseSystem>(new GravitySystem()));
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PlayerVelocitySystem()));
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new KinematicMovementSystem()));
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new GravitySystem()));
 	//TODO: must always follow GravitySystem. find a way to enforce such behaviour in entt
-	m_physics_systems.insert(m_physics_systems.end(), std::unique_ptr<BaseSystem>(new JumpSystem()));
-	m_physics_systems.insert(m_physics_systems.end(), std::unique_ptr<BaseSystem>(new PlayerRotationSystem()));
-	m_physics_systems.insert(m_physics_systems.end(), std::unique_ptr<BaseSystem>(new AttackSystem()));
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new JumpSystem()));
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PlayerRotationSystem()));
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new AttackSystem()));
 	
 	//setup systems
-	m_process_systems.insert(m_process_systems.end(), std::unique_ptr<BaseSystem>(new SimpleFollowSystem()));
-	m_process_systems.insert(m_process_systems.end(), std::unique_ptr<BaseSystem>(new DestroyDeadSystem()));
-	m_process_systems.insert(m_process_systems.end(), std::unique_ptr<BaseSystem>(new PlayerInputSystem()));
+	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new SimpleFollowSystem()));
+	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new DestroyDeadSystem()));
+	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new PlayerInputSystem()));
 }
 
 void godot::ECSWorld::_ready()
