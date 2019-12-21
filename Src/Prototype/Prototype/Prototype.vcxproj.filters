@@ -110,5 +110,8 @@
     <ClInclude Include="Systems\PlayerInputSystem.h">
       <Filter>Header Files\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="Components\InputComponents.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

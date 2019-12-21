@@ -1,5 +1,7 @@
 #include "PlayerInputSystem.h"
 
+#include "../Components/InputComponents.h"
+
 inline godot::Vector2 godot::PlayerInputSystem::GetInputDirection(Input* pInput, const char* actionPrefix)
 {
 	Vector2 direction{ 0.f, 0.f };

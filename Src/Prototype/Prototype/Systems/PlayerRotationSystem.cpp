@@ -5,6 +5,7 @@
 #include <Input.hpp>
 
 #include "../Components/Player.h"
+#include "../Components/InputComponents.h"
 
 //TODO: probably move this outside of method, when find a proper way to test this system
 inline godot::Vector3 godot::PlayerRotationSystem::GetTargetDirection(Vector2 inputDir, Basis camBasis)

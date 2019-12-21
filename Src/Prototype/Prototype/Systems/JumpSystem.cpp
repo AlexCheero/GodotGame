@@ -3,6 +3,8 @@
 #include <KinematicBody.hpp>
 #include <Input.hpp>
 
+#include "../Components/InputComponents.h"
+
 void godot::JumpSystem::Update(VelocityComponent& velocityComp, JumpSpeedComponent jump)
 {
 	velocityComp.velocity.y = jump.speed;

@@ -4,8 +4,6 @@
 
 #include <Input.hpp>
 
-#include "../Components/SimpleComponents.h"
-
 namespace godot
 {
 	class PlayerInputSystem : public BaseSystem
