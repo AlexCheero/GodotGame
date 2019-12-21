@@ -41,7 +41,7 @@ void godot::AttackSystem::operator()(float delta, entt::registry& registry)
 	auto view = registry.view<AttackComponent, InputComponent, Spatial*>();
 	view.each([&registry, this](entt::entity entity, AttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
 	{
-		if (!input.attack)
+		if (!input.Test(EInput::Attack))
 			return;
 
 		int64_t currTime = godot::OS::get_singleton()->get_ticks_msec();

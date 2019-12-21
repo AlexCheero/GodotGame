@@ -4,6 +4,8 @@
 
 #include <entt/entt.hpp>
 
+#include <bitset>
+
 namespace godot
 {
 	constexpr entt::hashed_string PlayerInputTag = "PlayerInputTag"_hs;
@@ -12,10 +14,20 @@ namespace godot
 	struct InputRotationComponent { Vector2 dir; };
 	struct InputVelocityComponent { Vector2 dir; };
 
-	//TODO: make input bitmask
+	enum class EInput
+	{
+		Attack,
+		Jump,
+
+		//do not add anything after this value
+		End
+	};
+
 	struct InputComponent
 	{
-		bool attack;
-		bool jump;
+		std::bitset<static_cast<int>(EInput::End)> inputSet;
+
+		void Set(EInput input, bool value) { inputSet.set(static_cast<int>(input), value); }
+		bool Test(EInput input) { return inputSet.test(static_cast<int>(input)); }
 	};
 }

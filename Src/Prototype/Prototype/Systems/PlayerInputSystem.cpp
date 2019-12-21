@@ -25,9 +25,8 @@ void godot::PlayerInputSystem::operator()(float delta, entt::registry& registry)
 	//TODO: read once more about differences between groups and view and, probably, use group instead
 	registry.view<InputComponent, entt::tag<PlayerInputTag> >().each([&registry, pInput](entt::entity entity, InputComponent& comp, entt::tag<PlayerInputTag> tag)
 	{
-		comp.attack = pInput->is_action_pressed("attack");
-		//KinematicBody::is_on_floor works bad so don't use is_action_just_pressed
-		comp.jump = pInput->is_action_pressed("jump");
+		comp.Set(EInput::Attack, pInput->is_action_pressed("attack"));
+		comp.Set(EInput::Jump, pInput->is_action_pressed("jump"));
 		
 		registry.get<InputRotationComponent&>(entity).dir = GetInputDirection(pInput, "ui");
 		registry.get<InputVelocityComponent&>(entity).dir = GetInputDirection(pInput, "move");
