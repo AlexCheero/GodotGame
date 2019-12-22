@@ -28,6 +28,7 @@ inline void godot::PlayerInputSystem::GetInputDirection(Vector2& dir, InputEvent
 void godot::PlayerInputSystem::operator()(entt::registry& registry, InputEvent* e)
 {
 	//TODO: read once more about differences between groups and view and, probably, use group instead
+	//TODO: implement proper pressed/just_pressed functional
 	registry.view<InputComponent, entt::tag<PlayerInputTag> >().each([&registry, e](entt::entity entity, InputComponent& comp, entt::tag<PlayerInputTag> tag)
 	{
 		if (e->is_action_pressed("attack"))
@@ -44,11 +45,19 @@ void godot::PlayerInputSystem::operator()(entt::registry& registry, InputEvent* 
 		{
 			comp.Set(EInput::ChooseMelee, true);
 			comp.Set(EInput::ChooseRanged, false);
+			comp.Set(EInput::ChooseThrowable, false);
 		}
 		if (e->is_action_pressed("choose_ranged"))
 		{
 			comp.Set(EInput::ChooseMelee, false);
 			comp.Set(EInput::ChooseRanged, true);
+			comp.Set(EInput::ChooseThrowable, false);
+		}
+		if (e->is_action_pressed("choose_throwable"))
+		{
+			comp.Set(EInput::ChooseMelee, false);
+			comp.Set(EInput::ChooseRanged, false);
+			comp.Set(EInput::ChooseThrowable, true);
 		}
 
 		GetInputDirection(comp.rotation, e, "ui");

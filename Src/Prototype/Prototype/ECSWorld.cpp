@@ -23,6 +23,7 @@
 #include "Systems/DestroyDeadSystem.h"
 #include "Systems/PlayerInputSystem.h"
 #include "Systems/WeaponChooseSystem.h"
+#include "Systems/ThrowAttackSystem.h"
 
 #include "Utils.h"
 
@@ -61,9 +62,14 @@ void godot::ECSWorld::PreparePlayerEntity()
 	WeaponHolderComponent weapons;
 	weapons.melee = MelleAttackComponent{ 4.f, 10.f, 90.f, 0.5f };
 	weapons.ranged = CastAttackComponent{ 40.f, 50.f, 0.5f };
+	
+	ResourceLoader* rl = ResourceLoader::get_singleton();
+	weapons.throwable = ThrowableAttackComponent{ rl->load("res://Scenes/Throwable.tscn"), 50.f, 10.f, 0.5f };
+
 	registry.assign<WeaponHolderComponent>(entity, weapons);
 	registry.assign<MelleAttackComponent>(entity, weapons.melee);
 	//registry.assign<CastAttackComponent>(entity, weapons.ranged);
+	//registry.assign<ThrowableAttackComponent>(entity, weapons.throwable);
 
 	registry.assign<entt::tag<PlayerInputTag> >(entity);
 
@@ -119,6 +125,7 @@ void godot::ECSWorld::_init()
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PlayerRotationSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new MeleeAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new CastAttackSystem()));
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowAttackSystem()));
 	
 	//setup systems
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new SimpleFollowSystem()));
@@ -128,23 +135,6 @@ void godot::ECSWorld::_init()
 
 void godot::ECSWorld::_ready()
 {
-	//TODO: test code!!!
-	ResourceLoader* rl = ResourceLoader::get_singleton();
-	Ref<PackedScene> throwableScene = rl->load("res://Scenes/Throwable.tscn");
-	if (throwableScene.is_valid())
-	{
-		Node* throwableNode = throwableScene->instance();
-		add_child(throwableNode);
-		Spatial* throwableSpatial = Object::cast_to<Spatial>(throwableNode);
-		if (throwableSpatial)
-		{
-			Transform tr = throwableSpatial->get_transform();
-			tr.origin = Vector3{ 2, 3, -5 };
-			throwableSpatial->set_transform(tr);
-		}
-	}
-	//test code>
-
 	//create entities and components
 	PreparePlayerEntity();
 	PrepareCameraEntity();

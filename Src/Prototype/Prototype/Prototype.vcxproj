@@ -163,6 +163,7 @@
     <ClCompile Include="Systems\PlayerRotationSystem.cpp" />
     <ClCompile Include="Systems\PlayerVelocitySystem.cpp" />
     <ClCompile Include="ECSWorld.cpp" />
+    <ClCompile Include="Systems\ThrowAttackSystem.cpp" />
     <ClCompile Include="Systems\WeaponChooseSystem.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
@@ -184,6 +185,7 @@
     <ClInclude Include="Systems\PlayerRotationSystem.h" />
     <ClInclude Include="Systems\PlayerVelocitySystem.h" />
     <ClInclude Include="ECSWorld.h" />
+    <ClInclude Include="Systems\ThrowAttackSystem.h" />
     <ClInclude Include="Systems\WeaponChooseSystem.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>

@@ -16,6 +16,7 @@ namespace godot
 		Jump,
 		ChooseMelee,
 		ChooseRanged,
+		ChooseThrowable,
 
 		//do not add anything after this value
 		End

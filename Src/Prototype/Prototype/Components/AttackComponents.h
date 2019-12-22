@@ -2,6 +2,9 @@
 
 #include <stdint.h>
 
+#include <Ref.hpp>
+#include <PackedScene.hpp>
+
 #include "../Utils.h"
 
 //TODO: make base attack component
@@ -24,6 +27,8 @@ struct CastAttackComponent
 
 struct ThrowableAttackComponent
 {
+	//TODO: implement object pools
+	godot::Ref<godot::PackedScene> throwableScene;
 	float force;
 	float damage;
 	float attackTime;
