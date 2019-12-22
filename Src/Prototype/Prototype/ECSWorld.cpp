@@ -4,6 +4,8 @@
 #include <KinematicBody.hpp>
 #include <Node.hpp>
 #include <Camera.hpp>
+#include <ResourceLoader.hpp>
+#include <PackedScene.hpp>
 
 #include "Components/Player.h"
 #include "Components/Enemy.h"
@@ -126,6 +128,23 @@ void godot::ECSWorld::_init()
 
 void godot::ECSWorld::_ready()
 {
+	//TODO: test code!!!
+	ResourceLoader* rl = ResourceLoader::get_singleton();
+	Ref<PackedScene> throwableScene = rl->load("res://Scenes/Throwable.tscn");
+	if (throwableScene.is_valid())
+	{
+		Node* throwableNode = throwableScene->instance();
+		add_child(throwableNode);
+		Spatial* throwableSpatial = Object::cast_to<Spatial>(throwableNode);
+		if (throwableSpatial)
+		{
+			Transform tr = throwableSpatial->get_transform();
+			tr.origin = Vector3{ 2, 3, -5 };
+			throwableSpatial->set_transform(tr);
+		}
+	}
+	//test code>
+
 	//create entities and components
 	PreparePlayerEntity();
 	PrepareCameraEntity();

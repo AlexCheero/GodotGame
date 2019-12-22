@@ -4,6 +4,7 @@
 
 #include "../Utils.h"
 
+//TODO: make base attack component
 struct MelleAttackComponent
 {
 	float distance;
@@ -21,8 +22,17 @@ struct CastAttackComponent
 	int64_t prevHitTime = -utils::SecondsToMillis(attackTime);
 };
 
+struct ThrowableAttackComponent
+{
+	float force;
+	float damage;
+	float attackTime;
+	int64_t prevHitTime = -utils::SecondsToMillis(attackTime);
+};
+
 struct WeaponHolderComponent
 {
 	MelleAttackComponent melee;
 	CastAttackComponent ranged;
+	ThrowableAttackComponent throwable;
 };
