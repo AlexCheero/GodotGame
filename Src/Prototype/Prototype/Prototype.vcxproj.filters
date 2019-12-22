@@ -42,9 +42,6 @@
     <ClCompile Include="Systems\PlayerRotationSystem.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\AttackSystem.cpp">
-      <Filter>Source Files\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\DestroyDeadSystem.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
@@ -58,6 +55,12 @@
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
     <ClCompile Include="Systems\PlayerInputSystem.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\MeleeAttackSystem.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\CastAttackSystem.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,9 +92,6 @@
     <ClInclude Include="Components\Enemy.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Systems\AttackSystem.h">
-      <Filter>Header Files\Systems</Filter>
-    </ClInclude>
     <ClInclude Include="Systems\DestroyDeadSystem.h">
       <Filter>Header Files\Systems</Filter>
     </ClInclude>
@@ -101,9 +101,6 @@
     <ClInclude Include="Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Components\AttackComponent.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Systems\SimpleFollowSystem.h">
       <Filter>Header Files\Systems</Filter>
     </ClInclude>
@@ -112,6 +109,15 @@
     </ClInclude>
     <ClInclude Include="Components\InputComponents.h">
       <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\MeleeAttackSystem.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\AttackComponents.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\CastAttackSystem.h">
+      <Filter>Header Files\Systems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

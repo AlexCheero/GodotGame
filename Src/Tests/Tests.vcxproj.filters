@@ -35,10 +35,10 @@
     <ClInclude Include="PlayerRotationSystemTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AttackSystemTest.h">
+    <ClInclude Include="SimpleFollowSystemTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SimpleFollowSystemTest.h">
+    <ClInclude Include="MeleeAttackSystemTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

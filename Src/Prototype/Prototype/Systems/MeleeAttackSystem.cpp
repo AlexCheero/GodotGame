@@ -1,4 +1,4 @@
-#include "AttackSystem.h"
+#include "MeleeAttackSystem.h"
 
 #include <World.hpp>
 #include <PhysicsDirectSpaceState.hpp>
@@ -9,13 +9,14 @@
 #include "core/math/math_funcs.h"
 
 #include "../Components/Enemy.h"
-#include "../Components/AttackComponent.h"
+#include "../Components/SimpleComponents.h"
+#include "../Components/AttackComponents.h"
 #include "../Components/InputComponents.h"
 #include "../Utils.h"
 
 const float INTERSECT_RESULTS_NUM = 16.f;
 
-godot::Array godot::AttackSystem::GetIntersects(Spatial* pAttackerSpatial, float distance)
+godot::Array godot::MeleeAttackSystem::GetIntersects(Spatial* pAttackerSpatial, float distance)
 {
 	m_attackShape->set_radius(distance);
 	m_params->set_shape(m_attackShape);
@@ -26,7 +27,7 @@ godot::Array godot::AttackSystem::GetIntersects(Spatial* pAttackerSpatial, float
 	return spaceState->intersect_shape(m_params, INTERSECT_RESULTS_NUM);
 }
 
-godot::AttackSystem::AttackSystem()
+godot::MeleeAttackSystem::MeleeAttackSystem()
 {
 	m_params = static_cast< Ref<PhysicsShapeQueryParameters> >(PhysicsShapeQueryParameters::_new());
 	m_params->set_collision_mask(utils::GetLayerByName("Enemy"));
@@ -36,10 +37,10 @@ godot::AttackSystem::AttackSystem()
 	m_attackShape = static_cast<Ref< SphereShape> >(SphereShape::_new());
 }
 
-void godot::AttackSystem::operator()(float delta, entt::registry& registry)
+void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 {
-	auto view = registry.view<AttackComponent, InputComponent, Spatial*>();
-	view.each([&registry, this](entt::entity entity, AttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
+	auto view = registry.view<MelleAttackComponent, InputComponent, Spatial*>();
+	view.each([&registry, this](entt::entity entity, MelleAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
 	{
 		if (!input.Test(EInput::Attack))
 			return;
@@ -90,7 +91,7 @@ bool godot::AttackSystem::CheckAttackAngle(Vector3 attackerPosition, Vector3 att
 */
 
 //check only flat (in (x,z) plane) angle. without considering y position of target
-bool godot::AttackSystem::CheckAttackAngle(Vector3 attackerPosition, Vector3 attackerDirection, Vector3 targetPosition, float maxAngle)
+bool godot::MeleeAttackSystem::CheckAttackAngle(Vector3 attackerPosition, Vector3 attackerDirection, Vector3 targetPosition, float maxAngle)
 {
 	Vector2 targetFlatPosition = utils::FlatVector(targetPosition);
 	Vector2 attackerFlatPosition = utils::FlatVector(attackerPosition);

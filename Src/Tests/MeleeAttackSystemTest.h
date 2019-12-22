@@ -3,11 +3,11 @@
 
 #include "core/math/math_funcs.h"
 
-#include "Systems/AttackSystem.h"
+#include "Systems/MeleeAttackSystem.h"
 
-__declspec(dllimport) class godot::AttackSystem;
+__declspec(dllimport) class godot::MeleeAttackSystem;
 
-TEST_CASE("AttackSystem test")
+TEST_CASE("MeleeAttackSystem test")
 {
 	Vector3 attackerPosition{ floatRand(), floatRand(), floatRand() };
 	//TODO: try to randomize y
@@ -33,7 +33,7 @@ TEST_CASE("AttackSystem test")
 
 		Vector3 targetPosition = attackerPosition + targetDirection * floatRand();
 
-		CHECK(AttackSystem::CheckAttackAngle(attackerPosition, attackerDirection, targetPosition, maxAngle));
+		CHECK(MeleeAttackSystem::CheckAttackAngle(attackerPosition, attackerDirection, targetPosition, maxAngle));
 	}
 
 	SUBCASE("Check angle out")
@@ -44,6 +44,6 @@ TEST_CASE("AttackSystem test")
 
 		Vector3 targetPosition = attackerPosition + targetDirection * floatRand();
 
-		CHECK(!AttackSystem::CheckAttackAngle(attackerPosition, attackerDirection, targetPosition, maxAngle));
+		CHECK(!MeleeAttackSystem::CheckAttackAngle(attackerPosition, attackerDirection, targetPosition, maxAngle));
 	}
 }
