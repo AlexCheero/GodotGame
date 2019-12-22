@@ -20,6 +20,7 @@
 #include "Systems/CastAttackSystem.h"
 #include "Systems/DestroyDeadSystem.h"
 #include "Systems/PlayerInputSystem.h"
+#include "Systems/WeaponChooseSystem.h"
 
 #include "Utils.h"
 
@@ -55,7 +56,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 	registry.assign<SpeedComponent>(entity, 30.f);
 	registry.assign<HealthComponent>(entity, 100.f);
 	registry.assign<MelleAttackComponent>(entity, 4.f, 10.f, 90.f, 0.5f);
-	registry.assign<CastAttackComponent>(entity, 40.f, 50.f, 0.5f);
+	//registry.assign<CastAttackComponent>(entity, 40.f, 50.f, 0.5f);
 
 	registry.assign<entt::tag<PlayerInputTag> >(entity);
 
@@ -109,13 +110,13 @@ void godot::ECSWorld::_init()
 	//TODO: must always follow GravitySystem. find a way to enforce such behaviour in entt
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new JumpSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PlayerRotationSystem()));
-	//TODO: switch between attack methods
-	//m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new MeleeAttackSystem()));
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new MeleeAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new CastAttackSystem()));
 	
 	//setup systems
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new SimpleFollowSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new DestroyDeadSystem()));
+	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new WeaponChooseSystem()));
 }
 
 void godot::ECSWorld::_ready()

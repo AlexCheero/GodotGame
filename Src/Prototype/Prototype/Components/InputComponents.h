@@ -14,6 +14,8 @@ namespace godot
 	{
 		Attack,
 		Jump,
+		ChooseMelee,
+		ChooseRanged,
 
 		//do not add anything after this value
 		End
@@ -27,5 +29,12 @@ namespace godot
 
 		void Set(EInput input, bool value) { inputSet.set(static_cast<int>(input), value); }
 		bool Test(EInput input) { return inputSet.test(static_cast<int>(input)); }
+		bool TestAndReset(EInput input)
+		{ 
+			int intInput = static_cast<int>(input);
+			bool value = inputSet.test(intInput);
+			inputSet.set(intInput, false);
+			return value;
+		}
 	};
 }

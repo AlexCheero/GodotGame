@@ -40,6 +40,17 @@ void godot::PlayerInputSystem::operator()(entt::registry& registry, InputEvent* 
 		else if (e->is_action_released("jump"))
 			comp.Set(EInput::Jump, false);
 
+		if (e->is_action_pressed("choose_melee"))
+		{
+			comp.Set(EInput::ChooseMelee, true);
+			comp.Set(EInput::ChooseRanged, false);
+		}
+		if (e->is_action_pressed("choose_ranged"))
+		{
+			comp.Set(EInput::ChooseMelee, false);
+			comp.Set(EInput::ChooseRanged, true);
+		}
+
 		GetInputDirection(comp.rotation, e, "ui");
 		GetInputDirection(comp.moveDir, e, "move");
 	});
