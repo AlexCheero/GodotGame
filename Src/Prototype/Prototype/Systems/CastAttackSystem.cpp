@@ -26,6 +26,8 @@ void godot::CastAttackSystem::operator()(float delta, entt::registry& registry)
 			return;
 		attackComp.prevHitTime = currTime;
 
+		Godot::print("Bang!");
+
 		PhysicsDirectSpaceState* spaceState = pAttackerSpatial->get_world()->get_direct_space_state();
 		Transform attackerTransform = pAttackerSpatial->get_transform();
 		Vector3 from = attackerTransform.origin;

@@ -20,3 +20,9 @@ struct CastAttackComponent
 	float attackTime;
 	int64_t prevHitTime = -utils::SecondsToMillis(attackTime);
 };
+
+struct WeaponHolderComponent
+{
+	MelleAttackComponent melee;
+	CastAttackComponent ranged;
+};

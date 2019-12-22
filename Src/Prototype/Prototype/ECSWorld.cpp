@@ -55,8 +55,13 @@ void godot::ECSWorld::PreparePlayerEntity()
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<SpeedComponent>(entity, 30.f);
 	registry.assign<HealthComponent>(entity, 100.f);
-	registry.assign<MelleAttackComponent>(entity, 4.f, 10.f, 90.f, 0.5f);
-	//registry.assign<CastAttackComponent>(entity, 40.f, 50.f, 0.5f);
+
+	WeaponHolderComponent weapons;
+	weapons.melee = MelleAttackComponent{ 4.f, 10.f, 90.f, 0.5f };
+	weapons.ranged = CastAttackComponent{ 40.f, 50.f, 0.5f };
+	registry.assign<WeaponHolderComponent>(entity, weapons);
+	registry.assign<MelleAttackComponent>(entity, weapons.melee);
+	//registry.assign<CastAttackComponent>(entity, weapons.ranged);
 
 	registry.assign<entt::tag<PlayerInputTag> >(entity);
 

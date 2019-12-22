@@ -50,6 +50,8 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 			return;
 		attackComp.prevHitTime = currTime;
 
+		Godot::print("Splash!");
+
 		Array intersects = GetIntersects(pAttackerSpatial, attackComp.distance);
 		if (intersects.size() == 0)
 			return;
