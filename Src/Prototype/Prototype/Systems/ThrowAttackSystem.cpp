@@ -23,12 +23,10 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 			return;
 		attackComp.prevHitTime = currTime;
 
-		//Godot::print("Throw!");
+		Godot::print("Throw!");
 
 		Node* throwableNode = attackComp.throwableScene->instance();
-		Godot::print("throwable: " + throwableNode->get_name());
 
-		//pAttackerSpatial->add_child(throwableNode);
 		pAttackerSpatial->get_tree()->get_root()->add_child(throwableNode);
 
 		//TODO: make global revision and check all such things with assert( != null)

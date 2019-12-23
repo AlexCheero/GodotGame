@@ -173,6 +173,7 @@
     <ClInclude Include="Components\InputComponents.h" />
     <ClInclude Include="Components\Player.h" />
     <ClInclude Include="Components\SimpleComponents.h" />
+    <ClInclude Include="Components\Throwable.h" />
     <ClInclude Include="Systems\CastAttackSystem.h" />
     <ClInclude Include="Systems\MeleeAttackSystem.h" />
     <ClInclude Include="Systems\BaseSystem.h" />

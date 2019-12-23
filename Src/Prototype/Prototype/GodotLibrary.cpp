@@ -3,6 +3,7 @@
 #include "ECSWorld.h"
 #include "Components/Player.h"
 #include "Components/Enemy.h"
+#include "Components/Throwable.h"
 
 using namespace godot;
 
@@ -22,4 +23,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<ECSWorld>();
 	register_class<Player>();
 	register_class<Enemy>();
+	register_class<Throwable>();
 }
