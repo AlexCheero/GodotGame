@@ -24,6 +24,7 @@
 #include "Systems/PlayerInputSystem.h"
 #include "Systems/WeaponChooseSystem.h"
 #include "Systems/ThrowAttackSystem.h"
+#include "Systems/ThrowableWeaponSystem.h"
 
 #include "Utils.h"
 
@@ -126,6 +127,7 @@ void godot::ECSWorld::_init()
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new MeleeAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new CastAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowAttackSystem()));
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowableWeaponSystem()));
 	
 	//setup systems
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new SimpleFollowSystem()));
