@@ -7,6 +7,7 @@
 
 namespace godot
 {
+	//TODO: check godot-view components for bloating
 	class Enemy : public KinematicBody
 	{
 		GODOT_CLASS(Enemy, KinematicBody)
@@ -15,6 +16,10 @@ namespace godot
 	public:
 		entt::entity GetEntity() const { return entity; }
 		void SetEntity(entt::entity value) { entity = value; }
+
+		//TODO: create some kind of followingPathComponent instead of fields in Enemy
+		//this TODO doubles TODO from NavAgentSystem.cpp
+		Vector3 moveTarget;
 
 		static void _register_methods() {}
 		//TODO: check that none of godot-view components (maybe check all the other components and systems)

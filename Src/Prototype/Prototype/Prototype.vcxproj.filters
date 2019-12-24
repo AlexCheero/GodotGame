@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Components">
       <UniqueIdentifier>{4bba72c8-8476-4fb9-adc6-0b34833a4b30}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Systems\AISystems">
+      <UniqueIdentifier>{90da1bd8-3f71-4c83-b4d6-3afb33f9dc78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\AISystems">
+      <UniqueIdentifier>{17447020-02ef-4434-b631-7a8ee1ffbbc8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp">
@@ -77,6 +83,9 @@
     </ClCompile>
     <ClCompile Include="Systems\ThrowableWeaponSystem.cpp">
       <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AISystems\NavAgentSystem.cpp">
+      <Filter>Source Files\Systems\AISystems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="Systems\ThrowableWeaponSystem.h">
       <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AISystems\NavAgentSystem.h">
+      <Filter>Header Files\Systems\AISystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

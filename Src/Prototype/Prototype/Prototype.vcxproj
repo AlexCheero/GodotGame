@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClCompile Include="Components\Throwable.cpp" />
     <ClCompile Include="GodotLibrary.cpp" />
+    <ClCompile Include="Systems\AISystems\NavAgentSystem.cpp" />
     <ClCompile Include="Systems\CastAttackSystem.cpp" />
     <ClCompile Include="Systems\MeleeAttackSystem.cpp" />
     <ClCompile Include="Systems\PlayerInputSystem.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="Components\Player.h" />
     <ClInclude Include="Components\SimpleComponents.h" />
     <ClInclude Include="Components\Throwable.h" />
+    <ClInclude Include="Systems\AISystems\NavAgentSystem.h" />
     <ClInclude Include="Systems\CastAttackSystem.h" />
     <ClInclude Include="Systems\MeleeAttackSystem.h" />
     <ClInclude Include="Systems\BaseSystem.h" />
