@@ -12,8 +12,12 @@ namespace godot
 		GODOT_CLASS(Throwable, RigidBody)
 	private:
 		entt::entity hittedEntity;
+		float damagePerForce;
+		float castForce;
 	public:
 		entt::entity GetHittedEntity() const { return hittedEntity; }
+		void SetCastForce(float force) { castForce = force; }
+		float GetDamage() { return damagePerForce * castForce; }
 
 		static void _register_methods();
 		void _init();

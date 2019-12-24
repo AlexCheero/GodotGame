@@ -4,6 +4,7 @@
 
 namespace godot
 {
+	//TODO: rename to ThrowableDamageSystem
 	class ThrowableWeaponSystem : public BaseSystem
 	{
 	public:

@@ -10,6 +10,9 @@ void godot::Throwable::_register_methods()
 void godot::Throwable::_init()
 {
 	hittedEntity = entt::null;
+	//TODO: set in inspector
+	damagePerForce = 1.f;
+
 	set_contact_monitor(true);
 	set_max_contacts_reported(1);
 }

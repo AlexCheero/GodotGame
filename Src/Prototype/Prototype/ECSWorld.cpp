@@ -65,7 +65,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 	weapons.ranged = CastAttackComponent{ 40.f, 50.f, 0.5f };
 	
 	ResourceLoader* rl = ResourceLoader::get_singleton();
-	weapons.throwable = ThrowableAttackComponent{ rl->load("res://Scenes/Throwable.tscn"), 50.f, 10.f, 0.5f };
+	weapons.throwable = ThrowableAttackComponent{ rl->load("res://Scenes/Throwable.tscn"), 50.f, 0.5f };
 
 	registry.assign<WeaponHolderComponent>(entity, weapons);
 	registry.assign<MelleAttackComponent>(entity, weapons.melee);

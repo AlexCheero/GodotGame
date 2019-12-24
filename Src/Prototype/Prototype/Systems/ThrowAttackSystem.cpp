@@ -39,6 +39,7 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 		throwableTransform.origin = attackerTransform.origin;
 		throwableTransform.origin -= attackerTransform.basis.z;
 		throwable->set_transform(throwableTransform);
+		throwable->SetCastForce(attackComp.force);
 		throwable->apply_central_impulse(-attackerTransform.basis.z * attackComp.force);
 	});
 }

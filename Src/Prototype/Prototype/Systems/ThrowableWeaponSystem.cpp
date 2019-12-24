@@ -19,8 +19,8 @@ void godot::ThrowableWeaponSystem::operator()(float delta, entt::registry& regis
 			return;
 
 		HealthComponent& hittedHealthComp = registry.get<HealthComponent>(hittedEntity);
-		//hittedHealthComp.hp -= damage;
-		hittedHealthComp.hp = 0;
+
+		hittedHealthComp.hp -= pThrowable->GetDamage();
 
 		if (hittedHealthComp.hp <= 0)
 		{

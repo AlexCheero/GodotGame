@@ -30,7 +30,6 @@ struct ThrowableAttackComponent
 	//TODO: implement object pools
 	godot::Ref<godot::PackedScene> throwableScene;
 	float force;
-	float damage;
 	float attackTime;
 	int64_t prevHitTime = -utils::SecondsToMillis(attackTime);
 };
