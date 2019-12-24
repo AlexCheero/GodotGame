@@ -5,6 +5,7 @@
 
 namespace godot
 {
+	//TODO: move all locomotion systems to separate filter/folder
 	class TESTABLE_CLASS GravitySystem : public BaseSystem
 	{
 	public:

@@ -17,6 +17,8 @@ namespace godot
 		void SetEntity(entt::entity value) { entity = value; }
 
 		static void _register_methods() {}
+		//TODO: check that none of godot-view components (maybe check all the other components and systems)
+		//initializes stuff inside. all the initialization must take place in ECSWorld!
 		void _init() {}
 	};
 }

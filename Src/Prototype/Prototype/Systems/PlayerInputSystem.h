@@ -7,6 +7,7 @@
 namespace godot
 {
 	//TODO: change name not to confuse it with classes that are inherited from base system
+	//TODO: move all player-related systems to separate filter/folder
 	class PlayerInputSystem
 	{
 		//TODO: come up with what to do with static methods
