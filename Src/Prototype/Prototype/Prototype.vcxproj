@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Components\Throwable.cpp" />
     <ClCompile Include="GodotLibrary.cpp" />
     <ClCompile Include="Systems\CastAttackSystem.cpp" />
     <ClCompile Include="Systems\MeleeAttackSystem.cpp" />

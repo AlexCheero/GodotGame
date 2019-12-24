@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Systems">
       <UniqueIdentifier>{31d43af6-79a8-487e-8ced-64d983127442}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{4bba72c8-8476-4fb9-adc6-0b34833a4b30}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp">
@@ -68,6 +71,9 @@
     </ClCompile>
     <ClCompile Include="Systems\ThrowAttackSystem.cpp">
       <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Throwable.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
