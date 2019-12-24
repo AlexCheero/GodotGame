@@ -11,6 +11,8 @@ material = SubResource( 1 )
 [sub_resource type="SphereShape" id=3]
 
 [node name="Throwable" type="RigidBody"]
+collision_layer = 8
+collision_mask = 5
 script = ExtResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
@@ -21,5 +23,4 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 shape = SubResource( 3 )
-[connection signal="body_entered" from="." to="." method="_on_body_shape_entered"]
 [connection signal="body_entered" from="." to="." method="_on_throwable_collide"]

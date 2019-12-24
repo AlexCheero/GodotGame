@@ -1,18 +1,17 @@
 #include "ThrowAttackSystem.h"
 
-//#include <Spatial.hpp>
 #include <OS.hpp>
 #include <SceneTree.hpp>
 #include <Viewport.hpp>
-#include <RigidBody.hpp>
 
 #include "../Components/AttackComponents.h"
 #include "../Components/InputComponents.h"
+#include "../Components/Throwable.h"
 
 void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<ThrowableAttackComponent, InputComponent, Spatial*>();
-	view.each([](entt::entity entity, ThrowableAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
+	view.each([&registry](entt::entity entity, ThrowableAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
 	{
 		//TODO: copypast from MeleeAttackSystem
 		if (!input.Test(EInput::Attack))
@@ -30,12 +29,16 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 		pAttackerSpatial->get_tree()->get_root()->add_child(throwableNode);
 
 		//TODO: make global revision and check all such things with assert( != null)
-		RigidBody* throwableRB = Object::cast_to<RigidBody>(throwableNode);
-		Transform throwableTransform = throwableRB->get_transform();
+		Throwable* throwable = Object::cast_to<Throwable>(throwableNode);
+		
+		entt::entity throwableEntity = registry.create();
+		registry.assign<Throwable*>(throwableEntity, throwable);
+
+		Transform throwableTransform = throwable->get_transform();
 		Transform attackerTransform = pAttackerSpatial->get_transform();
 		throwableTransform.origin = attackerTransform.origin;
 		throwableTransform.origin -= attackerTransform.basis.z;
-		throwableRB->set_transform(throwableTransform);
-		throwableRB->apply_central_impulse(-attackerTransform.basis.z * attackComp.force);
+		throwable->set_transform(throwableTransform);
+		throwable->apply_central_impulse(-attackerTransform.basis.z * attackComp.force);
 	});
 }
