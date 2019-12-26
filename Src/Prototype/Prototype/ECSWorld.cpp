@@ -6,6 +6,8 @@
 #include <Camera.hpp>
 #include <ResourceLoader.hpp>
 #include <PackedScene.hpp>
+#include <PoolArrays.hpp>
+#include <Navigation.hpp>
 
 #include "Components/Player.h"
 #include "Components/Enemy.h"
@@ -25,6 +27,7 @@
 #include "Systems/WeaponChooseSystem.h"
 #include "Systems/ThrowAttackSystem.h"
 #include "Systems/ThrowableWeaponSystem.h"
+#include "Systems/AISystems/NavAgentSystem.h"
 
 #include "Utils.h"
 
@@ -34,6 +37,7 @@ void godot::ECSWorld::UpdateSystems(float delta, SystemsVec& systems)
 		(*system)(delta, registry);
 }
 
+//TODO: clean entity creations
 void godot::ECSWorld::PreparePlayerEntity()
 {
 	entt::entity entity = registry.create();
@@ -56,7 +60,8 @@ void godot::ECSWorld::PreparePlayerEntity()
 	registry.assign<GravityComponent>(entity, 30.f, 20.f);
 	registry.assign<JumpSpeedComponent>(entity, 30.f);//TODO: find a way to set these values via editor
 	registry.assign<entt::tag<RotationTag> >(entity);
-	registry.assign<VelocityComponent>(entity);
+	//TODO: uncomment when done with NavAgentSystem
+	//registry.assign<VelocityComponent>(entity);
 	registry.assign<SpeedComponent>(entity, 30.f);
 	registry.assign<HealthComponent>(entity, 100.f);
 
@@ -95,6 +100,16 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	registry.assign<Node*>(entity, pEnemyNode);
 
 	Enemy* pEnemy = Object::cast_to<Enemy>(pEnemyNode);
+
+	//TODO: clean the whole pathfinding code
+	Navigation* nav = Object::cast_to<Navigation>(get_node("Navigation"));
+	
+	Node* pTargetNode = get_node("Navigation/NavigationMeshInstance/EnemyTarget");
+	Vector3 target = Object::cast_to<Spatial>(pTargetNode)->get_global_transform().origin;
+	
+	PoolVector3Array path = nav->get_simple_path(pEnemy->get_transform().origin, target);
+	pEnemy->navigation = NavigationComponent{ 30.f, path };
+
 	registry.assign<Enemy*>(entity, pEnemy);
 	pEnemy->SetEntity(entity);
 
@@ -102,6 +117,11 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	registry.assign<Spatial*>(entity, pSpatial);
 
 	registry.assign<HealthComponent>(entity, 100.f);
+
+	registry.assign<VelocityComponent>(entity);
+
+	KinematicBody* pBody = Object::cast_to<KinematicBody>(pEnemyNode);
+	registry.assign<KinematicBody*>(entity, pBody);
 }
 
 void godot::ECSWorld::_register_methods()
@@ -128,6 +148,8 @@ void godot::ECSWorld::_init()
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new CastAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowableWeaponSystem()));
+	//TODO: should it be in phys proc?
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new NavAgentSystem()));
 	
 	//setup systems
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new SimpleFollowSystem()));

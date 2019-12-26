@@ -4,7 +4,7 @@
 
 namespace godot
 {
-	class NavAgentSystem : BaseSystem
+	class NavAgentSystem : public BaseSystem
 	{
 	public:
 		virtual void operator()(float delta, entt::registry& registry) override;
