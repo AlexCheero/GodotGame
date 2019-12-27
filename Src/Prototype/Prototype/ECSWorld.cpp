@@ -106,7 +106,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	
 	Node* pTargetNode = get_node("Navigation/NavigationMeshInstance/EnemyTarget");
 	Vector3 target = Object::cast_to<Spatial>(pTargetNode)->get_global_transform().origin;
-	
+
 	PoolVector3Array path = nav->get_simple_path(pEnemy->get_transform().origin, target);
 	pEnemy->navigation = NavigationComponent{ 30.f, path };
 
@@ -122,6 +122,8 @@ void godot::ECSWorld::PrepareEnemyEntity()
 
 	KinematicBody* pBody = Object::cast_to<KinematicBody>(pEnemyNode);
 	registry.assign<KinematicBody*>(entity, pBody);
+
+	registry.assign<GravityComponent>(entity, 30.f, 20.f);
 }
 
 void godot::ECSWorld::_register_methods()

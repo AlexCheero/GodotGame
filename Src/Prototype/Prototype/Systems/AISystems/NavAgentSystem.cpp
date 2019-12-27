@@ -6,40 +6,31 @@
 void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
 {
 	//TODO: create some kind of followingPathComponent instead of fields in Enemy
-	//TODO: why use NavigationMeshInstance instead of NavigationMesh?
-	registry.view<Enemy*/*, Navigation**/, VelocityComponent>().each([this, delta](Enemy* pEnemy/*, Navigation* nav*/, VelocityComponent& velocity)
+	registry.view<Enemy*, VelocityComponent>().each([this, delta](Enemy* pEnemy, VelocityComponent& velocity)
 	{
-		//TODO: cache path
-		//PoolVector3Array path = nav->get_simple_path(pEnemy->get_transform().origin, pEnemy->moveTarget);
-
-		//if path_ind < path.size() :
-		//	var move_vec = (path[path_ind] - global_transform.origin)
-		//	if move_vec.length() < 0.1 :
-		//		path_ind += 1
-		//	else :
-		//		move_and_slide(move_vec.normalized() * move_speed, Vector3(0, 1, 0))
-
-		/*
-		NavigationComponent& nav = pEnemy->navigation;
-		if (nav.pathIndex < nav.path.size())
-		{
-			Vector3 moveVec = nav.path[nav.pathIndex] - pEnemy->get_global_transform().origin;
-			if (moveVec.length() < 0.1f) //implement precision
-				nav.pathIndex++;
-			else
-				velocity.velocity = moveVec.normalized() * nav.moveSpeed;
-		}
-		*/
+		if (!pEnemy->is_on_floor())
+			return;
 
 		if (pEnemy->navigation.pathIndex < pEnemy->navigation.path.size())
 		{
 			Vector3 origin = pEnemy->get_global_transform().origin;
-			//Godot::print("origin: " + String::num_real(origin.x) + ", " + String::num_real(origin.y) + ", " + String::num_real(origin.z));
-			Vector3 moveVec = pEnemy->navigation.path[pEnemy->navigation.pathIndex] - origin;
-			if (moveVec.length() < 0.1f) //implement precision
+			Vector3 currTarget = pEnemy->navigation.path[pEnemy->navigation.pathIndex];
+			Vector3 moveVec = currTarget - origin;
+
+			//TODO: implement precision
+			//TODO: take agent height into account
+			float precision = 1.2f;//0.1f;
+			if (moveVec.length() < precision)
+			{
 				pEnemy->navigation.pathIndex++;
+			}
 			else
+			{
+				//TODO: don't discard gravity's y influence
+				float y = velocity.velocity.y;
 				velocity.velocity = moveVec.normalized() * pEnemy->navigation.moveSpeed;
+				velocity.velocity.y += y;
+			}
 		}
 	});
 }
