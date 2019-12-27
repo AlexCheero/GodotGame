@@ -31,6 +31,9 @@
     <Filter Include="Source Files\Systems\AISystems">
       <UniqueIdentifier>{17447020-02ef-4434-b631-7a8ee1ffbbc8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\AIComponents">
+      <UniqueIdentifier>{b2b173d2-2692-47ae-8a8a-ca87057282e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp">
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="Systems\AISystems\NavAgentSystem.h">
       <Filter>Header Files\Systems\AISystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\AIComponents\NavigationComponents.h">
+      <Filter>Header Files\Components\AIComponents</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

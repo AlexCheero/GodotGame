@@ -171,6 +171,7 @@
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\AIComponents\NavigationComponents.h" />
     <ClInclude Include="Components\AttackComponents.h" />
     <ClInclude Include="Components\Enemy.h" />
     <ClInclude Include="Components\InputComponents.h" />

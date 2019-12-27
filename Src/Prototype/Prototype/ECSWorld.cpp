@@ -13,6 +13,7 @@
 #include "Components/Enemy.h"
 #include "Components/AttackComponents.h"
 #include "Components/InputComponents.h"
+#include "Components/AIComponents/NavigationComponents.h"
 
 #include "Systems/PlayerVelocitySystem.h"
 #include "Systems/KinematicMovementSystem.h"
@@ -57,7 +58,8 @@ void godot::ECSWorld::PreparePlayerEntity()
 	Camera* pCamera = Object::cast_to<Camera>(get_node("Camera"));
 	registry.assign<Camera*>(entity, pCamera);
 
-	registry.assign<GravityComponent>(entity, 30.f, 20.f);
+	//TODO: uncomment when done with NavAgentSystem
+	//registry.assign<GravityComponent>(entity, 30.f, 20.f);
 	registry.assign<JumpSpeedComponent>(entity, 30.f);//TODO: find a way to set these values via editor
 	registry.assign<entt::tag<RotationTag> >(entity);
 	//TODO: uncomment when done with NavAgentSystem
@@ -108,7 +110,9 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	Vector3 target = Object::cast_to<Spatial>(pTargetNode)->get_global_transform().origin;
 
 	PoolVector3Array path = nav->get_simple_path(pEnemy->get_transform().origin, target);
-	pEnemy->navigation = NavigationComponent{ 30.f, path };
+	registry.assign<NavPathComponent>(entity, path);
+	registry.assign<NavAgentComponent>(entity, 1.742f, 1.f, 0.1f);
+	registry.assign<SpeedComponent>(entity, 10.f);
 
 	registry.assign<Enemy*>(entity, pEnemy);
 	pEnemy->SetEntity(entity);
