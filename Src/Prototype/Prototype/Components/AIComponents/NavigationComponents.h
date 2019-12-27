@@ -5,14 +5,16 @@
 struct NavPathComponent
 {
 	godot::PoolVector3Array path;
+	int pathIndex = 0;
+
+	bool PathComplete() { return pathIndex >= path.size(); }
+	godot::Vector3 CurrentPathPoint() { return path[pathIndex]; }
 };
 
 struct NavAgentComponent
 {
 	//TODO: why 1-unit height capsule have such origin's y when on_floor checking?
-	float agentOriginHeight = 1.742f;
-	float agentRadius = 1.f;
-	float minDistance = 0.1f;
-	int pathIndex = 1;
-	int prevPathIndex = -1;
+	float agentOriginHeight;
+	float agentRadius;
+	float minDistance;
 };
