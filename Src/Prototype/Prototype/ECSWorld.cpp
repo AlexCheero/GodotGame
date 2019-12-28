@@ -58,12 +58,10 @@ void godot::ECSWorld::PreparePlayerEntity()
 	Camera* pCamera = Object::cast_to<Camera>(get_node("Camera"));
 	registry.assign<Camera*>(entity, pCamera);
 
-	//TODO: uncomment when done with NavAgentSystem
-	//registry.assign<GravityComponent>(entity, 30.f, 20.f);
+	registry.assign<GravityComponent>(entity, 30.f, 20.f);
 	registry.assign<JumpSpeedComponent>(entity, 30.f);//TODO: find a way to set these values via editor
 	registry.assign<entt::tag<RotationTag> >(entity);
-	//TODO: uncomment when done with NavAgentSystem
-	//registry.assign<VelocityComponent>(entity);
+	registry.assign<VelocityComponent>(entity);
 	registry.assign<SpeedComponent>(entity, 30.f);
 	registry.assign<HealthComponent>(entity, 100.f);
 
@@ -103,7 +101,6 @@ void godot::ECSWorld::PrepareEnemyEntity()
 
 	Enemy* pEnemy = Object::cast_to<Enemy>(pEnemyNode);
 
-	//TODO: clean the whole pathfinding code
 	Navigation* nav = Object::cast_to<Navigation>(get_node("Navigation"));
 	
 	Node* pTargetNode = get_node("Navigation/NavigationMeshInstance/EnemyTarget");
@@ -175,6 +172,7 @@ void godot::ECSWorld::_ready()
 
 void godot::ECSWorld::HandleInputEvent(InputEvent* e)
 {
+	//TODO: still maybe need to be done as usual system and moved to process update
 	PlayerInputSystem inputSystem;
 	inputSystem(registry, e);
 
