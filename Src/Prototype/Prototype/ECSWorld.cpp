@@ -111,7 +111,9 @@ void godot::ECSWorld::PrepareEnemyEntity()
 
 	PoolVector3Array path = nav->get_simple_path(pEnemy->get_transform().origin, target);
 	registry.assign<NavPathComponent>(entity, path);
-	registry.assign<NavAgentComponent>(entity, 1.742f, 1.f, 0.1f);
+	//TODO: calc proper agent height instead of hardcoding it. origin.y == 1.742 was logged when agent is_on_floor and 0.6 is the y of 1st path point on plane
+	//so nav agent height is 1.142f
+	registry.assign<NavAgentComponent>(entity, 1.142f, 1.f, 0.1f);
 	registry.assign<SpeedComponent>(entity, 10.f);
 
 	registry.assign<Enemy*>(entity, pEnemy);

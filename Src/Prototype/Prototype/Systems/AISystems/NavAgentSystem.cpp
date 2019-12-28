@@ -17,7 +17,6 @@ void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
 		if (!pathComp.PathComplete())
 		{
 			Vector3 origin = pEnemy->get_global_transform().origin;
-			//TODO: maybe there is a better way to take height into account
 			origin.y -= navigation.agentOriginHeight;
 			Vector3 moveVec = pathComp.CurrentPathPoint() - origin;
 
@@ -26,10 +25,11 @@ void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
 				pathComp.pathIndex++;
 			else
 			{
-				//TODO: maybe there is a better way not to discard gravity's y influence
-				float y = velocity.velocity.y;
-				velocity.velocity = moveVec.normalized() * speedComp.speed;
-				velocity.velocity.y += y;
+				moveVec.normalize();
+				moveVec *= speedComp.speed;
+				//direct assign not to discard gravity's y influence
+				velocity.velocity.x = moveVec.x;
+				velocity.velocity.z = moveVec.z;
 			}
 		}
 		else

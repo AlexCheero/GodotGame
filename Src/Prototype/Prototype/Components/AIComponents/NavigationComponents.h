@@ -13,7 +13,7 @@ struct NavPathComponent
 
 struct NavAgentComponent
 {
-	//TODO: why 1-unit height capsule have such origin's y when on_floor checking?
+	//TODO: why 1-unit height capsule have such origin's y when on_floor checking? see initialization in ECSWorld
 	float agentOriginHeight;
 	float agentRadius;
 	float minDistance;
