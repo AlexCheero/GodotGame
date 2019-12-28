@@ -40,7 +40,6 @@ void godot::ECSWorld::UpdateSystems(float delta, SystemsVec& systems)
 		(*system)(delta, registry);
 }
 
-//TODO: clean entity creations
 void godot::ECSWorld::PreparePlayerEntity()
 {
 	entt::entity entity = registry.create();
@@ -93,17 +92,22 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	Node* pEnemyNode = get_node("Enemy");
 	registry.assign<Node*>(entity, pEnemyNode);
 
-	Enemy* pEnemy = Object::cast_to<Enemy>(pEnemyNode);
+	AssignNodeInheritedComponent<Spatial>(registry, entity, pEnemyNode);
+	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pEnemyNode);
 
+	Enemy* pEnemy = AssignNodeInheritedComponent<Enemy>(registry, entity, pEnemyNode);
+	pEnemy->SetEntity(entity);
+
+//<prepare NavPathComponent
 	Navigation* nav = Object::cast_to<Navigation>(get_node("Navigation"));
-	
 	Node* pTargetNode = get_node("Navigation/NavigationMeshInstance/EnemyTarget");
 	//TODO: in real life scenarios you should take targets bounds into account
 	Vector3 target = Object::cast_to<Spatial>(pTargetNode)->get_global_transform().origin;
-
 	PoolVector3Array path = nav->get_simple_path(pEnemy->get_transform().origin, target);
 	registry.assign<NavPathComponent>(entity, path);
+//prepare NavPathComponent>
 
+//<prepare NavAgentComponent
 	CollisionShape* colShape = Object::cast_to<CollisionShape>(pEnemyNode->get_node("CollisionShape"));
 	Ref<Shape> shape = colShape->get_shape();
 	CapsuleShape* capsuleShape = static_cast<CapsuleShape*>(shape.ptr());
@@ -111,21 +115,11 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	float collisionOriginHeight = capsuleShape->get_radius() + capsuleShape->get_height() / 2;
 	float minDistance = capsuleShape->get_margin();//margin used for physics, probably should increase min distance
 	registry.assign<NavAgentComponent>(entity, collisionOriginHeight, capsuleShape->get_radius(), minDistance);
+//prepare NavAgentComponent>
+	
 	registry.assign<SpeedComponent>(entity, 10.f);
-
-	registry.assign<Enemy*>(entity, pEnemy);
-	pEnemy->SetEntity(entity);
-
-	Spatial* pSpatial = Object::cast_to<Spatial>(pEnemyNode);
-	registry.assign<Spatial*>(entity, pSpatial);
-
 	registry.assign<HealthComponent>(entity, 100.f);
-
 	registry.assign<VelocityComponent>(entity);
-
-	KinematicBody* pBody = Object::cast_to<KinematicBody>(pEnemyNode);
-	registry.assign<KinematicBody*>(entity, pBody);
-
 	registry.assign<GravityComponent>(entity, 30.f, 20.f);
 }
 
