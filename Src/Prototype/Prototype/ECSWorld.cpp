@@ -48,17 +48,10 @@ void godot::ECSWorld::PreparePlayerEntity()
 	Node* pPlayerNode = get_node("Player");
 	registry.assign<Node*>(entity, pPlayerNode);
 
-	Player* pPlayer = Object::cast_to<Player>(pPlayerNode);
-	registry.assign<Player*>(entity, pPlayer);
-
-	KinematicBody* pBody = Object::cast_to<KinematicBody>(pPlayerNode);
-	registry.assign<KinematicBody*>(entity, pBody);
-
-	Spatial* pSpatial = Object::cast_to<Spatial>(pPlayerNode);
-	registry.assign<Spatial*>(entity, pSpatial);
-
-	Camera* pCamera = Object::cast_to<Camera>(get_node("Camera"));
-	registry.assign<Camera*>(entity, pCamera);
+	AssignNodeInheritedComponent<Player>(registry, entity, pPlayerNode);
+	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pPlayerNode);
+	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
+	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("Camera"));
 
 	registry.assign<GravityComponent>(entity, 30.f, 20.f);
 	registry.assign<JumpSpeedComponent>(entity, 30.f);//TODO: find a way to set these values via editor
@@ -70,7 +63,6 @@ void godot::ECSWorld::PreparePlayerEntity()
 	WeaponHolderComponent weapons;
 	weapons.melee = MelleAttackComponent{ 4.f, 10.f, 90.f, 0.5f };
 	weapons.ranged = CastAttackComponent{ 40.f, 50.f, 0.5f };
-	
 	ResourceLoader* rl = ResourceLoader::get_singleton();
 	weapons.throwable = ThrowableAttackComponent{ rl->load("res://Scenes/Throwable.tscn"), 50.f, 0.5f };
 
@@ -88,10 +80,10 @@ void godot::ECSWorld::PrepareCameraEntity()
 {
 	entt::entity entity = registry.create();
 
-	Camera* pCamera = Object::cast_to<Camera>(get_node("Camera"));
-	registry.assign<Camera*>(entity, pCamera);
+	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("Camera"));
+	AssignNodeInheritedComponent<Spatial>(registry, entity, get_node("Player"));
+
 	registry.assign<SimpleFollowComponent>(entity, 15.f, -30.f, -45.f);
-	registry.assign<Spatial*>(entity, Object::cast_to<Spatial>(get_node("Player")));
 }
 
 void godot::ECSWorld::PrepareEnemyEntity()

@@ -17,6 +17,13 @@ namespace godot
 		SystemsVec m_physics_systems;
 		SystemsVec m_process_systems;
 
+		template<typename T>
+		T* AssignNodeInheritedComponent(entt::registry& registry, entt::entity entity, Node* pNode)
+		{
+			T* pComp = Object::cast_to<T>(pNode);
+			return registry.assign<T*>(entity, pComp);
+		}
+
 		void UpdateSystems(float delta, SystemsVec& systems);
 
 		void PreparePlayerEntity();
