@@ -180,7 +180,7 @@ void godot::ECSWorld::_ready()
 
 void godot::ECSWorld::HandleInputEvent(InputEvent* e)
 {
-	//TODO: still maybe need to be done as usual system and moved to process update
+	//TODO: still not sure, maybe it have to be done as usual system and moved to process update
 	PlayerInputSystem inputSystem;
 	inputSystem(registry, e);
 

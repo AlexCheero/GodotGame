@@ -7,7 +7,6 @@
 
 #include "../Utils.h"
 
-//TODO: make base attack component
 struct MelleAttackComponent
 {
 	float distance;
