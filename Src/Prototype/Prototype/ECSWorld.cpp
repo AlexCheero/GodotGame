@@ -8,6 +8,8 @@
 #include <PackedScene.hpp>
 #include <PoolArrays.hpp>
 #include <Navigation.hpp>
+#include <CollisionShape.hpp>
+#include <CapsuleShape.hpp>
 
 #include "Components/Player.h"
 #include "Components/Enemy.h"
@@ -104,13 +106,19 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	Navigation* nav = Object::cast_to<Navigation>(get_node("Navigation"));
 	
 	Node* pTargetNode = get_node("Navigation/NavigationMeshInstance/EnemyTarget");
+	//TODO: in real life scenarios you should take targets bounds into account
 	Vector3 target = Object::cast_to<Spatial>(pTargetNode)->get_global_transform().origin;
 
 	PoolVector3Array path = nav->get_simple_path(pEnemy->get_transform().origin, target);
 	registry.assign<NavPathComponent>(entity, path);
-	//TODO: calc proper agent height instead of hardcoding it. origin.y == 1.742 was logged when agent is_on_floor and 0.6 is the y of 1st path point on plane
-	//so nav agent height is 1.142f
-	registry.assign<NavAgentComponent>(entity, 1.142f, 1.f, 0.1f);
+
+	CollisionShape* colShape = Object::cast_to<CollisionShape>(pEnemyNode->get_node("CollisionShape"));
+	Ref<Shape> shape = colShape->get_shape();
+	CapsuleShape* capsuleShape = static_cast<CapsuleShape*>(shape.ptr());
+	//cause capsule height is hieght of the cylinder
+	float collisionOriginHeight = capsuleShape->get_radius() + capsuleShape->get_height() / 2;
+	float minDistance = capsuleShape->get_margin();//margin used for physics, probably should increase min distance
+	registry.assign<NavAgentComponent>(entity, collisionOriginHeight, capsuleShape->get_radius(), minDistance);
 	registry.assign<SpeedComponent>(entity, 10.f);
 
 	registry.assign<Enemy*>(entity, pEnemy);
