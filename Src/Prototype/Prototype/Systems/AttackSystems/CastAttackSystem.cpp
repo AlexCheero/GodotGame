@@ -5,12 +5,12 @@
 #include <PhysicsDirectSpaceState.hpp>
 #include <World.hpp>
 
-#include "../Components/SimpleComponents.h"
-#include "../Components/AttackComponents.h"
-#include "../Components/InputComponents.h"
-#include "../Components/Enemy.h"
+#include "../../Components/SimpleComponents.h"
+#include "../../Components/AttackComponents.h"
+#include "../../Components/InputComponents.h"
+#include "../../Components/Enemy.h"
 
-#include "../Utils.h"
+#include "../../Utils.h"
 
 void godot::CastAttackSystem::operator()(float delta, entt::registry& registry)
 {

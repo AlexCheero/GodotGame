@@ -23,13 +23,13 @@
 #include "Systems/JumpSystem.h";
 #include "Systems/PlayerRotationSystem.h"
 #include "Systems/SimpleFollowSystem.h"
-#include "Systems/MeleeAttackSystem.h"
-#include "Systems/CastAttackSystem.h"
+#include "Systems/AttackSystems/MeleeAttackSystem.h"
+#include "Systems/AttackSystems/CastAttackSystem.h"
 #include "Systems/DestroyDeadSystem.h"
 #include "Systems/PlayerInputSystem.h"
 #include "Systems/WeaponChooseSystem.h"
-#include "Systems/ThrowAttackSystem.h"
-#include "Systems/ThrowableWeaponSystem.h"
+#include "Systems/AttackSystems/ThrowAttackSystem.h"
+#include "Systems/AttackSystems/ThrowableWeaponSystem.h"
 #include "Systems/AISystems/NavAgentSystem.h"
 
 #include "Utils.h"

@@ -8,11 +8,11 @@
 
 #include "core/math/math_funcs.h"
 
-#include "../Components/Enemy.h"
-#include "../Components/SimpleComponents.h"
-#include "../Components/AttackComponents.h"
-#include "../Components/InputComponents.h"
-#include "../Utils.h"
+#include "../../Components/Enemy.h"
+#include "../../Components/SimpleComponents.h"
+#include "../../Components/AttackComponents.h"
+#include "../../Components/InputComponents.h"
+#include "../../Utils.h"
 
 const float INTERSECT_RESULTS_NUM = 16.f;
 

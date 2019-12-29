@@ -1,7 +1,7 @@
 #include "ThrowableWeaponSystem.h"
 
-#include "../Components/Throwable.h"
-#include "../Components/SimpleComponents.h"
+#include "../../Components/Throwable.h"
+#include "../../Components/SimpleComponents.h"
 
 void godot::ThrowableWeaponSystem::operator()(float delta, entt::registry& registry)
 {

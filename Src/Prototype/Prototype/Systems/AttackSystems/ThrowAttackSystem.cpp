@@ -4,9 +4,9 @@
 #include <SceneTree.hpp>
 #include <Viewport.hpp>
 
-#include "../Components/AttackComponents.h"
-#include "../Components/InputComponents.h"
-#include "../Components/Throwable.h"
+#include "../../Components/AttackComponents.h"
+#include "../../Components/InputComponents.h"
+#include "../../Components/Throwable.h"
 
 void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 {

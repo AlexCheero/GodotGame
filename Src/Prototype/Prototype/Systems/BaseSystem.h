@@ -10,7 +10,6 @@
 
 namespace godot
 {
-	//TODO: move all attack systems to separate filter/folder
 	class BaseSystem
 	{
 	public:

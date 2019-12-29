@@ -154,8 +154,10 @@
     <ClCompile Include="Components\Throwable.cpp" />
     <ClCompile Include="GodotLibrary.cpp" />
     <ClCompile Include="Systems\AISystems\NavAgentSystem.cpp" />
-    <ClCompile Include="Systems\CastAttackSystem.cpp" />
-    <ClCompile Include="Systems\MeleeAttackSystem.cpp" />
+    <ClCompile Include="Systems\AttackSystems\CastAttackSystem.cpp" />
+    <ClCompile Include="Systems\AttackSystems\MeleeAttackSystem.cpp" />
+    <ClCompile Include="Systems\AttackSystems\ThrowableWeaponSystem.cpp" />
+    <ClCompile Include="Systems\AttackSystems\ThrowAttackSystem.cpp" />
     <ClCompile Include="Systems\PlayerInputSystem.cpp" />
     <ClCompile Include="Systems\SimpleFollowSystem.cpp" />
     <ClCompile Include="Systems\DestroyDeadSystem.cpp" />
@@ -165,8 +167,6 @@
     <ClCompile Include="Systems\PlayerRotationSystem.cpp" />
     <ClCompile Include="Systems\PlayerVelocitySystem.cpp" />
     <ClCompile Include="ECSWorld.cpp" />
-    <ClCompile Include="Systems\ThrowableWeaponSystem.cpp" />
-    <ClCompile Include="Systems\ThrowAttackSystem.cpp" />
     <ClCompile Include="Systems\WeaponChooseSystem.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
@@ -179,8 +179,10 @@
     <ClInclude Include="Components\SimpleComponents.h" />
     <ClInclude Include="Components\Throwable.h" />
     <ClInclude Include="Systems\AISystems\NavAgentSystem.h" />
-    <ClInclude Include="Systems\CastAttackSystem.h" />
-    <ClInclude Include="Systems\MeleeAttackSystem.h" />
+    <ClInclude Include="Systems\AttackSystems\CastAttackSystem.h" />
+    <ClInclude Include="Systems\AttackSystems\MeleeAttackSystem.h" />
+    <ClInclude Include="Systems\AttackSystems\ThrowableWeaponSystem.h" />
+    <ClInclude Include="Systems\AttackSystems\ThrowAttackSystem.h" />
     <ClInclude Include="Systems\BaseSystem.h" />
     <ClInclude Include="Systems\PlayerInputSystem.h" />
     <ClInclude Include="Systems\SimpleFollowSystem.h" />
@@ -191,8 +193,6 @@
     <ClInclude Include="Systems\PlayerRotationSystem.h" />
     <ClInclude Include="Systems\PlayerVelocitySystem.h" />
     <ClInclude Include="ECSWorld.h" />
-    <ClInclude Include="Systems\ThrowableWeaponSystem.h" />
-    <ClInclude Include="Systems\ThrowAttackSystem.h" />
     <ClInclude Include="Systems\WeaponChooseSystem.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
