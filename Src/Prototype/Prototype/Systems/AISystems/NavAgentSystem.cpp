@@ -25,6 +25,7 @@ void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
 				pathComp.pathIndex++;
 			else
 			{
+				//TODO: rotate agent towards move direction
 				moveVec.normalize();
 				moveVec *= speedComp.speed;
 				//direct assign not to discard gravity's y influence

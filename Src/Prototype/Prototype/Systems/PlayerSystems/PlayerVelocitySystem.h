@@ -2,8 +2,8 @@
 
 #include <Camera.hpp>
 
-#include "BaseSystem.h"
-#include "../Components/SimpleComponents.h"
+#include "../BaseSystem.h"
+#include "../../Components/SimpleComponents.h"
 
 namespace godot
 {

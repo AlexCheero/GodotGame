@@ -17,16 +17,16 @@
 #include "Components/InputComponents.h"
 #include "Components/AIComponents/NavigationComponents.h"
 
-#include "Systems/PlayerVelocitySystem.h"
+#include "Systems/PlayerSystems/PlayerVelocitySystem.h"
 #include "Systems/KinematicMovementSystem.h"
 #include "Systems/GravitySystem.h";
 #include "Systems/JumpSystem.h";
-#include "Systems/PlayerRotationSystem.h"
+#include "Systems/PlayerSystems/PlayerRotationSystem.h"
 #include "Systems/SimpleFollowSystem.h"
 #include "Systems/AttackSystems/MeleeAttackSystem.h"
 #include "Systems/AttackSystems/CastAttackSystem.h"
 #include "Systems/DestroyDeadSystem.h"
-#include "Systems/PlayerInputSystem.h"
+#include "Systems/PlayerSystems/PlayerInputSystem.h"
 #include "Systems/WeaponChooseSystem.h"
 #include "Systems/AttackSystems/ThrowAttackSystem.h"
 #include "Systems/AttackSystems/ThrowableWeaponSystem.h"

@@ -2,8 +2,8 @@
 
 #include <Input.hpp>
 
-#include "../Components/Player.h"
-#include "../Components/InputComponents.h"
+#include "../../Components/Player.h"
+#include "../../Components/InputComponents.h"
 
 void godot::PlayerVelocitySystem::Update(VelocityComponent& velocityComp, SpeedComponent speedComp, Basis camBasis, Vector2 input)
 {

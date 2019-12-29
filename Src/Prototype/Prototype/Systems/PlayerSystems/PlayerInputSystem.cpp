@@ -1,6 +1,6 @@
 #include "PlayerInputSystem.h"
 
-#include "../Components/InputComponents.h"
+#include "../../Components/InputComponents.h"
 
 inline void godot::PlayerInputSystem::GetInputDirection(Vector2& dir, InputEvent* e, const char* actionPrefix)
 {
