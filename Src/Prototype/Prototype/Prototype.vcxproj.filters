@@ -46,19 +46,16 @@
     <Filter Include="Source Files\Systems\PlayerSystems">
       <UniqueIdentifier>{2e0abf90-1429-48d2-92e5-0bd974336c4b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Systems\LocomotionSystems">
+      <UniqueIdentifier>{559ad6c2-a24e-4e85-9dbc-93a1145aba8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\LocomotionSystems">
+      <UniqueIdentifier>{1b74d614-ced5-44a0-8ade-2c8af3417ef9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\KinematicMovementSystem.cpp">
-      <Filter>Source Files\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\GravitySystem.cpp">
-      <Filter>Source Files\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\JumpSystem.cpp">
-      <Filter>Source Files\Systems</Filter>
     </ClCompile>
     <ClCompile Include="Systems\DestroyDeadSystem.cpp">
       <Filter>Source Files\Systems</Filter>
@@ -102,6 +99,15 @@
     <ClCompile Include="Systems\PlayerSystems\PlayerVelocitySystem.cpp">
       <Filter>Source Files\Systems\PlayerSystems</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\LocomotionSystems\GravitySystem.cpp">
+      <Filter>Source Files\Systems\LocomotionSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\LocomotionSystems\JumpSystem.cpp">
+      <Filter>Source Files\Systems\LocomotionSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\LocomotionSystems\KinematicMovementSystem.cpp">
+      <Filter>Source Files\Systems\LocomotionSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -112,15 +118,6 @@
     </ClInclude>
     <ClInclude Include="Components\Player.h">
       <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\KinematicMovementSystem.h">
-      <Filter>Header Files\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\GravitySystem.h">
-      <Filter>Header Files\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\JumpSystem.h">
-      <Filter>Header Files\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Components\Enemy.h">
       <Filter>Header Files\Components</Filter>
@@ -175,6 +172,15 @@
     </ClInclude>
     <ClInclude Include="Systems\PlayerSystems\PlayerVelocitySystem.h">
       <Filter>Header Files\Systems\PlayerSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\LocomotionSystems\GravitySystem.h">
+      <Filter>Header Files\Systems\LocomotionSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\LocomotionSystems\JumpSystem.h">
+      <Filter>Header Files\Systems\LocomotionSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\LocomotionSystems\KinematicMovementSystem.h">
+      <Filter>Header Files\Systems\LocomotionSystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

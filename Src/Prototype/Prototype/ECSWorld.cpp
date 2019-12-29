@@ -18,9 +18,9 @@
 #include "Components/AIComponents/NavigationComponents.h"
 
 #include "Systems/PlayerSystems/PlayerVelocitySystem.h"
-#include "Systems/KinematicMovementSystem.h"
-#include "Systems/GravitySystem.h";
-#include "Systems/JumpSystem.h";
+#include "Systems/LocomotionSystems/KinematicMovementSystem.h"
+#include "Systems/LocomotionSystems/GravitySystem.h";
+#include "Systems/LocomotionSystems/JumpSystem.h";
 #include "Systems/PlayerSystems/PlayerRotationSystem.h"
 #include "Systems/SimpleFollowSystem.h"
 #include "Systems/AttackSystems/MeleeAttackSystem.h"
