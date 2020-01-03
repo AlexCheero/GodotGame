@@ -16,6 +16,7 @@
 #include "LocomotionViews/GravityView.h"
 #include "LocomotionViews/JumpSpeedView.h"
 #include "LocomotionViews/SpeedView.h"
+#include "SimpleFollowView.h"
 
 #define CONSTRUCT_COMPONENT(Name) template<> \
 inline bool EntityView::ConstructComponent<Name ## Component>(Name ## Component& component) \
@@ -78,4 +79,5 @@ namespace godot
 	CONSTRUCT_COMPONENT(Gravity)
 	CONSTRUCT_COMPONENT(JumpSpeed)
 	CONSTRUCT_COMPONENT(Speed)
+	CONSTRUCT_COMPONENT(SimpleFollow)
 }

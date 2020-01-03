@@ -81,10 +81,12 @@ void godot::ECSWorld::PrepareCameraEntity()
 {
 	entt::entity entity = registry.create();
 
-	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("Camera"));
+	Node* pCameraNode = get_node("Camera");
+	AssignNodeInheritedComponent<Camera>(registry, entity, pCameraNode);
 	AssignNodeInheritedComponent<Spatial>(registry, entity, get_node("Player"));
 
-	registry.assign<SimpleFollowComponent>(entity, 15.f, -30.f, -45.f);
+	EntityView* entityView = Object::cast_to<EntityView>(pCameraNode->get_node("EntityView"));
+	entityView->ConstructComponent(registry.assign<SimpleFollowComponent>(entity));
 }
 
 void godot::ECSWorld::PrepareEnemyEntity()

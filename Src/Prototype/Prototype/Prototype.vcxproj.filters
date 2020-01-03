@@ -150,6 +150,9 @@
     <ClCompile Include="Components\Views\LocomotionViews\SpeedView.cpp">
       <Filter>Source Files\Components\Views\LocomotionViews</Filter>
     </ClCompile>
+    <ClCompile Include="Components\Views\SimpleFollowView.cpp">
+      <Filter>Source Files\Components\Views</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -247,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="Components\Views\LocomotionViews\SpeedView.h">
       <Filter>Header Files\Components\Views\LocomotionViews</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Views\SimpleFollowView.h">
+      <Filter>Header Files\Components\Views</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

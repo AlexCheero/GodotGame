@@ -11,6 +11,7 @@
 #include "Components/Views/LocomotionViews/GravityView.h"
 #include "Components/Views/LocomotionViews/JumpSpeedView.h"
 #include "Components/Views/LocomotionViews/SpeedView.h"
+#include "Components/Views/SimpleFollowView.h"
 
 using namespace godot;
 
@@ -38,4 +39,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<GravityView>();
 	register_class<JumpSpeedView>();
 	register_class<SpeedView>();
+	register_class<SimpleFollowView>();
 }
