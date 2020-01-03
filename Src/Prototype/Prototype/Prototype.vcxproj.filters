@@ -158,9 +158,6 @@
     <ClInclude Include="Systems\BaseSystem.h">
       <Filter>Header Files\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Player.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Components\Enemy.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>

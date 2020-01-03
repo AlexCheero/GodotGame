@@ -11,7 +11,6 @@
 #include <CollisionShape.hpp>
 #include <CapsuleShape.hpp>
 
-#include "Components/Player.h"
 #include "Components/Enemy.h"
 #include "Components/AttackComponents.h"
 #include "Components/InputComponents.h"
@@ -51,8 +50,6 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	registry.assign<Node*>(entity, pPlayerNode);
 
-	//TODO: probably player should be just tag, after implementing Views
-	AssignNodeInheritedComponent<Player>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("Camera"));
@@ -72,6 +69,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 	//registry.assign<CastAttackComponent>(entity, weapons.ranged);
 	//registry.assign<ThrowableAttackComponent>(entity, weapons.throwable);
 
+	registry.assign<entt::tag<PlayerTag> >(entity);
 	registry.assign<entt::tag<RotationTag> >(entity);
 	registry.assign<entt::tag<PlayerInputTag> >(entity);
 

@@ -12,6 +12,7 @@ namespace godot
 	struct HealthComponent { float hp; };
 	
 	//<Tags
+	constexpr entt::hashed_string PlayerTag = "PlayerTag"_hs;
 	constexpr entt::hashed_string RotationTag = "RotationTag"_hs;
 	constexpr entt::hashed_string DeadTag = "DeadTag"_hs;
 	constexpr entt::hashed_string PendingDeleteTag = "PendingDeleteTag"_hs;
