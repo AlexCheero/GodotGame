@@ -59,8 +59,6 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	registry.assign<GravityComponent>(entity, 30.f, 20.f);
 	registry.assign<JumpSpeedComponent>(entity, 30.f);//TODO: find a way to set these values via editor
-	registry.assign<entt::tag<RotationTag> >(entity);
-	registry.assign<VelocityComponent>(entity);
 	registry.assign<SpeedComponent>(entity, 30.f);
 	registry.assign<HealthComponent>(entity, 100.f);
 
@@ -68,17 +66,17 @@ void godot::ECSWorld::PreparePlayerEntity()
 	entityView->ConstructComponent(weapons.melee);
 	entityView->ConstructComponent(weapons.ranged);
 	//Godot::print("test " + String::num(weapons.ranged.damage, 2));
-
-	ResourceLoader* rl = ResourceLoader::get_singleton();
-	weapons.throwable = ThrowableAttackComponent{ rl->load("res://Scenes/Throwable.tscn"), 50.f, 0.5f };
+	entityView->ConstructComponent(weapons.throwable);
 
 	registry.assign<WeaponHolderComponent>(entity, weapons);
 	registry.assign<MeleeAttackComponent>(entity, weapons.melee);
 	//registry.assign<CastAttackComponent>(entity, weapons.ranged);
 	//registry.assign<ThrowableAttackComponent>(entity, weapons.throwable);
 
+	registry.assign<entt::tag<RotationTag> >(entity);
 	registry.assign<entt::tag<PlayerInputTag> >(entity);
 
+	registry.assign<VelocityComponent>(entity);
 	registry.assign<InputComponent>(entity);
 }
 

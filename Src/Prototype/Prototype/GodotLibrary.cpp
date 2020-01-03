@@ -7,6 +7,7 @@
 #include "Components/Views/EntityView.h"
 #include "Components/Views/AttackViews/MeleeAttackView.h"
 #include "Components/Views/AttackViews/CastAttackView.h"
+#include "Components/Views/AttackViews/ThrowableAttackView.h"
 
 using namespace godot;
 
@@ -30,4 +31,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<EntityView>();
 	register_class<MeleeAttackView>();
 	register_class<CastAttackView>();
+	register_class<ThrowableAttackView>();
 }

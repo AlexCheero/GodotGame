@@ -129,6 +129,9 @@
     <ClCompile Include="Components\Views\AttackViews\CastAttackView.cpp">
       <Filter>Source Files\Components\Views\AttackViews</Filter>
     </ClCompile>
+    <ClCompile Include="Components\Views\AttackViews\ThrowableAttackView.cpp">
+      <Filter>Source Files\Components\Views\AttackViews</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -213,6 +216,9 @@
       <Filter>Header Files\Components\Views\AttackViews</Filter>
     </ClInclude>
     <ClInclude Include="Components\Views\AttackViews\CastAttackView.h">
+      <Filter>Header Files\Components\Views\AttackViews</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Views\AttackViews\ThrowableAttackView.h">
       <Filter>Header Files\Components\Views\AttackViews</Filter>
     </ClInclude>
   </ItemGroup>

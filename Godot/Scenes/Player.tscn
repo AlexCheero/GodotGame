@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Player.gdns" type="Script" id=1]
 [ext_resource path="res://Scripts/EntityView.gdns" type="Script" id=2]
 [ext_resource path="res://Scripts/MeleeAttackView.gdns" type="Script" id=3]
 [ext_resource path="res://Scripts/CastAttackView.gdns" type="Script" id=4]
+[ext_resource path="res://Scripts/ThrowableAttackView.gdns" type="Script" id=5]
+[ext_resource path="res://Scenes/Throwable.tscn" type="PackedScene" id=6]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.0352478, 0.130448, 0.644531, 1 )
@@ -56,4 +58,10 @@ attackTime = 0.5
 script = ExtResource( 4 )
 distance = 40.0
 damage = 50.0
+attackTime = 0.5
+
+[node name="ThrowableAttackView" type="Node" parent="EntityView"]
+script = ExtResource( 5 )
+throwable = ExtResource( 6 )
+force = 50.0
 attackTime = 0.5

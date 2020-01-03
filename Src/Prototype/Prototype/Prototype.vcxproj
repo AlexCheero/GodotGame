@@ -154,6 +154,7 @@
     <ClCompile Include="Components\Throwable.cpp" />
     <ClCompile Include="Components\Views\AttackViews\CastAttackView.cpp" />
     <ClCompile Include="Components\Views\AttackViews\MeleeAttackView.cpp" />
+    <ClCompile Include="Components\Views\AttackViews\ThrowableAttackView.cpp" />
     <ClCompile Include="Components\Views\EntityView.cpp" />
     <ClCompile Include="GodotLibrary.cpp" />
     <ClCompile Include="Systems\AISystems\NavAgentSystem.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="Components\Throwable.h" />
     <ClInclude Include="Components\Views\AttackViews\CastAttackView.h" />
     <ClInclude Include="Components\Views\AttackViews\MeleeAttackView.h" />
+    <ClInclude Include="Components\Views\AttackViews\ThrowableAttackView.h" />
     <ClInclude Include="Components\Views\ComponentView.h" />
     <ClInclude Include="Components\Views\EntityView.h" />
     <ClInclude Include="Systems\AISystems\NavAgentSystem.h" />
