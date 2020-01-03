@@ -66,7 +66,9 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	WeaponHolderComponent weapons;
 	entityView->ConstructComponent(weapons.melee);
-	weapons.ranged = CastAttackComponent{ 40.f, 50.f, 0.5f };
+	entityView->ConstructComponent(weapons.ranged);
+	//Godot::print("test " + String::num(weapons.ranged.damage, 2));
+
 	ResourceLoader* rl = ResourceLoader::get_singleton();
 	weapons.throwable = ThrowableAttackComponent{ rl->load("res://Scenes/Throwable.tscn"), 50.f, 0.5f };
 

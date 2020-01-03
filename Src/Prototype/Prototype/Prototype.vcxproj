@@ -152,6 +152,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Components\Throwable.cpp" />
+    <ClCompile Include="Components\Views\AttackViews\CastAttackView.cpp" />
+    <ClCompile Include="Components\Views\AttackViews\MeleeAttackView.cpp" />
     <ClCompile Include="Components\Views\EntityView.cpp" />
     <ClCompile Include="GodotLibrary.cpp" />
     <ClCompile Include="Systems\AISystems\NavAgentSystem.cpp" />
@@ -179,6 +181,7 @@
     <ClInclude Include="Components\Player.h" />
     <ClInclude Include="Components\SimpleComponents.h" />
     <ClInclude Include="Components\Throwable.h" />
+    <ClInclude Include="Components\Views\AttackViews\CastAttackView.h" />
     <ClInclude Include="Components\Views\AttackViews\MeleeAttackView.h" />
     <ClInclude Include="Components\Views\ComponentView.h" />
     <ClInclude Include="Components\Views\EntityView.h" />

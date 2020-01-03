@@ -9,6 +9,7 @@
 #include "ComponentView.h"
 #include "../AttackComponents.h"
 #include "AttackViews/MeleeAttackView.h"
+#include "AttackViews/CastAttackView.h"
 
 #define CONSTRUCT_COMPONENT(Name) template<> \
 inline bool EntityView::ConstructComponent<Name ## Component>(Name ## Component& component) \
@@ -63,5 +64,7 @@ namespace godot
 	//1. names should be equal, differes only with View/Component in the end
 	//2. define specialized template method with CONSTRUCT_COMPONENT macro in EntityView.h
 	//3. register view in GodotLibrary.cpp
+	//4. Component view should implement GetECSComponent method
 	CONSTRUCT_COMPONENT(MeleeAttack)
+	CONSTRUCT_COMPONENT(CastAttack)
 }

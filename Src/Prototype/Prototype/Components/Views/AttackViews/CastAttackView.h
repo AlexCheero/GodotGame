@@ -7,9 +7,9 @@
 
 namespace godot
 {
-	class MeleeAttackView : public ComponentView
+	class CastAttackView : public ComponentView
 	{
-		GODOT_CLASS(MeleeAttackView, ComponentView)
+		GODOT_CLASS(CastAttackView, ComponentView)
 	private:
 		float distance;
 		float damage;
@@ -18,6 +18,6 @@ namespace godot
 	public:
 		static void _register_methods();
 		void _init() {}
-		MeleeAttackComponent GetECSComponent() { return { distance, damage, angle, attackTime, -utils::SecondsToMillis(attackTime) }; }
+		CastAttackComponent GetECSComponent() { return {distance, damage, attackTime, -utils::SecondsToMillis(attackTime) }; }
 	};
 }
