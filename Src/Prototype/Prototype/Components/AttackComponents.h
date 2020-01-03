@@ -7,7 +7,7 @@
 
 #include "../Utils.h"
 
-struct MelleAttackComponent
+struct MeleeAttackComponent
 {
 	float distance;
 	float damage;
@@ -35,7 +35,7 @@ struct ThrowableAttackComponent
 
 struct WeaponHolderComponent
 {
-	MelleAttackComponent melee;
+	MeleeAttackComponent melee;
 	CastAttackComponent ranged;
 	ThrowableAttackComponent throwable;
 };

@@ -4,7 +4,8 @@
 #include <Node.hpp>
 #include <InputEvent.hpp>
 
-#include "Systems\BaseSystem.h"
+//TODO: check all the backslashes in paths
+#include "Systems/BaseSystem.h"
 
 namespace godot
 {

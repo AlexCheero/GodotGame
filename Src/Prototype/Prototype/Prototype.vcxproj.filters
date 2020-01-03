@@ -52,6 +52,15 @@
     <Filter Include="Source Files\Systems\LocomotionSystems">
       <UniqueIdentifier>{1b74d614-ced5-44a0-8ade-2c8af3417ef9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\Views">
+      <UniqueIdentifier>{680b03b8-b753-45c8-b7ca-5c2debc13b2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Views">
+      <UniqueIdentifier>{47b7a400-014c-44f6-9847-00ac852847c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Views\AttackViews">
+      <UniqueIdentifier>{8f4dc712-1800-4276-b71b-a1b40f23fe5f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp">
@@ -107,6 +116,9 @@
     </ClCompile>
     <ClCompile Include="Systems\LocomotionSystems\KinematicMovementSystem.cpp">
       <Filter>Source Files\Systems\LocomotionSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Views\EntityView.cpp">
+      <Filter>Source Files\Components\Views</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +193,15 @@
     </ClInclude>
     <ClInclude Include="Systems\LocomotionSystems\KinematicMovementSystem.h">
       <Filter>Header Files\Systems\LocomotionSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Views\EntityView.h">
+      <Filter>Header Files\Components\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Views\ComponentView.h">
+      <Filter>Header Files\Components\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Views\AttackViews\MeleeAttackView.h">
+      <Filter>Header Files\Components\Views\AttackViews</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

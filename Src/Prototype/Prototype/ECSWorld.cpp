@@ -32,6 +32,8 @@
 #include "Systems/AttackSystems/ThrowableWeaponSystem.h"
 #include "Systems/AISystems/NavAgentSystem.h"
 
+#include "Components/Views/EntityView.h"
+
 #include "Utils.h"
 
 void godot::ECSWorld::UpdateSystems(float delta, SystemsVec& systems)
@@ -45,8 +47,11 @@ void godot::ECSWorld::PreparePlayerEntity()
 	entt::entity entity = registry.create();
 
 	Node* pPlayerNode = get_node("Player");
+	EntityView* entityView = Object::cast_to<EntityView>(pPlayerNode->get_node("EntityView"));
+
 	registry.assign<Node*>(entity, pPlayerNode);
 
+	//TODO: probably player should be just tag, after implementing Views
 	AssignNodeInheritedComponent<Player>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
@@ -60,13 +65,13 @@ void godot::ECSWorld::PreparePlayerEntity()
 	registry.assign<HealthComponent>(entity, 100.f);
 
 	WeaponHolderComponent weapons;
-	weapons.melee = MelleAttackComponent{ 4.f, 10.f, 90.f, 0.5f };
+	entityView->ConstructComponent(weapons.melee);
 	weapons.ranged = CastAttackComponent{ 40.f, 50.f, 0.5f };
 	ResourceLoader* rl = ResourceLoader::get_singleton();
 	weapons.throwable = ThrowableAttackComponent{ rl->load("res://Scenes/Throwable.tscn"), 50.f, 0.5f };
 
 	registry.assign<WeaponHolderComponent>(entity, weapons);
-	registry.assign<MelleAttackComponent>(entity, weapons.melee);
+	registry.assign<MeleeAttackComponent>(entity, weapons.melee);
 	//registry.assign<CastAttackComponent>(entity, weapons.ranged);
 	//registry.assign<ThrowableAttackComponent>(entity, weapons.throwable);
 

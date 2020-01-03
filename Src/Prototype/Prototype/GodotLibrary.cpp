@@ -4,6 +4,8 @@
 #include "Components/Player.h"
 #include "Components/Enemy.h"
 #include "Components/Throwable.h"
+#include "Components/Views/EntityView.h"
+#include "Components/Views/AttackViews/MeleeAttackView.h"
 
 using namespace godot;
 
@@ -24,4 +26,6 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<Player>();
 	register_class<Enemy>();
 	register_class<Throwable>();
+	register_class<EntityView>();
+	register_class<MeleeAttackView>();
 }
