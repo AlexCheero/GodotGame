@@ -94,6 +94,8 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	entt::entity entity = registry.create();
 
 	Node* pEnemyNode = get_node("Enemy");
+	EntityView* entityView = Object::cast_to<EntityView>(pEnemyNode->get_node("EntityView"));
+
 	registry.assign<Node*>(entity, pEnemyNode);
 
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pEnemyNode);
@@ -102,6 +104,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	Enemy* pEnemy = AssignNodeInheritedComponent<Enemy>(registry, entity, pEnemyNode);
 	pEnemy->SetEntity(entity);
 
+	//TODO: should NavPathComponent and NavAgentComponent have views?
 //<prepare NavPathComponent
 	Navigation* nav = Object::cast_to<Navigation>(get_node("Navigation"));
 	Node* pTargetNode = get_node("Navigation/NavigationMeshInstance/EnemyTarget");
@@ -121,10 +124,11 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	registry.assign<NavAgentComponent>(entity, collisionOriginHeight, capsuleShape->get_radius(), minDistance);
 //prepare NavAgentComponent>
 	
-	registry.assign<SpeedComponent>(entity, 10.f);
-	registry.assign<HealthComponent>(entity, 100.f);
+	entityView->ConstructComponent(registry.assign<SpeedComponent>(entity));
+	entityView->ConstructComponent(registry.assign<HealthComponent>(entity));
+	entityView->ConstructComponent(registry.assign<GravityComponent>(entity));
+
 	registry.assign<VelocityComponent>(entity);
-	registry.assign<GravityComponent>(entity, 30.f, 20.f);
 }
 
 void godot::ECSWorld::_register_methods()
