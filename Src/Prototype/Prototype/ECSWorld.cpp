@@ -57,15 +57,14 @@ void godot::ECSWorld::PreparePlayerEntity()
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("Camera"));
 
-	registry.assign<GravityComponent>(entity, 30.f, 20.f);
-	registry.assign<JumpSpeedComponent>(entity, 30.f);//TODO: find a way to set these values via editor
-	registry.assign<SpeedComponent>(entity, 30.f);
-	registry.assign<HealthComponent>(entity, 100.f);
+	entityView->ConstructComponent(registry.assign<GravityComponent>(entity));
+	entityView->ConstructComponent(registry.assign<JumpSpeedComponent>(entity));
+	entityView->ConstructComponent(registry.assign<SpeedComponent>(entity));
+	entityView->ConstructComponent(registry.assign<HealthComponent>(entity));
 
 	WeaponHolderComponent weapons;
 	entityView->ConstructComponent(weapons.melee);
 	entityView->ConstructComponent(weapons.ranged);
-	//Godot::print("test " + String::num(weapons.ranged.damage, 2));
 	entityView->ConstructComponent(weapons.throwable);
 
 	registry.assign<WeaponHolderComponent>(entity, weapons);

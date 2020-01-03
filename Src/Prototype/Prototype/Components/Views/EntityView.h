@@ -11,6 +11,11 @@
 #include "AttackViews/MeleeAttackView.h"
 #include "AttackViews/CastAttackView.h"
 #include "AttackViews/ThrowableAttackView.h"
+#include "../SimpleComponents.h"
+#include "HealthView.h"
+#include "LocomotionViews/GravityView.h"
+#include "LocomotionViews/JumpSpeedView.h"
+#include "LocomotionViews/SpeedView.h"
 
 #define CONSTRUCT_COMPONENT(Name) template<> \
 inline bool EntityView::ConstructComponent<Name ## Component>(Name ## Component& component) \
@@ -69,4 +74,8 @@ namespace godot
 	CONSTRUCT_COMPONENT(MeleeAttack)
 	CONSTRUCT_COMPONENT(CastAttack)
 	CONSTRUCT_COMPONENT(ThrowableAttack)
+	CONSTRUCT_COMPONENT(Health)
+	CONSTRUCT_COMPONENT(Gravity)
+	CONSTRUCT_COMPONENT(JumpSpeed)
+	CONSTRUCT_COMPONENT(Speed)
 }

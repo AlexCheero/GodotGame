@@ -2,6 +2,8 @@
 
 #include <core/Godot.hpp>
 
+#include "entt/entt.hpp"
+
 namespace godot
 {
 	struct VelocityComponent { Vector3 velocity; };

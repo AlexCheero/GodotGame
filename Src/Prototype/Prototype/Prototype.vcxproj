@@ -156,6 +156,10 @@
     <ClCompile Include="Components\Views\AttackViews\MeleeAttackView.cpp" />
     <ClCompile Include="Components\Views\AttackViews\ThrowableAttackView.cpp" />
     <ClCompile Include="Components\Views\EntityView.cpp" />
+    <ClCompile Include="Components\Views\HealthView.cpp" />
+    <ClCompile Include="Components\Views\LocomotionViews\GravityView.cpp" />
+    <ClCompile Include="Components\Views\LocomotionViews\JumpSpeedView.cpp" />
+    <ClCompile Include="Components\Views\LocomotionViews\SpeedView.cpp" />
     <ClCompile Include="GodotLibrary.cpp" />
     <ClCompile Include="Systems\AISystems\NavAgentSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\CastAttackSystem.cpp" />
@@ -187,6 +191,10 @@
     <ClInclude Include="Components\Views\AttackViews\ThrowableAttackView.h" />
     <ClInclude Include="Components\Views\ComponentView.h" />
     <ClInclude Include="Components\Views\EntityView.h" />
+    <ClInclude Include="Components\Views\HealthView.h" />
+    <ClInclude Include="Components\Views\LocomotionViews\GravityView.h" />
+    <ClInclude Include="Components\Views\LocomotionViews\JumpSpeedView.h" />
+    <ClInclude Include="Components\Views\LocomotionViews\SpeedView.h" />
     <ClInclude Include="Systems\AISystems\NavAgentSystem.h" />
     <ClInclude Include="Systems\AttackSystems\CastAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\MeleeAttackSystem.h" />

@@ -1,11 +1,15 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/Player.gdns" type="Script" id=1]
-[ext_resource path="res://Scripts/EntityView.gdns" type="Script" id=2]
-[ext_resource path="res://Scripts/MeleeAttackView.gdns" type="Script" id=3]
-[ext_resource path="res://Scripts/CastAttackView.gdns" type="Script" id=4]
-[ext_resource path="res://Scripts/ThrowableAttackView.gdns" type="Script" id=5]
+[ext_resource path="res://Scripts/Views/EntityView.gdns" type="Script" id=2]
+[ext_resource path="res://Scripts/Views/AttackViews/MeleeAttackView.gdns" type="Script" id=3]
+[ext_resource path="res://Scripts/Views/AttackViews/CastAttackView.gdns" type="Script" id=4]
+[ext_resource path="res://Scripts/Views/AttackViews/ThrowableAttackView.gdns" type="Script" id=5]
 [ext_resource path="res://Scenes/Throwable.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scripts/Views/LocomotionViews/GravityView.gdns" type="Script" id=7]
+[ext_resource path="res://Scripts/Views/LocomotionViews/JumpSpeedView.gdns" type="Script" id=8]
+[ext_resource path="res://Scripts/Views/LocomotionViews/SpeedView.gdns" type="Script" id=9]
+[ext_resource path="res://Scripts/Views/HealthView.gdns" type="Script" id=10]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.0352478, 0.130448, 0.644531, 1 )
@@ -65,3 +69,20 @@ script = ExtResource( 5 )
 throwable = ExtResource( 6 )
 force = 50.0
 attackTime = 0.5
+
+[node name="GravityView" type="Node" parent="EntityView"]
+script = ExtResource( 7 )
+"up acceleration" = 30.0
+"down acceleration" = 20.0
+
+[node name="JumpSpeedView" type="Node" parent="EntityView"]
+script = ExtResource( 8 )
+"jump speed" = 30.0
+
+[node name="SpeedView" type="Node" parent="EntityView"]
+script = ExtResource( 9 )
+speed = 30.0
+
+[node name="HealthView" type="Node" parent="EntityView"]
+script = ExtResource( 10 )
+hp = 100.0

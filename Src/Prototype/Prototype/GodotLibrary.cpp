@@ -8,6 +8,10 @@
 #include "Components/Views/AttackViews/MeleeAttackView.h"
 #include "Components/Views/AttackViews/CastAttackView.h"
 #include "Components/Views/AttackViews/ThrowableAttackView.h"
+#include "Components/Views/HealthView.h"
+#include "Components/Views/LocomotionViews/GravityView.h"
+#include "Components/Views/LocomotionViews/JumpSpeedView.h"
+#include "Components/Views/LocomotionViews/SpeedView.h"
 
 using namespace godot;
 
@@ -32,4 +36,8 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<MeleeAttackView>();
 	register_class<CastAttackView>();
 	register_class<ThrowableAttackView>();
+	register_class<HealthView>();
+	register_class<GravityView>();
+	register_class<JumpSpeedView>();
+	register_class<SpeedView>();
 }

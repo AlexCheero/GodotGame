@@ -64,6 +64,12 @@
     <Filter Include="Source Files\Components\Views\AttackViews">
       <UniqueIdentifier>{9a20a15c-3d9f-4f73-8ae9-238da5fcf2ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\Views\LocomotionViews">
+      <UniqueIdentifier>{2f9e01d4-72d9-4238-bf76-42c9ae83de8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Views\LocomotionViews">
+      <UniqueIdentifier>{93f22394-a639-4828-9e25-096ca14494f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp">
@@ -131,6 +137,18 @@
     </ClCompile>
     <ClCompile Include="Components\Views\AttackViews\ThrowableAttackView.cpp">
       <Filter>Source Files\Components\Views\AttackViews</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Views\HealthView.cpp">
+      <Filter>Source Files\Components\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Views\LocomotionViews\GravityView.cpp">
+      <Filter>Source Files\Components\Views\LocomotionViews</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Views\LocomotionViews\JumpSpeedView.cpp">
+      <Filter>Source Files\Components\Views\LocomotionViews</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Views\LocomotionViews\SpeedView.cpp">
+      <Filter>Source Files\Components\Views\LocomotionViews</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +238,18 @@
     </ClInclude>
     <ClInclude Include="Components\Views\AttackViews\ThrowableAttackView.h">
       <Filter>Header Files\Components\Views\AttackViews</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Views\HealthView.h">
+      <Filter>Header Files\Components\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Views\LocomotionViews\GravityView.h">
+      <Filter>Header Files\Components\Views\LocomotionViews</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Views\LocomotionViews\JumpSpeedView.h">
+      <Filter>Header Files\Components\Views\LocomotionViews</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Views\LocomotionViews\SpeedView.h">
+      <Filter>Header Files\Components\Views\LocomotionViews</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
