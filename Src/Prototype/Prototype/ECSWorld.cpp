@@ -130,6 +130,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	entityView->ConstructComponent(registry.assign<GravityComponent>(entity));
 
 	registry.assign<VelocityComponent>(entity);
+	registry.assign<RotationDirectionComponent>(entity);
 }
 
 void godot::ECSWorld::_register_methods()

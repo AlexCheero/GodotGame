@@ -10,7 +10,7 @@
 inline godot::Vector3 godot::PlayerRotationSystem::GetTargetDirection(Vector2 inputDir, Basis camBasis)
 {
 	Vector3 dir{ 0, 0, 0 };
-	dir -= camBasis.x * inputDir.x + camBasis.z * inputDir.y;
+	dir += camBasis.x * inputDir.x + camBasis.z * inputDir.y;
 	dir.y = 0;
 
 	return dir;
