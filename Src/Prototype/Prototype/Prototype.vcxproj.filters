@@ -70,6 +70,12 @@
     <Filter Include="Source Files\Components\Views\LocomotionViews">
       <UniqueIdentifier>{93f22394-a639-4828-9e25-096ca14494f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\NodeComponents">
+      <UniqueIdentifier>{ed6f9640-d829-490d-8ea5-b166586b8796}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\NodeComponents">
+      <UniqueIdentifier>{dd5a0e83-99a2-4e34-9159-62dc1ee6b426}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp">
@@ -89,9 +95,6 @@
     </ClCompile>
     <ClCompile Include="Systems\WeaponChooseSystem.cpp">
       <Filter>Source Files\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Throwable.cpp">
-      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="Systems\AISystems\NavAgentSystem.cpp">
       <Filter>Source Files\Systems\AISystems</Filter>
@@ -153,6 +156,9 @@
     <ClCompile Include="Components\Views\SimpleFollowView.cpp">
       <Filter>Source Files\Components\Views</Filter>
     </ClCompile>
+    <ClCompile Include="Components\NodeComponents\ThrowableNodeComponent.cpp">
+      <Filter>Source Files\Components\NodeComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -160,9 +166,6 @@
     </ClInclude>
     <ClInclude Include="Systems\BaseSystem.h">
       <Filter>Header Files\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Enemy.h">
-      <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Systems\DestroyDeadSystem.h">
       <Filter>Header Files\Systems</Filter>
@@ -184,9 +187,6 @@
     </ClInclude>
     <ClInclude Include="Systems\WeaponChooseSystem.h">
       <Filter>Header Files\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Throwable.h">
-      <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Systems\AISystems\NavAgentSystem.h">
       <Filter>Header Files\Systems\AISystems</Filter>
@@ -253,6 +253,12 @@
     </ClInclude>
     <ClInclude Include="Components\Views\SimpleFollowView.h">
       <Filter>Header Files\Components\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\NodeComponents\EnemyNodeComponent.h">
+      <Filter>Header Files\Components\NodeComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\NodeComponents\ThrowableNodeComponent.h">
+      <Filter>Header Files\Components\NodeComponents</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,5 +4,5 @@
 
 [resource]
 resource_name = "Throwable"
-class_name = "Throwable"
+class_name = "ThrowableNodeComponent"
 library = ExtResource( 1 )

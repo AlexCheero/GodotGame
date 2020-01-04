@@ -8,7 +8,7 @@
 
 #include "core/math/math_funcs.h"
 
-#include "../../Components/Enemy.h"
+#include "../../Components/NodeComponents/EnemyNodeComponent.h"
 #include "../../Components/SimpleComponents.h"
 #include "../../Components/AttackComponents.h"
 #include "../../Components/InputComponents.h"
@@ -64,7 +64,7 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 		if (!CheckAttackAngle(attackerTransform.origin, -attackerTransform.basis.z, enemyPosition, attackComp.angle))
 			return;
 
-		entt::entity enemyEntity = Object::cast_to<Enemy>(pObj)->GetEntity();
+		entt::entity enemyEntity = Object::cast_to<EnemyNodeComponent>(pObj)->GetEntity();
 		
 		HealthComponent& enemyHealthComp = registry.get<HealthComponent>(enemyEntity);
 		enemyHealthComp.hp -= attackComp.damage;

@@ -1,11 +1,11 @@
 #include "ThrowableWeaponSystem.h"
 
-#include "../../Components/Throwable.h"
+#include "../../Components/NodeComponents/ThrowableNodeComponent.h"
 #include "../../Components/SimpleComponents.h"
 
 void godot::ThrowableWeaponSystem::operator()(float delta, entt::registry& registry)
 {
-	registry.view<Throwable*>().each([&registry](entt::entity throwableEntity, Throwable* pThrowable)
+	registry.view<ThrowableNodeComponent*>().each([&registry](entt::entity throwableEntity, ThrowableNodeComponent* pThrowable)
 	{
 		if (pThrowable->is_contact_monitor_enabled())
 			return;

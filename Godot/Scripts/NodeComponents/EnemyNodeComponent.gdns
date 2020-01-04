@@ -4,5 +4,5 @@
 
 [resource]
 resource_name = "Enemy"
-class_name = "Enemy"
+class_name = "EnemyNodeComponent"
 library = ExtResource( 1 )

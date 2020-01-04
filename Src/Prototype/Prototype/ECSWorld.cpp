@@ -11,7 +11,7 @@
 #include <CollisionShape.hpp>
 #include <CapsuleShape.hpp>
 
-#include "Components/Enemy.h"
+#include "Components/NodeComponents/EnemyNodeComponent.h"
 #include "Components/AttackComponents.h"
 #include "Components/InputComponents.h"
 #include "Components/AIComponents/NavigationComponents.h"
@@ -101,7 +101,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pEnemyNode);
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pEnemyNode);
 
-	Enemy* pEnemy = AssignNodeInheritedComponent<Enemy>(registry, entity, pEnemyNode);
+	EnemyNodeComponent* pEnemy = AssignNodeInheritedComponent<EnemyNodeComponent>(registry, entity, pEnemyNode);
 	pEnemy->SetEntity(entity);
 
 	//TODO: should NavPathComponent and NavAgentComponent have views?
