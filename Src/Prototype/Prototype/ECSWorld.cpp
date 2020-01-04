@@ -104,9 +104,9 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	EnemyNodeComponent* pEnemy = AssignNodeInheritedComponent<EnemyNodeComponent>(registry, entity, pEnemyNode);
 	pEnemy->SetEntity(entity);
 
-	//TODO: should NavPathComponent and NavAgentComponent have views?
 //<prepare NavPathComponent
 	Navigation* nav = Object::cast_to<Navigation>(get_node("Navigation"));
+	//TODO: dynamically set target when deceision making is implemented
 	Node* pTargetNode = get_node("Navigation/NavigationMeshInstance/EnemyTarget");
 	//TODO: in real life scenarios you should take targets bounds into account
 	Vector3 target = Object::cast_to<Spatial>(pTargetNode)->get_global_transform().origin;
