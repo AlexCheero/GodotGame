@@ -42,13 +42,8 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 	auto view = registry.view<MeleeAttackComponent, InputComponent, Spatial*>();
 	view.each([&registry, this](entt::entity entity, MeleeAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
 	{
-		if (!input.Test(EInput::Attack))
+		if (!CanAttack(input, attackComp.attackTime, attackComp.prevHitTime))
 			return;
-
-		int64_t currTime = godot::OS::get_singleton()->get_ticks_msec();
-		if (attackComp.prevHitTime + utils::SecondsToMillis(attackComp.attackTime) > currTime)
-			return;
-		attackComp.prevHitTime = currTime;
 
 		Godot::print("Splash!");
 

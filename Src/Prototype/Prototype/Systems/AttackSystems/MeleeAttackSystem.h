@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../BaseSystem.h"
+#include "AttackCooldown.h"
 
 #include <PhysicsShapeQueryParameters.hpp>
 #include <Spatial.hpp>
@@ -8,7 +9,7 @@
 
 namespace godot
 {
-	class TESTABLE_CLASS MeleeAttackSystem : public BaseSystem
+	class TESTABLE_CLASS MeleeAttackSystem : public BaseSystem, private AttackCooldown
 	{
 		Ref<PhysicsShapeQueryParameters> m_params;
 		Ref<SphereShape> m_attackShape;

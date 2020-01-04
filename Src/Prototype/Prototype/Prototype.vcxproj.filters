@@ -162,6 +162,9 @@
     <ClCompile Include="Systems\LocomotionSystems\LookAtSystem.cpp">
       <Filter>Source Files\Systems\LocomotionSystems</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\AttackCooldown.cpp">
+      <Filter>Source Files\Systems\AttackSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -265,6 +268,9 @@
     </ClInclude>
     <ClInclude Include="Systems\LocomotionSystems\LookAtSystem.h">
       <Filter>Header Files\Systems\LocomotionSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\AttackCooldown.h">
+      <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

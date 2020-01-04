@@ -11,16 +11,10 @@
 void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<ThrowableAttackComponent, InputComponent, Spatial*>();
-	view.each([&registry](entt::entity entity, ThrowableAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
+	view.each([&registry, this](entt::entity entity, ThrowableAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
 	{
-		//TODO: copypast from MeleeAttackSystem
-		if (!input.Test(EInput::Attack))
+		if (!CanAttack(input, attackComp.attackTime, attackComp.prevHitTime))
 			return;
-
-		int64_t currTime = godot::OS::get_singleton()->get_ticks_msec();
-		if (attackComp.prevHitTime + utils::SecondsToMillis(attackComp.attackTime) > currTime)
-			return;
-		attackComp.prevHitTime = currTime;
 
 		Godot::print("Throw!");
 

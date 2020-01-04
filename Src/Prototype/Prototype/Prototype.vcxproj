@@ -163,6 +163,7 @@
     <ClCompile Include="Components\Views\SimpleFollowView.cpp" />
     <ClCompile Include="GodotLibrary.cpp" />
     <ClCompile Include="Systems\AISystems\NavAgentSystem.cpp" />
+    <ClCompile Include="Systems\AttackSystems\AttackCooldown.cpp" />
     <ClCompile Include="Systems\AttackSystems\CastAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\MeleeAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\ThrowableWeaponSystem.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Components\Views\LocomotionViews\SpeedView.h" />
     <ClInclude Include="Components\Views\SimpleFollowView.h" />
     <ClInclude Include="Systems\AISystems\NavAgentSystem.h" />
+    <ClInclude Include="Systems\AttackSystems\AttackCooldown.h" />
     <ClInclude Include="Systems\AttackSystems\CastAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\MeleeAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\ThrowableWeaponSystem.h" />
