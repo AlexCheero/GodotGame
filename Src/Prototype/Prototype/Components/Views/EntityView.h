@@ -4,7 +4,6 @@
 #include <Node.hpp>
 
 #include <map>
-#include <typeinfo>
 
 #include "ComponentView.h"
 #include "../AttackComponents.h"
@@ -50,24 +49,10 @@ namespace godot
 	template<typename T>
 	inline bool EntityView::ConstructComponent(T& component)
 	{
-		Godot::print_error("Calling unspecialized template method EntityView::ConstructComponent that isn't working!");
+		Godot::print_error("Define specialized version of this method with macro CONSTRUCT_COMPONENT!");
 		return false;
-		String key(typeid(component).name());
-		key = key.substr(7, key.length() - (7 + 9));//7 for "struct " and 9 for "Component"
-
-		auto it = componentsMap.find(key);
-		if (it != componentsMap.end())
-		{
-			//TODO: find out why it can't take void* ptr
-			it->second->ConstructComponent(&component);
-			return true;
-		}
-		else
-			return false;
 	}
 
-	//TODO: try to fix unspecialized method
-	//TODO: right down the rules for defining components and it's views
 	//1. names should be equal, differes only with View/Component in the end
 	//2. define specialized template method with CONSTRUCT_COMPONENT macro in EntityView.h
 	//3. register view in GodotLibrary.cpp
