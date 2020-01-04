@@ -159,6 +159,9 @@
     <ClCompile Include="Components\NodeComponents\ThrowableNodeComponent.cpp">
       <Filter>Source Files\Components\NodeComponents</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\LocomotionSystems\LookAtSystem.cpp">
+      <Filter>Source Files\Systems\LocomotionSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -259,6 +262,9 @@
     </ClInclude>
     <ClInclude Include="Components\NodeComponents\ThrowableNodeComponent.h">
       <Filter>Header Files\Components\NodeComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\LocomotionSystems\LookAtSystem.h">
+      <Filter>Header Files\Systems\LocomotionSystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

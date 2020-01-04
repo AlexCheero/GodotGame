@@ -30,6 +30,7 @@
 #include "Systems/AttackSystems/ThrowAttackSystem.h"
 #include "Systems/AttackSystems/ThrowableWeaponSystem.h"
 #include "Systems/AISystems/NavAgentSystem.h"
+#include "Systems/LocomotionSystems/LookAtSystem.h"
 
 #include "Components/Views/EntityView.h"
 
@@ -70,11 +71,11 @@ void godot::ECSWorld::PreparePlayerEntity()
 	//registry.assign<ThrowableAttackComponent>(entity, weapons.throwable);
 
 	registry.assign<entt::tag<PlayerTag> >(entity);
-	registry.assign<entt::tag<RotationTag> >(entity);
 	registry.assign<entt::tag<PlayerInputTag> >(entity);
 
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<InputComponent>(entity);
+	registry.assign<RotationDirectionComponent>(entity);
 }
 
 void godot::ECSWorld::PrepareCameraEntity()
@@ -151,6 +152,7 @@ void godot::ECSWorld::_init()
 	//TODO: must always follow GravitySystem. find a way to enforce such behaviour in entt
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new JumpSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PlayerRotationSystem()));
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new LookAtSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new MeleeAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new CastAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowAttackSystem()));

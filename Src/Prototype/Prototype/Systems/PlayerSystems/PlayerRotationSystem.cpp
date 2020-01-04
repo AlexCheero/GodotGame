@@ -10,7 +10,7 @@
 inline godot::Vector3 godot::PlayerRotationSystem::GetTargetDirection(Vector2 inputDir, Basis camBasis)
 {
 	Vector3 dir{ 0, 0, 0 };
-	dir += camBasis.x * inputDir.x + camBasis.z * inputDir.y;
+	dir -= camBasis.x * inputDir.x + camBasis.z * inputDir.y;
 	dir.y = 0;
 
 	return dir;
@@ -18,17 +18,14 @@ inline godot::Vector3 godot::PlayerRotationSystem::GetTargetDirection(Vector2 in
 
 void godot::PlayerRotationSystem::operator()(float delta, entt::registry& registry)
 {
-	auto view = registry.view<entt::tag<RotationTag>, InputComponent, entt::tag<PlayerTag>, Spatial*, Camera*>();
+	auto view = registry.view<entt::tag<PlayerTag>, RotationDirectionComponent, InputComponent, Spatial*, Camera*>();
 	view.each(
-	[&registry](entt::entity entity, entt::tag<RotationTag> rotationComp, InputComponent input, entt::tag<PlayerTag> playerTag, Spatial* playerSpatial, Camera* pCam)
+	[](entt::tag<PlayerTag> playerTag, RotationDirectionComponent& rotDir, InputComponent input, Spatial* playerSpatial, Camera* pCam)
 	{
-		Basis camBasis = pCam->get_global_transform().get_basis();
-		Vector3 dir = GetTargetDirection(input.rotation, camBasis);
-
-		if (dir.length_squared() == 0)
+		if (input.rotation.length_squared() == 0)
 			return;
-		
-		Vector3 lookTarget = playerSpatial->get_global_transform().get_origin() - dir;
-		playerSpatial->look_at(lookTarget, Vector3{ 0, 1, 0 });
+
+		Basis camBasis = pCam->get_global_transform().get_basis();
+		rotDir.direction = GetTargetDirection(input.rotation, camBasis);
 	});
 }
