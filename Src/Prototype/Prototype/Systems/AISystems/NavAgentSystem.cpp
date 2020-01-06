@@ -5,6 +5,7 @@
 #include "../../Components/SimpleComponents.h"
 #include "../../Components/AIComponents/NavigationComponents.h"
 
+//TODO: smooth nav path following with bezier
 void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<KinematicBody*, VelocityComponent, NavAgentComponent, SpeedComponent, NavPathComponent>();

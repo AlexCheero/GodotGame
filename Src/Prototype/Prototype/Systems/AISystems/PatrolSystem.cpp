@@ -4,6 +4,7 @@
 
 #include "../../Components/AIComponents/NavigationComponents.h"
 
+//TODO: smooth patrolling from point to point with bezier
 void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 {
 	entt::entity navEntity = registry.view<Navigation*>()[0];
