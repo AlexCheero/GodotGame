@@ -32,15 +32,28 @@ navmesh = SubResource( 1 )
 
 [node name="Floor" parent="Navigation/NavigationMeshInstance" instance=ExtResource( 5 )]
 
-[node name="EnemyTarget" type="Spatial" parent="Navigation/NavigationMeshInstance"]
-editor/display_folded = true
+[node name="CubeObstacle" type="Spatial" parent="Navigation/NavigationMeshInstance"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 34.5199, 2.3309, -30.6353 )
 
-[node name="MeshInstance" type="MeshInstance" parent="Navigation/NavigationMeshInstance/EnemyTarget"]
+[node name="MeshInstance" type="MeshInstance" parent="Navigation/NavigationMeshInstance/CubeObstacle"]
 mesh = SubResource( 2 )
 material/0 = null
 
-[node name="StaticBody" type="StaticBody" parent="Navigation/NavigationMeshInstance/EnemyTarget/MeshInstance"]
+[node name="StaticBody" type="StaticBody" parent="Navigation/NavigationMeshInstance/CubeObstacle/MeshInstance"]
 
-[node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/EnemyTarget/MeshInstance/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/CubeObstacle/MeshInstance/StaticBody"]
 shape = SubResource( 3 )
+
+[node name="PatrolRoute" type="Node" parent="."]
+
+[node name="p1" type="Spatial" parent="PatrolRoute"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -44.5458, 0, -48.8634 )
+
+[node name="p2" type="Spatial" parent="PatrolRoute"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39.8872, 7.62939e-006, -54.5141 )
+
+[node name="p3" type="Spatial" parent="PatrolRoute"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.4776, 0, 16.6931 )
+
+[node name="p4" type="Spatial" parent="PatrolRoute"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -33.0559, 0, 16.7237 )

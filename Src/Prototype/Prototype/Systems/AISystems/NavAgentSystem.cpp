@@ -1,22 +1,23 @@
 #include "NavAgentSystem.h"
 
-#include "../../Components/NodeComponents/EnemyNodeComponent.h"
+#include <KinematicBody.hpp>
+
 #include "../../Components/SimpleComponents.h"
 #include "../../Components/AIComponents/NavigationComponents.h"
 
 void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
 {
-	auto view = registry.view<EnemyNodeComponent*, VelocityComponent, NavAgentComponent, SpeedComponent, NavPathComponent>();
+	auto view = registry.view<KinematicBody*, VelocityComponent, NavAgentComponent, SpeedComponent, NavPathComponent>();
 	view.each(
-	[&registry, this, delta](entt::entity entity, EnemyNodeComponent* pEnemy, VelocityComponent& velocity,
+	[&registry](entt::entity entity, KinematicBody* pKBody, VelocityComponent& velocity,
 							 NavAgentComponent navigation, SpeedComponent speedComp, NavPathComponent& pathComp)
 	{
-		if (!pEnemy->is_on_floor())
+		if (!pKBody->is_on_floor())
 			return;
 
 		if (!pathComp.PathComplete())
 		{
-			Vector3 origin = pEnemy->get_global_transform().origin;
+			Vector3 origin = pKBody->get_global_transform().origin;
 			origin.y -= navigation.agentOriginHeight;
 			Vector3 moveVec = pathComp.CurrentPathPoint() - origin;
 

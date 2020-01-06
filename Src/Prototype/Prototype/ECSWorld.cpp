@@ -31,6 +31,7 @@
 #include "Systems/AttackSystems/ThrowableWeaponSystem.h"
 #include "Systems/AISystems/NavAgentSystem.h"
 #include "Systems/LocomotionSystems/LookAtSystem.h"
+#include "Systems/AISystems/PatrolSystem.h"
 
 #include "Components/Views/EntityView.h"
 
@@ -105,16 +106,6 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	EnemyNodeComponent* pEnemy = AssignNodeInheritedComponent<EnemyNodeComponent>(registry, entity, pEnemyNode);
 	pEnemy->SetEntity(entity);
 
-//<prepare NavPathComponent
-	Navigation* nav = Object::cast_to<Navigation>(get_node("Navigation"));
-	//TODO: dynamically set target when deceision making is implemented
-	Node* pTargetNode = get_node("Navigation/NavigationMeshInstance/EnemyTarget");
-	//TODO: in real life scenarios you should take targets bounds into account
-	Vector3 target = Object::cast_to<Spatial>(pTargetNode)->get_global_transform().origin;
-	PoolVector3Array path = nav->get_simple_path(pEnemy->get_transform().origin, target);
-	registry.assign<NavPathComponent>(entity, path);
-//prepare NavPathComponent>
-
 //<prepare NavAgentComponent
 	CollisionShape* colShape = Object::cast_to<CollisionShape>(pEnemyNode->get_node("CollisionShape"));
 	Ref<Shape> shape = colShape->get_shape();
@@ -131,6 +122,22 @@ void godot::ECSWorld::PrepareEnemyEntity()
 
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<RotationDirectionComponent>(entity);
+
+//<prepare patrol route
+	PatrolRoute& route = registry.assign<PatrolRoute>(entity);
+	route.routePoints.clear();
+
+	Node* pPatrolRoute = get_node("PatrolRoute");
+	for (int i = 0; i < pPatrolRoute->get_child_count(); i++)
+	{
+		Spatial* spatialChild = Object::cast_to<Spatial>(pPatrolRoute->get_child(i));
+		if (!spatialChild)
+			continue;
+		
+		route.routePoints.push_back(spatialChild->get_global_transform().origin);
+	}
+	route.current = 0;
+//prepare patrol route>
 }
 
 void godot::ECSWorld::_register_methods()
@@ -158,6 +165,7 @@ void godot::ECSWorld::_init()
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new CastAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowableWeaponSystem()));
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PatrolSystem()));
 	//TODO: should it be in phys proc?
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new NavAgentSystem()));
 	
@@ -173,6 +181,11 @@ void godot::ECSWorld::_ready()
 	PreparePlayerEntity();
 	PrepareCameraEntity();
 	PrepareEnemyEntity();
+
+	//singleton Navigation* entity
+	Navigation* nav = Object::cast_to<Navigation>(get_node("Navigation"));
+	entt::entity entity = registry.create();
+	registry.assign<Navigation*>(entity, nav);
 }
 
 void godot::ECSWorld::HandleInputEvent(InputEvent* e)

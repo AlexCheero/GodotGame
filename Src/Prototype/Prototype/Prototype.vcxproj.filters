@@ -165,6 +165,9 @@
     <ClCompile Include="Systems\AttackSystems\AttackCooldown.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\AISystems\PatrolSystem.cpp">
+      <Filter>Source Files\Systems\AISystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -271,6 +274,9 @@
     </ClInclude>
     <ClInclude Include="Systems\AttackSystems\AttackCooldown.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AISystems\PatrolSystem.h">
+      <Filter>Header Files\Systems\AISystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
