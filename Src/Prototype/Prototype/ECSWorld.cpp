@@ -78,6 +78,8 @@ void godot::ECSWorld::PreparePlayerEntity()
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<InputComponent>(entity);
 	registry.assign<RotationDirectionComponent>(entity);
+
+	registry.assign<BoundsComponent>(entity, GetCapsuleBounds(pPlayerNode->get_node("CollisionShape")));
 }
 
 void godot::ECSWorld::PrepareCameraEntity()
@@ -107,15 +109,8 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	EnemyNodeComponent* pEnemy = AssignNodeInheritedComponent<EnemyNodeComponent>(registry, entity, pEnemyNode);
 	pEnemy->SetEntity(entity);
 
-//<prepare NavAgentComponent
-	CollisionShape* colShape = Object::cast_to<CollisionShape>(pEnemyNode->get_node("CollisionShape"));
-	Ref<Shape> shape = colShape->get_shape();
-	CapsuleShape* capsuleShape = static_cast<CapsuleShape*>(shape.ptr());
-	//cause capsule height is hieght of the cylinder
-	float collisionOriginHeight = capsuleShape->get_radius() + capsuleShape->get_height() / 2;
-	float minDistance = capsuleShape->get_margin();//margin used for physics, probably should increase min distance
-	registry.assign<NavAgentComponent>(entity, collisionOriginHeight, capsuleShape->get_radius(), minDistance);
-//prepare NavAgentComponent>
+	registry.assign<BoundsComponent>(entity, GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));
+	registry.assign<NavAgentComponent>(entity, 1.f);//TODO: create NavAgentView and remove hardcode
 	
 	entityView->ConstructComponent(registry.assign<SpeedComponent>(entity));
 	entityView->ConstructComponent(registry.assign<HealthComponent>(entity));
@@ -140,6 +135,20 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	}
 	route.current = 0;
 //prepare patrol route>
+}
+
+godot::BoundsComponent godot::ECSWorld::GetCapsuleBounds(Node* pCapsuleNode)
+{
+	CollisionShape* colShape = Object::cast_to<CollisionShape>(pCapsuleNode);
+	Ref<Shape> shape = colShape->get_shape();
+	CapsuleShape* capsuleShape = static_cast<CapsuleShape*>(shape.ptr());
+	//cause capsule height is hieght of the cylinder
+	float capsuleRadius = capsuleShape->get_radius();
+	float boundsHeight = 2 * capsuleRadius + capsuleShape->get_height();
+	float boundsWidth, boundsLength;
+	boundsWidth = boundsLength = capsuleRadius * 2;
+	//margin used for physics, probably should increase min distance
+	return { boundsWidth, boundsHeight, boundsLength, capsuleShape->get_margin() };
 }
 
 void godot::ECSWorld::_register_methods()

@@ -6,6 +6,8 @@
 
 #include "Systems/BaseSystem.h"
 
+#include "Components/SimpleComponents.h"
+
 namespace godot
 {
 	class ECSWorld : public Node
@@ -29,6 +31,7 @@ namespace godot
 		void PreparePlayerEntity();
 		void PrepareCameraEntity();
 		void PrepareEnemyEntity();
+		BoundsComponent GetCapsuleBounds(Node* pCapsuleNode);
 	public:
 		static void _register_methods();
 		void _init();

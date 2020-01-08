@@ -5,15 +5,16 @@
 #include <Spatial.hpp>
 
 #include "../../Components/SimpleComponents.h"
+#include "../../Components/AIComponents/PatrolComponents.h"
 
 namespace godot
 {
 	class PatrolSystem : public BaseSystem
 	{
 	private:
-		using PlayersView = entt::view<entt::exclude_t<>, entt::tag<PlayerTag>, Spatial*>;
+		using PlayersView = entt::view<entt::exclude_t<>, entt::tag<PlayerTag>, BoundsComponent, Spatial*>;
 		
-		bool CheckForTargets(PlayersView& targetsView, Spatial* pPatrolSpatial);
+		bool CheckForTargets(PlayersView& targetsView, PatrolmanComponent patrolman, Spatial* pPatrolSpatial, float navAgentRadius);
 	public:
 		virtual void operator()(float delta, entt::registry& registry) override;
 	};

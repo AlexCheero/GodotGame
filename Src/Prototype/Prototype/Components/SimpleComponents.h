@@ -30,4 +30,12 @@ namespace godot
 		float xAngle;
 		float yAngle;
 	};
+
+	struct BoundsComponent
+	{
+		float width;
+		float height;
+		float length;
+		float margin;
+	};
 }
