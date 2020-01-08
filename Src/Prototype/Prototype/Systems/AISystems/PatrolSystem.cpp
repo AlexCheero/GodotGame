@@ -40,11 +40,10 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 
 	auto players = registry.view<entt::tag<PlayerTag>, BoundsComponent, Spatial*>();
 
-	auto view = registry.view<PatrolRouteComponent, PatrolmanComponent, NavAgentComponent, BoundsComponent, Spatial*>(entt::exclude<NavPathComponent>);
+	auto view = registry.view<PatrolRouteComponent, PatrolmanComponent, BoundsComponent, Spatial*>(entt::exclude<NavPathComponent>);
 	view.each(
 	[this, &registry, navigation, &players]
-	(entt::entity entity, PatrolRouteComponent& route, PatrolmanComponent patrolman
-		, NavAgentComponent navAgent, BoundsComponent bounds, Spatial* pSpatial)
+	(entt::entity entity, PatrolRouteComponent& route, PatrolmanComponent patrolman, BoundsComponent bounds, Spatial* pSpatial)
 	{
 		static bool prevHaveTarget = false;
 		bool haveTarget = CheckForTargets(players, patrolman, pSpatial, bounds.length / 2);

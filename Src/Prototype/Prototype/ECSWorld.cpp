@@ -110,12 +110,13 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	pEnemy->SetEntity(entity);
 
 	registry.assign<BoundsComponent>(entity, GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));
-	registry.assign<NavAgentComponent>(entity, 1.f);//TODO: create NavAgentView and remove hardcode
 	
 	entityView->ConstructComponent(registry.assign<SpeedComponent>(entity));
 	entityView->ConstructComponent(registry.assign<HealthComponent>(entity));
 	entityView->ConstructComponent(registry.assign<GravityComponent>(entity));
 	entityView->ConstructComponent(registry.assign<PatrolmanComponent>(entity));
+	entityView->ConstructComponent(registry.assign<NavMarginComponent>(entity));
+		
 
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<RotationDirectionComponent>(entity);

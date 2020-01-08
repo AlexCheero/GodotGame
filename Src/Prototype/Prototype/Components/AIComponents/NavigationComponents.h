@@ -13,7 +13,7 @@ struct NavPathComponent
 	godot::Vector3 CurrentPathPoint() { return path[pathIndex]; }
 };
 
-struct NavAgentComponent
+struct NavMarginComponent
 {
-	float minDistance;
+	float margin;
 };

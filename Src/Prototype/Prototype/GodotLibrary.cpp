@@ -13,6 +13,7 @@
 #include "Components/Views/LocomotionViews/SpeedView.h"
 #include "Components/Views/SimpleFollowView.h"
 #include "Components/Views/AIViews/PatrolmanView.h"
+#include "Components/Views/AIViews/NavMarginView.h"
 
 using namespace godot;
 
@@ -42,4 +43,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<SpeedView>();
 	register_class<SimpleFollowView>();
 	register_class<PatrolmanView>();
+	register_class<NavMarginView>();
 }

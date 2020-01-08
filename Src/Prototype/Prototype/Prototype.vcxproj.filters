@@ -177,6 +177,9 @@
     <ClCompile Include="Components\Views\AIViews\PatrolmanView.cpp">
       <Filter>Source Files\Components\Views\AIViews</Filter>
     </ClCompile>
+    <ClCompile Include="Components\Views\AIViews\NavMarginView.cpp">
+      <Filter>Source Files\Components\Views\AIViews</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -291,6 +294,9 @@
       <Filter>Header Files\Components\AIComponents</Filter>
     </ClInclude>
     <ClInclude Include="Components\Views\AIViews\PatrolmanView.h">
+      <Filter>Header Files\Components\Views\AIViews</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Views\AIViews\NavMarginView.h">
       <Filter>Header Files\Components\Views\AIViews</Filter>
     </ClInclude>
   </ItemGroup>

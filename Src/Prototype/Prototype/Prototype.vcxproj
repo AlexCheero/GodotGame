@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Components\NodeComponents\ThrowableNodeComponent.cpp" />
+    <ClCompile Include="Components\Views\AIViews\NavMarginView.cpp" />
     <ClCompile Include="Components\Views\AIViews\PatrolmanView.cpp" />
     <ClCompile Include="Components\Views\AttackViews\CastAttackView.cpp" />
     <ClCompile Include="Components\Views\AttackViews\MeleeAttackView.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="Components\NodeComponents\EnemyNodeComponent.h" />
     <ClInclude Include="Components\NodeComponents\ThrowableNodeComponent.h" />
     <ClInclude Include="Components\SimpleComponents.h" />
+    <ClInclude Include="Components\Views\AIViews\NavMarginView.h" />
     <ClInclude Include="Components\Views\AIViews\PatrolmanView.h" />
     <ClInclude Include="Components\Views\AttackViews\CastAttackView.h" />
     <ClInclude Include="Components\Views\AttackViews\MeleeAttackView.h" />
