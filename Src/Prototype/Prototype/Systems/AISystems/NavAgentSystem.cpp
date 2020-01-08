@@ -4,6 +4,7 @@
 
 #include "../../Components/SimpleComponents.h"
 #include "../../Components/AIComponents/NavigationComponents.h"
+#include "../../Components/AIComponents/PatrolComponents.h"
 
 //TODO: smooth nav path following with bezier
 void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
@@ -40,6 +41,11 @@ void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
 		{
 			velocity.velocity.x = velocity.velocity.z = 0;
 			registry.remove<NavPathComponent>(entity);
+
+			//TODO: not working properly after cathcing up player
+			//see player second time only on patrol points
+			if (!registry.has<entt::tag<PatrollingTag> >(entity))
+				registry.assign<entt::tag<PatrollingTag> >(entity);
 		}
 	});
 }

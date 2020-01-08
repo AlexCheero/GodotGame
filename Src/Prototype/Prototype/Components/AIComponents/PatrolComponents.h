@@ -4,6 +4,8 @@
 
 #include <vector>
 
+#include "entt/entt.hpp"
+
 struct PatrolRouteComponent
 {
 	std::vector<godot::Vector3> routePoints;
@@ -18,4 +20,12 @@ struct PatrolmanComponent
 	float viewAngleBig;
 	float longViewDistance;
 	float shortViewDistance;
+};
+
+//TODO: probably move to something like FsmStateTags.h
+constexpr entt::hashed_string PatrollingTag = "PatrollingTag"_hs;
+
+struct PursuingComponent
+{
+	entt::entity target = entt::null;
 };

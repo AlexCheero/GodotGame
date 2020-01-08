@@ -33,6 +33,7 @@
 #include "Systems/AISystems/NavAgentSystem.h"
 #include "Systems/LocomotionSystems/LookAtSystem.h"
 #include "Systems/AISystems/PatrolSystem.h"
+#include "Systems/AISystems/PursuingSystem.h"
 
 #include "Components/Views/EntityView.h"
 
@@ -116,7 +117,6 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	entityView->ConstructComponent(registry.assign<GravityComponent>(entity));
 	entityView->ConstructComponent(registry.assign<PatrolmanComponent>(entity));
 	entityView->ConstructComponent(registry.assign<NavMarginComponent>(entity));
-		
 
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<RotationDirectionComponent>(entity);
@@ -136,6 +136,8 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	}
 	route.current = 0;
 //prepare patrol route>
+
+	registry.assign<entt::tag<PatrollingTag> >(entity);
 }
 
 godot::BoundsComponent godot::ECSWorld::GetCapsuleBounds(Node* pCapsuleNode)
@@ -165,6 +167,7 @@ void godot::ECSWorld::_init()
 {
 	utils::InitPhysicLayers();
 
+	//TODO: check what systems really should be in phys proc
 	//setup physics systems
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PlayerVelocitySystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new KinematicMovementSystem()));
@@ -180,6 +183,7 @@ void godot::ECSWorld::_init()
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PatrolSystem()));
 	//TODO: should it be in phys proc?
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new NavAgentSystem()));
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PursuingSystem()));
 	
 	//setup systems
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new SimpleFollowSystem()));

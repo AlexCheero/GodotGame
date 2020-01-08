@@ -180,6 +180,9 @@
     <ClCompile Include="Components\Views\AIViews\NavMarginView.cpp">
       <Filter>Source Files\Components\Views\AIViews</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\AISystems\PursuingSystem.cpp">
+      <Filter>Source Files\Systems\AISystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -298,6 +301,9 @@
     </ClInclude>
     <ClInclude Include="Components\Views\AIViews\NavMarginView.h">
       <Filter>Header Files\Components\Views\AIViews</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AISystems\PursuingSystem.h">
+      <Filter>Header Files\Systems\AISystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -14,7 +14,7 @@ namespace godot
 	private:
 		using PlayersView = entt::view<entt::exclude_t<>, entt::tag<PlayerTag>, BoundsComponent, Spatial*>;
 		
-		bool CheckForTargets(PlayersView& targetsView, PatrolmanComponent patrolman, Spatial* pPatrolSpatial, float navAgentRadius);
+		entt::entity CheckForTargets(PlayersView& targetsView, PatrolmanComponent patrolman, Spatial* pPatrolSpatial, float navAgentRadius);
 	public:
 		virtual void operator()(float delta, entt::registry& registry) override;
 	};
