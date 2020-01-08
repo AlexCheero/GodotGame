@@ -38,8 +38,7 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 
 	auto players = registry.view<entt::tag<PlayerTag>, BoundsComponent, Spatial*>();
 
-	//TODO: see player second time only on patrol points cause of entt::exclude<NavPathComponent>
-	auto view = registry.view<entt::tag<PatrollingTag>, PatrolRouteComponent, PatrolmanComponent, BoundsComponent, Spatial*>(entt::exclude<NavPathComponent>);
+	auto view = registry.view<entt::tag<PatrollingTag>, PatrolRouteComponent, PatrolmanComponent, BoundsComponent, Spatial*>();
 	view.each(
 	[this, &registry, pNavigation, &players]
 	(entt::entity entity, entt::tag<PatrollingTag> tag, PatrolRouteComponent& route, PatrolmanComponent patrolman, BoundsComponent bounds, Spatial* pSpatial)
@@ -52,6 +51,9 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 			registry.assign<PursuingComponent>(entity, targetEntity);
 			return;
 		}
+
+		if (registry.has<NavPathComponent>(entity))
+			return;
 
 		if (route.current < route.routePoints.size() - 1)
 			route.current++;

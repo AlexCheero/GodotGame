@@ -18,6 +18,7 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 		NavPathComponent& newPath = registry.assign_or_replace<NavPathComponent>(entity);
 		newPath.pathIndex = 0;
 		//TODO: make nav system to target to the floor of the point or don't take target's y into account
+		//TODO: only changes its path, after getting to previous target position
 		newPath.path = pNavigation->get_simple_path(pSpatial->get_global_transform().origin, pTargetSpatial->get_global_transform().origin);
 		registry.remove<PursuingComponent>(entity);
 	});
