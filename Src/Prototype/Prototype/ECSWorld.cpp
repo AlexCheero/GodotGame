@@ -15,6 +15,7 @@
 #include "Components/AttackComponents.h"
 #include "Components/InputComponents.h"
 #include "Components/AIComponents/NavigationComponents.h"
+#include "Components/AIComponents/PatrolComponents.h"
 
 #include "Systems/PlayerSystems/PlayerVelocitySystem.h"
 #include "Systems/LocomotionSystems/KinematicMovementSystem.h"
@@ -119,12 +120,13 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	entityView->ConstructComponent(registry.assign<SpeedComponent>(entity));
 	entityView->ConstructComponent(registry.assign<HealthComponent>(entity));
 	entityView->ConstructComponent(registry.assign<GravityComponent>(entity));
+	entityView->ConstructComponent(registry.assign<PatrolmanComponent>(entity));
 
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<RotationDirectionComponent>(entity);
 
 //<prepare patrol route
-	PatrolRoute& route = registry.assign<PatrolRoute>(entity);
+	PatrolRouteComponent& route = registry.assign<PatrolRouteComponent>(entity);
 	route.routePoints.clear();
 
 	Node* pPatrolRoute = get_node("PatrolRoute");

@@ -5,6 +5,7 @@
 #include "core/math/math_funcs.h"
 
 #include "../../Components/AIComponents/NavigationComponents.h"
+#include "../../Components/AIComponents/PatrolComponents.h"
 
 //TODO: probably split into two separate systems
 bool godot::PatrolSystem::CheckForTargets(PlayersView& targetsView, Spatial* pPatrolSpatial)
@@ -43,8 +44,8 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 
 	auto players = registry.view<entt::tag<PlayerTag>, Spatial*>();
 
-	auto view = registry.view<PatrolRoute, Spatial*>(entt::exclude<NavPathComponent>);
-	view.each([this, &registry, navigation, &players](entt::entity entity, PatrolRoute& route, Spatial* pSpatial)
+	auto view = registry.view<PatrolRouteComponent, Spatial*>(entt::exclude<NavPathComponent>);
+	view.each([this, &registry, navigation, &players](entt::entity entity, PatrolRouteComponent& route, Spatial* pSpatial)
 	{
 		CheckForTargets(players, pSpatial);
 		return;

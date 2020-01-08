@@ -76,6 +76,12 @@
     <Filter Include="Source Files\Components\NodeComponents">
       <UniqueIdentifier>{dd5a0e83-99a2-4e34-9159-62dc1ee6b426}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Components\Views\AIViews">
+      <UniqueIdentifier>{31a2dd2a-2b4a-434b-bc2b-ecc8a7324e69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components\Views\AIViews">
+      <UniqueIdentifier>{835fac83-706c-413a-bf98-1c66f5b7b8f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp">
@@ -167,6 +173,9 @@
     </ClCompile>
     <ClCompile Include="Systems\AISystems\PatrolSystem.cpp">
       <Filter>Source Files\Systems\AISystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Views\AIViews\PatrolmanView.cpp">
+      <Filter>Source Files\Components\Views\AIViews</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +286,12 @@
     </ClInclude>
     <ClInclude Include="Systems\AISystems\PatrolSystem.h">
       <Filter>Header Files\Systems\AISystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\AIComponents\PatrolComponents.h">
+      <Filter>Header Files\Components\AIComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Views\AIViews\PatrolmanView.h">
+      <Filter>Header Files\Components\Views\AIViews</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Components\NodeComponents\ThrowableNodeComponent.cpp" />
+    <ClCompile Include="Components\Views\AIViews\PatrolmanView.cpp" />
     <ClCompile Include="Components\Views\AttackViews\CastAttackView.cpp" />
     <ClCompile Include="Components\Views\AttackViews\MeleeAttackView.cpp" />
     <ClCompile Include="Components\Views\AttackViews\ThrowableAttackView.cpp" />
@@ -184,11 +185,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AIComponents\NavigationComponents.h" />
+    <ClInclude Include="Components\AIComponents\PatrolComponents.h" />
     <ClInclude Include="Components\AttackComponents.h" />
     <ClInclude Include="Components\InputComponents.h" />
     <ClInclude Include="Components\NodeComponents\EnemyNodeComponent.h" />
     <ClInclude Include="Components\NodeComponents\ThrowableNodeComponent.h" />
     <ClInclude Include="Components\SimpleComponents.h" />
+    <ClInclude Include="Components\Views\AIViews\PatrolmanView.h" />
     <ClInclude Include="Components\Views\AttackViews\CastAttackView.h" />
     <ClInclude Include="Components\Views\AttackViews\MeleeAttackView.h" />
     <ClInclude Include="Components\Views\AttackViews\ThrowableAttackView.h" />
