@@ -46,9 +46,9 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 		entt::entity targetEntity = CheckForTargets(players, patrolman, pSpatial, bounds.length / 2);
 		if (registry.valid(targetEntity))
 		{
-			Godot::print("player sighted!");
 			registry.remove<entt::tag<PatrollingTag> >(entity);
-			registry.assign<PursuingComponent>(entity, targetEntity);
+			//TODO: try not to use assign_or_replace
+			registry.assign_or_replace<PursuingComponent>(entity, targetEntity);
 			return;
 		}
 

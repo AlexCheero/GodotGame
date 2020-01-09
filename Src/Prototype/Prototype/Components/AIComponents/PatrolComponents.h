@@ -28,4 +28,5 @@ constexpr entt::hashed_string PatrollingTag = "PatrollingTag"_hs;
 struct PursuingComponent
 {
 	entt::entity target = entt::null;
+	godot::Vector3 previousTargetPosition;
 };
