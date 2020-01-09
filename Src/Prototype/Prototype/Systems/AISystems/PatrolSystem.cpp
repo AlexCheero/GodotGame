@@ -38,8 +38,8 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 
 	auto players = registry.view<entt::tag<PlayerTag>, BoundsComponent, Spatial*>();
 
-	auto view = registry.view<entt::tag<PatrollingTag>, PatrolRouteComponent, PatrolmanComponent, BoundsComponent, Spatial*>();
-	view.each(
+	auto notPursuingView = registry.view<entt::tag<PatrollingTag>, PatrolRouteComponent, PatrolmanComponent, BoundsComponent, Spatial*>(entt::exclude<PursuingComponent>);
+	notPursuingView.each(
 	[this, &registry, pNavigation, &players]
 	(entt::entity entity, entt::tag<PatrollingTag> tag, PatrolRouteComponent& route, PatrolmanComponent patrolman, BoundsComponent bounds, Spatial* pSpatial)
 	{
@@ -47,14 +47,16 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 		if (registry.valid(targetEntity))
 		{
 			registry.remove<entt::tag<PatrollingTag> >(entity);
-			//TODO: try not to use assign_or_replace
-			registry.assign_or_replace<PursuingComponent>(entity, targetEntity);
+			registry.assign<PursuingComponent>(entity, targetEntity);
 			return;
 		}
+	});
 
-		if (registry.has<NavPathComponent>(entity))
-			return;
-
+	auto withoutPathview = registry.view<entt::tag<PatrollingTag>, PatrolRouteComponent, PatrolmanComponent, BoundsComponent, Spatial*>(entt::exclude<NavPathComponent>);
+	withoutPathview.each(
+	[this, &registry, pNavigation, &players]
+	(entt::entity entity, entt::tag<PatrollingTag> tag, PatrolRouteComponent& route, PatrolmanComponent patrolman, BoundsComponent bounds, Spatial* pSpatial)
+	{
 		if (route.current < route.routePoints.size() - 1)
 			route.current++;
 		else

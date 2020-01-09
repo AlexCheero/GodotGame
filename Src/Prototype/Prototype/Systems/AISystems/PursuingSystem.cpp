@@ -22,7 +22,7 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 		Vector3 targetPosition = pTargetSpatial->get_global_transform().origin;
 		Vector3 pursuerPosition = pSpatial->get_global_transform().origin;
 		
-		//TODO: move to some view
+		//TODO: move to PursuingView
 		//TODO: change delta depending on distance to target (lower distance == lower taget)
 		//		can even check angle deltas instead of distance deltas on big distances
 		const float minSquaredDistanceDelta = 1.f;
