@@ -5,7 +5,8 @@
 
 void godot::ThrowableWeaponSystem::operator()(float delta, entt::registry& registry)
 {
-	registry.view<ThrowableNodeComponent*>().each([&registry](entt::entity throwableEntity, ThrowableNodeComponent* pThrowable)
+	auto view = registry.view<ThrowableNodeComponent*>(entt::exclude<entt::tag<DeadTag> >);
+	view.each([&registry](entt::entity throwableEntity, ThrowableNodeComponent* pThrowable)
 	{
 		if (pThrowable->is_contact_monitor_enabled())
 			return;
