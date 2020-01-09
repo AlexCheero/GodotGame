@@ -22,11 +22,11 @@ struct PatrolmanComponent
 	float shortViewDistance;
 };
 
-//TODO: probably move to something like FsmStateTags.h
-constexpr entt::hashed_string PatrollingTag = "PatrollingTag"_hs;
-
 struct PursuingComponent
 {
 	entt::entity target = entt::null;
 	godot::Vector3 previousTargetPosition;
 };
+
+//TODO: probably move to something like FsmStateTags.h
+constexpr entt::hashed_string PatrollingTag = "PatrollingTag"_hs;

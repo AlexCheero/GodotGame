@@ -2,6 +2,8 @@
 
 #include <PoolArrays.hpp>
 
+#include <entt/entt.hpp>
+
 //TODO: move all components into godot namespace or remove SimpleComponents from it
 struct NavPathComponent
 {
@@ -17,3 +19,6 @@ struct NavMarginComponent
 {
 	float margin;
 };
+
+//TODO: probably move to something like FsmStateTags.h
+constexpr entt::hashed_string PathFinishedTag = "PathFinishedTag"_hs;
