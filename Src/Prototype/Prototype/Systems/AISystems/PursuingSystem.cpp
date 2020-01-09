@@ -34,11 +34,8 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 			newPath.pathIndex = 0;
 			newPath.path = pNavigation->get_simple_path(pursuerPosition, targetPosition);
 			comp.previousTargetPosition = targetPosition;
+			//TODO: try to get rid of stuff like assign_or_replace and has
+			registry.assign_or_replace<NavPathComponent>(entity, newPath);
 		}
-
-		if (!hasPath)
-			registry.assign<NavPathComponent>(entity, newPath);
-		else if (targetChangedPosition)
-			registry.replace<NavPathComponent>(entity, newPath);
 	});
 }

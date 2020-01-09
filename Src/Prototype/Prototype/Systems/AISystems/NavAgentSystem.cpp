@@ -40,9 +40,11 @@ void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
 		else
 		{
 			velocity.velocity.x = velocity.velocity.z = 0;
+			//TODO: move up and split into two views, so can get rid of has check (see todo below)
 			registry.remove<NavPathComponent>(entity);
 
 			//TODO: not necessary Patrolling after this
+			//TODO: try to get rid of has check
 			if (!registry.has<entt::tag<PatrollingTag> >(entity))
 				registry.assign<entt::tag<PatrollingTag> >(entity);
 		}
