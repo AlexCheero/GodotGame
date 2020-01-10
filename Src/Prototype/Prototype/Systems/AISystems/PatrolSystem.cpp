@@ -52,11 +52,12 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 		}
 	});
 
-	auto withoutPathview = registry.view<entt::tag<PatrollingTag>, PatrolRouteComponent, PatrolmanComponent, BoundsComponent, Spatial*>(entt::exclude<NavPathComponent>);
+	auto withoutPathview = registry.view<entt::tag<PatrollingTag>, PatrolRouteComponent, Spatial*>(entt::exclude<NavPathComponent>);
 	withoutPathview.each(
 	[this, &registry, pNavigation, &players]
-	(entt::entity entity, entt::tag<PatrollingTag> tag, PatrolRouteComponent& route, PatrolmanComponent patrolman, BoundsComponent bounds, Spatial* pSpatial)
+	(entt::entity entity, entt::tag<PatrollingTag> tag1, PatrolRouteComponent& route, Spatial* pSpatial)
 	{
+		int prevPoint = route.current;
 		if (route.current < route.routePoints.size() - 1)
 			route.current++;
 		else
@@ -66,5 +67,17 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 		newPath.pathIndex = 0;
 		//TODO: make nav system to target to the floor of the point
 		newPath.path = pNavigation->get_simple_path(pSpatial->get_global_transform().origin, route.GetCurrentPatrolPoint());
+
+		if (registry.has<entt::tag<PathFinishedTag> >(entity))
+			registry.remove<entt::tag<PathFinishedTag> >(entity);
 	});
+
+	//TODO: read once more about differences between groups and view and decide- use separate view or has check in view below
+	//auto pathFinishedView = registry.view<entt::tag<PatrollingTag>, entt::tag<PathFinishedTag> >();
+	//pathFinishedView.each(
+	//[this, &registry, pNavigation, &players]
+	//(entt::entity entity, entt::tag<PatrollingTag> tag1, entt::tag<PathFinishedTag> tag2)
+	//{
+	//	registry.remove<entt::tag<PathFinishedTag> >(entity);
+	//});
 }
