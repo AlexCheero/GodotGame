@@ -73,6 +73,8 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 	});
 
 	//TODO: read once more about differences between groups and view and decide- use separate view or has check in view below
+	//		ask skypjack about what to use
+
 	//auto pathFinishedView = registry.view<entt::tag<PatrollingTag>, entt::tag<PathFinishedTag> >();
 	//pathFinishedView.each(
 	//[this, &registry, pNavigation, &players]
