@@ -140,6 +140,13 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	registry.assign<entt::tag<PatrollingTag> >(entity);
 }
 
+void godot::ECSWorld::PrepareSingletonEntities()
+{
+	Navigation* navigation = Object::cast_to<Navigation>(get_node("Navigation"));
+	entt::entity navigationEntity = registry.create();
+	registry.assign<Navigation*>(navigationEntity, navigation);
+}
+
 godot::BoundsComponent godot::ECSWorld::GetCapsuleBounds(Node* pCapsuleNode)
 {
 	CollisionShape* colShape = Object::cast_to<CollisionShape>(pCapsuleNode);
@@ -194,14 +201,10 @@ void godot::ECSWorld::_init()
 void godot::ECSWorld::_ready()
 {
 	//create entities and components
+	PrepareSingletonEntities();
 	PreparePlayerEntity();
 	PrepareCameraEntity();
 	PrepareEnemyEntity();
-
-	//singleton Navigation* entity
-	Navigation* nav = Object::cast_to<Navigation>(get_node("Navigation"));
-	entt::entity entity = registry.create();
-	registry.assign<Navigation*>(entity, nav);
 }
 
 void godot::ECSWorld::HandleInputEvent(InputEvent* e)
@@ -214,6 +217,7 @@ void godot::ECSWorld::HandleInputEvent(InputEvent* e)
 	{
 		//TODO: fix reset
 		registry.reset();
+		PrepareSingletonEntities();
 		get_tree()->reload_current_scene();
 	}
 	else if (e->is_action_pressed("ui_cancel"))

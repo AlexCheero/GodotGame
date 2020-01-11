@@ -31,6 +31,7 @@ namespace godot
 		void PreparePlayerEntity();
 		void PrepareCameraEntity();
 		void PrepareEnemyEntity();
+		void PrepareSingletonEntities();
 		BoundsComponent GetCapsuleBounds(Node* pCapsuleNode);
 	public:
 		static void _register_methods();
