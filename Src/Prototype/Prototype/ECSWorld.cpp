@@ -142,9 +142,15 @@ void godot::ECSWorld::PrepareEnemyEntity()
 
 void godot::ECSWorld::PrepareSingletonEntities()
 {
-	Navigation* navigation = Object::cast_to<Navigation>(get_node("Navigation"));
-	entt::entity navigationEntity = registry.create();
-	registry.assign<Navigation*>(navigationEntity, navigation);
+	//TODO: find out why registry is empty and use assert if it will fit
+	if (registry.empty<Navigation*>())
+	{
+		Navigation* navigation = Object::cast_to<Navigation>(get_node("Navigation"));
+		entt::entity navigationEntity = registry.create();
+		registry.assign<Navigation*>(navigationEntity, navigation);
+	}
+	else
+		Godot::print_warning("trying to assign more than one singleton entity", "PrepareSingletonEntities", "ECSWorld.cpp", __LINE__);
 }
 
 godot::BoundsComponent godot::ECSWorld::GetCapsuleBounds(Node* pCapsuleNode)
