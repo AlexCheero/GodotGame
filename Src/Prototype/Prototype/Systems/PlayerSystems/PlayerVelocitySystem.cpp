@@ -19,8 +19,8 @@ void godot::PlayerVelocitySystem::Update(VelocityComponent& velocityComp, SpeedC
 
 void godot::PlayerVelocitySystem::operator()(float delta, entt::registry& registry)
 {
-	auto view = registry.view<VelocityComponent, InputComponent, SpeedComponent, entt::tag<PlayerTag>, Camera*>();
-	view.each([&registry](entt::entity entity, VelocityComponent& velocity, InputComponent input, SpeedComponent speedComp, entt::tag<PlayerTag> playerTag, Camera* pCam)
+	auto view = registry.view<entt::tag<PlayerTag>, VelocityComponent, InputComponent, SpeedComponent, Camera*>();
+	view.less([&registry](entt::entity entity, VelocityComponent& velocity, InputComponent input, SpeedComponent speedComp, Camera* pCam)
 	{
 		Update(velocity, speedComp, pCam->get_transform().get_basis(), input.moveDir);
 	});

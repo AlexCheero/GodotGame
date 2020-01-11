@@ -39,9 +39,9 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 	auto players = registry.view<entt::tag<PlayerTag>, BoundsComponent, Spatial*>();
 
 	auto notPursuingView = registry.view<entt::tag<PatrollingTag>, PatrolRouteComponent, PatrolmanComponent, BoundsComponent, Spatial*>(entt::exclude<PursuingComponent>);
-	notPursuingView.each(
+	notPursuingView.less(
 	[this, &registry, pNavigation, &players]
-	(entt::entity entity, entt::tag<PatrollingTag> tag, PatrolRouteComponent& route, PatrolmanComponent patrolman, BoundsComponent bounds, Spatial* pSpatial)
+	(entt::entity entity, PatrolRouteComponent& route, PatrolmanComponent patrolman, BoundsComponent bounds, Spatial* pSpatial)
 	{
 		entt::entity targetEntity = CheckForTargets(players, patrolman, pSpatial, bounds.length / 2);
 		if (registry.valid(targetEntity))
@@ -53,9 +53,9 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 	});
 
 	auto withoutPathview = registry.view<entt::tag<PatrollingTag>, PatrolRouteComponent, Spatial*>(entt::exclude<NavPathComponent>);
-	withoutPathview.each(
+	withoutPathview.less(
 	[this, &registry, pNavigation, &players]
-	(entt::entity entity, entt::tag<PatrollingTag> tag1, PatrolRouteComponent& route, Spatial* pSpatial)
+	(entt::entity entity, PatrolRouteComponent& route, Spatial* pSpatial)
 	{
 		int prevPoint = route.current;
 		if (route.current < route.routePoints.size() - 1)
@@ -76,9 +76,9 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 	//		ask skypjack about what to use
 
 	//auto pathFinishedView = registry.view<entt::tag<PatrollingTag>, entt::tag<PathFinishedTag> >();
-	//pathFinishedView.each(
+	//pathFinishedView.less(
 	//[this, &registry, pNavigation, &players]
-	//(entt::entity entity, entt::tag<PatrollingTag> tag1, entt::tag<PathFinishedTag> tag2)
+	//(entt::entity entity)
 	//{
 	//	registry.remove<entt::tag<PathFinishedTag> >(entity);
 	//});

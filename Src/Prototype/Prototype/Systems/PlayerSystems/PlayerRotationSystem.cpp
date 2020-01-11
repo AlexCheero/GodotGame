@@ -20,8 +20,8 @@ inline godot::Vector3 godot::PlayerRotationSystem::GetTargetDirection(Vector2 in
 void godot::PlayerRotationSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<entt::tag<PlayerTag>, RotationDirectionComponent, InputComponent, Spatial*, Camera*>();
-	view.each(
-	[](entt::tag<PlayerTag> playerTag, RotationDirectionComponent& rotDir, InputComponent input, Spatial* playerSpatial, Camera* pCam)
+	view.less(
+	[](RotationDirectionComponent& rotDir, InputComponent input, Spatial* playerSpatial, Camera* pCam)
 	{
 		if (input.rotation.length_squared() == 0)
 			return;

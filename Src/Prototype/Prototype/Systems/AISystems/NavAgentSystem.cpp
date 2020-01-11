@@ -49,8 +49,7 @@ void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
 	});
 
 	auto finishedPathView = registry.view<entt::tag<PathFinishedTag> >(entt::exclude<entt::tag<PatrollingTag> >);
-	//TODO: try to use less instead of view, not to declare tags as params
-	finishedPathView.each([&registry](entt::entity entity, entt::tag<PathFinishedTag> tag)
+	finishedPathView.less([&registry](entt::entity entity)
 	{
 		//TODO: not necessary Patrolling after this
 		registry.assign<entt::tag<PatrollingTag> >(entity);
