@@ -29,7 +29,6 @@ void godot::PlayerInputSystem::operator()(entt::registry& registry, InputEvent* 
 {
 	//TODO: read once more about differences between groups and view and, probably, use group instead
 	//TODO: implement proper pressed/just_pressed functional
-	//TODO: do we really need PlayerInputTag?
 	registry.view<entt::tag<PlayerInputTag>, InputComponent>().less([&registry, e](entt::entity entity, InputComponent& comp)
 	{
 		if (e->is_action_pressed("attack"))
