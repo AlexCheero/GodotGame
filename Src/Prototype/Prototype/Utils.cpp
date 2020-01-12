@@ -20,7 +20,7 @@ void utils::InitPhysicLayers()
 	}
 }
 
-int utils::GetLayerByName(const char* name)
+int utils::GetLayerByName(godot::String name)
 {
 	for (int i = 0; i < LayerNames.size(); i++)
 	{

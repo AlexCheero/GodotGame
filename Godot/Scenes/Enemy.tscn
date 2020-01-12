@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/NodeComponents/EnemyNodeComponent.gdns" type="Script" id=1]
 [ext_resource path="res://Scripts/Views/EntityView.gdns" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scripts/Views/LocomotionViews/GravityView.gdns" type="Script" id=5]
 [ext_resource path="res://Scripts/Views/AIViews/PatrolmanView.gdns" type="Script" id=6]
 [ext_resource path="res://Scripts/Views/AIViews/NavMarginView.gdns" type="Script" id=7]
+[ext_resource path="res://Scripts/Views/AttackViews/MeleeAttackView.gdns" type="Script" id=8]
 
 [sub_resource type="CapsuleMesh" id=1]
 
@@ -67,3 +68,11 @@ script = ExtResource( 6 )
 [node name="NavMarginView" type="Node" parent="EntityView"]
 script = ExtResource( 7 )
 "min navigation margin" = 1.0
+
+[node name="MeleeAttackView" type="Node" parent="EntityView"]
+script = ExtResource( 8 )
+distance = 4.0
+damage = 50.0
+angle = 90.0
+attackTime = 0.5
+"collision layer" = "Player"

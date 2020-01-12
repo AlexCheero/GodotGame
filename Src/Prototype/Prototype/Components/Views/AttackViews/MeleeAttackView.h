@@ -15,9 +15,10 @@ namespace godot
 		float damage;
 		float angle;
 		float attackTime;
+		String collisionLayerName;
 	public:
 		static void _register_methods();
 		void _init() {}
-		MeleeAttackComponent GetECSComponent() { return { distance, damage, angle, attackTime, -utils::SecondsToMillis(attackTime) }; }
+		MeleeAttackComponent GetECSComponent() { return { distance, damage, angle, attackTime, collisionLayerName, -utils::SecondsToMillis(attackTime) }; }
 	};
 }

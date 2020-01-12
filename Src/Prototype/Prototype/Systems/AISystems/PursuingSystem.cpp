@@ -4,6 +4,8 @@
 #include <Navigation.hpp>
 
 #include "../../Components/AIComponents/NavigationComponents.h"
+#include "../../Components/AttackComponents.h"
+#include "../../Components/InputComponents.h"
 
 void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 {
@@ -11,7 +13,7 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 	Navigation* pNavigation = registry.get<Navigation*>(navEntity);
 
 	auto view = registry.view <PursuingComponent, Spatial*>();
-	view.each([&registry, pNavigation](entt::entity entity, PursuingComponent& comp, Spatial* pSpatial)
+	view.each([&registry, &view, pNavigation](entt::entity entity, PursuingComponent& comp, Spatial* pSpatial)
 	{
 		//TODO: assert registry.valid(comp.target);
 		//TODO: assert registry.has<Spatial*>(comp.target);
@@ -21,6 +23,15 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 
 		Vector3 targetPosition = pTargetSpatial->get_global_transform().origin;
 		Vector3 pursuerPosition = pSpatial->get_global_transform().origin;
+		float distanceToTarget = (targetPosition - pursuerPosition).length();
+
+		//TODO: create and iterate separate views for each attack type
+		//TODO: view.get doesn't compiles somehow
+		if (registry.has<InputComponent, MeleeAttackComponent>(entity)
+			&& registry.get<MeleeAttackComponent>(entity).distance >= distanceToTarget)
+		{
+			registry.get<InputComponent>(entity).Set(EInput::Attack, true);
+		}
 		
 		//TODO: move to PursuingView
 		//TODO: change delta depending on distance to target (lower distance == lower taget)

@@ -16,9 +16,10 @@
 
 const float INTERSECT_RESULTS_NUM = 16.f;
 
-godot::Array godot::MeleeAttackSystem::GetIntersects(Spatial* pAttackerSpatial, float distance)
+godot::Array godot::MeleeAttackSystem::GetIntersects(Spatial* pAttackerSpatial, float distance, String layerName)
 {
 	m_attackShape->set_radius(distance);
+	m_params->set_collision_mask(utils::GetLayerByName(layerName));
 	m_params->set_shape(m_attackShape);
 	Transform attackerTransform = pAttackerSpatial->get_global_transform();
 	m_params->set_transform(attackerTransform);
@@ -30,7 +31,6 @@ godot::Array godot::MeleeAttackSystem::GetIntersects(Spatial* pAttackerSpatial, 
 godot::MeleeAttackSystem::MeleeAttackSystem()
 {
 	m_params = static_cast< Ref<PhysicsShapeQueryParameters> >(PhysicsShapeQueryParameters::_new());
-	m_params->set_collision_mask(utils::GetLayerByName("Enemy"));
 	m_params->set_collide_with_areas(false);
 	m_params->set_collide_with_bodies(true);
 
@@ -47,7 +47,7 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 
 		Godot::print("Splash!");
 
-		Array intersects = GetIntersects(pAttackerSpatial, attackComp.distance);
+		Array intersects = GetIntersects(pAttackerSpatial, attackComp.distance, attackComp.collisionLayerName);
 		if (intersects.size() == 0)
 			return;
 		
@@ -56,6 +56,8 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 		
 		Vector3 enemyPosition = Object::cast_to<Spatial>(pObj)->get_global_transform().origin;
 		Transform attackerTransform = pAttackerSpatial->get_global_transform();
+		//TODO: because of opposite player and bot forward direction, bot cannot hit player
+		//TODO: also fix errors when bot kills player (probably because of entity becomes invalid)
 		if (!CheckAttackAngle(attackerTransform.origin, -attackerTransform.basis.z, enemyPosition, attackComp.angle))
 			return;
 

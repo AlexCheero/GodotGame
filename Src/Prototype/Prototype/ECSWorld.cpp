@@ -117,9 +117,11 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	entityView->ConstructComponent(registry.assign<GravityComponent>(entity));
 	entityView->ConstructComponent(registry.assign<PatrolmanComponent>(entity));
 	entityView->ConstructComponent(registry.assign<NavMarginComponent>(entity));
+	entityView->ConstructComponent(registry.assign<MeleeAttackComponent>(entity));
 
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<RotationDirectionComponent>(entity);
+	registry.assign<InputComponent>(entity);
 
 //<prepare patrol route
 	PatrolRouteComponent& route = registry.assign<PatrolRouteComponent>(entity);

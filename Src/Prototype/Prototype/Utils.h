@@ -12,7 +12,7 @@ namespace utils
 	const godot::Vector3 globalZ = godot::Vector3{ 0, 0, 1 };
 
 	void InitPhysicLayers();
-	int GetLayerByName(const char* name);
+	int GetLayerByName(godot::String name);
 	int64_t SecondsToMillis(float seconds);
 	godot::Vector2 FlatVector(godot::Vector3 vec3);
 }

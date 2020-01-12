@@ -55,6 +55,7 @@ distance = 4.0
 damage = 10.0
 angle = 90.0
 attackTime = 0.5
+"collision layer" = "Enemy"
 
 [node name="CastAttackView" type="Node" parent="EntityView"]
 script = ExtResource( 3 )
