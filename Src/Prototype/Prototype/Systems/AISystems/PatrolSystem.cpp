@@ -67,19 +67,16 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 		newPath.pathIndex = 0;
 		//TODO: make nav system to target to the floor of the point
 		newPath.path = pNavigation->get_simple_path(pSpatial->get_global_transform().origin, route.GetCurrentPatrolPoint());
-
-		if (registry.has<entt::tag<PathFinishedTag> >(entity))
-			registry.remove<entt::tag<PathFinishedTag> >(entity);
 	});
 
-	//TODO: read once more about differences between groups and view and decide- use separate view or has check in view below
-	//		ask skypjack about what to use
-
-	//auto pathFinishedView = registry.view<entt::tag<PatrollingTag>, entt::tag<PathFinishedTag> >();
-	//pathFinishedView.less(
-	//[this, &registry, pNavigation, &players]
-	//(entt::entity entity)
-	//{
-	//	registry.remove<entt::tag<PathFinishedTag> >(entity);
-	//});
+	//TODO: no proper remove function, update entt
+	//auto view = registry.view<A, B>();
+	//registry.remove<B>(view.begin(), view.end());
+	auto pathFinishedView = registry.view<entt::tag<PatrollingTag>, entt::tag<PathFinishedTag> >();
+	pathFinishedView.less(
+	[this, &registry, pNavigation, &players]
+	(entt::entity entity)
+	{
+		registry.remove<entt::tag<PathFinishedTag> >(entity);
+	});
 }
