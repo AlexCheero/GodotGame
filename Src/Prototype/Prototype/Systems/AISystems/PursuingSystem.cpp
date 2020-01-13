@@ -18,7 +18,7 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 		//TODO: implement losing sight of target and flee
 		if (!registry.valid(comp.target))
 		{
-			//TODO: registry.has<InputComponent>(entity)
+			//TODO: assert registry.has<InputComponent>(entity)
 			registry.get<InputComponent>(entity).Set(EInput::Attack, false);
 			registry.remove<PursuingComponent>(entity);
 			return;
@@ -37,7 +37,7 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 		if (registry.has<MeleeAttackComponent>(entity)
 			&& registry.get<MeleeAttackComponent>(entity).distance >= distanceToTarget)
 		{
-			//TODO: registry.has<InputComponent>(entity)
+			//TODO: assert registry.has<InputComponent>(entity)
 			registry.get<InputComponent>(entity).Set(EInput::Attack, true);
 		}
 		

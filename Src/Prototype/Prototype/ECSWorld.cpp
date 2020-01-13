@@ -34,10 +34,11 @@
 #include "Systems/LocomotionSystems/LookAtSystem.h"
 #include "Systems/AISystems/PatrolSystem.h"
 #include "Systems/AISystems/PursuingSystem.h"
+#include "Systems/AISystems/LookAroundSystem.h"
 
 #include "Components/Views/EntityView.h"
 
-#include "Utils.h"
+#include "Utils/Utils.h"
 
 void godot::ECSWorld::UpdateSystems(float delta, SystemsVec& systems)
 {
@@ -201,6 +202,7 @@ void godot::ECSWorld::_init()
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowableWeaponSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PatrolSystem()));
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new LookAroundSystem()));
 	//TODO: should it be in phys proc?
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new NavAgentSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PursuingSystem()));

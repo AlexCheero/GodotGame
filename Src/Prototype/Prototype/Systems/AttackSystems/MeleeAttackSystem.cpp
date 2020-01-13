@@ -12,7 +12,7 @@
 #include "../../Components/SimpleComponents.h"
 #include "../../Components/AttackComponents.h"
 #include "../../Components/InputComponents.h"
-#include "../../Utils.h"
+#include "../../Utils/Utils.h"
 
 const float INTERSECT_RESULTS_NUM = 16.f;
 
@@ -37,6 +37,7 @@ godot::MeleeAttackSystem::MeleeAttackSystem()
 	m_attackShape = static_cast<Ref< SphereShape> >(SphereShape::_new());
 }
 
+//TODO: implement proper hth with blocks and stuff
 void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<MeleeAttackComponent, InputComponent, Spatial*>();

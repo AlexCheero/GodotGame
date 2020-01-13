@@ -164,6 +164,7 @@
     <ClCompile Include="Components\Views\LocomotionViews\SpeedView.cpp" />
     <ClCompile Include="Components\Views\SimpleFollowView.cpp" />
     <ClCompile Include="GodotLibrary.cpp" />
+    <ClCompile Include="Systems\AISystems\LookAroundSystem.cpp" />
     <ClCompile Include="Systems\AISystems\NavAgentSystem.cpp" />
     <ClCompile Include="Systems\AISystems\PatrolSystem.cpp" />
     <ClCompile Include="Systems\AISystems\PursuingSystem.cpp" />
@@ -183,7 +184,7 @@
     <ClCompile Include="Systems\DestroyDeadSystem.cpp" />
     <ClCompile Include="ECSWorld.cpp" />
     <ClCompile Include="Systems\WeaponChooseSystem.cpp" />
-    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="Utils\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\AIComponents\NavigationComponents.h" />
@@ -205,6 +206,7 @@
     <ClInclude Include="Components\Views\LocomotionViews\JumpSpeedView.h" />
     <ClInclude Include="Components\Views\LocomotionViews\SpeedView.h" />
     <ClInclude Include="Components\Views\SimpleFollowView.h" />
+    <ClInclude Include="Systems\AISystems\LookAroundSystem.h" />
     <ClInclude Include="Systems\AISystems\NavAgentSystem.h" />
     <ClInclude Include="Systems\AISystems\PatrolSystem.h" />
     <ClInclude Include="Systems\AISystems\PursuingSystem.h" />
@@ -225,7 +227,8 @@
     <ClInclude Include="Systems\DestroyDeadSystem.h" />
     <ClInclude Include="ECSWorld.h" />
     <ClInclude Include="Systems\WeaponChooseSystem.h" />
-    <ClInclude Include="Utils.h" />
+    <ClInclude Include="Utils\Timer.h" />
+    <ClInclude Include="Utils\Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

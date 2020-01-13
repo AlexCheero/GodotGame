@@ -2,7 +2,7 @@
 
 #include <OS.hpp>
 
-#include "../../Utils.h"
+#include "../../Utils/Utils.h"
 
 bool godot::AttackCooldown::CanAttack(InputComponent input, float attackTime, int64_t& prevHitTime)
 {

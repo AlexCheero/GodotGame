@@ -82,6 +82,12 @@
     <Filter Include="Source Files\Components\Views\AIViews">
       <UniqueIdentifier>{835fac83-706c-413a-bf98-1c66f5b7b8f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{47be7515-d603-41ce-9d89-a42ca233f5c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{8adc3a64-b257-43ab-ad38-c53a63943e83}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp">
@@ -91,9 +97,6 @@
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
     <ClCompile Include="ECSWorld.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Systems\SimpleFollowSystem.cpp">
@@ -183,6 +186,12 @@
     <ClCompile Include="Systems\AISystems\PursuingSystem.cpp">
       <Filter>Source Files\Systems\AISystems</Filter>
     </ClCompile>
+    <ClCompile Include="Utils\Utils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AISystems\LookAroundSystem.cpp">
+      <Filter>Source Files\Systems\AISystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -195,9 +204,6 @@
       <Filter>Header Files\Systems</Filter>
     </ClInclude>
     <ClInclude Include="ECSWorld.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Systems\SimpleFollowSystem.h">
@@ -304,6 +310,15 @@
     </ClInclude>
     <ClInclude Include="Components\NodeComponents\EntityHolderNodeComponent.h">
       <Filter>Header Files\Components\NodeComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Utils.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Timer.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AISystems\LookAroundSystem.h">
+      <Filter>Header Files\Systems\AISystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

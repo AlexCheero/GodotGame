@@ -5,7 +5,7 @@
 #include <Ref.hpp>
 #include <PackedScene.hpp>
 
-#include "../Utils.h"
+#include "../Utils/Utils.h"
 
 struct MeleeAttackComponent
 {

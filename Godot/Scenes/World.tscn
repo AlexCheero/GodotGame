@@ -23,7 +23,7 @@ script = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="Enemy" parent="." instance=ExtResource( 4 )]
-transform = Transform( 0.999774, 0, 0.0212396, 0, 1, 0, -0.0212396, 0, 0.999774, 0, 2, -12 )
+transform = Transform( -0.98769, 0, -0.15642, 0, 1, 0, 0.15642, 0, -0.98769, 0, 2, -12 )
 
 [node name="Navigation" type="Navigation" parent="."]
 

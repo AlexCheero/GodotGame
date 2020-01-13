@@ -5,7 +5,7 @@
 
 #include "core/math/math_funcs.h"
 
-#include "../Utils.h"
+#include "../Utils/Utils.h"
 
 godot::Vector3 godot::SimpleFollowSystem::NewCamPosition(Vector3 targetPosition, SimpleFollowComponent comp)
 {

@@ -10,7 +10,7 @@
 #include "../../Components/InputComponents.h"
 #include "../../Components/NodeComponents/EntityHolderNodeComponent.h"
 
-#include "../../Utils.h"
+#include "../../Utils/Utils.h"
 
 void godot::CastAttackSystem::operator()(float delta, entt::registry& registry)
 {
