@@ -17,6 +17,8 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 	{
 		if (!registry.valid(comp.target))
 		{
+			//TODO: registry.has<InputComponent>(entity)
+			registry.get<InputComponent>(entity).Set(EInput::Attack, false);
 			registry.remove<PursuingComponent>(entity);
 			return;
 		}
@@ -31,9 +33,10 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 
 		//TODO: create and iterate separate views for each attack type
 		//TODO: view.get doesn't compiles somehow
-		if (registry.has<InputComponent, MeleeAttackComponent>(entity)
+		if (registry.has<MeleeAttackComponent>(entity)
 			&& registry.get<MeleeAttackComponent>(entity).distance >= distanceToTarget)
 		{
+			//TODO: registry.has<InputComponent>(entity)
 			registry.get<InputComponent>(entity).Set(EInput::Attack, true);
 		}
 		
