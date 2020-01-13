@@ -1,11 +1,14 @@
 #include "LookAroundSystem.h"
 
 #include <Navigation.hpp>
+#include <OS.hpp>
 
 #include "core/math/math_funcs.h"
 
 #include "../../Components/AIComponents/FSMStateComponents.h"
+#include "../../Utils/Utils.h"
 
+//TODO: check line of sight with raycst
 entt::entity godot::LookAroundSystem::CheckForTargets(PlayersView& targetsView, PatrolmanComponent patrolman, Spatial* pPatrolSpatial, float navAgentRadius)
 {
 	for (auto entity : targetsView)
@@ -30,7 +33,6 @@ entt::entity godot::LookAroundSystem::CheckForTargets(PlayersView& targetsView, 
 	return entt::null;
 }
 
-//TODO: implement losing sight of target
 void godot::LookAroundSystem::operator()(float delta, entt::registry& registry)
 {
 	entt::entity navEntity = registry.view<Navigation*>()[0];
@@ -47,8 +49,28 @@ void godot::LookAroundSystem::operator()(float delta, entt::registry& registry)
 		if (registry.valid(targetEntity))
 		{
 			registry.remove<entt::tag<PatrollingTag> >(entity);
-			registry.assign<PursuingComponent>(entity, targetEntity);
+			PursuingComponent& pursuingComp = registry.assign<PursuingComponent>(entity, targetEntity);
+			pursuingComp.targetLooseMsec = -1;
 			return;
+		}
+	});
+
+	//TODO: test target lost
+	auto pursuingView = registry.view<entt::tag<PatrollingTag>, PursuingComponent, PatrolmanComponent, BoundsComponent, Spatial*>();
+	pursuingView.less(
+	[this, &registry, &players](entt::entity entity, PursuingComponent& pursuingComp, PatrolmanComponent patrolman, BoundsComponent bounds, Spatial* pSpatial)
+	{
+		entt::entity targetEntity = CheckForTargets(players, patrolman, pSpatial, bounds.length / 2);
+		if (!registry.valid(targetEntity) && pursuingComp.targetLooseMsec >= 0)
+		{
+			int64_t ticksMsec = godot::OS::get_singleton()->get_ticks_msec();
+			if (pursuingComp.targetLooseMsec < 0)
+				pursuingComp.targetLooseMsec = ticksMsec;
+			else if (pursuingComp.targetLooseMsec + utils::SecondsToMillis(pursuingComp.lostInSeconds) <= ticksMsec)
+			{
+				Godot::print("target lost");
+				registry.remove<PursuingComponent>(entity);
+			}
 		}
 	});
 }

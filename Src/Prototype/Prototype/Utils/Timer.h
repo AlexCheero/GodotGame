@@ -14,6 +14,6 @@ namespace utils
 	public:
 		void Start(int64_t at = 0) { m_startTime = godot::OS::get_singleton()->get_ticks_msec() - at; }
 		void Stop() { m_startTime = -1; }
-		int64_t PassedMSecs() { return godot::OS::get_singleton()->get_ticks_msec() - m_startTime; }
+		int64_t PassedMSec() { return godot::OS::get_singleton()->get_ticks_msec() - m_startTime; }
 	};
 }

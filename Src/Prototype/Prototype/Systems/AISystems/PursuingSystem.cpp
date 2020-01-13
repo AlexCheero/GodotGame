@@ -13,7 +13,7 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 	entt::entity navEntity = registry.view<Navigation*>()[0];
 	Navigation* pNavigation = registry.get<Navigation*>(navEntity);
 
-	auto view = registry.view <PursuingComponent, Spatial*>();
+	auto view = registry.view<PursuingComponent, Spatial*>();
 	view.each([&registry, &view, pNavigation](entt::entity entity, PursuingComponent& comp, Spatial* pSpatial)
 	{
 		//TODO: implement flee
