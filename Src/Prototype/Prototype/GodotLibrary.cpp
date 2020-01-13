@@ -1,7 +1,7 @@
 #include <core/Godot.hpp>
 
 #include "ECSWorld.h"
-#include "Components/NodeComponents/EnemyNodeComponent.h"
+#include "Components/NodeComponents/EntityHolderNodeComponent.h"
 #include "Components/NodeComponents/ThrowableNodeComponent.h"
 #include "Components/Views/EntityView.h"
 #include "Components/Views/AttackViews/MeleeAttackView.h"
@@ -31,7 +31,7 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 {
 	Godot::nativescript_init(handle);
 	register_class<ECSWorld>();
-	register_class<EnemyNodeComponent>();
+	register_class<EntityHolderNodeComponent>();
 	register_class<ThrowableNodeComponent>();
 	register_class<EntityView>();
 	register_class<MeleeAttackView>();

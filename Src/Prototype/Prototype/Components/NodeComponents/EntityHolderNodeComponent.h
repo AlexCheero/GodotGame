@@ -7,9 +7,9 @@
 
 namespace godot
 {
-	class EnemyNodeComponent : public KinematicBody
+	class EntityHolderNodeComponent : public KinematicBody
 	{
-		GODOT_CLASS(EnemyNodeComponent, KinematicBody)
+		GODOT_CLASS(EntityHolderNodeComponent, KinematicBody)
 	private:
 		entt::entity entity;
 	public:

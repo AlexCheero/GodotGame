@@ -11,7 +11,7 @@
 #include <CollisionShape.hpp>
 #include <CapsuleShape.hpp>
 
-#include "Components/NodeComponents/EnemyNodeComponent.h"
+#include "Components/NodeComponents/EntityHolderNodeComponent.h"
 #include "Components/AttackComponents.h"
 #include "Components/InputComponents.h"
 #include "Components/AIComponents/NavigationComponents.h"
@@ -57,6 +57,9 @@ void godot::ECSWorld::PreparePlayerEntity()
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("Camera"));
+
+	EntityHolderNodeComponent* pEnemy = AssignNodeInheritedComponent<EntityHolderNodeComponent>(registry, entity, pPlayerNode);
+	pEnemy->SetEntity(entity);
 
 	entityView->ConstructComponent(registry.assign<GravityComponent>(entity));
 	entityView->ConstructComponent(registry.assign<JumpSpeedComponent>(entity));
@@ -107,7 +110,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pEnemyNode);
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pEnemyNode);
 
-	EnemyNodeComponent* pEnemy = AssignNodeInheritedComponent<EnemyNodeComponent>(registry, entity, pEnemyNode);
+	EntityHolderNodeComponent* pEnemy = AssignNodeInheritedComponent<EntityHolderNodeComponent>(registry, entity, pEnemyNode);
 	pEnemy->SetEntity(entity);
 
 	registry.assign<BoundsComponent>(entity, GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));

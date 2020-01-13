@@ -278,9 +278,6 @@
     <ClInclude Include="Components\Views\SimpleFollowView.h">
       <Filter>Header Files\Components\Views</Filter>
     </ClInclude>
-    <ClInclude Include="Components\NodeComponents\EnemyNodeComponent.h">
-      <Filter>Header Files\Components\NodeComponents</Filter>
-    </ClInclude>
     <ClInclude Include="Components\NodeComponents\ThrowableNodeComponent.h">
       <Filter>Header Files\Components\NodeComponents</Filter>
     </ClInclude>
@@ -304,6 +301,9 @@
     </ClInclude>
     <ClInclude Include="Systems\AISystems\PursuingSystem.h">
       <Filter>Header Files\Systems\AISystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\NodeComponents\EntityHolderNodeComponent.h">
+      <Filter>Header Files\Components\NodeComponents</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

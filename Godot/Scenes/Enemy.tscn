@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Scripts/NodeComponents/EnemyNodeComponent.gdns" type="Script" id=1]
+[ext_resource path="res://Scripts/NodeComponents/EntityHolderNodeComponent.gdns" type="Script" id=1]
 [ext_resource path="res://Scripts/Views/EntityView.gdns" type="Script" id=2]
 [ext_resource path="res://Scripts/Views/LocomotionViews/SpeedView.gdns" type="Script" id=3]
 [ext_resource path="res://Scripts/Views/HealthView.gdns" type="Script" id=4]

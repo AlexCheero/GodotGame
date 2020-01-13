@@ -8,7 +8,7 @@
 #include "../../Components/SimpleComponents.h"
 #include "../../Components/AttackComponents.h"
 #include "../../Components/InputComponents.h"
-#include "../../Components/NodeComponents/EnemyNodeComponent.h"
+#include "../../Components/NodeComponents/EntityHolderNodeComponent.h"
 
 #include "../../Utils.h"
 
@@ -32,7 +32,7 @@ void godot::CastAttackSystem::operator()(float delta, entt::registry& registry)
 			return;
 
 		Object* pObj = Node::___get_from_variant(rayHit["collider"]);
-		entt::entity enemyEntity = Object::cast_to<EnemyNodeComponent>(pObj)->GetEntity();
+		entt::entity enemyEntity = Object::cast_to<EntityHolderNodeComponent>(pObj)->GetEntity();
 
 		HealthComponent& enemyHealthComp = registry.get<HealthComponent>(enemyEntity);
 		enemyHealthComp.hp -= attackComp.damage;
