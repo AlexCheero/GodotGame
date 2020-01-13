@@ -16,6 +16,7 @@
 #include "Components/InputComponents.h"
 #include "Components/AIComponents/NavigationComponents.h"
 #include "Components/AIComponents/PatrolComponents.h"
+#include "Components/AIComponents/FSMStateComponents.h"
 
 #include "Systems/PlayerSystems/PlayerVelocitySystem.h"
 #include "Systems/LocomotionSystems/KinematicMovementSystem.h"

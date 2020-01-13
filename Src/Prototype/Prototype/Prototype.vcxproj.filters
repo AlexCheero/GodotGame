@@ -320,5 +320,8 @@
     <ClInclude Include="Systems\AISystems\LookAroundSystem.h">
       <Filter>Header Files\Systems\AISystems</Filter>
     </ClInclude>
+    <ClInclude Include="Components\AIComponents\FSMStateComponents.h">
+      <Filter>Header Files\Components\AIComponents</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

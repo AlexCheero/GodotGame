@@ -187,6 +187,7 @@
     <ClCompile Include="Utils\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\AIComponents\FSMStateComponents.h" />
     <ClInclude Include="Components\AIComponents\NavigationComponents.h" />
     <ClInclude Include="Components\AIComponents\PatrolComponents.h" />
     <ClInclude Include="Components\AttackComponents.h" />

@@ -4,6 +4,7 @@
 
 #include "../../Components/AIComponents/PatrolComponents.h"
 #include "../../Components/AIComponents/NavigationComponents.h"
+#include "../../Components/AIComponents/FSMStateComponents.h"
 
 //TODO: smooth patrolling from point to point with bezier and make smooth rotation
 void godot::PatrolSystem::operator()(float delta, entt::registry& registry)

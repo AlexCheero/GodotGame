@@ -4,6 +4,8 @@
 
 #include "core/math/math_funcs.h"
 
+#include "../../Components/AIComponents/FSMStateComponents.h"
+
 entt::entity godot::LookAroundSystem::CheckForTargets(PlayersView& targetsView, PatrolmanComponent patrolman, Spatial* pPatrolSpatial, float navAgentRadius)
 {
 	for (auto entity : targetsView)
@@ -28,6 +30,7 @@ entt::entity godot::LookAroundSystem::CheckForTargets(PlayersView& targetsView, 
 	return entt::null;
 }
 
+//TODO: implement losing sight of target
 void godot::LookAroundSystem::operator()(float delta, entt::registry& registry)
 {
 	entt::entity navEntity = registry.view<Navigation*>()[0];
@@ -35,10 +38,10 @@ void godot::LookAroundSystem::operator()(float delta, entt::registry& registry)
 
 	auto players = registry.view<entt::tag<PlayerTag>, BoundsComponent, Spatial*>();
 
-	auto view = registry.view<entt::tag<PatrollingTag>, PatrolRouteComponent, PatrolmanComponent, BoundsComponent, Spatial*>(entt::exclude<PursuingComponent>);
+	auto view = registry.view<entt::tag<PatrollingTag>, PatrolmanComponent, BoundsComponent, Spatial*>(entt::exclude<PursuingComponent>);
 	view.less(
 	[this, &registry, pNavigation, &players]
-	(entt::entity entity, PatrolRouteComponent& route, PatrolmanComponent patrolman, BoundsComponent bounds, Spatial* pSpatial)
+	(entt::entity entity, PatrolmanComponent patrolman, BoundsComponent bounds, Spatial* pSpatial)
 	{
 		entt::entity targetEntity = CheckForTargets(players, patrolman, pSpatial, bounds.length / 2);
 		if (registry.valid(targetEntity))

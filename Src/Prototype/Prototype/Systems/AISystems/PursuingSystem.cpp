@@ -6,6 +6,7 @@
 #include "../../Components/AIComponents/NavigationComponents.h"
 #include "../../Components/AttackComponents.h"
 #include "../../Components/InputComponents.h"
+#include "../../Components/AIComponents/FSMStateComponents.h"
 
 void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 {
@@ -15,7 +16,7 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 	auto view = registry.view <PursuingComponent, Spatial*>();
 	view.each([&registry, &view, pNavigation](entt::entity entity, PursuingComponent& comp, Spatial* pSpatial)
 	{
-		//TODO: implement losing sight of target and flee
+		//TODO: implement flee
 		if (!registry.valid(comp.target))
 		{
 			//TODO: assert registry.has<InputComponent>(entity)
@@ -34,9 +35,11 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 
 		//TODO: create and iterate separate views for each attack type
 		//TODO: view.get doesn't compiles somehow
+		//TODO: probably attackcode should be moved somwhere else
 		if (registry.has<MeleeAttackComponent>(entity)
 			&& registry.get<MeleeAttackComponent>(entity).distance >= distanceToTarget)
 		{
+			//TODO: keeps hitting player while pursuing him, but not in the hit radius
 			//TODO: assert registry.has<InputComponent>(entity)
 			registry.get<InputComponent>(entity).Set(EInput::Attack, true);
 		}

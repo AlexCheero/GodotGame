@@ -19,6 +19,3 @@ struct NavMarginComponent
 {
 	float margin;
 };
-
-//TODO: probably move to something like FsmStateTags.h
-constexpr entt::hashed_string PathFinishedTag = "PathFinishedTag"_hs;

@@ -5,10 +5,12 @@
 #include "../../Components/SimpleComponents.h"
 #include "../../Components/AIComponents/NavigationComponents.h"
 #include "../../Components/AIComponents/PatrolComponents.h"
+#include "../../Components/AIComponents/FSMStateComponents.h"
 
 //TODO: smooth nav path following with bezier
 void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
 {
+	//TODO: audit all the systems for redundant view arguments
 	auto view = registry.view<KinematicBody*, VelocityComponent, NavMarginComponent, BoundsComponent
 		, SpeedComponent, NavPathComponent>(entt::exclude<entt::tag<PathFinishedTag> >);
 	view.each(

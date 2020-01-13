@@ -21,12 +21,3 @@ struct PatrolmanComponent
 	float longViewDistance;
 	float shortViewDistance;
 };
-
-struct PursuingComponent
-{
-	entt::entity target = entt::null;
-	godot::Vector3 previousTargetPosition;
-};
-
-//TODO: probably move to something like FsmStateTags.h
-constexpr entt::hashed_string PatrollingTag = "PatrollingTag"_hs;
