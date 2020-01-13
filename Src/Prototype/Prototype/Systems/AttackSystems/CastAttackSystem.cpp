@@ -25,7 +25,7 @@ void godot::CastAttackSystem::operator()(float delta, entt::registry& registry)
 		PhysicsDirectSpaceState* spaceState = pAttackerSpatial->get_world()->get_direct_space_state();
 		Transform attackerTransform = pAttackerSpatial->get_transform();
 		Vector3 from = attackerTransform.origin;
-		Vector3 to = from - attackerTransform.basis.z * attackComp.distance;
+		Vector3 to = from + attackerTransform.basis.z * attackComp.distance;
 		Dictionary rayHit = spaceState->intersect_ray(from, to, Array(), utils::GetLayerByName("Enemy"));
 
 		if (rayHit.empty())

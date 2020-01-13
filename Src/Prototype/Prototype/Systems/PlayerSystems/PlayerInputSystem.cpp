@@ -5,22 +5,22 @@
 inline void godot::PlayerInputSystem::GetInputDirection(Vector2& dir, InputEvent* e, const char* actionPrefix)
 {
 	if (e->is_action_pressed(actionPrefix + String("_left")))
-		dir.x = 1;
+		dir.x = -1;
 	else if (e->is_action_released(actionPrefix + String("_left")))
 		dir.x = 0;
 
 	if (e->is_action_pressed(actionPrefix + String("_right")))
-		dir.x = -1;
+		dir.x = 1;
 	else if (e->is_action_released(actionPrefix + String("_right")))
 		dir.x = 0;
 
 	if (e->is_action_pressed(actionPrefix + String("_up")))
-		dir.y = 1;
+		dir.y = -1;
 	else if (e->is_action_released(actionPrefix + String("_up")))
 		dir.y = 0;
 
 	if (e->is_action_pressed(actionPrefix + String("_down")))
-		dir.y = -1;
+		dir.y = 1;
 	else if (e->is_action_released(actionPrefix + String("_down")))
 		dir.y = 0;
 }

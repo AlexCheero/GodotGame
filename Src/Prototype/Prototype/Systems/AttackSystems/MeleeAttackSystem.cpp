@@ -58,7 +58,7 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 		Transform attackerTransform = pAttackerSpatial->get_global_transform();
 		//TODO: because of opposite player and bot forward direction, bot cannot hit player
 		//TODO: also fix errors when bot kills player (probably because of entity becomes invalid)
-		if (!CheckAttackAngle(attackerTransform.origin, -attackerTransform.basis.z, enemyPosition, attackComp.angle))
+		if (!CheckAttackAngle(attackerTransform.origin, attackerTransform.basis.z, enemyPosition, attackComp.angle))
 			return;
 
 		entt::entity enemyEntity = Object::cast_to<EnemyNodeComponent>(pObj)->GetEntity();
