@@ -17,6 +17,6 @@ namespace godot
 	public:
 		static void _register_methods();
 		void _init() {}
-		SimpleFollowComponent GetECSComponent() { return { distance, xAngle, yAngle }; }
+		SimpleFollowComponent GetECSComponent() { return { entt::null, distance, xAngle, yAngle }; }
 	};
 }

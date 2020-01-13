@@ -17,6 +17,9 @@ namespace godot
 	constexpr entt::hashed_string DeadTag = "DeadTag"_hs;
 	constexpr entt::hashed_string PendingDeleteTag = "PendingDeleteTag"_hs;
 	//Tags>
+
+	//TODO: use it everywhere where it fits
+	constexpr entt::exclude_t ExcludeDead = entt::exclude<entt::tag<DeadTag>, entt::tag<PendingDeleteTag> >;
 	
 	struct GravityComponent
 	{
@@ -26,6 +29,7 @@ namespace godot
 
 	struct SimpleFollowComponent
 	{
+		entt::entity targetEntity;
 		float distance;
 		float xAngle;
 		float yAngle;

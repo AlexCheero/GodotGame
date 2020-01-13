@@ -11,7 +11,7 @@ namespace godot
 	{
 		GODOT_CLASS(EntityHolderNodeComponent, KinematicBody)
 	private:
-		entt::entity entity;
+		entt::entity entity = entt::null;
 	public:
 		entt::entity GetEntity() const { return entity; }
 		void SetEntity(entt::entity value) { entity = value; }

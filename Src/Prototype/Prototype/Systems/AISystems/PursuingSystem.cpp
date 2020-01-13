@@ -15,11 +15,15 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 	auto view = registry.view <PursuingComponent, Spatial*>();
 	view.each([&registry, &view, pNavigation](entt::entity entity, PursuingComponent& comp, Spatial* pSpatial)
 	{
-		//TODO: assert registry.valid(comp.target);
+		if (!registry.valid(comp.target))
+		{
+			registry.remove<PursuingComponent>(entity);
+			return;
+		}
+
 		//TODO: assert registry.has<Spatial*>(comp.target);
 		Spatial* pTargetSpatial = registry.get<Spatial*>(comp.target);
 		//TODO: make nav system to target to the floor of the point or don't take target's y into account
-		//TODO: only changes its path, after getting to previous target position
 
 		Vector3 targetPosition = pTargetSpatial->get_global_transform().origin;
 		Vector3 pursuerPosition = pSpatial->get_global_transform().origin;

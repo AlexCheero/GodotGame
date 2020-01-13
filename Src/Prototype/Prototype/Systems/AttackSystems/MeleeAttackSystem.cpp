@@ -45,6 +45,7 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 		if (!CanAttack(input, attackComp.attackTime, attackComp.prevHitTime))
 			return;
 
+		//TODO: bot keeps splashing after killing player
 		Godot::print("Splash!");
 
 		Array intersects = GetIntersects(pAttackerSpatial, attackComp.distance, attackComp.collisionLayerName);
@@ -56,8 +57,6 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 		
 		Vector3 enemyPosition = Object::cast_to<Spatial>(pObj)->get_global_transform().origin;
 		Transform attackerTransform = pAttackerSpatial->get_global_transform();
-		//TODO: because of opposite player and bot forward direction, bot cannot hit player
-		//TODO: also fix errors when bot kills player (probably because of entity becomes invalid)
 		if (!CheckAttackAngle(attackerTransform.origin, attackerTransform.basis.z, enemyPosition, attackComp.angle))
 			return;
 

@@ -29,7 +29,6 @@ void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
 
 		Vector3 origin = pKBody->get_global_transform().origin;
 		origin.y -= bounds.height / 2;
-		//TODO: somehow CurrentPathPoint crashes even with check for PathComplete above
 		Vector3 moveVec = pathComp.CurrentPathPoint() - origin;
 
 		float minDist = marginComp.margin + bounds.width / 2;
