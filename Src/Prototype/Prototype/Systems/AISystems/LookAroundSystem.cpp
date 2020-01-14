@@ -10,7 +10,6 @@
 #include "../../Components/AIComponents/FSMStateComponents.h"
 #include "../../Utils/Utils.h"
 
-//TODO: check line of sight with raycst
 entt::entity godot::LookAroundSystem::CheckForTargets(PlayersView& targetsView, PatrolmanComponent patrolman, Spatial* pPatrolSpatial, float navAgentRadius)
 {
 	for (auto entity : targetsView)
@@ -29,17 +28,7 @@ entt::entity godot::LookAroundSystem::CheckForTargets(PlayersView& targetsView, 
 			viewDistance += navAgentRadius + bounds.length / 2;
 			if (distanceToTarget <= viewDistance)
 			{
-				PhysicsDirectSpaceState* spaceState = pPatrolSpatial->get_world()->get_direct_space_state();
-				Transform attackerTransform = pPatrolSpatial->get_transform();
-				Vector3 from = attackerTransform.origin;
-				Vector3 to = from + attackerTransform.basis.z * distanceToTarget;
-				Dictionary rayHit = spaceState->intersect_ray(from, to, Array(), utils::GetLayerByName("Player"));
-
-				if (rayHit.empty())
-					return entt::null;
-
-				Object* pObj = Node::___get_from_variant(rayHit["collider"]);
-
+				Object* pObj = utils::CastFromSpatial(pPatrolSpatial, distanceToTarget, "Player");
 				if (pTargetSpatial == Object::cast_to<Spatial>(pObj))
 					return entity;
 
@@ -66,6 +55,7 @@ void godot::LookAroundSystem::operator()(float delta, entt::registry& registry)
 		entt::entity targetEntity = CheckForTargets(players, patrolman, pSpatial, bounds.length / 2);
 		if (registry.valid(targetEntity))
 		{
+			Godot::print("target found!");
 			registry.remove<entt::tag<PatrollingTag> >(entity);
 			PursuingComponent& pursuingComp = registry.assign<PursuingComponent>(entity, targetEntity);
 			pursuingComp.targetLooseMsec = -1;

@@ -4,6 +4,8 @@
 #include <vector>
 
 #include <ProjectSettings.hpp>
+#include <PhysicsDirectSpaceState.hpp>
+#include <World.hpp>
 
 std::vector<godot::String> LayerNames;
 void utils::InitPhysicLayers()
@@ -20,12 +22,14 @@ void utils::InitPhysicLayers()
 	}
 }
 
-int utils::GetLayerByName(godot::String name)
+int64_t utils::GetLayerByName(godot::String name)
 {
-	for (int i = 0; i < LayerNames.size(); i++)
+	if (name.length() == 0)
+		return 2147483647;//const for all layers
+	for (int64_t i = 0; i < LayerNames.size(); i++)
 	{
 		if (LayerNames[i] == name)
-			return 1 << i;
+			return 1ll << i;
 	}
 	return 0;
 }
@@ -39,4 +43,18 @@ int64_t utils::SecondsToMillis(float seconds)
 godot::Vector2 utils::FlatVector(godot::Vector3 vec3)
 {
 	return godot::Vector2{ vec3.x, vec3.z };
+}
+
+godot::Object* utils::CastFromSpatial(godot::Spatial* pSpatial, float distance, godot::String layerName)
+{
+	godot::PhysicsDirectSpaceState* spaceState = pSpatial->get_world()->get_direct_space_state();
+	godot::Transform attackerTransform = pSpatial->get_transform();
+	godot::Vector3 from = attackerTransform.origin;
+	godot::Vector3 to = from + attackerTransform.basis.z * distance;
+	godot::Dictionary rayHit = spaceState->intersect_ray(from, to, godot::Array(), GetLayerByName(layerName));
+
+	if (rayHit.empty())
+		return nullptr;
+
+	return godot::Node::___get_from_variant(rayHit["collider"]);
 }
