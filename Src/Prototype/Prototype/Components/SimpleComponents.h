@@ -27,6 +27,7 @@ namespace godot
 		float accDown;
 	};
 
+	//TODO: make debug/test change cam position functional
 	struct SimpleFollowComponent
 	{
 		entt::entity targetEntity;

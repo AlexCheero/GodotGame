@@ -12,5 +12,5 @@ struct PursuingComponent
 	godot::Vector3 previousTargetPosition;
 	//TODO: move to view and remove hardcode
 	int64_t targetLooseMsec;
-	float lostInSeconds = 5.f;
+	float lostInSeconds = 0.5f;
 };

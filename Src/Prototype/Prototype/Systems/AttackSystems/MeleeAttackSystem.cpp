@@ -18,6 +18,7 @@ const float INTERSECT_RESULTS_NUM = 16.f;
 
 godot::Array godot::MeleeAttackSystem::GetIntersects(Spatial* pAttackerSpatial, float distance, String layerName)
 {
+	//TODO: also check hit by raycast
 	m_attackShape->set_radius(distance);
 	m_params->set_collision_mask(utils::GetLayerByName(layerName));
 	m_params->set_shape(m_attackShape);

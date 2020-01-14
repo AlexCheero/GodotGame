@@ -2,6 +2,8 @@
 
 #include <Navigation.hpp>
 #include <OS.hpp>
+#include <PhysicsDirectSpaceState.hpp>
+#include <World.hpp>
 
 #include "core/math/math_funcs.h"
 
@@ -26,7 +28,23 @@ entt::entity godot::LookAroundSystem::CheckForTargets(PlayersView& targetsView, 
 			float viewDistance = angle <= patrolman.viewAngleSmall ? patrolman.longViewDistance : patrolman.shortViewDistance;
 			viewDistance += navAgentRadius + bounds.length / 2;
 			if (distanceToTarget <= viewDistance)
-				return entity;
+			{
+				PhysicsDirectSpaceState* spaceState = pPatrolSpatial->get_world()->get_direct_space_state();
+				Transform attackerTransform = pPatrolSpatial->get_transform();
+				Vector3 from = attackerTransform.origin;
+				Vector3 to = from + attackerTransform.basis.z * distanceToTarget;
+				Dictionary rayHit = spaceState->intersect_ray(from, to, Array(), utils::GetLayerByName("Player"));
+
+				if (rayHit.empty())
+					return entt::null;
+
+				Object* pObj = Node::___get_from_variant(rayHit["collider"]);
+
+				if (pTargetSpatial == Object::cast_to<Spatial>(pObj))
+					return entity;
+
+				return entt::null;
+			}
 		}
 	}
 
