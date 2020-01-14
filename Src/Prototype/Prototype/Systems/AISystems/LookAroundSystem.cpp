@@ -28,7 +28,7 @@ bool godot::LookAroundSystem::CanSeeTarget(PlayersView& targetsView, entt::entit
 		viewDistance += navAgentRadius + targetBounds.length / 2;
 		if (distanceToTarget <= viewDistance)
 		{
-			Object* pObj = utils::CastFromSpatial(pPatrolSpatial, distanceToTarget, "Player");
+			Object* pObj = utils::CastFromSpatial(pPatrolSpatial, distanceToTarget);
 			return pTargetSpatial == Object::cast_to<Spatial>(pObj);
 		}
 	}
