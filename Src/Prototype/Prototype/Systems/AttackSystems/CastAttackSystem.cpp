@@ -22,16 +22,10 @@ void godot::CastAttackSystem::operator()(float delta, entt::registry& registry)
 
 		Godot::print("Bang!");
 
-		PhysicsDirectSpaceState* spaceState = pAttackerSpatial->get_world()->get_direct_space_state();
-		Transform attackerTransform = pAttackerSpatial->get_transform();
-		Vector3 from = attackerTransform.origin;
-		Vector3 to = from + attackerTransform.basis.z * attackComp.distance;
-		Dictionary rayHit = spaceState->intersect_ray(from, to, Array(), utils::GetLayerByName("Enemy"));
-
-		if (rayHit.empty())
+		Object* pObj = utils::CastFromSpatial(pAttackerSpatial, attackComp.distance);
+		if (!pObj)
 			return;
 
-		Object* pObj = Node::___get_from_variant(rayHit["collider"]);
 		entt::entity enemyEntity = Object::cast_to<EntityHolderNodeComponent>(pObj)->GetEntity();
 
 		HealthComponent& enemyHealthComp = registry.get<HealthComponent>(enemyEntity);
