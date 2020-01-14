@@ -195,6 +195,9 @@
     <ClCompile Include="Systems\AISystems\HealthMonitoringSystem.cpp">
       <Filter>Source Files\Systems\AISystems</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\AISystems\FleeingSystem.cpp">
+      <Filter>Source Files\Systems\AISystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -327,6 +330,9 @@
       <Filter>Header Files\Components\AIComponents</Filter>
     </ClInclude>
     <ClInclude Include="Systems\AISystems\HealthMonitoringSystem.h">
+      <Filter>Header Files\Systems\AISystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AISystems\FleeingSystem.h">
       <Filter>Header Files\Systems\AISystems</Filter>
     </ClInclude>
   </ItemGroup>

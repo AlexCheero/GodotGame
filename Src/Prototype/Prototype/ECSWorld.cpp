@@ -37,6 +37,7 @@
 #include "Systems/AISystems/PursuingSystem.h"
 #include "Systems/AISystems/LookAroundSystem.h"
 #include "Systems/AISystems/HealthMonitoringSystem.h"
+#include "Systems/AISystems/FleeingSystem.h"
 
 #include "Components/Views/EntityView.h"
 
@@ -215,6 +216,7 @@ void godot::ECSWorld::_init()
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new DestroyDeadSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new WeaponChooseSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new HealthMonitoringSystem()));
+	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new FleeingSystem()));
 }
 
 void godot::ECSWorld::_ready()

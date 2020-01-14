@@ -164,6 +164,7 @@
     <ClCompile Include="Components\Views\LocomotionViews\SpeedView.cpp" />
     <ClCompile Include="Components\Views\SimpleFollowView.cpp" />
     <ClCompile Include="GodotLibrary.cpp" />
+    <ClCompile Include="Systems\AISystems\FleeingSystem.cpp" />
     <ClCompile Include="Systems\AISystems\HealthMonitoringSystem.cpp" />
     <ClCompile Include="Systems\AISystems\LookAroundSystem.cpp" />
     <ClCompile Include="Systems\AISystems\NavAgentSystem.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="Components\Views\LocomotionViews\JumpSpeedView.h" />
     <ClInclude Include="Components\Views\LocomotionViews\SpeedView.h" />
     <ClInclude Include="Components\Views\SimpleFollowView.h" />
+    <ClInclude Include="Systems\AISystems\FleeingSystem.h" />
     <ClInclude Include="Systems\AISystems\HealthMonitoringSystem.h" />
     <ClInclude Include="Systems\AISystems\LookAroundSystem.h" />
     <ClInclude Include="Systems\AISystems\NavAgentSystem.h" />
