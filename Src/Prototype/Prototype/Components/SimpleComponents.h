@@ -9,11 +9,11 @@ namespace godot
 	struct VelocityComponent { Vector3 velocity; };
 	struct SpeedComponent { float speed; };
 	struct JumpSpeedComponent { float speed; };
-	struct HealthComponent { float hp; };
 	struct RotationDirectionComponent { Vector3 direction; };
 	
 	//<Tags
 	constexpr entt::hashed_string PlayerTag = "PlayerTag"_hs;
+	constexpr entt::hashed_string BotTag = "BotTag"_hs;
 	constexpr entt::hashed_string DeadTag = "DeadTag"_hs;
 	constexpr entt::hashed_string PendingDeleteTag = "PendingDeleteTag"_hs;
 	//Tags>
@@ -42,5 +42,14 @@ namespace godot
 		float height;
 		float length;
 		float margin;
+	};
+
+	struct HealthComponent
+	{
+		float hp;
+		//TODO: set in view
+		float max = hp;
+
+		float ProportionOfMax() { return hp / max; }
 	};
 }

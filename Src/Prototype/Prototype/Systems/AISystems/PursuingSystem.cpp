@@ -7,6 +7,7 @@
 #include "../../Components/AttackComponents.h"
 #include "../../Components/InputComponents.h"
 #include "../../Components/AIComponents/FSMStateComponents.h"
+#include "../../Components/AIComponents/PatrolComponents.h"
 
 void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 {

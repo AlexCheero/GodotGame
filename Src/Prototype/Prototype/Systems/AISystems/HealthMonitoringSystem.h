@@ -4,7 +4,7 @@
 
 namespace godot
 {
-	class PursuingSystem : public BaseSystem
+	class HealthMonitoringSystem : public BaseSystem
 	{
 	public:
 		virtual void operator()(float delta, entt::registry& registry) override;

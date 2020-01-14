@@ -5,6 +5,7 @@
 //TODO: implement decision making system and don't spread tags all around the codebase
 constexpr entt::hashed_string PatrollingTag = "PatrollingTag"_hs;
 constexpr entt::hashed_string PathFinishedTag = "PathFinishedTag"_hs;
+constexpr entt::hashed_string FleeingTag = "FleeingTag"_hs;
 
 struct PursuingComponent
 {

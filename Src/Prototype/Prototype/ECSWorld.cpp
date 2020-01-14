@@ -36,6 +36,7 @@
 #include "Systems/AISystems/PatrolSystem.h"
 #include "Systems/AISystems/PursuingSystem.h"
 #include "Systems/AISystems/LookAroundSystem.h"
+#include "Systems/AISystems/HealthMonitoringSystem.h"
 
 #include "Components/Views/EntityView.h"
 
@@ -147,6 +148,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 //prepare patrol route>
 
 	registry.assign<entt::tag<PatrollingTag> >(entity);
+	registry.assign<entt::tag<BotTag> >(entity);
 }
 
 void godot::ECSWorld::PrepareSingletonEntities()
@@ -212,6 +214,7 @@ void godot::ECSWorld::_init()
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new SimpleFollowSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new DestroyDeadSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new WeaponChooseSystem()));
+	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new HealthMonitoringSystem()));
 }
 
 void godot::ECSWorld::_ready()
