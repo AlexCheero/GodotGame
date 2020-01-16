@@ -77,7 +77,7 @@ void godot::LookAroundSystem::operator()(float delta, entt::registry& registry)
 			int64_t ticksMsec = godot::OS::get_singleton()->get_ticks_msec();
 			if (pursuingComp.targetLostMsec < 0)
 				pursuingComp.targetLostMsec = ticksMsec;
-			else if (pursuingComp.targetLostMsec + utils::SecondsToMillis(pursuingComp.lostInSeconds) <= ticksMsec)
+			else if (pursuingComp.targetLostMsec + utils::SecondsToMillis(patrolman.looseTargetTime) <= ticksMsec)
 				registry.remove<PursuingComponent>(entity);
 		}
 	});

@@ -15,9 +15,10 @@ namespace godot
 		float viewAngleBig;
 		float longViewDistance;
 		float shortViewDistance;
+		float looseTargetTime;
 	public:
 		static void _register_methods();
 		void _init() {}
-		PatrolmanComponent GetECSComponent() { return { viewAngleSmall, viewAngleBig, longViewDistance, shortViewDistance }; }
+		PatrolmanComponent GetECSComponent() { return { viewAngleSmall, viewAngleBig, longViewDistance, shortViewDistance, looseTargetTime }; }
 	};
 }

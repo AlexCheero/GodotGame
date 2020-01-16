@@ -11,7 +11,5 @@ struct PursuingComponent
 {
 	entt::entity target = entt::null;
 	godot::Vector3 previousTargetPosition;
-	//TODO: move to view and remove hardcode
 	int64_t targetLostMsec;
-	float lostInSeconds = 5.f;
 };

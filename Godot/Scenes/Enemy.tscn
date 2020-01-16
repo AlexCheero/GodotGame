@@ -62,6 +62,7 @@ script = ExtResource( 6 )
 "big view angle" = 90.0
 "long view distance" = 30.0
 "short view distance" = 15.0
+"loose target time" = 5.0
 
 [node name="NavMarginView" type="Node" parent="EntityView"]
 script = ExtResource( 7 )
