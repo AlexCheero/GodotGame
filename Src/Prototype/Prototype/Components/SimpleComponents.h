@@ -45,8 +45,7 @@ struct BoundsComponent
 struct HealthComponent
 {
 	float hp;
-	//TODO: set in view
-	float max = hp;
+	float maxHp;
 
-	float ProportionOfMax() { return hp / max; }
+	float ProportionOfMax() { return hp / maxHp; }
 };

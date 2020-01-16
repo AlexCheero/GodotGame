@@ -50,6 +50,7 @@ speed = 10.0
 [node name="HealthView" type="Node" parent="EntityView"]
 script = ExtResource( 4 )
 hp = 100.0
+"max hp" = 100.0
 
 [node name="GravityVIew" type="Node" parent="EntityView"]
 script = ExtResource( 5 )
