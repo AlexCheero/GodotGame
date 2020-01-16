@@ -17,6 +17,7 @@ constexpr entt::hashed_string PendingDeleteTag = "PendingDeleteTag"_hs;
 //Tags>
 
 //TODO: ask skypjack can I add excludes?
+//TODO: it probably even doesn' needed
 constexpr entt::exclude_t ExcludeDead = entt::exclude<entt::tag<DeadTag>, entt::tag<PendingDeleteTag> >;
 
 struct GravityComponent

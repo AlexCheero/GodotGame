@@ -41,7 +41,7 @@ godot::MeleeAttackSystem::MeleeAttackSystem()
 //TODO: implement proper hth with blocks and stuff
 void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 {
-	auto view = registry.view<MeleeAttackComponent, InputComponent, Spatial*>();
+	auto view = registry.view<MeleeAttackComponent, InputComponent, Spatial*>(ExcludeDead);
 	view.each([&registry, this](MeleeAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
 	{
 		if (!CanAttack(input, attackComp.attackTime, attackComp.prevHitTime))

@@ -51,7 +51,7 @@ void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
 	auto finishedPathView = registry.view<entt::tag<PathFinishedTag> >(entt::exclude<entt::tag<PatrollingTag> >);
 	finishedPathView.less([&registry](entt::entity entity)
 	{
-		//TODO: not necessary Patrolling after this
+		//TODO: not necessary Patrolling after this, remove after implementing proper decision making
 		registry.assign<entt::tag<PatrollingTag> >(entity);
 	});
 }

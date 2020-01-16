@@ -5,8 +5,7 @@
 
 void godot::ThrowableWeaponSystem::operator()(float delta, entt::registry& registry)
 {
-	//TODO: check all systems that assigning DeadTag for double assign
-	auto view = registry.view<ThrowableNodeComponent*>(entt::exclude<entt::tag<DeadTag> >);
+	auto view = registry.view<ThrowableNodeComponent*>(ExcludeDead);
 	view.each([&registry](entt::entity throwableEntity, ThrowableNodeComponent* pThrowable)
 	{
 		if (pThrowable->is_contact_monitor_enabled())
