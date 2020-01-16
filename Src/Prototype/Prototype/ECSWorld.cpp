@@ -165,7 +165,7 @@ void godot::ECSWorld::PrepareSingletonEntities()
 		Godot::print_warning("trying to assign more than one singleton entity", "PrepareSingletonEntities", "ECSWorld.cpp", __LINE__);
 }
 
-godot::BoundsComponent godot::ECSWorld::GetCapsuleBounds(Node* pCapsuleNode)
+BoundsComponent godot::ECSWorld::GetCapsuleBounds(Node* pCapsuleNode)
 {
 	CollisionShape* colShape = Object::cast_to<CollisionShape>(pCapsuleNode);
 	Ref<Shape> shape = colShape->get_shape();

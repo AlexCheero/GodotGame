@@ -4,7 +4,6 @@
 
 #include <entt/entt.hpp>
 
-//TODO: move all components into godot namespace or remove SimpleComponents from it
 struct NavPathComponent
 {
 	godot::PoolVector3Array path;
