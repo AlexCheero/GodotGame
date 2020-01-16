@@ -4,7 +4,8 @@
 
 void godot::DestroyDeadSystem::operator()(float delta, entt::registry& registry)
 {
-	registry.view<entt::tag<DeadTag>, Node*>().less([&registry](entt::entity entity, Node* pNode)
+	auto view = registry.view<entt::tag<DeadTag>, Node*>();
+	view.less([&registry](entt::entity entity, Node* pNode)
 	{
 		if (registry.has<entt::tag<PendingDeleteTag> >(entity))
 			return;

@@ -17,7 +17,8 @@ godot::Vector3 godot::SimpleFollowSystem::NewCamPosition(Vector3 targetPosition,
 
 void godot::SimpleFollowSystem::operator()(float delta, entt::registry& registry)
 {
-	registry.view<Camera*, SimpleFollowComponent>().each([&registry, this](entt::entity entity, Camera* pCam, SimpleFollowComponent comp)
+	auto view = registry.view<Camera*, SimpleFollowComponent>();
+	view.each([&registry, this](entt::entity entity, Camera* pCam, SimpleFollowComponent comp)
 	{
 		if (!registry.valid(comp.targetEntity))
 		{

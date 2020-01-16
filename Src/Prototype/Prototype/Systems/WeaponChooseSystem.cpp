@@ -5,7 +5,8 @@
 
 void godot::WeaponChooseSystem::operator()(float delta, entt::registry& registry)
 {
-	registry.view<InputComponent, WeaponHolderComponent>().each([&registry](entt::entity entity, InputComponent input, WeaponHolderComponent weapons)
+	auto view = registry.view<InputComponent, WeaponHolderComponent>();
+	view.each([&registry](entt::entity entity, InputComponent input, WeaponHolderComponent weapons)
 	{
 		if (input.Test(EInput::ChooseMelee) && !registry.has<MeleeAttackComponent>(entity))
 		{

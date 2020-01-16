@@ -42,7 +42,7 @@ godot::MeleeAttackSystem::MeleeAttackSystem()
 void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<MeleeAttackComponent, InputComponent, Spatial*>();
-	view.each([&registry, this](entt::entity entity, MeleeAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
+	view.each([&registry, this](MeleeAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
 	{
 		if (!CanAttack(input, attackComp.attackTime, attackComp.prevHitTime))
 			return;

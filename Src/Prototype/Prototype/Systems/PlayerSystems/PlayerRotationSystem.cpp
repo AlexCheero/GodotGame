@@ -19,9 +19,9 @@ inline godot::Vector3 godot::PlayerRotationSystem::GetTargetDirection(Vector2 in
 //TODO: make smooth rotation
 void godot::PlayerRotationSystem::operator()(float delta, entt::registry& registry)
 {
-	auto view = registry.view<entt::tag<PlayerTag>, RotationDirectionComponent, InputComponent, Spatial*, Camera*>();
+	auto view = registry.view<entt::tag<PlayerTag>, RotationDirectionComponent, InputComponent, Camera*>();
 	view.less(
-	[](RotationDirectionComponent& rotDir, InputComponent input, Spatial* playerSpatial, Camera* pCam)
+	[](RotationDirectionComponent& rotDir, InputComponent input, Camera* pCam)
 	{
 		if (input.rotation.length_squared() == 0)
 			return;

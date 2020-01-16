@@ -11,7 +11,7 @@
 void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<ThrowableAttackComponent, InputComponent, Spatial*>();
-	view.each([&registry, this](entt::entity entity, ThrowableAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
+	view.each([&registry, this](ThrowableAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
 	{
 		if (!CanAttack(input, attackComp.attackTime, attackComp.prevHitTime))
 			return;

@@ -16,7 +16,7 @@ constexpr entt::hashed_string DeadTag = "DeadTag"_hs;
 constexpr entt::hashed_string PendingDeleteTag = "PendingDeleteTag"_hs;
 //Tags>
 
-//TODO: use it everywhere where it fits
+//TODO: ask skypjack can I add excludes?
 constexpr entt::exclude_t ExcludeDead = entt::exclude<entt::tag<DeadTag>, entt::tag<PendingDeleteTag> >;
 
 struct GravityComponent
