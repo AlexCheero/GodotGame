@@ -17,7 +17,6 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 	auto view = registry.view<PursuingComponent, Spatial*>();
 	view.each([&registry, &view, pNavigation](entt::entity entity, PursuingComponent& comp, Spatial* pSpatial)
 	{
-		//TODO: implement flee
 		if (!registry.valid(comp.target))
 		{
 			//TODO: assert registry.has<InputComponent>(entity)

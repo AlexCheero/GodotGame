@@ -18,7 +18,6 @@ void godot::ThrowableNodeComponent::_init()
 
 void godot::ThrowableNodeComponent::_on_throwable_collide(Node* pNode)
 {
-	//TODO: solve this
 	call_deferred("set_contact_monitor", false);
 
 	EntityHolderNodeComponent* pEnemy = Object::cast_to<EntityHolderNodeComponent>(pNode);
