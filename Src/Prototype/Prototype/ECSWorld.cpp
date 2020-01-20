@@ -12,6 +12,7 @@
 #include <CapsuleShape.hpp>
 
 #include "Components/NodeComponents/EntityHolderNodeComponent.h"
+#include "Components/NodeComponents/Animation2DComponent.h"
 #include "Components/AttackComponents.h"
 #include "Components/InputComponents.h"
 #include "Components/AIComponents/NavigationComponents.h"
@@ -238,9 +239,16 @@ void godot::ECSWorld::HandleInputEvent(InputEvent* e)
 
 	if (e->is_action_pressed("ui_accept"))
 	{
-		registry.reset();
-		PrepareSingletonEntities();
-		get_tree()->reload_current_scene();
+		//TODO: remove test code
+		Animation2DComponent* anim = Object::cast_to<Animation2DComponent>(get_node("Player/Sprite3D"));
+		if (anim->row == 3)
+			anim->row = 0;
+		else
+			anim->row++;
+
+		//registry.reset();
+		//PrepareSingletonEntities();
+		//get_tree()->reload_current_scene();
 	}
 	else if (e->is_action_pressed("ui_cancel"))
 		get_tree()->quit();

@@ -335,5 +335,8 @@
     <ClInclude Include="Systems\AISystems\FleeingSystem.h">
       <Filter>Header Files\Systems\AISystems</Filter>
     </ClInclude>
+    <ClInclude Include="Components\NodeComponents\Animation2DComponent.h">
+      <Filter>Header Files\Components\NodeComponents</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

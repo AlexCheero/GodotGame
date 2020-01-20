@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scripts/NodeComponents/EntityHolderNodeComponent.gdns" type="Script" id=1]
 [ext_resource path="res://Scripts/Views/EntityView.gdns" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Scripts/Views/LocomotionViews/SpeedView.gdns" type="Script" id=9]
 [ext_resource path="res://Scripts/Views/HealthView.gdns" type="Script" id=10]
 [ext_resource path="res://Characters/Hero/hero.png" type="Texture" id=11]
+[ext_resource path="res://Scripts/NodeComponents/Animation2DComponent.gdns" type="Script" id=12]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.0352478, 0.130448, 0.644531, 1 )
@@ -26,26 +27,25 @@ albedo_color = Color( 1, 0.184314, 0.184314, 1 )
 [sub_resource type="CylinderMesh" id=5]
 material = SubResource( 4 )
 
-[sub_resource type="SpatialMaterial" id=7]
+[sub_resource type="SpatialMaterial" id=8]
 flags_transparent = true
 flags_unshaded = true
 params_billboard_mode = 2
 
-[sub_resource type="Animation" id=6]
-resource_name = "Idle"
+[sub_resource type="Animation" id=7]
 length = 0.7
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("Sprite3D:animation column")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 1, 1, 2, 3, 4, 5 ]
+"values": [ 0, 1, 2, 3, 4, 5, 6 ]
 }
 
 [node name="Player" type="KinematicBody"]
@@ -69,6 +69,7 @@ mesh = SubResource( 5 )
 material/0 = null
 
 [node name="EntityView" type="Node" parent="."]
+editor/display_folded = true
 script = ExtResource( 2 )
 
 [node name="MeleeAttackView" type="Node" parent="EntityView"]
@@ -111,13 +112,15 @@ hp = 100.0
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0 )
-material_override = SubResource( 7 )
+material_override = SubResource( 8 )
 pixel_size = 0.06
 texture = ExtResource( 11 )
 vframes = 21
 hframes = 13
 frame = 5
+script = ExtResource( 12 )
+"animation column" = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
-anims/Idle = SubResource( 6 )
+anims/Idle = SubResource( 7 )
