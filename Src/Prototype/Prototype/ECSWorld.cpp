@@ -92,6 +92,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 void godot::ECSWorld::PrepareCameraEntity()
 {
+	//TODO: make main camera singleton entity
 	entt::entity entity = registry.create();
 
 	Node* pCameraNode = get_node("Camera");

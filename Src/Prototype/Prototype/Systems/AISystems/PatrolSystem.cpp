@@ -17,7 +17,6 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 	[this, &registry, pNavigation]
 	(entt::entity entity, PatrolRouteComponent& route, Spatial* pSpatial)
 	{
-		int prevPoint = route.current;
 		if (route.current < route.routePoints.size() - 1)
 			route.current++;
 		else
