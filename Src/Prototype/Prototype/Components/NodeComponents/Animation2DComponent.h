@@ -24,7 +24,9 @@ namespace godot
 		void _init() {}
 		void _process(float delta)
 		{
-			int frame = animCol + row * 7;
+			//TODO: remove hardcode
+			const int framesPerRow = 13;
+			int frame = animCol + row * framesPerRow;
 			set_frame(frame);
 		}
 	};
