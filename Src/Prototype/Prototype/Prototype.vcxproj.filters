@@ -198,6 +198,9 @@
     <ClCompile Include="Systems\AISystems\FleeingSystem.cpp">
       <Filter>Source Files\Systems\AISystems</Filter>
     </ClCompile>
+    <ClCompile Include="Components\NodeComponents\Animation2DComponent.cpp">
+      <Filter>Source Files\Components\NodeComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">

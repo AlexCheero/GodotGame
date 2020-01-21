@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Components\NodeComponents\Animation2DComponent.cpp" />
     <ClCompile Include="Components\NodeComponents\ThrowableNodeComponent.cpp" />
     <ClCompile Include="Components\Views\AIViews\NavMarginView.cpp" />
     <ClCompile Include="Components\Views\AIViews\PatrolmanView.cpp" />
