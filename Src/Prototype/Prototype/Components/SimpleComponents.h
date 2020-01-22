@@ -14,6 +14,7 @@ constexpr entt::hashed_string PlayerTag = "PlayerTag"_hs;
 constexpr entt::hashed_string BotTag = "BotTag"_hs;
 constexpr entt::hashed_string DeadTag = "DeadTag"_hs;
 constexpr entt::hashed_string PendingDeleteTag = "PendingDeleteTag"_hs;
+constexpr entt::hashed_string MainCameraTag = "MainCameraTag"_hs;
 //Tags>
 
 //TODO: ask skypjack can I add excludes?

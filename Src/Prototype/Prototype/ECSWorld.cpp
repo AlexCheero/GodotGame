@@ -39,6 +39,7 @@
 #include "Systems/AISystems/LookAroundSystem.h"
 #include "Systems/AISystems/HealthMonitoringSystem.h"
 #include "Systems/AISystems/FleeingSystem.h"
+#include "Systems/BillboardRotationSystem.h"
 
 #include "Components/Views/EntityView.h"
 
@@ -62,6 +63,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("Camera"));
+	AssignNodeInheritedComponent<Animation2DComponent>(registry, entity, get_node("Player/Sprite3D"));
 
 	EntityHolderNodeComponent* pEnemy = AssignNodeInheritedComponent<EntityHolderNodeComponent>(registry, entity, pPlayerNode);
 	pEnemy->SetEntity(entity);
@@ -98,12 +100,15 @@ void godot::ECSWorld::PrepareCameraEntity()
 
 	Node* pCameraNode = get_node("Camera");
 	AssignNodeInheritedComponent<Camera>(registry, entity, pCameraNode);
+	AssignNodeInheritedComponent<Spatial>(registry, entity, pCameraNode);
 
 	EntityView* entityView = Object::cast_to<EntityView>(pCameraNode->get_node("EntityView"));
 	SimpleFollowComponent& followComp = registry.assign<SimpleFollowComponent>(entity);
 	entityView->ConstructComponent(followComp);
 	//TODO: assert registry.valid(followComp.targetEntity);
 	followComp.targetEntity = Object::cast_to<EntityHolderNodeComponent>(get_node("Player"))->GetEntity();
+
+	registry.assign<entt::tag<MainCameraTag> >(entity);
 }
 
 void godot::ECSWorld::PrepareEnemyEntity()
@@ -123,6 +128,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 
 	registry.assign<BoundsComponent>(entity, GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));
 	
+	//TODO: refactor this so that entity view construct all it components automatically
 	entityView->ConstructComponent(registry.assign<SpeedComponent>(entity));
 	entityView->ConstructComponent(registry.assign<HealthComponent>(entity));
 	entityView->ConstructComponent(registry.assign<GravityComponent>(entity));
@@ -220,6 +226,7 @@ void godot::ECSWorld::_init()
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new WeaponChooseSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new HealthMonitoringSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new FleeingSystem()));
+	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new BillboardRotationSystem()));
 }
 
 void godot::ECSWorld::_ready()
@@ -239,16 +246,9 @@ void godot::ECSWorld::HandleInputEvent(InputEvent* e)
 
 	if (e->is_action_pressed("ui_accept"))
 	{
-		//TODO: remove test code
-		Animation2DComponent* anim = Object::cast_to<Animation2DComponent>(get_node("Player/Sprite3D"));
-		if (anim->row == 3)
-			anim->row = 0;
-		else
-			anim->row++;
-
-		//registry.reset();
-		//PrepareSingletonEntities();
-		//get_tree()->reload_current_scene();
+		registry.reset();
+		PrepareSingletonEntities();
+		get_tree()->reload_current_scene();
 	}
 	else if (e->is_action_pressed("ui_cancel"))
 		get_tree()->quit();
