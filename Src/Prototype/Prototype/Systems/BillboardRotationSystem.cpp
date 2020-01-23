@@ -44,13 +44,9 @@ void godot::BillboardRotationSystem::operator()(float delta, entt::registry& reg
 		//const bool reflect = false;
 
 		bool rightSide = leftDot > 0;
-		//TODO: change rotation to ccw or change sprite's sectors order
-		if (!rightSide)
+		if (rightSide)
 			angle = 360 - angle;
-		
-		//TODO: probably should use mod instead
-		if (angle >= 360)
-			angle -= 360;
+		angle = fmod(angle, 360);
 
 		//TODO: assert(angle >= 0 && angle <= 360)
 		//TODO: move to view
@@ -59,28 +55,7 @@ void godot::BillboardRotationSystem::operator()(float delta, entt::registry& reg
 		int sector = angle / anglePerSprite;
 		if (fmod(angle, anglePerSprite) > anglePerSprite / 2)
 			sector++;
-
-		//TODO: probably should use % instead
-		if (sector > 3)
-			sector -= 4;
-
-		//TODO: remove this hardcode change to ccw
-		switch (sector)
-		{
-		case 0:
-			break;
-		case 1:
-			sector = 3;
-			break;
-		case 2:
-			break;
-		case 3:
-			sector = 1;
-			break;
-		default:
-			Godot::print("default switch statement! sector: " + String::num_int64(sector));
-			break;
-		}
+		sector %= 4;
 
 		pSprite->row = sector;
 	});
