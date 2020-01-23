@@ -19,14 +19,12 @@ void godot::BillboardRotationSystem::operator()(float delta, entt::registry& reg
 	Transform mainCamTransform = registry.get<Spatial*>(mainCamEntity)->get_global_transform();
 	Vector3 camFwd = -mainCamTransform.get_basis().z;
 
-	//TODO: implement not for only animated
 	auto view = registry.view<Animation2DComponent*, Spatial*>();
 	view.each([mainCamTransform, camFwd](Animation2DComponent* pSprite, Spatial* pSpatial) mutable
 	{
 		Vector3 spatialFwd = pSpatial->get_global_transform().get_basis().z;
 		Vector3 spatialLeft = pSpatial->get_global_transform().get_basis().x;
 
-		//TODO: should I use local normal?
 		//using global up as normal, so spatialFwd and spatialLeft should be always orthogonal to it
 		const Plane xzPlane(Vector3{ 0, 1, 0 }, 0);
 		camFwd = xzPlane.project(camFwd);
@@ -40,18 +38,13 @@ void godot::BillboardRotationSystem::operator()(float delta, entt::registry& reg
 
 		float angle = Math::rad2deg(Math::acos(fwdDot));
 
-		//TODO: move to view and implement symmetrical sprites
-		//const bool reflect = false;
-
+		//TODO: implement symmetrical sprites
 		bool rightSide = leftDot > 0;
 		if (rightSide)
 			angle = 360 - angle;
 		angle = fmod(angle, 360);
 
-		//TODO: assert(angle >= 0 && angle <= 360)
-		//TODO: move to view
-		const int numSectors = 4;
-		float anglePerSprite = 360 / numSectors;
+		float anglePerSprite = 360 / pSprite->numSectors;
 		int sector = angle / anglePerSprite;
 		if (fmod(angle, anglePerSprite) > anglePerSprite / 2)
 			sector++;

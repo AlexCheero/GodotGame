@@ -6,13 +6,16 @@
 
 namespace godot
 {
+	//TODO: rename all node components postfix to Node
 	class Animation2DComponent : public Sprite3D
 	{
 		GODOT_CLASS(Animation2DComponent, Sprite3D)
 	private:
 		int animCol;
 	public:
-		int row = 0;
+		int row;
+		bool reflect;
+		int numSectors;
 
 		static void _register_methods();
 
