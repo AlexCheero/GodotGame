@@ -26,7 +26,11 @@ void godot::CastAttackSystem::operator()(float delta, entt::registry& registry)
 		if (!pObj)
 			return;
 
-		entt::entity enemyEntity = Object::cast_to<EntityHolderNodeComponent>(pObj)->GetEntity();
+		EntityHolderNodeComponent* entityHolder = Object::cast_to<EntityHolderNodeComponent>(pObj);
+		if (!entityHolder)
+			return;
+
+		entt::entity enemyEntity = entityHolder->GetEntity();
 
 		HealthComponent& enemyHealthComp = registry.get<HealthComponent>(enemyEntity);
 		enemyHealthComp.hp -= attackComp.damage;
