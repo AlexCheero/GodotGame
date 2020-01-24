@@ -48,7 +48,18 @@ void godot::BillboardRotationSystem::operator()(float delta, entt::registry& reg
 		int sector = angle / anglePerSprite;
 		if (fmod(angle, anglePerSprite) > anglePerSprite / 2)
 			sector++;
-		sector %= 4;
+		sector %= pSprite->numSectors;
+
+		
+		if (pSprite->reflect && sector > pSprite->numSectors / 2)
+		{
+			pSprite->set_flip_h(true);
+			sector = pSprite->numSectors - sector;
+		}
+		else
+			pSprite->set_flip_h(false);
+
+		//Godot::print("Sector: " + String::num_int64(sector));
 
 		pSprite->row = sector;
 	});
