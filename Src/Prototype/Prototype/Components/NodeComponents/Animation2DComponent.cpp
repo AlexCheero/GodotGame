@@ -11,6 +11,7 @@ void godot::Animation2DComponent::_register_methods()
 
 void godot::Animation2DComponent::_process(float delta)
 {
+	//TODO: implement animations switching
 	int frame = animCol + row * get_hframes();
 	set_frame(frame);
 }
