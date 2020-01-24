@@ -12,7 +12,6 @@
 #include "../Components/NodeComponents/Animation2DComponent.h"
 
 //TODO: probably implement it via shader
-//TODO: test for 8 directional sprite, like imp
 void godot::BillboardRotationSystem::operator()(float delta, entt::registry& registry)
 {
 	entt::entity mainCamEntity = registry.view<entt::tag<MainCameraTag> >()[0];
@@ -38,7 +37,6 @@ void godot::BillboardRotationSystem::operator()(float delta, entt::registry& reg
 
 		float angle = Math::rad2deg(Math::acos(fwdDot));
 
-		//TODO: implement symmetrical sprites
 		bool rightSide = leftDot > 0;
 		if (rightSide)
 			angle = 360 - angle;
@@ -50,7 +48,6 @@ void godot::BillboardRotationSystem::operator()(float delta, entt::registry& reg
 			sector++;
 		sector %= pSprite->numSectors;
 
-		
 		if (pSprite->reflect && sector > pSprite->numSectors / 2)
 		{
 			pSprite->set_flip_h(true);
@@ -58,8 +55,6 @@ void godot::BillboardRotationSystem::operator()(float delta, entt::registry& reg
 		}
 		else
 			pSprite->set_flip_h(false);
-
-		//Godot::print("Sector: " + String::num_int64(sector));
 
 		pSprite->row = sector;
 	});

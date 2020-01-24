@@ -13,6 +13,7 @@ namespace godot
 	private:
 		int animCol;
 	public:
+		//TODO: move all fields to private and use get/set
 		int row;
 		bool reflect;
 		int numSectors;
