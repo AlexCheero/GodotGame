@@ -204,6 +204,9 @@
     <ClCompile Include="Systems\BillboardRotationSystem.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="Components\NodeComponents\PickableNodeComponent.cpp">
+      <Filter>Source Files\Components\NodeComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -346,6 +349,9 @@
     </ClInclude>
     <ClInclude Include="Systems\BillboardRotationSystem.h">
       <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\NodeComponents\PickableNodeComponent.h">
+      <Filter>Header Files\Components\NodeComponents</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
