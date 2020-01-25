@@ -20,6 +20,7 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 
 		Node* throwableNode = attackComp.throwableScene->instance();
 
+		//TODO: root is viewport, not the scene root node. try use get_tree()->get_current_scene() instead
 		pAttackerSpatial->get_tree()->get_root()->add_child(throwableNode);
 
 		//TODO: make global revision and check all such things with assert( != null)

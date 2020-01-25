@@ -29,6 +29,7 @@ void godot::PlayerInputSystem::operator()(entt::registry& registry, InputEvent* 
 {
 	//TODO: read once more about differences between groups and view and, probably, use group instead
 	//TODO: implement proper pressed/just_pressed functional
+	//TODO: delete PlayerInputTag and use PlayerTag instead
 	auto view = registry.view<entt::tag<PlayerInputTag>, InputComponent>();
 	view.less([&registry, e](InputComponent& comp)
 	{
@@ -61,6 +62,7 @@ void godot::PlayerInputSystem::operator()(entt::registry& registry, InputEvent* 
 			comp.Set(EInput::ChooseThrowable, true);
 		}
 
+		//TODO: change to mouse
 		GetInputDirection(comp.rotation, e, "ui");
 		GetInputDirection(comp.moveDir, e, "move");
 	});
