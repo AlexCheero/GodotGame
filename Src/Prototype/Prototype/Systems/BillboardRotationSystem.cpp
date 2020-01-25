@@ -5,6 +5,7 @@
 
 #include <math.h> 
 
+//TODO: try to implement DragonBones/Spine module for smooth rotation
 //TODO: wrap all engine code in utils to easily remove it in future
 #include "core/math/math_funcs.h"
 
