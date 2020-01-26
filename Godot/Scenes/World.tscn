@@ -36,6 +36,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 transform = Transform( 0.989855, 0, -0.142075, 0, 1, 0, 0.142075, 0, 0.989855, 0, 2, -12 )
 
 [node name="Navigation" type="Navigation" parent="."]
+editor/display_folded = true
 
 [node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
 navmesh = SubResource( 1 )

@@ -57,7 +57,6 @@ mesh = SubResource( 3 )
 material/0 = null
 
 [node name="EntityView" type="Node" parent="."]
-editor/display_folded = true
 script = ExtResource( 2 )
 
 [node name="MeleeAttackView" type="Node" parent="EntityView"]

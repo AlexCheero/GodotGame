@@ -11,13 +11,13 @@
 #include <CollisionShape.hpp>
 #include <CapsuleShape.hpp>
 
-#include "Components/NodeComponents/EntityHolderNodeComponent.h"
 #include "Components/NodeComponents/Animation2DComponent.h"
 #include "Components/AttackComponents.h"
 #include "Components/InputComponents.h"
 #include "Components/AIComponents/NavigationComponents.h"
 #include "Components/AIComponents/PatrolComponents.h"
 #include "Components/AIComponents/FSMStateComponents.h"
+#include "Components/NodeComponents/EntityHolderNodeComponent.h"
 
 #include "Systems/PlayerSystems/PlayerVelocitySystem.h"
 #include "Systems/LocomotionSystems/KinematicMovementSystem.h"
@@ -40,8 +40,6 @@
 #include "Systems/AISystems/HealthMonitoringSystem.h"
 #include "Systems/AISystems/FleeingSystem.h"
 #include "Systems/BillboardRotationSystem.h"
-
-#include "Components/Views/EntityView.h"
 
 #include "Utils/Utils.h"
 
@@ -188,6 +186,41 @@ BoundsComponent godot::ECSWorld::GetCapsuleBounds(Node* pCapsuleNode)
 	return { boundsWidth, boundsHeight, boundsLength, capsuleShape->get_margin() };
 }
 
+void godot::ECSWorld::_on_Pickable_picked_up(Node* pPicker, EntityView* pPickableView, int pickableType)
+{
+	EntityHolderNodeComponent* pPickerEntityHolder = Object::cast_to<EntityHolderNodeComponent>(pPicker);
+	entt::entity pickerEntity = pPickerEntityHolder->GetEntity();
+	//TODO: assert pickerEntity, pPickerEntityHolder, pPickableView
+	EPickableType pickableEnmVal = static_cast<EPickableType>(pickableType);
+	switch (pickableEnmVal)
+	{
+	case EPickableType::MeleeWeapon:
+		pPickableView->ConstructComponent(registry.assign_or_replace<MeleeAttackComponent>(pickerEntity));
+		//TODO: assert pickerEntity has WeaponHolder
+		registry.get<WeaponHolderComponent>(pickerEntity).melee = registry.get<MeleeAttackComponent>(pickerEntity);
+		Godot::print("Picked up MeleeWeapon");
+		break;
+	case EPickableType::RangedWeapon:
+		Godot::print("Picked up RangedWeapon");
+		break;
+	case EPickableType::ThrowableWeapon:
+		Godot::print("Picked up ThrowableWeapon");
+		break;
+	case EPickableType::Medkit:
+		Godot::print("Picked up Medkit");
+		break;
+	case EPickableType::Buff:
+		Godot::print("Picked up Buff");
+		break;
+	case EPickableType::Key:
+		Godot::print("Picked up Key");
+		break;
+	default:
+		Godot::print_error("Wrong pickable type: " + String::num_int64(pickableType), "_on_Pickable_picked_up", "ECSWorld", __LINE__);
+		break;
+	}
+}
+
 void godot::ECSWorld::_register_methods()
 {
 	register_method((char*)"_init", &ECSWorld::_init);
@@ -195,6 +228,7 @@ void godot::ECSWorld::_register_methods()
 	register_method((char*)"_input", &ECSWorld::HandleInputEvent);
 	register_method((char*)"_process", &ECSWorld::_process);
 	register_method((char*)"_physics_process", &ECSWorld::_physics_process);
+	register_method((char*)"_on_Pickable_picked_up", &ECSWorld::_on_Pickable_picked_up);
 }
 
 void godot::ECSWorld::_init()
