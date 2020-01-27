@@ -14,8 +14,8 @@
 
 void godot::CastAttackSystem::operator()(float delta, entt::registry& registry)
 {
-	auto view = registry.view<CastAttackComponent, InputComponent, Spatial*>(ExcludeDead);
-	view.each([&registry, this](CastAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
+	auto view = registry.view<entt::tag<CurrentWeaponCastTag>, CastAttackComponent, InputComponent, Spatial*>(ExcludeDead);
+	view.less([&registry, this](CastAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
 	{
 		if (!CanAttack(input, attackComp.attackTime, attackComp.prevHitTime))
 			return;

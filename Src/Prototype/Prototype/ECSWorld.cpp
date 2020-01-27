@@ -71,12 +71,10 @@ void godot::ECSWorld::PreparePlayerEntity()
 	entityView->ConstructComponent(registry.assign<SpeedComponent>(entity));
 	entityView->ConstructComponent(registry.assign<HealthComponent>(entity));
 
-	WeaponHolderComponent weapons;
-	entityView->ConstructComponent(weapons.melee);
-
-	registry.assign<WeaponHolderComponent>(entity, weapons);
-	registry.assign<MeleeAttackComponent>(entity, weapons.melee);
-	weapons.Set(EWeapons::Melee, true);
+	MeleeAttackComponent melee;
+	entityView->ConstructComponent(melee);
+	registry.assign<MeleeAttackComponent>(entity, melee);
+	registry.assign<entt::tag<CurrentWeaponMeleeTag> >(entity);
 
 	registry.assign<entt::tag<PlayerTag> >(entity);
 	registry.assign<entt::tag<PlayerInputTag> >(entity);
@@ -169,6 +167,7 @@ void godot::ECSWorld::PrepareSingletonEntities()
 		Godot::print_warning("trying to assign more than one singleton entity", "PrepareSingletonEntities", "ECSWorld.cpp", __LINE__);
 }
 
+//TODO: move to utils
 BoundsComponent godot::ECSWorld::GetCapsuleBounds(Node* pCapsuleNode)
 {
 	CollisionShape* colShape = Object::cast_to<CollisionShape>(pCapsuleNode);
@@ -191,34 +190,33 @@ void godot::ECSWorld::_on_Pickable_picked_up(Node* pPicker, EntityView* pPickabl
 
 	entt::entity pickerEntity = pPickerEntityHolder->GetEntity();
 	//TODO: assert pickerEntity, pPickableView
+	//TODO: change weapon by button press
+	//		and probably not switch on pickup
 	EPickableType pickableEnmVal = static_cast<EPickableType>(pickableType);
 	switch (pickableEnmVal)
 	{
 	case EPickableType::MeleeWeapon:
 	{
-		MeleeAttackComponent& meleeComp = registry.assign_or_replace<MeleeAttackComponent>(pickerEntity);
 		//TODO: assert ConstructComponent
-		pPickableView->ConstructComponent(meleeComp);
-		//TODO: assert pickerEntity has WeaponHolder
-		registry.get<WeaponHolderComponent>(pickerEntity).melee = meleeComp;
+		pPickableView->ConstructComponent(registry.assign_or_replace<MeleeAttackComponent>(pickerEntity));
+		//if switch on pickup
+		registry.get_or_assign<entt::tag<CurrentWeaponMeleeTag> >(pickerEntity);
 		break;
 	}
 	case EPickableType::RangedWeapon:
 	{
-		CastAttackComponent& rangedComp = registry.assign_or_replace<CastAttackComponent>(pickerEntity);
 		//TODO: assert ConstructComponent
-		pPickableView->ConstructComponent(rangedComp);
-		//TODO: assert pickerEntity has WeaponHolder
-		registry.get<WeaponHolderComponent>(pickerEntity).ranged = rangedComp;
+		pPickableView->ConstructComponent(registry.assign_or_replace<CastAttackComponent>(pickerEntity));
+		//if switch on pickup
+		registry.get_or_assign<entt::tag<CurrentWeaponCastTag> >(pickerEntity);
 		break;
 	}
 	case EPickableType::ThrowableWeapon:
 	{
-		ThrowableAttackComponent& throwableComp = registry.assign_or_replace<ThrowableAttackComponent>(pickerEntity);
 		//TODO: assert ConstructComponent
-		pPickableView->ConstructComponent(throwableComp);
-		//TODO: assert pickerEntity has WeaponHolder
-		registry.get<WeaponHolderComponent>(pickerEntity).throwable = throwableComp;
+		pPickableView->ConstructComponent(registry.assign_or_replace<ThrowableAttackComponent>(pickerEntity));
+		//if switch on pickup
+		registry.get_or_assign<entt::tag<CurrentWeaponThrowableTag> >(pickerEntity);
 		break;
 	}
 	case EPickableType::Medkit:
@@ -273,7 +271,12 @@ void godot::ECSWorld::_init()
 	//setup systems
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new SimpleFollowSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new DestroyDeadSystem()));
+
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new WeaponChooseSystem()));
+	registry.on_construct<entt::tag<CurrentWeaponMeleeTag> >().connect<&WeaponChooseSystem::OnMeleeTagConstruct>();
+	registry.on_construct<entt::tag<CurrentWeaponCastTag> >().connect<&WeaponChooseSystem::OnCastTagConstruct>();
+	registry.on_construct<entt::tag<CurrentWeaponThrowableTag> >().connect<&WeaponChooseSystem::OnThrowableTagConstruct>();
+
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new HealthMonitoringSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new FleeingSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new BillboardRotationSystem()));
@@ -296,7 +299,7 @@ void godot::ECSWorld::HandleInputEvent(InputEvent* e)
 
 	if (e->is_action_pressed("ui_accept"))
 	{
-		registry.reset();
+		registry.clear();
 		PrepareSingletonEntities();
 		get_tree()->reload_current_scene();
 	}

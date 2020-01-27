@@ -1,17 +1,14 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/NodeComponents/EntityHolderNodeComponent.gdns" type="Script" id=1]
 [ext_resource path="res://Scripts/Views/EntityView.gdns" type="Script" id=2]
 [ext_resource path="res://Scripts/Views/AttackViews/MeleeAttackView.gdns" type="Script" id=3]
-[ext_resource path="res://Scripts/Views/AttackViews/CastAttackView.gdns" type="Script" id=4]
-[ext_resource path="res://Scripts/Views/AttackViews/ThrowableAttackView.gdns" type="Script" id=5]
-[ext_resource path="res://Scenes/Throwable.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scripts/Views/LocomotionViews/GravityView.gdns" type="Script" id=7]
-[ext_resource path="res://Scripts/Views/LocomotionViews/JumpSpeedView.gdns" type="Script" id=8]
-[ext_resource path="res://Scripts/Views/LocomotionViews/SpeedView.gdns" type="Script" id=9]
-[ext_resource path="res://Scripts/Views/HealthView.gdns" type="Script" id=10]
-[ext_resource path="res://Characters/Hero/hero.png" type="Texture" id=11]
-[ext_resource path="res://Scripts/NodeComponents/Animation2DComponent.gdns" type="Script" id=12]
+[ext_resource path="res://Scripts/Views/LocomotionViews/GravityView.gdns" type="Script" id=4]
+[ext_resource path="res://Scripts/Views/LocomotionViews/JumpSpeedView.gdns" type="Script" id=5]
+[ext_resource path="res://Scripts/Views/LocomotionViews/SpeedView.gdns" type="Script" id=6]
+[ext_resource path="res://Scripts/Views/HealthView.gdns" type="Script" id=7]
+[ext_resource path="res://Characters/Hero/hero.png" type="Texture" id=8]
+[ext_resource path="res://Scripts/NodeComponents/Animation2DComponent.gdns" type="Script" id=9]
 
 [sub_resource type="CapsuleShape" id=1]
 
@@ -67,33 +64,21 @@ angle = 90.0
 attackTime = 0.5
 "collision layer" = "Enemy"
 
-[node name="CastAttackView" type="Node" parent="EntityView"]
-script = ExtResource( 4 )
-distance = 40.0
-damage = 50.0
-attackTime = 0.5
-
-[node name="ThrowableAttackView" type="Node" parent="EntityView"]
-script = ExtResource( 5 )
-throwable = ExtResource( 6 )
-force = 50.0
-attackTime = 0.5
-
 [node name="GravityView" type="Node" parent="EntityView"]
-script = ExtResource( 7 )
+script = ExtResource( 4 )
 "up acceleration" = 30.0
 "down acceleration" = 20.0
 
 [node name="JumpSpeedView" type="Node" parent="EntityView"]
-script = ExtResource( 8 )
+script = ExtResource( 5 )
 "jump speed" = 30.0
 
 [node name="SpeedView" type="Node" parent="EntityView"]
-script = ExtResource( 9 )
+script = ExtResource( 6 )
 speed = 30.0
 
 [node name="HealthView" type="Node" parent="EntityView"]
-script = ExtResource( 10 )
+script = ExtResource( 7 )
 hp = 100.0
 "max hp" = 100.0
 
@@ -101,11 +86,11 @@ hp = 100.0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0 )
 material_override = SubResource( 4 )
 pixel_size = 0.06
-texture = ExtResource( 11 )
+texture = ExtResource( 8 )
 vframes = 21
 hframes = 13
 frame = 5
-script = ExtResource( 12 )
+script = ExtResource( 9 )
 "animation column" = 6
 "num sectors" = 4
 
