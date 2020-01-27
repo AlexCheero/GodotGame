@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <bitset>
 
 #include <Ref.hpp>
 #include <PackedScene.hpp>
@@ -17,6 +18,7 @@ struct MeleeAttackComponent
 	int64_t prevHitTime = -utils::SecondsToMillis(attackTime);
 };
 
+//TODO: implement ammo count
 struct CastAttackComponent
 {
 	float distance;
@@ -25,6 +27,7 @@ struct CastAttackComponent
 	int64_t prevHitTime = -utils::SecondsToMillis(attackTime);
 };
 
+//TODO: implement grenades
 struct ThrowableAttackComponent
 {
 	//TODO: implement object pools
@@ -34,8 +37,22 @@ struct ThrowableAttackComponent
 	int64_t prevHitTime = -utils::SecondsToMillis(attackTime);
 };
 
+enum class EWeapons
+{
+	Melee,
+	Ranged,
+	Throwable,
+
+	//do not add anything after this value
+	End
+};
+
 struct WeaponHolderComponent
 {
+	std::bitset<static_cast<int>(EWeapons::End)> availableWeapons;
+	void Set(EWeapons input, bool value) { availableWeapons.set(static_cast<int>(input), value); }
+	bool Test(EWeapons input) { return availableWeapons.test(static_cast<int>(input)); }
+
 	MeleeAttackComponent melee;
 	CastAttackComponent ranged;
 	ThrowableAttackComponent throwable;

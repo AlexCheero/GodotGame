@@ -73,13 +73,10 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	WeaponHolderComponent weapons;
 	entityView->ConstructComponent(weapons.melee);
-	entityView->ConstructComponent(weapons.ranged);
-	entityView->ConstructComponent(weapons.throwable);
 
 	registry.assign<WeaponHolderComponent>(entity, weapons);
 	registry.assign<MeleeAttackComponent>(entity, weapons.melee);
-	//registry.assign<CastAttackComponent>(entity, weapons.ranged);
-	//registry.assign<ThrowableAttackComponent>(entity, weapons.throwable);
+	weapons.Set(EWeapons::Melee, true);
 
 	registry.assign<entt::tag<PlayerTag> >(entity);
 	registry.assign<entt::tag<PlayerInputTag> >(entity);
@@ -189,23 +186,41 @@ BoundsComponent godot::ECSWorld::GetCapsuleBounds(Node* pCapsuleNode)
 void godot::ECSWorld::_on_Pickable_picked_up(Node* pPicker, EntityView* pPickableView, int pickableType)
 {
 	EntityHolderNodeComponent* pPickerEntityHolder = Object::cast_to<EntityHolderNodeComponent>(pPicker);
+	if (!pPickerEntityHolder)
+		return;
+
 	entt::entity pickerEntity = pPickerEntityHolder->GetEntity();
-	//TODO: assert pickerEntity, pPickerEntityHolder, pPickableView
+	//TODO: assert pickerEntity, pPickableView
 	EPickableType pickableEnmVal = static_cast<EPickableType>(pickableType);
 	switch (pickableEnmVal)
 	{
 	case EPickableType::MeleeWeapon:
-		pPickableView->ConstructComponent(registry.assign_or_replace<MeleeAttackComponent>(pickerEntity));
+	{
+		MeleeAttackComponent& meleeComp = registry.assign_or_replace<MeleeAttackComponent>(pickerEntity);
+		//TODO: assert ConstructComponent
+		pPickableView->ConstructComponent(meleeComp);
 		//TODO: assert pickerEntity has WeaponHolder
-		registry.get<WeaponHolderComponent>(pickerEntity).melee = registry.get<MeleeAttackComponent>(pickerEntity);
-		Godot::print("Picked up MeleeWeapon");
+		registry.get<WeaponHolderComponent>(pickerEntity).melee = meleeComp;
 		break;
+	}
 	case EPickableType::RangedWeapon:
-		Godot::print("Picked up RangedWeapon");
+	{
+		CastAttackComponent& rangedComp = registry.assign_or_replace<CastAttackComponent>(pickerEntity);
+		//TODO: assert ConstructComponent
+		pPickableView->ConstructComponent(rangedComp);
+		//TODO: assert pickerEntity has WeaponHolder
+		registry.get<WeaponHolderComponent>(pickerEntity).ranged = rangedComp;
 		break;
+	}
 	case EPickableType::ThrowableWeapon:
-		Godot::print("Picked up ThrowableWeapon");
+	{
+		ThrowableAttackComponent& throwableComp = registry.assign_or_replace<ThrowableAttackComponent>(pickerEntity);
+		//TODO: assert ConstructComponent
+		pPickableView->ConstructComponent(throwableComp);
+		//TODO: assert pickerEntity has WeaponHolder
+		registry.get<WeaponHolderComponent>(pickerEntity).throwable = throwableComp;
 		break;
+	}
 	case EPickableType::Medkit:
 		Godot::print("Picked up Medkit");
 		break;
