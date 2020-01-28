@@ -5,11 +5,11 @@
 
 void godot::WeaponChooseSystem::OnMeleeTagConstruct(entt::registry& registry, entt::entity entity)
 {
-	registry.remove_if_exists<entt::tag<CurrentWeaponCastTag> >(entity);
+	registry.remove_if_exists<entt::tag<CurrentWeaponRangedTag> >(entity);
 	registry.remove_if_exists<entt::tag<CurrentWeaponThrowableTag> >(entity);
 }
 
-void godot::WeaponChooseSystem::OnCastTagConstruct(entt::registry& registry, entt::entity entity)
+void godot::WeaponChooseSystem::OnRangedTagConstruct(entt::registry& registry, entt::entity entity)
 {
 	registry.remove_if_exists<entt::tag<CurrentWeaponMeleeTag> >(entity);
 	registry.remove_if_exists<entt::tag<CurrentWeaponThrowableTag> >(entity);
@@ -18,7 +18,7 @@ void godot::WeaponChooseSystem::OnCastTagConstruct(entt::registry& registry, ent
 void godot::WeaponChooseSystem::OnThrowableTagConstruct(entt::registry& registry, entt::entity entity)
 {
 	registry.remove_if_exists<entt::tag<CurrentWeaponMeleeTag> >(entity);
-	registry.remove_if_exists<entt::tag<CurrentWeaponCastTag> >(entity);
+	registry.remove_if_exists<entt::tag<CurrentWeaponRangedTag> >(entity);
 }
 
 //TODO: don't update this and similar systems all the time
@@ -33,10 +33,10 @@ void godot::WeaponChooseSystem::operator()(float delta, entt::registry& registry
 		{
 			registry.assign<entt::tag<CurrentWeaponMeleeTag> >(entity);
 		}
-		if (input.Test(EInput::ChooseRanged) && !registry.has<entt::tag<CurrentWeaponCastTag> >(entity)
-			&& registry.has<CastAttackComponent>(entity))
+		if (input.Test(EInput::ChooseRanged) && !registry.has<entt::tag<CurrentWeaponRangedTag> >(entity)
+			&& registry.has<RangedAttackComponent>(entity))
 		{
-			registry.assign<entt::tag<CurrentWeaponCastTag> >(entity);
+			registry.assign<entt::tag<CurrentWeaponRangedTag> >(entity);
 		}
 		if (input.Test(EInput::ChooseThrowable) && !registry.has<entt::tag<CurrentWeaponThrowableTag> >(entity)
 			&& registry.has<ThrowableAttackComponent>(entity))

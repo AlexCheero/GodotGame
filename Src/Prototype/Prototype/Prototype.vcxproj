@@ -156,7 +156,7 @@
     <ClCompile Include="Components\NodeComponents\ThrowableNodeComponent.cpp" />
     <ClCompile Include="Components\Views\AIViews\NavMarginView.cpp" />
     <ClCompile Include="Components\Views\AIViews\PatrolmanView.cpp" />
-    <ClCompile Include="Components\Views\AttackViews\CastAttackView.cpp" />
+    <ClCompile Include="Components\Views\AttackViews\RangedAttackView.cpp" />
     <ClCompile Include="Components\Views\AttackViews\MeleeAttackView.cpp" />
     <ClCompile Include="Components\Views\AttackViews\ThrowableAttackView.cpp" />
     <ClCompile Include="Components\Views\EntityView.cpp" />
@@ -173,7 +173,7 @@
     <ClCompile Include="Systems\AISystems\PatrolSystem.cpp" />
     <ClCompile Include="Systems\AISystems\PursuingSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\AttackCooldown.cpp" />
-    <ClCompile Include="Systems\AttackSystems\CastAttackSystem.cpp" />
+    <ClCompile Include="Systems\AttackSystems\RangedAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\MeleeAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\ThrowableWeaponSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\ThrowAttackSystem.cpp" />
@@ -204,7 +204,7 @@
     <ClInclude Include="Components\SimpleComponents.h" />
     <ClInclude Include="Components\Views\AIViews\NavMarginView.h" />
     <ClInclude Include="Components\Views\AIViews\PatrolmanView.h" />
-    <ClInclude Include="Components\Views\AttackViews\CastAttackView.h" />
+    <ClInclude Include="Components\Views\AttackViews\RangedAttackView.h" />
     <ClInclude Include="Components\Views\AttackViews\MeleeAttackView.h" />
     <ClInclude Include="Components\Views\AttackViews\ThrowableAttackView.h" />
     <ClInclude Include="Components\Views\ComponentView.h" />
@@ -221,7 +221,7 @@
     <ClInclude Include="Systems\AISystems\PatrolSystem.h" />
     <ClInclude Include="Systems\AISystems\PursuingSystem.h" />
     <ClInclude Include="Systems\AttackSystems\AttackCooldown.h" />
-    <ClInclude Include="Systems\AttackSystems\CastAttackSystem.h" />
+    <ClInclude Include="Systems\AttackSystems\RangedAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\MeleeAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\ThrowableWeaponSystem.h" />
     <ClInclude Include="Systems\AttackSystems\ThrowAttackSystem.h" />

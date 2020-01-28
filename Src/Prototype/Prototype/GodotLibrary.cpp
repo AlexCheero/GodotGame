@@ -7,7 +7,7 @@
 #include "Components/NodeComponents/Animation2DComponent.h"
 #include "Components/Views/EntityView.h"
 #include "Components/Views/AttackViews/MeleeAttackView.h"
-#include "Components/Views/AttackViews/CastAttackView.h"
+#include "Components/Views/AttackViews/RangedAttackView.h"
 #include "Components/Views/AttackViews/ThrowableAttackView.h"
 #include "Components/Views/HealthView.h"
 #include "Components/Views/LocomotionViews/GravityView.h"
@@ -37,7 +37,7 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<ThrowableNodeComponent>();
 	register_class<EntityView>();
 	register_class<MeleeAttackView>();
-	register_class<CastAttackView>();
+	register_class<RangedAttackView>();
 	register_class<ThrowableAttackView>();
 	register_class<HealthView>();
 	register_class<GravityView>();

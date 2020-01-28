@@ -7,9 +7,9 @@
 
 namespace godot
 {
-	class CastAttackView : public ComponentView
+	class RangedAttackView : public ComponentView
 	{
-		GODOT_CLASS(CastAttackView, ComponentView)
+		GODOT_CLASS(RangedAttackView, ComponentView)
 	private:
 		float distance;
 		float damage;
@@ -18,6 +18,6 @@ namespace godot
 	public:
 		static void _register_methods();
 		void _init() {}
-		CastAttackComponent GetECSComponent() { return {distance, damage, attackTime, -utils::SecondsToMillis(attackTime) }; }
+		RangedAttackComponent GetECSComponent() { return {distance, damage, attackTime, -utils::SecondsToMillis(attackTime) }; }
 	};
 }

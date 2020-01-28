@@ -8,7 +8,7 @@
 #include "ComponentView.h"
 #include "../AttackComponents.h"
 #include "AttackViews/MeleeAttackView.h"
-#include "AttackViews/CastAttackView.h"
+#include "AttackViews/RangedAttackView.h"
 #include "AttackViews/ThrowableAttackView.h"
 #include "../SimpleComponents.h"
 #include "HealthView.h"
@@ -60,7 +60,7 @@ namespace godot
 	//3. register view in GodotLibrary.cpp
 	//4. Component view should implement GetECSComponent method
 	CONSTRUCT_COMPONENT(MeleeAttack)
-	CONSTRUCT_COMPONENT(CastAttack)
+	CONSTRUCT_COMPONENT(RangedAttack)
 	CONSTRUCT_COMPONENT(ThrowableAttack)
 	CONSTRUCT_COMPONENT(Health)
 	CONSTRUCT_COMPONENT(Gravity)

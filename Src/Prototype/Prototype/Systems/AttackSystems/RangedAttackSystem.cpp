@@ -1,4 +1,4 @@
-#include "CastAttackSystem.h"
+#include "RangedAttackSystem.h"
 
 #include <Spatial.hpp>
 #include <OS.hpp>
@@ -12,10 +12,10 @@
 
 #include "../../Utils/Utils.h"
 
-void godot::CastAttackSystem::operator()(float delta, entt::registry& registry)
+void godot::RangedAttackSystem::operator()(float delta, entt::registry& registry)
 {
-	auto view = registry.view<entt::tag<CurrentWeaponCastTag>, CastAttackComponent, InputComponent, Spatial*>(ExcludeDead);
-	view.less([&registry, this](CastAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
+	auto view = registry.view<entt::tag<CurrentWeaponRangedTag>, RangedAttackComponent, InputComponent, Spatial*>(ExcludeDead);
+	view.less([&registry, this](RangedAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
 	{
 		if (!CanAttack(input, attackComp.attackTime, attackComp.prevHitTime))
 			return;
@@ -37,11 +37,11 @@ void godot::CastAttackSystem::operator()(float delta, entt::registry& registry)
 
 		if (enemyHealthComp.hp <= 0)
 		{
-			Godot::print("Cast kill!");
+			Godot::print("Ranged kill!");
 			enemyHealthComp.hp = 0;
 			registry.assign<entt::tag<DeadTag> >(enemyEntity);
 		}
 		else
-			Godot::print("Cast hit!");
+			Godot::print("Ranged hit!");
 	});
 }

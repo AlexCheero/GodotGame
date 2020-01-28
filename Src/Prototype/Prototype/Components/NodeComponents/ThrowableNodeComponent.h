@@ -14,11 +14,11 @@ namespace godot
 		float damagePerForce;
 
 		entt::entity hittedEntity;
-		float castForce;
+		float throwForce;
 	public:
 		entt::entity GetHittedEntity() const { return hittedEntity; }
-		void SetCastForce(float force) { castForce = force; }
-		float GetDamage() { return damagePerForce * castForce; }
+		void SetThrowForce(float force) { throwForce = force; }
+		float GetDamage() { return damagePerForce * throwForce; }
 
 		static void _register_methods();
 		void _init();

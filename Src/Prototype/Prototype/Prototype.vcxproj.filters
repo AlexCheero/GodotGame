@@ -108,9 +108,6 @@
     <ClCompile Include="Systems\AISystems\NavAgentSystem.cpp">
       <Filter>Source Files\Systems\AISystems</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\AttackSystems\CastAttackSystem.cpp">
-      <Filter>Source Files\Systems\AttackSystems</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\AttackSystems\MeleeAttackSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
@@ -142,9 +139,6 @@
       <Filter>Source Files\Components\Views</Filter>
     </ClCompile>
     <ClCompile Include="Components\Views\AttackViews\MeleeAttackView.cpp">
-      <Filter>Source Files\Components\Views\AttackViews</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\Views\AttackViews\CastAttackView.cpp">
       <Filter>Source Files\Components\Views\AttackViews</Filter>
     </ClCompile>
     <ClCompile Include="Components\Views\AttackViews\ThrowableAttackView.cpp">
@@ -207,6 +201,12 @@
     <ClCompile Include="Components\NodeComponents\PickableNodeComponent.cpp">
       <Filter>Source Files\Components\NodeComponents</Filter>
     </ClCompile>
+    <ClCompile Include="Components\Views\AttackViews\RangedAttackView.cpp">
+      <Filter>Source Files\Components\Views\AttackViews</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\RangedAttackSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -238,9 +238,6 @@
     </ClInclude>
     <ClInclude Include="Components\AIComponents\NavigationComponents.h">
       <Filter>Header Files\Components\AIComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\AttackSystems\CastAttackSystem.h">
-      <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\AttackSystems\MeleeAttackSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
@@ -276,9 +273,6 @@
       <Filter>Header Files\Components\Views</Filter>
     </ClInclude>
     <ClInclude Include="Components\Views\AttackViews\MeleeAttackView.h">
-      <Filter>Header Files\Components\Views\AttackViews</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\Views\AttackViews\CastAttackView.h">
       <Filter>Header Files\Components\Views\AttackViews</Filter>
     </ClInclude>
     <ClInclude Include="Components\Views\AttackViews\ThrowableAttackView.h">
@@ -352,6 +346,12 @@
     </ClInclude>
     <ClInclude Include="Components\NodeComponents\PickableNodeComponent.h">
       <Filter>Header Files\Components\NodeComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Views\AttackViews\RangedAttackView.h">
+      <Filter>Header Files\Components\Views\AttackViews</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\RangedAttackSystem.h">
+      <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -26,7 +26,7 @@
 #include "Systems/PlayerSystems/PlayerRotationSystem.h"
 #include "Systems/SimpleFollowSystem.h"
 #include "Systems/AttackSystems/MeleeAttackSystem.h"
-#include "Systems/AttackSystems/CastAttackSystem.h"
+#include "Systems/AttackSystems/RangedAttackSystem.h"
 #include "Systems/DestroyDeadSystem.h"
 #include "Systems/PlayerSystems/PlayerInputSystem.h"
 #include "Systems/WeaponChooseSystem.h"
@@ -206,9 +206,9 @@ void godot::ECSWorld::_on_Pickable_picked_up(Node* pPicker, EntityView* pPickabl
 	case EPickableType::RangedWeapon:
 	{
 		//TODO: assert ConstructComponent
-		pPickableView->ConstructComponent(registry.assign_or_replace<CastAttackComponent>(pickerEntity));
+		pPickableView->ConstructComponent(registry.assign_or_replace<RangedAttackComponent>(pickerEntity));
 		//if switch on pickup
-		registry.get_or_assign<entt::tag<CurrentWeaponCastTag> >(pickerEntity);
+		registry.get_or_assign<entt::tag<CurrentWeaponRangedTag> >(pickerEntity);
 		break;
 	}
 	case EPickableType::ThrowableWeapon:
@@ -259,7 +259,7 @@ void godot::ECSWorld::_init()
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PlayerRotationSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new LookAtSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new MeleeAttackSystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new CastAttackSystem()));
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new RangedAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowableWeaponSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PatrolSystem()));
@@ -274,7 +274,7 @@ void godot::ECSWorld::_init()
 
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new WeaponChooseSystem()));
 	registry.on_construct<entt::tag<CurrentWeaponMeleeTag> >().connect<&WeaponChooseSystem::OnMeleeTagConstruct>();
-	registry.on_construct<entt::tag<CurrentWeaponCastTag> >().connect<&WeaponChooseSystem::OnCastTagConstruct>();
+	registry.on_construct<entt::tag<CurrentWeaponRangedTag> >().connect<&WeaponChooseSystem::OnRangedTagConstruct>();
 	registry.on_construct<entt::tag<CurrentWeaponThrowableTag> >().connect<&WeaponChooseSystem::OnThrowableTagConstruct>();
 
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new HealthMonitoringSystem()));

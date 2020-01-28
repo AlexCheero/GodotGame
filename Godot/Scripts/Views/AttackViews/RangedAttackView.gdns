@@ -4,5 +4,5 @@
 
 [resource]
 resource_name = "CastAttackView"
-class_name = "CastAttackView"
+class_name = "RangedAttackView"
 library = ExtResource( 1 )
