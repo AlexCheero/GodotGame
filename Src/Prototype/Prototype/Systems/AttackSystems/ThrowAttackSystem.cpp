@@ -11,14 +11,19 @@
 void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<entt::tag<CurrentWeaponThrowableTag>, ThrowableAttackComponent, InputComponent, Spatial*>();
-	view.less([&registry, this](ThrowableAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
+	view.less([&registry, this](entt::entity entity, ThrowableAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
 	{
 		if (!CanAttack(input, attackComp.attackTime, attackComp.prevHitTime))
 			return;
 
-		Godot::print("Throw!");
-
 		Node* throwableNode = attackComp.throwableScene->instance();
+		attackComp.ammoCount--;
+		//TODO: assert attackComp.ammoCount >= 0
+		//TODO: instantly melee hits or don't changes weapon at all, after throwing weapon. fix this after refactoring whole input system
+		if (attackComp.ammoCount == 0 /*&& throw on out of ammo*/)
+			registry.remove<ThrowableAttackComponent>(entity);
+
+		Godot::print("Throw!");
 
 		//TODO: root is viewport, not the scene root node. try use get_tree()->get_current_scene() instead
 		pAttackerSpatial->get_tree()->get_root()->add_child(throwableNode);

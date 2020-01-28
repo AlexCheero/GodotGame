@@ -36,6 +36,7 @@ struct RangedAttackComponent
 constexpr entt::hashed_string CurrentWeaponThrowableTag = "CurrentWeaponThrowableTag"_hs;
 struct ThrowableAttackComponent
 {
+	int ammoCount;
 	//TODO: implement object pools
 	godot::Ref<godot::PackedScene> throwableScene;
 	float force;

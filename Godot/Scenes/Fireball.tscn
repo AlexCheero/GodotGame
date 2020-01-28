@@ -31,6 +31,7 @@ script = ExtResource( 3 )
 
 [node name="ThrowableAttackView" type="Node" parent="EntityView"]
 script = ExtResource( 4 )
+"ammo count" = 1
 throwable = ExtResource( 5 )
 force = 50.0
 attackTime = 0.5
