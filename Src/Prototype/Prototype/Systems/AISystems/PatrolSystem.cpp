@@ -28,14 +28,6 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 		newPath.path = pNavigation->get_simple_path(pSpatial->get_global_transform().origin, route.GetCurrentPatrolPoint());
 	});
 
-	//TODO: no proper remove function, update entt
-	//auto view = registry.view<A, B>();
-	//registry.remove<B>(view.begin(), view.end());
 	auto pathFinishedView = registry.view<entt::tag<PatrollingTag>, entt::tag<PathFinishedTag> >();
-	pathFinishedView.less(
-	[this, &registry]
-	(entt::entity entity)
-	{
-		registry.remove<entt::tag<PathFinishedTag> >(entity);
-	});
+	registry.remove<entt::tag<PathFinishedTag> >(pathFinishedView.begin(), pathFinishedView.end());
 }

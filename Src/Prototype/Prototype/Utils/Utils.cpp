@@ -58,3 +58,9 @@ godot::Object* utils::CastFromSpatial(godot::Spatial* pSpatial, float distance, 
 
 	return godot::Node::___get_from_variant(rayHit["collider"]);
 }
+
+void utils::Assert(bool assertion, const char* message, const char* file, int line)
+{
+	std::cerr << message << "\n" << "file: " << file << ", line: " << line << "\n";
+	abort();
+}

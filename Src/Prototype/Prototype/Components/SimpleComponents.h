@@ -18,7 +18,7 @@ constexpr entt::hashed_string MainCameraTag = "MainCameraTag"_hs;
 //Tags>
 
 //TODO: ask skypjack can I add excludes?
-//TODO: it probably even doesn' needed
+//TODO: it probably even doesn't needed
 constexpr entt::exclude_t ExcludeDead = entt::exclude<entt::tag<DeadTag>, entt::tag<PendingDeleteTag> >;
 
 struct GravityComponent

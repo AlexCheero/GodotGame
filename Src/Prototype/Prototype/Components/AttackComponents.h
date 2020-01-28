@@ -21,7 +21,6 @@ struct MeleeAttackComponent
 	int64_t prevHitTime = -utils::SecondsToMillis(attackTime);
 };
 
-//TODO: implement ammo count
 constexpr entt::hashed_string CurrentWeaponRangedTag = "CurrentWeaponRangedTag"_hs;
 struct RangedAttackComponent
 {

@@ -88,7 +88,6 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 void godot::ECSWorld::PrepareCameraEntity()
 {
-	//TODO: make main camera singleton entity
 	entt::entity entity = registry.create();
 
 	Node* pCameraNode = get_node("Camera");
@@ -190,7 +189,7 @@ void godot::ECSWorld::_on_Pickable_picked_up(Node* pPicker, EntityView* pPickabl
 
 	entt::entity pickerEntity = pPickerEntityHolder->GetEntity();
 	//TODO: assert pickerEntity, pPickableView
-	//TODO: change weapon by button press
+	//TODO: pick/change weapon by button press
 	//		and probably not switch on pickup
 	EPickableType pickableEnmVal = static_cast<EPickableType>(pickableType);
 	switch (pickableEnmVal)
@@ -254,7 +253,7 @@ void godot::ECSWorld::_init()
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PlayerVelocitySystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new KinematicMovementSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new GravitySystem()));
-	//TODO: must always follow GravitySystem. find a way to enforce such behaviour in entt
+	//must always follow GravitySystem
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new JumpSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PlayerRotationSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new LookAtSystem()));
