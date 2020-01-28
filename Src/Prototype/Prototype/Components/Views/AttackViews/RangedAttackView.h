@@ -11,6 +11,7 @@ namespace godot
 	{
 		GODOT_CLASS(RangedAttackView, ComponentView)
 	private:
+		int ammoCount;
 		float distance;
 		float damage;
 		float angle;
@@ -18,6 +19,6 @@ namespace godot
 	public:
 		static void _register_methods();
 		void _init() {}
-		RangedAttackComponent GetECSComponent() { return {distance, damage, attackTime, -utils::SecondsToMillis(attackTime) }; }
+		RangedAttackComponent GetECSComponent() { return { ammoCount, distance, damage, attackTime, -utils::SecondsToMillis(attackTime) }; }
 	};
 }

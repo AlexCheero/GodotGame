@@ -15,10 +15,16 @@
 void godot::RangedAttackSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<entt::tag<CurrentWeaponRangedTag>, RangedAttackComponent, InputComponent, Spatial*>(ExcludeDead);
-	view.less([&registry, this](RangedAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
+	view.less([&registry, this](entt::entity entity, RangedAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
 	{
 		if (!CanAttack(input, attackComp.attackTime, attackComp.prevHitTime))
 			return;
+
+		attackComp.ammoCount--;
+		//TODO: assert attackComp.ammoCount >= 0
+		//TODO: instantly melee hits, after throwing weapon
+		if (attackComp.ammoCount == 0 /*&& throw on out of ammo*/)
+			registry.remove<RangedAttackComponent>(entity);
 
 		Godot::print("Bang!");
 

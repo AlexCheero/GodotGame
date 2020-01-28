@@ -30,6 +30,7 @@ script = ExtResource( 3 )
 
 [node name="RangedAttackView" type="Node" parent="EntityView"]
 script = ExtResource( 4 )
+"ammo count" = 2
 distance = 40.0
 damage = 100.0
 attackTime = 0.5

@@ -25,6 +25,7 @@ struct MeleeAttackComponent
 constexpr entt::hashed_string CurrentWeaponRangedTag = "CurrentWeaponRangedTag"_hs;
 struct RangedAttackComponent
 {
+	int ammoCount;
 	float distance;
 	float damage;
 	float attackTime;
