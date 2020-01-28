@@ -31,7 +31,7 @@ struct RangedAttackComponent
 	int64_t prevHitTime = -utils::SecondsToMillis(attackTime);
 };
 
-//TODO: implement grenades
+//TODO1: implement grenades
 constexpr entt::hashed_string CurrentWeaponThrowableTag = "CurrentWeaponThrowableTag"_hs;
 struct ThrowableAttackComponent
 {

@@ -10,7 +10,7 @@
 inline godot::Vector3 godot::PlayerRotationSystem::GetTargetDirection(Vector2 inputDir, Basis camBasis)
 {
 	Vector3 dir{ 0, 0, 0 };
-	//TODO: probably move to utils or make it static. and the same in BillboardRotationSystem
+	//TODO1: probably move to utils or make it static. and the same in BillboardRotationSystem
 	const Plane xzPlane(Vector3{ 0, 1, 0 }, 0);
 	Vector3 relativeLeft = xzPlane.project(camBasis.x).normalized();
 	Vector3 relativeFwd = xzPlane.project(camBasis.z).normalized();

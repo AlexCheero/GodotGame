@@ -13,13 +13,11 @@ struct RotationDirectionComponent { godot::Vector3 direction; };
 constexpr entt::hashed_string PlayerTag = "PlayerTag"_hs;
 constexpr entt::hashed_string BotTag = "BotTag"_hs;
 constexpr entt::hashed_string DeadTag = "DeadTag"_hs;
-constexpr entt::hashed_string PendingDeleteTag = "PendingDeleteTag"_hs;
 constexpr entt::hashed_string MainCameraTag = "MainCameraTag"_hs;
 //Tags>
 
-//TODO: ask skypjack can I add excludes?
-//TODO: it probably even doesn't needed
-constexpr entt::exclude_t ExcludeDead = entt::exclude<entt::tag<DeadTag>, entt::tag<PendingDeleteTag> >;
+//TODO: ask skypjack can I append excludes?
+constexpr entt::exclude_t ExcludeDead = entt::exclude<entt::tag<DeadTag> >;
 
 struct GravityComponent
 {

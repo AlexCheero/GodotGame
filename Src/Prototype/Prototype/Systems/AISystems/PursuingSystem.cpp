@@ -15,7 +15,7 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 	Navigation* pNavigation = registry.get<Navigation*>(navEntity);
 
 	auto view = registry.view<PursuingComponent, InputComponent, Spatial*>();
-	view.each([&registry, &view, pNavigation](entt::entity entity, PursuingComponent& comp, InputComponent& input, Spatial* pSpatial)
+	view.each([&registry, pNavigation](entt::entity entity, PursuingComponent& comp, InputComponent& input, Spatial* pSpatial)
 	{
 		if (!registry.valid(comp.target))
 		{
@@ -33,7 +33,6 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 		float distanceToTarget = (targetPosition - pursuerPosition).length();
 
 		//TODO: create and iterate separate views for each attack type
-		//TODO: view.get doesn't compiles somehow
 		//TODO: probably attackcode should be moved somwhere else
 		if (registry.has<MeleeAttackComponent>(entity)
 			&& registry.get<MeleeAttackComponent>(entity).distance >= distanceToTarget)

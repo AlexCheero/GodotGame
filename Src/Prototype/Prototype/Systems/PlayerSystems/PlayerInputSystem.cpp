@@ -1,6 +1,7 @@
 #include "PlayerInputSystem.h"
 
 #include "../../Components/InputComponents.h"
+#include "../../Components/SimpleComponents.h"
 
 inline void godot::PlayerInputSystem::GetInputDirection(Vector2& dir, InputEvent* e, const char* actionPrefix)
 {
@@ -29,8 +30,7 @@ void godot::PlayerInputSystem::operator()(entt::registry& registry, InputEvent* 
 {
 	//TODO: read once more about differences between groups and view and, probably, use group instead
 	//TODO: implement proper pressed/just_pressed functional
-	//TODO: delete PlayerInputTag and use PlayerTag instead
-	auto view = registry.view<entt::tag<PlayerInputTag>, InputComponent>();
+	auto view = registry.view<entt::tag<PlayerTag>, InputComponent>();
 	view.less([&registry, e](InputComponent& comp)
 	{
 		if (e->is_action_pressed("attack"))

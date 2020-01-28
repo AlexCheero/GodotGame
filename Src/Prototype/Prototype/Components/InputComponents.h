@@ -6,8 +6,6 @@
 
 #include <bitset>
 
-constexpr entt::hashed_string PlayerInputTag = "PlayerInputTag"_hs;
-
 enum class EInput
 {
 	Attack,

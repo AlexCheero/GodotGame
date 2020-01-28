@@ -16,7 +16,7 @@ void godot::ThrowableNodeComponent::_init()
 	set_max_contacts_reported(1);
 }
 
-//TODO: remake as PickableNodeComponent
+//TODO1: remake as PickableNodeComponent
 void godot::ThrowableNodeComponent::_on_throwable_collide(Node* pNode)
 {
 	if (hittedEntity != entt::null)

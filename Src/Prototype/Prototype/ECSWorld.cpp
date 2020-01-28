@@ -79,7 +79,6 @@ void godot::ECSWorld::PreparePlayerEntity()
 	registry.assign<entt::tag<CurrentWeaponMeleeTag> >(entity);
 
 	registry.assign<entt::tag<PlayerTag> >(entity);
-	registry.assign<entt::tag<PlayerInputTag> >(entity);
 
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<InputComponent>(entity);
@@ -123,7 +122,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 
 	registry.assign<BoundsComponent>(entity, GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));
 	
-	//TODO: refactor this so that entity view construct all it components automatically
+	//TODO1: refactor this so that entity view construct all it components automatically
 	entityView->ConstructComponent(registry.assign<SpeedComponent>(entity));
 	entityView->ConstructComponent(registry.assign<HealthComponent>(entity));
 	entityView->ConstructComponent(registry.assign<GravityComponent>(entity));
@@ -170,7 +169,7 @@ void godot::ECSWorld::PrepareSingletonEntities()
 		Godot::print_warning("trying to assign more than one singleton entity", "PrepareSingletonEntities", "ECSWorld.cpp", __LINE__);
 }
 
-//TODO: move to utils
+//TODO1: move to utils
 BoundsComponent godot::ECSWorld::GetCapsuleBounds(Node* pCapsuleNode)
 {
 	CollisionShape* colShape = Object::cast_to<CollisionShape>(pCapsuleNode);
