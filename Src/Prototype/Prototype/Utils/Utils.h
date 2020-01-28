@@ -7,7 +7,7 @@
 #include <Spatial.hpp>
 
 #ifdef DEBUG
-//TODO: use doctest assert
+//TODO: use doctest assert and remove #include "Utils.h" everywhere where this assert is used
 #define ASSERT(assertion, message) utils::Assert(assertion, message, __FILE__, __LINE__)
 #else
 #define ASSERT(assertion, message)

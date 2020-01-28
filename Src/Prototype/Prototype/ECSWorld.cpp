@@ -73,6 +73,8 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	MeleeAttackComponent melee;
 	entityView->ConstructComponent(melee);
+	//TODO: add some kind of reactive callback to automatically assign curr weapon tag on assigning attack comp
+	//		and remove manual tag assigning here and for bot too
 	registry.assign<MeleeAttackComponent>(entity, melee);
 	registry.assign<entt::tag<CurrentWeaponMeleeTag> >(entity);
 
@@ -97,8 +99,8 @@ void godot::ECSWorld::PrepareCameraEntity()
 	EntityView* entityView = Object::cast_to<EntityView>(pCameraNode->get_node("EntityView"));
 	SimpleFollowComponent& followComp = registry.assign<SimpleFollowComponent>(entity);
 	entityView->ConstructComponent(followComp);
-	//TODO: assert registry.valid(followComp.targetEntity);
 	followComp.targetEntity = Object::cast_to<EntityHolderNodeComponent>(get_node("Player"))->GetEntity();
+	ASSERT(registry.valid(followComp.targetEntity), "invalid follow component target");
 
 	registry.assign<entt::tag<MainCameraTag> >(entity);
 }
@@ -127,7 +129,9 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	entityView->ConstructComponent(registry.assign<GravityComponent>(entity));
 	entityView->ConstructComponent(registry.assign<PatrolmanComponent>(entity));
 	entityView->ConstructComponent(registry.assign<NavMarginComponent>(entity));
+
 	entityView->ConstructComponent(registry.assign<MeleeAttackComponent>(entity));
+	registry.assign<entt::tag<CurrentWeaponMeleeTag> >(entity);
 
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<RotationDirectionComponent>(entity);
@@ -188,7 +192,8 @@ void godot::ECSWorld::_on_Pickable_picked_up(Node* pPicker, EntityView* pPickabl
 		return;
 
 	entt::entity pickerEntity = pPickerEntityHolder->GetEntity();
-	//TODO: assert pickerEntity, pPickableView
+	ASSERT(pickerEntity != entt::null, "picker is null");
+	ASSERT(pPickableView != nullptr, "pickable view is null");
 	//TODO: pick/change weapon by button press
 	//		and probably not switch on pickup
 	EPickableType pickableEnmVal = static_cast<EPickableType>(pickableType);
@@ -196,24 +201,24 @@ void godot::ECSWorld::_on_Pickable_picked_up(Node* pPicker, EntityView* pPickabl
 	{
 	case EPickableType::MeleeWeapon:
 	{
-		//TODO: assert ConstructComponent
-		pPickableView->ConstructComponent(registry.assign_or_replace<MeleeAttackComponent>(pickerEntity));
+		bool constructed = pPickableView->ConstructComponent(registry.assign_or_replace<MeleeAttackComponent>(pickerEntity));
+		ASSERT(constructed, "can't construct MeleeAttackComponent");
 		//if switch on pickup
 		registry.get_or_assign<entt::tag<CurrentWeaponMeleeTag> >(pickerEntity);
 		break;
 	}
 	case EPickableType::RangedWeapon:
 	{
-		//TODO: assert ConstructComponent
-		pPickableView->ConstructComponent(registry.assign_or_replace<RangedAttackComponent>(pickerEntity));
+		bool constructed = pPickableView->ConstructComponent(registry.assign_or_replace<RangedAttackComponent>(pickerEntity));
+		ASSERT(constructed, "can't construct RangedAttackComponent");
 		//if switch on pickup
 		registry.get_or_assign<entt::tag<CurrentWeaponRangedTag> >(pickerEntity);
 		break;
 	}
 	case EPickableType::ThrowableWeapon:
 	{
-		//TODO: assert ConstructComponent
-		pPickableView->ConstructComponent(registry.assign_or_replace<ThrowableAttackComponent>(pickerEntity));
+		bool constructed = pPickableView->ConstructComponent(registry.assign_or_replace<ThrowableAttackComponent>(pickerEntity));
+		ASSERT(constructed, "can't construct ThrowableAttackComponent");
 		//if switch on pickup
 		registry.get_or_assign<entt::tag<CurrentWeaponThrowableTag> >(pickerEntity);
 		break;

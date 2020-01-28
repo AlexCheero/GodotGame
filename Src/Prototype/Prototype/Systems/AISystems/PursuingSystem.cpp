@@ -14,18 +14,17 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 	entt::entity navEntity = registry.view<Navigation*>()[0];
 	Navigation* pNavigation = registry.get<Navigation*>(navEntity);
 
-	auto view = registry.view<PursuingComponent, Spatial*>();
-	view.each([&registry, &view, pNavigation](entt::entity entity, PursuingComponent& comp, Spatial* pSpatial)
+	auto view = registry.view<PursuingComponent, InputComponent, Spatial*>();
+	view.each([&registry, &view, pNavigation](entt::entity entity, PursuingComponent& comp, InputComponent& input, Spatial* pSpatial)
 	{
 		if (!registry.valid(comp.target))
 		{
-			//TODO: assert registry.has<InputComponent>(entity)
-			registry.get<InputComponent>(entity).Set(EInput::Attack, false);
+			input.Set(EInput::Attack, false);
 			registry.remove<PursuingComponent>(entity);
 			return;
 		}
 
-		//TODO: assert registry.has<Spatial*>(comp.target);
+		ASSERT(registry.has<Spatial*>(comp.target), "pursuing target has no spatial");
 		Spatial* pTargetSpatial = registry.get<Spatial*>(comp.target);
 		//TODO: make nav system to target to the floor of the point or don't take target's y into account
 
@@ -40,10 +39,9 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 			&& registry.get<MeleeAttackComponent>(entity).distance >= distanceToTarget)
 		{
 			//TODO: keeps hitting player while pursuing him, but not in the hit radius
-			//TODO: assert registry.has<InputComponent>(entity)
-			registry.get<InputComponent>(entity).Set(EInput::Attack, true);
+			input.Set(EInput::Attack, true);
 		}
-		
+
 		//TODO: move to PursuingView
 		//TODO: change delta depending on distance to target (lower distance == lower taget)
 		//		can even check angle deltas instead of distance deltas on big distances

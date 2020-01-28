@@ -61,6 +61,9 @@ godot::Object* utils::CastFromSpatial(godot::Spatial* pSpatial, float distance, 
 
 void utils::Assert(bool assertion, const char* message, const char* file, int line)
 {
+	if (assertion)
+		return;
+
 	std::cerr << message << "\n" << "file: " << file << ", line: " << line << "\n";
 	abort();
 }
