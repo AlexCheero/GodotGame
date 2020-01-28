@@ -22,7 +22,6 @@ struct MeleeAttackComponent
 };
 
 //TODO: implement ammo count
-//TODO: use same range or cast for this type
 constexpr entt::hashed_string CurrentWeaponRangedTag = "CurrentWeaponRangedTag"_hs;
 struct RangedAttackComponent
 {
