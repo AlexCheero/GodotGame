@@ -6,7 +6,7 @@
 
 #include "../../Components/AttackComponents.h"
 #include "../../Components/InputComponents.h"
-#include "../../Components/NodeComponents/ThrowableNodeComponent.h"
+#include "../../Nodes/ThrowableNode.h"
 
 void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 {
@@ -28,7 +28,7 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 		pAttackerSpatial->get_tree()->get_current_scene()->add_child(throwableNode);
 
 		//TODO1: make global revision and check all such things with assert( != null)
-		ThrowableNodeComponent* throwable = Object::cast_to<ThrowableNodeComponent>(throwableNode);
+		ThrowableNode* throwable = Object::cast_to<ThrowableNode>(throwableNode);
 		
 		Transform throwableTransform = throwable->get_transform();
 		Transform attackerTransform = pAttackerSpatial->get_transform();

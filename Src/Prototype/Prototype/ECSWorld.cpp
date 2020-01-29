@@ -30,7 +30,6 @@
 #include "Systems/PlayerSystems/PlayerInputSystem.h"
 #include "Systems/WeaponChooseSystem.h"
 #include "Systems/AttackSystems/ThrowAttackSystem.h"
-#include "Systems/AttackSystems/ThrowableWeaponSystem.h"
 #include "Systems/AISystems/NavAgentSystem.h"
 #include "Systems/LocomotionSystems/LookAtSystem.h"
 #include "Systems/AISystems/PatrolSystem.h"
@@ -223,7 +222,7 @@ void godot::ECSWorld::_on_Pickable_picked_up(Node* pPicker, EntityView* pPickabl
 	}
 }
 
-void godot::ECSWorld::_on_Throwable_hit(Node* pTarget, ThrowableNodeComponent* pThrowable)
+void godot::ECSWorld::_on_Throwable_hit(Node* pTarget, ThrowableNode* pThrowable)
 {
 	Godot::print("throwable hit");
 	EntityHolderNode* pTargetEntityHolder = Object::cast_to<EntityHolderNode>(pTarget);
@@ -270,7 +269,6 @@ void godot::ECSWorld::_init()
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new MeleeAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new RangedAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowAttackSystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowableWeaponSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PatrolSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new LookAroundSystem()));
 	//TODO: should it be in phys proc?

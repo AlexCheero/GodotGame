@@ -7,9 +7,9 @@
 
 namespace godot
 {
-	class ThrowableNodeComponent : public RigidBody
+	class ThrowableNode : public RigidBody
 	{
-		GODOT_CLASS(ThrowableNodeComponent, RigidBody)
+		GODOT_CLASS(ThrowableNode, RigidBody)
 	private:
 		float damagePerForce;
 

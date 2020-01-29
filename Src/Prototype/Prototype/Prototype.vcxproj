@@ -152,7 +152,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Components\NodeComponents\Animation2DComponent.cpp" />
-    <ClCompile Include="Components\NodeComponents\ThrowableNodeComponent.cpp" />
     <ClCompile Include="Components\Views\AIViews\NavMarginView.cpp" />
     <ClCompile Include="Components\Views\AIViews\PatrolmanView.cpp" />
     <ClCompile Include="Components\Views\AttackViews\RangedAttackView.cpp" />
@@ -166,6 +165,7 @@
     <ClCompile Include="Components\Views\SimpleFollowView.cpp" />
     <ClCompile Include="GodotLibrary.cpp" />
     <ClCompile Include="Nodes\PickableNode.cpp" />
+    <ClCompile Include="Nodes\ThrowableNode.cpp" />
     <ClCompile Include="Systems\AISystems\FleeingSystem.cpp" />
     <ClCompile Include="Systems\AISystems\HealthMonitoringSystem.cpp" />
     <ClCompile Include="Systems\AISystems\LookAroundSystem.cpp" />
@@ -175,7 +175,6 @@
     <ClCompile Include="Systems\AttackSystems\AttackCooldown.cpp" />
     <ClCompile Include="Systems\AttackSystems\RangedAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\MeleeAttackSystem.cpp" />
-    <ClCompile Include="Systems\AttackSystems\ThrowableWeaponSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\ThrowAttackSystem.cpp" />
     <ClCompile Include="Systems\BillboardRotationSystem.cpp" />
     <ClCompile Include="Systems\LocomotionSystems\GravitySystem.cpp" />
@@ -198,7 +197,6 @@
     <ClInclude Include="Components\AttackComponents.h" />
     <ClInclude Include="Components\InputComponents.h" />
     <ClInclude Include="Components\NodeComponents\Animation2DComponent.h" />
-    <ClInclude Include="Components\NodeComponents\ThrowableNodeComponent.h" />
     <ClInclude Include="Components\SimpleComponents.h" />
     <ClInclude Include="Components\Views\AIViews\NavMarginView.h" />
     <ClInclude Include="Components\Views\AIViews\PatrolmanView.h" />
@@ -214,6 +212,7 @@
     <ClInclude Include="Components\Views\SimpleFollowView.h" />
     <ClInclude Include="Nodes\EntityHolderNode.h" />
     <ClInclude Include="Nodes\PickableNode.h" />
+    <ClInclude Include="Nodes\ThrowableNode.h" />
     <ClInclude Include="Systems\AISystems\FleeingSystem.h" />
     <ClInclude Include="Systems\AISystems\HealthMonitoringSystem.h" />
     <ClInclude Include="Systems\AISystems\LookAroundSystem.h" />
@@ -223,7 +222,6 @@
     <ClInclude Include="Systems\AttackSystems\AttackCooldown.h" />
     <ClInclude Include="Systems\AttackSystems\RangedAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\MeleeAttackSystem.h" />
-    <ClInclude Include="Systems\AttackSystems\ThrowableWeaponSystem.h" />
     <ClInclude Include="Systems\AttackSystems\ThrowAttackSystem.h" />
     <ClInclude Include="Systems\BaseSystem.h" />
     <ClInclude Include="Systems\BillboardRotationSystem.h" />

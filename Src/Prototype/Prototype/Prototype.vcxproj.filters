@@ -117,9 +117,6 @@
     <ClCompile Include="Systems\AttackSystems\MeleeAttackSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\AttackSystems\ThrowableWeaponSystem.cpp">
-      <Filter>Source Files\Systems\AttackSystems</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\AttackSystems\ThrowAttackSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
@@ -164,9 +161,6 @@
     </ClCompile>
     <ClCompile Include="Components\Views\SimpleFollowView.cpp">
       <Filter>Source Files\Components\Views</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\NodeComponents\ThrowableNodeComponent.cpp">
-      <Filter>Source Files\Components\NodeComponents</Filter>
     </ClCompile>
     <ClCompile Include="Systems\LocomotionSystems\LookAtSystem.cpp">
       <Filter>Source Files\Systems\LocomotionSystems</Filter>
@@ -213,6 +207,9 @@
     <ClCompile Include="Nodes\PickableNode.cpp">
       <Filter>Source Files\Nodes</Filter>
     </ClCompile>
+    <ClCompile Include="Nodes\ThrowableNode.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -246,9 +243,6 @@
       <Filter>Header Files\Components\AIComponents</Filter>
     </ClInclude>
     <ClInclude Include="Systems\AttackSystems\MeleeAttackSystem.h">
-      <Filter>Header Files\Systems\AttackSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\AttackSystems\ThrowableWeaponSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\AttackSystems\ThrowAttackSystem.h">
@@ -298,9 +292,6 @@
     </ClInclude>
     <ClInclude Include="Components\Views\SimpleFollowView.h">
       <Filter>Header Files\Components\Views</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\NodeComponents\ThrowableNodeComponent.h">
-      <Filter>Header Files\Components\NodeComponents</Filter>
     </ClInclude>
     <ClInclude Include="Systems\LocomotionSystems\LookAtSystem.h">
       <Filter>Header Files\Systems\LocomotionSystems</Filter>
@@ -357,6 +348,9 @@
       <Filter>Header Files\Nodes</Filter>
     </ClInclude>
     <ClInclude Include="Nodes\EntityHolderNode.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Nodes\ThrowableNode.h">
       <Filter>Header Files\Nodes</Filter>
     </ClInclude>
   </ItemGroup>
