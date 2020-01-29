@@ -42,13 +42,6 @@ void godot::RangedAttackSystem::operator()(float delta, entt::registry& registry
 		HealthComponent& enemyHealthComp = registry.get<HealthComponent>(enemyEntity);
 		enemyHealthComp.hp -= attackComp.damage;
 
-		if (enemyHealthComp.hp <= 0)
-		{
-			Godot::print("Ranged kill!");
-			enemyHealthComp.hp = 0;
-			registry.assign<entt::tag<DeadTag> >(enemyEntity);
-		}
-		else
-			Godot::print("Ranged hit!");
+		Godot::print("ranged hit");
 	});
 }

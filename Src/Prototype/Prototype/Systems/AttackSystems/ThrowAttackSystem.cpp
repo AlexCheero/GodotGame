@@ -30,9 +30,6 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 		//TODO1: make global revision and check all such things with assert( != null)
 		ThrowableNodeComponent* throwable = Object::cast_to<ThrowableNodeComponent>(throwableNode);
 		
-		entt::entity throwableEntity = registry.create();
-		registry.assign<ThrowableNodeComponent*>(throwableEntity, throwable);
-
 		Transform throwableTransform = throwable->get_transform();
 		Transform attackerTransform = pAttackerSpatial->get_transform();
 		throwableTransform.origin = attackerTransform.origin;

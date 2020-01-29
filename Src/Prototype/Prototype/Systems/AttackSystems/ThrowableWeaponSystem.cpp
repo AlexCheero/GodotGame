@@ -5,6 +5,7 @@
 
 void godot::ThrowableWeaponSystem::operator()(float delta, entt::registry& registry)
 {
+	return;
 	auto view = registry.view<ThrowableNodeComponent*>(ExcludeDead);
 	view.each([&registry](entt::entity throwableEntity, ThrowableNodeComponent* pThrowable)
 	{
@@ -22,14 +23,5 @@ void godot::ThrowableWeaponSystem::operator()(float delta, entt::registry& regis
 		HealthComponent& hittedHealthComp = registry.get<HealthComponent>(hittedEntity);
 
 		hittedHealthComp.hp -= pThrowable->GetDamage();
-
-		if (hittedHealthComp.hp <= 0)
-		{
-			Godot::print("Kill!");
-			hittedHealthComp.hp = 0;
-			registry.assign<entt::tag<DeadTag> >(hittedEntity);
-		}
-		else
-			Godot::print("Hit!");
 	});
 }

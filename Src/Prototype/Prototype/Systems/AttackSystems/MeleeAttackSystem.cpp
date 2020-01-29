@@ -68,14 +68,7 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 		HealthComponent& enemyHealthComp = registry.get<HealthComponent>(enemyEntity);
 		enemyHealthComp.hp -= attackComp.damage;
 
-		if (enemyHealthComp.hp <= 0)
-		{
-			Godot::print("Kill!");
-			enemyHealthComp.hp = 0;
-			registry.assign<entt::tag<DeadTag> >(enemyEntity);
-		}
-		else
-			Godot::print("Hit!");
+		Godot::print("melee hit");
 	});
 }
 

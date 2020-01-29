@@ -9,8 +9,19 @@
 
 void godot::HealthMonitoringSystem::operator()(float delta, entt::registry& registry)
 {
-	auto view = registry.view<entt::tag<BotTag>, HealthComponent>(entt::exclude<entt::tag<FleeingTag> >);
-	view.less([&registry](entt::entity entity, HealthComponent health)
+	auto view = registry.view<HealthComponent>();
+	view.each([&registry](entt::entity entity, HealthComponent& healthComp)
+	{
+		if (healthComp.hp > 0)
+			return;
+		
+		Godot::print("Kill!");
+		healthComp.hp = 0;
+		registry.assign<entt::tag<DeadTag> >(entity);
+	});
+
+	auto botView = registry.view<entt::tag<BotTag>, HealthComponent>(entt::exclude<entt::tag<FleeingTag> >);
+	botView.less([&registry](entt::entity entity, HealthComponent health)
 	{
 		//TODO: move somwhere like DecisionMakingView
 		const float criticalProportion = 0.5f;
@@ -19,9 +30,9 @@ void godot::HealthMonitoringSystem::operator()(float delta, entt::registry& regi
 
 		registry.assign<entt::tag<FleeingTag> >(entity);
 		//TODO: make more smart fleeing system and don't remove or even reset it here
-		registry.remove<PursuingComponent>(entity);
-		registry.remove<PatrolmanComponent>(entity);
-		registry.remove<NavPathComponent>(entity);
+		registry.remove_if_exists<PursuingComponent>(entity);
+		registry.remove_if_exists<PatrolmanComponent>(entity);
+		registry.remove_if_exists<NavPathComponent>(entity);
 		//---------------------------------------------------------------------------
 	});
 }

@@ -223,6 +223,25 @@ void godot::ECSWorld::_on_Pickable_picked_up(Node* pPicker, EntityView* pPickabl
 	}
 }
 
+void godot::ECSWorld::_on_Throwable_hit(Node* pTarget, ThrowableNodeComponent* pThrowable)
+{
+	Godot::print("throwable hit");
+	EntityHolderNode* pTargetEntityHolder = Object::cast_to<EntityHolderNode>(pTarget);
+	if (!pTargetEntityHolder)
+		return;
+
+	entt::entity hittedEntity = pTargetEntityHolder->GetEntity();
+
+	//TODO: probably should check (or assert?) registry.has<entt::tag<DeadTag> >(hittedEntity)
+	ASSERT(hittedEntity != entt::null, "picker is null");
+	ASSERT(registry.has<HealthComponent>(hittedEntity), "hitted entity has no HealthComponent");
+	ASSERT(pThrowable != nullptr, "pickable view is null");
+
+	HealthComponent& health = registry.get<HealthComponent>(hittedEntity);
+
+	health.hp -= pThrowable->GetDamage();
+}
+
 void godot::ECSWorld::_register_methods()
 {
 	register_method((char*)"_init", &ECSWorld::_init);
@@ -231,6 +250,7 @@ void godot::ECSWorld::_register_methods()
 	register_method((char*)"_process", &ECSWorld::_process);
 	register_method((char*)"_physics_process", &ECSWorld::_physics_process);
 	register_method((char*)"_on_Pickable_picked_up", &ECSWorld::_on_Pickable_picked_up);
+	register_method((char*)"_on_Throwable_hit", &ECSWorld::_on_Throwable_hit);
 }
 
 void godot::ECSWorld::_init()
