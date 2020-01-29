@@ -323,9 +323,6 @@
     <ClInclude Include="Systems\AISystems\PursuingSystem.h">
       <Filter>Header Files\Systems\AISystems</Filter>
     </ClInclude>
-    <ClInclude Include="Components\NodeComponents\EntityHolderNodeComponent.h">
-      <Filter>Header Files\Components\NodeComponents</Filter>
-    </ClInclude>
     <ClInclude Include="Utils\Utils.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
@@ -357,6 +354,9 @@
       <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
     <ClInclude Include="Nodes\PickableNode.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Nodes\EntityHolderNode.h">
       <Filter>Header Files\Nodes</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,9 +1,7 @@
 #include <core/Godot.hpp>
 
 #include "ECSWorld.h"
-#include "Components/NodeComponents/EntityHolderNodeComponent.h"
 #include "Components/NodeComponents/ThrowableNodeComponent.h"
-#include "Nodes/PickableNode.h"
 #include "Components/NodeComponents/Animation2DComponent.h"
 #include "Components/Views/EntityView.h"
 #include "Components/Views/AttackViews/MeleeAttackView.h"
@@ -16,6 +14,9 @@
 #include "Components/Views/SimpleFollowView.h"
 #include "Components/Views/AIViews/PatrolmanView.h"
 #include "Components/Views/AIViews/NavMarginView.h"
+
+#include "Nodes/PickableNode.h"
+#include "Nodes/EntityHolderNode.h"
 
 using namespace godot;
 
@@ -33,7 +34,7 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 {
 	Godot::nativescript_init(handle);
 	register_class<ECSWorld>();
-	register_class<EntityHolderNodeComponent>();
+	register_class<EntityHolderNode>();
 	register_class<ThrowableNodeComponent>();
 	register_class<EntityView>();
 	register_class<MeleeAttackView>();

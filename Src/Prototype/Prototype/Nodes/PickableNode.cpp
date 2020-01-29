@@ -2,7 +2,7 @@
 
 #include <SceneTree.hpp>
 
-#include "../Components/NodeComponents/EntityHolderNodeComponent.h"
+#include "../Nodes/EntityHolderNode.h"
 
 void godot::PickableNode::SetType(int i)
 {
@@ -14,7 +14,7 @@ void godot::PickableNode::SetType(int i)
 
 void godot::PickableNode::_on_Pickable_body_entered(Node* pNode)
 {
-	EntityHolderNodeComponent* pEntityHolder = Object::cast_to<EntityHolderNodeComponent>(pNode);
+	EntityHolderNode* pEntityHolder = Object::cast_to<EntityHolderNode>(pNode);
 	if (pickerEntity != entt::null || !pEntityHolder)
 		return;
 

@@ -198,7 +198,6 @@
     <ClInclude Include="Components\AttackComponents.h" />
     <ClInclude Include="Components\InputComponents.h" />
     <ClInclude Include="Components\NodeComponents\Animation2DComponent.h" />
-    <ClInclude Include="Components\NodeComponents\EntityHolderNodeComponent.h" />
     <ClInclude Include="Components\NodeComponents\ThrowableNodeComponent.h" />
     <ClInclude Include="Components\SimpleComponents.h" />
     <ClInclude Include="Components\Views\AIViews\NavMarginView.h" />
@@ -213,6 +212,7 @@
     <ClInclude Include="Components\Views\LocomotionViews\JumpSpeedView.h" />
     <ClInclude Include="Components\Views\LocomotionViews\SpeedView.h" />
     <ClInclude Include="Components\Views\SimpleFollowView.h" />
+    <ClInclude Include="Nodes\EntityHolderNode.h" />
     <ClInclude Include="Nodes\PickableNode.h" />
     <ClInclude Include="Systems\AISystems\FleeingSystem.h" />
     <ClInclude Include="Systems\AISystems\HealthMonitoringSystem.h" />

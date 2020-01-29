@@ -1,6 +1,6 @@
 #include "ThrowableNodeComponent.h"
 
-#include "EntityHolderNodeComponent.h"
+#include "../../Nodes/EntityHolderNode.h"
 
 void godot::ThrowableNodeComponent::_register_methods()
 {
@@ -24,7 +24,7 @@ void godot::ThrowableNodeComponent::_on_throwable_collide(Node* pNode)
 
 	call_deferred("set_contact_monitor", false);
 
-	EntityHolderNodeComponent* pEnemy = Object::cast_to<EntityHolderNodeComponent>(pNode);
+	EntityHolderNode* pEnemy = Object::cast_to<EntityHolderNode>(pNode);
 	if (pEnemy)
 		hittedEntity = pEnemy->GetEntity();
 }

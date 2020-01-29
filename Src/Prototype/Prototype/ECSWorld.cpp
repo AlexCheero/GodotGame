@@ -17,7 +17,6 @@
 #include "Components/AIComponents/NavigationComponents.h"
 #include "Components/AIComponents/PatrolComponents.h"
 #include "Components/AIComponents/FSMStateComponents.h"
-#include "Components/NodeComponents/EntityHolderNodeComponent.h"
 
 #include "Systems/PlayerSystems/PlayerVelocitySystem.h"
 #include "Systems/LocomotionSystems/KinematicMovementSystem.h"
@@ -41,6 +40,8 @@
 #include "Systems/AISystems/FleeingSystem.h"
 #include "Systems/BillboardRotationSystem.h"
 
+#include "Nodes/EntityHolderNode.h"
+
 #include "Utils/Utils.h"
 
 void godot::ECSWorld::UpdateSystems(float delta, SystemsVec& systems)
@@ -63,7 +64,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("Camera"));
 	AssignNodeInheritedComponent<Animation2DComponent>(registry, entity, get_node("Player/Sprite3D"));
 
-	EntityHolderNodeComponent* pEnemy = AssignNodeInheritedComponent<EntityHolderNodeComponent>(registry, entity, pPlayerNode);
+	EntityHolderNode* pEnemy = AssignNodeInheritedComponent<EntityHolderNode>(registry, entity, pPlayerNode);
 	pEnemy->SetEntity(entity);
 
 	entityView->ConstructComponent(registry.assign<GravityComponent>(entity));
@@ -98,7 +99,7 @@ void godot::ECSWorld::PrepareCameraEntity()
 	EntityView* entityView = Object::cast_to<EntityView>(pCameraNode->get_node("EntityView"));
 	SimpleFollowComponent& followComp = registry.assign<SimpleFollowComponent>(entity);
 	entityView->ConstructComponent(followComp);
-	followComp.targetEntity = Object::cast_to<EntityHolderNodeComponent>(get_node("Player"))->GetEntity();
+	followComp.targetEntity = Object::cast_to<EntityHolderNode>(get_node("Player"))->GetEntity();
 	ASSERT(registry.valid(followComp.targetEntity), "invalid follow component target");
 
 	registry.assign<entt::tag<MainCameraTag> >(entity);
@@ -117,7 +118,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pEnemyNode);
 	AssignNodeInheritedComponent<Animation2DComponent>(registry, entity, get_node("Enemy/Sprite3D"));
 
-	EntityHolderNodeComponent* pEnemy = AssignNodeInheritedComponent<EntityHolderNodeComponent>(registry, entity, pEnemyNode);
+	EntityHolderNode* pEnemy = AssignNodeInheritedComponent<EntityHolderNode>(registry, entity, pEnemyNode);
 	pEnemy->SetEntity(entity);
 
 	registry.assign<BoundsComponent>(entity, utils::GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));
@@ -171,7 +172,7 @@ void godot::ECSWorld::PrepareSingletonEntities()
 
 void godot::ECSWorld::_on_Pickable_picked_up(Node* pPicker, EntityView* pPickableView, int pickableType)
 {
-	EntityHolderNodeComponent* pPickerEntityHolder = Object::cast_to<EntityHolderNodeComponent>(pPicker);
+	EntityHolderNode* pPickerEntityHolder = Object::cast_to<EntityHolderNode>(pPicker);
 	if (!pPickerEntityHolder)
 		return;
 

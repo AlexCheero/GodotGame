@@ -5,10 +5,11 @@
 #include <PhysicsDirectSpaceState.hpp>
 #include <World.hpp>
 
+#include "../../Nodes/EntityHolderNode.h"
+
 #include "../../Components/SimpleComponents.h"
 #include "../../Components/AttackComponents.h"
 #include "../../Components/InputComponents.h"
-#include "../../Components/NodeComponents/EntityHolderNodeComponent.h"
 
 #include "../../Utils/Utils.h"
 
@@ -32,7 +33,7 @@ void godot::RangedAttackSystem::operator()(float delta, entt::registry& registry
 		if (!pObj)
 			return;
 
-		EntityHolderNodeComponent* entityHolder = Object::cast_to<EntityHolderNodeComponent>(pObj);
+		EntityHolderNode* entityHolder = Object::cast_to<EntityHolderNode>(pObj);
 		if (!entityHolder)
 			return;
 
