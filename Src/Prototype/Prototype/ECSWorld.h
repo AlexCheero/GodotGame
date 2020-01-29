@@ -8,7 +8,7 @@
 
 #include "Components/SimpleComponents.h"
 #include "Components/Views/EntityView.h"
-#include "Components/NodeComponents/PickableNodeComponent.h"
+#include "Nodes/PickableNode.h"
 #include "Components/Views/EntityView.h"
 
 #include "Components/NodeComponents/Animation2DComponent.h"

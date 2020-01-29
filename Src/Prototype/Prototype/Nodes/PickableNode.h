@@ -5,7 +5,7 @@
 
 #include "entt/entt.hpp"
 
-#include "../Views/EntityView.h"
+#include "../Components/Views/EntityView.h"
 
 namespace godot
 {
@@ -22,9 +22,9 @@ namespace godot
 		Last
 	};
 
-	class PickableNodeComponent : public Area
+	class PickableNode : public Area
 	{
-		GODOT_CLASS(PickableNodeComponent, Area)
+		GODOT_CLASS(PickableNode, Area)
 	private:
 		void SetType(int i);
 		int GetType() { return static_cast<int>(type); }

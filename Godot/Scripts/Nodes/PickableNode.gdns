@@ -4,5 +4,5 @@
 
 [resource]
 resource_name = "PickableNodeComponent"
-class_name = "PickableNodeComponent"
+class_name = "PickableNode"
 library = ExtResource( 1 )

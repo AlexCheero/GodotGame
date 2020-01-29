@@ -88,6 +88,12 @@
     <Filter Include="Source Files\Utils">
       <UniqueIdentifier>{8adc3a64-b257-43ab-ad38-c53a63943e83}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Nodes">
+      <UniqueIdentifier>{2fd369f7-adb1-4833-921b-a3d05e7edb2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Nodes">
+      <UniqueIdentifier>{ec7b74e6-4350-4d13-8ba1-64d1fa2529fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp">
@@ -198,14 +204,14 @@
     <ClCompile Include="Systems\BillboardRotationSystem.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="Components\NodeComponents\PickableNodeComponent.cpp">
-      <Filter>Source Files\Components\NodeComponents</Filter>
-    </ClCompile>
     <ClCompile Include="Components\Views\AttackViews\RangedAttackView.cpp">
       <Filter>Source Files\Components\Views\AttackViews</Filter>
     </ClCompile>
     <ClCompile Include="Systems\AttackSystems\RangedAttackSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Nodes\PickableNode.cpp">
+      <Filter>Source Files\Nodes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -344,14 +350,14 @@
     <ClInclude Include="Systems\BillboardRotationSystem.h">
       <Filter>Header Files\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="Components\NodeComponents\PickableNodeComponent.h">
-      <Filter>Header Files\Components\NodeComponents</Filter>
-    </ClInclude>
     <ClInclude Include="Components\Views\AttackViews\RangedAttackView.h">
       <Filter>Header Files\Components\Views\AttackViews</Filter>
     </ClInclude>
     <ClInclude Include="Systems\AttackSystems\RangedAttackSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Nodes\PickableNode.h">
+      <Filter>Header Files\Nodes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

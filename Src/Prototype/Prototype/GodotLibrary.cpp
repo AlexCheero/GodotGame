@@ -3,7 +3,7 @@
 #include "ECSWorld.h"
 #include "Components/NodeComponents/EntityHolderNodeComponent.h"
 #include "Components/NodeComponents/ThrowableNodeComponent.h"
-#include "Components/NodeComponents/PickableNodeComponent.h"
+#include "Nodes/PickableNode.h"
 #include "Components/NodeComponents/Animation2DComponent.h"
 #include "Components/Views/EntityView.h"
 #include "Components/Views/AttackViews/MeleeAttackView.h"
@@ -47,5 +47,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<PatrolmanView>();
 	register_class<NavMarginView>();
 	register_class<Animation2DComponent>();
-	register_class<PickableNodeComponent>();
+	register_class<PickableNode>();
 }
