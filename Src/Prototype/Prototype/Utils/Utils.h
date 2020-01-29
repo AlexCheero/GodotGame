@@ -6,6 +6,8 @@
 #include <Vector3.hpp>
 #include <Spatial.hpp>
 
+#include "../Components/SimpleComponents.h"
+
 #ifdef DEBUG
 //TODO: use doctest assert and remove #include "Utils.h" everywhere where this assert is used
 #define ASSERT(assertion, message) utils::Assert(assertion, message, __FILE__, __LINE__)
@@ -24,5 +26,7 @@ namespace utils
 	int64_t SecondsToMillis(float seconds);
 	godot::Vector2 FlatVector(godot::Vector3 vec3);
 	godot::Object* CastFromSpatial(godot::Spatial* pSpatial, float distance, godot::String layerName = "");
+	BoundsComponent GetCapsuleBounds(godot::Node* pCapsuleNode);
+
 	void Assert(bool assertion, const char* message, const char* file, int line);
 }

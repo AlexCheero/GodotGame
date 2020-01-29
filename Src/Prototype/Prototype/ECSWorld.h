@@ -37,7 +37,6 @@ namespace godot
 		void PrepareCameraEntity();
 		void PrepareEnemyEntity();
 		void PrepareSingletonEntities();
-		BoundsComponent GetCapsuleBounds(Node* pCapsuleNode);
 		void _on_Pickable_picked_up(Node* pPicker, EntityView* pPickableView, int pickableType);
 	public:
 		static void _register_methods();

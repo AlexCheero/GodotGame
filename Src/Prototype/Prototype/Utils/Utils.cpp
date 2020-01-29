@@ -6,6 +6,8 @@
 #include <ProjectSettings.hpp>
 #include <PhysicsDirectSpaceState.hpp>
 #include <World.hpp>
+#include <CollisionShape.hpp>
+#include <CapsuleShape.hpp>
 
 std::vector<godot::String> LayerNames;
 void utils::InitPhysicLayers()
@@ -57,6 +59,20 @@ godot::Object* utils::CastFromSpatial(godot::Spatial* pSpatial, float distance, 
 		return nullptr;
 
 	return godot::Node::___get_from_variant(rayHit["collider"]);
+}
+
+BoundsComponent utils::GetCapsuleBounds(godot::Node* pCapsuleNode)
+{
+	godot::CollisionShape* colShape = godot::Object::cast_to<godot::CollisionShape>(pCapsuleNode);
+	godot::Ref<godot::Shape> shape = colShape->get_shape();
+	godot::CapsuleShape* capsuleShape = static_cast<godot::CapsuleShape*>(shape.ptr());
+	//cause capsule height is hieght of the cylinder
+	float capsuleRadius = capsuleShape->get_radius();
+	float boundsHeight = 2 * capsuleRadius + capsuleShape->get_height();
+	float boundsWidth, boundsLength;
+	boundsWidth = boundsLength = capsuleRadius * 2;
+	//margin used for physics, probably should increase min distance
+	return { boundsWidth, boundsHeight, boundsLength, capsuleShape->get_margin() };
 }
 
 void utils::Assert(bool assertion, const char* message, const char* file, int line)

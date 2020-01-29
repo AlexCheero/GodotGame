@@ -84,7 +84,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 	registry.assign<InputComponent>(entity);
 	registry.assign<RotationDirectionComponent>(entity);
 
-	registry.assign<BoundsComponent>(entity, GetCapsuleBounds(pPlayerNode->get_node("CollisionShape")));
+	registry.assign<BoundsComponent>(entity, utils::GetCapsuleBounds(pPlayerNode->get_node("CollisionShape")));
 }
 
 void godot::ECSWorld::PrepareCameraEntity()
@@ -120,7 +120,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	EntityHolderNodeComponent* pEnemy = AssignNodeInheritedComponent<EntityHolderNodeComponent>(registry, entity, pEnemyNode);
 	pEnemy->SetEntity(entity);
 
-	registry.assign<BoundsComponent>(entity, GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));
+	registry.assign<BoundsComponent>(entity, utils::GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));
 	
 	//TODO1: refactor this so that entity view construct all it components automatically
 	entityView->ConstructComponent(registry.assign<SpeedComponent>(entity));
@@ -167,21 +167,6 @@ void godot::ECSWorld::PrepareSingletonEntities()
 	}
 	else
 		Godot::print_warning("trying to assign more than one singleton entity", "PrepareSingletonEntities", "ECSWorld.cpp", __LINE__);
-}
-
-//TODO1: move to utils
-BoundsComponent godot::ECSWorld::GetCapsuleBounds(Node* pCapsuleNode)
-{
-	CollisionShape* colShape = Object::cast_to<CollisionShape>(pCapsuleNode);
-	Ref<Shape> shape = colShape->get_shape();
-	CapsuleShape* capsuleShape = static_cast<CapsuleShape*>(shape.ptr());
-	//cause capsule height is hieght of the cylinder
-	float capsuleRadius = capsuleShape->get_radius();
-	float boundsHeight = 2 * capsuleRadius + capsuleShape->get_height();
-	float boundsWidth, boundsLength;
-	boundsWidth = boundsLength = capsuleRadius * 2;
-	//margin used for physics, probably should increase min distance
-	return { boundsWidth, boundsHeight, boundsLength, capsuleShape->get_margin() };
 }
 
 void godot::ECSWorld::_on_Pickable_picked_up(Node* pPicker, EntityView* pPickableView, int pickableType)
