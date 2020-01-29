@@ -11,6 +11,7 @@
 
 #include "../Components/SimpleComponents.h"
 #include "../Components/NodeComponents/Animation2DComponent.h"
+#include "../Utils/Utils.h"
 
 //TODO: probably implement it via shader
 void godot::BillboardRotationSystem::operator()(float delta, entt::registry& registry)
@@ -26,7 +27,7 @@ void godot::BillboardRotationSystem::operator()(float delta, entt::registry& reg
 		Vector3 spatialLeft = pSpatial->get_global_transform().get_basis().x;
 
 		//using global up as normal, so spatialFwd and spatialLeft should be always orthogonal to it
-		const Plane xzPlane(Vector3{ 0, 1, 0 }, 0);
+		const Plane xzPlane(utils::globalY, 0);
 		camFwd = xzPlane.project(camFwd);
 
 		camFwd.normalize();
