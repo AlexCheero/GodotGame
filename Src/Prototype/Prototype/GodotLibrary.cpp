@@ -16,7 +16,7 @@
 
 #include "Nodes/PickableNode.h"
 #include "Nodes/EntityHolderNode.h"
-#include "Nodes/ThrowableNode.h"
+#include "Nodes/ThrowableWeaponNode.h"
 
 using namespace godot;
 
@@ -35,7 +35,7 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	Godot::nativescript_init(handle);
 	register_class<ECSWorld>();
 	register_class<EntityHolderNode>();
-	register_class<ThrowableNode>();
+	register_class<ThrowableWeaponNode>();
 	register_class<EntityView>();
 	register_class<MeleeAttackView>();
 	register_class<RangedAttackView>();

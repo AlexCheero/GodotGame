@@ -1,18 +1,18 @@
-#include "ThrowableNode.h"
+#include "ThrowableWeaponNode.h"
 
 #include <SceneTree.hpp>
 
 #include "../Nodes/EntityHolderNode.h"
 
-void godot::ThrowableNode::_register_methods()
+void godot::ThrowableWeaponNode::_register_methods()
 {
-	register_property<ThrowableNode, float>("damage", &ThrowableNode::damagePerForce, 0);
+	register_property<ThrowableWeaponNode, float>("damage", &ThrowableWeaponNode::damagePerForce, 0);
 
-	register_method((char*)"_on_throwable_collide", &ThrowableNode::_on_throwable_collide);
-	register_method((char*)"_ready", &ThrowableNode::_ready);
+	register_method((char*)"_on_throwable_collide", &ThrowableWeaponNode::_on_throwable_collide);
+	register_method((char*)"_ready", &ThrowableWeaponNode::_ready);
 }
 
-void godot::ThrowableNode::_init()
+void godot::ThrowableWeaponNode::_init()
 {
 	hittedEntity = entt::null;
 
@@ -20,7 +20,7 @@ void godot::ThrowableNode::_init()
 	set_max_contacts_reported(1);
 }
 
-void godot::ThrowableNode::_ready()
+void godot::ThrowableWeaponNode::_ready()
 {
 	Node* world = get_tree()->get_current_scene();
 	Array params;
@@ -28,7 +28,7 @@ void godot::ThrowableNode::_ready()
 	connect("body_entered", world, "_on_Throwable_hit", params);
 }
 
-void godot::ThrowableNode::_on_throwable_collide(Node* pNode)
+void godot::ThrowableWeaponNode::_on_throwable_collide(Node* pNode)
 {
 	if (hittedEntity != entt::null)
 		return;

@@ -12,7 +12,7 @@
 #include "Components/NodeComponents/Animation2DComponent.h"
 
 #include "Nodes/PickableNode.h"
-#include "Nodes/ThrowableNode.h"
+#include "Nodes/ThrowableWeaponNode.h"
 
 namespace godot
 {
@@ -39,7 +39,7 @@ namespace godot
 		void PrepareEnemyEntity();
 		void PrepareSingletonEntities();
 		void _on_Pickable_picked_up(Node* pPicker, EntityView* pPickableView, int pickableType);
-		void _on_Throwable_hit(Node* pTarget, ThrowableNode* pThrowable);
+		void _on_Throwable_hit(Node* pTarget, ThrowableWeaponNode* pThrowable);
 	public:
 		static void _register_methods();
 		void _init();

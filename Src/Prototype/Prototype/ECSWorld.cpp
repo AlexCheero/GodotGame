@@ -222,7 +222,7 @@ void godot::ECSWorld::_on_Pickable_picked_up(Node* pPicker, EntityView* pPickabl
 	}
 }
 
-void godot::ECSWorld::_on_Throwable_hit(Node* pTarget, ThrowableNode* pThrowable)
+void godot::ECSWorld::_on_Throwable_hit(Node* pTarget, ThrowableWeaponNode* pThrowable)
 {
 	Godot::print("throwable hit");
 	EntityHolderNode* pTargetEntityHolder = Object::cast_to<EntityHolderNode>(pTarget);

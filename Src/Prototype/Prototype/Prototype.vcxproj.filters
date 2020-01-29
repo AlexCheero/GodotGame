@@ -207,7 +207,7 @@
     <ClCompile Include="Nodes\PickableNode.cpp">
       <Filter>Source Files\Nodes</Filter>
     </ClCompile>
-    <ClCompile Include="Nodes\ThrowableNode.cpp">
+    <ClCompile Include="Nodes\ThrowableWeaponNode.cpp">
       <Filter>Source Files\Nodes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -350,7 +350,7 @@
     <ClInclude Include="Nodes\EntityHolderNode.h">
       <Filter>Header Files\Nodes</Filter>
     </ClInclude>
-    <ClInclude Include="Nodes\ThrowableNode.h">
+    <ClInclude Include="Nodes\ThrowableWeaponNode.h">
       <Filter>Header Files\Nodes</Filter>
     </ClInclude>
   </ItemGroup>
