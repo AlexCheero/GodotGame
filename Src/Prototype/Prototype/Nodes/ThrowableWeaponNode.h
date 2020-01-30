@@ -13,6 +13,7 @@ namespace godot
 	private:
 		float damagePerForce;
 
+		//TODO1: probably remove this field
 		entt::entity hittedEntity;
 		float throwForce;
 	public:

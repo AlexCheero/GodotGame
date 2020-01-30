@@ -164,6 +164,7 @@
     <ClCompile Include="Components\Views\LocomotionViews\SpeedView.cpp" />
     <ClCompile Include="Components\Views\SimpleFollowView.cpp" />
     <ClCompile Include="GodotLibrary.cpp" />
+    <ClCompile Include="Nodes\GrenadeNode.cpp" />
     <ClCompile Include="Nodes\PickableNode.cpp" />
     <ClCompile Include="Nodes\ThrowableWeaponNode.cpp" />
     <ClCompile Include="Systems\AISystems\FleeingSystem.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="Components\Views\LocomotionViews\SpeedView.h" />
     <ClInclude Include="Components\Views\SimpleFollowView.h" />
     <ClInclude Include="Nodes\EntityHolderNode.h" />
+    <ClInclude Include="Nodes\GrenadeNode.h" />
     <ClInclude Include="Nodes\PickableNode.h" />
     <ClInclude Include="Nodes\ThrowableWeaponNode.h" />
     <ClInclude Include="Systems\AISystems\FleeingSystem.h" />

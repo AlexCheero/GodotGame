@@ -7,6 +7,7 @@
 #include "../../Components/AttackComponents.h"
 #include "../../Components/InputComponents.h"
 #include "../../Nodes/ThrowableWeaponNode.h"
+#include "../../Nodes/GrenadeNode.h"
 
 void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 {
@@ -30,12 +31,27 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 		//TODO1: make global revision and check all such things with assert( != null)
 		ThrowableWeaponNode* throwable = Object::cast_to<ThrowableWeaponNode>(throwableNode);
 		
-		Transform throwableTransform = throwable->get_transform();
-		Transform attackerTransform = pAttackerSpatial->get_transform();
-		throwableTransform.origin = attackerTransform.origin;
-		throwableTransform.origin += attackerTransform.basis.z;
-		throwable->set_transform(throwableTransform);
-		throwable->SetThrowForce(attackComp.force);
-		throwable->apply_central_impulse(attackerTransform.basis.z * attackComp.force);
+		//TODO0: test code, remove asap
+		if (throwable)
+		{
+			Transform throwableTransform = throwable->get_transform();
+			Transform attackerTransform = pAttackerSpatial->get_transform();
+			throwableTransform.origin = attackerTransform.origin;
+			throwableTransform.origin += attackerTransform.basis.z;
+			throwable->set_transform(throwableTransform);
+			throwable->SetThrowForce(attackComp.force);
+			throwable->apply_central_impulse(attackerTransform.basis.z * attackComp.force);
+		}
+		else
+		{
+			GrenadeNode* grenade = Object::cast_to<GrenadeNode>(throwableNode);
+
+			Transform throwableTransform = grenade->get_transform();
+			Transform attackerTransform = pAttackerSpatial->get_transform();
+			throwableTransform.origin = attackerTransform.origin;
+			throwableTransform.origin += attackerTransform.basis.z;
+			grenade->set_transform(throwableTransform);
+			grenade->apply_central_impulse(attackerTransform.basis.z * attackComp.force);
+		}
 	});
 }

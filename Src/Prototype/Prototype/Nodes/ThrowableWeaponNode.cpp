@@ -6,7 +6,7 @@
 
 void godot::ThrowableWeaponNode::_register_methods()
 {
-	register_property<ThrowableWeaponNode, float>("damage", &ThrowableWeaponNode::damagePerForce, 0);
+	register_property<ThrowableWeaponNode, float>("damage per force", &ThrowableWeaponNode::damagePerForce, 0);
 
 	register_method((char*)"_on_throwable_collide", &ThrowableWeaponNode::_on_throwable_collide);
 	register_method((char*)"_ready", &ThrowableWeaponNode::_ready);

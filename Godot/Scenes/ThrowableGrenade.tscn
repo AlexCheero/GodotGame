@@ -1,20 +1,22 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scripts/Nodes/ThrowableWeaponNode.gdns" type="Script" id=1]
+[ext_resource path="res://Scripts/Nodes/GrenadeNode.gdns" type="Script" id=1]
 
 [sub_resource type="SpatialMaterial" id=1]
-albedo_color = Color( 0.639216, 0, 1, 1 )
+albedo_color = Color( 0.521569, 1, 0, 1 )
 
 [sub_resource type="SphereMesh" id=2]
 material = SubResource( 1 )
 
 [sub_resource type="SphereShape" id=3]
 
-[node name="Throwable" type="RigidBody"]
+[node name="ThrowableGrenade" type="RigidBody"]
 collision_layer = 8
 collision_mask = 5
 script = ExtResource( 1 )
-"damage per force" = 50.0
+"explosion time" = 1.0
+"explosion radius" = 20.0
+damage = 200.0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )

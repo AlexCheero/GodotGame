@@ -32,11 +32,11 @@ godot::Array godot::MeleeAttackSystem::GetIntersects(Spatial* pAttackerSpatial, 
 
 godot::MeleeAttackSystem::MeleeAttackSystem()
 {
-	m_params = static_cast< Ref<PhysicsShapeQueryParameters> >(PhysicsShapeQueryParameters::_new());
+	m_params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
 	m_params->set_collide_with_areas(false);
 	m_params->set_collide_with_bodies(true);
 
-	m_attackShape = static_cast<Ref< SphereShape> >(SphereShape::_new());
+	m_attackShape = Ref<SphereShape>(SphereShape::_new());
 }
 
 //TODO: implement proper hth with blocks and stuff

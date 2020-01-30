@@ -210,6 +210,9 @@
     <ClCompile Include="Nodes\ThrowableWeaponNode.cpp">
       <Filter>Source Files\Nodes</Filter>
     </ClCompile>
+    <ClCompile Include="Nodes\GrenadeNode.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -351,6 +354,9 @@
       <Filter>Header Files\Nodes</Filter>
     </ClInclude>
     <ClInclude Include="Nodes\ThrowableWeaponNode.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Nodes\GrenadeNode.h">
       <Filter>Header Files\Nodes</Filter>
     </ClInclude>
   </ItemGroup>

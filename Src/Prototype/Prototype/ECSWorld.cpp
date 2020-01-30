@@ -169,6 +169,7 @@ void godot::ECSWorld::PrepareSingletonEntities()
 		Godot::print_warning("trying to assign more than one singleton entity", "PrepareSingletonEntities", "ECSWorld.cpp", __LINE__);
 }
 
+//TODO: think about refactoring all the callbacks for signals
 void godot::ECSWorld::_on_Pickable_picked_up(Node* pPicker, EntityView* pPickableView, int pickableType)
 {
 	EntityHolderNode* pPickerEntityHolder = Object::cast_to<EntityHolderNode>(pPicker);
@@ -241,6 +242,21 @@ void godot::ECSWorld::_on_Throwable_hit(Node* pTarget, ThrowableWeaponNode* pThr
 	health.hp -= pThrowable->GetDamage();
 }
 
+void godot::ECSWorld::_on_Grenade_explosion(Node* pTarget, GrenadeNode* pGrenade)
+{
+	for (int i = 0; i < pGrenade->GetHitted().size(); i++)
+	{
+		EntityHolderNode* pEntitiyHolder = Object::cast_to<EntityHolderNode>(pGrenade->GetHitted()[i]);
+		ASSERT(pEntitiyHolder != nullptr, "entity holder hitted by explosion is null");
+		ASSERT(pEntitiyHolder->GetEntity() != entt::null, "wrong entity, hitted by explosion");
+		ASSERT(registry.has<HealthComponent>(pEntitiyHolder->GetEntity()), "no health component on entity hitted by explosion");
+
+		registry.get<HealthComponent>(pEntitiyHolder->GetEntity()).hp -= pGrenade->GetDamage();
+	}
+
+	pGrenade->queue_free();
+}
+
 void godot::ECSWorld::_register_methods()
 {
 	register_method((char*)"_init", &ECSWorld::_init);
@@ -250,6 +266,7 @@ void godot::ECSWorld::_register_methods()
 	register_method((char*)"_physics_process", &ECSWorld::_physics_process);
 	register_method((char*)"_on_Pickable_picked_up", &ECSWorld::_on_Pickable_picked_up);
 	register_method((char*)"_on_Throwable_hit", &ECSWorld::_on_Throwable_hit);
+	register_method((char*)"_on_Grenade_explosion", &ECSWorld::_on_Grenade_explosion);
 }
 
 void godot::ECSWorld::_init()
