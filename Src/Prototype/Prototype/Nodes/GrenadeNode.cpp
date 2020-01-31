@@ -81,6 +81,5 @@ void godot::GrenadeNode::_process(float delta)
 	emit_signal("grenade_explodes", this);
 	//----------
 
-	//TODO0: check if throwable or pickable are deleted in World or in self
-	//queue_free();
+	queue_free();
 }

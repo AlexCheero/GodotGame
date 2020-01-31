@@ -253,8 +253,6 @@ void godot::ECSWorld::_on_Grenade_explosion(Node* pTarget, GrenadeNode* pGrenade
 
 		registry.get<HealthComponent>(pEntitiyHolder->GetEntity()).hp -= pGrenade->GetDamage();
 	}
-
-	pGrenade->queue_free();
 }
 
 void godot::ECSWorld::_register_methods()

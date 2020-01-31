@@ -19,7 +19,6 @@ const float INTERSECT_RESULTS_NUM = 16.f;
 
 godot::Array godot::MeleeAttackSystem::GetIntersects(Spatial* pAttackerSpatial, float distance, String layerName)
 {
-	//TODO0: also check hit by raycast, use utils::CastFromSpatial
 	m_attackShape->set_radius(distance);
 	m_params->set_collision_mask(utils::GetLayerByName(layerName));
 	m_params->set_shape(m_attackShape);
@@ -55,15 +54,26 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 		if (intersects.size() == 0)
 			return;
 		
-		Dictionary dict = intersects[0];//TODO: hits only first intersected, implement area hits
-		Object* pObj = Node::___get_from_variant(dict["collider"]);
+		Object* pHittedObj = nullptr;
+		for (int i = 0; i < intersects.size(); i++)
+		{
+			Dictionary dict = intersects[i];//TODO: hits only first intersected, implement area hits
+			Object* pObj = Node::___get_from_variant(dict["collider"]);
+
+			Object* pCastHitResult = utils::CastFromSpatial(pAttackerSpatial, pAttackerSpatial->get_global_transform().get_basis().z, attackComp.distance);
+			if (pObj == pCastHitResult)
+				pHittedObj = pCastHitResult;
+		}
+
+		if (!pHittedObj)
+			return;
 		
-		Vector3 enemyPosition = Object::cast_to<Spatial>(pObj)->get_global_transform().origin;
+		Vector3 enemyPosition = Object::cast_to<Spatial>(pHittedObj)->get_global_transform().origin;
 		Transform attackerTransform = pAttackerSpatial->get_global_transform();
 		if (!CheckAttackAngle(attackerTransform.origin, attackerTransform.basis.z, enemyPosition, attackComp.angle))
 			return;
 
-		entt::entity enemyEntity = Object::cast_to<EntityHolderNode>(pObj)->GetEntity();
+		entt::entity enemyEntity = Object::cast_to<EntityHolderNode>(pHittedObj)->GetEntity();
 		
 		HealthComponent& enemyHealthComp = registry.get<HealthComponent>(enemyEntity);
 		enemyHealthComp.hp -= attackComp.damage;
