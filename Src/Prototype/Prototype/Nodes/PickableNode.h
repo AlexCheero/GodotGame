@@ -30,13 +30,10 @@ namespace godot
 		int GetType() { return static_cast<int>(type); }
 		EPickableType type;
 
-		//TODO1: probably remove this field
-		entt::entity pickerEntity;
-
 		void _on_Pickable_body_entered(Node* pNode);
 	public:
 		static void _register_methods();
-		void _init();
+		void _init() {}
 		void _ready();
 	};
 }

@@ -14,11 +14,9 @@ void godot::PickableNode::SetType(int i)
 
 void godot::PickableNode::_on_Pickable_body_entered(Node* pNode)
 {
-	EntityHolderNode* pEntityHolder = Object::cast_to<EntityHolderNode>(pNode);
-	if (pickerEntity != entt::null || !pEntityHolder)
+	if (!Object::cast_to<EntityHolderNode>(pNode))
 		return;
 
-	pickerEntity = pEntityHolder->GetEntity();
 	queue_free();
 }
 
@@ -30,11 +28,6 @@ void godot::PickableNode::_register_methods()
 
 	register_method((char*)"_ready", &PickableNode::_ready);
 	register_method((char*)"_on_Pickable_body_entered", &PickableNode::_on_Pickable_body_entered);
-}
-
-void godot::PickableNode::_init()
-{
-	pickerEntity = entt::null;
 }
 
 void godot::PickableNode::_ready()

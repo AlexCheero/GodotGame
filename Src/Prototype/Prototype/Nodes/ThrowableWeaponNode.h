@@ -12,12 +12,8 @@ namespace godot
 		GODOT_CLASS(ThrowableWeaponNode, RigidBody)
 	private:
 		float damagePerForce;
-
-		//TODO1: probably remove this field
-		entt::entity hittedEntity;
 		float throwForce;
 	public:
-		entt::entity GetHittedEntity() const { return hittedEntity; }
 		void SetThrowForce(float force) { throwForce = force; }
 		float GetDamage() { return damagePerForce * throwForce; }
 

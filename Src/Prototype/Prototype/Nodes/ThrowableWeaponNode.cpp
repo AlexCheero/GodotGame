@@ -14,8 +14,6 @@ void godot::ThrowableWeaponNode::_register_methods()
 
 void godot::ThrowableWeaponNode::_init()
 {
-	hittedEntity = entt::null;
-
 	set_contact_monitor(true);
 	set_max_contacts_reported(1);
 }
@@ -30,12 +28,5 @@ void godot::ThrowableWeaponNode::_ready()
 
 void godot::ThrowableWeaponNode::_on_throwable_collide(Node* pNode)
 {
-	if (hittedEntity != entt::null)
-		return;
-
-	EntityHolderNode* pEnemy = Object::cast_to<EntityHolderNode>(pNode);
-	if (pEnemy)
-		hittedEntity = pEnemy->GetEntity();
-
 	queue_free();
 }
