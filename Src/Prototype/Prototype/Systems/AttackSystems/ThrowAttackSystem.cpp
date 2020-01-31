@@ -40,6 +40,7 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 		//TODO1: make global revision and check all such things with assert( != null)
 		ThrowableWeaponNode* throwable = Object::cast_to<ThrowableWeaponNode>(throwableNode);
 		
+		//TODO: can calculate impulse by speed delta
 		if (throwable)
 			throwable->SetThrowForce(attackComp.force);
 	});

@@ -6,7 +6,7 @@
 
 namespace godot
 {
-	//TODO1: change name not to confuse it with classes that are inherited from base system
+	//TODO: change name not to confuse it with classes that are inherited from base system
 	class PlayerInputSystem
 	{
 		static void GetInputDirection(Vector2& dir, InputEvent* e, const char* actionPrefix);
