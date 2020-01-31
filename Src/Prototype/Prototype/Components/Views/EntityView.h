@@ -51,7 +51,7 @@ namespace godot
 	template<typename T>
 	inline bool EntityView::ConstructComponent(T& component)
 	{
-		Godot::print_error("Define specialized version of this method with macro CONSTRUCT_COMPONENT!");
+		ASSERT(false, "specialized version of this method should be called! Define it with macro CONSTRUCT_COMPONENT!");
 		return false;
 	}
 
