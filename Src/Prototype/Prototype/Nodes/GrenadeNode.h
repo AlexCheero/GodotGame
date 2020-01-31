@@ -19,6 +19,8 @@ namespace godot
 		Ref<SphereShape> attackShape;
 		float startTime;
 		Array hitted;
+
+		bool CheckVisibility(Object* pTarget);
 	public:
 		Array GetHitted() { return hitted; }
 		float GetDamage() { return damage; }

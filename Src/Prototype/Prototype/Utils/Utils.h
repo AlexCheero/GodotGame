@@ -26,7 +26,7 @@ namespace utils
 	int64_t GetLayerByName(godot::String name);
 	int64_t SecondsToMillis(float seconds);
 	godot::Vector2 FlatVector(godot::Vector3 vec3);
-	godot::Object* CastFromSpatial(godot::Spatial* pSpatial, float distance, godot::String layerName = "");
+	godot::Object* CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 direction, float distance, godot::String layerName = "");
 	BoundsComponent GetCapsuleBounds(godot::Node* pCapsuleNode);
 
 	void Assert(bool assertion, const char* message, const char* file, int line);

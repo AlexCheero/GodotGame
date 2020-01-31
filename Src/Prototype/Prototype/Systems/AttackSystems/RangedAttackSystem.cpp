@@ -29,7 +29,8 @@ void godot::RangedAttackSystem::operator()(float delta, entt::registry& registry
 
 		Godot::print("Bang!");
 
-		Object* pObj = utils::CastFromSpatial(pAttackerSpatial, attackComp.distance);
+		Vector3 castDirection = pAttackerSpatial->get_global_transform().get_basis().z;
+		Object* pObj = utils::CastFromSpatial(pAttackerSpatial, castDirection, attackComp.distance);
 		if (!pObj)
 			return;
 

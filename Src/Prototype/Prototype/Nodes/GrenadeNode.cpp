@@ -9,6 +9,17 @@
 
 #include "EntityHolderNode.h"
 
+bool godot::GrenadeNode::CheckVisibility(Object* pTarget)
+{
+	Spatial* pTargetSpatial = Object::cast_to<Spatial>(pTarget);
+	Vector3 targetPosition = pTargetSpatial->get_global_transform().get_origin();
+	Vector3 castDirection = targetPosition - get_global_transform().get_origin();
+	castDirection.normalize();
+	Object* pHitResult = utils::CastFromSpatial(this, castDirection, explosionRadius);
+
+	return pTarget == pHitResult;
+}
+
 void godot::GrenadeNode::_register_methods()
 {
 	register_property<GrenadeNode, float>("explosion time", &GrenadeNode::explosionTime, 0);
@@ -52,7 +63,6 @@ void godot::GrenadeNode::_process(float delta)
 
 	params->set_transform(get_global_transform());
 	PhysicsDirectSpaceState* spaceState = get_world()->get_direct_space_state();
-	//TODO0: check intersects with raycats
 	Array intersects = spaceState->intersect_shape(params, INTERSECT_RESULTS_NUM);
 
 	ASSERT(hitted.size() == 0, "grenade hitted array isn't empty");
@@ -62,7 +72,7 @@ void godot::GrenadeNode::_process(float delta)
 		Dictionary dict = intersects[i];
 		Object* pObj = Node::___get_from_variant(dict["collider"]);
 		EntityHolderNode* pEntitiyHolder = Object::cast_to<EntityHolderNode>(pObj);
-		if (pEntitiyHolder)
+		if (pEntitiyHolder && CheckVisibility(pObj))
 			hitted.push_back(pEntitiyHolder);
 	}
 

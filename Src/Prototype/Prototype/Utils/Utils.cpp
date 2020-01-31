@@ -47,12 +47,12 @@ godot::Vector2 utils::FlatVector(godot::Vector3 vec3)
 	return godot::Vector2{ vec3.x, vec3.z };
 }
 
-godot::Object* utils::CastFromSpatial(godot::Spatial* pSpatial, float distance, godot::String layerName)
+godot::Object* utils::CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 direction, float distance, godot::String layerName)
 {
 	godot::PhysicsDirectSpaceState* spaceState = pSpatial->get_world()->get_direct_space_state();
-	godot::Transform attackerTransform = pSpatial->get_transform();
-	godot::Vector3 from = attackerTransform.origin;
-	godot::Vector3 to = from + attackerTransform.basis.z * distance;
+	godot::Transform transform = pSpatial->get_transform();
+	godot::Vector3 from = transform.origin;
+	godot::Vector3 to = from + direction * distance;
 	godot::Dictionary rayHit = spaceState->intersect_ray(from, to, godot::Array(), GetLayerByName(layerName));
 
 	if (rayHit.empty())
