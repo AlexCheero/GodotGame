@@ -66,16 +66,10 @@ void godot::ECSWorld::PreparePlayerEntity()
 	EntityHolderNode* pEnemy = AssignNodeInheritedComponent<EntityHolderNode>(registry, entity, pPlayerNode);
 	pEnemy->SetEntity(entity);
 
-	entityView->ConstructComponent(registry.assign<GravityComponent>(entity));
-	entityView->ConstructComponent(registry.assign<JumpSpeedComponent>(entity));
-	entityView->ConstructComponent(registry.assign<SpeedComponent>(entity));
-	entityView->ConstructComponent(registry.assign<HealthComponent>(entity));
+	entityView->ConstructComponents(registry, entity);
 
-	MeleeAttackComponent melee;
-	entityView->ConstructComponent(melee);
 	//TODO: add some kind of reactive callback to automatically assign curr weapon tag on assigning attack comp
 	//		and remove manual tag assigning here and for bot too
-	registry.assign<MeleeAttackComponent>(entity, melee);
 	registry.assign<entt::tag<CurrentWeaponMeleeTag> >(entity);
 
 	registry.assign<entt::tag<PlayerTag> >(entity);
@@ -96,8 +90,11 @@ void godot::ECSWorld::PrepareCameraEntity()
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pCameraNode);
 
 	EntityView* entityView = Object::cast_to<EntityView>(pCameraNode->get_node("EntityView"));
-	SimpleFollowComponent& followComp = registry.assign<SimpleFollowComponent>(entity);
-	entityView->ConstructComponent(followComp);
+
+	entityView->ConstructComponents(registry, entity);
+
+	SimpleFollowComponent& followComp = registry.get<SimpleFollowComponent>(entity);
+
 	followComp.targetEntity = Object::cast_to<EntityHolderNode>(get_node("Player"))->GetEntity();
 	ASSERT(registry.valid(followComp.targetEntity), "invalid follow component target");
 
@@ -122,14 +119,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 
 	registry.assign<BoundsComponent>(entity, utils::GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));
 	
-	//TODO1: refactor this so that entity view construct all it components automatically
-	entityView->ConstructComponent(registry.assign<SpeedComponent>(entity));
-	entityView->ConstructComponent(registry.assign<HealthComponent>(entity));
-	entityView->ConstructComponent(registry.assign<GravityComponent>(entity));
-	entityView->ConstructComponent(registry.assign<PatrolmanComponent>(entity));
-	entityView->ConstructComponent(registry.assign<NavMarginComponent>(entity));
-
-	entityView->ConstructComponent(registry.assign<MeleeAttackComponent>(entity));
+	entityView->ConstructComponents(registry, entity);
 	registry.assign<entt::tag<CurrentWeaponMeleeTag> >(entity);
 
 	registry.assign<VelocityComponent>(entity);

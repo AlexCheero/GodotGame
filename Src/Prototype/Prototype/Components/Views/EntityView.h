@@ -5,6 +5,8 @@
 
 #include <map>
 
+#include "entt/entt.hpp"
+
 #include "ComponentView.h"
 #include "../AttackComponents.h"
 #include "AttackViews/MeleeAttackView.h"
@@ -40,13 +42,44 @@ namespace godot
 		GODOT_CLASS(EntityView, Node)
 	private:
 		std::map<String, ComponentView*> componentsMap;
+
+		template<typename Type, typename... Types>
+		void ConstructComponentsFromViews(entt::registry& registry, entt::entity entity/*, Types... types*/);
 	public:
 		static void _register_methods() { register_method((char*)"_ready", &EntityView::_ready); }
 		void _init() {}
 		void _ready();
 		template<typename T>
 		bool ConstructComponent(T& component);
+		
+		void ConstructComponents(entt::registry& registry, entt::entity entity)
+		{
+			ConstructComponentsFromViews
+				<
+					MeleeAttackComponent,
+					RangedAttackComponent,
+					ThrowableAttackComponent,
+					HealthComponent,
+					GravityComponent,
+					JumpSpeedComponent,
+					SpeedComponent,
+					SimpleFollowComponent,
+					PatrolmanComponent,
+					NavMarginComponent
+				>
+				(registry, entity);
+		}
 	};
+
+	template<typename Type, typename... Types>
+	void EntityView::ConstructComponentsFromViews(entt::registry& registry, entt::entity entity)
+	{
+		Type component{};
+		if (ConstructComponent(component))
+			registry.assign<Type>(entity, component);
+		if constexpr (sizeof...(Types))
+			ConstructComponentsFromViews<Types...>(registry, entity);
+	}
 
 	template<typename T>
 	inline bool EntityView::ConstructComponent(T& component)
@@ -59,6 +92,8 @@ namespace godot
 	//2. define specialized template method with CONSTRUCT_COMPONENT macro in EntityView.h
 	//3. register view in GodotLibrary.cpp
 	//4. Component view should implement GetECSComponent method
+	//5. add new component type to template arguments in ConstructComponents method
+	//6. scene node must have equal view name
 	CONSTRUCT_COMPONENT(MeleeAttack)
 	CONSTRUCT_COMPONENT(RangedAttack)
 	CONSTRUCT_COMPONENT(ThrowableAttack)
