@@ -37,7 +37,6 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 		pRB->set_transform(throwableTransform);
 		pRB->apply_central_impulse(attackerTransform.basis.z * attackComp.force);
 
-		//TODO1: make global revision and check all such things with assert( != null)
 		ThrowableWeaponNode* throwable = Object::cast_to<ThrowableWeaponNode>(throwableNode);
 		
 		//TODO: can calculate impulse by speed delta

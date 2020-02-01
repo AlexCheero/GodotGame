@@ -159,7 +159,7 @@ void godot::ECSWorld::PrepareSingletonEntities()
 		Godot::print_warning("trying to assign more than one singleton entity", "PrepareSingletonEntities", "ECSWorld.cpp", __LINE__);
 }
 
-//TODO: think about refactoring all the callbacks for signals
+//TODO: think about refactoring all the callbacks for signals (moving it somwhere out of world)
 void godot::ECSWorld::_on_Pickable_picked_up(Node* pPicker, EntityView* pPickableView, int pickableType)
 {
 	EntityHolderNode* pPickerEntityHolder = Object::cast_to<EntityHolderNode>(pPicker);
