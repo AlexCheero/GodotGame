@@ -24,6 +24,7 @@ namespace utils
 
 	void InitPhysicLayers();
 	int64_t GetLayerByName(godot::String name);
+	//TODO: try use _process delta instead
 	int64_t SecondsToMillis(float seconds);
 	godot::Vector2 FlatVector(godot::Vector3 vec3);
 	godot::Object* CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 direction, float distance, godot::String layerName = "");
