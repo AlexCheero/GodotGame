@@ -10,6 +10,7 @@
 #include <Navigation.hpp>
 #include <CollisionShape.hpp>
 #include <CapsuleShape.hpp>
+#include <AnimationTree.hpp>
 
 #include "Components/NodeComponents/Animation2DComponent.h"
 #include "Components/AttackComponents.h"
@@ -61,7 +62,8 @@ void godot::ECSWorld::PreparePlayerEntity()
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("Camera"));
-	AssignNodeInheritedComponent<Animation2DComponent>(registry, entity, get_node("Player/Sprite3D"));
+	//AssignNodeInheritedComponent<Animation2DComponent>(registry, entity, get_node("Player/Sprite3D"));
+	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Player/vanguard/AnimationTree"));
 
 	EntityHolderNode* pEnemy = AssignNodeInheritedComponent<EntityHolderNode>(registry, entity, pPlayerNode);
 	pEnemy->SetEntity(entity);

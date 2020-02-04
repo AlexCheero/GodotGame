@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Nodes/EntityHolderNode.gdns" type="Script" id=1]
 [ext_resource path="res://Scripts/Views/EntityView.gdns" type="Script" id=2]
@@ -7,39 +7,11 @@
 [ext_resource path="res://Scripts/Views/LocomotionViews/JumpSpeedView.gdns" type="Script" id=5]
 [ext_resource path="res://Scripts/Views/LocomotionViews/SpeedView.gdns" type="Script" id=6]
 [ext_resource path="res://Scripts/Views/HealthView.gdns" type="Script" id=7]
-[ext_resource path="res://Characters/Hero/hero.png" type="Texture" id=8]
-[ext_resource path="res://Scripts/NodeComponents/Animation2DComponent.gdns" type="Script" id=9]
-
-
+[ext_resource path="res://Scenes/character3D.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CapsuleShape" id=1]
-
-[sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 1, 0.184314, 0.184314, 1 )
-
-[sub_resource type="CylinderMesh" id=3]
-material = SubResource( 2 )
-
-[sub_resource type="SpatialMaterial" id=4]
-flags_transparent = true
-flags_unshaded = true
-params_billboard_mode = 2
-
-[sub_resource type="Animation" id=5]
-length = 0.7
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite3D:animation column")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6 ]
-}
+radius = 0.857216
+height = 1.92992
 
 [node name="Player" type="KinematicBody"]
 collision_layer = 2
@@ -50,12 +22,8 @@ script = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-008, -1, 0, 1, -4.37114e-008, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="Nose" type="MeshInstance" parent="."]
-transform = Transform( 0.1, 0, 0, 0, -2.18557e-008, -0.1, 0, 0.5, -4.37114e-009, 0, 0.679, 1.43 )
-mesh = SubResource( 3 )
-material/0 = null
-
 [node name="EntityView" type="Node" parent="."]
+editor/display_folded = true
 script = ExtResource( 2 )
 
 [node name="MeleeAttackView" type="Node" parent="EntityView"]
@@ -84,18 +52,4 @@ script = ExtResource( 7 )
 hp = 100.0
 "max hp" = 100.0
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0 )
-material_override = SubResource( 4 )
-pixel_size = 0.06
-texture = ExtResource( 8 )
-vframes = 21
-hframes = 13
-frame = 5
-script = ExtResource( 9 )
-"animation column" = 6
-"num sectors" = 4
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "Idle"
-anims/Idle = SubResource( 5 )
+[node name="vanguard" parent="." instance=ExtResource( 8 )]

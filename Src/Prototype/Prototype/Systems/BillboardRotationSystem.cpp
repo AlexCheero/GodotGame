@@ -1,6 +1,5 @@
 #include "BillboardRotationSystem.h"
 
-#include <Sprite3D.hpp>
 #include <Spatial.hpp>
 
 #include <math.h> 

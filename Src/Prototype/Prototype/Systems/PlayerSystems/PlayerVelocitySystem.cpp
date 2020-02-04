@@ -1,6 +1,7 @@
 #include "PlayerVelocitySystem.h"
 
 #include <Input.hpp>
+#include <AnimationTree.hpp>
 
 #include "../../Components/InputComponents.h"
 
@@ -20,8 +21,11 @@ void godot::PlayerVelocitySystem::Update(VelocityComponent& velocityComp, SpeedC
 void godot::PlayerVelocitySystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<entt::tag<PlayerTag>, VelocityComponent, InputComponent, SpeedComponent, Camera*>();
-	view.less([&registry](VelocityComponent& velocity, InputComponent input, SpeedComponent speedComp, Camera* pCam)
+	view.less([&registry](entt::entity entity, VelocityComponent& velocity, InputComponent input, SpeedComponent speedComp, Camera* pCam)
 	{
+		if (registry.has<AnimationTree*>(entity))
+			registry.get<AnimationTree*>(entity)->set("parameters/BlendSpace2D/blend_position", input.moveDir);
+
 		Update(velocity, speedComp, pCam->get_transform().get_basis(), input.moveDir);
 	});
 }
