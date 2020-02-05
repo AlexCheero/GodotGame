@@ -14,8 +14,7 @@ inline godot::Vector3 godot::PlayerRotationSystem::GetTargetDirection(Vector2 in
 	const Plane xzPlane(utils::globalY, 0);
 	Vector3 relativeLeft = xzPlane.project(camBasis.x).normalized();
 	Vector3 relativeFwd = xzPlane.project(camBasis.z).normalized();
-	//TODO: check movement and rotation and fix accordingly to the fact that te cam's z is backwards
-	dir += relativeLeft * inputDir.x + relativeFwd * inputDir.y;
+	dir += relativeLeft * inputDir.x - relativeFwd * inputDir.y;
 	dir.y = 0;
 
 	return dir.normalized();

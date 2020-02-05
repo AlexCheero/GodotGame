@@ -9,7 +9,7 @@ void godot::PlayerVelocitySystem::Update(VelocityComponent& velocityComp, SpeedC
 {
 	Vector3 flatVelocity = Vector3(0, 0, 0);
 	flatVelocity += camBasis.x * input.x;
-	flatVelocity += camBasis.z * input.y;
+	flatVelocity -= camBasis.z * input.y;
 
 	flatVelocity.normalize();
 	flatVelocity *= speedComp.speed;
