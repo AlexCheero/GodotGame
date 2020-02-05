@@ -2,36 +2,36 @@
 
 [ext_resource path="res://Characters3D/vanguard.dae" type="PackedScene" id=1]
 
-[sub_resource type="AnimationNodeAnimation" id=8]
+[sub_resource type="AnimationNodeAnimation" id=1]
 animation = "Idle-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=2]
 animation = "Strafe_l-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=3]
 animation = "Strafe_r-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
+[sub_resource type="AnimationNodeAnimation" id=4]
 animation = "Running_bwd-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=15]
+[sub_resource type="AnimationNodeAnimation" id=5]
 animation = "Running-loop"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=11]
-blend_point_0/node = SubResource( 8 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=6]
+blend_point_0/node = SubResource( 1 )
 blend_point_0/pos = Vector2( 0, 0 )
-blend_point_1/node = SubResource( 12 )
+blend_point_1/node = SubResource( 2 )
 blend_point_1/pos = Vector2( -1, 0 )
-blend_point_2/node = SubResource( 13 )
+blend_point_2/node = SubResource( 3 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 14 )
+blend_point_3/node = SubResource( 4 )
 blend_point_3/pos = Vector2( 0, 1 )
-blend_point_4/node = SubResource( 15 )
+blend_point_4/node = SubResource( 5 )
 blend_point_4/pos = Vector2( 0, -1 )
 
 [sub_resource type="AnimationNodeBlendTree" id=7]
-graph_offset = Vector2( -403, -90 )
-nodes/BlendSpace2D/node = SubResource( 11 )
+graph_offset = Vector2( -407.568, -85.5 )
+nodes/BlendSpace2D/node = SubResource( 6 )
 nodes/BlendSpace2D/position = Vector2( -93, 10 )
 nodes/output/position = Vector2( 200, -20 )
 node_connections = [ "output", 0, "BlendSpace2D" ]
@@ -47,4 +47,4 @@ tree_root = SubResource( 7 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 root_motion_track = NodePath("Skeleton:root_doc")
-parameters/BlendSpace2D/blend_position = Vector2( 0.000923395, 0.00319481 )
+parameters/BlendSpace2D/blend_position = Vector2( 0, 0 )
