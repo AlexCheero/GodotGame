@@ -47,9 +47,7 @@ void godot::PlayerVelocitySystem::operator()(float delta, entt::registry& regist
 
 		Vector2 animVec{ xform.x, xform.z };
 
-		if (input.moveDir.length_squared() != 0)
-			Godot::print("anim vec: " + String::num(animVec.x) + ", " + String::num(animVec.y));
-
+		//TODO: diagonal anims looks a bit weird because of blending problem
 		pAnimTree->set("parameters/BlendSpace2D/blend_position", animVec);
 		//----------------------------------------
 	});
