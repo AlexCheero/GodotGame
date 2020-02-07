@@ -21,6 +21,7 @@ enum class EInput
 struct InputComponent
 {
 	std::bitset<static_cast<int>(EInput::End)> inputSet;
+	//TODO: normalize input directions in input system
 	godot::Vector2 rotation;
 	godot::Vector2 moveDir;
 

@@ -78,7 +78,8 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<InputComponent>(entity);
-	registry.assign<RotationDirectionComponent>(entity);
+	RotationDirectionComponent rot { registry.get<Spatial*>(entity)->get_global_transform().get_basis().z };
+	registry.assign<RotationDirectionComponent>(entity, rot);
 
 	registry.assign<BoundsComponent>(entity, utils::GetCapsuleBounds(pPlayerNode->get_node("CollisionShape")));
 }
@@ -125,7 +126,8 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	registry.assign<entt::tag<CurrentWeaponMeleeTag> >(entity);
 
 	registry.assign<VelocityComponent>(entity);
-	registry.assign<RotationDirectionComponent>(entity);
+	RotationDirectionComponent rot{ registry.get<Spatial*>(entity)->get_global_transform().get_basis().z };
+	registry.assign<RotationDirectionComponent>(entity, rot);
 	registry.assign<InputComponent>(entity);
 
 //<prepare patrol route

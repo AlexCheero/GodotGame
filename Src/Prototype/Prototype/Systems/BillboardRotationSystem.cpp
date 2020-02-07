@@ -41,6 +41,7 @@ void godot::BillboardRotationSystem::operator()(float delta, entt::registry& reg
 		bool rightSide = leftDot > 0;
 		if (rightSide)
 			angle = 360 - angle;
+		//TODO: doesn't needed here
 		angle = fmod(angle, 360);
 
 		float anglePerSprite = 360 / pSprite->numSectors;
