@@ -173,6 +173,7 @@
     <ClCompile Include="Systems\AISystems\NavAgentSystem.cpp" />
     <ClCompile Include="Systems\AISystems\PatrolSystem.cpp" />
     <ClCompile Include="Systems\AISystems\PursuingSystem.cpp" />
+    <ClCompile Include="Systems\AnimSystems\LocomotionAnimSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\AttackCooldown.cpp" />
     <ClCompile Include="Systems\AttackSystems\RangedAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\MeleeAttackSystem.cpp" />
@@ -221,6 +222,7 @@
     <ClInclude Include="Systems\AISystems\NavAgentSystem.h" />
     <ClInclude Include="Systems\AISystems\PatrolSystem.h" />
     <ClInclude Include="Systems\AISystems\PursuingSystem.h" />
+    <ClInclude Include="Systems\AnimSystems\LocomotionAnimSystem.h" />
     <ClInclude Include="Systems\AttackSystems\AttackCooldown.h" />
     <ClInclude Include="Systems\AttackSystems\RangedAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\MeleeAttackSystem.h" />

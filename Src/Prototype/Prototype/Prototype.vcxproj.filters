@@ -94,6 +94,12 @@
     <Filter Include="Source Files\Nodes">
       <UniqueIdentifier>{ec7b74e6-4350-4d13-8ba1-64d1fa2529fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Systems\AnimSystems">
+      <UniqueIdentifier>{1975e70a-a12a-44b5-9d92-ac1a4e68010a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\AnimSystems">
+      <UniqueIdentifier>{afb7192c-7223-4e1b-8235-d4ae0e69152a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp">
@@ -212,6 +218,9 @@
     </ClCompile>
     <ClCompile Include="Nodes\GrenadeNode.cpp">
       <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AnimSystems\LocomotionAnimSystem.cpp">
+      <Filter>Source Files\Systems\AnimSystems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -358,6 +367,9 @@
     </ClInclude>
     <ClInclude Include="Nodes\GrenadeNode.h">
       <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AnimSystems\LocomotionAnimSystem.h">
+      <Filter>Header Files\Systems\AnimSystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

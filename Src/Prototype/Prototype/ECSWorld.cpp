@@ -39,6 +39,7 @@
 #include "Systems/AISystems/HealthMonitoringSystem.h"
 #include "Systems/AISystems/FleeingSystem.h"
 #include "Systems/BillboardRotationSystem.h"
+#include "Systems/AnimSystems/LocomotionAnimSystem.h"
 
 #include "Nodes/EntityHolderNode.h"
 
@@ -296,6 +297,7 @@ void godot::ECSWorld::_init()
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new HealthMonitoringSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new FleeingSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new BillboardRotationSystem()));
+	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new LocomotionAnimSystem()));
 }
 
 void godot::ECSWorld::_ready()
