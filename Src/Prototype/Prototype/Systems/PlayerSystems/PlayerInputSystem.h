@@ -9,7 +9,7 @@ namespace godot
 	//TODO: change name not to confuse it with classes that are inherited from base system
 	class PlayerInputSystem
 	{
-		static void GetInputDirection(Vector2& dir, InputEvent* e, const char* actionPrefix);
+		static Vector2 GetInputDirection(const char* actionPrefix);
 	public:
 		void operator()(entt::registry& registry, InputEvent* e);
 	};

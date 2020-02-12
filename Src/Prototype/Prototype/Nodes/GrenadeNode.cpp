@@ -78,6 +78,7 @@ void godot::GrenadeNode::_process(float delta)
 
 	//TODO: passing whole object and freeing it in the callback because of bug(?) when the signal
 	//		callback Array parameter is 0 sized. Ask in all chats/communities how to solve this problem
+	//		try once again since i have moved to 3.2 ver
 	emit_signal("grenade_explodes", this);
 	//----------
 
