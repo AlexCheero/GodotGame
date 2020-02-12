@@ -3,6 +3,7 @@
 #include <AnimationTree.hpp>
 
 #include "../../Components/SimpleComponents.h"
+#include "../../Components/InputComponents.h"
 #include "../../Utils/Utils.h"
 
 void godot::LocomotionAnimSystem::operator()(float delta, entt::registry& registry)
@@ -25,5 +26,12 @@ void godot::LocomotionAnimSystem::operator()(float delta, entt::registry& regist
 
 		//TODO: diagonal anims looks a bit weird because of blending problem
 		pAnimTree->set("parameters/BlendSpace2D/blend_position", animVec);
+	});
+
+	auto punchView = registry.view<InputComponent, AnimationTree*>();
+	punchView.each([](InputComponent input, AnimationTree* pAnimTree)
+	{
+		if (input.Test(EInput::Attack))
+			pAnimTree->set("parameters/OneShot/active", true);
 	});
 }
