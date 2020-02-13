@@ -222,6 +222,9 @@
     <ClCompile Include="Systems\AnimSystems\LocomotionAnimSystem.cpp">
       <Filter>Source Files\Systems\AnimSystems</Filter>
     </ClCompile>
+    <ClCompile Include="Nodes\HTHDamagingArea.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -370,6 +373,9 @@
     </ClInclude>
     <ClInclude Include="Systems\AnimSystems\LocomotionAnimSystem.h">
       <Filter>Header Files\Systems\AnimSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Nodes\HTHDamagingArea.h">
+      <Filter>Header Files\Nodes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -18,6 +18,7 @@
 #include "Nodes/EntityHolderNode.h"
 #include "Nodes/ThrowableWeaponNode.h"
 #include "Nodes/GrenadeNode.h"
+#include "Nodes/HTHDamagingArea.h"
 
 using namespace godot;
 
@@ -51,4 +52,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<Animation2DComponent>();
 	register_class<PickableNode>();
 	register_class<GrenadeNode>();
+	register_class<HTHDamagingArea>();
 }
