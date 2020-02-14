@@ -19,7 +19,6 @@ namespace godot
 
 		static void _register_methods();
 		void _init();
-		void _ready();
 		void _on_throwable_collide(Node* pNode);
 	};
 }

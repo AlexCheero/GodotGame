@@ -12,7 +12,6 @@
 #include "Components/NodeComponents/Animation2DComponent.h"
 
 #include "Nodes/PickableNode.h"
-#include "Nodes/ThrowableWeaponNode.h"
 #include "Nodes/GrenadeNode.h"
 #include "Nodes/HTHDamagingArea.h"
 
@@ -43,10 +42,11 @@ namespace godot
 		void PrepareEnemyEntity();
 		void PrepareSingletonEntities();
 		void _on_Pickable_picked_up(Node* pPicker, EntityView* pPickableView, int pickableType);
-		void _on_Throwable_hit(Node* pTarget, ThrowableWeaponNode* pThrowable);
 		void _on_Grenade_explosion(Node* pTarget, GrenadeNode* pGrenade);
 		void _on_HTH_hit(int entity);
 	public:
+		entt::registry& GetRegistry() { return registry; }
+
 		static void _register_methods();
 		void _init();
 		void _ready();
