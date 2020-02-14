@@ -275,6 +275,7 @@ void godot::ECSWorld::_init()
 
 	//TODO: try to move physics to separate thread
 	//TODO: check what systems really should be in phys proc
+	//TODO: check what systems should be reactive
 	//setup physics systems
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PlayerVelocitySystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new KinematicMovementSystem()));
