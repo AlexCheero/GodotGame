@@ -164,7 +164,8 @@ void godot::ECSWorld::PrepareSingletonEntities()
 		Godot::print_warning("trying to assign more than one singleton entity", "PrepareSingletonEntities", "ECSWorld.cpp", __LINE__);
 }
 
-//TODO: think about refactoring all the callbacks for signals (moving it somwhere out of world)
+//TODO0: think about refactoring all the callbacks for signals (moving it somwhere out of world)
+//		 try to refactor it, using reactive callbacks in entt
 void godot::ECSWorld::_on_Pickable_picked_up(Node* pPicker, EntityView* pPickableView, int pickableType)
 {
 	EntityHolderNode* pPickerEntityHolder = Object::cast_to<EntityHolderNode>(pPicker);
@@ -250,6 +251,11 @@ void godot::ECSWorld::_on_Grenade_explosion(Node* pTarget, GrenadeNode* pGrenade
 	}
 }
 
+void godot::ECSWorld::_on_HTH_hit(int entity)
+{
+	//hit target entity
+}
+
 void godot::ECSWorld::_register_methods()
 {
 	register_method((char*)"_init", &ECSWorld::_init);
@@ -260,6 +266,7 @@ void godot::ECSWorld::_register_methods()
 	register_method((char*)"_on_Pickable_picked_up", &ECSWorld::_on_Pickable_picked_up);
 	register_method((char*)"_on_Throwable_hit", &ECSWorld::_on_Throwable_hit);
 	register_method((char*)"_on_Grenade_explosion", &ECSWorld::_on_Grenade_explosion);
+	register_method((char*)"_on_HTH_hit", &ECSWorld::_on_HTH_hit);
 }
 
 void godot::ECSWorld::_init()

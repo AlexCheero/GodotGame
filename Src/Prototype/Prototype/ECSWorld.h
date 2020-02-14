@@ -14,6 +14,7 @@
 #include "Nodes/PickableNode.h"
 #include "Nodes/ThrowableWeaponNode.h"
 #include "Nodes/GrenadeNode.h"
+#include "Nodes/HTHDamagingArea.h"
 
 namespace godot
 {
@@ -41,7 +42,8 @@ namespace godot
 		void PrepareSingletonEntities();
 		void _on_Pickable_picked_up(Node* pPicker, EntityView* pPickableView, int pickableType);
 		void _on_Throwable_hit(Node* pTarget, ThrowableWeaponNode* pThrowable);
-		void _on_Grenade_explosion(Node* pTarget, GrenadeNode* hitted);
+		void _on_Grenade_explosion(Node* pTarget, GrenadeNode* pGrenade);
+		void _on_HTH_hit(int entity);
 	public:
 		static void _register_methods();
 		void _init();
