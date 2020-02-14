@@ -55,6 +55,7 @@ void godot::GrenadeNode::_ready()
 	connect("grenade_explodes", world, "_on_Grenade_explosion", signalParams);
 }
 
+//TODO: move to usual system cause it is in the _process
 void godot::GrenadeNode::_process(float delta)
 {
 	int64_t currTime = godot::OS::get_singleton()->get_ticks_msec();

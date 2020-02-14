@@ -55,7 +55,7 @@ node_connections = [ "output", 0, "OneShot", "OneShot", 0, "BlendSpace2D", "OneS
 bones/15/bound_children = [ NodePath("BoneAttachment") ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Skeleton" index="2"]
-transform = Transform( 0.763792, 0.644619, -0.0329167, -0.618549, 0.716425, -0.322691, -0.184431, 0.266829, 0.945932, 0.315806, 0.84457, 0.120946 )
+transform = Transform( 0.762008, 0.64756, -0.00282493, -0.616608, 0.724238, -0.308662, -0.197831, 0.236946, 0.951167, 0.310253, 0.84661, 0.126491 )
 bone_name = "mixamorig_LeftHandThumb4"
 
 [node name="Area" type="Area" parent="Skeleton/BoneAttachment" index="0"]
