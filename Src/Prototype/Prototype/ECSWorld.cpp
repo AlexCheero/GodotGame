@@ -45,6 +45,8 @@
 
 #include "Utils/Utils.h"
 
+godot::ECSWorld* godot::ECSWorld::instance = nullptr;
+
 void godot::ECSWorld::UpdateSystems(float delta, SystemsVec& systems)
 {
 	for (auto& system : systems)
@@ -271,6 +273,8 @@ void godot::ECSWorld::_register_methods()
 
 void godot::ECSWorld::_init()
 {
+	InitInstance(this);
+
 	utils::InitPhysicLayers();
 
 	//TODO: try to move physics to separate thread

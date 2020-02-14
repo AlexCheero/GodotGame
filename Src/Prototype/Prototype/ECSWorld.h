@@ -16,9 +16,11 @@
 #include "Nodes/GrenadeNode.h"
 #include "Nodes/HTHDamagingArea.h"
 
+#include "Singleton.h"
+
 namespace godot
 {
-	class ECSWorld : public Node
+	class ECSWorld : public Node, public Singleton<ECSWorld>
 	{
 		GODOT_CLASS(ECSWorld, Node)
 	private:
