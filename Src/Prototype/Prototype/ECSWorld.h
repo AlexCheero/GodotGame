@@ -42,7 +42,6 @@ namespace godot
 		void PrepareEnemyEntity();
 		void PrepareSingletonEntities();
 		void _on_Grenade_explosion(Node* pTarget, GrenadeNode* pGrenade);
-		void _on_HTH_hit(int entity);
 	public:
 		entt::registry& GetRegistry() { return registry; }
 

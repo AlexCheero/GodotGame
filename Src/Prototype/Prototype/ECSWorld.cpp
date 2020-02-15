@@ -181,11 +181,6 @@ void godot::ECSWorld::_on_Grenade_explosion(Node* pTarget, GrenadeNode* pGrenade
 	}
 }
 
-void godot::ECSWorld::_on_HTH_hit(int entity)
-{
-	//hit target entity
-}
-
 void godot::ECSWorld::_register_methods()
 {
 	register_method((char*)"_init", &ECSWorld::_init);
@@ -194,7 +189,6 @@ void godot::ECSWorld::_register_methods()
 	register_method((char*)"_process", &ECSWorld::_process);
 	register_method((char*)"_physics_process", &ECSWorld::_physics_process);
 	register_method((char*)"_on_Grenade_explosion", &ECSWorld::_on_Grenade_explosion);
-	register_method((char*)"_on_HTH_hit", &ECSWorld::_on_HTH_hit);
 }
 
 void godot::ECSWorld::_init()

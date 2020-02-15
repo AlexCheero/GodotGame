@@ -5,6 +5,8 @@
 
 #include "entt/entt.hpp"
 
+#include "../Nodes/EntityHolderNode.h"
+
 namespace godot
 {
 	class ThrowableWeaponNode : public RigidBody
@@ -19,6 +21,6 @@ namespace godot
 
 		static void _register_methods();
 		void _init();
-		void _on_throwable_collide(Node* pNode);
+		void _on_throwable_collide(EntityHolderNode* pEntityHolder);
 	};
 }

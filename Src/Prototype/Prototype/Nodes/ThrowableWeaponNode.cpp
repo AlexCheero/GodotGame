@@ -2,7 +2,6 @@
 
 #include <SceneTree.hpp>
 
-#include "../Nodes/EntityHolderNode.h"
 #include "../ECSWorld.h"
 
 void godot::ThrowableWeaponNode::_register_methods()
@@ -20,14 +19,14 @@ void godot::ThrowableWeaponNode::_init()
 
 //TODO: probably move this method (and all similar from other nodes) to some kind of reactive system
 //		implemented as static functor
-void godot::ThrowableWeaponNode::_on_throwable_collide(Node* pNode)
+void godot::ThrowableWeaponNode::_on_throwable_collide(EntityHolderNode* pEntityHolder)
 {
 	Godot::print("throwable hit");
 	queue_free();
 
-	EntityHolderNode* pEntityHolder = Object::cast_to<EntityHolderNode>(pNode);
 	if (!pEntityHolder)
 		return;
+
 	entt::entity entity = pEntityHolder->GetEntity();
 	entt::registry& registry = ECSWorld::GetInstance()->GetRegistry();
 

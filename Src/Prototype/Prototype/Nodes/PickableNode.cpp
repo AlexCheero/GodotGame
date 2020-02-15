@@ -2,7 +2,6 @@
 
 #include <SceneTree.hpp>
 
-#include "../Nodes/EntityHolderNode.h"
 #include "../ECSWorld.h"
 
 void godot::PickableNode::SetType(int i)
@@ -13,15 +12,14 @@ void godot::PickableNode::SetType(int i)
 	type = static_cast<EPickableType>(i);
 }
 
-void godot::PickableNode::_on_Pickable_body_entered(Node* pNode)
+void godot::PickableNode::_on_Pickable_body_entered(EntityHolderNode* pEntityHolder)
 {
-	EntityHolderNode* pPicker = Object::cast_to<EntityHolderNode>(pNode);
-	if (!pPicker)
+	if (!pEntityHolder)
 		return;
 
 	queue_free();
 
-	entt::entity pickerEntity = pPicker->GetEntity();
+	entt::entity pickerEntity = pEntityHolder->GetEntity();
 	ASSERT(pickerEntity != entt::null, "picker is null");
 	EntityView* pPickableView = Object::cast_to<EntityView>(get_node("EntityView"));
 	ASSERT(pPickableView != nullptr, "pickable view is null");
