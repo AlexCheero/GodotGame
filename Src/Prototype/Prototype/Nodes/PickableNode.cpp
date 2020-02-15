@@ -3,6 +3,7 @@
 #include <SceneTree.hpp>
 
 #include "../Nodes/EntityHolderNode.h"
+#include "../ECSWorld.h"
 
 void godot::PickableNode::SetType(int i)
 {
@@ -14,10 +15,60 @@ void godot::PickableNode::SetType(int i)
 
 void godot::PickableNode::_on_Pickable_body_entered(Node* pNode)
 {
-	if (!Object::cast_to<EntityHolderNode>(pNode))
+	EntityHolderNode* pPicker = Object::cast_to<EntityHolderNode>(pNode);
+	if (!pPicker)
 		return;
 
 	queue_free();
+
+	entt::entity pickerEntity = pPicker->GetEntity();
+	ASSERT(pickerEntity != entt::null, "picker is null");
+	EntityView* pPickableView = Object::cast_to<EntityView>(get_node("EntityView"));
+	ASSERT(pPickableView != nullptr, "pickable view is null");
+
+	entt::registry& registry = ECSWorld::GetInstance()->GetRegistry();
+
+	//TODO: pick/change weapon by button press
+	//		and probably not switch on pickup
+	switch (type)
+	{
+	case EPickableType::MeleeWeapon:
+	{
+		bool constructed = pPickableView->ConstructComponent(registry.assign_or_replace<MeleeAttackComponent>(pickerEntity));
+		ASSERT(constructed, "can't construct MeleeAttackComponent");
+		//if switch on pickup
+		registry.get_or_assign<entt::tag<CurrentWeaponMeleeTag> >(pickerEntity);
+		break;
+	}
+	case EPickableType::RangedWeapon:
+	{
+		bool constructed = pPickableView->ConstructComponent(registry.assign_or_replace<RangedAttackComponent>(pickerEntity));
+		ASSERT(constructed, "can't construct RangedAttackComponent");
+		//if switch on pickup
+		registry.get_or_assign<entt::tag<CurrentWeaponRangedTag> >(pickerEntity);
+		break;
+	}
+	case EPickableType::ThrowableWeapon:
+	{
+		bool constructed = pPickableView->ConstructComponent(registry.assign_or_replace<ThrowableAttackComponent>(pickerEntity));
+		ASSERT(constructed, "can't construct ThrowableAttackComponent");
+		//if switch on pickup
+		registry.get_or_assign<entt::tag<CurrentWeaponThrowableTag> >(pickerEntity);
+		break;
+	}
+	case EPickableType::Medkit:
+		Godot::print("Picked up Medkit");
+		break;
+	case EPickableType::Buff:
+		Godot::print("Picked up Buff");
+		break;
+	case EPickableType::Key:
+		Godot::print("Picked up Key");
+		break;
+	default:
+		Godot::print_error("Wrong pickable type: " + String::num_int64((int64_t)type), "_on_Pickable_body_entered", "PickableNode.cpp", __LINE__);
+		break;
+	}
 }
 
 void godot::PickableNode::_register_methods()
@@ -26,15 +77,5 @@ void godot::PickableNode::_register_methods()
 		, GODOT_METHOD_RPC_MODE_DISABLED, GODOT_PROPERTY_USAGE_DEFAULT, GODOT_PROPERTY_HINT_ENUM
 		, "MeleeWeapon, RangedWeapon, ThrowableWeapon, Medkit, Buff, Key");
 
-	register_method((char*)"_ready", &PickableNode::_ready);
 	register_method((char*)"_on_Pickable_body_entered", &PickableNode::_on_Pickable_body_entered);
-}
-
-void godot::PickableNode::_ready()
-{
-	Node* world = get_tree()->get_current_scene();
-	Array params;
-	params.push_back(get_node("EntityView"));
-	params.push_back(static_cast<int>(type));
-	connect("body_entered", world, "_on_Pickable_picked_up", params);
 }

@@ -168,59 +168,6 @@ void godot::ECSWorld::PrepareSingletonEntities()
 
 //TODO0: think about refactoring all the callbacks for signals (moving it somwhere out of world)
 //		 try to refactor it, using reactive callbacks in entt
-void godot::ECSWorld::_on_Pickable_picked_up(Node* pPicker, EntityView* pPickableView, int pickableType)
-{
-	EntityHolderNode* pPickerEntityHolder = Object::cast_to<EntityHolderNode>(pPicker);
-	if (!pPickerEntityHolder)
-		return;
-
-	entt::entity pickerEntity = pPickerEntityHolder->GetEntity();
-	ASSERT(pickerEntity != entt::null, "picker is null");
-	ASSERT(pPickableView != nullptr, "pickable view is null");
-	//TODO: pick/change weapon by button press
-	//		and probably not switch on pickup
-	EPickableType pickableEnmVal = static_cast<EPickableType>(pickableType);
-	switch (pickableEnmVal)
-	{
-	case EPickableType::MeleeWeapon:
-	{
-		bool constructed = pPickableView->ConstructComponent(registry.assign_or_replace<MeleeAttackComponent>(pickerEntity));
-		ASSERT(constructed, "can't construct MeleeAttackComponent");
-		//if switch on pickup
-		registry.get_or_assign<entt::tag<CurrentWeaponMeleeTag> >(pickerEntity);
-		break;
-	}
-	case EPickableType::RangedWeapon:
-	{
-		bool constructed = pPickableView->ConstructComponent(registry.assign_or_replace<RangedAttackComponent>(pickerEntity));
-		ASSERT(constructed, "can't construct RangedAttackComponent");
-		//if switch on pickup
-		registry.get_or_assign<entt::tag<CurrentWeaponRangedTag> >(pickerEntity);
-		break;
-	}
-	case EPickableType::ThrowableWeapon:
-	{
-		bool constructed = pPickableView->ConstructComponent(registry.assign_or_replace<ThrowableAttackComponent>(pickerEntity));
-		ASSERT(constructed, "can't construct ThrowableAttackComponent");
-		//if switch on pickup
-		registry.get_or_assign<entt::tag<CurrentWeaponThrowableTag> >(pickerEntity);
-		break;
-	}
-	case EPickableType::Medkit:
-		Godot::print("Picked up Medkit");
-		break;
-	case EPickableType::Buff:
-		Godot::print("Picked up Buff");
-		break;
-	case EPickableType::Key:
-		Godot::print("Picked up Key");
-		break;
-	default:
-		Godot::print_error("Wrong pickable type: " + String::num_int64(pickableType), "_on_Pickable_picked_up", "ECSWorld", __LINE__);
-		break;
-	}
-}
-
 void godot::ECSWorld::_on_Grenade_explosion(Node* pTarget, GrenadeNode* pGrenade)
 {
 	for (int i = 0; i < pGrenade->GetHitted().size(); i++)
@@ -246,7 +193,6 @@ void godot::ECSWorld::_register_methods()
 	register_method((char*)"_input", &ECSWorld::HandleInputEvent);
 	register_method((char*)"_process", &ECSWorld::_process);
 	register_method((char*)"_physics_process", &ECSWorld::_physics_process);
-	register_method((char*)"_on_Pickable_picked_up", &ECSWorld::_on_Pickable_picked_up);
 	register_method((char*)"_on_Grenade_explosion", &ECSWorld::_on_Grenade_explosion);
 	register_method((char*)"_on_HTH_hit", &ECSWorld::_on_HTH_hit);
 }
