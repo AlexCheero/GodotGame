@@ -20,6 +20,19 @@ bool godot::GrenadeNode::CheckVisibility(Object* pTarget)
 	return pTarget == pHitResult;
 }
 
+void godot::GrenadeNode::PrepareIntersectParams()
+{
+	attackShape = Ref<SphereShape>(SphereShape::_new());
+	attackShape->set_radius(explosionRadius);
+	//TODO: set layer name
+	//params->set_collision_mask(utils::GetLayerByName(layerName));
+
+	params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
+	params->set_collide_with_areas(false);
+	params->set_collide_with_bodies(true);
+	params->set_shape(attackShape);
+}
+
 void godot::GrenadeNode::_register_methods()
 {
 	register_property<GrenadeNode, float>("explosion time", &GrenadeNode::explosionTime, 0);
@@ -32,28 +45,19 @@ void godot::GrenadeNode::_register_methods()
 	register_signal<GrenadeNode>("grenade_explodes", "hitted", GODOT_VARIANT_TYPE_OBJECT);
 }
 
-const float INTERSECT_RESULTS_NUM = 32.f;
-
 void godot::GrenadeNode::_ready()
 {
+	PrepareIntersectParams();
+
 	startTime = godot::OS::get_singleton()->get_ticks_msec();
-
-	//prepare overlap sphere params
-	attackShape = Ref<SphereShape>(SphereShape::_new());
-	attackShape->set_radius(explosionRadius);
-	//params->set_collision_mask(utils::GetLayerByName(layerName));
-
-	params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
-	params->set_collide_with_areas(false);
-	params->set_collide_with_bodies(true);
-	params->set_shape(attackShape);
-	//-----------------------------
 
 	Node* world = get_tree()->get_current_scene();
 	Array signalParams;
 	signalParams.push_back(this);
 	connect("grenade_explodes", world, "_on_Grenade_explosion", signalParams);
 }
+
+const float INTERSECT_RESULTS_NUM = 32.f;
 
 //TODO: move to usual system cause it is in the _process
 void godot::GrenadeNode::_process(float delta)

@@ -21,6 +21,7 @@ namespace godot
 		Array hitted;
 
 		bool CheckVisibility(Object* pTarget);
+		void PrepareIntersectParams();
 	public:
 		Array GetHitted() { return hitted; }
 		float GetDamage() { return damage; }
