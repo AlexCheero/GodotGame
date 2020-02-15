@@ -7,6 +7,7 @@
 
 namespace godot
 {
+	//TODO0: delete this class and make this ecs way
 	class GrenadeNode : public RigidBody
 	{
 		GODOT_CLASS(GrenadeNode, RigidBody)

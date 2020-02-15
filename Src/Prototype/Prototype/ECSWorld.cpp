@@ -62,6 +62,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	registry.assign<Node*>(entity, pPlayerNode);
 
+	//TODO0: check what node inherited components really should be assigned
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("Camera"));
