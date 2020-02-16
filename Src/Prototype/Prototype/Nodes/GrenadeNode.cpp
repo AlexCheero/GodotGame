@@ -9,83 +9,10 @@
 
 #include "EntityHolderNode.h"
 
-bool godot::GrenadeNode::CheckVisibility(Object* pTarget)
-{
-	Spatial* pTargetSpatial = Object::cast_to<Spatial>(pTarget);
-	Vector3 targetPosition = pTargetSpatial->get_global_transform().get_origin();
-	Vector3 castDirection = targetPosition - get_global_transform().get_origin();
-	castDirection.normalize();
-	Object* pHitResult = utils::CastFromSpatial(this, castDirection, explosionRadius);
-
-	return pTarget == pHitResult;
-}
-
-void godot::GrenadeNode::PrepareIntersectParams()
-{
-	attackShape = Ref<SphereShape>(SphereShape::_new());
-	attackShape->set_radius(explosionRadius);
-	//TODO: set layer name
-	//params->set_collision_mask(utils::GetLayerByName(layerName));
-
-	params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
-	params->set_collide_with_areas(false);
-	params->set_collide_with_bodies(true);
-	params->set_shape(attackShape);
-}
 
 void godot::GrenadeNode::_register_methods()
 {
 	register_property<GrenadeNode, float>("explosion time", &GrenadeNode::explosionTime, 0);
 	register_property<GrenadeNode, float>("explosion radius", &GrenadeNode::explosionRadius, 0);
 	register_property<GrenadeNode, float>("damage", &GrenadeNode::damage, 0);
-
-	register_method((char*)"_ready", &GrenadeNode::_ready);
-	register_method((char*)"_process", &GrenadeNode::_process);
-
-	register_signal<GrenadeNode>("grenade_explodes", "hitted", GODOT_VARIANT_TYPE_OBJECT);
-}
-
-void godot::GrenadeNode::_ready()
-{
-	PrepareIntersectParams();
-
-	startTime = godot::OS::get_singleton()->get_ticks_msec();
-
-	Node* world = get_tree()->get_current_scene();
-	Array signalParams;
-	signalParams.push_back(this);
-	connect("grenade_explodes", world, "_on_Grenade_explosion", signalParams);
-}
-
-const float INTERSECT_RESULTS_NUM = 32.f;
-
-//TODO: move to usual system cause it is in the _process
-void godot::GrenadeNode::_process(float delta)
-{
-	int64_t currTime = godot::OS::get_singleton()->get_ticks_msec();
-	if (startTime + utils::SecondsToMillis(explosionTime) > currTime)
-		return;
-
-	params->set_transform(get_global_transform());
-	PhysicsDirectSpaceState* spaceState = get_world()->get_direct_space_state();
-	Array intersects = spaceState->intersect_shape(params, INTERSECT_RESULTS_NUM);
-
-	ASSERT(hitted.size() == 0, "grenade hitted array isn't empty");
-
-	for (int i = 0; i < intersects.size(); i++)
-	{
-		Dictionary dict = intersects[i];
-		Object* pObj = Node::___get_from_variant(dict["collider"]);
-		EntityHolderNode* pEntitiyHolder = Object::cast_to<EntityHolderNode>(pObj);
-		if (pEntitiyHolder && CheckVisibility(pObj))
-			hitted.push_back(pEntitiyHolder);
-	}
-
-	//TODO: passing whole object and freeing it in the callback because of bug(?) when the signal
-	//		callback Array parameter is 0 sized. Ask in all chats/communities how to solve this problem
-	//		try once again since i have moved to 3.2 ver
-	emit_signal("grenade_explodes", this);
-	//----------
-
-	queue_free();
 }

@@ -47,6 +47,7 @@ godot::Vector2 utils::FlatVector(godot::Vector3 vec3)
 	return godot::Vector2{ vec3.x, vec3.z };
 }
 
+//TODO: return spatial instead of object
 godot::Object* utils::CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 direction, float distance, godot::String layerName)
 {
 	godot::PhysicsDirectSpaceState* spaceState = pSpatial->get_world()->get_direct_space_state();

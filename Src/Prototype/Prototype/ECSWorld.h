@@ -41,7 +41,6 @@ namespace godot
 		void PrepareCameraEntity();
 		void PrepareEnemyEntity();
 		void PrepareSingletonEntities();
-		void _on_Grenade_explosion(Node* pTarget, GrenadeNode* pGrenade);
 	public:
 		entt::registry& GetRegistry() { return registry; }
 

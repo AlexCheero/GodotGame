@@ -225,6 +225,9 @@
     <ClCompile Include="Nodes\HTHDamagingArea.cpp">
       <Filter>Source Files\Nodes</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\GrenadeSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -379,6 +382,9 @@
     </ClInclude>
     <ClInclude Include="Singleton.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\GrenadeSystem.h">
+      <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

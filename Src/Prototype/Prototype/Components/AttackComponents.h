@@ -42,3 +42,12 @@ struct ThrowableAttackComponent
 	float attackTime;
 	int64_t prevHitTime = -utils::SecondsToMillis(attackTime);
 };
+
+constexpr entt::hashed_string GrenadeExplodesTag = "GrenadeExplodesTag"_hs;
+struct GrenadeComponent
+{
+	float explosionTime;
+	float explosionRadius;
+	float damage;
+	float startTime;
+};

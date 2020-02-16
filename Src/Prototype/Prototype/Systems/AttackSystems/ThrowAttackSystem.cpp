@@ -40,8 +40,19 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 
 		ThrowableWeaponNode* throwable = Object::cast_to<ThrowableWeaponNode>(throwableNode);
 		
-		//TODO: can calculate impulse by speed delta
+		//TODO: split grenades and throwables
 		if (throwable)
 			throwable->SetThrowForce(attackComp.force);
+		else
+		{
+			entt::entity grenadeEntity = registry.create();
+			registry.assign<Spatial*>(grenadeEntity, Object::cast_to<Spatial>(throwableNode));
+			GrenadeComponent& grenComp = registry.assign<GrenadeComponent>(grenadeEntity);
+			grenComp.startTime = godot::OS::get_singleton()->get_ticks_msec();
+			//TODO0: fill all gren params with its view, when its done
+			grenComp.damage = 200;
+			grenComp.explosionRadius = 20;
+			grenComp.explosionTime = 1;
+		}
 	});
 }

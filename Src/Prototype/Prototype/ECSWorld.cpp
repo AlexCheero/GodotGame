@@ -40,6 +40,7 @@
 #include "Systems/AISystems/FleeingSystem.h"
 #include "Systems/BillboardRotationSystem.h"
 #include "Systems/AnimSystems/LocomotionAnimSystem.h"
+#include "Systems/AttackSystems/GrenadeSystem.h"
 
 #include "Nodes/EntityHolderNode.h"
 
@@ -167,21 +168,6 @@ void godot::ECSWorld::PrepareSingletonEntities()
 		Godot::print_warning("trying to assign more than one singleton entity", "PrepareSingletonEntities", "ECSWorld.cpp", __LINE__);
 }
 
-//TODO0: think about refactoring all the callbacks for signals (moving it somwhere out of world)
-//		 try to refactor it, using reactive callbacks in entt
-void godot::ECSWorld::_on_Grenade_explosion(Node* pTarget, GrenadeNode* pGrenade)
-{
-	for (int i = 0; i < pGrenade->GetHitted().size(); i++)
-	{
-		EntityHolderNode* pEntitiyHolder = Object::cast_to<EntityHolderNode>(pGrenade->GetHitted()[i]);
-		ASSERT(pEntitiyHolder != nullptr, "entity holder hitted by explosion is null");
-		ASSERT(pEntitiyHolder->GetEntity() != entt::null, "wrong entity, hitted by explosion");
-		ASSERT(registry.has<HealthComponent>(pEntitiyHolder->GetEntity()), "no health component on entity hitted by explosion");
-
-		registry.get<HealthComponent>(pEntitiyHolder->GetEntity()).hp -= pGrenade->GetDamage();
-	}
-}
-
 void godot::ECSWorld::_register_methods()
 {
 	register_method((char*)"_init", &ECSWorld::_init);
@@ -189,7 +175,6 @@ void godot::ECSWorld::_register_methods()
 	register_method((char*)"_input", &ECSWorld::HandleInputEvent);
 	register_method((char*)"_process", &ECSWorld::_process);
 	register_method((char*)"_physics_process", &ECSWorld::_physics_process);
-	register_method((char*)"_on_Grenade_explosion", &ECSWorld::_on_Grenade_explosion);
 }
 
 void godot::ECSWorld::_init()
@@ -216,6 +201,7 @@ void godot::ECSWorld::_init()
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PatrolSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new LookAroundSystem()));
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new GrenadeSystem()));
 	//TODO: should it be in phys proc?
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new NavAgentSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PursuingSystem()));
