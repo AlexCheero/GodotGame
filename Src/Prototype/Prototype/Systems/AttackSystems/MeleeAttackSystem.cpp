@@ -41,6 +41,8 @@ godot::MeleeAttackSystem::MeleeAttackSystem()
 //TODO: implement proper hth with blocks and stuff
 void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 {
+	//TODO0: remove this system after finishing HTHDamaging area
+	return;
 	auto view = registry.view<entt::tag<CurrentWeaponMeleeTag>, MeleeAttackComponent, InputComponent, Spatial*>(ExcludeDead);
 	view.less([&registry, this](MeleeAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
 	{
