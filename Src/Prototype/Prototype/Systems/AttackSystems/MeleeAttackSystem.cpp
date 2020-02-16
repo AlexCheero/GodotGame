@@ -39,6 +39,7 @@ godot::MeleeAttackSystem::MeleeAttackSystem()
 }
 
 //TODO: implement proper hth with blocks and stuff
+//TODO: call such systems only by input callback
 void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<entt::tag<CurrentWeaponMeleeTag>, MeleeAttackComponent, InputComponent, Spatial*>(ExcludeDead);

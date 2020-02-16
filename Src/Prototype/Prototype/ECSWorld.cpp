@@ -65,6 +65,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	//TODO: check what node inherited components really should be assigned
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pPlayerNode);
+	//TODO: probably should use position3d class instead of spatial
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("Camera"));
 	//AssignNodeInheritedComponent<Animation2DComponent>(registry, entity, get_node("Player/Sprite3D"));
