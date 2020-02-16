@@ -179,9 +179,7 @@ void godot::ECSWorld::_register_methods()
 
 void godot::ECSWorld::_init()
 {
-	//TODO: it reinits on scene reset
-	if (instance == nullptr)
-		InitInstance(this);
+	InitInstance(this);
 
 	utils::InitPhysicLayers();
 

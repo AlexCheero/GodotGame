@@ -8,7 +8,8 @@ protected:
 
 	static void InitInstance(T* inst)
 	{
-		ASSERT(instance == nullptr, "instance already inited");
+		//TODO: should reinit on scene reset
+		//ASSERT(instance == nullptr, "instance already inited");
 		ASSERT(inst != nullptr, "trying to init instance with nullptr");
 
 		instance = inst;
