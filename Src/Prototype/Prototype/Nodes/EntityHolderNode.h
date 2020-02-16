@@ -7,7 +7,7 @@
 
 namespace godot
 {
-	//TODO0: this class should not inherit KinematicBody
+	//TODO: this class should not inherit KinematicBody
 	class EntityHolderNode : public KinematicBody
 	{
 		GODOT_CLASS(EntityHolderNode, KinematicBody)

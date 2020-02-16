@@ -11,10 +11,6 @@
 #include "Components/Views/EntityView.h"
 #include "Components/NodeComponents/Animation2DComponent.h"
 
-#include "Nodes/PickableNode.h"
-#include "Nodes/GrenadeNode.h"
-#include "Nodes/HTHDamagingArea.h"
-
 #include "Singleton.h"
 
 namespace godot

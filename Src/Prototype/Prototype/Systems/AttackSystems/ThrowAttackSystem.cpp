@@ -7,7 +7,7 @@
 #include "../../Components/AttackComponents.h"
 #include "../../Components/InputComponents.h"
 #include "../../Nodes/ThrowableWeaponNode.h"
-#include "../../Nodes/GrenadeNode.h"
+#include "../../Components/Views/EntityView.h"
 
 void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 {
@@ -47,12 +47,15 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 		{
 			entt::entity grenadeEntity = registry.create();
 			registry.assign<Spatial*>(grenadeEntity, Object::cast_to<Spatial>(throwableNode));
-			GrenadeComponent& grenComp = registry.assign<GrenadeComponent>(grenadeEntity);
+			
+			EntityView* pGrenadeView = Object::cast_to<EntityView>(throwableNode->get_node("EntityView"));
+			ASSERT(pGrenadeView != nullptr, "grenade entity view is null");
+
+			GrenadeComponent grenComp;
+			pGrenadeView->ConstructComponent(grenComp);
 			grenComp.startTime = godot::OS::get_singleton()->get_ticks_msec();
-			//TODO0: fill all gren params with its view, when its done
-			grenComp.damage = 200;
-			grenComp.explosionRadius = 20;
-			grenComp.explosionTime = 1;
+
+			registry.assign<GrenadeComponent>(grenadeEntity, grenComp);
 		}
 	});
 }

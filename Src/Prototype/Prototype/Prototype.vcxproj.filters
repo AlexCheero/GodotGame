@@ -216,9 +216,6 @@
     <ClCompile Include="Nodes\ThrowableWeaponNode.cpp">
       <Filter>Source Files\Nodes</Filter>
     </ClCompile>
-    <ClCompile Include="Nodes\GrenadeNode.cpp">
-      <Filter>Source Files\Nodes</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\AnimSystems\LocomotionAnimSystem.cpp">
       <Filter>Source Files\Systems\AnimSystems</Filter>
     </ClCompile>
@@ -227,6 +224,9 @@
     </ClCompile>
     <ClCompile Include="Systems\AttackSystems\GrenadeSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\Views\AttackViews\GrenadeView.cpp">
+      <Filter>Source Files\Components\Views\AttackViews</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -371,9 +371,6 @@
     <ClInclude Include="Nodes\ThrowableWeaponNode.h">
       <Filter>Header Files\Nodes</Filter>
     </ClInclude>
-    <ClInclude Include="Nodes\GrenadeNode.h">
-      <Filter>Header Files\Nodes</Filter>
-    </ClInclude>
     <ClInclude Include="Systems\AnimSystems\LocomotionAnimSystem.h">
       <Filter>Header Files\Systems\AnimSystems</Filter>
     </ClInclude>
@@ -385,6 +382,9 @@
     </ClInclude>
     <ClInclude Include="Systems\AttackSystems\GrenadeSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Views\AttackViews\GrenadeView.h">
+      <Filter>Header Files\Components\Views\AttackViews</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

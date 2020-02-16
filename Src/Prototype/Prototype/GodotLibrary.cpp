@@ -6,6 +6,7 @@
 #include "Components/Views/AttackViews/MeleeAttackView.h"
 #include "Components/Views/AttackViews/RangedAttackView.h"
 #include "Components/Views/AttackViews/ThrowableAttackView.h"
+#include "Components/Views/AttackViews/GrenadeView.h"
 #include "Components/Views/HealthView.h"
 #include "Components/Views/LocomotionViews/GravityView.h"
 #include "Components/Views/LocomotionViews/JumpSpeedView.h"
@@ -17,7 +18,6 @@
 #include "Nodes/PickableNode.h"
 #include "Nodes/EntityHolderNode.h"
 #include "Nodes/ThrowableWeaponNode.h"
-#include "Nodes/GrenadeNode.h"
 #include "Nodes/HTHDamagingArea.h"
 
 using namespace godot;
@@ -51,6 +51,6 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<NavMarginView>();
 	register_class<Animation2DComponent>();
 	register_class<PickableNode>();
-	register_class<GrenadeNode>();
 	register_class<HTHDamagingArea>();
+	register_class<GrenadeView>();
 }

@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Scripts/Nodes/GrenadeNode.gdns" type="Script" id=1]
+[ext_resource path="res://Scripts/Views/AttackViews/GrenadeView.gdns" type="Script" id=1]
+[ext_resource path="res://Scripts/Views/EntityView.gdns" type="Script" id=2]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.521569, 1, 0, 1 )
@@ -13,10 +14,6 @@ material = SubResource( 1 )
 [node name="ThrowableGrenade" type="RigidBody"]
 collision_layer = 8
 collision_mask = 5
-script = ExtResource( 1 )
-"explosion time" = 1.0
-"explosion radius" = 20.0
-damage = 200.0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
@@ -26,4 +23,13 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 shape = SubResource( 3 )
+
+[node name="EntityView" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="GrenadeView" type="Node" parent="EntityView"]
+script = ExtResource( 1 )
+"explosion time" = 1.0
+"explosion radius" = 20.0
+damage = 200.0
 [connection signal="body_entered" from="." to="." method="_on_throwable_collide"]

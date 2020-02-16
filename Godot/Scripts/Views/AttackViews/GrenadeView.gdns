@@ -3,6 +3,6 @@
 [ext_resource path="res://NativeLibs/Debug/Prototype/Prototype.gdnlib" type="GDNativeLibrary" id=1]
 
 [resource]
-resource_name = "GrenadeNode"
-class_name = "GrenadeNode"
+resource_name = "GrenadeView"
+class_name = "GrenadeView"
 library = ExtResource( 1 )

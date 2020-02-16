@@ -154,6 +154,7 @@
     <ClCompile Include="Components\NodeComponents\Animation2DComponent.cpp" />
     <ClCompile Include="Components\Views\AIViews\NavMarginView.cpp" />
     <ClCompile Include="Components\Views\AIViews\PatrolmanView.cpp" />
+    <ClCompile Include="Components\Views\AttackViews\GrenadeView.cpp" />
     <ClCompile Include="Components\Views\AttackViews\RangedAttackView.cpp" />
     <ClCompile Include="Components\Views\AttackViews\MeleeAttackView.cpp" />
     <ClCompile Include="Components\Views\AttackViews\ThrowableAttackView.cpp" />
@@ -164,7 +165,6 @@
     <ClCompile Include="Components\Views\LocomotionViews\SpeedView.cpp" />
     <ClCompile Include="Components\Views\SimpleFollowView.cpp" />
     <ClCompile Include="GodotLibrary.cpp" />
-    <ClCompile Include="Nodes\GrenadeNode.cpp" />
     <ClCompile Include="Nodes\HTHDamagingArea.cpp" />
     <ClCompile Include="Nodes\PickableNode.cpp" />
     <ClCompile Include="Nodes\ThrowableWeaponNode.cpp" />
@@ -204,6 +204,7 @@
     <ClInclude Include="Components\SimpleComponents.h" />
     <ClInclude Include="Components\Views\AIViews\NavMarginView.h" />
     <ClInclude Include="Components\Views\AIViews\PatrolmanView.h" />
+    <ClInclude Include="Components\Views\AttackViews\GrenadeView.h" />
     <ClInclude Include="Components\Views\AttackViews\RangedAttackView.h" />
     <ClInclude Include="Components\Views\AttackViews\MeleeAttackView.h" />
     <ClInclude Include="Components\Views\AttackViews\ThrowableAttackView.h" />
@@ -215,7 +216,6 @@
     <ClInclude Include="Components\Views\LocomotionViews\SpeedView.h" />
     <ClInclude Include="Components\Views\SimpleFollowView.h" />
     <ClInclude Include="Nodes\EntityHolderNode.h" />
-    <ClInclude Include="Nodes\GrenadeNode.h" />
     <ClInclude Include="Nodes\HTHDamagingArea.h" />
     <ClInclude Include="Nodes\PickableNode.h" />
     <ClInclude Include="Nodes\ThrowableWeaponNode.h" />

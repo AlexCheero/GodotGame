@@ -12,6 +12,7 @@
 #include "AttackViews/MeleeAttackView.h"
 #include "AttackViews/RangedAttackView.h"
 #include "AttackViews/ThrowableAttackView.h"
+#include "AttackViews/GrenadeView.h"
 #include "../SimpleComponents.h"
 #include "HealthView.h"
 #include "LocomotionViews/GravityView.h"
@@ -106,4 +107,5 @@ namespace godot
 	CONSTRUCT_COMPONENT(SimpleFollow)
 	CONSTRUCT_COMPONENT(Patrolman)
 	CONSTRUCT_COMPONENT(NavMargin)
+	CONSTRUCT_COMPONENT(Grenade)
 }

@@ -15,6 +15,7 @@ namespace godot
 		float damage;
 		float angle;
 		float attackTime;
+		//TODO: make it int for all views
 		String collisionLayerName;
 	public:
 		static void _register_methods();
