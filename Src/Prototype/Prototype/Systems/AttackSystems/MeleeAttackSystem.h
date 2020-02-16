@@ -11,6 +11,7 @@ namespace godot
 {
 	class TESTABLE_CLASS MeleeAttackSystem : public BaseSystem, private AttackCooldown
 	{
+	private:
 		Ref<PhysicsShapeQueryParameters> m_params;
 		Ref<SphereShape> m_attackShape;
 		Array GetIntersects(Spatial* pAttackerSpatial, float distance, String layerName);

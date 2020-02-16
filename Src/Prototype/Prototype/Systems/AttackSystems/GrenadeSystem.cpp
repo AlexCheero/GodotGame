@@ -1,8 +1,6 @@
 #include "GrenadeSystem.h"
 
 #include <OS.hpp>
-#include <SphereShape.hpp>
-#include <PhysicsShapeQueryParameters.hpp>
 #include <PhysicsDirectSpaceState.hpp>
 #include <World.hpp>
 
@@ -21,6 +19,17 @@ bool godot::GrenadeSystem::CheckVisibility(Spatial* pGrenade, EntityHolderNode* 
 	return pTarget == Object::cast_to<EntityHolderNode>(pHitResult);
 }
 
+godot::GrenadeSystem::GrenadeSystem()
+{
+	m_params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
+	m_params->set_collide_with_areas(false);
+	m_params->set_collide_with_bodies(true);
+	//TODO: set layer name
+	//m_params->set_collision_mask(utils::GetLayerByName(layerName));
+
+	m_attackShape = Ref<SphereShape>(SphereShape::_new());
+}
+
 void godot::GrenadeSystem::operator()(float delta, entt::registry& registry)
 {
 	int64_t currTime = godot::OS::get_singleton()->get_ticks_msec();
@@ -35,20 +44,12 @@ void godot::GrenadeSystem::operator()(float delta, entt::registry& registry)
 	auto explodedView = registry.view<entt::tag<GrenadeExplodesTag>, GrenadeComponent, Spatial*>(entt::exclude<entt::tag<DeadTag> >);
 	explodedView.less([this, &registry](entt::entity entity, GrenadeComponent grenComp, Spatial* pGrenSpatial)
 	{
-		//TODO0: cache params
-		Ref<SphereShape> attackShape = Ref<SphereShape>(SphereShape::_new());
-		attackShape->set_radius(grenComp.explosionRadius);
-		
-		//TODO: set layer name
-		//params->set_collision_mask(utils::GetLayerByName(layerName));
-		Ref<PhysicsShapeQueryParameters> params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
-		params->set_collide_with_areas(false);
-		params->set_collide_with_bodies(true);
-		params->set_shape(attackShape);
+		m_attackShape->set_radius(grenComp.explosionRadius);
+		m_params->set_shape(m_attackShape);
 
-		params->set_transform(pGrenSpatial->get_global_transform());
+		m_params->set_transform(pGrenSpatial->get_global_transform());
 		PhysicsDirectSpaceState* spaceState = pGrenSpatial->get_world()->get_direct_space_state();
-		Array intersects = spaceState->intersect_shape(params, INTERSECT_RESULTS_NUM);
+		Array intersects = spaceState->intersect_shape(m_params, INTERSECT_RESULTS_NUM);
 
 		for (int i = 0; i < intersects.size(); i++)
 		{
