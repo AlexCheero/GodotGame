@@ -6,6 +6,8 @@
 
 void godot::HTHDamagingArea::_register_methods()
 {
+	register_property<HTHDamagingArea, float>("damage", &HTHDamagingArea::damage, 0);
+
 	register_method((char*)"_on_Area_body_entered", &HTHDamagingArea::_on_Area_body_entered);
 }
 
@@ -14,8 +16,8 @@ void godot::HTHDamagingArea::_on_Area_body_entered(EntityHolderNode* pEntityHold
 	if (!pEntityHolder)
 		return;
 
-	//TODO0: rewrite draft
+	//TODO0: rewrite draft. switch on/off, use IK
 	entt::registry& registry = ECSWorld::GetInstance()->GetRegistry();
 
-	registry.get<HealthComponent>(pEntityHolder->GetEntity()).hp -= 100;
+	registry.get<HealthComponent>(pEntityHolder->GetEntity()).hp -= damage;
 }

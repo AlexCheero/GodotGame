@@ -14,7 +14,7 @@ namespace godot
 	{
 		GODOT_CLASS(HTHDamagingArea, Area)
 	private:
-
+		float damage;
 		void _on_Area_body_entered(EntityHolderNode* pEntityHolder);
 	public:
 		static void _register_methods();
