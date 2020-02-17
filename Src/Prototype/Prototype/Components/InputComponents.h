@@ -23,6 +23,7 @@ enum class EInput
 	End
 };
 
+//TODO: probably can just use entt::tag<(int)EInput::Value>
 #define CREATE_HASH_STRING(name) \
 	constexpr entt::hashed_string name##InputTag = #name##_hs;
 
