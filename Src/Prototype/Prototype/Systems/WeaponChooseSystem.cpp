@@ -21,7 +21,7 @@ void godot::WeaponChooseSystem::OnThrowableTagConstruct(entt::registry& registry
 	registry.remove_if_exists<entt::tag<CurrentWeaponRangedTag> >(entity);
 }
 
-//TODO: don't update this and similar systems all the time
+//TODO: don't update this and similar systems all the time, make it reactive as MeleeAttackSystem
 void godot::WeaponChooseSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<InputComponent>();

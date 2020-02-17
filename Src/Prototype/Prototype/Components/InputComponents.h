@@ -6,17 +6,28 @@
 
 #include <bitset>
 
+//macro black magick that creates new enum value and hashed_string tag for it
+#define INPUT_VALUES(value) \
+	value(Attack) \
+	value(Jump) \
+	value(ChooseMelee) \
+	value(ChooseRanged) \
+	value(ChooseThrowable)
+
+#define CREATE_ENUM_VALUE(name) \
+	name,
+
 enum class EInput
 {
-	Attack,
-	Jump,
-	ChooseMelee,
-	ChooseRanged,
-	ChooseThrowable,
-
-	//do not add anything after this value
+	INPUT_VALUES(CREATE_ENUM_VALUE)
 	End
 };
+
+#define CREATE_HASH_STRING(name) \
+	constexpr entt::hashed_string name##InputTag = #name##_hs;
+
+INPUT_VALUES(CREATE_HASH_STRING)
+//------------------------macro black magick ends here-----------------------
 
 struct InputComponent
 {
@@ -35,5 +46,3 @@ struct InputComponent
 		return value;
 	}
 };
-
-constexpr entt::hashed_string AttackInputTag = "AttackInputTag"_hs;
