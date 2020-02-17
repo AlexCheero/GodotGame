@@ -10,7 +10,6 @@ struct JumpSpeedComponent { float speed; };
 struct RotationDirectionComponent { godot::Vector3 direction; };
 
 //<Tags
-//TODO0: try to change all tag types to entt::tag
 constexpr entt::hashed_string PlayerTag = "PlayerTag"_hs;
 constexpr entt::hashed_string BotTag = "BotTag"_hs;
 constexpr entt::hashed_string DeadTag = "DeadTag"_hs;
