@@ -19,5 +19,7 @@ void godot::HTHDamagingArea::_on_Area_body_entered(EntityHolderNode* pEntityHold
 	//TODO0: rewrite draft. switch on/off, use IK
 	entt::registry& registry = ECSWorld::GetInstance()->GetRegistry();
 
+	Godot::print("hth damaging area entered!");
+
 	registry.get<HealthComponent>(pEntityHolder->GetEntity()).hp -= damage;
 }

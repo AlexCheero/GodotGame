@@ -28,6 +28,7 @@ void godot::LocomotionAnimSystem::operator()(float delta, entt::registry& regist
 		pAnimTree->set("parameters/BlendSpace2D/blend_position", animVec);
 	});
 
+	//TODO: this is not locomotion
 	auto punchView = registry.view<InputComponent, AnimationTree*>();
 	punchView.each([](InputComponent input, AnimationTree* pAnimTree)
 	{

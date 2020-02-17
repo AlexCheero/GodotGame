@@ -35,3 +35,5 @@ struct InputComponent
 		return value;
 	}
 };
+
+constexpr entt::hashed_string AttackInputTag = "AttackInputTag"_hs;

@@ -187,38 +187,48 @@ void godot::ECSWorld::_init()
 	//TODO: try to move physics to separate thread
 	//TODO: check what systems really should be in phys proc
 	//TODO: check what systems should be reactive
+	
 	//setup physics systems
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PlayerVelocitySystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new KinematicMovementSystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new GravitySystem()));
-	//must always follow GravitySystem
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new JumpSystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PlayerRotationSystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new LookAtSystem()));
-	//TODO0: delete MeleeAttackSystem after finishing HTHDamaging area
-	//m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new MeleeAttackSystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new RangedAttackSystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowAttackSystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PatrolSystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new LookAroundSystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new GrenadeSystem()));
-	//TODO: should it be in phys proc?
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new NavAgentSystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PursuingSystem()));
+	{
+		m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PlayerVelocitySystem()));
+		m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new KinematicMovementSystem()));
+		m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new GravitySystem()));
+		//must always follow GravitySystem
+		m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new JumpSystem()));
+		m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PlayerRotationSystem()));
+		m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new LookAtSystem()));
+		m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new RangedAttackSystem()));
+		m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowAttackSystem()));
+		m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PatrolSystem()));
+		m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new LookAroundSystem()));
+		m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new GrenadeSystem()));
+		//TODO: should it be in phys proc?
+		m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new NavAgentSystem()));
+		m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PursuingSystem()));
+	}
 	
 	//setup systems
-	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new SimpleFollowSystem()));
-	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new DestroyDeadSystem()));
+	{
+		m_process_systems.push_back(std::unique_ptr<BaseSystem>(new SimpleFollowSystem()));
+		m_process_systems.push_back(std::unique_ptr<BaseSystem>(new DestroyDeadSystem()));
 
-	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new WeaponChooseSystem()));
-	registry.on_construct<entt::tag<CurrentWeaponMeleeTag> >().connect<&WeaponChooseSystem::OnMeleeTagConstruct>();
-	registry.on_construct<entt::tag<CurrentWeaponRangedTag> >().connect<&WeaponChooseSystem::OnRangedTagConstruct>();
-	registry.on_construct<entt::tag<CurrentWeaponThrowableTag> >().connect<&WeaponChooseSystem::OnThrowableTagConstruct>();
+		m_process_systems.push_back(std::unique_ptr<BaseSystem>(new WeaponChooseSystem()));
+		registry.on_construct<entt::tag<CurrentWeaponMeleeTag> >().connect<&WeaponChooseSystem::OnMeleeTagConstruct>();
+		registry.on_construct<entt::tag<CurrentWeaponRangedTag> >().connect<&WeaponChooseSystem::OnRangedTagConstruct>();
+		registry.on_construct<entt::tag<CurrentWeaponThrowableTag> >().connect<&WeaponChooseSystem::OnThrowableTagConstruct>();
 
-	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new HealthMonitoringSystem()));
-	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new FleeingSystem()));
-	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new BillboardRotationSystem()));
-	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new LocomotionAnimSystem()));
+		m_process_systems.push_back(std::unique_ptr<BaseSystem>(new HealthMonitoringSystem()));
+		m_process_systems.push_back(std::unique_ptr<BaseSystem>(new FleeingSystem()));
+		m_process_systems.push_back(std::unique_ptr<BaseSystem>(new BillboardRotationSystem()));
+		m_process_systems.push_back(std::unique_ptr<BaseSystem>(new LocomotionAnimSystem()));
+	}
+
+	//setup reactive systems
+	{
+		//TODO0: refactor MeleeAttackSystem with HTHDamaging area
+		MeleeAttackSystem::InitParams();
+		registry.on_construct<entt::tag<AttackInputTag> >().connect<&MeleeAttackSystem::OnMeleeInputTagConstruct>();
+	}
 }
 
 void godot::ECSWorld::_ready()

@@ -18,9 +18,17 @@ void godot::PlayerInputSystem::operator()(entt::registry& registry, InputEvent* 
 {
 	//TODO: read once more about differences between groups and view and, probably, use group instead
 	auto view = registry.view<entt::tag<PlayerTag>, InputComponent>();
-	view.less([&registry, e](InputComponent& comp)
+	view.less([&registry, e](entt::entity entity, InputComponent& comp)
 	{
-		comp.Set(EInput::Attack, e->is_action_pressed("attack"));
+		//TODO0: refactor this stuff
+		bool attackPressed = e->is_action_pressed("attack");
+		bool hasAttackInput = registry.has<entt::tag<AttackInputTag> >(entity);
+		comp.Set(EInput::Attack, attackPressed);
+		if (attackPressed && !hasAttackInput)
+			registry.assign<entt::tag<AttackInputTag> >(entity);
+		else if (!attackPressed && hasAttackInput)
+			registry.remove<entt::tag<AttackInputTag> >(entity);
+
 		comp.Set(EInput::Jump, e->is_action_pressed("jump"));
 		comp.Set(EInput::ChooseMelee, e->is_action_pressed("choose_melee"));
 		comp.Set(EInput::ChooseRanged, e->is_action_pressed("choose_ranged"));

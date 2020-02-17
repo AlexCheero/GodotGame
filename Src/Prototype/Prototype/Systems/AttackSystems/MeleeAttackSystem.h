@@ -9,15 +9,16 @@
 
 namespace godot
 {
-	class TESTABLE_CLASS MeleeAttackSystem : public BaseSystem, private AttackCooldown
+	//TODO: rename to reactive system or just turn it into free function
+	class TESTABLE_CLASS MeleeAttackSystem
 	{
 	private:
-		Ref<PhysicsShapeQueryParameters> m_params;
-		Ref<SphereShape> m_attackShape;
-		Array GetIntersects(Spatial* pAttackerSpatial, float distance, String layerName);
+		static Ref<PhysicsShapeQueryParameters> m_params;
+		static Ref<SphereShape> m_attackShape;
+		static Array GetIntersects(Spatial* pAttackerSpatial, float distance, String layerName);
 	public:
-		MeleeAttackSystem();
-		virtual void operator()(float delta, entt::registry& registry) override;
+		static void InitParams();
+		static void OnMeleeInputTagConstruct(entt::registry& registry, entt::entity entity);
 		static bool CheckAttackAngle(Vector3 attackerPosition, Vector3 attackerDirection, Vector3 targetPosition, float maxAngle);
 	};
 }
