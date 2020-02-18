@@ -19,6 +19,7 @@ struct MeleeAttackComponent
 	float attackTime;
 	godot::String collisionLayerName;
 	int64_t prevHitTime = -utils::SecondsToMillis(attackTime);
+	godot::Spatial* pTargetSpatial = nullptr;
 };
 
 constexpr entt::hashed_string CurrentWeaponRangedTag = "CurrentWeaponRangedTag"_hs;
