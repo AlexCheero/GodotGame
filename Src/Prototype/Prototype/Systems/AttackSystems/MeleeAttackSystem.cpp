@@ -55,8 +55,8 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 	view.less([&registry, this](entt::entity entity, MeleeAttackComponent& attackComp, InputComponent input
 		, RotationDirectionComponent& rotComp, Spatial* pAttackerSpatial)
 	{
-		//TODO0: crashes when trying to get dir to pending delete target
-		if (attackComp.pTargetSpatial != nullptr)
+		//TODO0: crashes when trying to get dir to pending delete target. should use Object::instance_validate() but it is not in the bindings
+		if (attackComp.pTargetSpatial != nullptr && attackComp.pTargetSpatial->is_inside_tree())
 			rotComp.direction = GetDirToTarget(pAttackerSpatial, attackComp);
 		
 		if (!CanAttack(input, attackComp.attackTime, attackComp.prevHitTime))
