@@ -28,14 +28,22 @@ godot::Array godot::MeleeAttackSystem::GetIntersects(Spatial* pAttackerSpatial, 
 	return spaceState->intersect_shape(m_params, INTERSECT_RESULTS_NUM);
 }
 
-godot::Vector3 godot::MeleeAttackSystem::GetDirToTarget(Spatial* pAttackerSpatial, MeleeAttackComponent attackComp)
+godot::Vector3 godot::MeleeAttackSystem::GetDirToTarget(Spatial* pAttackerSpatial, entt::registry& registry, entt::entity lockedTarget)
 {
+	ASSERT(registry.has<Spatial*>(lockedTarget), "lockedTarget has no spatial");
+	Spatial* pTargetSpatial = registry.get<Spatial*>(lockedTarget);
+
 	Transform attackerTransform = pAttackerSpatial->get_global_transform();
-	Vector3 enemyPosition = attackComp.pTargetSpatial->get_global_transform().origin;
+	Vector3 enemyPosition = pTargetSpatial->get_global_transform().origin;
 	Vector3 dirToTarget = enemyPosition - attackerTransform.origin;
 	dirToTarget.normalize();
 
 	return dirToTarget;
+}
+
+bool godot::MeleeAttackSystem::ChecktargetEntity(entt::registry& registry, entt::entity lockedTarget)
+{
+	return lockedTarget != entt::null && registry.valid(lockedTarget) && !registry.has<entt::tag<DeadTag> >(lockedTarget);
 }
 
 godot::MeleeAttackSystem::MeleeAttackSystem()
@@ -55,9 +63,8 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 	view.less([&registry, this](entt::entity entity, MeleeAttackComponent& attackComp, InputComponent input
 		, RotationDirectionComponent& rotComp, Spatial* pAttackerSpatial)
 	{
-		//TODO0: crashes when trying to get dir to pending delete target. should use Object::instance_validate() but it is not in the bindings
-		if (attackComp.pTargetSpatial != nullptr && attackComp.pTargetSpatial->is_inside_tree())
-			rotComp.direction = GetDirToTarget(pAttackerSpatial, attackComp);
+		if (ChecktargetEntity(registry, attackComp.lockedTarget))
+			rotComp.direction = GetDirToTarget(pAttackerSpatial, registry, attackComp.lockedTarget);
 		
 		if (!CanAttack(input, attackComp.attackTime, attackComp.prevHitTime))
 			return;
@@ -76,13 +83,20 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 		if (!pHittedObj)
 			return;
 
-		Spatial* pTargetSpatial = Object::cast_to<Spatial>(pHittedObj);
-		if (attackComp.pTargetSpatial == pTargetSpatial)
+		EntityHolderNode* pEntityHolder = Object::cast_to<EntityHolderNode>(pHittedObj);
+		entt::entity targetEntity = pEntityHolder->GetEntity();
+		ASSERT(pEntityHolder != nullptr, "target pEntityHolder is null");
+		ASSERT(targetEntity != entt::null, "target entity is null");
+		ASSERT(registry.valid(targetEntity), "invalid target entity");
+		//TODO: probably this should be runtime check
+		ASSERT(!registry.has<entt::tag<DeadTag> >(targetEntity), "");
+
+		if (attackComp.lockedTarget == targetEntity)
 			return;
 
-		attackComp.pTargetSpatial = Object::cast_to<Spatial>(pHittedObj);
+		attackComp.lockedTarget = targetEntity;
 
-		Vector3 dirToTarget = GetDirToTarget(pAttackerSpatial, attackComp);;
+		Vector3 dirToTarget = GetDirToTarget(pAttackerSpatial, registry, attackComp.lockedTarget);;
 		float angleCos = dirToTarget.dot(pAttackerSpatial->get_global_transform().basis.z);
 		float angle = Math::rad2deg(Math::acos(angleCos));
 		if (angle <= attackComp.angle)

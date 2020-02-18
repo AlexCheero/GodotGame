@@ -44,6 +44,7 @@ namespace godot
 	private:
 		//TODO: remove all child nodes and use only one node with all components as fields
 		//		same as for AnimationTree parameters in inspector
+		//		probably merge with entity holder node
 		std::map<String, ComponentView*> componentsMap;
 
 		template<typename Type, typename... Types>
