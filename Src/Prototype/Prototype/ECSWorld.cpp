@@ -196,7 +196,7 @@ void godot::ECSWorld::_init()
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PlayerRotationSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new LookAtSystem()));
 	//TODO0: delete MeleeAttackSystem after finishing HTHDamaging area
-	//m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new MeleeAttackSystem()));
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new MeleeAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new RangedAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PatrolSystem()));

@@ -18,6 +18,5 @@ namespace godot
 	public:
 		MeleeAttackSystem();
 		virtual void operator()(float delta, entt::registry& registry) override;
-		static bool CheckAttackAngle(Vector3 attackerPosition, Vector3 attackerDirection, Vector3 targetPosition, float maxAngle);
 	};
 }

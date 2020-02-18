@@ -42,8 +42,9 @@ godot::MeleeAttackSystem::MeleeAttackSystem()
 //TODO: call such systems only by input callback
 void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 {
-	auto view = registry.view<entt::tag<CurrentWeaponMeleeTag>, MeleeAttackComponent, InputComponent, Spatial*>(ExcludeDead);
-	view.less([&registry, this](MeleeAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
+	auto view = registry.view<entt::tag<CurrentWeaponMeleeTag>, MeleeAttackComponent, InputComponent, RotationDirectionComponent, Spatial*>(ExcludeDead);
+	view.less([&registry, this](entt::entity entity, MeleeAttackComponent& attackComp, InputComponent input
+		, RotationDirectionComponent& rotComp, Spatial* pAttackerSpatial)
 	{
 		if (!CanAttack(input, attackComp.attackTime, attackComp.prevHitTime))
 			return;
@@ -51,60 +52,28 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 		//TODO: bot keeps splashing after killing player
 		Godot::print("Splash!");
 
+		//TODO: intersect only with something that can be hitted
 		Array intersects = GetIntersects(pAttackerSpatial, attackComp.distance, attackComp.collisionLayerName);
 		if (intersects.size() == 0)
 			return;
-		
-		Object* pHittedObj = nullptr;
-		for (int i = 0; i < intersects.size(); i++)
-		{
-			Dictionary dict = intersects[i];//TODO: hits only first intersected, implement area hits
-			Object* pObj = Node::___get_from_variant(dict["collider"]);
 
-			Object* pCastHitResult = utils::CastFromSpatial(pAttackerSpatial, pAttackerSpatial->get_global_transform().get_basis().z, attackComp.distance);
-			if (pObj == pCastHitResult)
-				pHittedObj = pCastHitResult;
-		}
+		Dictionary dict = intersects[0];//TODO: hits only first intersected, implement area hits
+		Object* pObj = Node::___get_from_variant(dict["collider"]);
+		Object* pHittedObj = pObj;
 
 		if (!pHittedObj)
 			return;
-		
-		Vector3 enemyPosition = Object::cast_to<Spatial>(pHittedObj)->get_global_transform().origin;
+
 		Transform attackerTransform = pAttackerSpatial->get_global_transform();
-		if (!CheckAttackAngle(attackerTransform.origin, attackerTransform.basis.z, enemyPosition, attackComp.angle))
-			return;
+		Vector3 enemyPosition = Object::cast_to<Spatial>(pHittedObj)->get_global_transform().origin;
+		Vector3 dirToTarget = enemyPosition - attackerTransform.origin;
+		dirToTarget.normalize();
 
-		entt::entity enemyEntity = Object::cast_to<EntityHolderNode>(pHittedObj)->GetEntity();
-		
-		HealthComponent& enemyHealthComp = registry.get<HealthComponent>(enemyEntity);
-		enemyHealthComp.hp -= attackComp.damage;
-
-		Godot::print("melee hit");
+		float angleCos = dirToTarget.dot(attackerTransform.basis.z);
+		float angle = Math::rad2deg(Math::acos(angleCos));
+		if (angle <= attackComp.angle)
+		{
+			rotComp.direction = dirToTarget;
+		}
 	});
-}
-
-/*
-bool godot::AttackSystem::CheckAttackAngle(Vector3 attackerPosition, Vector3 attackerDirection, Vector3 targetPosition, float maxAngle)
-{
-	Vector3 toEnemyDirection = targetPosition - attackerPosition;
-	toEnemyDirection.normalize();
-	float angleCos = toEnemyDirection.dot(attackerDirection);
-	float angle = Math::rad2deg(Math::acos(angleCos));
-
-	return angle <= maxAngle;
-}
-*/
-
-//check only flat (in (x,z) plane) angle. without considering y position of target
-bool godot::MeleeAttackSystem::CheckAttackAngle(Vector3 attackerPosition, Vector3 attackerDirection, Vector3 targetPosition, float maxAngle)
-{
-	Vector2 targetFlatPosition = utils::FlatVector(targetPosition);
-	Vector2 attackerFlatPosition = utils::FlatVector(attackerPosition);
-	Vector2 toEnemyFlatDirection = targetFlatPosition - attackerFlatPosition;
-	toEnemyFlatDirection.normalize();
-	Vector2 attackerFlatDirection = utils::FlatVector(attackerDirection);
-	float angleCos = toEnemyFlatDirection.dot(attackerFlatDirection);
-	float angle = Math::rad2deg(Math::acos(angleCos));
-
-	return angle <= maxAngle;
 }
