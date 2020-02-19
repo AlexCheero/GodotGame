@@ -121,7 +121,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pEnemyNode);
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pEnemyNode);
-	AssignNodeInheritedComponent<Animation2DComponent>(registry, entity, get_node("Enemy/Sprite3D"));
+	//AssignNodeInheritedComponent<Animation2DComponent>(registry, entity, get_node("Enemy/Sprite3D"));
 
 	EntityHolderNode* pEnemy = AssignNodeInheritedComponent<EntityHolderNode>(registry, entity, pEnemyNode);
 	pEnemy->SetEntity(entity);

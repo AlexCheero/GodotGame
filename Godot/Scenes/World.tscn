@@ -91,12 +91,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -33.0559, 0, 16.7237 )
 
 [node name="Sword" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.441332, 2.51958, 10.2293 )
+type = -1
 
 [node name="Pistol" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.533201, 2.46549, 7.40483 )
+type = -1
 
 [node name="Fireball" parent="." instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.823804, 2.15959, 12.4014 )
+type = -1
 
 [node name="Grenade" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.13633, 2.05233, 2.4185 )
+type = -1
