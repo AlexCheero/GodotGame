@@ -55,14 +55,14 @@ node_connections = [ "output", 0, "OneShot", "OneShot", 0, "BlendSpace2D", "OneS
 bones/15/bound_children = [ NodePath("BoneAttachment") ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Skeleton" index="2"]
-transform = Transform( 0.763414, 0.645491, -0.0232005, -0.617373, 0.718659, -0.319968, -0.189864, 0.258592, 0.947145, 0.315125, 0.845512, 0.123738 )
+transform = Transform( 0.767093, 0.640987, -0.0264621, -0.614088, 0.721715, -0.319408, -0.185639, 0.261266, 0.947247, 0.313849, 0.846624, 0.121226 )
 bone_name = "mixamorig_LeftHandThumb4"
 
 [node name="Area" type="Area" parent="Skeleton/BoneAttachment" index="0"]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource( 2 )
-damage = 50.0
+damage = 10.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Skeleton/BoneAttachment/Area" index="0"]
 transform = Transform( 0.99994, -0.00343036, -0.0104506, 0.0030067, 0.999179, -0.0403854, 0.0105797, 0.0403494, 0.999128, 0.0133851, 0.0326422, -0.0517914 )

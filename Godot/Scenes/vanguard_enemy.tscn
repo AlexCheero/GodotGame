@@ -54,20 +54,18 @@ node_connections = [ "output", 0, "OneShot", "OneShot", 0, "BlendSpace2D", "OneS
 
 [node name="vanguard" instance=ExtResource( 2 )]
 
-[node name="Skeleton" parent="." index="0"]
-bones/15/bound_children = [ NodePath("BoneAttachment") ]
-
 [node name="vanguard_Mesh" parent="Skeleton" index="1"]
 material/0 = SubResource( 1 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Skeleton" index="2"]
-transform = Transform( 0.764677, 0.644368, -0.00748202, -0.617803, 0.729751, -0.292877, -0.183262, 0.22858, 0.95612, 0.308935, 0.848422, 0.134117 )
+transform = Transform( 0.766655, 0.640562, -0.0437928, -0.616506, 0.715379, -0.328863, -0.17933, 0.279123, 0.943361, 0.317064, 0.844104, 0.120243 )
 bone_name = "mixamorig_LeftHandThumb4"
 
 [node name="Area" type="Area" parent="Skeleton/BoneAttachment" index="0"]
-collision_layer = 2
-collision_mask = 4
+collision_layer = 4
+collision_mask = 2
 script = ExtResource( 1 )
+damage = 10.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Skeleton/BoneAttachment/Area" index="0"]
 transform = Transform( 0.99994, -0.00343036, -0.0104506, 0.0030067, 0.999179, -0.0403854, 0.0105797, 0.0403494, 0.999128, 0.0133851, 0.0326422, -0.0517914 )

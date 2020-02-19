@@ -217,7 +217,8 @@ void godot::ECSWorld::_init()
 	registry.on_construct<entt::tag<CurrentWeaponThrowableTag> >().connect<&WeaponChooseSystem::OnThrowableTagConstruct>();
 
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new HealthMonitoringSystem()));
-	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new FleeingSystem()));
+	//TODO: change logick of FleeingSystem after implementing combat systems (hth, shooting, covers, etc.)
+	//m_process_systems.push_back(std::unique_ptr<BaseSystem>(new FleeingSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new BillboardRotationSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new LocomotionAnimSystem()));
 }
