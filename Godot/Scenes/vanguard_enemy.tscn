@@ -4,19 +4,22 @@
 [ext_resource path="res://Characters3D/vanguard.dae" type="PackedScene" id=2]
 [ext_resource path="res://Characters/BlendTrees/character_blend_tree.tres" type="AnimationNodeBlendTree" id=3]
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="SphereShape" id=2]
+[sub_resource type="SphereShape" id=1]
 radius = 0.1
 
 [node name="vanguard" instance=ExtResource( 2 )]
 
+[node name="Skeleton" parent="." index="0"]
+bones/15/bound_children = [ NodePath("BoneAttachment") ]
+
 [node name="vanguard_Mesh" parent="Skeleton" index="1"]
-material/0 = SubResource( 1 )
+material/0 = SubResource( 2 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Skeleton" index="2"]
-transform = Transform( 0.762991, 0.645937, -0.0246728, -0.618236, 0.718059, -0.31965, -0.188758, 0.259143, 0.947214, 0.312169, 0.850851, 0.122646 )
+transform = Transform( 0.763769, 0.644652, -0.0327953, -0.618565, 0.716448, -0.322611, -0.184477, 0.266686, 0.945963, 0.304913, 0.844599, 0.117635 )
 bone_name = "mixamorig_LeftHandThumb4"
 
 [node name="Area" type="Area" parent="Skeleton/BoneAttachment" index="0"]
@@ -27,7 +30,7 @@ damage = 10.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Skeleton/BoneAttachment/Area" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013, 0.033, -0.052 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 disabled = true
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]

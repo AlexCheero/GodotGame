@@ -9,8 +9,11 @@ radius = 0.1
 
 [node name="vanguard" instance=ExtResource( 1 )]
 
+[node name="Skeleton" parent="." index="0"]
+bones/15/bound_children = [ NodePath("BoneAttachment") ]
+
 [node name="BoneAttachment" type="BoneAttachment" parent="Skeleton" index="2"]
-transform = Transform( 0.763907, 0.64449, -0.0328128, -0.618945, 0.717342, -0.319886, -0.182626, 0.264672, 0.946888, 0.319405, 0.845728, 0.117381 )
+transform = Transform( 0.76764, 0.638675, -0.0531062, -0.616325, 0.712973, -0.334382, -0.175698, 0.289416, 0.940939, 0.302117, 0.843062, 0.122438 )
 bone_name = "mixamorig_LeftHandThumb4"
 
 [node name="Area" type="Area" parent="Skeleton/BoneAttachment" index="0"]

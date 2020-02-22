@@ -35,7 +35,7 @@ blend_point_4/node = SubResource( 8 )
 blend_point_4/pos = Vector2( -1, 0 )
 
 [resource]
-graph_offset = Vector2( -286.032, -2 )
+graph_offset = Vector2( -296, 3.5 )
 nodes/LeftJabAnim/node = SubResource( 1 )
 nodes/LeftJabAnim/position = Vector2( -240, 360 )
 nodes/LeftJabOneShot/node = SubResource( 2 )
