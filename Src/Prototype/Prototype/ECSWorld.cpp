@@ -122,7 +122,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pEnemyNode);
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pEnemyNode);
 	//AssignNodeInheritedComponent<Animation2DComponent>(registry, entity, get_node("Enemy/Sprite3D"));
-	//AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Enemy/vanguard/AnimationTree"));
+	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Enemy/vanguard/AnimationTree"));
 
 	EntityHolderNode* pEnemy = AssignNodeInheritedComponent<EntityHolderNode>(registry, entity, pEnemyNode);
 	pEnemy->SetEntity(entity);
@@ -219,7 +219,7 @@ void godot::ECSWorld::_init()
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new HealthMonitoringSystem()));
 	//TODO: change logick of FleeingSystem after implementing combat systems (hth, shooting, covers, etc.)
 	//m_process_systems.push_back(std::unique_ptr<BaseSystem>(new FleeingSystem()));
-	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new BillboardRotationSystem()));
+	//m_process_systems.push_back(std::unique_ptr<BaseSystem>(new BillboardRotationSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new LocomotionAnimSystem()));
 }
 

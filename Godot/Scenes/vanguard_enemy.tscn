@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Nodes/HTHDamagingArea.gdns" type="Script" id=1]
 [ext_resource path="res://Characters3D/vanguard.dae" type="PackedScene" id=2]
+[ext_resource path="res://Characters/BlendTrees/character_blend_tree.tres" type="AnimationNodeBlendTree" id=3]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -9,56 +10,13 @@ albedo_color = Color( 1, 0, 0, 1 )
 [sub_resource type="SphereShape" id=2]
 radius = 0.1
 
-[sub_resource type="AnimationNodeAnimation" id=3]
-animation = "Jab Left"
-
-[sub_resource type="AnimationNodeAnimation" id=4]
-animation = "Idle-loop"
-
-[sub_resource type="AnimationNodeAnimation" id=5]
-animation = "Running-loop"
-
-[sub_resource type="AnimationNodeAnimation" id=6]
-animation = "Running Backward-loop"
-
-[sub_resource type="AnimationNodeAnimation" id=7]
-animation = "Jog Strafe Right-loop"
-
-[sub_resource type="AnimationNodeAnimation" id=8]
-animation = "Jog Strafe Left-loop"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id=9]
-blend_point_0/node = SubResource( 4 )
-blend_point_0/pos = Vector2( 0, 0 )
-blend_point_1/node = SubResource( 5 )
-blend_point_1/pos = Vector2( 0, 1 )
-blend_point_2/node = SubResource( 6 )
-blend_point_2/pos = Vector2( 0, -1 )
-blend_point_3/node = SubResource( 7 )
-blend_point_3/pos = Vector2( 1, 0 )
-blend_point_4/node = SubResource( 8 )
-blend_point_4/pos = Vector2( -1, 0 )
-
-[sub_resource type="AnimationNodeOneShot" id=10]
-
-[sub_resource type="AnimationNodeBlendTree" id=11]
-graph_offset = Vector2( -158, 138.5 )
-nodes/Animation/node = SubResource( 3 )
-nodes/Animation/position = Vector2( -80, 320 )
-nodes/BlendSpace2D/node = SubResource( 9 )
-nodes/BlendSpace2D/position = Vector2( -40, 120 )
-nodes/OneShot/node = SubResource( 10 )
-nodes/OneShot/position = Vector2( 160, 240 )
-nodes/output/position = Vector2( 360, 120 )
-node_connections = [ "output", 0, "OneShot", "OneShot", 0, "BlendSpace2D", "OneShot", 1, "Animation" ]
-
 [node name="vanguard" instance=ExtResource( 2 )]
 
 [node name="vanguard_Mesh" parent="Skeleton" index="1"]
 material/0 = SubResource( 1 )
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Skeleton" index="2"]
-transform = Transform( 0.766655, 0.640562, -0.0437928, -0.616506, 0.715379, -0.328863, -0.17933, 0.279123, 0.943361, 0.317064, 0.844104, 0.120243 )
+transform = Transform( 0.762991, 0.645937, -0.0246728, -0.618236, 0.718059, -0.31965, -0.188758, 0.259143, 0.947214, 0.312169, 0.850851, 0.122646 )
 bone_name = "mixamorig_LeftHandThumb4"
 
 [node name="Area" type="Area" parent="Skeleton/BoneAttachment" index="0"]
@@ -68,14 +26,16 @@ script = ExtResource( 1 )
 damage = 10.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Skeleton/BoneAttachment/Area" index="0"]
-transform = Transform( 0.99994, -0.00343036, -0.0104506, 0.0030067, 0.999179, -0.0403854, 0.0105797, 0.0403494, 0.999128, 0.0133851, 0.0326422, -0.0517914 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013, 0.033, -0.052 )
 shape = SubResource( 2 )
+disabled = true
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
-tree_root = SubResource( 11 )
+tree_root = ExtResource( 3 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 root_motion_track = NodePath("Skeleton:root_doc")
-parameters/BlendSpace2D/blend_position = Vector2( 0, 0 )
-parameters/OneShot/active = false
+parameters/LeftJabOneShot/active = false
+parameters/LeftJabTimeScale/scale = 1.0
+parameters/LocomotionBlendSpace/blend_position = Vector2( 0, 0 )
 [connection signal="body_entered" from="Skeleton/BoneAttachment/Area" to="Skeleton/BoneAttachment/Area" method="_on_Area_body_entered"]
