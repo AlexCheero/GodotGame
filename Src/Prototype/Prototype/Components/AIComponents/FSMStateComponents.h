@@ -4,9 +4,6 @@
 
 #include "entt/entt.hpp"
 
-//TODO: implement decision making system and don't spread tags all around the codebase
-constexpr entt::hashed_string FleeingTag = "FleeingTag"_hs;
-
 struct PursuingStateComponent
 {
 	entt::entity target = entt::null;

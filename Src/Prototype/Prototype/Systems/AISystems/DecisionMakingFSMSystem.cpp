@@ -34,6 +34,7 @@ bool godot::DecisionMakingFSMSystem::CanSeeTarget(PlayersView& targetsView, entt
 	return false;
 }
 
+//TODO0: use bot tag for views
 void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& registry)
 {
 	auto players = registry.view<entt::tag<PlayerTag>, Spatial*>();
@@ -61,9 +62,9 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 		}
 	});
 
-	auto pursueView = registry.view<PursuingStateComponent, PatrolmanComponent, MeleeAttackComponent, Spatial*>();
+	auto pursueView = registry.view<PursuingStateComponent, PatrolmanComponent, MeleeAttackComponent, HealthComponent, Spatial*>();
 	pursueView.each([this, &registry, &players](entt::entity entity, PursuingStateComponent& pursuingComp
-		, PatrolmanComponent patrolComp, MeleeAttackComponent meleeComp, Spatial* pSpatial)
+		, PatrolmanComponent patrolComp, MeleeAttackComponent meleeComp, HealthComponent& healthComp, Spatial* pSpatial)
 	{
 		bool validTarget = registry.valid(pursuingComp.target);
 		if (validTarget && CanSeeTarget(players, pursuingComp.target, patrolComp, pSpatial))
@@ -77,8 +78,16 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 				validTarget = false;
 		}
 
-		if (validTarget)
+		//TODO: move somwhere like DecisionMakingView
+		const float criticalProportion = 0.5f;
+		if (healthComp.ProportionOfMax() <= criticalProportion)
 		{
+			registry.remove<PursuingStateComponent>(entity);
+			registry.assign<entt::tag<FleeStateTag> >(entity);
+		}
+		else if (validTarget)
+		{
+			//TODO0: implement fleeing transition via health monitoring system logick
 			ASSERT(registry.has<Spatial*>(pursuingComp.target), "pursuing target has no spatial");
 			Spatial* pTargetSpatial = registry.get<Spatial*>(pursuingComp.target);
 			//TODO: make nav system to target to the floor of the point or don't take target's y into account
