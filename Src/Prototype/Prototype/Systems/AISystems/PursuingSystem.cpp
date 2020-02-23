@@ -4,9 +4,7 @@
 #include <Navigation.hpp>
 
 #include "../../Components/AIComponents/NavigationComponents.h"
-#include "../../Components/AttackComponents.h"
 #include "../../Components/AIComponents/FSMStateComponents.h"
-#include "../../Components/AIComponents/PatrolComponents.h"
 
 void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 {

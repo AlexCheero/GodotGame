@@ -4,8 +4,6 @@
 
 #include "../../Components/SimpleComponents.h"
 #include "../../Components/AIComponents/NavigationComponents.h"
-#include "../../Components/AIComponents/PatrolComponents.h"
-#include "../../Components/AIComponents/FSMStateComponents.h"
 
 //TODO: smooth nav path following with bezier
 void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
