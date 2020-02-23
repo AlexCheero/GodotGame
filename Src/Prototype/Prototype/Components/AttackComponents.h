@@ -18,7 +18,7 @@ struct MeleeAttackComponent
 	float angle;
 	float attackTime;
 	godot::String collisionLayerName;
-	int64_t prevHitTime = -utils::SecondsToMillis(attackTime);
+	int64_t prevHitTimeMillis = -utils::SecondsToMillis(attackTime);
 	entt::entity lockedTarget = entt::null;
 };
 

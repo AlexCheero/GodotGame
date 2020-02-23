@@ -32,7 +32,7 @@ void godot::LocomotionAnimSystem::operator()(float delta, entt::registry& regist
 		pAnimTree->set("parameters/LocomotionBlendSpace/blend_position", animVec);
 	});
 
-	//TODO: this is not locomotion! either move to another system oor remove this system
+	//TODO: this is not locomotion! either move to another system or remove this system
 	auto punchView = registry.view<InputComponent, MeleeAttackComponent, AnimationTree*>();
 	punchView.each([](InputComponent input, MeleeAttackComponent attackComp, AnimationTree* pAnimTree)
 	{

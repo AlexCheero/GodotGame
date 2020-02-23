@@ -8,6 +8,6 @@ namespace godot
 	class AttackCooldown
 	{
 	protected:
-		bool CanAttack(InputComponent input, float attackTime, int64_t& prevHitTime);
+		bool CanAttack(InputComponent input, float attackTime, int64_t& prevHitTimeMillis);
 	};
 }

@@ -4,17 +4,16 @@
 
 #include "../../Utils/Utils.h"
 
-bool godot::AttackCooldown::CanAttack(InputComponent input, float attackTime, int64_t& prevHitTime)
+bool godot::AttackCooldown::CanAttack(InputComponent input, float attackTime, int64_t& prevHitTimeMillis)
 {
 	if (!input.Test(EInput::Attack))
 		return false;
 
-	//TODO: move cd reset to base system to have ability to set update frequency
-	int64_t currTime = godot::OS::get_singleton()->get_ticks_msec();
-	if (prevHitTime + utils::SecondsToMillis(attackTime) > currTime)
+	int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
+	if (prevHitTimeMillis + utils::SecondsToMillis(attackTime) > currTimeMillis)
 		return false;
 
-	prevHitTime = currTime;
+	prevHitTimeMillis = currTimeMillis;
 
 	return true;
 }

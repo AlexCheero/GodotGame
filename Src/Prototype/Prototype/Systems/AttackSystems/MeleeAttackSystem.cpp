@@ -66,10 +66,9 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 		if (ChecktargetEntity(registry, attackComp.lockedTarget))
 			rotComp.direction = GetDirToTarget(pAttackerSpatial, registry, attackComp.lockedTarget);
 		
-		if (!CanAttack(input, attackComp.attackTime, attackComp.prevHitTime))
+		if (!CanAttack(input, attackComp.attackTime, attackComp.prevHitTimeMillis))
 			return;
-
-		//TODO: bot keeps splashing after killing player
+		
 		Godot::print("Splash!");
 
 		//TODO: intersect only with something that can be hitted

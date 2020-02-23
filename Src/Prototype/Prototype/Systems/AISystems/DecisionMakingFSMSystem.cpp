@@ -34,6 +34,17 @@ bool godot::DecisionMakingFSMSystem::CanSeeTarget(PlayersView& targetsView, entt
 	return false;
 }
 
+float godot::DecisionMakingFSMSystem::GetDistanceToTarget(entt::registry& registry, entt::entity target, Spatial* pBotSpatial)
+{
+	ASSERT(registry.has<Spatial*>(target), "pursuing target has no spatial");
+	Spatial* pTargetSpatial = registry.get<Spatial*>(target);
+	//TODO: make nav system to target to the floor of the point or don't take target's y into account
+
+	Vector3 targetPosition = pTargetSpatial->get_global_transform().origin;
+	Vector3 pursuerPosition = pBotSpatial->get_global_transform().origin;
+	return (targetPosition - pursuerPosition).length();
+}
+
 //TODO0: use bot tag for views
 void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& registry)
 {
@@ -53,9 +64,9 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 			break;
 		}
 
+		//to pursuit transition
 		if (registry.valid(targetEntity))
 		{
-			Godot::print("target found!");
 			registry.remove<entt::tag<PatrolStateTag> >(entity);
 			PursuingStateComponent& pursuingComp = registry.assign<PursuingStateComponent>(entity, targetEntity);
 			pursuingComp.targetLostMsec = -1;
@@ -64,7 +75,7 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 
 	auto pursueView = registry.view<PursuingStateComponent, PatrolmanComponent, MeleeAttackComponent, HealthComponent, Spatial*>();
 	pursueView.each([this, &registry, &players](entt::entity entity, PursuingStateComponent& pursuingComp
-		, PatrolmanComponent patrolComp, MeleeAttackComponent meleeComp, HealthComponent& healthComp, Spatial* pSpatial)
+		, PatrolmanComponent patrolComp, MeleeAttackComponent meleeComp, HealthComponent healthComp, Spatial* pSpatial)
 	{
 		bool validTarget = registry.valid(pursuingComp.target);
 		if (validTarget && CanSeeTarget(players, pursuingComp.target, patrolComp, pSpatial))
@@ -78,7 +89,8 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 				validTarget = false;
 		}
 
-		//TODO: move somwhere like DecisionMakingView
+		//TODO0: move somwhere like DecisionMakingView
+		//to flee transition
 		const float criticalProportion = 0.5f;
 		if (healthComp.ProportionOfMax() <= criticalProportion)
 		{
@@ -87,21 +99,14 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 		}
 		else if (validTarget)
 		{
-			//TODO0: implement fleeing transition via health monitoring system logick
-			ASSERT(registry.has<Spatial*>(pursuingComp.target), "pursuing target has no spatial");
-			Spatial* pTargetSpatial = registry.get<Spatial*>(pursuingComp.target);
-			//TODO: make nav system to target to the floor of the point or don't take target's y into account
-
-			Vector3 targetPosition = pTargetSpatial->get_global_transform().origin;
-			Vector3 pursuerPosition = pSpatial->get_global_transform().origin;
-			float distanceToTarget = (targetPosition - pursuerPosition).length();
-
-			if (meleeComp.distance >= distanceToTarget)
+			//to attack transition
+			if (meleeComp.distance >= GetDistanceToTarget(registry, pursuingComp.target, pSpatial))
 			{
 				registry.remove<PursuingStateComponent>(entity);
 				registry.assign<entt::tag<AttackStateTag> >(entity);
 			}
 		}
+		//to patrol transition
 		else
 		{
 			registry.remove<PursuingStateComponent>(entity);
@@ -109,10 +114,35 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 		}
 	});
 
-	auto attackView = registry.view<entt::tag<AttackStateTag> >();
-	attackView.less([]()
+	auto attackView = registry.view<entt::tag<AttackStateTag>, InputComponent, MeleeAttackComponent, HealthComponent, Spatial*>();
+	attackView.less([this, &registry](entt::entity entity, InputComponent& inputComp, MeleeAttackComponent meleeComp
+		, HealthComponent healthComp, Spatial* pSpatial)
 	{
-		//
+		int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
+		bool attackInput = meleeComp.prevHitTimeMillis + utils::SecondsToMillis(meleeComp.attackTime) <= currTimeMillis;
+		inputComp.Set(EInput::Attack, attackInput);
+
+		//TODO0: move somwhere like DecisionMakingView here and from pursueView
+		//to flee transition
+		const float criticalProportion = 0.5f;
+		if (healthComp.ProportionOfMax() <= criticalProportion)
+		{
+			registry.remove<entt::tag<AttackStateTag> >(entity);
+			registry.assign<entt::tag<FleeStateTag> >(entity);
+		}
+		//to pursuit transition
+		if (registry.valid(meleeComp.lockedTarget) && meleeComp.distance < GetDistanceToTarget(registry, meleeComp.lockedTarget, pSpatial))
+		{
+			registry.remove<entt::tag<AttackStateTag> >(entity);
+			PursuingStateComponent& pursuingComp = registry.assign<PursuingStateComponent>(entity, meleeComp.lockedTarget);
+			pursuingComp.targetLostMsec = -1;
+		}
+		//to patrol transition
+		else if (!registry.valid(meleeComp.lockedTarget) || registry.has<entt::tag<DeadTag> >(meleeComp.lockedTarget))
+		{
+			registry.remove<entt::tag<AttackStateTag> >(entity);
+			registry.assign<entt::tag<PatrolStateTag> >(entity);
+		}
 	});
 
 	auto fleeView = registry.view<entt::tag<FleeStateTag> >();

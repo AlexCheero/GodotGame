@@ -10,6 +10,7 @@
 
 namespace godot
 {
+	//TODO: implement custom update frequency
 	class BaseSystem
 	{
 	public:
