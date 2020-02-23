@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Characters3D/vanguard.dae" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Nodes/HTHDamagingArea.gdns" type="Script" id=2]
 [ext_resource path="res://Characters/BlendTrees/character_blend_tree.tres" type="AnimationNodeBlendTree" id=3]
+[ext_resource path="res://Characters3D/Jab Left.tres" type="Animation" id=4]
 
 [sub_resource type="SphereShape" id=1]
 radius = 0.1
@@ -13,19 +14,22 @@ radius = 0.1
 bones/15/bound_children = [ NodePath("BoneAttachment") ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Skeleton" index="2"]
-transform = Transform( 0.763416, 0.645487, -0.0232313, -0.617376, 0.718653, -0.319975, -0.189845, 0.258617, 0.947142, 0.301325, 0.845513, 0.123784 )
+transform = Transform( 0.763948, 0.644436, -0.0329224, -0.618992, 0.717462, -0.319522, -0.182292, 0.264477, 0.947007, 0.305544, 0.845852, 0.117636 )
 bone_name = "mixamorig_LeftHandThumb4"
 
 [node name="Area" type="Area" parent="Skeleton/BoneAttachment" index="0"]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource( 2 )
-damage = 10.0
+damage = 100.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Skeleton/BoneAttachment/Area" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013, 0.033, -0.052 )
 shape = SubResource( 1 )
 disabled = true
+
+[node name="AnimationPlayer" parent="." index="1"]
+"anims/Jab Left" = ExtResource( 4 )
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = ExtResource( 3 )
