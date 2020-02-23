@@ -11,10 +11,11 @@
 void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<KinematicBody*, VelocityComponent, NavMarginComponent, BoundsComponent
-		, SpeedComponent, NavPathComponent>(entt::exclude<entt::tag<PathFinishedTag> >);
+		, SpeedComponent, NavPathComponent, RotationDirectionComponent>();
 	view.each(
 	[&registry](entt::entity entity, KinematicBody* pKBody, VelocityComponent& velocity,
-		NavMarginComponent marginComp, BoundsComponent bounds, SpeedComponent speedComp, NavPathComponent& pathComp)
+		NavMarginComponent marginComp, BoundsComponent bounds, SpeedComponent speedComp,
+		NavPathComponent& pathComp, RotationDirectionComponent& rotDirComp)
 	{
 		if (!pKBody->is_on_floor())
 			return;
@@ -23,7 +24,6 @@ void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
 		{
 			velocity.velocity.x = velocity.velocity.z = 0;
 			registry.remove<NavPathComponent>(entity);
-			registry.assign<entt::tag<PathFinishedTag> >(entity);
 			return;
 		}
 
@@ -37,19 +37,11 @@ void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
 		else
 		{
 			moveVec.normalize();
-			if (registry.has<RotationDirectionComponent>(entity))
-				registry.get<RotationDirectionComponent>(entity).direction = moveVec;
+			rotDirComp.direction = moveVec;
 			moveVec *= speedComp.speed;
 			//direct assign not to discard gravity's y influence
 			velocity.velocity.x = moveVec.x;
 			velocity.velocity.z = moveVec.z;
 		}
-	});
-
-	auto finishedPathView = registry.view<entt::tag<PathFinishedTag> >(entt::exclude<entt::tag<PatrollingTag> >);
-	finishedPathView.less([&registry](entt::entity entity)
-	{
-		//TODO: not necessary Patrolling after this, remove after implementing proper decision making
-		registry.assign<entt::tag<PatrollingTag> >(entity);
 	});
 }

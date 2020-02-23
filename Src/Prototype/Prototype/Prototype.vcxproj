@@ -168,9 +168,9 @@
     <ClCompile Include="Nodes\HTHDamagingArea.cpp" />
     <ClCompile Include="Nodes\PickableNode.cpp" />
     <ClCompile Include="Nodes\ThrowableWeaponNode.cpp" />
+    <ClCompile Include="Systems\AISystems\DecisionMakingFSMSystem.cpp" />
     <ClCompile Include="Systems\AISystems\FleeingSystem.cpp" />
     <ClCompile Include="Systems\AISystems\HealthMonitoringSystem.cpp" />
-    <ClCompile Include="Systems\AISystems\LookAroundSystem.cpp" />
     <ClCompile Include="Systems\AISystems\NavAgentSystem.cpp" />
     <ClCompile Include="Systems\AISystems\PatrolSystem.cpp" />
     <ClCompile Include="Systems\AISystems\PursuingSystem.cpp" />
@@ -220,9 +220,9 @@
     <ClInclude Include="Nodes\PickableNode.h" />
     <ClInclude Include="Nodes\ThrowableWeaponNode.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Systems\AISystems\DecisionMakingFSMSystem.h" />
     <ClInclude Include="Systems\AISystems\FleeingSystem.h" />
     <ClInclude Include="Systems\AISystems\HealthMonitoringSystem.h" />
-    <ClInclude Include="Systems\AISystems\LookAroundSystem.h" />
     <ClInclude Include="Systems\AISystems\NavAgentSystem.h" />
     <ClInclude Include="Systems\AISystems\PatrolSystem.h" />
     <ClInclude Include="Systems\AISystems\PursuingSystem.h" />

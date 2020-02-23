@@ -14,13 +14,13 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 	entt::entity navEntity = registry.view<Navigation*>()[0];
 	Navigation* pNavigation = registry.get<Navigation*>(navEntity);
 
-	auto view = registry.view<PursuingComponent, InputComponent, Spatial*>();
-	view.each([&registry, pNavigation](entt::entity entity, PursuingComponent& comp, InputComponent& input, Spatial* pSpatial)
+	auto view = registry.view<PursuingStateComponent, InputComponent, Spatial*>();
+	view.each([&registry, pNavigation](entt::entity entity, PursuingStateComponent& comp, InputComponent& input, Spatial* pSpatial)
 	{
 		if (!registry.valid(comp.target))
 		{
 			input.Set(EInput::Attack, false);
-			registry.remove<PursuingComponent>(entity);
+			registry.remove<PursuingStateComponent>(entity);
 			return;
 		}
 
@@ -33,7 +33,7 @@ void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
 		float distanceToTarget = (targetPosition - pursuerPosition).length();
 
 		//TODO: create and iterate separate views for each attack type
-		//TODO: probably attackcode should be moved somwhere else
+		//TODO: probably attack code should be moved somwhere else
 		if (registry.has<MeleeAttackComponent>(entity)
 			&& registry.get<MeleeAttackComponent>(entity).distance >= distanceToTarget)
 		{

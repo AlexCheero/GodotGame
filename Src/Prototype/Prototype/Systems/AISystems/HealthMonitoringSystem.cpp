@@ -30,7 +30,7 @@ void godot::HealthMonitoringSystem::operator()(float delta, entt::registry& regi
 
 		registry.assign<entt::tag<FleeingTag> >(entity);
 		//TODO: make more smart fleeing system and don't remove or even reset it here
-		registry.remove_if_exists<PursuingComponent>(entity);
+		registry.remove_if_exists<PursuingStateComponent>(entity);
 		registry.remove_if_exists<PatrolmanComponent>(entity);
 		registry.remove_if_exists<NavPathComponent>(entity);
 		//---------------------------------------------------------------------------

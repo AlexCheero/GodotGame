@@ -35,12 +35,12 @@
 #include "Systems/LocomotionSystems/LookAtSystem.h"
 #include "Systems/AISystems/PatrolSystem.h"
 #include "Systems/AISystems/PursuingSystem.h"
-#include "Systems/AISystems/LookAroundSystem.h"
 #include "Systems/AISystems/HealthMonitoringSystem.h"
 #include "Systems/AISystems/FleeingSystem.h"
 #include "Systems/BillboardRotationSystem.h"
 #include "Systems/AnimSystems/LocomotionAnimSystem.h"
 #include "Systems/AttackSystems/GrenadeSystem.h"
+#include "Systems/AISystems/DecisionMakingFSMSystem.h"
 
 #include "Nodes/EntityHolderNode.h"
 
@@ -153,7 +153,9 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	route.current = 0;
 //prepare patrol route>
 
-	registry.assign<entt::tag<PatrollingTag> >(entity);
+	//initial fsm state
+	registry.assign<entt::tag<PatrolStateTag> >(entity);
+	
 	registry.assign<entt::tag<BotTag> >(entity);
 }
 
@@ -201,7 +203,11 @@ void godot::ECSWorld::_init()
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new RangedAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PatrolSystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new LookAroundSystem()));
+
+	//======================================================================================
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new DecisionMakingFSMSystem()));
+	//======================================================================================
+
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new GrenadeSystem()));
 	//TODO: should it be in phys proc?
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new NavAgentSystem()));

@@ -12,10 +12,8 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 	entt::entity navEntity = registry.view<Navigation*>()[0];
 	Navigation* pNavigation = registry.get<Navigation*>(navEntity);
 
-	auto withoutPathview = registry.view<entt::tag<PatrollingTag>, PatrolRouteComponent, Spatial*>(entt::exclude<NavPathComponent>);
-	withoutPathview.less(
-	[this, &registry, pNavigation]
-	(entt::entity entity, PatrolRouteComponent& route, Spatial* pSpatial)
+	auto view = registry.view<entt::tag<PatrolStateTag>, PatrolRouteComponent, Spatial*>(entt::exclude<NavPathComponent>);
+	view.less([this, &registry, pNavigation] (entt::entity entity, PatrolRouteComponent& route, Spatial* pSpatial)
 	{
 		if (route.current < route.routePoints.size() - 1)
 			route.current++;
@@ -27,7 +25,4 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 		//TODO: make nav system to target to the floor of the point
 		newPath.path = pNavigation->get_simple_path(pSpatial->get_global_transform().origin, route.GetCurrentPatrolPoint());
 	});
-
-	auto pathFinishedView = registry.view<entt::tag<PatrollingTag>, entt::tag<PathFinishedTag> >();
-	registry.remove<entt::tag<PathFinishedTag> >(pathFinishedView.begin(), pathFinishedView.end());
 }
