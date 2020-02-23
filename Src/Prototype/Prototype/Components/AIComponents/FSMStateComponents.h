@@ -15,5 +15,6 @@ struct PursuingStateComponent
 };
 
 constexpr entt::hashed_string PatrolStateTag = "PatrolStateTag"_hs;
-constexpr entt::hashed_string FleeStateTag = "FleeStateTag"_hs;
 constexpr entt::hashed_string AttackStateTag = "AttackStateTag"_hs;
+constexpr entt::hashed_string FleeStateTag = "FleeStateTag"_hs;
+
