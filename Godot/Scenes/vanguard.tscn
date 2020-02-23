@@ -13,7 +13,7 @@ radius = 0.1
 bones/15/bound_children = [ NodePath("BoneAttachment") ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="Skeleton" index="2"]
-transform = Transform( 0.76764, 0.638675, -0.0531062, -0.616325, 0.712973, -0.334382, -0.175698, 0.289416, 0.940939, 0.302117, 0.843062, 0.122438 )
+transform = Transform( 0.762484, 0.647005, -0.000114769, -0.615761, 0.725609, -0.307128, -0.19863, 0.234251, 0.951668, 0.298055, 0.847637, 0.124562 )
 bone_name = "mixamorig_LeftHandThumb4"
 
 [node name="Area" type="Area" parent="Skeleton/BoneAttachment" index="0"]
