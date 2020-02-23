@@ -10,18 +10,15 @@ radius = 0.1
 
 [node name="vanguard" instance=ExtResource( 1 )]
 
-[node name="Skeleton" parent="." index="0"]
-bones/15/bound_children = [ NodePath("BoneAttachment") ]
-
 [node name="BoneAttachment" type="BoneAttachment" parent="Skeleton" index="2"]
-transform = Transform( 0.763948, 0.644436, -0.0329224, -0.618992, 0.717462, -0.319522, -0.182292, 0.264477, 0.947007, 0.305544, 0.845852, 0.117636 )
+transform = Transform( 0.764353, 0.643903, -0.033969, -0.618435, 0.717172, -0.321247, -0.182491, 0.266553, 0.946387, 0.318097, 0.846442, 0.118379 )
 bone_name = "mixamorig_LeftHandThumb4"
 
 [node name="Area" type="Area" parent="Skeleton/BoneAttachment" index="0"]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource( 2 )
-damage = 100.0
+damage = 10.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Skeleton/BoneAttachment/Area" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013, 0.033, -0.052 )
