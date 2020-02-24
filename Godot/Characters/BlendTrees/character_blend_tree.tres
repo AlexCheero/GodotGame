@@ -45,4 +45,4 @@ nodes/LeftJabTimeScale/position = Vector2( -40, 300 )
 nodes/LocomotionBlendSpace/node = SubResource( 9 )
 nodes/LocomotionBlendSpace/position = Vector2( -180, 60 )
 nodes/output/position = Vector2( 360, 120 )
-node_connections = [ "output", 0, "LeftJabOneShot", "LeftJabTimeScale", 0, "LeftJabAnim", "LeftJabOneShot", 0, "LocomotionBlendSpace", "LeftJabOneShot", 1, "LeftJabTimeScale" ]
+node_connections = [ "output", 0, "LeftJabOneShot", "LeftJabOneShot", 0, "LocomotionBlendSpace", "LeftJabOneShot", 1, "LeftJabTimeScale", "LeftJabTimeScale", 0, "LeftJabAnim" ]

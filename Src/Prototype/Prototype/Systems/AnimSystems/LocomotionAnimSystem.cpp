@@ -38,7 +38,6 @@ void godot::LocomotionAnimSystem::operator()(float delta, entt::registry& regist
 	{
 		if (input.Test(EInput::Attack))
 		{
-			//TODO0: get AnimationPlayer as component
 			AnimationPlayer* pAnimPlayer = Object::cast_to<AnimationPlayer>(pAnimTree->get_node(pAnimTree->get_animation_player()));
 			Ref<Animation> anim = pAnimPlayer->get_animation("Jab Left");
 

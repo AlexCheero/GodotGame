@@ -46,14 +46,13 @@ float godot::DecisionMakingFSMSystem::GetDistanceToTarget(entt::registry& regist
 	return (targetPosition - pursuerPosition).length();
 }
 
-//TODO0: use bot tag for views
 void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& registry)
 {
 	auto players = registry.view<entt::tag<PlayerTag>, Spatial*>();
 
 	//DecisionMakingFSMSystem should be the only system to manage tags and set input
 	//TODO0: add noticing player on taking damage
-	auto patrolView = registry.view<entt::tag<PatrolStateTag>, PatrolmanComponent, Spatial*>();
+	auto patrolView = registry.view<entt::tag<BotTag>, entt::tag<PatrolStateTag>, PatrolmanComponent, Spatial*>();
 	patrolView.less([this, &registry, &players](entt::entity entity, PatrolmanComponent patrolComp, Spatial* pSpatial)
 	{
 		entt::entity targetEntity = entt::null;
@@ -75,8 +74,8 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 		}
 	});
 
-	auto pursueView = registry.view<PursuingStateComponent, PatrolmanComponent, MeleeAttackComponent, HealthComponent, Spatial*>();
-	pursueView.each([this, &registry, &players](entt::entity entity, PursuingStateComponent& pursuingComp
+	auto pursueView = registry.view<entt::tag<BotTag>, PursuingStateComponent, PatrolmanComponent, MeleeAttackComponent, HealthComponent, Spatial*>();
+	pursueView.less([this, &registry, &players](entt::entity entity, PursuingStateComponent& pursuingComp
 		, PatrolmanComponent patrolComp, MeleeAttackComponent meleeComp, HealthComponent healthComp, Spatial* pSpatial)
 	{
 		bool validTarget = registry.valid(pursuingComp.target);
@@ -117,7 +116,7 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 		}
 	});
 
-	auto attackView = registry.view<entt::tag<AttackStateTag>, InputComponent, MeleeAttackComponent, HealthComponent, Spatial*>();
+	auto attackView = registry.view<entt::tag<BotTag>, entt::tag<AttackStateTag>, InputComponent, MeleeAttackComponent, HealthComponent, Spatial*>();
 	attackView.less([this, &registry](entt::entity entity, InputComponent& inputComp, MeleeAttackComponent meleeComp
 		, HealthComponent healthComp, Spatial* pSpatial)
 	{
@@ -149,7 +148,7 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 		}
 	});
 
-	auto fleeView = registry.view<entt::tag<FleeStateTag> >();
+	auto fleeView = registry.view<entt::tag<BotTag>, entt::tag<FleeStateTag> >();
 	fleeView.less([]()
 	{
 		//TODO: implement proper fleeing system
