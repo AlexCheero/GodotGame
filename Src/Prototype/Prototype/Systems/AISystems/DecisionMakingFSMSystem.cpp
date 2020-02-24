@@ -76,7 +76,7 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 
 	auto pursueView = registry.view<entt::tag<BotTag>, PursuingStateComponent, PatrolmanComponent, MeleeAttackComponent, HealthComponent, Spatial*>();
 	pursueView.less([this, &registry, &players](entt::entity entity, PursuingStateComponent& pursuingComp
-		, PatrolmanComponent patrolComp, MeleeAttackComponent meleeComp, HealthComponent healthComp, Spatial* pSpatial)
+		, PatrolmanComponent patrolComp, MeleeAttackComponent& meleeComp, HealthComponent healthComp, Spatial* pSpatial)
 	{
 		bool validTarget = registry.valid(pursuingComp.target);
 		if (validTarget && CanSeeTarget(players, pursuingComp.target, patrolComp, pSpatial))
@@ -111,6 +111,7 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 		//to patrol transition
 		else
 		{
+			meleeComp.lockedTarget = entt::null;
 			registry.remove<PursuingStateComponent>(entity);
 			registry.assign<entt::tag<PatrolStateTag> >(entity);
 		}
