@@ -37,20 +37,34 @@ void godot::HTHAnimSystem::operator()(float delta, entt::registry& registry)
 	auto punchView = registry.view<InputComponent, MeleeAttackComponent, AnimationTree*>();
 	punchView.each([](entt::entity entity, InputComponent& input, MeleeAttackComponent& attackComp, AnimationTree* pAnimTree)
 	{
-		//TODO0: possibly merge with MeleeAttackSystem and use Test instead of TestAndReset
-		if (input.TestAndReset(EInput::Attack))
+		//TODO0: possibly merge with MeleeAttackSystem and remove copypasted cooldown code
+		int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
+		bool attackInput = attackComp.prevAnimTimeMillis + utils::SecondsToMillis(attackComp.attackTime) <= currTimeMillis;
+		if (attackInput && input.Test(EInput::Attack))
 		{
-			AnimationPlayer* pAnimPlayer = Object::cast_to<AnimationPlayer>(pAnimTree->get_node(pAnimTree->get_animation_player()));
-			Ref<Animation> anim = pAnimPlayer->get_animation(anims[attackComp.comboSequenceNumber]);
-			
-			String paramName = String(paramNames[attackComp.comboSequenceNumber]);
-			pAnimTree->set("parameters/" + paramName + "TimeScale/scale",
-				1 / (anim->get_length() * attackComp.attackTime));
-			pAnimTree->set("parameters/" + paramName + "OneShot/active", true);
-			
-			attackComp.comboSequenceNumber++;
-			if (attackComp.comboSequenceNumber > 7)
+			//TODO0: refactor Combo sequence code after merging with MeleeAttackSystem
+			//========Combo sequence code========
+			bool continueCombo = attackComp.prevAnimTimeMillis + utils::SecondsToMillis(2.5f) > currTimeMillis;
+			if (continueCombo)
+			{
+				attackComp.comboSequenceNumber++;
+				if (attackComp.comboSequenceNumber > 7)//TODO: remove hardcode
+					attackComp.comboSequenceNumber = 0;
+			}
+			else
 				attackComp.comboSequenceNumber = 0;
+			attackComp.prevAnimTimeMillis = currTimeMillis;
+			//===================================
+
+			AnimationPlayer* pAnimPlayer = Object::cast_to<AnimationPlayer>(pAnimTree->get_node(pAnimTree->get_animation_player()));
+			String animName(anims[attackComp.comboSequenceNumber]);
+			Ref<Animation> anim = pAnimPlayer->get_animation(animName);
+			
+			String paramName(paramNames[attackComp.comboSequenceNumber]);
+			//TODO: same anim time for all animations, maybe use general anim scale for this
+			//float timeScale = anim->get_length() / attackComp.attackTime;
+			//pAnimTree->set("parameters/" + paramName + "TimeScale/scale", timeScale);
+			pAnimTree->set("parameters/" + paramName + "OneShot/active", true);
 		}
 	});
 }

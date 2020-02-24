@@ -19,6 +19,8 @@ struct MeleeAttackComponent
 	float attackTime;
 	godot::String collisionLayerName;
 	int64_t prevHitTimeMillis = -utils::SecondsToMillis(attackTime);
+	//TODO0: hack!!! remove when HTHAnimSystem merged with MeleeAttackSystem
+	int64_t prevAnimTimeMillis = -utils::SecondsToMillis(attackTime);
 	entt::entity lockedTarget = entt::null;
 	int comboSequenceNumber = 0;
 };
