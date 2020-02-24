@@ -39,6 +39,7 @@
 #include "Systems/AISystems/FleeingSystem.h"
 #include "Systems/BillboardRotationSystem.h"
 #include "Systems/AnimSystems/LocomotionAnimSystem.h"
+#include "Systems/AnimSystems/HTHAnimSystem.h"
 #include "Systems/AttackSystems/GrenadeSystem.h"
 #include "Systems/AISystems/DecisionMakingFSMSystem.h"
 
@@ -226,6 +227,7 @@ void godot::ECSWorld::_init()
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new FleeingSystem()));
 	//m_process_systems.push_back(std::unique_ptr<BaseSystem>(new BillboardRotationSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new LocomotionAnimSystem()));
+	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new HTHAnimSystem()));
 }
 
 void godot::ECSWorld::_ready()

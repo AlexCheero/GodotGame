@@ -4,6 +4,8 @@
 
 #include "../../Components/InputComponents.h"
 
+//TODO: speed should be different, depending on player's orientation. probably should merge
+//		PlayerVelocitySystem, LocomotionAnimSystem, GravitySystem, JumpSystem, KinematicMovementSystem and PlayerRotationSystem
 void godot::PlayerVelocitySystem::Update(VelocityComponent& velocityComp, SpeedComponent speedComp, Basis camBasis, Vector2 input)
 {
 	Vector3 flatVelocity = Vector3(0, 0, 0);

@@ -228,6 +228,9 @@
     <ClCompile Include="Systems\AISystems\DecisionMakingFSMSystem.cpp">
       <Filter>Source Files\Systems\AISystems</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\AnimSystems\HTHAnimSystem.cpp">
+      <Filter>Source Files\Systems\AnimSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -385,6 +388,9 @@
     </ClInclude>
     <ClInclude Include="Systems\AISystems\DecisionMakingFSMSystem.h">
       <Filter>Header Files\Systems\AISystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AnimSystems\HTHAnimSystem.h">
+      <Filter>Header Files\Systems\AnimSystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
