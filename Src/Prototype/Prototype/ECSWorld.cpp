@@ -202,8 +202,8 @@ void godot::ECSWorld::_init()
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new MeleeAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new RangedAttackSystem()));
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowAttackSystem()));
-	//m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PatrolSystem()));
-	//m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new DecisionMakingFSMSystem()));
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PatrolSystem()));
+	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new DecisionMakingFSMSystem()));
 
 	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new GrenadeSystem()));
 	//TODO: should it be in phys proc?
@@ -221,7 +221,7 @@ void godot::ECSWorld::_init()
 
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new HealthMonitoringSystem()));
 	//TODO: change logick of FleeingSystem after implementing combat systems (hth, shooting, covers, etc.)
-	//m_process_systems.push_back(std::unique_ptr<BaseSystem>(new FleeingSystem()));
+	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new FleeingSystem()));
 	//m_process_systems.push_back(std::unique_ptr<BaseSystem>(new BillboardRotationSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new LocomotionAnimSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new HTHAnimSystem()));
