@@ -12,7 +12,6 @@ namespace godot
 		GODOT_CLASS(MeleeAttackView, ComponentView)
 	private:
 		float distance;
-		float damage;
 		float angle;
 		float attackTime;
 		//TODO: make it int for all views
@@ -20,6 +19,6 @@ namespace godot
 	public:
 		static void _register_methods();
 		void _init() {}
-		MeleeAttackComponent GetECSComponent() { return { distance, damage, angle, attackTime, collisionLayerName, -utils::SecondsToMillis(attackTime) }; }
+		MeleeAttackComponent GetECSComponent() { return { distance, angle, attackTime, collisionLayerName, -utils::SecondsToMillis(attackTime) }; }
 	};
 }

@@ -14,12 +14,13 @@ constexpr entt::hashed_string CurrentWeaponMeleeTag = "CurrentWeaponMeleeTag"_hs
 struct MeleeAttackComponent
 {
 	float distance;
-	float damage;
 	float angle;
+	//TODO: set attack time in anim
 	float attackTime;
 	godot::String collisionLayerName;
 	int64_t prevHitTimeMillis = -utils::SecondsToMillis(attackTime);
 	entt::entity lockedTarget = entt::null;
+	int comboSequenceNumber = 0;
 };
 
 constexpr entt::hashed_string CurrentWeaponRangedTag = "CurrentWeaponRangedTag"_hs;

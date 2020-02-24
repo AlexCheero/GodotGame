@@ -1,48 +1,139 @@
-[gd_resource type="AnimationNodeBlendTree" load_steps=10 format=2]
+[gd_resource type="AnimationNodeBlendTree" load_steps=31 format=2]
 
 [sub_resource type="AnimationNodeAnimation" id=1]
-animation = "Jab Left"
+animation = "Kick Front Left"
 
 [sub_resource type="AnimationNodeOneShot" id=2]
 
 [sub_resource type="AnimationNodeTimeScale" id=3]
 
 [sub_resource type="AnimationNodeAnimation" id=4]
-animation = "Idle-loop"
+animation = "Kick Front Right"
 
-[sub_resource type="AnimationNodeAnimation" id=5]
-animation = "Running-loop"
+[sub_resource type="AnimationNodeOneShot" id=5]
 
-[sub_resource type="AnimationNodeAnimation" id=6]
-animation = "Running Backward-loop"
+[sub_resource type="AnimationNodeTimeScale" id=6]
 
 [sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Hook Left"
+
+[sub_resource type="AnimationNodeOneShot" id=8]
+
+[sub_resource type="AnimationNodeTimeScale" id=9]
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "Jab Left"
+
+[sub_resource type="AnimationNodeOneShot" id=11]
+
+[sub_resource type="AnimationNodeTimeScale" id=12]
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "Idle-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "Running-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "Running Backward-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "Jog Strafe Right-loop"
 
-[sub_resource type="AnimationNodeAnimation" id=8]
+[sub_resource type="AnimationNodeAnimation" id=17]
 animation = "Jog Strafe Left-loop"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=9]
-blend_point_0/node = SubResource( 4 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=18]
+blend_point_0/node = SubResource( 13 )
 blend_point_0/pos = Vector2( 0, 0 )
-blend_point_1/node = SubResource( 5 )
+blend_point_1/node = SubResource( 14 )
 blend_point_1/pos = Vector2( 0, 1 )
-blend_point_2/node = SubResource( 6 )
+blend_point_2/node = SubResource( 15 )
 blend_point_2/pos = Vector2( 0, -1 )
-blend_point_3/node = SubResource( 7 )
+blend_point_3/node = SubResource( 16 )
 blend_point_3/pos = Vector2( 1, 0 )
-blend_point_4/node = SubResource( 8 )
+blend_point_4/node = SubResource( 17 )
 blend_point_4/pos = Vector2( -1, 0 )
 
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "Hook Right"
+
+[sub_resource type="AnimationNodeOneShot" id=20]
+
+[sub_resource type="AnimationNodeTimeScale" id=21]
+
+[sub_resource type="AnimationNodeAnimation" id=22]
+animation = "Jab Right"
+
+[sub_resource type="AnimationNodeOneShot" id=23]
+
+[sub_resource type="AnimationNodeTimeScale" id=24]
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "Kick Round Left"
+
+[sub_resource type="AnimationNodeOneShot" id=26]
+
+[sub_resource type="AnimationNodeTimeScale" id=27]
+
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "Kick Round Right"
+
+[sub_resource type="AnimationNodeOneShot" id=29]
+
+[sub_resource type="AnimationNodeTimeScale" id=30]
+
 [resource]
-graph_offset = Vector2( -291, 97 )
-nodes/LeftJabAnim/node = SubResource( 1 )
-nodes/LeftJabAnim/position = Vector2( -240, 360 )
-nodes/LeftJabOneShot/node = SubResource( 2 )
-nodes/LeftJabOneShot/position = Vector2( 160, 220 )
-nodes/LeftJabTimeScale/node = SubResource( 3 )
-nodes/LeftJabTimeScale/position = Vector2( -40, 300 )
-nodes/LocomotionBlendSpace/node = SubResource( 9 )
-nodes/LocomotionBlendSpace/position = Vector2( -180, 60 )
-nodes/output/position = Vector2( 360, 120 )
-node_connections = [ "output", 0, "LeftJabOneShot", "LeftJabOneShot", 0, "LocomotionBlendSpace", "LeftJabOneShot", 1, "LeftJabTimeScale", "LeftJabTimeScale", 0, "LeftJabAnim" ]
+graph_offset = Vector2( -577.374, 1209.5 )
+nodes/FrontLeftKickAnim/node = SubResource( 1 )
+nodes/FrontLeftKickAnim/position = Vector2( -460, 900 )
+nodes/FrontLeftKickOneShot/node = SubResource( 2 )
+nodes/FrontLeftKickOneShot/position = Vector2( 0, 900 )
+nodes/FrontLeftKickTimeScale/node = SubResource( 3 )
+nodes/FrontLeftKickTimeScale/position = Vector2( -240, 900 )
+nodes/FrontRightKickAnim/node = SubResource( 4 )
+nodes/FrontRightKickAnim/position = Vector2( -480, 1080 )
+nodes/FrontRightKickOneShot/node = SubResource( 5 )
+nodes/FrontRightKickOneShot/position = Vector2( 0, 1080 )
+nodes/FrontRightKickTimeScale/node = SubResource( 6 )
+nodes/FrontRightKickTimeScale/position = Vector2( -260, 1080 )
+nodes/LeftHookAnim/node = SubResource( 7 )
+nodes/LeftHookAnim/position = Vector2( -420, 540 )
+nodes/LeftHookOneShot/node = SubResource( 8 )
+nodes/LeftHookOneShot/position = Vector2( 0, 540 )
+nodes/LeftHookTimeScale/node = SubResource( 9 )
+nodes/LeftHookTimeScale/position = Vector2( -240, 540 )
+nodes/LeftJabAnim/node = SubResource( 10 )
+nodes/LeftJabAnim/position = Vector2( -360, 180 )
+nodes/LeftJabOneShot/node = SubResource( 11 )
+nodes/LeftJabOneShot/position = Vector2( 0, 180 )
+nodes/LeftJabTimeScale/node = SubResource( 12 )
+nodes/LeftJabTimeScale/position = Vector2( -200, 180 )
+nodes/LocomotionBlendSpace/node = SubResource( 18 )
+nodes/LocomotionBlendSpace/position = Vector2( -40, 20 )
+nodes/RightHookAnim/node = SubResource( 19 )
+nodes/RightHookAnim/position = Vector2( -420, 720 )
+nodes/RightHookOneShot/node = SubResource( 20 )
+nodes/RightHookOneShot/position = Vector2( 0, 720 )
+nodes/RightHookTimeScale/node = SubResource( 21 )
+nodes/RightHookTimeScale/position = Vector2( -220, 720 )
+nodes/RightJabAnim/node = SubResource( 22 )
+nodes/RightJabAnim/position = Vector2( -400, 360 )
+nodes/RightJabOneShot/node = SubResource( 23 )
+nodes/RightJabOneShot/position = Vector2( 0, 360 )
+nodes/RightJabTimeScale/node = SubResource( 24 )
+nodes/RightJabTimeScale/position = Vector2( -220, 360 )
+nodes/RoundLeftKickAnim/node = SubResource( 25 )
+nodes/RoundLeftKickAnim/position = Vector2( -480, 1260 )
+nodes/RoundLeftKickOneShot/node = SubResource( 26 )
+nodes/RoundLeftKickOneShot/position = Vector2( 0, 1260 )
+nodes/RoundLeftKickTimeScale/node = SubResource( 27 )
+nodes/RoundLeftKickTimeScale/position = Vector2( -260, 1260 )
+nodes/RoundRightKickAnim/node = SubResource( 28 )
+nodes/RoundRightKickAnim/position = Vector2( -480, 1440 )
+nodes/RoundRightKickOneShot/node = SubResource( 29 )
+nodes/RoundRightKickOneShot/position = Vector2( 0, 1440 )
+nodes/RoundRightKickTimeScale/node = SubResource( 30 )
+nodes/RoundRightKickTimeScale/position = Vector2( -260, 1440 )
+nodes/output/position = Vector2( 300, 940 )
+node_connections = [ "output", 0, "RoundRightKickOneShot", "FrontLeftKickTimeScale", 0, "FrontLeftKickAnim", "LeftJabOneShot", 0, "LocomotionBlendSpace", "LeftJabOneShot", 1, "LeftJabTimeScale", "FrontLeftKickOneShot", 0, "RightHookOneShot", "FrontLeftKickOneShot", 1, "FrontLeftKickTimeScale", "LeftHookTimeScale", 0, "LeftHookAnim", "LeftHookOneShot", 0, "RightJabOneShot", "LeftHookOneShot", 1, "LeftHookTimeScale", "LeftJabTimeScale", 0, "LeftJabAnim", "FrontRightKickOneShot", 0, "FrontLeftKickOneShot", "FrontRightKickOneShot", 1, "FrontRightKickTimeScale", "FrontRightKickTimeScale", 0, "FrontRightKickAnim", "RoundLeftKickOneShot", 0, "FrontRightKickOneShot", "RoundLeftKickOneShot", 1, "RoundLeftKickTimeScale", "RoundLeftKickTimeScale", 0, "RoundLeftKickAnim", "RightHookTimeScale", 0, "RightHookAnim", "RoundRightKickTimeScale", 0, "RoundRightKickAnim", "RightHookOneShot", 0, "LeftHookOneShot", "RightHookOneShot", 1, "RightHookTimeScale", "RightJabOneShot", 0, "LeftJabOneShot", "RightJabOneShot", 1, "RightJabTimeScale", "RoundRightKickOneShot", 0, "RoundLeftKickOneShot", "RoundRightKickOneShot", 1, "RoundRightKickTimeScale", "RightJabTimeScale", 0, "RightJabAnim" ]

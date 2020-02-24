@@ -12,7 +12,7 @@
 [ext_resource path="res://Characters3D/Kick Round Left.tres" type="Animation" id=10]
 [ext_resource path="res://Characters3D/Kick Round Right.tres" type="Animation" id=11]
 
-[sub_resource type="SphereShape" id=5]
+[sub_resource type="SphereShape" id=1]
 radius = 0.1
 
 [sub_resource type="SphereShape" id=2]
@@ -33,7 +33,7 @@ bones/59/bound_children = [ NodePath("LeftFootAttachment") ]
 bones/64/bound_children = [ NodePath("RightFootAttachment") ]
 
 [node name="LeftHandAttachment" type="BoneAttachment" parent="Skeleton" index="2"]
-transform = Transform( 0.768592, 0.639496, -0.0175607, -0.613143, 0.728531, -0.305441, -0.182535, 0.245527, 0.952048, 0.307889, 0.84745, 0.131501 )
+transform = Transform( 0.765926, 0.641859, -0.0369776, -0.616417, 0.716787, -0.325952, -0.182711, 0.272449, 0.944662, 0.31545, 0.844061, 0.125616 )
 bone_name = "mixamorig_LeftHandThumb4"
 
 [node name="Area" type="Area" parent="Skeleton/LeftHandAttachment" index="0"]
@@ -44,11 +44,11 @@ script = ExtResource( 2 )
 damage = 100.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Skeleton/LeftHandAttachment/Area" index="0"]
-shape = SubResource( 5 )
+shape = SubResource( 1 )
 disabled = true
 
 [node name="RightHandAttachment" type="BoneAttachment" parent="Skeleton" index="3"]
-transform = Transform( 0.818103, -0.522432, 0.240359, 0.57495, 0.734456, -0.360566, 0.0118382, 0.433173, 0.901232, -0.290262, 0.815371, 0.103118 )
+transform = Transform( 0.819804, -0.530524, 0.215551, 0.571712, 0.736834, -0.360859, 0.0326179, 0.419069, 0.907367, -0.289626, 0.823539, 0.0933429 )
 bone_name = "mixamorig_RightHandThumb4"
 
 [node name="Area" type="Area" parent="Skeleton/RightHandAttachment" index="0"]
@@ -63,7 +63,7 @@ shape = SubResource( 2 )
 disabled = true
 
 [node name="LeftFootAttachment" type="BoneAttachment" parent="Skeleton" index="4"]
-transform = Transform( 0.970744, -0.0248567, 0.238828, 0.00537491, 0.996627, 0.0818802, -0.240058, -0.078201, 0.967603, 0.250279, 0.015049, 0.221888 )
+transform = Transform( 0.970689, -0.0228617, 0.239247, 0.00315052, 0.996591, 0.0824489, -0.240316, -0.0792784, 0.967452, 0.253128, 0.0151592, 0.218893 )
 bone_name = "mixamorig_LeftToeBase"
 
 [node name="Area" type="Area" parent="Skeleton/LeftFootAttachment" index="0"]
@@ -78,7 +78,7 @@ shape = SubResource( 3 )
 disabled = true
 
 [node name="RightFootAttachment" type="BoneAttachment" parent="Skeleton" index="5"]
-transform = Transform( 0.892791, 0.0560941, -0.446966, 9.51695e-07, 0.992217, 0.124525, 0.450472, -0.111175, 0.885841, -0.195785, 0.0140613, 0.0895713 )
+transform = Transform( 0.892756, 0.056159, -0.447026, 0.000139014, 0.992166, 0.124921, 0.45054, -0.111587, 0.885755, -0.192822, 0.0140218, 0.0861855 )
 bone_name = "mixamorig_RightToeBase"
 
 [node name="Area" type="Area" parent="Skeleton/RightFootAttachment" index="0"]
@@ -107,9 +107,23 @@ tree_root = ExtResource( 3 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 root_motion_track = NodePath("Skeleton:root_doc")
+parameters/FrontLeftKickOneShot/active = false
+parameters/FrontLeftKickTimeScale/scale = 1.0
+parameters/FrontRightKickOneShot/active = false
+parameters/FrontRightKickTimeScale/scale = 1.0
+parameters/LeftHookOneShot/active = false
+parameters/LeftHookTimeScale/scale = 1.0
 parameters/LeftJabOneShot/active = false
 parameters/LeftJabTimeScale/scale = 1.0
 parameters/LocomotionBlendSpace/blend_position = Vector2( 0, 0 )
+parameters/RightHookOneShot/active = false
+parameters/RightHookTimeScale/scale = 1.0
+parameters/RightJabOneShot/active = false
+parameters/RightJabTimeScale/scale = 1.0
+parameters/RoundLeftKickOneShot/active = false
+parameters/RoundLeftKickTimeScale/scale = 1.0
+parameters/RoundRightKickOneShot/active = false
+parameters/RoundRightKickTimeScale/scale = 1.0
 [connection signal="body_entered" from="Skeleton/LeftHandAttachment/Area" to="Skeleton/LeftHandAttachment/Area" method="_on_Area_body_entered"]
 [connection signal="body_entered" from="Skeleton/RightHandAttachment/Area" to="Skeleton/RightHandAttachment/Area" method="_on_Area_body_entered"]
 [connection signal="body_entered" from="Skeleton/LeftFootAttachment/Area" to="Skeleton/LeftFootAttachment/Area" method="_on_Area_body_entered"]

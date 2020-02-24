@@ -57,6 +57,7 @@ shape = SubResource( 3 )
 
 [node name="Wall1" type="MeshInstance" parent="Navigation/NavigationMeshInstance"]
 transform = Transform( 0.993865, 0, -0.110602, 0, 1, 0, 0.110602, 0, 0.993865, 0.352059, 10.5282, -5.84609 )
+visible = false
 mesh = SubResource( 4 )
 material/0 = null
 
@@ -67,6 +68,7 @@ shape = SubResource( 5 )
 
 [node name="Wall2" type="MeshInstance" parent="Navigation/NavigationMeshInstance"]
 transform = Transform( -0.131567, 0, -0.991307, 0, 1, 0, 0.991307, 0, -0.131567, 8.96894, 10.5282, 4.79635 )
+visible = false
 mesh = SubResource( 4 )
 material/0 = null
 
