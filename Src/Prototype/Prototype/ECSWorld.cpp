@@ -224,7 +224,7 @@ void godot::ECSWorld::_init()
 	//m_process_systems.push_back(std::unique_ptr<BaseSystem>(new FleeingSystem()));
 	//m_process_systems.push_back(std::unique_ptr<BaseSystem>(new BillboardRotationSystem()));
 	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new LocomotionAnimSystem()));
-	//m_process_systems.push_back(std::unique_ptr<BaseSystem>(new HTHAnimSystem()));
+	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new HTHAnimSystem()));
 }
 
 void godot::ECSWorld::_ready()

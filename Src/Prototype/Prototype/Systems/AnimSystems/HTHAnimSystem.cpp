@@ -8,6 +8,7 @@
 #include "../../Components/InputComponents.h"
 #include "../../Components/AttackComponents.h"
 
+//TODO: remove hardcode
 static const char* anims[8] =
 {
 	"Jab Left",
@@ -34,37 +35,45 @@ static const char* paramNames[8] =
 
 void godot::HTHAnimSystem::operator()(float delta, entt::registry& registry)
 {
-	auto punchView = registry.view<InputComponent, MeleeAttackComponent, AnimationTree*>();
-	punchView.each([](entt::entity entity, InputComponent& input, MeleeAttackComponent& attackComp, AnimationTree* pAnimTree)
+	auto punchView = registry.view<entt::tag<PlayHthAnimTag>, MeleeAttackComponent, AnimationTree*>();
+	punchView.less([&registry](entt::entity entity, MeleeAttackComponent& attackComp, AnimationTree* pAnimTree)
 	{
-		//TODO0: possibly merge with MeleeAttackSystem and remove copypasted cooldown code
 		int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
-		bool attackInput = attackComp.prevAnimTimeMillis + utils::SecondsToMillis(attackComp.attackTime) <= currTimeMillis;
-		if (attackInput && input.Test(EInput::Attack))
-		{
-			//TODO0: refactor Combo sequence code after merging with MeleeAttackSystem
-			//========Combo sequence code========
-			bool continueCombo = attackComp.prevAnimTimeMillis + utils::SecondsToMillis(2.5f) > currTimeMillis;
-			if (continueCombo)
-			{
-				attackComp.comboSequenceNumber++;
-				if (attackComp.comboSequenceNumber > 7)//TODO: remove hardcode
-					attackComp.comboSequenceNumber = 0;
-			}
-			else
-				attackComp.comboSequenceNumber = 0;
-			attackComp.prevAnimTimeMillis = currTimeMillis;
-			//===================================
 
-			AnimationPlayer* pAnimPlayer = Object::cast_to<AnimationPlayer>(pAnimTree->get_node(pAnimTree->get_animation_player()));
-			String animName(anims[attackComp.comboSequenceNumber]);
-			Ref<Animation> anim = pAnimPlayer->get_animation(animName);
-			
-			String paramName(paramNames[attackComp.comboSequenceNumber]);
-			//TODO: same anim time for all animations, maybe use general anim scale for this
-			//float timeScale = anim->get_length() / attackComp.attackTime;
-			//pAnimTree->set("parameters/" + paramName + "TimeScale/scale", timeScale);
-			pAnimTree->set("parameters/" + paramName + "OneShot/active", true);
+		//TODO: remove hardcode
+		static const int animCount = 7;
+
+		//TODO0: refactor Combo sequence code after merging with MeleeAttackSystem
+		//========Combo sequence code========
+		bool continueCombo = attackComp.prevAnimTimeMillis + utils::SecondsToMillis(2.5f) > currTimeMillis;
+		if (continueCombo)
+		{
+			attackComp.comboSequenceNumber++;
+			if (attackComp.comboSequenceNumber > animCount)
+				attackComp.comboSequenceNumber = 0;
 		}
+		else
+			attackComp.comboSequenceNumber = 0;
+		attackComp.prevAnimTimeMillis = currTimeMillis;
+		//===================================
+
+		int prevAnimIdx = attackComp.comboSequenceNumber - 1;
+		if (prevAnimIdx < 0)
+			prevAnimIdx = animCount;
+		String prevParamName(paramNames[prevAnimIdx]);
+		String paramName(paramNames[attackComp.comboSequenceNumber]);
+
+		//TODO: same anim time for all animations, maybe use general anim scale for this
+		//AnimationPlayer* pAnimPlayer = Object::cast_to<AnimationPlayer>(pAnimTree->get_node(pAnimTree->get_animation_player()));
+		//String animName(anims[attackComp.comboSequenceNumber]);
+		//Ref<Animation> anim = pAnimPlayer->get_animation(animName);
+		//float timeScale = anim->get_length() / attackComp.attackTime;
+		//pAnimTree->set("parameters/" + paramName + "TimeScale/scale", timeScale);
+
+		//TODO: blend between anims
+		pAnimTree->set("parameters/" + prevParamName + "OneShot/active", false);
+		pAnimTree->set("parameters/" + paramName + "OneShot/active", true);
+
+		registry.remove<entt::tag<PlayHthAnimTag> >(entity);
 	});
 }

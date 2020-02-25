@@ -5,9 +5,6 @@
 #include <Dictionary.hpp>
 #include <Input.hpp>
 #include <OS.hpp>
-//TODO: remove if hth anim will be played in HTHAnimSystem
-#include <Animation.hpp>
-#include <AnimationPlayer.hpp>
 
 #include "core/math/math_funcs.h"
 
@@ -49,59 +46,6 @@ bool godot::MeleeAttackSystem::ChecktargetEntity(entt::registry& registry, entt:
 	return lockedTarget != entt::null && registry.valid(lockedTarget) && !registry.has<entt::tag<DeadTag> >(lockedTarget);
 }
 
-//TODO: remove if hth anim will be played in HTHAnimSystem
-static const char* anims[8] =
-{
-	"Jab Left",
-	"Jab Right",
-	"Hook Left",
-	"Hook Right",
-	"Kick Front Left",
-	"Kick Front Right",
-	"Kick Round Left",
-	"Kick Round Right"
-};
-
-static const char* paramNames[8] =
-{
-	"LeftJab",
-	"RightJab",
-	"LeftHook",
-	"RightHook",
-	"FrontLeftKick",
-	"FrontRightKick",
-	"RoundLeftKick",
-	"RoundRightKick"
-};
-
-void godot::MeleeAttackSystem::PlayAnim(entt::entity entity, InputComponent& input, MeleeAttackComponent& attackComp, AnimationTree* pAnimTree)
-{
-	//========Combo sequence code========
-	int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
-	bool continueCombo = attackComp.prevAnimTimeMillis + utils::SecondsToMillis(2.5f) > currTimeMillis;
-	if (continueCombo)
-	{
-		attackComp.comboSequenceNumber++;
-		if (attackComp.comboSequenceNumber > 7)//TODO: remove hardcode
-			attackComp.comboSequenceNumber = 0;
-	}
-	else
-		attackComp.comboSequenceNumber = 0;
-	attackComp.prevAnimTimeMillis = currTimeMillis;
-	//===================================
-
-	String paramName(paramNames[attackComp.comboSequenceNumber]);
-
-	//TODO: same anim time for all animations, maybe use general anim scale for this
-	//AnimationPlayer* pAnimPlayer = Object::cast_to<AnimationPlayer>(pAnimTree->get_node(pAnimTree->get_animation_player()));
-	//String animName(anims[attackComp.comboSequenceNumber]);
-	//Ref<Animation> anim = pAnimPlayer->get_animation(animName);
-	//float timeScale = anim->get_length() / attackComp.attackTime;
-	//pAnimTree->set("parameters/" + paramName + "TimeScale/scale", timeScale);
-
-	pAnimTree->set("parameters/" + paramName + "OneShot/active", true);
-}
-
 godot::MeleeAttackSystem::MeleeAttackSystem()
 {
 	m_params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
@@ -116,9 +60,9 @@ godot::MeleeAttackSystem::MeleeAttackSystem()
 void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<entt::tag<CurrentWeaponMeleeTag>, MeleeAttackComponent, InputComponent,
-		RotationDirectionComponent, Spatial*, AnimationTree*>(ExcludeDead);
+		RotationDirectionComponent, Spatial*>(ExcludeDead);
 	view.less([&registry, this](entt::entity entity, MeleeAttackComponent& attackComp, InputComponent input
-		, RotationDirectionComponent& rotComp, Spatial* pAttackerSpatial, AnimationTree* pAnimTree)
+		, RotationDirectionComponent& rotComp, Spatial* pAttackerSpatial)
 	{
 		if (ChecktargetEntity(registry, attackComp.lockedTarget))
 			rotComp.direction = GetDirToTarget(pAttackerSpatial, registry, attackComp.lockedTarget);
@@ -128,8 +72,7 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 		
 		Godot::print("Splash!");
 
-		//TODO0: or keep playing anim in HTHAnimSystem, but by tag, not by input and cooldown
-		PlayAnim(entity, input, attackComp, pAnimTree);
+		registry.assign<entt::tag<PlayHthAnimTag> >(entity);
 
 		Array intersects = GetIntersects(pAttackerSpatial, attackComp.distance, attackComp.collisionLayerName);
 		if (intersects.size() == 0)
