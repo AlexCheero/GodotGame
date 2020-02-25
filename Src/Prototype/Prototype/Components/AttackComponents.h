@@ -55,3 +55,6 @@ struct GrenadeComponent
 	float damage;
 	float startTime;
 };
+
+//TODO: possibly move to separate AnimationComponents.h
+constexpr entt::hashed_string PlayHthAnimTag = "PlayHthAnimTag"_hs;
