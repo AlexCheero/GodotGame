@@ -8,7 +8,7 @@
 #include "../../Components/InputComponents.h"
 #include "../../Components/AttackComponents.h"
 
-const char* anims[8] =
+static const char* anims[8] =
 {
 	"Jab Left",
 	"Jab Right",
@@ -20,7 +20,7 @@ const char* anims[8] =
 	"Kick Round Right"
 };
 
-const char* paramNames[8] =
+static const char* paramNames[8] =
 {
 	"LeftJab",
 	"RightJab",
