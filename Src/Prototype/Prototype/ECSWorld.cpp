@@ -19,6 +19,7 @@
 #include "Components/AIComponents/PatrolComponents.h"
 #include "Components/AIComponents/FSMStateComponents.h"
 
+#include "Systems/SystemChain.h"
 #include "Systems/PlayerSystems/PlayerVelocitySystem.h"
 #include "Systems/LocomotionSystems/KinematicMovementSystem.h"
 #include "Systems/LocomotionSystems/GravitySystem.h";
@@ -192,39 +193,38 @@ void godot::ECSWorld::_init()
 	//TODO: check what systems really should be in phys proc
 	//TODO: check what systems should be reactive
 	//setup physics systems
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PlayerVelocitySystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new KinematicMovementSystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new GravitySystem()));
-	//must always follow GravitySystem
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new JumpSystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PlayerRotationSystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new LookAtSystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new MeleeAttackSystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new RangedAttackSystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new ThrowAttackSystem()));
-	//m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PatrolSystem()));
-	//m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new DecisionMakingFSMSystem()));
+	m_physics_systems.emplace_back(new PlayerVelocitySystem());
+	m_physics_systems.emplace_back(new KinematicMovementSystem());
+	m_physics_systems.emplace_back(new SystemChain<GravitySystem, JumpSystem>());
+	m_physics_systems.emplace_back(new PlayerRotationSystem());
+	m_physics_systems.emplace_back(new LookAtSystem());
+	m_physics_systems.emplace_back(new MeleeAttackSystem());
+	m_physics_systems.emplace_back(new RangedAttackSystem());
+	m_physics_systems.emplace_back(new ThrowAttackSystem());
 
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new GrenadeSystem()));
+	//m_physics_systems.emplace_back(new PatrolSystem());
+	//m_physics_systems.emplace_back(new DecisionMakingFSMSystem());
+
+	m_physics_systems.emplace_back(new GrenadeSystem());
 	//TODO: should it be in phys proc?
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new NavAgentSystem()));
-	m_physics_systems.push_back(std::unique_ptr<BaseSystem>(new PursuingSystem()));
+	m_physics_systems.emplace_back(new NavAgentSystem());
+	m_physics_systems.emplace_back(new PursuingSystem());
 	
 	//setup systems
-	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new SimpleFollowSystem()));
-	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new DestroyDeadSystem()));
+	m_process_systems.emplace_back(new SimpleFollowSystem());
+	m_process_systems.emplace_back(new DestroyDeadSystem());
 
-	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new WeaponChooseSystem()));
+	m_process_systems.emplace_back(new WeaponChooseSystem());
 	registry.on_construct<entt::tag<CurrentWeaponMeleeTag> >().connect<&WeaponChooseSystem::OnMeleeTagConstruct>();
 	registry.on_construct<entt::tag<CurrentWeaponRangedTag> >().connect<&WeaponChooseSystem::OnRangedTagConstruct>();
 	registry.on_construct<entt::tag<CurrentWeaponThrowableTag> >().connect<&WeaponChooseSystem::OnThrowableTagConstruct>();
 
-	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new HealthMonitoringSystem()));
+	m_process_systems.emplace_back(new HealthMonitoringSystem());
 	//TODO: change logick of FleeingSystem after implementing combat systems (hth, shooting, covers, etc.)
-	//m_process_systems.push_back(std::unique_ptr<BaseSystem>(new FleeingSystem()));
-	//m_process_systems.push_back(std::unique_ptr<BaseSystem>(new BillboardRotationSystem()));
-	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new LocomotionAnimSystem()));
-	m_process_systems.push_back(std::unique_ptr<BaseSystem>(new HTHAnimSystem()));
+	//m_process_systems.emplace_back(new FleeingSystem());
+	//m_process_systems.emplace_back(new BillboardRotationSystem());
+	m_process_systems.emplace_back(new LocomotionAnimSystem());
+	m_process_systems.emplace_back(new HTHAnimSystem());
 }
 
 void godot::ECSWorld::_ready()
