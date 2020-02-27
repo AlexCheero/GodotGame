@@ -392,5 +392,8 @@
     <ClInclude Include="Systems\AnimSystems\HTHAnimSystem.h">
       <Filter>Header Files\Systems\AnimSystems</Filter>
     </ClInclude>
+    <ClInclude Include="Systems\SystemChain.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
