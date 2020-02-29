@@ -29,6 +29,20 @@ namespace utils
 	godot::Vector2 FlatVector(godot::Vector3 vec3);
 	godot::Object* CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 direction, float distance, godot::String layerName = "");
 	BoundsComponent GetCapsuleBounds(godot::Node* pCapsuleNode);
-
 	void Assert(bool assertion, const char* message, const char* file, int line);
+	
+	template<typename T>
+	T* GetParentOfType(godot::Node* pNode)
+	{
+		godot::Node* pParentNode = pNode->get_parent();
+		if (!pParentNode)
+			return nullptr;
+
+		//TODO: maybe check via ___get_type_name
+		T* castedParent = godot::Object::cast_to<T>(pParentNode);
+		if (castedParent)
+			return castedParent;
+		else
+			return GetParentOfType<T>(pParentNode);
+	}
 }

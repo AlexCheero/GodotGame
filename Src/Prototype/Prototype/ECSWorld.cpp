@@ -73,8 +73,8 @@ void godot::ECSWorld::PreparePlayerEntity()
 	//AssignNodeInheritedComponent<Animation2DComponent>(registry, entity, get_node("Player/Sprite3D"));
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Player/vanguard/AnimationTree"));
 
-	EntityHolderNode* pEnemy = AssignNodeInheritedComponent<EntityHolderNode>(registry, entity, pPlayerNode);
-	pEnemy->SetEntity(entity);
+	EntityHolderNode* pEntityHolder = AssignNodeInheritedComponent<EntityHolderNode>(registry, entity, pPlayerNode);
+	pEntityHolder->SetEntity(entity);
 
 	entityView->ConstructComponents(registry, entity);
 
@@ -126,8 +126,8 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	//AssignNodeInheritedComponent<Animation2DComponent>(registry, entity, get_node("Enemy/Sprite3D"));
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Enemy/vanguard/AnimationTree"));
 
-	EntityHolderNode* pEnemy = AssignNodeInheritedComponent<EntityHolderNode>(registry, entity, pEnemyNode);
-	pEnemy->SetEntity(entity);
+	EntityHolderNode* pEntityHolder = AssignNodeInheritedComponent<EntityHolderNode>(registry, entity, pEnemyNode);
+	pEntityHolder->SetEntity(entity);
 
 	registry.assign<BoundsComponent>(entity, utils::GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));
 	
