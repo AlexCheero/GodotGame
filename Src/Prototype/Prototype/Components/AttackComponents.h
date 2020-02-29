@@ -18,11 +18,12 @@ struct MeleeAttackComponent
 	//TODO: set attack time in anim
 	float attackTime;
 	godot::String collisionLayerName;
+	//TODO: maybe split into cold and hot data
 	int64_t prevHitTimeMillis = -utils::SecondsToMillis(attackTime);
-	//TODO0: hack!!! remove when HTHAnimSystem merged with MeleeAttackSystem
-	int64_t prevAnimTimeMillis = -utils::SecondsToMillis(attackTime);
-	entt::entity lockedTarget = entt::null;
-	int comboSequenceNumber = 0;
+	//TODO: remove hardcode and get from view
+	int64_t maxComboIntervalMillis = 3000;
+	int comboLength = 8;
+	int comboSequenceNum = 0;
 };
 
 constexpr entt::hashed_string CurrentWeaponRangedTag = "CurrentWeaponRangedTag"_hs;
@@ -47,6 +48,13 @@ struct ThrowableAttackComponent
 	int64_t prevHitTime = -utils::SecondsToMillis(attackTime);
 };
 
+constexpr entt::hashed_string AttackedTag = "AttackedTag"_hs;
+
+struct TargetLockComponent
+{
+	entt::entity target = entt::null;
+};
+
 constexpr entt::hashed_string GrenadeExplodesTag = "GrenadeExplodesTag"_hs;
 struct GrenadeComponent
 {
@@ -55,6 +63,3 @@ struct GrenadeComponent
 	float damage;
 	float startTime;
 };
-
-//TODO: possibly move to separate AnimationComponents.h
-constexpr entt::hashed_string PlayHthAnimTag = "PlayHthAnimTag"_hs;

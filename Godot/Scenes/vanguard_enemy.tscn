@@ -12,34 +12,28 @@
 [ext_resource path="res://Characters3D/Kick Round Right.tres" type="Animation" id=10]
 [ext_resource path="res://Characters3D/Jab Right.tres" type="Animation" id=11]
 
-[sub_resource type="SpatialMaterial" id=6]
+[sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 1, 0, 0, 1 )
-
-[sub_resource type="SphereShape" id=5]
-radius = 0.1
 
 [sub_resource type="SphereShape" id=2]
 radius = 0.1
 
 [sub_resource type="SphereShape" id=3]
-radius = 0.15
+radius = 0.1
 
 [sub_resource type="SphereShape" id=4]
 radius = 0.15
 
+[sub_resource type="SphereShape" id=5]
+radius = 0.15
+
 [node name="vanguard" instance=ExtResource( 2 )]
 
-[node name="Skeleton" parent="." index="0"]
-bones/15/bound_children = [ NodePath("LeftHandAttachment") ]
-bones/39/bound_children = [ NodePath("RightHandAttachment") ]
-bones/59/bound_children = [ NodePath("LeftFootAttachment") ]
-bones/64/bound_children = [ NodePath("RightFootAttachment") ]
-
 [node name="vanguard_Mesh" parent="Skeleton" index="1"]
-material/0 = SubResource( 6 )
+material/0 = SubResource( 1 )
 
 [node name="LeftHandAttachment" type="BoneAttachment" parent="Skeleton" index="2"]
-transform = Transform( 0.763175, 0.645701, -0.0251145, -0.618107, 0.718123, -0.319748, -0.188427, 0.259547, 0.947169, 0.311998, 0.852076, 0.122976 )
+transform = Transform( 0.764353, 0.643904, -0.033919, -0.618399, 0.717147, -0.321372, -0.182609, 0.266617, 0.946346, 0.318047, 0.846452, 0.118367 )
 bone_name = "mixamorig_LeftHandThumb4"
 
 [node name="Area" type="Area" parent="Skeleton/LeftHandAttachment" index="0"]
@@ -47,14 +41,14 @@ transform = Transform( 1, -2.98023e-08, -2.98023e-08, 0, 1, -1.49012e-08, -2.980
 collision_layer = 4
 collision_mask = 2
 script = ExtResource( 1 )
-damage = 100.0
+damage = 25.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Skeleton/LeftHandAttachment/Area" index="0"]
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 disabled = true
 
 [node name="RightHandAttachment" type="BoneAttachment" parent="Skeleton" index="3"]
-transform = Transform( 0.826808, -0.512858, 0.231009, 0.562471, 0.75659, -0.333461, -0.00376099, 0.405645, 0.914023, -0.300689, 0.824144, 0.114728 )
+transform = Transform( 0.823778, -0.520904, 0.223716, 0.56674, 0.746977, -0.347607, 0.0139586, 0.413141, 0.910561, -0.288406, 0.823818, 0.0958338 )
 bone_name = "mixamorig_RightHandThumb4"
 
 [node name="Area" type="Area" parent="Skeleton/RightHandAttachment" index="0"]
@@ -62,40 +56,40 @@ transform = Transform( 0.999686, 0.0219498, -0.0121652, -0.0215694, 0.999288, 0.
 collision_layer = 4
 collision_mask = 2
 script = ExtResource( 1 )
-damage = 100.0
+damage = 25.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Skeleton/RightHandAttachment/Area" index="0"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 disabled = true
 
 [node name="LeftFootAttachment" type="BoneAttachment" parent="Skeleton" index="4"]
-transform = Transform( 0.9707, -0.0238676, 0.239108, 0.00481173, 0.996786, 0.0799648, -0.240248, -0.0764712, 0.967695, 0.250305, 0.0149537, 0.2219 )
+transform = Transform( 0.97071, -0.0216289, 0.239278, 0.00159232, 0.996497, 0.0836157, -0.240248, -0.0807855, 0.967344, 0.25314, 0.0151156, 0.218624 )
 bone_name = "mixamorig_LeftToeBase"
 
 [node name="Area" type="Area" parent="Skeleton/LeftFootAttachment" index="0"]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource( 1 )
-damage = 100.0
+damage = 25.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Skeleton/LeftFootAttachment/Area" index="0"]
 transform = Transform( 0.999998, 0.00221427, -0.000440657, -0.00221424, 0.999998, -0.000167295, 0.000440076, 0.000168435, 0.999999, 2.34544e-05, 0.101802, -0.0349443 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 disabled = true
 
 [node name="RightFootAttachment" type="BoneAttachment" parent="Skeleton" index="5"]
-transform = Transform( 0.89209, 0.0542467, -0.44859, -4.86873e-07, 0.992767, 0.120052, 0.451858, -0.107097, 0.885638, -0.195913, 0.0140754, 0.0895735 )
+transform = Transform( 0.892528, 0.0560222, -0.447499, 2.94531e-07, 0.992254, 0.12422, 0.450992, -0.11087, 0.885614, -0.193053, 0.0140748, 0.0864029 )
 bone_name = "mixamorig_RightToeBase"
 
 [node name="Area" type="Area" parent="Skeleton/RightFootAttachment" index="0"]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource( 1 )
-damage = 100.0
+damage = 25.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Skeleton/RightFootAttachment/Area" index="0"]
 transform = Transform( 0.999999, 0.000198402, -0.000668138, -0.000201762, 0.999987, -0.00516585, 0.000667244, 0.00516596, 0.999987, -0.0206144, 0.117667, 0.0112326 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 disabled = true
 
 [node name="AnimationPlayer" parent="." index="1"]
@@ -113,9 +107,23 @@ tree_root = ExtResource( 3 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 root_motion_track = NodePath("Skeleton:root_doc")
+parameters/FrontLeftKickOneShot/active = false
+parameters/FrontLeftKickTimeScale/scale = 1.0
+parameters/FrontRightKickOneShot/active = false
+parameters/FrontRightKickTimeScale/scale = 1.0
+parameters/LeftHookOneShot/active = false
+parameters/LeftHookTimeScale/scale = 1.0
 parameters/LeftJabOneShot/active = false
 parameters/LeftJabTimeScale/scale = 1.0
 parameters/LocomotionBlendSpace/blend_position = Vector2( 0, 0 )
+parameters/RightHookOneShot/active = false
+parameters/RightHookTimeScale/scale = 1.0
+parameters/RightJabOneShot/active = false
+parameters/RightJabTimeScale/scale = 1.0
+parameters/RoundLeftKickOneShot/active = false
+parameters/RoundLeftKickTimeScale/scale = 1.0
+parameters/RoundRightKickOneShot/active = false
+parameters/RoundRightKickTimeScale/scale = 1.0
 [connection signal="body_entered" from="Skeleton/LeftHandAttachment/Area" to="Skeleton/LeftHandAttachment/Area" method="_on_Area_body_entered"]
 [connection signal="body_entered" from="Skeleton/RightHandAttachment/Area" to="Skeleton/RightHandAttachment/Area" method="_on_Area_body_entered"]
 [connection signal="body_entered" from="Skeleton/LeftFootAttachment/Area" to="Skeleton/LeftFootAttachment/Area" method="_on_Area_body_entered"]

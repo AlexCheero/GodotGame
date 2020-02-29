@@ -202,8 +202,8 @@ void godot::ECSWorld::_init()
 	m_physics_systems.emplace_back(new RangedAttackSystem());
 	m_physics_systems.emplace_back(new ThrowAttackSystem());
 
-	//m_physics_systems.emplace_back(new PatrolSystem());
-	//m_physics_systems.emplace_back(new DecisionMakingFSMSystem());
+	m_physics_systems.emplace_back(new PatrolSystem());
+	m_physics_systems.emplace_back(new DecisionMakingFSMSystem());
 
 	m_physics_systems.emplace_back(new GrenadeSystem());
 	//TODO: should it be in phys proc?
@@ -221,10 +221,9 @@ void godot::ECSWorld::_init()
 
 	m_process_systems.emplace_back(new HealthMonitoringSystem());
 	//TODO: change logick of FleeingSystem after implementing combat systems (hth, shooting, covers, etc.)
-	//m_process_systems.emplace_back(new FleeingSystem());
+	m_process_systems.emplace_back(new FleeingSystem());
 	//m_process_systems.emplace_back(new BillboardRotationSystem());
 	m_process_systems.emplace_back(new LocomotionAnimSystem());
-	m_process_systems.emplace_back(new HTHAnimSystem());
 }
 
 void godot::ECSWorld::_ready()

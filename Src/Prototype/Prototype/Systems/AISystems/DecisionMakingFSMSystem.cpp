@@ -51,7 +51,7 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 	auto players = registry.view<entt::tag<PlayerTag>, Spatial*>();
 
 	//DecisionMakingFSMSystem should be the only system to manage tags and set input
-	//TODO0: add noticing player on taking damage
+	//TODO1: add noticing player on taking damage
 	auto patrolView = registry.view<entt::tag<BotTag>, entt::tag<PatrolStateTag>, PatrolmanComponent, Spatial*>();
 	patrolView.less([this, &registry, &players](entt::entity entity, PatrolmanComponent patrolComp, Spatial* pSpatial)
 	{
@@ -90,7 +90,7 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 				validTarget = false;
 		}
 
-		//TODO0: move somwhere like DecisionMakingView
+		//TODO1: move somwhere like DecisionMakingView
 		//to flee transition
 		const float criticalProportion = 0.5f;
 		if (healthComp.ProportionOfMax() <= criticalProportion)
@@ -105,46 +105,50 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 			if (meleeComp.distance >= GetDistanceToTarget(registry, pursuingComp.target, pSpatial))
 			{
 				registry.remove<PursuingStateComponent>(entity);
-				registry.assign<entt::tag<AttackStateTag> >(entity);
+				registry.assign<entt::tag<MeleeAttackStateTag> >(entity);
+				registry.assign<TargetLockComponent>(entity).target = pursuingComp.target;
 			}
 		}
 		//to patrol transition
 		else
 		{
-			meleeComp.lockedTarget = entt::null;
 			registry.remove<PursuingStateComponent>(entity);
 			registry.assign<entt::tag<PatrolStateTag> >(entity);
 		}
 	});
 
-	auto attackView = registry.view<entt::tag<BotTag>, entt::tag<AttackStateTag>, InputComponent, MeleeAttackComponent, HealthComponent, Spatial*>();
-	attackView.less([this, &registry](entt::entity entity, InputComponent& inputComp, MeleeAttackComponent meleeComp
-		, HealthComponent healthComp, Spatial* pSpatial)
+	auto meleeAttackView = registry.view<entt::tag<BotTag>, entt::tag<MeleeAttackStateTag>, InputComponent
+		, MeleeAttackComponent, HealthComponent, Spatial*
+		, TargetLockComponent>();
+	meleeAttackView.less([this, &registry](entt::entity entity, InputComponent& inputComp, MeleeAttackComponent& meleeComp
+		, HealthComponent healthComp, Spatial* pSpatial, TargetLockComponent lockComp)
 	{
 		int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
 		bool attackInput = meleeComp.prevHitTimeMillis + utils::SecondsToMillis(meleeComp.attackTime) <= currTimeMillis;
 		inputComp.Set(EInput::Attack, attackInput);
 
-		//TODO0: move somwhere like DecisionMakingView here and from pursueView
+		//TODO1: move somwhere like DecisionMakingView here and from pursueView
 		//to flee transition
 		const float criticalProportion = 0.5f;
 		if (healthComp.ProportionOfMax() <= criticalProportion)
 		{
 			registry.remove_if_exists<NavPathComponent>(entity);
-			registry.remove<entt::tag<AttackStateTag> >(entity);
+			registry.remove<entt::tag<MeleeAttackStateTag> >(entity);
 			registry.assign<entt::tag<FleeStateTag> >(entity);
 		}
 		//to pursuit transition
-		if (registry.valid(meleeComp.lockedTarget) && meleeComp.distance < GetDistanceToTarget(registry, meleeComp.lockedTarget, pSpatial))
+		if (registry.valid(lockComp.target) && meleeComp.distance < GetDistanceToTarget(registry, lockComp.target, pSpatial))
 		{
-			registry.remove<entt::tag<AttackStateTag> >(entity);
-			PursuingStateComponent& pursuingComp = registry.assign<PursuingStateComponent>(entity, meleeComp.lockedTarget);
+			PursuingStateComponent& pursuingComp = registry.assign<PursuingStateComponent>(entity, lockComp.target);
+			registry.remove<entt::tag<MeleeAttackStateTag> >(entity);
+			registry.remove<TargetLockComponent>(entity);
 			pursuingComp.targetLostMsec = -1;
 		}
 		//to patrol transition
-		else if (!registry.valid(meleeComp.lockedTarget) || registry.has<entt::tag<DeadTag> >(meleeComp.lockedTarget))
+		else if (!registry.valid(lockComp.target) || registry.has<entt::tag<DeadTag> >(lockComp.target))
 		{
-			registry.remove<entt::tag<AttackStateTag> >(entity);
+			registry.remove<entt::tag<MeleeAttackStateTag> >(entity);
+			registry.remove<TargetLockComponent>(entity);
 			registry.assign<entt::tag<PatrolStateTag> >(entity);
 		}
 	});

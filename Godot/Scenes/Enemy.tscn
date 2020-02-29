@@ -55,7 +55,6 @@ script = ExtResource( 7 )
 [node name="MeleeAttackView" type="Node" parent="EntityView"]
 script = ExtResource( 8 )
 distance = 4.0
-damage = 10.0
 angle = 90.0
 attackTime = 1.0
 "collision layer" = "Player"

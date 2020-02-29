@@ -6,6 +6,7 @@
 
 #include <bitset>
 
+//TODO: maybe turn all input into tags, instead of input container
 enum class EInput
 {
 	Attack,

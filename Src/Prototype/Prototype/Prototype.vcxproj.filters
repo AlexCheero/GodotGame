@@ -231,6 +231,9 @@
     <ClCompile Include="Systems\AnimSystems\HTHAnimSystem.cpp">
       <Filter>Source Files\Systems\AnimSystems</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\HTHLockTargetSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -394,6 +397,9 @@
     </ClInclude>
     <ClInclude Include="Systems\SystemChain.h">
       <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\HTHLockTargetSystem.h">
+      <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

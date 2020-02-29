@@ -26,14 +26,8 @@ radius = 0.15
 
 [node name="vanguard" instance=ExtResource( 1 )]
 
-[node name="Skeleton" parent="." index="0"]
-bones/15/bound_children = [ NodePath("LeftHandAttachment") ]
-bones/39/bound_children = [ NodePath("RightHandAttachment") ]
-bones/59/bound_children = [ NodePath("LeftFootAttachment") ]
-bones/64/bound_children = [ NodePath("RightFootAttachment") ]
-
 [node name="LeftHandAttachment" type="BoneAttachment" parent="Skeleton" index="2"]
-transform = Transform( 0.765926, 0.641859, -0.0369776, -0.616417, 0.716787, -0.325952, -0.182711, 0.272449, 0.944662, 0.31545, 0.844061, 0.125616 )
+transform = Transform( 0.763609, 0.645594, -0.0104037, -0.615302, 0.722707, -0.314794, -0.19571, 0.246781, 0.949102, 0.313182, 0.850884, 0.121181 )
 bone_name = "mixamorig_LeftHandThumb4"
 
 [node name="Area" type="Area" parent="Skeleton/LeftHandAttachment" index="0"]
@@ -41,14 +35,14 @@ transform = Transform( 1, -2.98023e-08, -2.98023e-08, 0, 1, -1.49012e-08, -2.980
 collision_layer = 2
 collision_mask = 4
 script = ExtResource( 2 )
-damage = 100.0
+damage = 25.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Skeleton/LeftHandAttachment/Area" index="0"]
 shape = SubResource( 1 )
 disabled = true
 
 [node name="RightHandAttachment" type="BoneAttachment" parent="Skeleton" index="3"]
-transform = Transform( 0.819804, -0.530524, 0.215551, 0.571712, 0.736834, -0.360859, 0.0326179, 0.419069, 0.907367, -0.289626, 0.823539, 0.0933429 )
+transform = Transform( 0.820554, -0.517281, 0.243124, 0.571538, 0.746834, -0.33997, -0.0057136, 0.41792, 0.908465, -0.293095, 0.81968, 0.111575 )
 bone_name = "mixamorig_RightHandThumb4"
 
 [node name="Area" type="Area" parent="Skeleton/RightHandAttachment" index="0"]
@@ -56,21 +50,21 @@ transform = Transform( 0.999686, 0.0219498, -0.0121652, -0.0215694, 0.999288, 0.
 collision_layer = 2
 collision_mask = 4
 script = ExtResource( 2 )
-damage = 100.0
+damage = 25.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Skeleton/RightHandAttachment/Area" index="0"]
 shape = SubResource( 2 )
 disabled = true
 
 [node name="LeftFootAttachment" type="BoneAttachment" parent="Skeleton" index="4"]
-transform = Transform( 0.970689, -0.0228617, 0.239247, 0.00315052, 0.996591, 0.0824489, -0.240316, -0.0792784, 0.967452, 0.253128, 0.0151592, 0.218893 )
+transform = Transform( 0.970636, -0.0251574, 0.239231, 0.00617429, 0.996793, 0.0797715, -0.240471, -0.0759521, 0.96768, 0.25311, 0.0149369, 0.218684 )
 bone_name = "mixamorig_LeftToeBase"
 
 [node name="Area" type="Area" parent="Skeleton/LeftFootAttachment" index="0"]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource( 2 )
-damage = 100.0
+damage = 25.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Skeleton/LeftFootAttachment/Area" index="0"]
 transform = Transform( 0.999998, 0.00221427, -0.000440657, -0.00221424, 0.999998, -0.000167295, 0.000440076, 0.000168435, 0.999999, 2.34544e-05, 0.101802, -0.0349443 )
@@ -78,14 +72,14 @@ shape = SubResource( 3 )
 disabled = true
 
 [node name="RightFootAttachment" type="BoneAttachment" parent="Skeleton" index="5"]
-transform = Transform( 0.892756, 0.056159, -0.447026, 0.000139014, 0.992166, 0.124921, 0.45054, -0.111587, 0.885755, -0.192822, 0.0140218, 0.0861855 )
+transform = Transform( 0.892253, 0.0559527, -0.448056, 5.91517e-05, 0.992278, 0.124032, 0.451537, -0.110695, 0.885359, -0.193091, 0.0140829, 0.0864673 )
 bone_name = "mixamorig_RightToeBase"
 
 [node name="Area" type="Area" parent="Skeleton/RightFootAttachment" index="0"]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource( 2 )
-damage = 100.0
+damage = 25.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Skeleton/RightFootAttachment/Area" index="0"]
 transform = Transform( 0.999999, 0.000198402, -0.000668138, -0.000201762, 0.999987, -0.00516585, 0.000667244, 0.00516596, 0.999987, -0.0206144, 0.117667, 0.0112326 )
