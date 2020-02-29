@@ -11,6 +11,11 @@ struct PursuingStateComponent
 	int64_t targetLostMsec;
 };
 
+struct HittedByComponent
+{
+	entt::entity attacker = entt::null;
+};
+
 constexpr entt::hashed_string PatrolStateTag = "PatrolStateTag"_hs;
 constexpr entt::hashed_string MeleeAttackStateTag = "MeleeAttackStateTag"_hs;
 constexpr entt::hashed_string FleeStateTag = "FleeStateTag"_hs;

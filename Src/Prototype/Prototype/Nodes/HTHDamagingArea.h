@@ -21,6 +21,7 @@ namespace godot
 		void _assign_owner_entity();
 	public:
 		static void _register_methods();
-		void _init();
+		void _init() {}
+		void _ready();
 	};
 }

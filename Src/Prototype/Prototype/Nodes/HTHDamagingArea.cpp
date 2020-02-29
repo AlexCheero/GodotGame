@@ -13,9 +13,10 @@ void godot::HTHDamagingArea::_register_methods()
 
 	register_method((char*)"_on_Area_body_entered", &HTHDamagingArea::_on_Area_body_entered);
 	register_method((char*)"_assign_owner_entity", &HTHDamagingArea::_assign_owner_entity);
+	register_method((char*)"_ready", &HTHDamagingArea::_ready);
 }
 
-void godot::HTHDamagingArea::_init()
+void godot::HTHDamagingArea::_ready()
 {
 	call_deferred("_assign_owner_entity");
 }
@@ -29,8 +30,10 @@ void godot::HTHDamagingArea::_on_Area_body_entered(EntityHolderNode* pEntityHold
 
 	entt::entity hittedEntity = pEntityHolder->GetEntity();
 	registry.get<HealthComponent>(hittedEntity).hp -= damage;
-	//TODO0: make full transition to pursuing fsm state
-	registry.assign_or_replace<PursuingStateComponent>(hittedEntity).target = ownerEntity;
+	
+	//TODO0: make reactive
+	if (registry.has<entt::tag<PatrolStateTag> >(hittedEntity) && !registry.has<HittedByComponent>(hittedEntity))
+		registry.assign<HittedByComponent>(hittedEntity).attacker = ownerEntity;
 }
 
 void godot::HTHDamagingArea::_assign_owner_entity()

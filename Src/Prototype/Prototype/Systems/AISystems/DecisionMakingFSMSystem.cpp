@@ -56,13 +56,24 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 	patrolView.less([this, &registry, &players](entt::entity entity, PatrolmanComponent patrolComp, Spatial* pSpatial)
 	{
 		entt::entity targetEntity = entt::null;
-		for (auto entity : players)
+		//TODO0: refactor all this stuff and make on hit noticing reactive
+		if (registry.has<HittedByComponent>(entity)
+			&& registry.valid(registry.get<HittedByComponent>(entity).attacker))
 		{
-			if (!CanSeeTarget(players, entity, patrolComp, pSpatial))
-				continue;
+			targetEntity = registry.get<HittedByComponent>(entity).attacker;
+			registry.remove<HittedByComponent>(entity);
+		}
 
-			targetEntity = entity;
-			break;
+		if (!registry.valid(targetEntity))
+		{
+			for (auto entity : players)
+			{
+				if (!CanSeeTarget(players, entity, patrolComp, pSpatial))
+					continue;
+
+				targetEntity = entity;
+				break;
+			}
 		}
 
 		//to pursuit transition
