@@ -43,37 +43,45 @@ float godot::DecisionMakingFSMSystem::GetDistanceToTarget(entt::registry& regist
 	return (targetPosition - pursuerPosition).length();
 }
 
+void godot::DecisionMakingFSMSystem::OnHitNoticing(entt::registry& registry)
+{
+	static entt::observer hittedOnPatrolObserver{ registry, entt::collector.group<entt::tag<PatrolStateTag>, HittedByComponent>() };
+	hittedOnPatrolObserver.each([&registry](const auto entity)
+	{
+		registry.remove<entt::tag<PatrolStateTag> >(entity);
+		entt::entity attacker = registry.get<HittedByComponent>(entity).attacker;
+		registry.remove<HittedByComponent>(entity);
+		PursuingStateComponent& pursuingComp = registry.assign<PursuingStateComponent>(entity, attacker);
+		pursuingComp.targetLostMsec = -1;
+	});
+
+	static entt::observer hittedOutOfPatrolObserver{ registry, entt::collector.group<HittedByComponent>(entt::exclude<entt::tag<PatrolStateTag> >) };
+	hittedOutOfPatrolObserver.each([&registry](const auto entity)
+	{
+		registry.remove<HittedByComponent>(entity);
+	});
+}
+
 void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& registry)
 {
+	OnHitNoticing(registry);
+	
 	auto players = registry.view<entt::tag<PlayerTag>, Spatial*>();
 
 	//DecisionMakingFSMSystem should be the only system to manage tags and set input
-	//TODO1: add noticing player on taking damage
 	auto patrolView = registry.view<entt::tag<BotTag>, entt::tag<PatrolStateTag>, PatrolmanComponent, Spatial*>();
 	patrolView.less([this, &registry, &players](entt::entity entity, PatrolmanComponent patrolComp, Spatial* pSpatial)
 	{
 		entt::entity targetEntity = entt::null;
-		//TODO0: refactor all this stuff and make on hit noticing reactive
-		if (registry.has<HittedByComponent>(entity)
-			&& registry.valid(registry.get<HittedByComponent>(entity).attacker))
+		for (auto entity : players)
 		{
-			targetEntity = registry.get<HittedByComponent>(entity).attacker;
-			registry.remove<HittedByComponent>(entity);
+			if (!CanSeeTarget(players.get<Spatial*>(entity), patrolComp, pSpatial))
+				continue;
+
+			targetEntity = entity;
+			break;
 		}
 
-		if (!registry.valid(targetEntity))
-		{
-			for (auto entity : players)
-			{
-				if (!CanSeeTarget(players.get<Spatial*>(entity), patrolComp, pSpatial))
-					continue;
-
-				targetEntity = entity;
-				break;
-			}
-		}
-
-		//TODO: try to move all transitions to reactive callbacks
 		//to pursuit transition
 		if (registry.valid(targetEntity))
 		{

@@ -14,6 +14,7 @@ namespace godot
 	private:
 		bool CanSeeTarget(Spatial* pTargetSpatial, PatrolmanComponent patrolman, Spatial* pPatrolSpatial);
 		float GetDistanceToTarget(entt::registry& registry, entt::entity target, Spatial* pBotSpatial);
+		void OnHitNoticing(entt::registry& registry);
 	public:
 		virtual void operator()(float delta, entt::registry& registry) override;
 	};

@@ -16,6 +16,12 @@ struct HittedByComponent
 	entt::entity attacker = entt::null;
 };
 
+//TODO0: implement instead of HittedByComponent
+struct HittedFromComponent
+{
+	godot::Vector3 position;
+};
+
 constexpr entt::hashed_string PatrolStateTag = "PatrolStateTag"_hs;
 constexpr entt::hashed_string MeleeAttackStateTag = "MeleeAttackStateTag"_hs;
 constexpr entt::hashed_string FleeStateTag = "FleeStateTag"_hs;

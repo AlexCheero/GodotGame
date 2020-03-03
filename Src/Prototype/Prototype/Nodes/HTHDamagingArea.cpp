@@ -31,9 +31,8 @@ void godot::HTHDamagingArea::_on_Area_body_entered(EntityHolderNode* pEntityHold
 	entt::entity hittedEntity = pEntityHolder->GetEntity();
 	registry.get<HealthComponent>(hittedEntity).hp -= damage;
 	
-	//TODO0: make reactive
-	if (registry.has<entt::tag<PatrolStateTag> >(hittedEntity) && !registry.has<HittedByComponent>(hittedEntity))
-		registry.assign<HittedByComponent>(hittedEntity).attacker = ownerEntity;
+	//registry.assign<HittedFromComponent>(hittedEntity).position = get_global_transform().get_origin();
+	registry.assign_or_replace<HittedByComponent>(hittedEntity).attacker = ownerEntity;
 }
 
 void godot::HTHDamagingArea::_assign_owner_entity()
