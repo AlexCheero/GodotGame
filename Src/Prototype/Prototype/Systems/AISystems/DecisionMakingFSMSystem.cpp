@@ -11,11 +11,8 @@
 #include "../../Utils/Utils.h"
 
 //doesn't take target's and agent's bounds into account
-bool godot::DecisionMakingFSMSystem::CanSeeTarget(PlayersView& targetsView, entt::entity targetEntity
-	, PatrolmanComponent patrolman, Spatial* pPatrolSpatial)
+bool godot::DecisionMakingFSMSystem::CanSeeTarget(Spatial* pTargetSpatial, PatrolmanComponent patrolman, Spatial* pPatrolSpatial)
 {
-	Spatial* pTargetSpatial = targetsView.get<Spatial*>(targetEntity);
-
 	Vector3 patrolFwd = pPatrolSpatial->get_global_transform().get_basis().z.normalized();
 	Vector3 toTargetDir = pTargetSpatial->get_global_transform().origin - pPatrolSpatial->get_global_transform().origin;
 	float distanceToTarget = toTargetDir.length();
@@ -68,7 +65,7 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 		{
 			for (auto entity : players)
 			{
-				if (!CanSeeTarget(players, entity, patrolComp, pSpatial))
+				if (!CanSeeTarget(players.get<Spatial*>(entity), patrolComp, pSpatial))
 					continue;
 
 				targetEntity = entity;
@@ -76,6 +73,7 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 			}
 		}
 
+		//TODO: try to move all transitions to reactive callbacks
 		//to pursuit transition
 		if (registry.valid(targetEntity))
 		{
@@ -90,7 +88,7 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 		, PatrolmanComponent patrolComp, MeleeAttackComponent& meleeComp, HealthComponent healthComp, Spatial* pSpatial)
 	{
 		bool validTarget = registry.valid(pursuingComp.target);
-		if (validTarget && CanSeeTarget(players, pursuingComp.target, patrolComp, pSpatial))
+		if (validTarget && CanSeeTarget(players.get<Spatial*>(pursuingComp.target), patrolComp, pSpatial))
 			pursuingComp.targetLostMsec = -1;
 		else
 		{

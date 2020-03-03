@@ -12,9 +12,7 @@ namespace godot
 	class DecisionMakingFSMSystem : public BaseSystem
 	{
 	private:
-		using PlayersView = entt::view<entt::exclude_t<>, entt::tag<PlayerTag>, Spatial*>;
-
-		bool CanSeeTarget(PlayersView& targetsView, entt::entity targetEntity, PatrolmanComponent patrolman, Spatial* pPatrolSpatial);
+		bool CanSeeTarget(Spatial* pTargetSpatial, PatrolmanComponent patrolman, Spatial* pPatrolSpatial);
 		float GetDistanceToTarget(entt::registry& registry, entt::entity target, Spatial* pBotSpatial);
 	public:
 		virtual void operator()(float delta, entt::registry& registry) override;
