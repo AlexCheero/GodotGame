@@ -40,7 +40,7 @@ godot::HTHLockTargetSystem::HTHLockTargetSystem()
 void godot::HTHLockTargetSystem::operator()(float delta, entt::registry& registry)
 {
 	//TODO: implement target change when already have locked target
-	auto withoutTargetView = registry.view<entt::tag<AttackedTag>, entt::tag<CurrentWeaponMeleeTag>, InputComponent, MeleeAttackComponent, Spatial*>(entt::exclude<TargetLockComponent>);
+	auto withoutTargetView = registry.view<entt::tag<AttackActionTag>, entt::tag<CurrentWeaponMeleeTag>, InputComponent, MeleeAttackComponent, Spatial*>(entt::exclude<TargetLockComponent>);
 	withoutTargetView.less([this, &registry](entt::entity entity, InputComponent input, MeleeAttackComponent attackComp, Spatial* pSpatial)
 	{
 		Array intersects = GetIntersects(pSpatial, attackComp.distance, attackComp.collisionLayerName);
@@ -64,7 +64,7 @@ void godot::HTHLockTargetSystem::operator()(float delta, entt::registry& registr
 		registry.assign<TargetLockComponent>(entity).target = targetEntity;
 	});
 
-	auto lockedView = registry.view<entt::tag<AttackedTag>, entt::tag<CurrentWeaponMeleeTag>, TargetLockComponent, RotationDirectionComponent, Spatial*>();
+	auto lockedView = registry.view<entt::tag<CurrentWeaponMeleeTag>, TargetLockComponent, RotationDirectionComponent, Spatial*>();
 	lockedView.less([this, &registry](entt::entity entity, TargetLockComponent lockComp, RotationDirectionComponent& rotComp, Spatial* pSpatial)
 	{
 		if (ChecktargetEntity(registry, lockComp.target))

@@ -48,7 +48,7 @@ struct ThrowableAttackComponent
 	int64_t prevHitTime = -utils::SecondsToMillis(attackTime);
 };
 
-constexpr entt::hashed_string AttackedTag = "AttackedTag"_hs;
+constexpr entt::hashed_string AttackActionTag = "AttackActionTag"_hs;
 
 struct TargetLockComponent
 {
@@ -63,3 +63,5 @@ struct GrenadeComponent
 	float damage;
 	float startTime;
 };
+
+constexpr entt::hashed_string PileInTag = "PileInTag"_hs;

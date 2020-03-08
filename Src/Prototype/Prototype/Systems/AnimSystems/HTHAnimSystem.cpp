@@ -34,7 +34,7 @@ static const char* paramNames[8] =
 
 void godot::HTHAnimSystem::operator()(float delta, entt::registry& registry)
 {
-	auto punchView = registry.view<entt::tag<AttackedTag>, MeleeAttackComponent, AnimationTree*>();
+	auto punchView = registry.view<entt::tag<AttackActionTag>, MeleeAttackComponent, AnimationTree*>();
 	punchView.less([&registry](entt::entity entity, MeleeAttackComponent& attackComp, AnimationTree* pAnimTree)
 	{
 		int prevAnimIdx = attackComp.comboSequenceNum - 1;

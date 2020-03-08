@@ -8,7 +8,7 @@
 
 namespace godot
 {
-	//TODO: choose hth or melee and use only one variant
+	//TODO: choose hth or melee and use only one prefix
 	class HTHLockTargetSystem : public BaseSystem
 	{
 	private:

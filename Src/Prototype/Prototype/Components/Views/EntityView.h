@@ -48,7 +48,7 @@ namespace godot
 		std::map<String, ComponentView*> componentsMap;
 
 		template<typename Type, typename... Types>
-		void ConstructComponentsFromViews(entt::registry& registry, entt::entity entity/*, Types... types*/);
+		void ConstructComponentsFromViews(entt::registry& registry, entt::entity entity);
 	public:
 		static void _register_methods() { register_method((char*)"_ready", &EntityView::_ready); }
 		void _init() {}

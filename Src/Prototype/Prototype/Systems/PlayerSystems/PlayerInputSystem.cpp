@@ -16,7 +16,6 @@ inline godot::Vector2 godot::PlayerInputSystem::GetInputDirection(const char* ac
 
 void godot::PlayerInputSystem::operator()(entt::registry& registry, InputEvent* e)
 {
-	//TODO: read once more about differences between groups and view and, probably, use group instead
 	auto view = registry.view<entt::tag<PlayerTag>, InputComponent>();
 	view.less([&registry, e](InputComponent& comp)
 	{
@@ -26,7 +25,7 @@ void godot::PlayerInputSystem::operator()(entt::registry& registry, InputEvent* 
 		comp.Set(EInput::ChooseRanged, e->is_action_pressed("choose_ranged"));
 		comp.Set(EInput::ChooseThrowable, e->is_action_pressed("choose_throwable"));
 
-		//TODO: change to mouse
+		//TODO: change to mouse and/or gamepad
 		comp.rotation = GetInputDirection("ui");
 		comp.moveDir = GetInputDirection("move");
 	});

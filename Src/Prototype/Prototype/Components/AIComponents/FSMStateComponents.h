@@ -16,7 +16,7 @@ struct HittedByComponent
 	entt::entity attacker = entt::null;
 };
 
-//TODO0: implement instead of HittedByComponent
+//TODO: implement instead of HittedByComponent
 struct HittedFromComponent
 {
 	godot::Vector3 position;
