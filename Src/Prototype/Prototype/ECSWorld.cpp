@@ -67,7 +67,6 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	//TODO: check what node inherited components really should be assigned
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pPlayerNode);
-	//TODO: probably should use position3d class instead of spatial
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("Camera"));
 	//AssignNodeInheritedComponent<Animation2DComponent>(registry, entity, get_node("Player/Sprite3D"));
@@ -194,7 +193,7 @@ void godot::ECSWorld::_init()
 	//TODO: check what systems should be reactive
 	//setup physics systems
 	m_physics_systems.emplace_back(new PlayerVelocitySystem());
-	m_physics_systems.emplace_back(new KinematicMovementSystem());
+	//m_physics_systems.emplace_back(new KinematicMovementSystem());
 	m_physics_systems.emplace_back(new SystemChain<GravitySystem, JumpSystem>());
 	m_physics_systems.emplace_back(new PlayerRotationSystem());
 	m_physics_systems.emplace_back(new LookAtSystem());
@@ -202,6 +201,10 @@ void godot::ECSWorld::_init()
 	m_physics_systems.emplace_back(new RangedAttackSystem());
 	m_physics_systems.emplace_back(new ThrowAttackSystem());
 
+	//TODO: must be called after all systems that affects velocity (same line commented above)
+	m_physics_systems.emplace_back(new KinematicMovementSystem());
+
+	//TODO: make simple way to switch off bots (PatrolSystem, NavAgentSystem, PursuingSystem, FleeingSystem and others)
 	m_physics_systems.emplace_back(new PatrolSystem());
 	m_physics_systems.emplace_back(new DecisionMakingFSMSystem());
 

@@ -8,6 +8,7 @@
 #include "../../Components/InputComponents.h"
 #include "../../Components/AttackComponents.h"
 #include "../../Components/AIComponents/NavigationComponents.h"
+
 #include "../../Utils/Utils.h"
 
 //doesn't take target's and agent's bounds into account
@@ -51,6 +52,8 @@ void godot::DecisionMakingFSMSystem::OnHitNoticing(entt::registry& registry)
 		registry.remove<entt::tag<PatrolStateTag> >(entity);
 		entt::entity attacker = registry.get<HittedByComponent>(entity).attacker;
 		registry.remove<HittedByComponent>(entity);
+		//TODO0: NavPathComponent removed everywhere where PursuingStateComponent is assigned, refactor via reactive callbacks
+		registry.remove_if_exists<NavPathComponent>(entity);
 		PursuingStateComponent& pursuingComp = registry.assign<PursuingStateComponent>(entity, attacker);
 		pursuingComp.targetLostMsec = -1;
 	});
@@ -86,6 +89,7 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 		if (registry.valid(targetEntity))
 		{
 			registry.remove<entt::tag<PatrolStateTag> >(entity);
+			registry.remove_if_exists<NavPathComponent>(entity);
 			PursuingStateComponent& pursuingComp = registry.assign<PursuingStateComponent>(entity, targetEntity);
 			pursuingComp.targetLostMsec = -1;
 		}
@@ -107,7 +111,7 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 				validTarget = false;
 		}
 
-		//TODO1: move somwhere like DecisionMakingView
+		//TODO: move somwhere like DecisionMakingView
 		//to flee transition
 		const float criticalProportion = 0.5f;
 		if (healthComp.ProportionOfMax() <= criticalProportion)
@@ -144,7 +148,7 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 		bool attackInput = meleeComp.prevHitTimeMillis + utils::SecondsToMillis(meleeComp.attackTime) <= currTimeMillis;
 		inputComp.Set(EInput::Attack, attackInput);
 
-		//TODO1: move somwhere like DecisionMakingView here and from pursueView
+		//TODO: move somwhere like DecisionMakingView here and from pursueView
 		//to flee transition
 		const float criticalProportion = 0.5f;
 		if (healthComp.ProportionOfMax() <= criticalProportion)
@@ -156,6 +160,7 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 		//to pursuit transition
 		if (registry.valid(lockComp.target) && meleeComp.distance < GetDistanceToTarget(registry, lockComp.target, pSpatial))
 		{
+			registry.remove_if_exists<NavPathComponent>(entity);
 			PursuingStateComponent& pursuingComp = registry.assign<PursuingStateComponent>(entity, lockComp.target);
 			registry.remove<entt::tag<MeleeAttackStateTag> >(entity);
 			registry.remove<TargetLockComponent>(entity);

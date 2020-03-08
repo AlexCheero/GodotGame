@@ -28,10 +28,12 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 
 	lockSystem(delta, registry);
 
+	//TODO0: it difficult to hit the moving target anyway, needs some different logick
 //=====================PileInSystem=====================
 	//TODO: proably move to pile in system
 	//TODO: remove hardcode
-	const float maxAttackDistance = 1.5f;
+	//TODO: player + bot colliders radii is hardcoded also
+	const float maxAttackDistance = 2.f;//1.5f
 	auto checkForPileInView = registry.view<entt::tag<AttackActionTag>, TargetLockComponent,
 											VelocityComponent, SpeedComponent, Spatial*>(entt::exclude<entt::tag<PileInTag> >);
 	checkForPileInView.less([&registry, maxAttackDistance](entt::entity entity, TargetLockComponent lockComp, VelocityComponent velComp,
