@@ -33,11 +33,6 @@ void godot::HTHDamagingArea::_on_Area_body_entered(EntityHolderNode* pEntityHold
 	float hpBefore = registry.get<HealthComponent>(hittedEntity).hp;
 	registry.get<HealthComponent>(hittedEntity).hp -= damage;
 
-	String ownerName = registry.get<Spatial*>(ownerEntity)->get_name();
-	String parentName = get_parent()->get_name();
-	Godot::print(ownerName + "'s" + " " + parentName + " collided. hp before: " + String::num(hpBefore, 0) + ", hp after: " +
-		String::num(registry.get<HealthComponent>(hittedEntity).hp, 0) + ", damage: " + String::num(damage, 0));
-	
 	if (!registry.has<HittedByComponent>(hittedEntity))
 		registry.assign<HittedByComponent>(hittedEntity).attacker = ownerEntity;
 	

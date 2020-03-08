@@ -179,6 +179,7 @@
     <ClCompile Include="Systems\AttackSystems\AttackCooldown.cpp" />
     <ClCompile Include="Systems\AttackSystems\GrenadeSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\HTHLockTargetSystem.cpp" />
+    <ClCompile Include="Systems\AttackSystems\PileInSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\RangedAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\MeleeAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\ThrowAttackSystem.cpp" />
@@ -233,6 +234,7 @@
     <ClInclude Include="Systems\AttackSystems\AttackCooldown.h" />
     <ClInclude Include="Systems\AttackSystems\GrenadeSystem.h" />
     <ClInclude Include="Systems\AttackSystems\HTHLockTargetSystem.h" />
+    <ClInclude Include="Systems\AttackSystems\PileInSystem.h" />
     <ClInclude Include="Systems\AttackSystems\RangedAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\MeleeAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\ThrowAttackSystem.h" />

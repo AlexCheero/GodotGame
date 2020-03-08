@@ -4,7 +4,10 @@
 #include "AttackCooldown.h"
 
 #include "../SystemChain.h"
+
 #include "HTHLockTargetSystem.h"
+#include "PileInSystem.h"
+
 #include "../AnimSystems/HTHAnimSystem.h"
 
 namespace godot
@@ -15,6 +18,7 @@ namespace godot
 	protected:
 		HTHLockTargetSystem lockSystem;
 		HTHAnimSystem animSystem;
+		PileInSystem pileInSystem;
 	};
 
 	class MeleeAttackSystem : public SystemChain<HTHLockTargetSystem, HTHAnimSystem>
