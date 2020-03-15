@@ -49,6 +49,10 @@ struct ThrowableAttackComponent
 };
 
 constexpr entt::hashed_string AttackActionTag = "AttackActionTag"_hs;
+struct AttackAnimPlayingComponent
+{
+	float playBackTimeLeft;
+};
 
 struct TargetLockComponent
 {

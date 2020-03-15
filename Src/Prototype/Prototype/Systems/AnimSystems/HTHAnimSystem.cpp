@@ -44,11 +44,13 @@ void godot::HTHAnimSystem::operator()(float delta, entt::registry& registry)
 		String paramName(paramNames[attackComp.comboSequenceNum]);
 
 		//TODO: same anim time for all animations, maybe use general anim scale for this
-		//AnimationPlayer* pAnimPlayer = Object::cast_to<AnimationPlayer>(pAnimTree->get_node(pAnimTree->get_animation_player()));
-		//String animName(anims[attackComp.comboSequenceNum]);
-		//Ref<Animation> anim = pAnimPlayer->get_animation(animName);
+		AnimationPlayer* pAnimPlayer = Object::cast_to<AnimationPlayer>(pAnimTree->get_node(pAnimTree->get_animation_player()));
+		String animName(anims[attackComp.comboSequenceNum]);
+		Ref<Animation> anim = pAnimPlayer->get_animation(animName);
 		//float timeScale = anim->get_length() / attackComp.attackTime;
 		//pAnimTree->set("parameters/" + paramName + "TimeScale/scale", timeScale);
+
+		registry.assign_or_replace<AttackAnimPlayingComponent>(entity).playBackTimeLeft = anim->get_length();
 
 		//TODO: blend between anims
 		pAnimTree->set("parameters/" + prevParamName + "OneShot/active", false);

@@ -30,6 +30,15 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 	pileInSystem(delta, registry);
 	animSystem(delta, registry);
 
+	//TODO: removing AttackAnimPlayingComponent when animation is finished, refactor this
+	auto animPlayingView = registry.view<AttackAnimPlayingComponent>();
+	animPlayingView.each([&registry, delta](entt::entity entity, AttackAnimPlayingComponent& attackPlayingComp)
+	{
+		attackPlayingComp.playBackTimeLeft -= delta;
+		if (attackPlayingComp.playBackTimeLeft <= 0)
+			registry.remove<AttackAnimPlayingComponent>(entity);
+	});
+
 	auto inputClearView = registry.view<entt::tag<AttackActionTag> >();
 	registry.remove<entt::tag<AttackActionTag> >(inputClearView.begin(), inputClearView.end());
 }
