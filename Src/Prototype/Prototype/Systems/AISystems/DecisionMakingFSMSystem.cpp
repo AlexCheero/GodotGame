@@ -151,14 +151,14 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 		//TODO: move somwhere like DecisionMakingView here and from pursueView
 		//to flee transition
 		const float criticalProportion = 0.5f;
-		if (healthComp.ProportionOfMax() <= criticalProportion)
+		if (healthComp.ProportionOfMax() <= criticalProportion && false) //TODO: to flee transition switched off to emulate melee stuck
 		{
 			registry.remove_if_exists<NavPathComponent>(entity);
 			registry.remove<entt::tag<MeleeAttackStateTag> >(entity);
 			registry.assign<entt::tag<FleeStateTag> >(entity);
 		}
 		//to pursuit transition
-		if (registry.valid(lockComp.target) && meleeComp.distance < GetDistanceToTarget(registry, lockComp.target, pSpatial))
+		else if (registry.valid(lockComp.target) && meleeComp.distance < GetDistanceToTarget(registry, lockComp.target, pSpatial))
 		{
 			registry.remove_if_exists<NavPathComponent>(entity);
 			PursuingStateComponent& pursuingComp = registry.assign<PursuingStateComponent>(entity, lockComp.target);
