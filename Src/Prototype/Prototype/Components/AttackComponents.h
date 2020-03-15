@@ -13,6 +13,7 @@
 constexpr entt::hashed_string CurrentWeaponMeleeTag = "CurrentWeaponMeleeTag"_hs;
 struct MeleeAttackComponent
 {
+	//TODO: use different distance for each hit
 	float distance;
 	float angle;
 	//TODO: set attack time in anim
