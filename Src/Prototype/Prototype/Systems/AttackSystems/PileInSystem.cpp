@@ -21,7 +21,7 @@ void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 	});
 
 	//TODO0: stop or slow down fleeing enemy while in hth combat, not always pile in
-	//TODO0: cancel pile in, by move input
+	//TODO0: cancel pile in, by move input. upd: implemented but not tested properly
 	auto pileInView = registry.view<entt::tag<PileInTag>, AttackAnimPlayingComponent, TargetLockComponent, VelocityComponent, SpeedComponent, Spatial*>();
 	pileInView.less([&registry, maxAttackDistance](entt::entity entity, AttackAnimPlayingComponent animPlayingComp, TargetLockComponent lockComp,
 												   VelocityComponent& velComp, SpeedComponent speedComp, Spatial* pSpatial)

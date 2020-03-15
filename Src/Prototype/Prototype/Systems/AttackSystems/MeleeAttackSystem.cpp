@@ -18,6 +18,7 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 
 		if (millisSinceLastHit <= attackComp.maxComboIntervalMillis)
 		{
+			//TODO0: sequence starts from second hit
 			attackComp.comboSequenceNum++;
 			if (attackComp.comboSequenceNum > attackComp.comboLength - 1)
 				attackComp.comboSequenceNum = 0;
@@ -31,10 +32,15 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 	animSystem(delta, registry);
 
 	//TODO: removing AttackAnimPlayingComponent when animation is finished, refactor this
-	auto animPlayingView = registry.view<AttackAnimPlayingComponent>();
-	animPlayingView.each([&registry, delta](entt::entity entity, AttackAnimPlayingComponent& attackPlayingComp)
+	auto animPlayingView = registry.view<AttackAnimPlayingComponent, InputComponent>();
+	animPlayingView.each([&registry, delta](entt::entity entity, AttackAnimPlayingComponent& attackPlayingComp, InputComponent inputComp)
 	{
 		attackPlayingComp.playBackTimeLeft -= delta;
+		
+		//TODO: split into two separate systems
+		if (attackPlayingComp.playBackTimeLeft <= 0 || inputComp.moveDir.length_squared() > 0)
+			registry.remove_if_exists<entt::tag<PileInTag> >(entity);
+
 		if (attackPlayingComp.playBackTimeLeft <= 0)
 			registry.remove<AttackAnimPlayingComponent>(entity);
 	});
