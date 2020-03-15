@@ -50,6 +50,7 @@ void godot::HTHAnimSystem::operator()(float delta, entt::registry& registry)
 		//float timeScale = anim->get_length() / attackComp.attackTime;
 		//pAnimTree->set("parameters/" + paramName + "TimeScale/scale", timeScale);
 
+		//TODO: take anim time scale into account
 		registry.assign_or_replace<AttackAnimPlayingComponent>(entity).playBackTimeLeft = anim->get_length();
 
 		//TODO: blend between anims
