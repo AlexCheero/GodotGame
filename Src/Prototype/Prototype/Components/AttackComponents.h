@@ -70,3 +70,6 @@ struct GrenadeComponent
 };
 
 constexpr entt::hashed_string PileInTag = "PileInTag"_hs;
+
+//TODO: probably should remove this tag with MeleeAttackSystem refactoring
+constexpr entt::hashed_string IncrementComboTag = "IncrementComboTag"_hs;

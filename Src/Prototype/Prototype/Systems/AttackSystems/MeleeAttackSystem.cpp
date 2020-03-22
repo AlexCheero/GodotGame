@@ -4,6 +4,7 @@
 
 //TODO: implement proper hth with blocks and stuff
 //TODO: call such systems only by input callback
+//TODO: refactor all this mess
 void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 {
 	int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
@@ -17,12 +18,7 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 		attackComp.prevHitTimeMillis = currTimeMillis;
 
 		if (millisSinceLastHit <= attackComp.maxComboIntervalMillis)
-		{
-			//TODO0: sequence starts from second hit
-			attackComp.comboSequenceNum++;
-			if (attackComp.comboSequenceNum > attackComp.comboLength - 1)
-				attackComp.comboSequenceNum = 0;
-		}
+			registry.assign<entt::tag<IncrementComboTag> >(entity);
 
 		registry.assign<entt::tag<AttackActionTag> >(entity);
 	});
@@ -44,6 +40,15 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 		if (attackPlayingComp.playBackTimeLeft <= 0)
 			registry.remove<AttackAnimPlayingComponent>(entity);
 	});
+
+	auto incrementComboView = registry.view<entt::tag<IncrementComboTag>, MeleeAttackComponent>();
+	incrementComboView.less([](MeleeAttackComponent& attackComp)
+	{
+		attackComp.comboSequenceNum++;
+		if (attackComp.comboSequenceNum > attackComp.comboLength - 1)
+			attackComp.comboSequenceNum = 0;
+	});
+	registry.remove<entt::tag<IncrementComboTag> >(incrementComboView.begin(), incrementComboView.end());
 
 	auto inputClearView = registry.view<entt::tag<AttackActionTag> >();
 	registry.remove<entt::tag<AttackActionTag> >(inputClearView.begin(), inputClearView.end());
