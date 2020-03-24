@@ -8,7 +8,7 @@ struct PursuingStateComponent
 {
 	entt::entity target = entt::null;
 	godot::Vector3 previousTargetPosition;
-	int64_t targetLostMsec;
+	int64_t targetLostMsec = -1;
 };
 
 struct HittedByComponent

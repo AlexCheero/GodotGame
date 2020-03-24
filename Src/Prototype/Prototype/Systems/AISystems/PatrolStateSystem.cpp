@@ -9,10 +9,20 @@
 
 #include "DecisionMakingHelper.h"
 
+godot::PatrolStateSystem::PatrolStateSystem(entt::registry& registry)
+{
+	toPursuitTransitionObserver.connect(registry, entt::collector.group<PursuingStateComponent>().where<entt::tag<PatrolStateTag> >());
+}
+
 void godot::PatrolStateSystem::operator()(float delta, entt::registry& registry)
 {
-	auto players = registry.view<entt::tag<PlayerTag>, Spatial*>();
+	toPursuitTransitionObserver.each([&registry](const auto entity)
+	{
+		registry.remove<entt::tag<PatrolStateTag> >(entity);
+		registry.remove_if_exists<NavPathComponent>(entity);
+	});
 
+	auto players = registry.view<entt::tag<PlayerTag>, Spatial*>();
 	auto patrolView = registry.view<entt::tag<BotTag>, entt::tag<PatrolStateTag>, PatrolmanComponent, Spatial*>();
 	patrolView.less([this, &registry, &players](entt::entity entity, PatrolmanComponent patrolComp, Spatial* pSpatial)
 	{
@@ -28,11 +38,6 @@ void godot::PatrolStateSystem::operator()(float delta, entt::registry& registry)
 
 		//to pursuit transition
 		if (registry.valid(targetEntity))
-		{
-			registry.remove<entt::tag<PatrolStateTag> >(entity);
-			registry.remove_if_exists<NavPathComponent>(entity);
-			PursuingStateComponent& pursuingComp = registry.assign<PursuingStateComponent>(entity, targetEntity);
-			pursuingComp.targetLostMsec = -1;
-		}
+			registry.assign<PursuingStateComponent>(entity, targetEntity);
 	});
 }

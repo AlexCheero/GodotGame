@@ -206,7 +206,7 @@ void godot::ECSWorld::_init()
 
 	//TODO: make simple way to switch off bots (PatrolSystem, NavAgentSystem, PursuingSystem, FleeingSystem and others)
 	m_physics_systems.emplace_back(new PatrolSystem());
-	m_physics_systems.emplace_back(new DecisionMakingFSMSystem());
+	m_physics_systems.emplace_back(new DecisionMakingFSMSystem(registry));
 
 	m_physics_systems.emplace_back(new GrenadeSystem());
 	//TODO: should it be in phys proc?
@@ -218,6 +218,7 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new DestroyDeadSystem());
 
 	m_process_systems.emplace_back(new WeaponChooseSystem());
+	//TODO: maybe should move it into inner WeaponChooseSystem's observer
 	registry.on_construct<entt::tag<CurrentWeaponMeleeTag> >().connect<&WeaponChooseSystem::OnMeleeTagConstruct>();
 	registry.on_construct<entt::tag<CurrentWeaponRangedTag> >().connect<&WeaponChooseSystem::OnRangedTagConstruct>();
 	registry.on_construct<entt::tag<CurrentWeaponThrowableTag> >().connect<&WeaponChooseSystem::OnThrowableTagConstruct>();
