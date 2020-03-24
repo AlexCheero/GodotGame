@@ -33,6 +33,7 @@ void godot::HTHDamagingArea::_on_Area_body_entered(EntityHolderNode* pEntityHold
 	float hpBefore = registry.get<HealthComponent>(hittedEntity).hp;
 	registry.get<HealthComponent>(hittedEntity).hp -= damage;
 
+	//TODO: assign only on bot
 	if (!registry.has<HittedByComponent>(hittedEntity))
 		registry.assign<HittedByComponent>(hittedEntity).attacker = ownerEntity;
 	

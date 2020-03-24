@@ -35,26 +35,18 @@ void godot::PursueStateSystem::operator()(float delta, entt::registry& registry)
 		//to flee transition
 		const float criticalProportion = 0.5f;
 		if (healthComp.ProportionOfMax() <= criticalProportion)
-		{
-			registry.remove_if_exists<NavPathComponent>(entity);
-			registry.remove<PursuingStateComponent>(entity);
 			registry.assign<entt::tag<FleeStateTag> >(entity);
-		}
 		else if (validTarget)
 		{
 			//to attack transition
 			if (meleeComp.distance >= GetDistanceToTarget(registry, pursuingComp.target, pSpatial))
 			{
-				registry.remove<PursuingStateComponent>(entity);
 				registry.assign<entt::tag<MeleeAttackStateTag> >(entity);
 				registry.assign<TargetLockComponent>(entity).target = pursuingComp.target;
 			}
 		}
 		//to patrol transition
 		else
-		{
-			registry.remove<PursuingStateComponent>(entity);
 			registry.assign<entt::tag<PatrolStateTag> >(entity);
-		}
 	});
 }

@@ -25,26 +25,12 @@ void godot::HTHStateSystem::operator()(float delta, entt::registry& registry)
 		//to flee transition
 		const float criticalProportion = 0.5f;
 		if (healthComp.ProportionOfMax() <= criticalProportion && false) //TODO: to flee transition switched off to emulate melee stuck
-		{
-			registry.remove_if_exists<NavPathComponent>(entity);
-			registry.remove<entt::tag<MeleeAttackStateTag> >(entity);
 			registry.assign<entt::tag<FleeStateTag> >(entity);
-		}
 		//to pursuit transition
 		else if (registry.valid(lockComp.target) && meleeComp.distance < GetDistanceToTarget(registry, lockComp.target, pSpatial))
-		{
-			registry.remove_if_exists<NavPathComponent>(entity);
-			PursuingStateComponent& pursuingComp = registry.assign<PursuingStateComponent>(entity, lockComp.target);
-			registry.remove<entt::tag<MeleeAttackStateTag> >(entity);
-			registry.remove<TargetLockComponent>(entity);
-			pursuingComp.targetLostMsec = -1;
-		}
+			registry.assign<PursuingStateComponent>(entity, lockComp.target);
 		//to patrol transition
 		else if (!registry.valid(lockComp.target) || registry.has<entt::tag<DeadTag> >(lockComp.target))
-		{
-			registry.remove<entt::tag<MeleeAttackStateTag> >(entity);
-			registry.remove<TargetLockComponent>(entity);
 			registry.assign<entt::tag<PatrolStateTag> >(entity);
-		}
 	});
 }
