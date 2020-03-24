@@ -46,6 +46,7 @@ float godot::DecisionMakingFSMSystem::GetDistanceToTarget(entt::registry& regist
 
 void godot::DecisionMakingFSMSystem::OnHitNoticing(entt::registry& registry)
 {
+	//TODO0: dont use local static vars, cause they become invalid on game restart
 	static entt::observer hittedOnPatrolObserver{ registry, entt::collector.group<entt::tag<PatrolStateTag>, HittedByComponent>() };
 	hittedOnPatrolObserver.each([&registry](const auto entity)
 	{

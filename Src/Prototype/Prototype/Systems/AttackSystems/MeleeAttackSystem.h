@@ -12,6 +12,7 @@
 
 namespace godot
 {
+	//TODO: SystemChain and its specializations is absolutely useless
 	template<>
 	class SystemChain<HTHLockTargetSystem, HTHAnimSystem> : public BaseSystem
 	{
