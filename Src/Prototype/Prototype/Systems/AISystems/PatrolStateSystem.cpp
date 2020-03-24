@@ -16,12 +16,6 @@ godot::PatrolStateSystem::PatrolStateSystem(entt::registry& registry)
 
 void godot::PatrolStateSystem::operator()(float delta, entt::registry& registry)
 {
-	toPursuitTransitionObserver.each([&registry](const auto entity)
-	{
-		registry.remove<entt::tag<PatrolStateTag> >(entity);
-		registry.remove_if_exists<NavPathComponent>(entity);
-	});
-
 	auto players = registry.view<entt::tag<PlayerTag>, Spatial*>();
 	auto patrolView = registry.view<entt::tag<BotTag>, entt::tag<PatrolStateTag>, PatrolmanComponent, Spatial*>();
 	patrolView.less([this, &registry, &players](entt::entity entity, PatrolmanComponent patrolComp, Spatial* pSpatial)
@@ -39,5 +33,11 @@ void godot::PatrolStateSystem::operator()(float delta, entt::registry& registry)
 		//to pursuit transition
 		if (registry.valid(targetEntity))
 			registry.assign<PursuingStateComponent>(entity, targetEntity);
+	});
+
+	toPursuitTransitionObserver.each([&registry](const auto entity)
+	{
+		registry.remove<entt::tag<PatrolStateTag> >(entity);
+		registry.remove_if_exists<NavPathComponent>(entity);
 	});
 }
