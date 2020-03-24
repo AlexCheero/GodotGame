@@ -4,16 +4,22 @@
 
 #include <Spatial.hpp>
 
-#include "../../Components/SimpleComponents.h"
-#include "../../Components/AIComponents/PatrolComponents.h"
+#include "PatrolStateSystem.h"
+#include "PursueStateSystem.h"
+#include "HTHStateSystem.h"
+#include "FleeStateSystem.h"
 
 namespace godot
 {
+	//TODO: move all decision making code (base system, state systems, helpers etc) to separate filter/folder
 	class DecisionMakingFSMSystem : public BaseSystem
 	{
 	private:
-		bool CanSeeTarget(Spatial* pTargetSpatial, PatrolmanComponent patrolman, Spatial* pPatrolSpatial);
-		float GetDistanceToTarget(entt::registry& registry, entt::entity target, Spatial* pBotSpatial);
+		PatrolStateSystem patrolSystem;
+		PursueStateSystem pursueSystem;
+		HTHStateSystem hthSystem;
+		FleeStateSystem fleeSystem;
+
 		void OnHitNoticing(entt::registry& registry);
 	public:
 		virtual void operator()(float delta, entt::registry& registry) override;

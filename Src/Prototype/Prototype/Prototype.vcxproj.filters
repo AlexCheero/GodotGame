@@ -237,6 +237,21 @@
     <ClCompile Include="Systems\AttackSystems\PileInSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\AISystems\DecisionMakingHelper.cpp">
+      <Filter>Source Files\Systems\AISystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AISystems\PatrolStateSystem.cpp">
+      <Filter>Source Files\Systems\AISystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AISystems\PursueStateSystem.cpp">
+      <Filter>Source Files\Systems\AISystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AISystems\HTHStateSystem.cpp">
+      <Filter>Source Files\Systems\AISystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AISystems\FleeStateSystem.cpp">
+      <Filter>Source Files\Systems\AISystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -406,6 +421,21 @@
     </ClInclude>
     <ClInclude Include="Systems\AttackSystems\PileInSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AISystems\DecisionMakingHelper.h">
+      <Filter>Header Files\Systems\AISystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AISystems\PatrolStateSystem.h">
+      <Filter>Header Files\Systems\AISystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AISystems\PursueStateSystem.h">
+      <Filter>Header Files\Systems\AISystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AISystems\HTHStateSystem.h">
+      <Filter>Header Files\Systems\AISystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AISystems\FleeStateSystem.h">
+      <Filter>Header Files\Systems\AISystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
