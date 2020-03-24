@@ -9,6 +9,8 @@
 #include "HTHStateSystem.h"
 #include "FleeStateSystem.h"
 
+#include "../../Components/AIComponents/FSMStateComponents.h"
+
 namespace godot
 {
 	//TODO: move all decision making code (base system, state systems, helpers etc) to separate filter/folder
@@ -20,9 +22,15 @@ namespace godot
 		HTHStateSystem hthSystem;
 		FleeStateSystem fleeSystem;
 
+		void OnTransitionToPursuing(entt::registry& registry, entt::entity entity);
+
 		void OnHitNoticing(entt::registry& registry);
 	public:
-		DecisionMakingFSMSystem(entt::registry& registry) : patrolSystem(registry) {}
+		DecisionMakingFSMSystem(entt::registry& registry)
+		{
+			registry.on_construct<PursuingStateComponent>().connect<&DecisionMakingFSMSystem::OnTransitionToPursuing>(this);
+		}
+
 		virtual void operator()(float delta, entt::registry& registry) override;
 	};
 }

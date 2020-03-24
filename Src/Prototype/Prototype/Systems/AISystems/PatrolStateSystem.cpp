@@ -9,11 +9,6 @@
 
 #include "DecisionMakingHelper.h"
 
-godot::PatrolStateSystem::PatrolStateSystem(entt::registry& registry)
-{
-	toPursuitTransitionObserver.connect(registry, entt::collector.group<PursuingStateComponent>().where<entt::tag<PatrolStateTag> >());
-}
-
 void godot::PatrolStateSystem::operator()(float delta, entt::registry& registry)
 {
 	auto players = registry.view<entt::tag<PlayerTag>, Spatial*>();
@@ -33,11 +28,5 @@ void godot::PatrolStateSystem::operator()(float delta, entt::registry& registry)
 		//to pursuit transition
 		if (registry.valid(targetEntity))
 			registry.assign<PursuingStateComponent>(entity, targetEntity);
-	});
-
-	toPursuitTransitionObserver.each([&registry](const auto entity)
-	{
-		registry.remove<entt::tag<PatrolStateTag> >(entity);
-		registry.remove_if_exists<NavPathComponent>(entity);
 	});
 }

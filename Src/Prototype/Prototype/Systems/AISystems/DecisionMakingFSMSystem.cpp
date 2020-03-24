@@ -3,6 +3,15 @@
 #include "../../Components/AIComponents/FSMStateComponents.h"
 #include "../../Components/AIComponents/NavigationComponents.h"
 
+void godot::DecisionMakingFSMSystem::OnTransitionToPursuing(entt::registry& registry, entt::entity entity)
+{
+	if (registry.has<entt::tag<PatrolStateTag> >(entity))
+	{
+		registry.remove<entt::tag<PatrolStateTag> >(entity);
+		registry.remove_if_exists<NavPathComponent>(entity);
+	}
+}
+
 void godot::DecisionMakingFSMSystem::OnHitNoticing(entt::registry& registry)
 {
 	//TODO0: dont use local static vars, cause they become invalid on game restart
@@ -29,7 +38,7 @@ void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& reg
 {
 	OnHitNoticing(registry);
 	
-	//DecisionMakingFSMSystem (or its states) should be the only system to manage tags and set input for bot
+	//DecisionMakingFSMSystem (or its states) should be the only system to manage states and set input for bot
 	patrolSystem(delta, registry);
 	pursueSystem(delta, registry);
 	hthSystem(delta, registry);
