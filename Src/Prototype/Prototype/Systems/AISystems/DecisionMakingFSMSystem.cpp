@@ -6,10 +6,7 @@
 
 void godot::DecisionMakingFSMSystem::OnTransitionToPatrol(entt::registry& registry, entt::entity entity)
 {
-	if (registry.has<PursuingStateComponent>(entity))
-	{
-		registry.remove<PursuingStateComponent>(entity);
-	}
+	registry.remove_if_exists<PursuingStateComponent>(entity);
 	if (registry.has<entt::tag<MeleeAttackStateTag> >(entity))
 	{
 		registry.remove<entt::tag<MeleeAttackStateTag> >(entity);
@@ -19,39 +16,25 @@ void godot::DecisionMakingFSMSystem::OnTransitionToPatrol(entt::registry& regist
 
 void godot::DecisionMakingFSMSystem::OnTransitionToPursuing(entt::registry& registry, entt::entity entity)
 {
-	if (registry.has<entt::tag<PatrolStateTag> >(entity))
-	{
-		registry.remove<entt::tag<PatrolStateTag> >(entity);
-		registry.remove_if_exists<NavPathComponent>(entity);
-	}
+	registry.remove_if_exists<entt::tag<PatrolStateTag> >(entity);
 	if (registry.has<entt::tag<MeleeAttackStateTag> >(entity))
 	{
 		registry.remove<entt::tag<MeleeAttackStateTag> >(entity);
-		registry.remove_if_exists<NavPathComponent>(entity);
 		registry.remove<TargetLockComponent>(entity);
 	}
+	registry.remove_if_exists<NavPathComponent>(entity);
 }
 
 void godot::DecisionMakingFSMSystem::OnTransitionToFlee(entt::registry& registry, entt::entity entity)
 {
-	if (registry.has<PursuingStateComponent>(entity))
-	{
-		registry.remove<PursuingStateComponent>(entity);
-		registry.remove_if_exists<NavPathComponent>(entity);
-	}
-	if (registry.has<entt::tag<MeleeAttackStateTag> >(entity))
-	{
-		registry.remove<entt::tag<MeleeAttackStateTag> >(entity);
-		registry.remove_if_exists<NavPathComponent>(entity);
-	}
+	registry.remove_if_exists<PursuingStateComponent>(entity);
+	registry.remove_if_exists<entt::tag<MeleeAttackStateTag> >(entity);
+	registry.remove_if_exists<NavPathComponent>(entity);
 }
 
 void godot::DecisionMakingFSMSystem::OnTransitionToHTH(entt::registry& registry, entt::entity entity)
 {
-	if (registry.has<PursuingStateComponent>(entity))
-	{
-		registry.remove<PursuingStateComponent>(entity);
-	}
+	registry.remove_if_exists<PursuingStateComponent>(entity);
 }
 
 void godot::DecisionMakingFSMSystem::OnHitNoticing(entt::registry& registry)
