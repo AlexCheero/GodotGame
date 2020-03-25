@@ -27,19 +27,24 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 	pileInSystem(delta, registry);
 	animSystem(delta, registry);
 
-	//TODO: removing AttackAnimPlayingComponent when animation is finished, refactor this
-	auto animPlayingView = registry.view<AttackAnimPlayingComponent, InputComponent>();
-	animPlayingView.each([&registry, delta](entt::entity entity, AttackAnimPlayingComponent& attackPlayingComp, InputComponent inputComp)
+	auto animPlayingView = registry.view<AttackAnimPlayingComponent>();
+	animPlayingView.each([&registry, delta](entt::entity entity, AttackAnimPlayingComponent& attackPlayingComp)
 	{
 		attackPlayingComp.playBackTimeLeft -= delta;
-		
-		//TODO: split into two separate systems
-		if (attackPlayingComp.playBackTimeLeft <= 0 || inputComp.moveDir.length_squared() > 0)
-			registry.remove_if_exists<entt::tag<PileInTag> >(entity);
 
 		if (attackPlayingComp.playBackTimeLeft <= 0)
 			registry.remove<AttackAnimPlayingComponent>(entity);
 	});
+
+	auto pileInRemoveOnMoveInputView = registry.view<InputComponent>();
+	pileInRemoveOnMoveInputView.each([&registry, delta](entt::entity entity, InputComponent inputComp)
+	{
+		if (inputComp.moveDir.length_squared() > 0)
+			registry.remove_if_exists<entt::tag<PileInTag> >(entity);
+	});
+
+	auto pileInRemoveOnAnimationEndView = registry.view<entt::tag<PileInTag> >(entt::exclude<AttackAnimPlayingComponent>);
+	registry.remove<entt::tag<PileInTag> >(pileInRemoveOnAnimationEndView.begin(), pileInRemoveOnAnimationEndView.end());
 
 	auto incrementComboView = registry.view<entt::tag<IncrementComboTag>, MeleeAttackComponent>();
 	incrementComboView.less([](MeleeAttackComponent& attackComp)
