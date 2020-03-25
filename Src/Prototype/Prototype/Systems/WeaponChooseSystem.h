@@ -6,11 +6,12 @@ namespace godot
 {
 	class WeaponChooseSystem : public BaseSystem
 	{
+	private:
+		void OnMeleeTagConstruct(entt::registry& registry, entt::entity entity);
+		void OnRangedTagConstruct(entt::registry& registry, entt::entity entity);
+		void OnThrowableTagConstruct(entt::registry& registry, entt::entity entity);
 	public:
-		static void OnMeleeTagConstruct(entt::registry& registry, entt::entity entity);
-		static void OnRangedTagConstruct(entt::registry& registry, entt::entity entity);
-		static void OnThrowableTagConstruct(entt::registry& registry, entt::entity entity);
-
+		WeaponChooseSystem(entt::registry& registry);
 		virtual void operator()(float delta, entt::registry& registry) override;
 	};
 }

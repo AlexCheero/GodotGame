@@ -21,6 +21,13 @@ void godot::WeaponChooseSystem::OnThrowableTagConstruct(entt::registry& registry
 	registry.remove_if_exists<entt::tag<CurrentWeaponRangedTag> >(entity);
 }
 
+godot::WeaponChooseSystem::WeaponChooseSystem(entt::registry& registry)
+{
+	registry.on_construct<entt::tag<CurrentWeaponMeleeTag> >().connect<&WeaponChooseSystem::OnMeleeTagConstruct>(this);
+	registry.on_construct<entt::tag<CurrentWeaponRangedTag> >().connect<&WeaponChooseSystem::OnRangedTagConstruct>(this);
+	registry.on_construct<entt::tag<CurrentWeaponThrowableTag> >().connect<&WeaponChooseSystem::OnThrowableTagConstruct>(this);
+}
+
 //TODO: don't update this and similar systems all the time
 void godot::WeaponChooseSystem::operator()(float delta, entt::registry& registry)
 {

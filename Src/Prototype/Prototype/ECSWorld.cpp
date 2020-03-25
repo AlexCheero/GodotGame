@@ -217,13 +217,7 @@ void godot::ECSWorld::_init()
 	//setup systems
 	m_process_systems.emplace_back(new SimpleFollowSystem());
 	m_process_systems.emplace_back(new DestroyDeadSystem());
-
-	m_process_systems.emplace_back(new WeaponChooseSystem());
-	//TODO: maybe should move it into inner WeaponChooseSystem's observer
-	registry.on_construct<entt::tag<CurrentWeaponMeleeTag> >().connect<&WeaponChooseSystem::OnMeleeTagConstruct>();
-	registry.on_construct<entt::tag<CurrentWeaponRangedTag> >().connect<&WeaponChooseSystem::OnRangedTagConstruct>();
-	registry.on_construct<entt::tag<CurrentWeaponThrowableTag> >().connect<&WeaponChooseSystem::OnThrowableTagConstruct>();
-
+	m_process_systems.emplace_back(new WeaponChooseSystem(registry));
 	m_process_systems.emplace_back(new HealthMonitoringSystem());
 	//TODO: change logick of FleeingSystem after implementing combat systems (hth, shooting, covers, etc.)
 	m_process_systems.emplace_back(new FleeingSystem());
