@@ -18,7 +18,6 @@ void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 			registry.assign<entt::tag<PileInTag> >(entity);
 	});
 
-	//TODO0: stop or slow down fleeing enemy while in hth combat, not always pile in
 	auto pileInView = registry.view<entt::tag<PileInTag>, AttackAnimPlayingComponent, TargetLockComponent, VelocityComponent, SpeedComponent, Spatial*>();
 	pileInView.less([&registry, maxAttackDistance](entt::entity entity, AttackAnimPlayingComponent animPlayingComp, TargetLockComponent lockComp,
 												   VelocityComponent& velComp, SpeedComponent speedComp, Spatial* pSpatial)
@@ -37,6 +36,10 @@ void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 		toTargetVelocity.normalize();
 		//TODO: remove hardcode and probably use speed instead of factor
 		const float pileInDashFactor = 1.5f;
-		velComp.velocity += toTargetVelocity * speedComp.speed * pileInDashFactor;
+		toTargetVelocity *= speedComp.speed * pileInDashFactor;
+		//TODO: don't pile in in air, not just reset velocity's y
+		toTargetVelocity.y = velComp.velocity.y;
+
+		velComp.velocity = toTargetVelocity;
 	});
 }
