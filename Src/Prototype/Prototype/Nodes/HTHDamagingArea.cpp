@@ -36,6 +36,9 @@ void godot::HTHDamagingArea::_on_Area_body_entered(EntityHolderNode* pEntityHold
 	//TODO: assign only on bot
 	if (!registry.has<HittedByComponent>(hittedEntity))
 		registry.assign<HittedByComponent>(hittedEntity).attacker = ownerEntity;
+
+	//TODO: remove hardcode
+	registry.assign_or_replace<HTHStuckComponent>(hittedEntity, 1.f);
 	
 	//TODO: implement instead of HittedByComponent
 	//registry.assign<HittedFromComponent>(hittedEntity).position = get_global_transform().get_origin();

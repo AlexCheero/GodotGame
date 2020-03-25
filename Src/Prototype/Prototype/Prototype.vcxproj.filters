@@ -252,6 +252,9 @@
     <ClCompile Include="Systems\AISystems\FleeStateSystem.cpp">
       <Filter>Source Files\Systems\AISystems</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\LocomotionSystems\HTHStuckSystem.cpp">
+      <Filter>Source Files\Systems\LocomotionSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -436,6 +439,9 @@
     </ClInclude>
     <ClInclude Include="Systems\AISystems\FleeStateSystem.h">
       <Filter>Header Files\Systems\AISystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\LocomotionSystems\HTHStuckSystem.h">
+      <Filter>Header Files\Systems\LocomotionSystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,8 +4,6 @@
 
 #include "entt/entt.hpp"
 
-//TODO: probably set velocity for bot in single system, like PlayerVelocitySystem (maybe even merge with it)
-//		by input and set only input for bot in decision making system
 struct VelocityComponent { godot::Vector3 velocity; };
 struct SpeedComponent { float speed; };
 struct JumpSpeedComponent { float speed; };

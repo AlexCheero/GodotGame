@@ -190,6 +190,7 @@
     <ClCompile Include="Systems\AttackSystems\ThrowAttackSystem.cpp" />
     <ClCompile Include="Systems\BillboardRotationSystem.cpp" />
     <ClCompile Include="Systems\LocomotionSystems\GravitySystem.cpp" />
+    <ClCompile Include="Systems\LocomotionSystems\HTHStuckSystem.cpp" />
     <ClCompile Include="Systems\LocomotionSystems\JumpSystem.cpp" />
     <ClCompile Include="Systems\LocomotionSystems\KinematicMovementSystem.cpp" />
     <ClCompile Include="Systems\LocomotionSystems\LookAtSystem.cpp" />
@@ -251,6 +252,7 @@
     <ClInclude Include="Systems\BaseSystem.h" />
     <ClInclude Include="Systems\BillboardRotationSystem.h" />
     <ClInclude Include="Systems\LocomotionSystems\GravitySystem.h" />
+    <ClInclude Include="Systems\LocomotionSystems\HTHStuckSystem.h" />
     <ClInclude Include="Systems\LocomotionSystems\JumpSystem.h" />
     <ClInclude Include="Systems\LocomotionSystems\KinematicMovementSystem.h" />
     <ClInclude Include="Systems\LocomotionSystems\LookAtSystem.h" />

@@ -43,6 +43,7 @@
 #include "Systems/AnimSystems/HTHAnimSystem.h"
 #include "Systems/AttackSystems/GrenadeSystem.h"
 #include "Systems/AISystems/DecisionMakingFSMSystem.h"
+#include "Systems/LocomotionSystems/HTHStuckSystem.h"
 
 #include "Nodes/EntityHolderNode.h"
 
@@ -228,6 +229,7 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new FleeingSystem());
 	//m_process_systems.emplace_back(new BillboardRotationSystem());
 	m_process_systems.emplace_back(new LocomotionAnimSystem());
+	m_process_systems.emplace_back(new HTHStuckSystem(registry));
 }
 
 void godot::ECSWorld::_ready()
