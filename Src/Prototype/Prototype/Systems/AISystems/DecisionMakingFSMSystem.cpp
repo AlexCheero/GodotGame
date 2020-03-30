@@ -52,6 +52,7 @@ void godot::DecisionMakingFSMSystem::OnHitNoticing(entt::registry& registry)
 		ASSERT(registry.has<PatrolmanComponent>(entity), "entity has no PatrolmanComponent");
 		PatrolmanComponent patrolmanComp = registry.get<PatrolmanComponent>(entity);
 		Vector3 dir = (hitPosition - pSpatial->get_global_transform().get_origin()).normalized();
+		//TODO: somehow cast fails sometimes,
 		Object* pHitted = utils::CastFromSpatial(pSpatial, dir, patrolmanComp.longViewDistance);
 
 		if (!pHitted)
@@ -84,9 +85,8 @@ godot::DecisionMakingFSMSystem::DecisionMakingFSMSystem(entt::registry& registry
 
 void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& registry)
 {
-	//cannot use registry on_construct callback cause HittedByComponent::attacker
-	//is set to already deleted entity in HTHDamagingArea
-	//TODO: try to use registry on_construct callback after implementing HittedFromComponent
+	//cannot use registry on_construct callback cause this method checks
+	//visibility of enemy via cast and should do it in the physics thread
 	OnHitNoticing(registry);
 
 	//DecisionMakingFSMSystem (or its states) should be the only system to manage states and set input for bot
