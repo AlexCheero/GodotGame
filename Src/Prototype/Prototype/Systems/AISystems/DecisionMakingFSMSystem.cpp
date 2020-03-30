@@ -85,8 +85,7 @@ godot::DecisionMakingFSMSystem::DecisionMakingFSMSystem(entt::registry& registry
 
 void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& registry)
 {
-	//cannot use registry on_construct callback cause this method checks
-	//visibility of enemy via cast and should do it in the physics thread
+	//TODO: cannot use registry on_construct callback cause somehow cast fails all the time with this approach
 	OnHitNoticing(registry);
 
 	//DecisionMakingFSMSystem (or its states) should be the only system to manage states and set input for bot
