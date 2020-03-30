@@ -46,24 +46,17 @@ void godot::DecisionMakingFSMSystem::OnHitNoticing(entt::registry& registry)
 	{
 		Vector3 hitPosition = registry.get<HittedFromComponent>(entity).position;
 		registry.remove<HittedFromComponent>(entity);
-
+		registry.remove<NavPathComponent>(entity);
+		
 		ASSERT(registry.has<Spatial*>(entity), "entity has no spatial");
 		Spatial* pSpatial = registry.get<Spatial*>(entity);
-		ASSERT(registry.has<PatrolmanComponent>(entity), "entity has no PatrolmanComponent");
-		PatrolmanComponent patrolmanComp = registry.get<PatrolmanComponent>(entity);
 		Vector3 dir = (hitPosition - pSpatial->get_global_transform().get_origin()).normalized();
-		//TODO: somehow cast fails sometimes,
-		Object* pHitted = utils::CastFromSpatial(pSpatial, dir, patrolmanComp.longViewDistance);
+		dir.y = 0;
+		dir.normalize();
 
-		if (!pHitted)
-			return;
+		registry.get<RotationDirectionComponent>(entity).direction = dir;
 
-		EntityHolderNode* pEntityHolder = Object::cast_to<EntityHolderNode>(pHitted);
-		if (!pEntityHolder)
-			return;
-
-		ASSERT(registry.valid(pEntityHolder->GetEntity()), "invalid entity");
-		registry.assign<PursuingStateComponent>(entity, pEntityHolder->GetEntity());
+		registry.assign_or_replace<PatrolLookAroundComponent>(entity);
 	});
 
 	hittedOutOfPatrolObserver.each([&registry](const auto entity)
