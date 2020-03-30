@@ -77,8 +77,7 @@ godot::DecisionMakingFSMSystem::DecisionMakingFSMSystem(entt::registry& registry
 	registry.on_construct<entt::tag<PatrolStateTag> >().connect<&DecisionMakingFSMSystem::OnTransitionToPatrol>(this);
 	registry.on_construct<entt::tag<FleeStateTag> >().connect<&DecisionMakingFSMSystem::OnTransitionToFlee>(this);
 	registry.on_construct<entt::tag<MeleeAttackStateTag> >().connect<&DecisionMakingFSMSystem::OnTransitionToHTH>(this);
-	registry.on_construct<HittedFromComponent>().connect<&DecisionMakingFSMSystem::OnHitNoticing>(this);
-
+	
 	hittedOnPatrolObserver.connect(registry, entt::collector.group<entt::tag<PatrolStateTag>, HittedFromComponent>());
 	hittedOutOfPatrolObserver.connect(registry, entt::collector.group<HittedFromComponent>(entt::exclude<entt::tag<PatrolStateTag> >));
 }
