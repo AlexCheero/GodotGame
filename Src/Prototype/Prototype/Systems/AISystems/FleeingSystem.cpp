@@ -22,7 +22,6 @@ void godot::FleeingSystem::operator()(float delta, entt::registry& registry)
 				vectorToNearestEnemy = fromPlayerVector;
 		}
 
-		//TODO: make more smart fleeing system when covers are implemented
 		vectorToNearestEnemy.y = 0;
 		vectorToNearestEnemy.normalize();
 		float y = velocityComp.velocity.y;

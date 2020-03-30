@@ -5,7 +5,7 @@
 void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 {
 	//TODO: remove hardcode and calculate separate maxAttackDistance for each hit
-	//TODO: player + bot colliders radii is hardcoded also
+	//		player + bot colliders radii is hardcoded also
 	const float maxAttackDistance = 2.f;//1.5f
 	auto checkForPileInView = registry.view<entt::tag<AttackActionTag>, TargetLockComponent, Spatial*>(entt::exclude<entt::tag<PileInTag> >);
 	checkForPileInView.less([&registry, maxAttackDistance](entt::entity entity, TargetLockComponent lockComp, Spatial* pSpatial)
