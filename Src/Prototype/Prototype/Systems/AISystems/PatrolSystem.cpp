@@ -12,7 +12,7 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 	entt::entity navEntity = registry.view<Navigation*>()[0];
 	Navigation* pNavigation = registry.get<Navigation*>(navEntity);
 
-	auto view = registry.view<entt::tag<PatrolStateTag>, PatrolRouteComponent, Spatial*>(entt::exclude<NavPathComponent, PatrolLookAroundComponent>);
+	auto view = registry.view<entt::tag<PatrolStateTag>, PatrolRouteComponent, Spatial*>(entt::exclude<NavPathComponent, HittedFromComponent>);
 	view.less([this, &registry, pNavigation] (entt::entity entity, PatrolRouteComponent& route, Spatial* pSpatial)
 	{
 		if (route.current < route.routePoints.size() - 1)
@@ -26,11 +26,11 @@ void godot::PatrolSystem::operator()(float delta, entt::registry& registry)
 		newPath.path = pNavigation->get_simple_path(pSpatial->get_global_transform().origin, route.GetCurrentPatrolPoint());
 	});
 
-	auto lookAroundView = registry.view<PatrolLookAroundComponent>();
-	lookAroundView.each([&registry, delta](entt::entity entity, PatrolLookAroundComponent& comp)
+	auto lookAroundView = registry.view<HittedFromComponent>();
+	lookAroundView.each([&registry, delta](entt::entity entity, HittedFromComponent& comp)
 	{
-		comp.time -= delta;
-		if (comp.time <= 0)
-			registry.remove<PatrolLookAroundComponent>(entity);
+		comp.lookAroundTime -= delta;
+		if (comp.lookAroundTime <= 0)
+			registry.remove<HittedFromComponent>(entity);
 	});
 }
