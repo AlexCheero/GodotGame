@@ -24,10 +24,7 @@ namespace godot
 		void OnTransitionToPursuing(entt::registry& registry, entt::entity entity);
 		void OnTransitionToFlee(entt::registry& registry, entt::entity entity);
 		void OnTransitionToHTH(entt::registry& registry, entt::entity entity);
-
-		entt::observer hittedOnPatrolObserver;
-		entt::observer hittedOutOfPatrolObserver;
-		void OnHitNoticing(entt::registry& registry);
+		void OnHitNoticing(entt::registry& registry, entt::entity entity);
 	public:
 		DecisionMakingFSMSystem(entt::registry& registry);
 
