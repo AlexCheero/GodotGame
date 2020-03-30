@@ -54,8 +54,6 @@ void godot::DecisionMakingFSMSystem::OnHitNoticing(entt::registry& registry, ent
 		dir.normalize();
 
 		registry.get<RotationDirectionComponent>(entity).direction = dir;
-
-		registry.assign_or_replace<PatrolLookAroundComponent>(entity);
 	}
 }
 
@@ -66,6 +64,8 @@ godot::DecisionMakingFSMSystem::DecisionMakingFSMSystem(entt::registry& registry
 	registry.on_construct<entt::tag<FleeStateTag> >().connect<&DecisionMakingFSMSystem::OnTransitionToFlee>(this);
 	registry.on_construct<entt::tag<MeleeAttackStateTag> >().connect<&DecisionMakingFSMSystem::OnTransitionToHTH>(this);
 	registry.on_construct<HittedFromComponent>().connect<&DecisionMakingFSMSystem::OnHitNoticing>(this);
+
+	registry.on_destroy<entt::tag<PatrolStateTag> >().connect<&entt::registry::remove_if_exists<HittedFromComponent> >();
 }
 
 void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& registry)

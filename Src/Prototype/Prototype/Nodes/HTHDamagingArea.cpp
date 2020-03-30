@@ -37,8 +37,7 @@ void godot::HTHDamagingArea::_on_Area_body_entered(EntityHolderNode* pEntityHold
 	registry.assign_or_replace<HTHStuckComponent>(hittedEntity, 1.f);
 	
 	//TODO: assign only on bot
-	if (!registry.has<HittedFromComponent>(hittedEntity))
-		registry.assign<HittedFromComponent>(hittedEntity, get_global_transform().get_origin());
+	registry.assign_or_replace<HittedFromComponent>(hittedEntity, get_global_transform().get_origin());
 }
 
 void godot::HTHDamagingArea::_assign_owner_entity()

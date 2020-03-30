@@ -14,12 +14,8 @@ struct PursuingStateComponent
 struct HittedFromComponent
 {
 	godot::Vector3 position;
-};
-
-struct PatrolLookAroundComponent
-{
 	//TODO: remove hardcode
-	float time = 1;
+	float lookAroundTime = 1.f;
 };
 
 constexpr entt::hashed_string PatrolStateTag = "PatrolStateTag"_hs;
