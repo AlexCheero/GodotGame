@@ -34,7 +34,6 @@
 #include "Systems/AttackSystems/ThrowAttackSystem.h"
 #include "Systems/AISystems/NavAgentSystem.h"
 #include "Systems/LocomotionSystems/LookAtSystem.h"
-#include "Systems/AISystems/PatrolSystem.h"
 #include "Systems/AISystems/PursuingSystem.h"
 #include "Systems/AISystems/HealthMonitoringSystem.h"
 #include "Systems/AISystems/FleeingSystem.h"
@@ -205,8 +204,7 @@ void godot::ECSWorld::_init()
 	//TODO: must be called after all systems that affects velocity (same line commented above)
 	m_physics_systems.emplace_back(new KinematicMovementSystem());
 
-	//TODO: make simple way to switch off bots (PatrolSystem, NavAgentSystem, PursuingSystem, FleeingSystem and others)
-	m_physics_systems.emplace_back(new PatrolSystem());
+	//TODO: make simple way to switch off bots (NavAgentSystem, PursuingSystem, FleeingSystem and others)
 	m_physics_systems.emplace_back(new DecisionMakingFSMSystem(registry));
 
 	m_physics_systems.emplace_back(new GrenadeSystem());

@@ -174,9 +174,6 @@
     <ClCompile Include="Systems\AttackSystems\AttackCooldown.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\AISystems\PatrolSystem.cpp">
-      <Filter>Source Files\Systems\AISystems</Filter>
-    </ClCompile>
     <ClCompile Include="Components\Views\AIViews\PatrolmanView.cpp">
       <Filter>Source Files\Components\Views\AIViews</Filter>
     </ClCompile>
@@ -343,9 +340,6 @@
     </ClInclude>
     <ClInclude Include="Systems\AttackSystems\AttackCooldown.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\AISystems\PatrolSystem.h">
-      <Filter>Header Files\Systems\AISystems</Filter>
     </ClInclude>
     <ClInclude Include="Components\AIComponents\PatrolComponents.h">
       <Filter>Header Files\Components\AIComponents</Filter>

@@ -176,7 +176,6 @@
     <ClCompile Include="Systems\AISystems\HTHStateSystem.cpp" />
     <ClCompile Include="Systems\AISystems\NavAgentSystem.cpp" />
     <ClCompile Include="Systems\AISystems\PatrolStateSystem.cpp" />
-    <ClCompile Include="Systems\AISystems\PatrolSystem.cpp" />
     <ClCompile Include="Systems\AISystems\PursueStateSystem.cpp" />
     <ClCompile Include="Systems\AISystems\PursuingSystem.cpp" />
     <ClCompile Include="Systems\AnimSystems\HTHAnimSystem.cpp" />
@@ -237,7 +236,6 @@
     <ClInclude Include="Systems\AISystems\HTHStateSystem.h" />
     <ClInclude Include="Systems\AISystems\NavAgentSystem.h" />
     <ClInclude Include="Systems\AISystems\PatrolStateSystem.h" />
-    <ClInclude Include="Systems\AISystems\PatrolSystem.h" />
     <ClInclude Include="Systems\AISystems\PursueStateSystem.h" />
     <ClInclude Include="Systems\AISystems\PursuingSystem.h" />
     <ClInclude Include="Systems\AnimSystems\HTHAnimSystem.h" />
