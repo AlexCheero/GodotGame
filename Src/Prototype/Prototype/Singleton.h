@@ -8,12 +8,13 @@ protected:
 
 	static void InitInstance(T* inst)
 	{
-		//TODO: should reinit on scene reset
-		//ASSERT(instance == nullptr, "instance already inited");
+		ASSERT(instance == nullptr, "instance already inited");
 		ASSERT(inst != nullptr, "trying to init instance with nullptr");
 
 		instance = inst;
 	}
+
+	static void ResetInstance() { instance = nullptr; }
 public:
 	static T* GetInstance() { return instance; }
 };

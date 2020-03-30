@@ -158,15 +158,11 @@ void godot::ECSWorld::PrepareEnemyEntity()
 
 void godot::ECSWorld::PrepareSingletonEntities()
 {
-	//TODO: find out why registry is empty and use assert if it will fit
-	if (registry.empty<Navigation*>())
-	{
-		Navigation* navigation = Object::cast_to<Navigation>(get_node("Navigation"));
-		entt::entity navigationEntity = registry.create();
-		registry.assign<Navigation*>(navigationEntity, navigation);
-	}
-	else
-		Godot::print_warning("trying to assign more than one singleton entity", "PrepareSingletonEntities", "ECSWorld.cpp", __LINE__);
+	ASSERT(registry.empty<Navigation*>(), "registry is not empty");
+
+	Navigation* navigation = Object::cast_to<Navigation>(get_node("Navigation"));
+	entt::entity navigationEntity = registry.create();
+	registry.assign<Navigation*>(navigationEntity, navigation);
 }
 
 void godot::ECSWorld::_register_methods()
@@ -213,9 +209,7 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new DestroyDeadSystem());
 	m_process_systems.emplace_back(new WeaponChooseSystem(registry));
 	m_process_systems.emplace_back(new HealthMonitoringSystem());
-	//TODO: change logick of FleeingSystem after implementing combat systems (hth, shooting, covers, etc.)
 	m_process_systems.emplace_back(new FleeingSystem());
-	//m_process_systems.emplace_back(new BillboardRotationSystem());
 	m_process_systems.emplace_back(new LocomotionAnimSystem());
 	m_process_systems.emplace_back(new HTHStuckSystem(registry));
 }
@@ -233,6 +227,7 @@ void godot::ECSWorld::HandleInputEvent(InputEvent* e)
 {
 	if (e->is_action_pressed("ui_accept"))
 	{
+		ResetInstance();
 		registry.clear();
 		PrepareSingletonEntities();
 		get_tree()->reload_current_scene();

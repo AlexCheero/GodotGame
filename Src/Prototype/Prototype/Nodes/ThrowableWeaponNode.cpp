@@ -32,8 +32,6 @@ void godot::ThrowableWeaponNode::_on_throwable_collide(EntityHolderNode* pEntity
 
 	//TODO: probably should check (or assert?) registry.has<entt::tag<DeadTag> >(entity)
 	ASSERT(entity != entt::null, "target is null");
-	//TODO: it fails with access violation exception on work machine when trying to get info about components from registry
-	//		try to use call_deferred if the bug reproduced
 	ASSERT(registry.has<HealthComponent>(entity), "hitted entity has no HealthComponent");
 
 	HealthComponent& health = registry.get<HealthComponent>(entity);
