@@ -151,7 +151,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Components\NodeComponents\Animation2DComponent.cpp" />
     <ClCompile Include="Components\Views\AIViews\NavMarginView.cpp" />
     <ClCompile Include="Components\Views\AIViews\PatrolmanView.cpp" />
     <ClCompile Include="Components\Views\AttackViews\GrenadeView.cpp" />
@@ -187,7 +186,6 @@
     <ClCompile Include="Systems\AttackSystems\RangedAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\MeleeAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\ThrowAttackSystem.cpp" />
-    <ClCompile Include="Systems\BillboardRotationSystem.cpp" />
     <ClCompile Include="Systems\LocomotionSystems\GravitySystem.cpp" />
     <ClCompile Include="Systems\LocomotionSystems\HTHStuckSystem.cpp" />
     <ClCompile Include="Systems\LocomotionSystems\JumpSystem.cpp" />
@@ -208,7 +206,6 @@
     <ClInclude Include="Components\AIComponents\PatrolComponents.h" />
     <ClInclude Include="Components\AttackComponents.h" />
     <ClInclude Include="Components\InputComponents.h" />
-    <ClInclude Include="Components\NodeComponents\Animation2DComponent.h" />
     <ClInclude Include="Components\SimpleComponents.h" />
     <ClInclude Include="Components\Views\AIViews\NavMarginView.h" />
     <ClInclude Include="Components\Views\AIViews\PatrolmanView.h" />
@@ -248,7 +245,6 @@
     <ClInclude Include="Systems\AttackSystems\MeleeAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\ThrowAttackSystem.h" />
     <ClInclude Include="Systems\BaseSystem.h" />
-    <ClInclude Include="Systems\BillboardRotationSystem.h" />
     <ClInclude Include="Systems\LocomotionSystems\GravitySystem.h" />
     <ClInclude Include="Systems\LocomotionSystems\HTHStuckSystem.h" />
     <ClInclude Include="Systems\LocomotionSystems\JumpSystem.h" />

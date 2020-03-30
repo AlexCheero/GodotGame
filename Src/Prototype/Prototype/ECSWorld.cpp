@@ -12,7 +12,6 @@
 #include <CapsuleShape.hpp>
 #include <AnimationTree.hpp>
 
-#include "Components/NodeComponents/Animation2DComponent.h"
 #include "Components/AttackComponents.h"
 #include "Components/InputComponents.h"
 #include "Components/AIComponents/NavigationComponents.h"
@@ -37,7 +36,6 @@
 #include "Systems/AISystems/PursuingSystem.h"
 #include "Systems/AISystems/HealthMonitoringSystem.h"
 #include "Systems/AISystems/FleeingSystem.h"
-#include "Systems/BillboardRotationSystem.h"
 #include "Systems/AnimSystems/LocomotionAnimSystem.h"
 #include "Systems/AnimSystems/HTHAnimSystem.h"
 #include "Systems/AttackSystems/GrenadeSystem.h"
@@ -69,7 +67,6 @@ void godot::ECSWorld::PreparePlayerEntity()
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("Camera"));
-	//AssignNodeInheritedComponent<Animation2DComponent>(registry, entity, get_node("Player/Sprite3D"));
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Player/vanguard/AnimationTree"));
 
 	EntityHolderNode* pEntityHolder = AssignNodeInheritedComponent<EntityHolderNode>(registry, entity, pPlayerNode);
@@ -122,7 +119,6 @@ void godot::ECSWorld::PrepareEnemyEntity()
 
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pEnemyNode);
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pEnemyNode);
-	//AssignNodeInheritedComponent<Animation2DComponent>(registry, entity, get_node("Enemy/Sprite3D"));
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Enemy/vanguard/AnimationTree"));
 
 	EntityHolderNode* pEntityHolder = AssignNodeInheritedComponent<EntityHolderNode>(registry, entity, pEnemyNode);

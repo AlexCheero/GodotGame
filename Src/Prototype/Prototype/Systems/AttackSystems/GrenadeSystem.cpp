@@ -41,7 +41,7 @@ void godot::GrenadeSystem::operator()(float delta, entt::registry& registry)
 			registry.assign<entt::tag<GrenadeExplodesTag> >(entity);
 	});
 
-	auto explodedView = registry.view<entt::tag<GrenadeExplodesTag>, GrenadeComponent, Spatial*>(entt::exclude<entt::tag<DeadTag> >);
+	auto explodedView = registry.view<entt::tag<GrenadeExplodesTag>, GrenadeComponent, Spatial*>(ExcludeDead);
 	explodedView.less([this, &registry](entt::entity entity, GrenadeComponent grenComp, Spatial* pGrenSpatial)
 	{
 		m_attackShape->set_radius(grenComp.explosionRadius);

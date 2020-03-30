@@ -192,12 +192,6 @@
     <ClCompile Include="Systems\AISystems\FleeingSystem.cpp">
       <Filter>Source Files\Systems\AISystems</Filter>
     </ClCompile>
-    <ClCompile Include="Components\NodeComponents\Animation2DComponent.cpp">
-      <Filter>Source Files\Components\NodeComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\BillboardRotationSystem.cpp">
-      <Filter>Source Files\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="Components\Views\AttackViews\RangedAttackView.cpp">
       <Filter>Source Files\Components\Views\AttackViews</Filter>
     </ClCompile>
@@ -367,12 +361,6 @@
     </ClInclude>
     <ClInclude Include="Systems\AISystems\FleeingSystem.h">
       <Filter>Header Files\Systems\AISystems</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\NodeComponents\Animation2DComponent.h">
-      <Filter>Header Files\Components\NodeComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\BillboardRotationSystem.h">
-      <Filter>Header Files\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Components\Views\AttackViews\RangedAttackView.h">
       <Filter>Header Files\Components\Views\AttackViews</Filter>

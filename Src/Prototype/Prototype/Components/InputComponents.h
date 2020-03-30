@@ -6,7 +6,6 @@
 
 #include <bitset>
 
-//TODO: maybe turn all input into tags, instead of input container
 enum class EInput
 {
 	Attack,
@@ -22,7 +21,6 @@ enum class EInput
 struct InputComponent
 {
 	std::bitset<static_cast<int>(EInput::End)> inputSet;
-	//TODO?: normalize input directions in input system
 	godot::Vector2 rotation;
 	godot::Vector2 moveDir;
 

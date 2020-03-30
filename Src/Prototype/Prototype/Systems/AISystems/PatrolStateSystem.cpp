@@ -10,7 +10,6 @@
 
 #include "DecisionMakingHelper.h"
 
-//TODO: merge PatrolStateSystem and PatrolSystem
 void godot::PatrolStateSystem::operator()(float delta, entt::registry& registry)
 {
 	auto players = registry.view<entt::tag<PlayerTag>, Spatial*>();

@@ -1,7 +1,6 @@
 #include <core/Godot.hpp>
 
 #include "ECSWorld.h"
-#include "Components/NodeComponents/Animation2DComponent.h"
 #include "Components/Views/EntityView.h"
 #include "Components/Views/AttackViews/MeleeAttackView.h"
 #include "Components/Views/AttackViews/RangedAttackView.h"
@@ -49,7 +48,6 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<SimpleFollowView>();
 	register_class<PatrolmanView>();
 	register_class<NavMarginView>();
-	register_class<Animation2DComponent>();
 	register_class<PickableNode>();
 	register_class<HTHDamagingArea>();
 	register_class<GrenadeView>();

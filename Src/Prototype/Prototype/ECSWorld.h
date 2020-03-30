@@ -9,7 +9,6 @@
 #include "Components/SimpleComponents.h"
 #include "Components/Views/EntityView.h"
 #include "Components/Views/EntityView.h"
-#include "Components/NodeComponents/Animation2DComponent.h"
 
 #include "Singleton.h"
 
