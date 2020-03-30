@@ -11,12 +11,6 @@ struct PursuingStateComponent
 	int64_t targetLostMsec = -1;
 };
 
-struct HittedByComponent
-{
-	entt::entity attacker = entt::null;
-};
-
-//TODO: implement instead of HittedByComponent
 struct HittedFromComponent
 {
 	godot::Vector3 position;
