@@ -69,7 +69,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("Camera"));
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Player/vanguard/AnimationTree"));
 
-	EntityHolderNode* pEntityHolder = AssignNodeInheritedComponent<EntityHolderNode>(registry, entity, pPlayerNode);
+	EntityHolderNode* pEntityHolder = Object::cast_to<EntityHolderNode>(pPlayerNode);
 	pEntityHolder->SetEntity(entity);
 
 	entityView->ConstructComponents(registry, entity);
@@ -121,7 +121,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pEnemyNode);
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Enemy/vanguard/AnimationTree"));
 
-	EntityHolderNode* pEntityHolder = AssignNodeInheritedComponent<EntityHolderNode>(registry, entity, pEnemyNode);
+	EntityHolderNode* pEntityHolder = Object::cast_to<EntityHolderNode>(pEnemyNode);
 	pEntityHolder->SetEntity(entity);
 
 	registry.assign<BoundsComponent>(entity, utils::GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));

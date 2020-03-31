@@ -5,8 +5,6 @@
 #include "../../Components/AIComponents/PatrolComponents.h"
 #include "../../Components/AttackComponents.h"
 
-#include "../../Nodes/EntityHolderNode.h"
-
 void godot::DecisionMakingFSMSystem::OnTransitionToPatrol(entt::registry& registry, entt::entity entity)
 {
 	registry.remove_if_exists<PursuingStateComponent>(entity);
