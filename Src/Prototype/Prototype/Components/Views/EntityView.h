@@ -61,7 +61,7 @@ namespace godot
 		template<typename T>
 		bool ConstructComponent(T& component);
 		
-		//TODO: use entity field after merging with EntityHolderNode
+		//TODO: use entity field after merging with EntityHolderNode (merge done)
 		void ConstructComponents(entt::registry& registry, entt::entity entity)
 		{
 			ConstructComponentsFromViews

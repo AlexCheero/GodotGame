@@ -15,7 +15,6 @@
 #include "Components/Views/AIViews/NavMarginView.h"
 
 #include "Nodes/PickableNode.h"
-#include "Nodes/EntityHolderNode.h"
 #include "Nodes/ThrowableWeaponNode.h"
 #include "Nodes/HTHDamagingArea.h"
 
@@ -35,7 +34,6 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 {
 	Godot::nativescript_init(handle);
 	register_class<ECSWorld>();
-	register_class<EntityHolderNode>();
 	register_class<ThrowableWeaponNode>();
 	register_class<EntityView>();
 	register_class<MeleeAttackView>();

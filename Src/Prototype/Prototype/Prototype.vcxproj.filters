@@ -371,9 +371,6 @@
     <ClInclude Include="Nodes\PickableNode.h">
       <Filter>Header Files\Nodes</Filter>
     </ClInclude>
-    <ClInclude Include="Nodes\EntityHolderNode.h">
-      <Filter>Header Files\Nodes</Filter>
-    </ClInclude>
     <ClInclude Include="Nodes\ThrowableWeaponNode.h">
       <Filter>Header Files\Nodes</Filter>
     </ClInclude>

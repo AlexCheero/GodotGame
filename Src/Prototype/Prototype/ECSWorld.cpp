@@ -42,8 +42,6 @@
 #include "Systems/AISystems/DecisionMakingFSMSystem.h"
 #include "Systems/LocomotionSystems/HTHStuckSystem.h"
 
-#include "Nodes/EntityHolderNode.h"
-
 #include "Utils/Utils.h"
 
 godot::ECSWorld* godot::ECSWorld::instance = nullptr;
@@ -69,9 +67,6 @@ void godot::ECSWorld::PreparePlayerEntity()
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("Camera"));
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Player/vanguard/AnimationTree"));
-
-	EntityHolderNode* pEntityHolder = Object::cast_to<EntityHolderNode>(pPlayerNode);
-	pEntityHolder->SetEntity(entity);
 
 	entityView->ConstructComponents(registry, entity);
 
@@ -122,9 +117,6 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pEnemyNode);
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pEnemyNode);
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Enemy/vanguard/AnimationTree"));
-
-	EntityHolderNode* pEntityHolder = Object::cast_to<EntityHolderNode>(pEnemyNode);
-	pEntityHolder->SetEntity(entity);
 
 	registry.assign<BoundsComponent>(entity, utils::GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));
 	

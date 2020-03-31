@@ -220,7 +220,6 @@
     <ClInclude Include="Components\Views\LocomotionViews\JumpSpeedView.h" />
     <ClInclude Include="Components\Views\LocomotionViews\SpeedView.h" />
     <ClInclude Include="Components\Views\SimpleFollowView.h" />
-    <ClInclude Include="Nodes\EntityHolderNode.h" />
     <ClInclude Include="Nodes\HTHDamagingArea.h" />
     <ClInclude Include="Nodes\PickableNode.h" />
     <ClInclude Include="Nodes\ThrowableWeaponNode.h" />
