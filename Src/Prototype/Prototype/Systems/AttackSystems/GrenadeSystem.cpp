@@ -6,16 +6,17 @@
 
 #include "../../Components/AttackComponents.h"
 #include "../../Components/SimpleComponents.h"
+#include "../../Components/Views/EntityView.h"
 
 const float INTERSECT_RESULTS_NUM = 32.f;
 
-bool godot::GrenadeSystem::CheckVisibility(Spatial* pGrenade, EntityHolderNode* pTarget, float explosionRadius)
+bool godot::GrenadeSystem::CheckVisibility(Spatial* pGrenade, Spatial* pTarget, float explosionRadius)
 {
 	Vector3 castDirection = pTarget->get_global_transform().get_origin() - pGrenade->get_global_transform().get_origin();
 	castDirection.normalize();
 	Object* pHitResult = utils::CastFromSpatial(pGrenade, castDirection, explosionRadius);
 
-	return pTarget == Object::cast_to<EntityHolderNode>(pHitResult);
+	return pTarget == Object::cast_to<Spatial>(pHitResult);
 }
 
 godot::GrenadeSystem::GrenadeSystem()
@@ -54,13 +55,14 @@ void godot::GrenadeSystem::operator()(float delta, entt::registry& registry)
 		{
 			Dictionary dict = intersects[i];
 			Object* pObj = Node::___get_from_variant(dict["collider"]);
-			EntityHolderNode* pEntitiyHolder = Object::cast_to<EntityHolderNode>(pObj);
+			Spatial* pTargetSpatial = Object::cast_to<Spatial>(pObj);
 
-			if (pEntitiyHolder && CheckVisibility(pGrenSpatial, pEntitiyHolder, grenComp.explosionRadius))
+			if (pTargetSpatial && pTargetSpatial->has_node("EntityView") && CheckVisibility(pGrenSpatial, pTargetSpatial, grenComp.explosionRadius))
 			{
-				ASSERT(pEntitiyHolder->GetEntity() != entt::null, "wrong entity, hitted by explosion");
-				ASSERT(registry.has<HealthComponent>(pEntitiyHolder->GetEntity()), "no health component on entity hitted by explosion");
-				registry.get<HealthComponent>(pEntitiyHolder->GetEntity()).hp -= grenComp.damage;
+				EntityView* pEntityView = Object::cast_to<EntityView>(pTargetSpatial->get_node("EntityView"));
+				ASSERT(registry.valid(pEntityView->GetEntity()), "wrong entity, hitted by explosion");
+				ASSERT(registry.has<HealthComponent>(pEntityView->GetEntity()), "no health component on entity hitted by explosion");
+				registry.get<HealthComponent>(pEntityView->GetEntity()).hp -= grenComp.damage;
 			}
 		}
 

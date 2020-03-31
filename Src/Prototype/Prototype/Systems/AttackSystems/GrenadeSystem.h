@@ -4,8 +4,7 @@
 
 #include <PhysicsShapeQueryParameters.hpp>
 #include <SphereShape.hpp>
-
-#include "../../Nodes/EntityHolderNode.h"
+#include <Spatial.hpp>
 
 namespace godot
 {
@@ -15,7 +14,7 @@ namespace godot
 		Ref<PhysicsShapeQueryParameters> m_params;
 		Ref<SphereShape> m_attackShape;
 
-		bool CheckVisibility(Spatial* pGrenade, EntityHolderNode* pTarget, float explosionRadius);
+		bool CheckVisibility(Spatial* pGrenade, Spatial* pTarget, float explosionRadius);
 	public:
 		GrenadeSystem();
 
