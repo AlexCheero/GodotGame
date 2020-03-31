@@ -4,7 +4,6 @@
 
 #include "../ECSWorld.h"
 #include "../Utils/Utils.h"
-#include "EntityHolderNode.h"
 #include "../Components/AIComponents/FSMStateComponents.h"
 
 void godot::HTHDamagingArea::_register_methods()

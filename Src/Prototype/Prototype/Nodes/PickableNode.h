@@ -2,11 +2,11 @@
 
 #include <core/Godot.hpp>
 #include <Area.hpp>
+#include <KinematicBody.hpp>
 
 #include "entt/entt.hpp"
 
 #include "../Components/Views/EntityView.h"
-#include "../Nodes/EntityHolderNode.h"
 
 namespace godot
 {
@@ -31,7 +31,7 @@ namespace godot
 		int GetType() { return static_cast<int>(type); }
 		EPickableType type;
 
-		void _on_Pickable_body_entered(EntityHolderNode* pEntityHolder);
+		void _on_Pickable_body_entered(KinematicBody* pBody);
 	public:
 		static void _register_methods();
 		void _init() {}

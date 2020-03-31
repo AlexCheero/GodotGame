@@ -12,14 +12,16 @@ void godot::PickableNode::SetType(int i)
 	type = static_cast<EPickableType>(i);
 }
 
-void godot::PickableNode::_on_Pickable_body_entered(EntityHolderNode* pEntityHolder)
+void godot::PickableNode::_on_Pickable_body_entered(KinematicBody* pBody)
 {
-	if (!pEntityHolder)
+	ASSERT(pBody != nullptr, "kinematic body is null");
+	if (!pBody->has_node("EntityView"))
 		return;
 
 	queue_free();
-
-	entt::entity pickerEntity = pEntityHolder->GetEntity();
+	
+	EntityView* pPickerEntityView = Object::cast_to<EntityView>(pBody->get_node("EntityView"));
+	entt::entity pickerEntity = pPickerEntityView->GetEntity();
 	ASSERT(pickerEntity != entt::null, "picker is null");
 	EntityView* pPickableView = Object::cast_to<EntityView>(get_node("EntityView"));
 	ASSERT(pPickableView != nullptr, "pickable view is null");

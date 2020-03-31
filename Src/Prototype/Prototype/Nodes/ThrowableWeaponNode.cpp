@@ -3,6 +3,7 @@
 #include <SceneTree.hpp>
 
 #include "../ECSWorld.h"
+#include "../Components/Views/EntityView.h"
 
 void godot::ThrowableWeaponNode::_register_methods()
 {
@@ -19,19 +20,21 @@ void godot::ThrowableWeaponNode::_init()
 
 //TODO: probably move this method (and all similar from other nodes) to some kind of reactive system
 //		implemented as static functor
-void godot::ThrowableWeaponNode::_on_throwable_collide(EntityHolderNode* pEntityHolder)
+void godot::ThrowableWeaponNode::_on_throwable_collide(KinematicBody* pBody)
 {
 	Godot::print("throwable hit");
 	queue_free();
 
-	if (!pEntityHolder)
+	ASSERT(pBody != nullptr, "kinematic body is null");
+	if (!pBody->has_node("EntityView"))
 		return;
 
-	entt::entity entity = pEntityHolder->GetEntity();
+	EntityView* pEntityView = Object::cast_to<EntityView>(pBody->get_node("EntityView"));
+	entt::entity entity = pEntityView->GetEntity();
 	entt::registry& registry = ECSWorld::GetInstance()->GetRegistry();
 
 	//TODO: probably should check (or assert?) registry.has<entt::tag<DeadTag> >(entity)
-	ASSERT(entity != entt::null, "target is null");
+	ASSERT(registry.valid(entity), "target is null");
 	ASSERT(registry.has<HealthComponent>(entity), "hitted entity has no HealthComponent");
 
 	HealthComponent& health = registry.get<HealthComponent>(entity);

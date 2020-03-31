@@ -2,10 +2,9 @@
 
 #include <core/Godot.hpp>
 #include <RigidBody.hpp>
+#include <KinematicBody.hpp>
 
 #include "entt/entt.hpp"
-
-#include "../Nodes/EntityHolderNode.h"
 
 namespace godot
 {
@@ -21,6 +20,6 @@ namespace godot
 
 		static void _register_methods();
 		void _init();
-		void _on_throwable_collide(EntityHolderNode* pEntityHolder);
+		void _on_throwable_collide(KinematicBody* pBody);
 	};
 }
