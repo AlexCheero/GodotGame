@@ -60,6 +60,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	Node* pPlayerNode = get_node("Player");
 	EntityView* entityView = Object::cast_to<EntityView>(pPlayerNode->get_node("EntityView"));
+	entityView->SetEntity(entity);
 
 	registry.assign<Node*>(entity, pPlayerNode);
 
@@ -102,7 +103,7 @@ void godot::ECSWorld::PrepareCameraEntity()
 
 	SimpleFollowComponent& followComp = registry.get<SimpleFollowComponent>(entity);
 
-	followComp.targetEntity = Object::cast_to<EntityHolderNode>(get_node("Player"))->GetEntity();
+	followComp.targetEntity = Object::cast_to<EntityView>(get_node("Player")->get_node("EntityView"))->GetEntity();
 	ASSERT(registry.valid(followComp.targetEntity), "invalid follow component target");
 
 	registry.assign<entt::tag<MainCameraTag> >(entity);
@@ -114,6 +115,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 
 	Node* pEnemyNode = get_node("Enemy");
 	EntityView* entityView = Object::cast_to<EntityView>(pEnemyNode->get_node("EntityView"));
+	entityView->SetEntity(entity);
 
 	registry.assign<Node*>(entity, pEnemyNode);
 

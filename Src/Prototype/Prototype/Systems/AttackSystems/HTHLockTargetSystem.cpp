@@ -7,7 +7,8 @@
 
 #include "../../Components/AttackComponents.h"
 #include "../../Components/InputComponents.h"
-#include "../../Nodes/EntityHolderNode.h"
+
+#include "../../Components/Views/EntityView.h"
 
 const float INTERSECT_RESULTS_NUM = 16.f;
 
@@ -54,9 +55,15 @@ void godot::HTHLockTargetSystem::operator()(float delta, entt::registry& registr
 		if (!pHittedObj)
 			return;
 
-		EntityHolderNode* pEntityHolder = Object::cast_to<EntityHolderNode>(pHittedObj);
-		entt::entity targetEntity = pEntityHolder->GetEntity();
-		ASSERT(pEntityHolder != nullptr, "target pEntityHolder is null");
+		Node* pHittedNode = Object::cast_to<Node>(pHittedObj);
+		if (!pHittedNode->has_node("EntityView"))
+			return;
+
+		EntityView* pHittedEntityView = Object::cast_to<EntityView>(pHittedNode->get_node("EntityView"));
+		if (!pHittedEntityView)
+			return;
+
+		entt::entity targetEntity = pHittedEntityView->GetEntity();
 		ASSERT(targetEntity != entt::null, "target entity is null");
 		ASSERT(registry.valid(targetEntity), "invalid target entity");
 		//TODO: probably this should be runtime check

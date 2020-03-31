@@ -42,6 +42,7 @@ namespace godot
 	{
 		GODOT_CLASS(EntityView, Node)
 	private:
+		entt::entity entity = entt::null;
 		//TODO: remove all child nodes and use only one node with all components as fields
 		//		same as for AnimationTree parameters in inspector
 		//		probably merge with entity holder node
@@ -53,9 +54,14 @@ namespace godot
 		static void _register_methods() { register_method((char*)"_ready", &EntityView::_ready); }
 		void _init() {}
 		void _ready();
+
+		entt::entity GetEntity() const { return entity; }
+		void SetEntity(entt::entity value) { entity = value; }
+
 		template<typename T>
 		bool ConstructComponent(T& component);
 		
+		//TODO: use entity field after merging with EntityHolderNode
 		void ConstructComponents(entt::registry& registry, entt::entity entity)
 		{
 			ConstructComponentsFromViews

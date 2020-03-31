@@ -5,7 +5,7 @@
 #include <PhysicsDirectSpaceState.hpp>
 #include <World.hpp>
 
-#include "../../Nodes/EntityHolderNode.h"
+#include "../../Components/Views/EntityView.h"
 
 #include "../../Components/SimpleComponents.h"
 #include "../../Components/AttackComponents.h"
@@ -35,11 +35,15 @@ void godot::RangedAttackSystem::operator()(float delta, entt::registry& registry
 		if (!pObj)
 			return;
 
-		EntityHolderNode* entityHolder = Object::cast_to<EntityHolderNode>(pObj);
-		if (!entityHolder)
+		Node* pNode = Object::cast_to<Node>(pObj);
+		if (!pNode->has_node("EntityView"))
 			return;
 
-		entt::entity enemyEntity = entityHolder->GetEntity();
+		EntityView* pEntityView = Object::cast_to<EntityView>(pNode->get_node("EntityView"));
+		if (!pEntityView)
+			return;
+
+		entt::entity enemyEntity = pEntityView->GetEntity();
 
 		HealthComponent& enemyHealthComp = registry.get<HealthComponent>(enemyEntity);
 		enemyHealthComp.hp -= attackComp.damage;
