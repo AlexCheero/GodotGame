@@ -5,6 +5,7 @@
 
 namespace godot
 {
+	//TODO: try to use SpringArm instead
 	class TESTABLE_CLASS SimpleFollowSystem : public BaseSystem
 	{
 	public:

@@ -70,12 +70,6 @@
     <Filter Include="Source Files\Components\Views\LocomotionViews">
       <UniqueIdentifier>{93f22394-a639-4828-9e25-096ca14494f0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Components\NodeComponents">
-      <UniqueIdentifier>{ed6f9640-d829-490d-8ea5-b166586b8796}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Components\NodeComponents">
-      <UniqueIdentifier>{dd5a0e83-99a2-4e34-9159-62dc1ee6b426}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Components\Views\AIViews">
       <UniqueIdentifier>{31a2dd2a-2b4a-434b-bc2b-ecc8a7324e69}</UniqueIdentifier>
     </Filter>
