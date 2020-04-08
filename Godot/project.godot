@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "EditorProperty",
+"class": "MyDictEditor",
+"language": "GDScript",
+"path": "res://addons/my_plugin/MyDictEditor.gd"
+}, {
+"base": "EditorProperty",
+"class": "MyIntEditor",
+"language": "GDScript",
+"path": "res://addons/my_plugin/MyIntEditor.gd"
+} ]
 _global_script_class_icons={
-
+"MyDictEditor": "",
+"MyIntEditor": ""
 }
 
 [application]
