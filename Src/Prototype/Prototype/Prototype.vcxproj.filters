@@ -416,5 +416,8 @@
     <ClInclude Include="Systems\LocomotionSystems\HTHStuckSystem.h">
       <Filter>Header Files\Systems\LocomotionSystems</Filter>
     </ClInclude>
+    <ClInclude Include="Components\Views\ComponentConverter.h">
+      <Filter>Header Files\Components\Views</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

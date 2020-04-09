@@ -27,10 +27,10 @@ struct GravityComponent
 //TODO: make debug/test change cam position functional
 struct SimpleFollowComponent
 {
-	entt::entity targetEntity;
 	float distance;
 	float xAngle;
 	float yAngle;
+	entt::entity targetEntity;
 };
 
 struct BoundsComponent

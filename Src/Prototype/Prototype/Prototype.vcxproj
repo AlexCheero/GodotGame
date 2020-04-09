@@ -213,6 +213,7 @@
     <ClInclude Include="Components\Views\AttackViews\RangedAttackView.h" />
     <ClInclude Include="Components\Views\AttackViews\MeleeAttackView.h" />
     <ClInclude Include="Components\Views\AttackViews\ThrowableAttackView.h" />
+    <ClInclude Include="Components\Views\ComponentConverter.h" />
     <ClInclude Include="Components\Views\ComponentView.h" />
     <ClInclude Include="Components\Views\EntityView.h" />
     <ClInclude Include="Components\Views\HealthView.h" />
