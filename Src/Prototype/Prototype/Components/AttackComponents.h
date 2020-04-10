@@ -13,7 +13,9 @@
 constexpr entt::hashed_string CurrentWeaponMeleeTag = "CurrentWeaponMeleeTag"_hs;
 struct MeleeAttackComponent
 {
-	//TODO: use different distance for each hit
+	//TODO: move this declaration into macro
+	constexpr static int PROPERTIES_COUNT = 4;
+	//TODO: use different distance for each hit or it should be defined by animation
 	float distance;
 	float angle;
 	//TODO: set attack time in anim
@@ -30,6 +32,7 @@ struct MeleeAttackComponent
 constexpr entt::hashed_string CurrentWeaponRangedTag = "CurrentWeaponRangedTag"_hs;
 struct RangedAttackComponent
 {
+	constexpr static int PROPERTIES_COUNT = 4;
 	int ammoCount;
 	float distance;
 	float damage;
@@ -41,6 +44,7 @@ struct RangedAttackComponent
 constexpr entt::hashed_string CurrentWeaponThrowableTag = "CurrentWeaponThrowableTag"_hs;
 struct ThrowableAttackComponent
 {
+	constexpr static int PROPERTIES_COUNT = 4;
 	int ammoCount;
 	//TODO: implement object pools
 	godot::Ref<godot::PackedScene> throwableScene;
@@ -63,6 +67,7 @@ struct TargetLockComponent
 constexpr entt::hashed_string GrenadeExplodesTag = "GrenadeExplodesTag"_hs;
 struct GrenadeComponent
 {
+	constexpr static int PROPERTIES_COUNT = 4;
 	float explosionTime;
 	float explosionRadius;
 	float damage;

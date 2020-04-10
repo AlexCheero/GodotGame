@@ -1,5 +1,13 @@
 #include "EntityView.h"
 
+void godot::EntityView::_register_methods()
+{
+	register_property<EntityView, Dictionary>("components", &EntityView::componentsDict, Dictionary());
+
+	//register_method((char*)"_ready", &EntityView::_ready);
+}
+
+/*
 void godot::EntityView::_ready()
 {
 	int childCount = get_child_count();
@@ -13,3 +21,4 @@ void godot::EntityView::_ready()
 		componentsMap.insert({ key, pCompView });
 	}
 }
+*/
