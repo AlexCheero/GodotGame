@@ -16,6 +16,8 @@ struct PatrolRouteComponent
 
 struct PatrolmanComponent
 {
+	constexpr static int PROPERTIES_COUNT = 5;
+
 	float viewAngleSmall;
 	float viewAngleBig;
 	float longViewDistance;

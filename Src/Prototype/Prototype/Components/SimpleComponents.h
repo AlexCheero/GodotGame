@@ -5,8 +5,8 @@
 #include "entt/entt.hpp"
 
 struct VelocityComponent { godot::Vector3 velocity; };
-struct SpeedComponent { float speed; };
-struct JumpSpeedComponent { float speed; };
+struct SpeedComponent { constexpr static int PROPERTIES_COUNT = 1; float speed; };
+struct JumpSpeedComponent { constexpr static int PROPERTIES_COUNT = 1; float speed; };
 struct RotationDirectionComponent { godot::Vector3 direction; };
 
 //<Tags
@@ -20,6 +20,8 @@ constexpr entt::exclude_t ExcludeDead = entt::exclude<entt::tag<DeadTag> >;
 
 struct GravityComponent
 {
+	constexpr static int PROPERTIES_COUNT = 2;
+
 	float accUp;
 	float accDown;
 };
@@ -27,6 +29,8 @@ struct GravityComponent
 //TODO: make debug/test change cam position functional
 struct SimpleFollowComponent
 {
+	constexpr static int PROPERTIES_COUNT = 3;
+
 	float distance;
 	float xAngle;
 	float yAngle;
@@ -43,6 +47,8 @@ struct BoundsComponent
 
 struct HealthComponent
 {
+	constexpr static int PROPERTIES_COUNT = 2;
+
 	float hp;
 	float maxHp;
 

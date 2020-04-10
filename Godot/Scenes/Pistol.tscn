@@ -27,6 +27,9 @@ texture = ExtResource( 2 )
 
 [node name="EntityView" type="Node" parent="."]
 script = ExtResource( 3 )
+components = {
+"RangedAttackComponent": [ 100.0, 40.0, 100.0, 0.5 ]
+}
 
 [node name="RangedAttackView" type="Node" parent="EntityView"]
 script = ExtResource( 4 )

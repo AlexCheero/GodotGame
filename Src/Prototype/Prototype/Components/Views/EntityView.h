@@ -76,18 +76,19 @@ namespace godot
 		{
 			Godot::print("construct components for " + get_parent()->get_name() + ":");
 
+			//TODO: assert views have no wrong keys
 			ConstructComponentsFromViews
 				<
-					MeleeAttackComponent
-					//RangedAttackComponent,
-					//ThrowableAttackComponent,
-					//HealthComponent,
-					//GravityComponent,
-					//JumpSpeedComponent,
-					//SpeedComponent,
-					//SimpleFollowComponent,
-					//PatrolmanComponent,
-					//NavMarginComponent
+					MeleeAttackComponent,
+					RangedAttackComponent,
+					ThrowableAttackComponent,
+					HealthComponent,
+					GravityComponent,
+					JumpSpeedComponent,
+					SpeedComponent,
+					SimpleFollowComponent,
+					PatrolmanComponent,
+					NavMarginComponent
 				>
 				(registry, entity);
 		}
@@ -102,6 +103,7 @@ namespace godot
 		Godot::print(String("    convert ") + COMPONENTS_NAME(T));
 
 		Array arr = componentsDict[COMPONENTS_NAME(T)];
+		//TODO0: assert right num of values
 		comp = ConvertToComponent<T, T::PROPERTIES_COUNT>(arr);
 	}
 

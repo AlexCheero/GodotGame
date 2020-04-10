@@ -28,6 +28,9 @@ texture = ExtResource( 2 )
 
 [node name="EntityView" type="Node" parent="."]
 script = ExtResource( 3 )
+components = {
+"ThrowableAttackComponent": [ 100.0, ExtResource( 5 ), 50.0, 0.5 ]
+}
 
 [node name="ThrowableAttackView" type="Node" parent="EntityView"]
 script = ExtResource( 4 )

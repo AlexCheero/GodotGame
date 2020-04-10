@@ -5,8 +5,6 @@
 [ext_resource path="res://Scripts/Views/EntityView.gdns" type="Script" id=3]
 [ext_resource path="res://Scripts/Views/AttackViews/MeleeAttackView.gdns" type="Script" id=4]
 
-
-
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.5, 0.5, 0.5 )
 
@@ -29,11 +27,13 @@ texture = ExtResource( 2 )
 
 [node name="EntityView" type="Node" parent="."]
 script = ExtResource( 3 )
+components = {
+"MeleeAttackComponent": [ 4.0, 90.0, 0.5, "Enemy" ]
+}
 
 [node name="MeleeAttackView" type="Node" parent="EntityView"]
 script = ExtResource( 4 )
 distance = 40.0
-damage = 100.0
 angle = 90.0
 attackTime = 0.5
 "collision layer" = "Enemy"

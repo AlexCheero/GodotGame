@@ -67,7 +67,7 @@ struct TargetLockComponent
 constexpr entt::hashed_string GrenadeExplodesTag = "GrenadeExplodesTag"_hs;
 struct GrenadeComponent
 {
-	constexpr static int PROPERTIES_COUNT = 4;
+	constexpr static int PROPERTIES_COUNT = 3;
 	float explosionTime;
 	float explosionRadius;
 	float damage;

@@ -7,6 +7,9 @@
 
 [node name="EntityView" type="Node" parent="."]
 script = ExtResource( 1 )
+components = {
+"SimpleFollowComponent": [ 15.0, -30.0, -45.0 ]
+}
 
 [node name="SimpleFollowView" type="Node" parent="EntityView"]
 script = ExtResource( 2 )

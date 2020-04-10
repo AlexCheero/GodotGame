@@ -15,5 +15,7 @@ struct NavPathComponent
 
 struct NavMarginComponent
 {
+	constexpr static int PROPERTIES_COUNT = 1;
+
 	float margin;
 };

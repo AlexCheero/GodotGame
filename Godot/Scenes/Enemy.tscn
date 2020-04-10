@@ -23,6 +23,14 @@ shape = SubResource( 1 )
 
 [node name="EntityView" type="Node" parent="."]
 script = ExtResource( 2 )
+components = {
+"GravityComponent": [ 30.0, 20.0 ],
+"HealthComponent": [ 100.0, 100.0 ],
+"MeleeAttackComponent": [ 4.0, 90.0, 1.0, "Player" ],
+"NavMarginComponent": [ 1.0 ],
+"PatrolmanComponent": [ 45.0, 90.0, 30.0, 15.0, 5.0 ],
+"SpeedComponent": [ 10.0 ]
+}
 
 [node name="SpeedView" type="Node" parent="EntityView"]
 script = ExtResource( 3 )
