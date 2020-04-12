@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Nodes/PickableNode.gdns" type="Script" id=1]
 [ext_resource path="res://Images/grenade.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Views/EntityView.gdns" type="Script" id=3]
-[ext_resource path="res://Scripts/Views/AttackViews/ThrowableAttackView.gdns" type="Script" id=4]
 [ext_resource path="res://Scenes/ThrowableGrenade.tscn" type="PackedScene" id=5]
 
 [sub_resource type="BoxShape" id=1]
@@ -31,11 +30,4 @@ script = ExtResource( 3 )
 components = {
 "ThrowableAttackComponent": [ 100.0, ExtResource( 5 ), 50.0, 0.5 ]
 }
-
-[node name="ThrowableAttackView" type="Node" parent="EntityView"]
-script = ExtResource( 4 )
-"ammo count" = 100
-throwable = ExtResource( 5 )
-force = 50.0
-attackTime = 0.5
 [connection signal="body_entered" from="." to="." method="_on_Pickable_body_entered"]

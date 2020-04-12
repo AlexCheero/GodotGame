@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Scripts/Views/EntityView.gdns" type="Script" id=1]
-[ext_resource path="res://Scripts/Views/SimpleFollowView.gdns" type="Script" id=2]
 
 [node name="Camera" type="Camera"]
 
@@ -10,9 +9,3 @@ script = ExtResource( 1 )
 components = {
 "SimpleFollowComponent": [ 15.0, -30.0, -45.0 ]
 }
-
-[node name="SimpleFollowView" type="Node" parent="EntityView"]
-script = ExtResource( 2 )
-distance = 15.0
-"x angle" = -30.0
-"y angle" = -45.0

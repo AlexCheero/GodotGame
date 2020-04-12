@@ -1,11 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Views/EntityView.gdns" type="Script" id=2]
-[ext_resource path="res://Scripts/Views/AttackViews/MeleeAttackView.gdns" type="Script" id=3]
-[ext_resource path="res://Scripts/Views/LocomotionViews/GravityView.gdns" type="Script" id=4]
-[ext_resource path="res://Scripts/Views/LocomotionViews/JumpSpeedView.gdns" type="Script" id=5]
-[ext_resource path="res://Scripts/Views/LocomotionViews/SpeedView.gdns" type="Script" id=6]
-[ext_resource path="res://Scripts/Views/HealthView.gdns" type="Script" id=7]
 [ext_resource path="res://Scenes/vanguard.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CapsuleShape" id=1]
@@ -29,31 +24,6 @@ components = {
 "MeleeAttackComponent": [ 4.0, 90.0, 0.5, "Enemy" ],
 "SpeedComponent": [ 30.0 ]
 }
-
-[node name="MeleeAttackView" type="Node" parent="EntityView"]
-script = ExtResource( 3 )
-distance = 4.0
-angle = 90.0
-attackTime = 0.5
-"collision layer" = "Enemy"
-
-[node name="GravityView" type="Node" parent="EntityView"]
-script = ExtResource( 4 )
-"up acceleration" = 30.0
-"down acceleration" = 20.0
-
-[node name="JumpSpeedView" type="Node" parent="EntityView"]
-script = ExtResource( 5 )
-"jump speed" = 30.0
-
-[node name="SpeedView" type="Node" parent="EntityView"]
-script = ExtResource( 6 )
-speed = 30.0
-
-[node name="HealthView" type="Node" parent="EntityView"]
-script = ExtResource( 7 )
-hp = 100.0
-"max hp" = 100.0
 
 [node name="vanguard" parent="." instance=ExtResource( 8 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.80012, 0 )

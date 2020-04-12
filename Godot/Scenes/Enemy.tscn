@@ -1,12 +1,6 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Views/EntityView.gdns" type="Script" id=2]
-[ext_resource path="res://Scripts/Views/LocomotionViews/SpeedView.gdns" type="Script" id=3]
-[ext_resource path="res://Scripts/Views/HealthView.gdns" type="Script" id=4]
-[ext_resource path="res://Scripts/Views/LocomotionViews/GravityView.gdns" type="Script" id=5]
-[ext_resource path="res://Scripts/Views/AIViews/PatrolmanView.gdns" type="Script" id=6]
-[ext_resource path="res://Scripts/Views/AIViews/NavMarginView.gdns" type="Script" id=7]
-[ext_resource path="res://Scripts/Views/AttackViews/MeleeAttackView.gdns" type="Script" id=8]
 [ext_resource path="res://Scenes/vanguard_enemy.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CapsuleShape" id=1]
@@ -31,39 +25,6 @@ components = {
 "PatrolmanComponent": [ 45.0, 90.0, 30.0, 15.0, 5.0 ],
 "SpeedComponent": [ 10.0 ]
 }
-
-[node name="SpeedView" type="Node" parent="EntityView"]
-script = ExtResource( 3 )
-speed = 10.0
-
-[node name="HealthView" type="Node" parent="EntityView"]
-script = ExtResource( 4 )
-hp = 100.0
-"max hp" = 100.0
-
-[node name="GravityVIew" type="Node" parent="EntityView"]
-script = ExtResource( 5 )
-"up acceleration" = 30.0
-"down acceleration" = 20.0
-
-[node name="PatrolmanView" type="Node" parent="EntityView"]
-script = ExtResource( 6 )
-"small view angle" = 45.0
-"big view angle" = 90.0
-"long view distance" = 30.0
-"short view distance" = 15.0
-"loose target time" = 5.0
-
-[node name="NavMarginView" type="Node" parent="EntityView"]
-script = ExtResource( 7 )
-"min navigation margin" = 1.0
-
-[node name="MeleeAttackView" type="Node" parent="EntityView"]
-script = ExtResource( 8 )
-distance = 4.0
-angle = 90.0
-attackTime = 1.0
-"collision layer" = "Player"
 
 [node name="vanguard" parent="." instance=ExtResource( 9 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.8, 0 )
