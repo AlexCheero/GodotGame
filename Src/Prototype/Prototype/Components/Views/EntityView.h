@@ -56,8 +56,6 @@ namespace godot
 		//TODO: use entity field after merging with EntityHolderNode (merge done)
 		void ConstructComponents(entt::registry& registry, entt::entity entity)
 		{
-			Godot::print("construct components for " + get_parent()->get_name() + ":");
-
 			//TODO: assert views have no wrong keys
 			ConstructComponentsFromViews
 				<
@@ -81,8 +79,6 @@ namespace godot
 	{
 		if (!componentsDict.has(ComponentMeta<T>::name))
 			return false;
-
-		Godot::print(String("    convert ") + ComponentMeta<T>::name);
 
 		Array arr = componentsDict[ComponentMeta<T>::name];
 		//TODO0: assert right num of values
