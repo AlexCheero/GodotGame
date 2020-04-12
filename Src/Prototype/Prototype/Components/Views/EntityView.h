@@ -97,14 +97,14 @@ namespace godot
 	template<typename T>
 	inline bool EntityView::ConvertToComponent1(T& comp)
 	{
-		if (!componentsDict.has(COMPONENTS_NAME(Type)))
+		if (!componentsDict.has(ComponentMeta<T>::name))
 			return false;
 
-		Godot::print(String("    convert ") + COMPONENTS_NAME(T));
+		Godot::print(String("    convert ") + ComponentMeta<T>::name);
 
-		Array arr = componentsDict[COMPONENTS_NAME(T)];
+		Array arr = componentsDict[ComponentMeta<T>::name];
 		//TODO0: assert right num of values
-		comp = ConvertToComponent<T, T::PROPERTIES_COUNT>(arr);
+		comp = ConvertToComponent<T, ComponentMeta<T>::propertiesCount>(arr);
 	}
 
 	template<typename Type, typename... Types>

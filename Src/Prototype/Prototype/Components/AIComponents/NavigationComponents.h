@@ -4,6 +4,8 @@
 
 #include <entt/entt.hpp>
 
+#include "../ComponentsMeta.h"
+
 struct NavPathComponent
 {
 	godot::PoolVector3Array path;
@@ -15,7 +17,6 @@ struct NavPathComponent
 
 struct NavMarginComponent
 {
-	constexpr static int PROPERTIES_COUNT = 1;
-
 	float margin;
 };
+REGISTER_COMPONENT(NavMarginComponent, 1);

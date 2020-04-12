@@ -4,9 +4,11 @@
 
 #include "entt/entt.hpp"
 
+#include "ComponentsMeta.h"
+
 struct VelocityComponent { godot::Vector3 velocity; };
-struct SpeedComponent { constexpr static int PROPERTIES_COUNT = 1; float speed; };
-struct JumpSpeedComponent { constexpr static int PROPERTIES_COUNT = 1; float speed; };
+struct SpeedComponent { float speed; }; REGISTER_COMPONENT(SpeedComponent, 1);
+struct JumpSpeedComponent { float speed; }; REGISTER_COMPONENT(JumpSpeedComponent, 1);
 struct RotationDirectionComponent { godot::Vector3 direction; };
 
 //<Tags
@@ -20,22 +22,19 @@ constexpr entt::exclude_t ExcludeDead = entt::exclude<entt::tag<DeadTag> >;
 
 struct GravityComponent
 {
-	constexpr static int PROPERTIES_COUNT = 2;
-
 	float accUp;
 	float accDown;
 };
+REGISTER_COMPONENT(GravityComponent, 2);
 
-//TODO: make debug/test change cam position functional
 struct SimpleFollowComponent
 {
-	constexpr static int PROPERTIES_COUNT = 3;
-
 	float distance;
 	float xAngle;
 	float yAngle;
 	entt::entity targetEntity;
 };
+REGISTER_COMPONENT(SimpleFollowComponent, 3);
 
 struct BoundsComponent
 {
@@ -47,10 +46,9 @@ struct BoundsComponent
 
 struct HealthComponent
 {
-	constexpr static int PROPERTIES_COUNT = 2;
-
 	float hp;
 	float maxHp;
 
 	float ProportionOfMax() { return hp / maxHp; }
 };
+REGISTER_COMPONENT(HealthComponent, 2);

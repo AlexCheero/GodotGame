@@ -419,5 +419,8 @@
     <ClInclude Include="Components\Views\ComponentConverter.h">
       <Filter>Header Files\Components\Views</Filter>
     </ClInclude>
+    <ClInclude Include="Components\ComponentsMeta.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

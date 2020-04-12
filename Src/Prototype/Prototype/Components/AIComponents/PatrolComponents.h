@@ -6,6 +6,8 @@
 
 #include "entt/entt.hpp"
 
+#include "../ComponentsMeta.h"
+
 struct PatrolRouteComponent
 {
 	std::vector<godot::Vector3> routePoints;
@@ -16,8 +18,6 @@ struct PatrolRouteComponent
 
 struct PatrolmanComponent
 {
-	constexpr static int PROPERTIES_COUNT = 5;
-
 	float viewAngleSmall;
 	float viewAngleBig;
 	float longViewDistance;
@@ -25,3 +25,4 @@ struct PatrolmanComponent
 	//TODO: probably this field doesn't fit here
 	float looseTargetTime;
 };
+REGISTER_COMPONENT(PatrolmanComponent, 5);

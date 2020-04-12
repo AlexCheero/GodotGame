@@ -205,6 +205,7 @@
     <ClInclude Include="Components\AIComponents\NavigationComponents.h" />
     <ClInclude Include="Components\AIComponents\PatrolComponents.h" />
     <ClInclude Include="Components\AttackComponents.h" />
+    <ClInclude Include="Components\ComponentsMeta.h" />
     <ClInclude Include="Components\InputComponents.h" />
     <ClInclude Include="Components\SimpleComponents.h" />
     <ClInclude Include="Components\Views\AIViews\NavMarginView.h" />
