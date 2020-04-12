@@ -83,6 +83,7 @@ namespace godot
 		Array arr = componentsDict[ComponentMeta<T>::name];
 		//TODO0: assert right num of values
 		comp = ConvertComponentFromArray<T, ComponentMeta<T>::propertiesCount>(arr);
+		return true;
 	}
 
 	template<typename Type, typename... Types>
