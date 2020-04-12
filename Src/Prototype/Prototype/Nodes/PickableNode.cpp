@@ -34,6 +34,7 @@ void godot::PickableNode::_on_Pickable_body_entered(KinematicBody* pBody)
 	{
 	case EPickableType::MeleeWeapon:
 	{
+		//TODO: probably should use only ConstructComponentS and make ConvertToComponent private
 		bool constructed = pPickableView->ConvertToComponent(registry.assign_or_replace<MeleeAttackComponent>(pickerEntity));
 		ASSERT(constructed, "can't construct MeleeAttackComponent");
 		//if switch on pickup
