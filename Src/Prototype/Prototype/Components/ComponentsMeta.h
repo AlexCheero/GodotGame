@@ -7,6 +7,7 @@ struct ComponentMeta
 	constexpr static int propertiesCount;
 };
 
+//TODO: separate component name from "Component" to set only its actual name in editor
 #define REGISTER_COMPONENT(Type, propsCnt) template<> \
 struct ComponentMeta<Type> \
 { \
