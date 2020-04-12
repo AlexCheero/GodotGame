@@ -157,7 +157,6 @@
     <ClCompile Include="Components\Views\AttackViews\RangedAttackView.cpp" />
     <ClCompile Include="Components\Views\AttackViews\MeleeAttackView.cpp" />
     <ClCompile Include="Components\Views\AttackViews\ThrowableAttackView.cpp" />
-    <ClCompile Include="Components\Views\EntityView.cpp" />
     <ClCompile Include="Components\Views\HealthView.cpp" />
     <ClCompile Include="Components\Views\LocomotionViews\GravityView.cpp" />
     <ClCompile Include="Components\Views\LocomotionViews\JumpSpeedView.cpp" />
@@ -214,7 +213,6 @@
     <ClInclude Include="Components\Views\AttackViews\RangedAttackView.h" />
     <ClInclude Include="Components\Views\AttackViews\MeleeAttackView.h" />
     <ClInclude Include="Components\Views\AttackViews\ThrowableAttackView.h" />
-    <ClInclude Include="Components\Views\ComponentConverter.h" />
     <ClInclude Include="Components\Views\ComponentView.h" />
     <ClInclude Include="Components\Views\EntityView.h" />
     <ClInclude Include="Components\Views\HealthView.h" />

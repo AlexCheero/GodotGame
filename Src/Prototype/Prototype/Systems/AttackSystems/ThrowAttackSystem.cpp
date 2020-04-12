@@ -52,7 +52,7 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 			ASSERT(pGrenadeView != nullptr, "grenade entity view is null");
 
 			GrenadeComponent grenComp;
-			ASSERT(pGrenadeView->ConvertToComponent1(grenComp), "grenade view have no GrenadeComponent");
+			ASSERT(pGrenadeView->ConvertToComponent(grenComp), "grenade view have no GrenadeComponent");
 			grenComp.startTime = godot::OS::get_singleton()->get_ticks_msec();
 
 			registry.assign<GrenadeComponent>(grenadeEntity, grenComp);

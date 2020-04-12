@@ -34,7 +34,7 @@ void godot::PickableNode::_on_Pickable_body_entered(KinematicBody* pBody)
 	{
 	case EPickableType::MeleeWeapon:
 	{
-		bool constructed = pPickableView->ConvertToComponent1(registry.assign_or_replace<MeleeAttackComponent>(pickerEntity));
+		bool constructed = pPickableView->ConvertToComponent(registry.assign_or_replace<MeleeAttackComponent>(pickerEntity));
 		ASSERT(constructed, "can't construct MeleeAttackComponent");
 		//if switch on pickup
 		registry.get_or_assign<entt::tag<CurrentWeaponMeleeTag> >(pickerEntity);
@@ -42,7 +42,7 @@ void godot::PickableNode::_on_Pickable_body_entered(KinematicBody* pBody)
 	}
 	case EPickableType::RangedWeapon:
 	{
-		bool constructed = pPickableView->ConvertToComponent1(registry.assign_or_replace<RangedAttackComponent>(pickerEntity));
+		bool constructed = pPickableView->ConvertToComponent(registry.assign_or_replace<RangedAttackComponent>(pickerEntity));
 		ASSERT(constructed, "can't construct RangedAttackComponent");
 		//if switch on pickup
 		registry.get_or_assign<entt::tag<CurrentWeaponRangedTag> >(pickerEntity);
@@ -50,7 +50,7 @@ void godot::PickableNode::_on_Pickable_body_entered(KinematicBody* pBody)
 	}
 	case EPickableType::ThrowableWeapon:
 	{
-		bool constructed = pPickableView->ConvertToComponent1(registry.assign_or_replace<ThrowableAttackComponent>(pickerEntity));
+		bool constructed = pPickableView->ConvertToComponent(registry.assign_or_replace<ThrowableAttackComponent>(pickerEntity));
 		ASSERT(constructed, "can't construct ThrowableAttackComponent");
 		//if switch on pickup
 		registry.get_or_assign<entt::tag<CurrentWeaponThrowableTag> >(pickerEntity);
