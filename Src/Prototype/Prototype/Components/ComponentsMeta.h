@@ -1,7 +1,7 @@
 #pragma once
 
 template<class T, size_t N>
-constexpr size_t GetArraSize(T(&)[N]) { return N; }
+constexpr size_t GetArraySize(T(&)[N]) { return N; }
 
 template <typename T>
 struct ComponentMeta {};
@@ -11,5 +11,5 @@ struct ComponentMeta<Type> \
 { \
 	constexpr static const char* name = #Type; \
 	constexpr static const char* properties[] = { __VA_ARGS__ }; \
-	constexpr static int propertiesCount = GetArraSize(ComponentMeta<Type>::properties); \
+	constexpr static int propertiesCount = GetArraySize(ComponentMeta<Type>::properties); \
 }
