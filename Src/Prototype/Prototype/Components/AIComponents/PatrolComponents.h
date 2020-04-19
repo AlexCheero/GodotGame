@@ -25,4 +25,4 @@ struct PatrolmanComponent
 	//TODO: probably this field doesn't fit here
 	float looseTargetTime;
 };
-REGISTER_COMPONENT(PatrolmanComponent, 5);
+REGISTER_COMPONENT(PatrolmanComponent, "viewAngleSmall", "viewAngleBig", "longViewDistance", "shortViewDistance", "looseTargetTime");

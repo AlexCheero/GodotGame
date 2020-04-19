@@ -7,8 +7,8 @@
 #include "ComponentsMeta.h"
 
 struct VelocityComponent { godot::Vector3 velocity; };
-struct SpeedComponent { float speed; }; REGISTER_COMPONENT(SpeedComponent, 1);
-struct JumpSpeedComponent { float speed; }; REGISTER_COMPONENT(JumpSpeedComponent, 1);
+struct SpeedComponent { float speed; }; REGISTER_COMPONENT(SpeedComponent, "speed");
+struct JumpSpeedComponent { float speed; }; REGISTER_COMPONENT(JumpSpeedComponent, "speed");
 struct RotationDirectionComponent { godot::Vector3 direction; };
 
 //<Tags
@@ -25,7 +25,7 @@ struct GravityComponent
 	float accUp;
 	float accDown;
 };
-REGISTER_COMPONENT(GravityComponent, 2);
+REGISTER_COMPONENT(GravityComponent, "acceleration Up", "acceleration Down");
 
 struct SimpleFollowComponent
 {
@@ -34,7 +34,7 @@ struct SimpleFollowComponent
 	float yAngle;
 	entt::entity targetEntity;
 };
-REGISTER_COMPONENT(SimpleFollowComponent, 3);
+REGISTER_COMPONENT(SimpleFollowComponent, "distance", "xAngle", "yAngle");
 
 struct BoundsComponent
 {
@@ -51,4 +51,4 @@ struct HealthComponent
 
 	float ProportionOfMax() { return hp / maxHp; }
 };
-REGISTER_COMPONENT(HealthComponent, 2);
+REGISTER_COMPONENT(HealthComponent, "hp", "maxHp");

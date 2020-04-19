@@ -28,6 +28,11 @@ texture = ExtResource( 2 )
 [node name="EntityView" type="Node" parent="."]
 script = ExtResource( 3 )
 components = {
-"ThrowableAttackComponent": [ 100.0, ExtResource( 5 ), 50.0, 0.5 ]
+"ThrowableAttackComponent": {
+"ammoCount": 100,
+"attackTime": 0.5,
+"force": 50.0,
+"throwableScene": ExtResource( 5 )
+}
 }
 [connection signal="body_entered" from="." to="." method="_on_Pickable_body_entered"]

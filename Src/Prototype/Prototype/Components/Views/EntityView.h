@@ -3,8 +3,6 @@
 #include <core/Godot.hpp>
 #include <Node.hpp>
 
-#include <map>
-
 #include "entt/entt.hpp"
 
 #include "ComponentView.h"
@@ -22,10 +20,6 @@
 #include "AIViews/PatrolmanView.h"
 #include "AIViews/NavMarginView.h"
 
-#define DECLARE_CONVERT_TO_COMPONENT(count) template<typename T, int fieldsCount> \
-inline typename std::enable_if<fieldsCount == count, T>::type \
-ConvertComponentFromArray(godot::Array& arr)
-
 namespace godot
 {
 	class EntityView : public Node
@@ -38,11 +32,18 @@ namespace godot
 		template<typename Type, typename... Types>
 		void ConstructComponentsFromViews(entt::registry& registry, entt::entity entity);
 
-		DECLARE_CONVERT_TO_COMPONENT(1) { return { arr[0] }; }
-		DECLARE_CONVERT_TO_COMPONENT(2) { return { arr[0], arr[1] }; }
-		DECLARE_CONVERT_TO_COMPONENT(3) { return { arr[0], arr[1], arr[2] }; }
-		DECLARE_CONVERT_TO_COMPONENT(4) { return { arr[0], arr[1], arr[2], arr[3] }; }
-		DECLARE_CONVERT_TO_COMPONENT(5) { return { arr[0], arr[1], arr[2], arr[3], arr[4] }; }
+		template<typename T, std::size_t... I>
+		T ConvertComponentFromDict_impl(const Dictionary& dict, std::index_sequence<I...>)
+		{
+			return T{ dict[ComponentMeta<T>::properties[I]]... };
+		}
+
+		template<typename T>
+		T ConvertComponentFromDict(const Dictionary& dict)
+		{
+			return ConvertComponentFromDict_impl<T>(dict, std::make_index_sequence<ComponentMeta<T>::propertiesCount>{});
+		}
+
 	public:
 		static void _register_methods() { register_property<EntityView, Dictionary>("components", &EntityView::componentsDict, Dictionary()); }
 		void _init() {}
@@ -53,6 +54,7 @@ namespace godot
 		template<typename T>
 		bool ConvertToComponent(T& comp);
 
+		//TODO: remove script after initing components
 		//TODO: use entity field after merging with EntityHolderNode (merge done)
 		void ConstructComponents(entt::registry& registry, entt::entity entity)
 		{
@@ -80,9 +82,11 @@ namespace godot
 		if (!componentsDict.has(ComponentMeta<T>::name))
 			return false;
 
-		Array arr = componentsDict[ComponentMeta<T>::name];
 		//TODO0: assert right num of values
-		comp = ConvertComponentFromArray<T, ComponentMeta<T>::propertiesCount>(arr);
+		//TODO0: check keys
+		Dictionary dict = componentsDict[ComponentMeta<T>::name];
+		comp = ConvertComponentFromDict<T>(dict);
+		
 		return true;
 	}
 

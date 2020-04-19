@@ -26,6 +26,10 @@ shape = SubResource( 3 )
 [node name="EntityView" type="Node" parent="."]
 script = ExtResource( 2 )
 components = {
-"GrenadeComponent": [ 1.0, 20.0, 200.0 ]
+"GrenadeComponent": {
+"damage": 200.0,
+"explosionRadius": 20.0,
+"explosionTime": 1.0
+}
 }
 [connection signal="body_entered" from="." to="." method="_on_throwable_collide"]

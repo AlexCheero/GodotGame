@@ -27,6 +27,11 @@ texture = ExtResource( 2 )
 [node name="EntityView" type="Node" parent="."]
 script = ExtResource( 3 )
 components = {
-"MeleeAttackComponent": [ 4.0, 90.0, 0.5, "Enemy" ]
+"MeleeAttackComponent": {
+"angle": 90.0,
+"attackTime": 0.5,
+"collisionLayerName": "Enemy",
+"distance": 4.0
+}
 }
 [connection signal="body_entered" from="." to="." method="_on_Pickable_body_entered"]
