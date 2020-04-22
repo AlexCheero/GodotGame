@@ -7,8 +7,7 @@
 #include "Systems/BaseSystem.h"
 
 #include "Components/SimpleComponents.h"
-#include "Components/Views/EntityView.h"
-#include "Components/Views/EntityView.h"
+#include "Nodes/EntityView.h"
 
 #include "Singleton.h"
 

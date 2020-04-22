@@ -151,17 +151,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Components\Views\AIViews\NavMarginView.cpp" />
-    <ClCompile Include="Components\Views\AIViews\PatrolmanView.cpp" />
-    <ClCompile Include="Components\Views\AttackViews\GrenadeView.cpp" />
-    <ClCompile Include="Components\Views\AttackViews\RangedAttackView.cpp" />
-    <ClCompile Include="Components\Views\AttackViews\MeleeAttackView.cpp" />
-    <ClCompile Include="Components\Views\AttackViews\ThrowableAttackView.cpp" />
-    <ClCompile Include="Components\Views\HealthView.cpp" />
-    <ClCompile Include="Components\Views\LocomotionViews\GravityView.cpp" />
-    <ClCompile Include="Components\Views\LocomotionViews\JumpSpeedView.cpp" />
-    <ClCompile Include="Components\Views\LocomotionViews\SpeedView.cpp" />
-    <ClCompile Include="Components\Views\SimpleFollowView.cpp" />
     <ClCompile Include="GodotLibrary.cpp" />
     <ClCompile Include="Nodes\HTHDamagingArea.cpp" />
     <ClCompile Include="Nodes\PickableNode.cpp" />
@@ -207,19 +196,7 @@
     <ClInclude Include="Components\ComponentsMeta.h" />
     <ClInclude Include="Components\InputComponents.h" />
     <ClInclude Include="Components\SimpleComponents.h" />
-    <ClInclude Include="Components\Views\AIViews\NavMarginView.h" />
-    <ClInclude Include="Components\Views\AIViews\PatrolmanView.h" />
-    <ClInclude Include="Components\Views\AttackViews\GrenadeView.h" />
-    <ClInclude Include="Components\Views\AttackViews\RangedAttackView.h" />
-    <ClInclude Include="Components\Views\AttackViews\MeleeAttackView.h" />
-    <ClInclude Include="Components\Views\AttackViews\ThrowableAttackView.h" />
-    <ClInclude Include="Components\Views\ComponentView.h" />
-    <ClInclude Include="Components\Views\EntityView.h" />
-    <ClInclude Include="Components\Views\HealthView.h" />
-    <ClInclude Include="Components\Views\LocomotionViews\GravityView.h" />
-    <ClInclude Include="Components\Views\LocomotionViews\JumpSpeedView.h" />
-    <ClInclude Include="Components\Views\LocomotionViews\SpeedView.h" />
-    <ClInclude Include="Components\Views\SimpleFollowView.h" />
+    <ClInclude Include="Nodes\EntityView.h" />
     <ClInclude Include="Nodes\HTHDamagingArea.h" />
     <ClInclude Include="Nodes\PickableNode.h" />
     <ClInclude Include="Nodes\ThrowableWeaponNode.h" />

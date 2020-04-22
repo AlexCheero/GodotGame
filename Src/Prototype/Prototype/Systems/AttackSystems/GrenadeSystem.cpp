@@ -6,7 +6,7 @@
 
 #include "../../Components/AttackComponents.h"
 #include "../../Components/SimpleComponents.h"
-#include "../../Components/Views/EntityView.h"
+#include "../../Nodes/EntityView.h"
 
 const float INTERSECT_RESULTS_NUM = 32.f;
 

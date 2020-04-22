@@ -6,7 +6,7 @@
 
 #include "entt/entt.hpp"
 
-#include "../Components/Views/EntityView.h"
+#include "../Nodes/EntityView.h"
 
 namespace godot
 {

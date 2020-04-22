@@ -5,7 +5,7 @@
 #include <PhysicsDirectSpaceState.hpp>
 #include <World.hpp>
 
-#include "../../Components/Views/EntityView.h"
+#include "../../Nodes/EntityView.h"
 
 #include "../../Components/SimpleComponents.h"
 #include "../../Components/AttackComponents.h"

@@ -3,7 +3,7 @@
 #include <SceneTree.hpp>
 
 #include "../ECSWorld.h"
-#include "../Components/Views/EntityView.h"
+#include "../Nodes/EntityView.h"
 
 void godot::ThrowableWeaponNode::_register_methods()
 {

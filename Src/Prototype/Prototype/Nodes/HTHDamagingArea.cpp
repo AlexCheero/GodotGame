@@ -5,7 +5,8 @@
 #include "../ECSWorld.h"
 #include "../Utils/Utils.h"
 #include "../Components/AIComponents/FSMStateComponents.h"
-#include "../Components/Views/EntityView.h"
+#include "../Nodes/EntityView.h"
+#include "../Components/AIComponents/PatrolComponents.h"
 
 void godot::HTHDamagingArea::_register_methods()
 {

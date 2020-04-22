@@ -7,7 +7,7 @@
 #include "../../Components/AttackComponents.h"
 #include "../../Components/InputComponents.h"
 #include "../../Nodes/ThrowableWeaponNode.h"
-#include "../../Components/Views/EntityView.h"
+#include "../../Nodes/EntityView.h"
 
 void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 {
