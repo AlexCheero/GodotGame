@@ -2,8 +2,9 @@
 
 [ext_resource path="res://Scripts/Nodes/PickableNode.gdns" type="Script" id=1]
 [ext_resource path="res://Images/throwable.png" type="Texture" id=2]
-[ext_resource path="res://Scripts/Views/EntityView.gdns" type="Script" id=3]
+[ext_resource path="res://Scripts/Nodes/EntityView.gdns" type="Script" id=3]
 [ext_resource path="res://Scenes/Throwable2.tscn" type="PackedScene" id=5]
+
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.5, 0.5, 0.5 )

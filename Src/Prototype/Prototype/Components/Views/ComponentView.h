@@ -4,6 +4,7 @@
 
 //#include "EntityView.h"
 
+
 namespace godot
 {
 	class ComponentView : public Node

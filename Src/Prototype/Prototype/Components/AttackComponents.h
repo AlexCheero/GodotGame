@@ -14,6 +14,7 @@
 
 constexpr entt::hashed_string CurrentWeaponMeleeTag = "CurrentWeaponMeleeTag"_hs;
 //TODO: refactor this component. split into several separate ones
+//TODO: sword have no all needed keys and game crashes on picking sword up
 struct MeleeAttackComponent
 {
 	//TODO: set attack time in anim

@@ -1,7 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scripts/Views/EntityView.gdns" type="Script" id=2]
+[ext_resource path="res://Scripts/Nodes/EntityView.gdns" type="Script" id=2]
 [ext_resource path="res://Scenes/vanguard_enemy.tscn" type="PackedScene" id=9]
+
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.86
