@@ -39,7 +39,10 @@ void godot::HTHDamagingArea::_on_Area_body_entered(KinematicBody* pBody)
 	registry.assign_or_replace<HTHStuckComponent>(hittedEntity, 1.f);
 	
 	if (registry.has<entt::tag<BotTag> >(hittedEntity))
-		registry.assign_or_replace<HittedFromComponent>(hittedEntity, get_global_transform().get_origin());
+	{
+		PatrolmanComponent& patrolManComp = registry.get<PatrolmanComponent>(hittedEntity);
+		registry.assign_or_replace<HittedFromComponent>(hittedEntity, get_global_transform().get_origin(), patrolManComp.lookAroundTime);
+	}
 }
 
 void godot::HTHDamagingArea::_assign_owner_entity()

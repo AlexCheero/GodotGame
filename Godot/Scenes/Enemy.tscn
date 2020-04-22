@@ -37,6 +37,7 @@ components = {
 },
 "PatrolmanComponent": {
 "longViewDistance": 30.0,
+"lookAroundTime": 1.0,
 "looseTargetTime": 5.0,
 "shortViewDistance": 15.0,
 "viewAngleBig": 90.0,
