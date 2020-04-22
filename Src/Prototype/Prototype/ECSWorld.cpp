@@ -18,7 +18,6 @@
 #include "Components/AIComponents/PatrolComponents.h"
 #include "Components/AIComponents/FSMStateComponents.h"
 
-#include "Systems/SystemChain.h"
 #include "Systems/PlayerSystems/PlayerVelocitySystem.h"
 #include "Systems/LocomotionSystems/KinematicMovementSystem.h"
 #include "Systems/LocomotionSystems/GravitySystem.h";
@@ -179,15 +178,16 @@ void godot::ECSWorld::_init()
 	//TODO: check what systems should be reactive
 	//setup physics systems
 	m_physics_systems.emplace_back(new PlayerVelocitySystem());
-	//m_physics_systems.emplace_back(new KinematicMovementSystem());
-	m_physics_systems.emplace_back(new SystemChain<GravitySystem, JumpSystem>());
+	m_physics_systems.emplace_back(new GravitySystem());
+	//must be called after GravitySystem
+	m_physics_systems.emplace_back(new JumpSystem());
 	m_physics_systems.emplace_back(new PlayerRotationSystem());
 	m_physics_systems.emplace_back(new LookAtSystem());
 	m_physics_systems.emplace_back(new MeleeAttackSystem());
 	m_physics_systems.emplace_back(new RangedAttackSystem());
 	m_physics_systems.emplace_back(new ThrowAttackSystem());
 
-	//TODO: must be called after all systems that affects velocity (same line commented above)
+	//must be called after all systems that affects velocity
 	m_physics_systems.emplace_back(new KinematicMovementSystem());
 
 	//TODO: make simple way to switch off bots (NavAgentSystem, PursuingSystem, FleeingSystem and others)

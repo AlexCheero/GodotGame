@@ -14,7 +14,7 @@ void godot::HTHStuckSystem::OnStunComponentDestroy(entt::registry& registry, ent
 {
 	ASSERT(registry.has<StunComponent>(entity), "StunComponent is already deleted");
 	const StunComponent& stunComp = registry.get<StunComponent>(entity);
-	//TODO: why this check here?
+	//cause SpeedComponent can be already deleted if hitted entity is dead
 	if (registry.has<SpeedComponent>(entity))
 		registry.get<SpeedComponent>(entity).speed /= stunComp.speedFactor;
 }

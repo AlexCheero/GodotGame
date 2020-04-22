@@ -232,7 +232,6 @@
     <ClInclude Include="Systems\SimpleFollowSystem.h" />
     <ClInclude Include="Systems\DestroyDeadSystem.h" />
     <ClInclude Include="ECSWorld.h" />
-    <ClInclude Include="Systems\SystemChain.h" />
     <ClInclude Include="Systems\WeaponChooseSystem.h" />
     <ClInclude Include="Utils\Timer.h" />
     <ClInclude Include="Utils\Utils.h" />
