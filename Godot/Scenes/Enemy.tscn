@@ -31,7 +31,9 @@ components = {
 "attackTime": 1.0,
 "collisionLayerName": "Player",
 "distance": 4.0,
-"maxComboIntervalMillis": 3000
+"maxComboIntervalMillis": 3000,
+"stunSpeedFactor": 0.1,
+"stunTime": 1.0
 },
 "NavMarginComponent": {
 "margin": 1.0

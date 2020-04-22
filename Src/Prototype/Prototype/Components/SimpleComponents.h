@@ -6,17 +6,15 @@
 
 #include "ComponentsMeta.h"
 
-struct VelocityComponent { godot::Vector3 velocity; };
-struct SpeedComponent { float speed; }; REGISTER_COMPONENT(SpeedComponent, "speed");
-struct JumpSpeedComponent { float speed; }; REGISTER_COMPONENT(JumpSpeedComponent, "speed");
-struct RotationDirectionComponent { godot::Vector3 direction; };
-
-//<Tags
 constexpr entt::hashed_string PlayerTag = "PlayerTag"_hs;
 constexpr entt::hashed_string BotTag = "BotTag"_hs;
 constexpr entt::hashed_string DeadTag = "DeadTag"_hs;
 constexpr entt::hashed_string MainCameraTag = "MainCameraTag"_hs;
-//Tags>
+
+struct VelocityComponent { godot::Vector3 velocity; };
+struct SpeedComponent { float speed; }; REGISTER_COMPONENT(SpeedComponent, "speed");
+struct JumpSpeedComponent { float speed; }; REGISTER_COMPONENT(JumpSpeedComponent, "speed");
+struct RotationDirectionComponent { godot::Vector3 direction; };
 
 constexpr entt::exclude_t ExcludeDead = entt::exclude<entt::tag<DeadTag> >;
 
@@ -52,3 +50,9 @@ struct HealthComponent
 	float ProportionOfMax() { return hp / maxHp; }
 };
 REGISTER_COMPONENT(HealthComponent, "hp", "maxHp");
+
+struct StunComponent
+{
+	float secondsLeft;
+	float speedFactor;
+};

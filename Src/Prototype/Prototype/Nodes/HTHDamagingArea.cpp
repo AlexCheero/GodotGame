@@ -32,11 +32,12 @@ void godot::HTHDamagingArea::_on_Area_body_entered(KinematicBody* pBody)
 
 	entt::registry& registry = ECSWorld::GetInstance()->GetRegistry();
 	
-	float hpBefore = registry.get<HealthComponent>(hittedEntity).hp;
+	ASSERT(registry.has<HealthComponent>(hittedEntity), "hittedEntity has no HealthComponent");
 	registry.get<HealthComponent>(hittedEntity).hp -= damage;
 
-	//TODO: remove hardcode
-	registry.assign_or_replace<HTHStuckComponent>(hittedEntity, 1.f);
+	ASSERT(registry.has<MeleeAttackComponent>(ownerEntity), "ownerEntity has no MeleeAttackComponent");
+	const MeleeAttackComponent& meleeComp = registry.get<MeleeAttackComponent>(ownerEntity);
+	registry.assign_or_replace<StunComponent>(hittedEntity, meleeComp.stunTime, meleeComp.stunSpeedFactor);
 	
 	if (registry.has<entt::tag<BotTag> >(hittedEntity))
 	{

@@ -34,7 +34,9 @@ components = {
 "attackTime": 0.5,
 "collisionLayerName": "Enemy",
 "distance": 4.0,
-"maxComboIntervalMillis": 3000
+"maxComboIntervalMillis": 3000,
+"stunSpeedFactor": 0.1,
+"stunTime": 1.0
 },
 "SpeedComponent": {
 "speed": 30.0

@@ -23,13 +23,18 @@ struct MeleeAttackComponent
 	float attackTime;
 	godot::String collisionLayerName;
 	int64_t maxComboIntervalMillis;
+	//TODO: probably move this to ability component (or something like this)
+	float stunTime;
+	float stunSpeedFactor;
+
+	//TODO: remove hardcode
+	int comboLength = 8;
+	
 	//TODO: maybe split into cold and hot data
 	int64_t prevHitTimeMillis = -utils::SecondsToMillis(attackTime);
-	
-	int comboLength = 8;
 	int comboSequenceNum = 0;
 };
-REGISTER_COMPONENT(MeleeAttackComponent, "distance", "angle", "attackTime", "collisionLayerName", "maxComboIntervalMillis");
+REGISTER_COMPONENT(MeleeAttackComponent, "distance", "angle", "attackTime", "collisionLayerName", "maxComboIntervalMillis", "stunTime", "stunSpeedFactor");
 
 constexpr entt::hashed_string CurrentWeaponRangedTag = "CurrentWeaponRangedTag"_hs;
 struct RangedAttackComponent
@@ -77,10 +82,4 @@ struct GrenadeComponent
 REGISTER_COMPONENT(GrenadeComponent, "explosionTime", "explosionRadius", "damage");
 
 constexpr entt::hashed_string PileInTag = "PileInTag"_hs;
-
-struct HTHStuckComponent
-{
-	float secondsLeft;
-};
-
 constexpr entt::hashed_string IncrementComboTag = "IncrementComboTag"_hs;
