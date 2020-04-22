@@ -2,10 +2,10 @@
 
 #include <OS.hpp>
 
-#include "../../Components/AIComponents/FSMStateComponents.h"
-#include "../../Components/AttackComponents.h"
-#include "../../Components/InputComponents.h"
-#include "../../Components/AIComponents/NavigationComponents.h"
+#include "../../../Components/AIComponents/FSMStateComponents.h"
+#include "../../../Components/AttackComponents.h"
+#include "../../../Components/InputComponents.h"
+#include "../../../Components/AIComponents/NavigationComponents.h"
 
 #include "DecisionMakingHelper.h"
 

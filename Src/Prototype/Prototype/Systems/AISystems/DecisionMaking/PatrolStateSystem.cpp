@@ -3,10 +3,10 @@
 #include <Spatial.hpp>
 #include <Navigation.hpp>
 
-#include "../../Components/AIComponents/FSMStateComponents.h"
-#include "../../Components/SimpleComponents.h"
-#include "../../Components/AIComponents/PatrolComponents.h"
-#include "../../Components/AIComponents/NavigationComponents.h"
+#include "../../../Components/AIComponents/FSMStateComponents.h"
+#include "../../../Components/SimpleComponents.h"
+#include "../../../Components/AIComponents/PatrolComponents.h"
+#include "../../../Components/AIComponents/NavigationComponents.h"
 
 #include "DecisionMakingHelper.h"
 

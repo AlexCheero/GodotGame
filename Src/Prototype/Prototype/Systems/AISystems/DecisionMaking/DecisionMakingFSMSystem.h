@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../BaseSystem.h"
+#include "../../BaseSystem.h"
 
 #include <Spatial.hpp>
 
@@ -11,7 +11,6 @@
 
 namespace godot
 {
-	//TODO: move all decision making code (base system, state systems, helpers etc) to separate filter/folder
 	class DecisionMakingFSMSystem : public BaseSystem
 	{
 	private:

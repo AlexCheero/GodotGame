@@ -1,7 +1,7 @@
 #include "FleeStateSystem.h"
 
-#include "../../Components/AIComponents/FSMStateComponents.h"
-#include "../../Components/SimpleComponents.h"
+#include "../../../Components/AIComponents/FSMStateComponents.h"
+#include "../../../Components/SimpleComponents.h"
 
 void godot::FleeStateSystem::operator()(float delta, entt::registry& registry)
 {

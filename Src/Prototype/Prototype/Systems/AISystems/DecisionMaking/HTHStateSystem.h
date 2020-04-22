@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../BaseSystem.h"
+#include "../../BaseSystem.h"
 
 namespace godot
 {
-	class PatrolStateSystem : public BaseSystem
+	class HTHStateSystem : public BaseSystem
 	{
 	public:
 		virtual void operator()(float delta, entt::registry& registry) override;

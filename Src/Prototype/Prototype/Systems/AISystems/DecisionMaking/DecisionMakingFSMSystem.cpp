@@ -1,9 +1,9 @@
 #include "DecisionMakingFSMSystem.h"
 
-#include "../../Components/AIComponents/FSMStateComponents.h"
-#include "../../Components/AIComponents/NavigationComponents.h"
-#include "../../Components/AIComponents/PatrolComponents.h"
-#include "../../Components/AttackComponents.h"
+#include "../../../Components/AIComponents/FSMStateComponents.h"
+#include "../../../Components/AIComponents/NavigationComponents.h"
+#include "../../../Components/AIComponents/PatrolComponents.h"
+#include "../../../Components/AttackComponents.h"
 
 void godot::DecisionMakingFSMSystem::OnTransitionToPatrol(entt::registry& registry, entt::entity entity)
 {

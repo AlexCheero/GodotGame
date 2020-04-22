@@ -39,7 +39,7 @@
 #include "Systems/AnimSystems/LocomotionAnimSystem.h"
 #include "Systems/AnimSystems/HTHAnimSystem.h"
 #include "Systems/AttackSystems/GrenadeSystem.h"
-#include "Systems/AISystems/DecisionMakingFSMSystem.h"
+#include "Systems/AISystems/DecisionMaking/DecisionMakingFSMSystem.h"
 #include "Systems/LocomotionSystems/HTHStuckSystem.h"
 
 #include "Utils/Utils.h"

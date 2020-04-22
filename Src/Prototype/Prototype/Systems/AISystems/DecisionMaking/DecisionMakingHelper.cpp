@@ -2,7 +2,7 @@
 
 #include "core/math/math_funcs.h"
 
-#include "../../Utils/Utils.h"
+#include "../../../Utils/Utils.h"
 
 //doesn't take target's and agent's bounds into account
 bool godot::CanSeeTarget(Spatial* pTargetSpatial, PatrolmanComponent patrolman, Spatial* pPatrolSpatial)

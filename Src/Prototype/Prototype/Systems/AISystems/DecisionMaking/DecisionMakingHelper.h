@@ -4,7 +4,7 @@
 
 #include <Spatial.hpp>
 
-#include "../../Components/AIComponents/PatrolComponents.h"
+#include "../../../Components/AIComponents/PatrolComponents.h"
 
 namespace godot
 {

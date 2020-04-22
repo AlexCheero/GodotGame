@@ -67,6 +67,12 @@
     <Filter Include="Source Files\Systems\AnimSystems">
       <UniqueIdentifier>{afb7192c-7223-4e1b-8235-d4ae0e69152a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Systems\AISystems\DecisionMaking">
+      <UniqueIdentifier>{31fe873d-6e3d-46eb-b2c2-c5707461a648}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\AISystems\DecisionMaking">
+      <UniqueIdentifier>{6f3508e2-3c73-4fc5-81d6-1551a9f95a0d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp">
@@ -147,9 +153,6 @@
     <ClCompile Include="Systems\AttackSystems\GrenadeSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\AISystems\DecisionMakingFSMSystem.cpp">
-      <Filter>Source Files\Systems\AISystems</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\AnimSystems\HTHAnimSystem.cpp">
       <Filter>Source Files\Systems\AnimSystems</Filter>
     </ClCompile>
@@ -159,23 +162,26 @@
     <ClCompile Include="Systems\AttackSystems\PileInSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\AISystems\DecisionMakingHelper.cpp">
-      <Filter>Source Files\Systems\AISystems</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\AISystems\PatrolStateSystem.cpp">
-      <Filter>Source Files\Systems\AISystems</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\AISystems\PursueStateSystem.cpp">
-      <Filter>Source Files\Systems\AISystems</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\AISystems\HTHStateSystem.cpp">
-      <Filter>Source Files\Systems\AISystems</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\AISystems\FleeStateSystem.cpp">
-      <Filter>Source Files\Systems\AISystems</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\LocomotionSystems\HTHStuckSystem.cpp">
       <Filter>Source Files\Systems\LocomotionSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AISystems\DecisionMaking\DecisionMakingFSMSystem.cpp">
+      <Filter>Source Files\Systems\AISystems\DecisionMaking</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AISystems\DecisionMaking\DecisionMakingHelper.cpp">
+      <Filter>Source Files\Systems\AISystems\DecisionMaking</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AISystems\DecisionMaking\FleeStateSystem.cpp">
+      <Filter>Source Files\Systems\AISystems\DecisionMaking</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AISystems\DecisionMaking\HTHStateSystem.cpp">
+      <Filter>Source Files\Systems\AISystems\DecisionMaking</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AISystems\DecisionMaking\PatrolStateSystem.cpp">
+      <Filter>Source Files\Systems\AISystems\DecisionMaking</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AISystems\DecisionMaking\PursueStateSystem.cpp">
+      <Filter>Source Files\Systems\AISystems\DecisionMaking</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -281,9 +287,6 @@
     <ClInclude Include="Systems\AttackSystems\GrenadeSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
-    <ClInclude Include="Systems\AISystems\DecisionMakingFSMSystem.h">
-      <Filter>Header Files\Systems\AISystems</Filter>
-    </ClInclude>
     <ClInclude Include="Systems\AnimSystems\HTHAnimSystem.h">
       <Filter>Header Files\Systems\AnimSystems</Filter>
     </ClInclude>
@@ -296,21 +299,6 @@
     <ClInclude Include="Systems\AttackSystems\PileInSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
-    <ClInclude Include="Systems\AISystems\DecisionMakingHelper.h">
-      <Filter>Header Files\Systems\AISystems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\AISystems\PatrolStateSystem.h">
-      <Filter>Header Files\Systems\AISystems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\AISystems\PursueStateSystem.h">
-      <Filter>Header Files\Systems\AISystems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\AISystems\HTHStateSystem.h">
-      <Filter>Header Files\Systems\AISystems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\AISystems\FleeStateSystem.h">
-      <Filter>Header Files\Systems\AISystems</Filter>
-    </ClInclude>
     <ClInclude Include="Systems\LocomotionSystems\HTHStuckSystem.h">
       <Filter>Header Files\Systems\LocomotionSystems</Filter>
     </ClInclude>
@@ -319,6 +307,24 @@
     </ClInclude>
     <ClInclude Include="Nodes\EntityView.h">
       <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AISystems\DecisionMaking\DecisionMakingFSMSystem.h">
+      <Filter>Header Files\Systems\AISystems\DecisionMaking</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AISystems\DecisionMaking\DecisionMakingHelper.h">
+      <Filter>Header Files\Systems\AISystems\DecisionMaking</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AISystems\DecisionMaking\FleeStateSystem.h">
+      <Filter>Header Files\Systems\AISystems\DecisionMaking</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AISystems\DecisionMaking\HTHStateSystem.h">
+      <Filter>Header Files\Systems\AISystems\DecisionMaking</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AISystems\DecisionMaking\PatrolStateSystem.h">
+      <Filter>Header Files\Systems\AISystems\DecisionMaking</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AISystems\DecisionMaking\PursueStateSystem.h">
+      <Filter>Header Files\Systems\AISystems\DecisionMaking</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
