@@ -46,10 +46,11 @@ struct HealthComponent
 {
 	float hp;
 	float maxHp;
+	float criticalProportion;
 
-	float ProportionOfMax() { return hp / maxHp; }
+	bool IsHealthCritical() { return hp / maxHp <= criticalProportion; }
 };
-REGISTER_COMPONENT(HealthComponent, "hp", "maxHp");
+REGISTER_COMPONENT(HealthComponent, "hp", "maxHp", "criticalProportion");
 
 struct StunComponent
 {

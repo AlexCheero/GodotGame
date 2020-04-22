@@ -33,8 +33,7 @@ void godot::PursueStateSystem::operator()(float delta, entt::registry& registry)
 
 		//TODO: move somwhere like DecisionMakingView
 		//to flee transition
-		const float criticalProportion = 0.5f;
-		if (healthComp.ProportionOfMax() <= criticalProportion)
+		if (healthComp.IsHealthCritical())
 			registry.assign<entt::tag<FleeStateTag> >(entity);
 		else if (validTarget)
 		{

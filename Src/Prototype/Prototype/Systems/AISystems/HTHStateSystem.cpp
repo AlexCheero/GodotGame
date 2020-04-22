@@ -23,8 +23,7 @@ void godot::HTHStateSystem::operator()(float delta, entt::registry& registry)
 
 		//TODO: move somwhere like DecisionMakingView here and from pursueView
 		//to flee transition
-		const float criticalProportion = 0.5f;
-		if (healthComp.ProportionOfMax() <= criticalProportion)
+		if (healthComp.IsHealthCritical())
 			registry.assign<entt::tag<FleeStateTag> >(entity);
 		//to pursuit transition
 		else if (registry.valid(lockComp.target) && meleeComp.distance < GetDistanceToTarget(registry, lockComp.target, pSpatial))

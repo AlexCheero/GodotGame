@@ -23,6 +23,7 @@ components = {
 "acceleration Up": 30.0
 },
 "HealthComponent": {
+"criticalProportion": 0.5,
 "hp": 100.0,
 "maxHp": 100.0
 },
