@@ -4,39 +4,34 @@
 
 void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 {
-	//TODO: remove hardcode and calculate separate maxAttackDistance for each hit
-	//		player + bot colliders radii is hardcoded also
-	const float maxAttackDistance = 2.f;//1.5f
-	auto checkForPileInView = registry.view<entt::tag<AttackActionTag>, TargetLockComponent, Spatial*>(entt::exclude<entt::tag<PileInTag> >);
-	checkForPileInView.less([&registry, maxAttackDistance](entt::entity entity, TargetLockComponent lockComp, Spatial* pSpatial)
+	auto checkForPileInView = registry.view<entt::tag<AttackActionTag>, TargetLockComponent, MeleeAttackComponent, Spatial*>(entt::exclude<entt::tag<PileInTag> >);
+	checkForPileInView.less([&registry](entt::entity entity, TargetLockComponent lockComp, MeleeAttackComponent melee, Spatial* pSpatial)
 	{
 		ASSERT(registry.has<Spatial*>(lockComp.target), "target has no spatial");
 		Spatial* pTargetSpatial = registry.get<Spatial*>(lockComp.target);
 		Vector3 toTargetDirection = pTargetSpatial->get_global_transform().get_origin() - pSpatial->get_global_transform().get_origin();
 		float distanceToTarget = toTargetDirection.length();
-		if (distanceToTarget > maxAttackDistance)
+		if (distanceToTarget > melee.maxDistance)
 			registry.assign<entt::tag<PileInTag> >(entity);
 	});
 
-	auto pileInView = registry.view<entt::tag<PileInTag>, AttackAnimPlayingComponent, TargetLockComponent, VelocityComponent, SpeedComponent, Spatial*>();
-	pileInView.less([&registry, maxAttackDistance](entt::entity entity, AttackAnimPlayingComponent animPlayingComp, TargetLockComponent lockComp,
-												   VelocityComponent& velComp, SpeedComponent speedComp, Spatial* pSpatial)
+	auto pileInView = registry.view<entt::tag<PileInTag>, AttackAnimPlayingComponent, TargetLockComponent, VelocityComponent, SpeedComponent,
+									MeleeAttackComponent, Spatial*>();
+	pileInView.less([&registry](entt::entity entity, AttackAnimPlayingComponent animPlayingComp, TargetLockComponent lockComp,
+												   VelocityComponent& velComp, SpeedComponent speedComp, MeleeAttackComponent melee, Spatial* pSpatial)
 	{
 		ASSERT(registry.has<Spatial*>(lockComp.target), "target has no spatial");
 		Spatial* pTargetSpatial = registry.get<Spatial*>(lockComp.target);
 		Vector3 toTargetDirection = pTargetSpatial->get_global_transform().get_origin() - pSpatial->get_global_transform().get_origin();
 		float distanceToTarget = toTargetDirection.length();
 		
-		//TODO: remove this hardcode also
-		if (distanceToTarget <= maxAttackDistance / 2)
+		if (distanceToTarget <= melee.minDistance)
 			return;
 
 		Vector3 toTargetVelocity = toTargetDirection;
 		toTargetVelocity.y = 0;
 		toTargetVelocity.normalize();
-		//TODO: remove hardcode and probably use speed instead of factor
-		const float pileInDashFactor = 1.5f;
-		toTargetVelocity *= speedComp.speed * pileInDashFactor;
+		toTargetVelocity *= speedComp.speed + melee.dashSpeed;
 		//TODO: don't pile in in air, not just reset velocity's y
 		toTargetVelocity.y = velComp.velocity.y;
 

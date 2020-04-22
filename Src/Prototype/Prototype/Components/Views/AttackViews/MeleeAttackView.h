@@ -19,6 +19,5 @@ namespace godot
 	public:
 		static void _register_methods();
 		void _init() {}
-		MeleeAttackComponent GetECSComponent() { return { distance, angle, attackTime, collisionLayerName, -utils::SecondsToMillis(attackTime) }; }
 	};
 }

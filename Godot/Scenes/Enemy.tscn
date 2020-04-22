@@ -28,11 +28,12 @@ components = {
 "maxHp": 100.0
 },
 "MeleeAttackComponent": {
-"angle": 90.0,
 "attackTime": 1.0,
 "collisionLayerName": "Player",
-"distance": 4.0,
+"dashSpeed": 5.0,
 "maxComboIntervalMillis": 3000,
+"maxDistance": 2.0,
+"minDistance": 1.0,
 "stunSpeedFactor": 0.1,
 "stunTime": 1.0
 },

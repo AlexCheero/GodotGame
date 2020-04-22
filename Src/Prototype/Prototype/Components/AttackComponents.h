@@ -13,12 +13,9 @@
 #include "ComponentsMeta.h"
 
 constexpr entt::hashed_string CurrentWeaponMeleeTag = "CurrentWeaponMeleeTag"_hs;
+//TODO: refactor this component. split into several separate ones
 struct MeleeAttackComponent
 {
-	//TODO: use different distance for each hit or it should be defined by animation
-	float distance;
-	//TODO: doesn't needed anymore, since it is defined by animation such as distance
-	float angle;
 	//TODO: set attack time in anim
 	float attackTime;
 	godot::String collisionLayerName;
@@ -27,6 +24,12 @@ struct MeleeAttackComponent
 	float stunTime;
 	float stunSpeedFactor;
 
+	//<pile in
+	float maxDistance;
+	float minDistance;
+	float dashSpeed;
+	//pile in>
+
 	//TODO: remove hardcode
 	int comboLength = 8;
 	
@@ -34,7 +37,7 @@ struct MeleeAttackComponent
 	int64_t prevHitTimeMillis = -utils::SecondsToMillis(attackTime);
 	int comboSequenceNum = 0;
 };
-REGISTER_COMPONENT(MeleeAttackComponent, "distance", "angle", "attackTime", "collisionLayerName", "maxComboIntervalMillis", "stunTime", "stunSpeedFactor");
+REGISTER_COMPONENT(MeleeAttackComponent, "attackTime", "collisionLayerName", "maxComboIntervalMillis", "stunTime", "stunSpeedFactor", "maxDistance", "minDistance", "dashSpeed");
 
 constexpr entt::hashed_string CurrentWeaponRangedTag = "CurrentWeaponRangedTag"_hs;
 struct RangedAttackComponent

@@ -38,7 +38,7 @@ void godot::PursueStateSystem::operator()(float delta, entt::registry& registry)
 		else if (validTarget)
 		{
 			//to attack transition
-			if (meleeComp.distance >= GetDistanceToTarget(registry, pursuingComp.target, pSpatial))
+			if (meleeComp.maxDistance >= GetDistanceToTarget(registry, pursuingComp.target, pSpatial))
 			{
 				registry.assign<entt::tag<MeleeAttackStateTag> >(entity);
 				registry.assign<TargetLockComponent>(entity).target = pursuingComp.target;

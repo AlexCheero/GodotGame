@@ -45,7 +45,7 @@ void godot::HTHLockTargetSystem::operator()(float delta, entt::registry& registr
 	withoutTargetView.less([this, &registry](entt::entity entity, InputComponent input, MeleeAttackComponent attackComp, Spatial* pSpatial)
 	{
 		//TODO: same as for pile in- use different distance for each hit
-		Array intersects = GetIntersects(pSpatial, attackComp.distance, attackComp.collisionLayerName);
+		Array intersects = GetIntersects(pSpatial, attackComp.maxDistance, attackComp.collisionLayerName);
 		if (intersects.size() == 0)
 			return;
 
