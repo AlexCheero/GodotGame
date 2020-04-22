@@ -28,6 +28,23 @@ namespace godot
 	private:
 		entt::entity entity = entt::null;
 		Dictionary componentsDict;
+
+#ifdef DEBUG
+		template<typename T>
+		bool CheckKeys(Dictionary& dict)
+		{
+			if (dict.size() != ComponentMeta<T>::propertiesCount)
+				return false;
+
+			for (int i = 0; i < ComponentMeta<T>::propertiesCount; i++)
+			{
+				if (!dict.has(ComponentMeta<T>::properties[i]))
+					return false;
+			}
+
+			return true;
+		}
+#endif
 		
 		template<typename Type, typename... Types>
 		void ConstructComponentsFromViews(entt::registry& registry, entt::entity entity);
@@ -82,9 +99,12 @@ namespace godot
 		if (!componentsDict.has(ComponentMeta<T>::name))
 			return false;
 
-		//TODO0: assert right num of values
-		//TODO0: check keys
 		Dictionary dict = componentsDict[ComponentMeta<T>::name];
+
+#ifdef DEBUG
+		ASSERT(CheckKeys<T>(dict), "wrong keys in components dict of entity view");
+#endif
+
 		comp = ConvertComponentFromDict<T>(dict);
 		
 		return true;
