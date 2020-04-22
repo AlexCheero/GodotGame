@@ -22,14 +22,14 @@ struct MeleeAttackComponent
 	//TODO: set attack time in anim
 	float attackTime;
 	godot::String collisionLayerName;
+	int64_t maxComboIntervalMillis;
 	//TODO: maybe split into cold and hot data
 	int64_t prevHitTimeMillis = -utils::SecondsToMillis(attackTime);
-	//TODO: remove hardcode and get from view
-	int64_t maxComboIntervalMillis = 3000;
+	
 	int comboLength = 8;
 	int comboSequenceNum = 0;
 };
-REGISTER_COMPONENT(MeleeAttackComponent, "distance", "angle", "attackTime", "collisionLayerName");
+REGISTER_COMPONENT(MeleeAttackComponent, "distance", "angle", "attackTime", "collisionLayerName", "maxComboIntervalMillis");
 
 constexpr entt::hashed_string CurrentWeaponRangedTag = "CurrentWeaponRangedTag"_hs;
 struct RangedAttackComponent

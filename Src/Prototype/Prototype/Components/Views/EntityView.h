@@ -75,7 +75,6 @@ namespace godot
 		//TODO: use entity field after merging with EntityHolderNode (merge done)
 		void ConstructComponents(entt::registry& registry, entt::entity entity)
 		{
-			//TODO: assert views have no wrong keys
 			ConstructComponentsFromViews
 				<
 					MeleeAttackComponent,

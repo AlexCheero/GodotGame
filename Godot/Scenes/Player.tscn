@@ -33,7 +33,8 @@ components = {
 "angle": 90.0,
 "attackTime": 0.5,
 "collisionLayerName": "Enemy",
-"distance": 4.0
+"distance": 4.0,
+"maxComboIntervalMillis": 3000
 },
 "SpeedComponent": {
 "speed": 30.0
