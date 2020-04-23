@@ -18,8 +18,6 @@ void godot::ThrowableWeaponNode::_init()
 	set_max_contacts_reported(1);
 }
 
-//TODO: probably move this method (and all similar from other nodes) to some kind of reactive system
-//		implemented as static functor
 void godot::ThrowableWeaponNode::_on_throwable_collide(KinematicBody* pBody)
 {
 	Godot::print("throwable hit");

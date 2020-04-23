@@ -21,7 +21,6 @@ void godot::HTHStateSystem::operator()(float delta, entt::registry& registry)
 		bool attackInput = meleeComp.prevHitTimeMillis + utils::SecondsToMillis(meleeComp.attackTime) <= currTimeMillis;
 		inputComp.Set(EInput::Attack, attackInput);
 
-		//TODO: move somwhere like DecisionMakingView here and from pursueView
 		//to flee transition
 		if (healthComp.IsHealthCritical())
 			registry.assign<entt::tag<FleeStateTag> >(entity);

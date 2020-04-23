@@ -27,7 +27,6 @@ struct MeleeAttackComponent
 
 	//<pile in
 	float maxDistance;
-	//TODO: this is min distance after what character starts pile in. use maxDistance portion instead
 	float minDistance;
 	float dashSpeed;
 	//pile in>

@@ -48,6 +48,7 @@ struct HealthComponent
 	float maxHp;
 	float criticalProportion;
 
+	//TODO: maybe this should be in some kind of decision making view
 	bool IsHealthCritical() { return hp / maxHp <= criticalProportion; }
 };
 REGISTER_COMPONENT(HealthComponent, "hp", "maxHp", "criticalProportion");

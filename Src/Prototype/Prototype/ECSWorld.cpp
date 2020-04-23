@@ -194,7 +194,6 @@ void godot::ECSWorld::_init()
 	m_physics_systems.emplace_back(new DecisionMakingFSMSystem(registry));
 
 	m_physics_systems.emplace_back(new GrenadeSystem());
-	//TODO: should it be in phys proc?
 	m_physics_systems.emplace_back(new NavAgentSystem());
 	m_physics_systems.emplace_back(new PursuingSystem());
 	
