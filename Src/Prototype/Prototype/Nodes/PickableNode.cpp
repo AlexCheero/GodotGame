@@ -35,8 +35,13 @@ void godot::PickableNode::_on_Pickable_body_entered(KinematicBody* pBody)
 	case EPickableType::MeleeWeapon:
 	{
 		//TODO: probably should use only ConstructComponentS and make ConvertToComponent private
-		bool constructed = pPickableView->ConvertToComponent(registry.assign_or_replace<MeleeAttackComponent>(pickerEntity));
+		MeleeWeaponComponent meleeWeaponComp;
+		bool constructed = pPickableView->ConvertToComponent(meleeWeaponComp);
 		ASSERT(constructed, "can't construct MeleeAttackComponent");
+		ASSERT(registry.has<MeleeAttackComponent>(pickerEntity), "entity has no MeleeAttackComponent");
+		MeleeAttackComponent& attackComp = registry.get<MeleeAttackComponent>(pickerEntity);
+		attackComp.attackTime = meleeWeaponComp.attackTime;
+		attackComp.maxDistance = meleeWeaponComp.distance;
 		//if switch on pickup
 		registry.get_or_assign<entt::tag<CurrentWeaponMeleeTag> >(pickerEntity);
 		break;

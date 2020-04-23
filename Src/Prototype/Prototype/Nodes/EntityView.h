@@ -76,7 +76,8 @@ namespace godot
 					SpeedComponent,
 					SimpleFollowComponent,
 					PatrolmanComponent,
-					NavMarginComponent
+					NavMarginComponent,
+					MeleeWeaponComponent
 				>
 				(registry, entity);
 		}

@@ -14,7 +14,6 @@
 
 constexpr entt::hashed_string CurrentWeaponMeleeTag = "CurrentWeaponMeleeTag"_hs;
 //TODO: refactor this component. split into several separate ones
-//TODO: sword have no all needed keys and game crashes on picking sword up
 struct MeleeAttackComponent
 {
 	//TODO: set attack time in anim
@@ -39,6 +38,13 @@ struct MeleeAttackComponent
 	int comboSequenceNum = 0;
 };
 REGISTER_COMPONENT(MeleeAttackComponent, "attackTime", "collisionLayerName", "maxComboIntervalMillis", "stunTime", "stunSpeedFactor", "maxDistance", "minDistance", "dashSpeed");
+
+struct MeleeWeaponComponent
+{
+	float attackTime;
+	float distance;
+};
+REGISTER_COMPONENT(MeleeWeaponComponent, "attackTime", "distance");
 
 constexpr entt::hashed_string CurrentWeaponRangedTag = "CurrentWeaponRangedTag"_hs;
 struct RangedAttackComponent
