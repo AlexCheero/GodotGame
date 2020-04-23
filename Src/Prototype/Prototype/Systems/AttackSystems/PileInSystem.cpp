@@ -33,6 +33,7 @@ void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 		toTargetVelocity.normalize();
 		toTargetVelocity *= speedComp.speed + melee.dashSpeed;
 		//TODO: don't pile in in air, not just reset velocity's y
+		//      it slows down drastically if using is_on_floor
 		toTargetVelocity.y = velComp.velocity.y;
 
 		velComp.velocity = toTargetVelocity;

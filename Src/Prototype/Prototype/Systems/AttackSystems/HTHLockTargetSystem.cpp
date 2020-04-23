@@ -66,8 +66,7 @@ void godot::HTHLockTargetSystem::operator()(float delta, entt::registry& registr
 		entt::entity targetEntity = pHittedEntityView->GetEntity();
 		ASSERT(targetEntity != entt::null, "target entity is null");
 		ASSERT(registry.valid(targetEntity), "invalid target entity");
-		//TODO: probably this should be runtime check
-		ASSERT(!registry.has<entt::tag<DeadTag> >(targetEntity), "");
+		ASSERT(!registry.has<entt::tag<DeadTag> >(targetEntity), "entity is already dead!");
 
 		registry.assign<TargetLockComponent>(entity).target = targetEntity;
 	});

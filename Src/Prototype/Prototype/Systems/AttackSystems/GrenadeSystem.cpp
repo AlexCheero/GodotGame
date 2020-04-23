@@ -60,8 +60,9 @@ void godot::GrenadeSystem::operator()(float delta, entt::registry& registry)
 			if (pTargetSpatial && pTargetSpatial->has_node("EntityView") && CheckVisibility(pGrenSpatial, pTargetSpatial, grenComp.explosionRadius))
 			{
 				EntityView* pEntityView = Object::cast_to<EntityView>(pTargetSpatial->get_node("EntityView"));
-				//TODO: this assert crashes when second grenade hits first, already exploded
-				ASSERT(registry.valid(pEntityView->GetEntity()), "wrong entity, hitted by explosion");
+				//cause is_instance_valid is not presented in the bindings
+				if (!registry.valid(pEntityView->GetEntity()))
+					return;
 				ASSERT(registry.has<HealthComponent>(pEntityView->GetEntity()), "no health component on entity hitted by explosion");
 				registry.get<HealthComponent>(pEntityView->GetEntity()).hp -= grenComp.damage;
 			}
