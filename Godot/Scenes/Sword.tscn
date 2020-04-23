@@ -27,7 +27,7 @@ texture = ExtResource( 2 )
 [node name="EntityView" type="Node" parent="."]
 script = ExtResource( 3 )
 components = {
-"MeleeWeaponComponent": {
+"MeleeWeapon": {
 "attackTime": 0.5,
 "damage": 50.0,
 "distance": 4.0

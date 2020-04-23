@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Scripts/Nodes/EntityView.gdns" type="Script" id=2]
 
-
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.521569, 1, 0, 1 )
 
@@ -27,7 +26,7 @@ shape = SubResource( 3 )
 [node name="EntityView" type="Node" parent="."]
 script = ExtResource( 2 )
 components = {
-"GrenadeComponent": {
+"Grenade": {
 "damage": 200.0,
 "explosionRadius": 20.0,
 "explosionTime": 1.0

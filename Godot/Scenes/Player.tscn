@@ -18,19 +18,19 @@ shape = SubResource( 1 )
 [node name="EntityView" type="Node" parent="."]
 script = ExtResource( 2 )
 components = {
-"GravityComponent": {
-"acceleration Down": 20.0,
-"acceleration Up": 30.0
+"Gravity": {
+"accelerationDown": 20.0,
+"accelerationUp": 30.0
 },
-"HealthComponent": {
+"Health": {
 "criticalProportion": 0.5,
 "hp": 100.0,
 "maxHp": 100.0
 },
-"JumpSpeedComponent": {
+"JumpSpeed": {
 "speed": 30.0
 },
-"MeleeAttackComponent": {
+"MeleeAttack": {
 "attackTime": 0.5,
 "collisionLayerName": "Enemy",
 "damage": 20.0,
@@ -41,7 +41,7 @@ components = {
 "stunSpeedFactor": 0.1,
 "stunTime": 1.0
 },
-"SpeedComponent": {
+"Speed": {
 "speed": 30.0
 }
 }

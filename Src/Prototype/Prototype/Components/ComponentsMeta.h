@@ -11,7 +11,7 @@ struct ComponentMeta {};
 #define REGISTER_COMPONENT(Type, ...) template<> \
 struct ComponentMeta<Type> \
 { \
-	constexpr static const char* name = #Type; \
+	constexpr static const char* typeName = #Type; \
 	constexpr static const char* properties[] = { __VA_ARGS__ }; \
 	constexpr static int propertiesCount = GetArraySize(ComponentMeta<Type>::properties); \
 }

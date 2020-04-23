@@ -5,7 +5,6 @@
 [ext_resource path="res://Scripts/Nodes/EntityView.gdns" type="Script" id=3]
 [ext_resource path="res://Scenes/Throwable2.tscn" type="PackedScene" id=5]
 
-
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.5, 0.5, 0.5 )
 
@@ -29,7 +28,7 @@ texture = ExtResource( 2 )
 [node name="EntityView" type="Node" parent="."]
 script = ExtResource( 3 )
 components = {
-"ThrowableAttackComponent": {
+"ThrowableAttack": {
 "ammoCount": 100,
 "attackTime": 0.5,
 "force": 50.0,

@@ -2,13 +2,12 @@
 
 [ext_resource path="res://Scripts/Nodes/EntityView.gdns" type="Script" id=1]
 
-
 [node name="Camera" type="Camera"]
 
 [node name="EntityView" type="Node" parent="."]
 script = ExtResource( 1 )
 components = {
-"SimpleFollowComponent": {
+"SimpleFollow": {
 "distance": 15.0,
 "xAngle": -30.0,
 "yAngle": -45.0

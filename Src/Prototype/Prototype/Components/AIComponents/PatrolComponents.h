@@ -22,7 +22,6 @@ struct PatrolmanComponent
 	float viewAngleBig;
 	float longViewDistance;
 	float shortViewDistance;
-	//TODO: probably this field doesn't fit here
 	float looseTargetTime;
 	float lookAroundTime;
 };

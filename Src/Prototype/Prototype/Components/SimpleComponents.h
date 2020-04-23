@@ -23,7 +23,7 @@ struct GravityComponent
 	float accUp;
 	float accDown;
 };
-REGISTER_COMPONENT(GravityComponent, "acceleration Up", "acceleration Down");
+REGISTER_COMPONENT(GravityComponent, "accelerationUp", "accelerationDown");
 
 struct SimpleFollowComponent
 {

@@ -12,6 +12,7 @@
 
 namespace godot
 {
+	//TODO: implement tag views
 	class EntityView : public Node
 	{
 		GODOT_CLASS(EntityView, Node)
@@ -86,10 +87,14 @@ namespace godot
 	template<typename T>
 	inline bool EntityView::ConvertToComponent(T& comp)
 	{
-		if (!componentsDict.has(ComponentMeta<T>::name))
+		String componentKey(ComponentMeta<T>::typeName);
+		//assert that component's type name always ends with Component
+		ASSERT(componentKey.find_last("Component") == componentKey.length() - 9, "component's type name doesn't ends with Component");
+		componentKey = componentKey.substr(0, componentKey.length() - 9);
+		if (!componentsDict.has(componentKey))
 			return false;
 
-		Dictionary dict = componentsDict[ComponentMeta<T>::name];
+		Dictionary dict = componentsDict[componentKey];
 
 #ifdef DEBUG
 		ASSERT(CheckKeys<T>(dict), "wrong keys in components dict of entity view");
