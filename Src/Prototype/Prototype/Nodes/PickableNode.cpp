@@ -42,6 +42,7 @@ void godot::PickableNode::_on_Pickable_body_entered(KinematicBody* pBody)
 		MeleeAttackComponent& attackComp = registry.get<MeleeAttackComponent>(pickerEntity);
 		attackComp.attackTime = meleeWeaponComp.attackTime;
 		attackComp.maxDistance = meleeWeaponComp.distance;
+		attackComp.damage = meleeWeaponComp.damage;
 		//if switch on pickup
 		registry.get_or_assign<entt::tag<CurrentWeaponMeleeTag> >(pickerEntity);
 		break;

@@ -29,6 +29,7 @@ script = ExtResource( 3 )
 components = {
 "MeleeWeaponComponent": {
 "attackTime": 0.5,
+"damage": 50.0,
 "distance": 4.0
 }
 }

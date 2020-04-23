@@ -62,7 +62,7 @@ namespace godot
 		bool ConvertToComponent(T& comp);
 
 		//TODO: remove script after initing components
-		//TODO: use entity field after merging with EntityHolderNode (merge done)
+		//TODO: use entity field after merging with EntityHolderNode (merge done) or split it into two separate classes back
 		void ConstructComponents(entt::registry& registry, entt::entity entity)
 		{
 			ConstructComponents_impl

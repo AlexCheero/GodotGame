@@ -10,8 +10,6 @@
 
 void godot::HTHDamagingArea::_register_methods()
 {
-	register_property<HTHDamagingArea, float>("damage", &HTHDamagingArea::damage, 0);
-
 	register_method((char*)"_on_Area_body_entered", &HTHDamagingArea::_on_Area_body_entered);
 	register_method((char*)"_assign_owner_entity", &HTHDamagingArea::_assign_owner_entity);
 	register_method((char*)"_ready", &HTHDamagingArea::_ready);
@@ -34,7 +32,8 @@ void godot::HTHDamagingArea::_on_Area_body_entered(KinematicBody* pBody)
 	entt::registry& registry = ECSWorld::GetInstance()->GetRegistry();
 	
 	ASSERT(registry.has<HealthComponent>(hittedEntity), "hittedEntity has no HealthComponent");
-	registry.get<HealthComponent>(hittedEntity).hp -= damage;
+	ASSERT(registry.has<MeleeAttackComponent>(ownerEntity), "ownerEntity has no MeleeAttackComponent");
+	registry.get<HealthComponent>(hittedEntity).hp -= registry.get<MeleeAttackComponent>(ownerEntity).damage;
 
 	ASSERT(registry.has<MeleeAttackComponent>(ownerEntity), "ownerEntity has no MeleeAttackComponent");
 	const MeleeAttackComponent& meleeComp = registry.get<MeleeAttackComponent>(ownerEntity);

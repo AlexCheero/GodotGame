@@ -3,7 +3,6 @@
 [ext_resource path="res://Scripts/Nodes/EntityView.gdns" type="Script" id=2]
 [ext_resource path="res://Scenes/vanguard.tscn" type="PackedScene" id=8]
 
-
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.857216
 height = 1.92992
@@ -34,6 +33,7 @@ components = {
 "MeleeAttackComponent": {
 "attackTime": 0.5,
 "collisionLayerName": "Enemy",
+"damage": 20.0,
 "dashSpeed": 5.0,
 "maxComboIntervalMillis": 3000,
 "maxDistance": 2.0,

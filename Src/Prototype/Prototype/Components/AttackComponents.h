@@ -16,6 +16,7 @@ constexpr entt::hashed_string CurrentWeaponMeleeTag = "CurrentWeaponMeleeTag"_hs
 //TODO: refactor this component. split into several separate ones
 struct MeleeAttackComponent
 {
+	float damage;
 	//TODO: set attack time in anim
 	float attackTime;
 	godot::String collisionLayerName;
@@ -37,14 +38,16 @@ struct MeleeAttackComponent
 	int64_t prevHitTimeMillis = -utils::SecondsToMillis(attackTime);
 	int comboSequenceNum = 0;
 };
-REGISTER_COMPONENT(MeleeAttackComponent, "attackTime", "collisionLayerName", "maxComboIntervalMillis", "stunTime", "stunSpeedFactor", "maxDistance", "minDistance", "dashSpeed");
+REGISTER_COMPONENT(MeleeAttackComponent, "damage", "attackTime", "collisionLayerName", "maxComboIntervalMillis",
+	                                     "stunTime", "stunSpeedFactor", "maxDistance", "minDistance", "dashSpeed");
 
 struct MeleeWeaponComponent
 {
+	float damage;
 	float attackTime;
 	float distance;
 };
-REGISTER_COMPONENT(MeleeWeaponComponent, "attackTime", "distance");
+REGISTER_COMPONENT(MeleeWeaponComponent, "damage", "attackTime", "distance");
 
 constexpr entt::hashed_string CurrentWeaponRangedTag = "CurrentWeaponRangedTag"_hs;
 struct RangedAttackComponent

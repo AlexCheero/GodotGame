@@ -13,8 +13,6 @@ namespace godot
 		GODOT_CLASS(HTHDamagingArea, Area)
 	private:
 		entt::entity ownerEntity;
-		//TODO: move damage to owner's MeleeAttackComponent
-		float damage;
 
 		void _on_Area_body_entered(KinematicBody* pBody);
 		void _assign_owner_entity();
