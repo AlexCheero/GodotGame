@@ -31,8 +31,8 @@ void godot::ThrowableWeaponNode::_on_throwable_collide(KinematicBody* pBody)
 	entt::entity entity = pEntityView->GetEntity();
 	entt::registry& registry = ECSWorld::GetInstance()->GetRegistry();
 
-	//TODO: probably should check (or assert?) registry.has<entt::tag<DeadTag> >(entity)
 	ASSERT(registry.valid(entity), "target is null");
+	ASSERT(!registry.has<entt::tag<DeadTag> >(entity), "entity is already dead");
 	ASSERT(registry.has<HealthComponent>(entity), "hitted entity has no HealthComponent");
 
 	HealthComponent& health = registry.get<HealthComponent>(entity);
