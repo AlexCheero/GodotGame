@@ -7,7 +7,9 @@
 
 void godot::FleeingSystem::operator()(float delta, entt::registry& registry)
 {
-	auto players = registry.view<entt::tag<PlayerTag>, Spatial*>();
+	auto players = registry.view<entt::tag<PlayerTag>, Spatial*>(entt::exclude<entt::tag<DeadTag >>);
+	if (players.size() == 0)
+		return;
 
 	auto view = registry.view<entt::tag<FleeStateTag>, VelocityComponent, SpeedComponent, Spatial*>();
 	view.less([&players](VelocityComponent& velocityComp, SpeedComponent speedComp, Spatial* pSpatial)
@@ -17,7 +19,6 @@ void godot::FleeingSystem::operator()(float delta, entt::registry& registry)
 		{
 			Spatial* pPlayerSpatial = players.get<Spatial*>(player);
 			Vector3 fromPlayerVector = pSpatial->get_global_transform().get_origin() - pPlayerSpatial->get_global_transform().get_origin();
-			//TODO: make something with case when it somewhy cannot find players and therefore the distance is infinite
 			if (fromPlayerVector.length_squared() < vectorToNearestEnemy.length_squared())
 				vectorToNearestEnemy = fromPlayerVector;
 		}

@@ -5,7 +5,7 @@
 
 namespace godot
 {
-	//TODO: try to use SpringArm instead
+	//TODO: try to use SpringArm instead and implement rotated camera
 	class TESTABLE_CLASS SimpleFollowSystem : public BaseSystem
 	{
 	public:

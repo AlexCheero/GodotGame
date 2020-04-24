@@ -24,8 +24,6 @@ godot::GrenadeSystem::GrenadeSystem()
 	m_params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
 	m_params->set_collide_with_areas(false);
 	m_params->set_collide_with_bodies(true);
-	//TODO: set layer name
-	//m_params->set_collision_mask(utils::GetLayerByName(layerName));
 
 	m_attackShape = Ref<SphereShape>(SphereShape::_new());
 }

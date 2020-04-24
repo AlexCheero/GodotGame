@@ -44,7 +44,6 @@ void godot::PatrolStateSystem::operator()(float delta, entt::registry& registry)
 
 		NavPathComponent& newPath = registry.assign<NavPathComponent>(entity);
 		newPath.pathIndex = 0;
-		//TODO: make nav system to target to the floor of the point
 		newPath.path = pNavigation->get_simple_path(pSpatial->get_global_transform().origin, route.GetCurrentPatrolPoint());
 	});
 

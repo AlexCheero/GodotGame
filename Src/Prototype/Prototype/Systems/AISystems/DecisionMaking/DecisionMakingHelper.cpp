@@ -30,8 +30,6 @@ float godot::GetDistanceToTarget(entt::registry& registry, entt::entity target, 
 {
 	ASSERT(registry.has<Spatial*>(target), "pursuing target has no spatial");
 	Spatial* pTargetSpatial = registry.get<Spatial*>(target);
-	//TODO: make nav system to target to the floor of the point or don't take target's y into account
-
 	Vector3 targetPosition = pTargetSpatial->get_global_transform().origin;
 	Vector3 pursuerPosition = pBotSpatial->get_global_transform().origin;
 	return (targetPosition - pursuerPosition).length();

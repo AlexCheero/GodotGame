@@ -189,7 +189,7 @@ void godot::ECSWorld::_init()
 	//must be called after all systems that affects velocity
 	m_physics_systems.emplace_back(new KinematicMovementSystem());
 
-	//TODO: make simple way to switch off bots (NavAgentSystem, PursuingSystem, FleeingSystem and others)
+	//comment to switch off bots
 	m_physics_systems.emplace_back(new DecisionMakingFSMSystem(registry));
 
 	m_physics_systems.emplace_back(new GrenadeSystem());
