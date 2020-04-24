@@ -65,7 +65,7 @@ constexpr entt::hashed_string CurrentWeaponThrowableTag = "CurrentWeaponThrowabl
 struct ThrowableAttackComponent
 {
 	int ammoCount;
-	//TODO: implement object pools
+	//TODO: implement object pools. keep pooled objects outside of scene tree
 	godot::Ref<godot::PackedScene> throwableScene;
 	float force;
 	float attackTime;
