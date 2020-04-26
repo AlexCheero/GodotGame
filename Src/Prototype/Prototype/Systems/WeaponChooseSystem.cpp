@@ -5,18 +5,21 @@
 
 void godot::WeaponChooseSystem::OnMeleeTagConstruct(entt::registry& registry, entt::entity entity)
 {
+	ASSERT(registry.has<MeleeAttackComponent>(entity), "registry has no MeleeAttackComponent");
 	registry.remove_if_exists<CurrentWeaponRangedTag>(entity);
 	registry.remove_if_exists<CurrentWeaponThrowableTag>(entity);
 }
 
 void godot::WeaponChooseSystem::OnRangedTagConstruct(entt::registry& registry, entt::entity entity)
 {
+	ASSERT(registry.has<RangedAttackComponent>(entity), "registry has no RangedAttackComponent");
 	registry.remove_if_exists<CurrentWeaponMeleeTag>(entity);
 	registry.remove_if_exists<CurrentWeaponThrowableTag>(entity);
 }
 
 void godot::WeaponChooseSystem::OnThrowableTagConstruct(entt::registry& registry, entt::entity entity)
 {
+	ASSERT(registry.has<ThrowableAttackComponent>(entity), "registry has no ThrowableAttackComponent");
 	registry.remove_if_exists<CurrentWeaponMeleeTag>(entity);
 	registry.remove_if_exists<CurrentWeaponRangedTag>(entity);
 }
