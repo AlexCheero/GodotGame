@@ -2,6 +2,8 @@
 
 #include <core/CoreTypes.hpp>
 
+#include "../ComponentsMeta.h"
+
 #include "entt/entt.hpp"
 
 struct PursuingStateComponent
@@ -17,7 +19,6 @@ struct HittedFromComponent
 	float lookAroundTime;
 };
 
-constexpr entt::hashed_string PatrolStateTag = "PatrolStateTag"_hs;
-constexpr entt::hashed_string MeleeAttackStateTag = "MeleeAttackStateTag"_hs;
-constexpr entt::hashed_string FleeStateTag = "FleeStateTag"_hs;
-
+DECLARE_TAG(PatrolStateTag);
+DECLARE_TAG(MeleeAttackStateTag);
+DECLARE_TAG(FleeStateTag);

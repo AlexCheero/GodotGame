@@ -5,27 +5,27 @@
 
 void godot::WeaponChooseSystem::OnMeleeTagConstruct(entt::registry& registry, entt::entity entity)
 {
-	registry.remove_if_exists<entt::tag<CurrentWeaponRangedTag> >(entity);
-	registry.remove_if_exists<entt::tag<CurrentWeaponThrowableTag> >(entity);
+	registry.remove_if_exists<CurrentWeaponRangedTag>(entity);
+	registry.remove_if_exists<CurrentWeaponThrowableTag>(entity);
 }
 
 void godot::WeaponChooseSystem::OnRangedTagConstruct(entt::registry& registry, entt::entity entity)
 {
-	registry.remove_if_exists<entt::tag<CurrentWeaponMeleeTag> >(entity);
-	registry.remove_if_exists<entt::tag<CurrentWeaponThrowableTag> >(entity);
+	registry.remove_if_exists<CurrentWeaponMeleeTag>(entity);
+	registry.remove_if_exists<CurrentWeaponThrowableTag>(entity);
 }
 
 void godot::WeaponChooseSystem::OnThrowableTagConstruct(entt::registry& registry, entt::entity entity)
 {
-	registry.remove_if_exists<entt::tag<CurrentWeaponMeleeTag> >(entity);
-	registry.remove_if_exists<entt::tag<CurrentWeaponRangedTag> >(entity);
+	registry.remove_if_exists<CurrentWeaponMeleeTag>(entity);
+	registry.remove_if_exists<CurrentWeaponRangedTag>(entity);
 }
 
 godot::WeaponChooseSystem::WeaponChooseSystem(entt::registry& registry)
 {
-	registry.on_construct<entt::tag<CurrentWeaponMeleeTag> >().connect<&WeaponChooseSystem::OnMeleeTagConstruct>(this);
-	registry.on_construct<entt::tag<CurrentWeaponRangedTag> >().connect<&WeaponChooseSystem::OnRangedTagConstruct>(this);
-	registry.on_construct<entt::tag<CurrentWeaponThrowableTag> >().connect<&WeaponChooseSystem::OnThrowableTagConstruct>(this);
+	registry.on_construct<CurrentWeaponMeleeTag>().connect<&WeaponChooseSystem::OnMeleeTagConstruct>(this);
+	registry.on_construct<CurrentWeaponRangedTag>().connect<&WeaponChooseSystem::OnRangedTagConstruct>(this);
+	registry.on_construct<CurrentWeaponThrowableTag>().connect<&WeaponChooseSystem::OnThrowableTagConstruct>(this);
 }
 
 //TODO: don't update this and similar systems all the time
@@ -35,20 +35,20 @@ void godot::WeaponChooseSystem::operator()(float delta, entt::registry& registry
 	view.each([&registry](entt::entity entity, InputComponent input)
 	{
 		//TODO: it shouldn't take non existent weapon
-		if (input.Test(EInput::ChooseMelee) && !registry.has<entt::tag<CurrentWeaponMeleeTag> >(entity)
+		if (input.Test(EInput::ChooseMelee) && !registry.has<CurrentWeaponMeleeTag>(entity)
 			&& registry.has<MeleeAttackComponent>(entity))
 		{
-			registry.assign<entt::tag<CurrentWeaponMeleeTag> >(entity);
+			registry.assign<CurrentWeaponMeleeTag>(entity);
 		}
-		if (input.Test(EInput::ChooseRanged) && !registry.has<entt::tag<CurrentWeaponRangedTag> >(entity)
+		if (input.Test(EInput::ChooseRanged) && !registry.has<CurrentWeaponRangedTag>(entity)
 			&& registry.has<RangedAttackComponent>(entity))
 		{
-			registry.assign<entt::tag<CurrentWeaponRangedTag> >(entity);
+			registry.assign<CurrentWeaponRangedTag>(entity);
 		}
-		if (input.Test(EInput::ChooseThrowable) && !registry.has<entt::tag<CurrentWeaponThrowableTag> >(entity)
+		if (input.Test(EInput::ChooseThrowable) && !registry.has<CurrentWeaponThrowableTag>(entity)
 			&& registry.has<ThrowableAttackComponent>(entity))
 		{
-			registry.assign<entt::tag<CurrentWeaponThrowableTag> >(entity);
+			registry.assign<CurrentWeaponThrowableTag>(entity);
 		}
 	});
 }

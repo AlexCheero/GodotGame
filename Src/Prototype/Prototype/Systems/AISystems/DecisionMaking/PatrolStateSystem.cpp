@@ -12,8 +12,8 @@
 
 void godot::PatrolStateSystem::operator()(float delta, entt::registry& registry)
 {
-	auto players = registry.view<entt::tag<PlayerTag>, Spatial*>();
-	auto patrolView = registry.view<entt::tag<BotTag>, entt::tag<PatrolStateTag>, PatrolmanComponent, Spatial*>();
+	auto players = registry.view<PlayerTag, Spatial*>();
+	auto patrolView = registry.view<BotTag, PatrolStateTag, PatrolmanComponent, Spatial*>();
 	patrolView.less([this, &registry, &players](entt::entity entity, PatrolmanComponent patrolComp, Spatial* pSpatial)
 	{
 		entt::entity targetEntity = entt::null;
@@ -34,7 +34,7 @@ void godot::PatrolStateSystem::operator()(float delta, entt::registry& registry)
 	entt::entity navEntity = registry.view<Navigation*>()[0];
 	Navigation* pNavigation = registry.get<Navigation*>(navEntity);
 
-	auto advanceView = registry.view<entt::tag<PatrolStateTag>, PatrolRouteComponent, Spatial*>(entt::exclude<NavPathComponent, HittedFromComponent>);
+	auto advanceView = registry.view<PatrolStateTag, PatrolRouteComponent, Spatial*>(entt::exclude<NavPathComponent, HittedFromComponent>);
 	advanceView.less([this, &registry, pNavigation] (entt::entity entity, PatrolRouteComponent& route, Spatial* pSpatial)
 	{
 		if (route.current < route.routePoints.size() - 1)

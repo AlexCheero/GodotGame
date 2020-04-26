@@ -5,7 +5,7 @@
 
 void godot::FleeStateSystem::operator()(float delta, entt::registry& registry)
 {
-	auto fleeView = registry.view<entt::tag<BotTag>, entt::tag<FleeStateTag> >();
+	auto fleeView = registry.view<BotTag, FleeStateTag>();
 	fleeView.less([]()
 	{
 		//TODO: implement proper fleeing system and probably merge with FleeingSystem

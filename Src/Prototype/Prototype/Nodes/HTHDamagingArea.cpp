@@ -39,7 +39,7 @@ void godot::HTHDamagingArea::_on_Area_body_entered(KinematicBody* pBody)
 	const MeleeAttackComponent& meleeComp = registry.get<MeleeAttackComponent>(ownerEntity);
 	registry.assign_or_replace<StunComponent>(hittedEntity, meleeComp.stunTime, meleeComp.stunSpeedFactor);
 	
-	if (registry.has<entt::tag<BotTag> >(hittedEntity))
+	if (registry.has<BotTag>(hittedEntity))
 	{
 		PatrolmanComponent& patrolManComp = registry.get<PatrolmanComponent>(hittedEntity);
 		registry.assign_or_replace<HittedFromComponent>(hittedEntity, get_global_transform().get_origin(), patrolManComp.lookAroundTime);

@@ -12,7 +12,7 @@
 
 #include "ComponentsMeta.h"
 
-constexpr entt::hashed_string CurrentWeaponMeleeTag = "CurrentWeaponMeleeTag"_hs;
+DECLARE_TAG(CurrentWeaponMeleeTag);
 //TODO: refactor this component. split into several separate ones
 struct MeleeAttackComponent
 {
@@ -49,7 +49,7 @@ struct MeleeWeaponComponent
 };
 REGISTER_COMPONENT(MeleeWeaponComponent, "damage", "attackTime", "distance");
 
-constexpr entt::hashed_string CurrentWeaponRangedTag = "CurrentWeaponRangedTag"_hs;
+DECLARE_TAG(CurrentWeaponRangedTag);
 struct RangedAttackComponent
 {
 	int ammoCount;
@@ -61,7 +61,7 @@ struct RangedAttackComponent
 REGISTER_COMPONENT(RangedAttackComponent, "ammoCount", "distance", "damage", "attackTime");
 
 //TODO make grenade as separate weapon type
-constexpr entt::hashed_string CurrentWeaponThrowableTag = "CurrentWeaponThrowableTag"_hs;
+DECLARE_TAG(CurrentWeaponThrowableTag);
 struct ThrowableAttackComponent
 {
 	int ammoCount;
@@ -73,7 +73,7 @@ struct ThrowableAttackComponent
 };
 REGISTER_COMPONENT(ThrowableAttackComponent, "ammoCount", "throwableScene", "force", "attackTime");
 
-constexpr entt::hashed_string AttackActionTag = "AttackActionTag"_hs;
+DECLARE_TAG(AttackActionTag);
 struct AttackAnimPlayingComponent
 {
 	float playBackTimeLeft;
@@ -84,7 +84,7 @@ struct TargetLockComponent
 	entt::entity target = entt::null;
 };
 
-constexpr entt::hashed_string GrenadeExplodesTag = "GrenadeExplodesTag"_hs;
+DECLARE_TAG(GrenadeExplodesTag);
 struct GrenadeComponent
 {
 	float explosionTime;
@@ -94,5 +94,5 @@ struct GrenadeComponent
 };
 REGISTER_COMPONENT(GrenadeComponent, "explosionTime", "explosionRadius", "damage");
 
-constexpr entt::hashed_string PileInTag = "PileInTag"_hs;
-constexpr entt::hashed_string IncrementComboTag = "IncrementComboTag"_hs;
+DECLARE_TAG(PileInTag);
+DECLARE_TAG(IncrementComboTag);

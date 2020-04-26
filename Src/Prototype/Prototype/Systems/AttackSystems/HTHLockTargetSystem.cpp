@@ -26,7 +26,7 @@ godot::Array godot::HTHLockTargetSystem::GetIntersects(Spatial* pAttackerSpatial
 
 bool godot::HTHLockTargetSystem::ChecktargetEntity(entt::registry& registry, entt::entity lockedTarget)
 {
-	return registry.valid(lockedTarget) && !registry.has<entt::tag<DeadTag> >(lockedTarget);
+	return registry.valid(lockedTarget) && !registry.has<DeadTag>(lockedTarget);
 }
 
 godot::HTHLockTargetSystem::HTHLockTargetSystem()
@@ -41,7 +41,7 @@ godot::HTHLockTargetSystem::HTHLockTargetSystem()
 void godot::HTHLockTargetSystem::operator()(float delta, entt::registry& registry)
 {
 	//TODO: implement target change when already have locked target
-	auto withoutTargetView = registry.view<entt::tag<AttackActionTag>, entt::tag<CurrentWeaponMeleeTag>, InputComponent, MeleeAttackComponent, Spatial*>(entt::exclude<TargetLockComponent>);
+	auto withoutTargetView = registry.view<AttackActionTag, CurrentWeaponMeleeTag, InputComponent, MeleeAttackComponent, Spatial*>(entt::exclude<TargetLockComponent>);
 	withoutTargetView.less([this, &registry](entt::entity entity, InputComponent input, MeleeAttackComponent attackComp, Spatial* pSpatial)
 	{
 		//TODO: same as for pile in- use different distance for each hit
@@ -66,12 +66,12 @@ void godot::HTHLockTargetSystem::operator()(float delta, entt::registry& registr
 		entt::entity targetEntity = pHittedEntityView->GetEntity();
 		ASSERT(targetEntity != entt::null, "target entity is null");
 		ASSERT(registry.valid(targetEntity), "invalid target entity");
-		ASSERT(!registry.has<entt::tag<DeadTag> >(targetEntity), "entity is already dead!");
+		ASSERT(!registry.has<DeadTag>(targetEntity), "entity is already dead!");
 
 		registry.assign<TargetLockComponent>(entity).target = targetEntity;
 	});
 
-	auto lockedView = registry.view<entt::tag<CurrentWeaponMeleeTag>, TargetLockComponent, RotationDirectionComponent, Spatial*>();
+	auto lockedView = registry.view<CurrentWeaponMeleeTag, TargetLockComponent, RotationDirectionComponent, Spatial*>();
 	lockedView.less([this, &registry](entt::entity entity, TargetLockComponent lockComp, RotationDirectionComponent& rotComp, Spatial* pSpatial)
 	{
 		if (ChecktargetEntity(registry, lockComp.target))

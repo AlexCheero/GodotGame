@@ -11,7 +11,7 @@
 
 void godot::HTHStateSystem::operator()(float delta, entt::registry& registry)
 {
-	auto view = registry.view<entt::tag<BotTag>, entt::tag<MeleeAttackStateTag>, InputComponent
+	auto view = registry.view<BotTag, MeleeAttackStateTag, InputComponent
 		, MeleeAttackComponent, HealthComponent, Spatial*
 		, TargetLockComponent>();
 	view.less([this, &registry](entt::entity entity, InputComponent& inputComp, MeleeAttackComponent& meleeComp
@@ -23,12 +23,12 @@ void godot::HTHStateSystem::operator()(float delta, entt::registry& registry)
 
 		//to flee transition
 		if (healthComp.IsHealthCritical())
-			registry.assign<entt::tag<FleeStateTag> >(entity);
+			registry.assign<FleeStateTag>(entity);
 		//to pursuit transition
 		else if (registry.valid(lockComp.target) && meleeComp.maxDistance < GetDistanceToTarget(registry, lockComp.target, pSpatial))
 			registry.assign<PursuingStateComponent>(entity, lockComp.target);
 		//to patrol transition
-		else if (!registry.valid(lockComp.target) || registry.has<entt::tag<DeadTag> >(lockComp.target))
-			registry.assign<entt::tag<PatrolStateTag> >(entity);
+		else if (!registry.valid(lockComp.target) || registry.has<DeadTag>(lockComp.target))
+			registry.assign<PatrolStateTag>(entity);
 	});
 }

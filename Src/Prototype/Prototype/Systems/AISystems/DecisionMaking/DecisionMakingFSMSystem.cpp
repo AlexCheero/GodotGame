@@ -8,19 +8,19 @@
 void godot::DecisionMakingFSMSystem::OnTransitionToPatrol(entt::registry& registry, entt::entity entity)
 {
 	registry.remove_if_exists<PursuingStateComponent>(entity);
-	if (registry.has<entt::tag<MeleeAttackStateTag> >(entity))
+	if (registry.has<MeleeAttackStateTag>(entity))
 	{
-		registry.remove<entt::tag<MeleeAttackStateTag> >(entity);
+		registry.remove<MeleeAttackStateTag>(entity);
 		registry.remove<TargetLockComponent>(entity);
 	}
 }
 
 void godot::DecisionMakingFSMSystem::OnTransitionToPursuing(entt::registry& registry, entt::entity entity)
 {
-	registry.remove_if_exists<entt::tag<PatrolStateTag> >(entity);
-	if (registry.has<entt::tag<MeleeAttackStateTag> >(entity))
+	registry.remove_if_exists<PatrolStateTag>(entity);
+	if (registry.has<MeleeAttackStateTag>(entity))
 	{
-		registry.remove<entt::tag<MeleeAttackStateTag> >(entity);
+		registry.remove<MeleeAttackStateTag>(entity);
 		registry.remove<TargetLockComponent>(entity);
 	}
 	registry.remove_if_exists<NavPathComponent>(entity);
@@ -29,7 +29,7 @@ void godot::DecisionMakingFSMSystem::OnTransitionToPursuing(entt::registry& regi
 void godot::DecisionMakingFSMSystem::OnTransitionToFlee(entt::registry& registry, entt::entity entity)
 {
 	registry.remove_if_exists<PursuingStateComponent>(entity);
-	registry.remove_if_exists<entt::tag<MeleeAttackStateTag> >(entity);
+	registry.remove_if_exists<MeleeAttackStateTag>(entity);
 	registry.remove_if_exists<NavPathComponent>(entity);
 }
 
@@ -40,7 +40,7 @@ void godot::DecisionMakingFSMSystem::OnTransitionToHTH(entt::registry& registry,
 
 void godot::DecisionMakingFSMSystem::OnHitNoticing(entt::registry& registry, entt::entity entity)
 {
-	if (registry.has<entt::tag<PatrolStateTag> >(entity))
+	if (registry.has<PatrolStateTag>(entity))
 	{
 		Vector3 hitPosition = registry.get<HittedFromComponent>(entity).position;
 		registry.remove<NavPathComponent>(entity);
@@ -58,12 +58,12 @@ void godot::DecisionMakingFSMSystem::OnHitNoticing(entt::registry& registry, ent
 godot::DecisionMakingFSMSystem::DecisionMakingFSMSystem(entt::registry& registry)
 {
 	registry.on_construct<PursuingStateComponent>().connect<&DecisionMakingFSMSystem::OnTransitionToPursuing>(this);
-	registry.on_construct<entt::tag<PatrolStateTag> >().connect<&DecisionMakingFSMSystem::OnTransitionToPatrol>(this);
-	registry.on_construct<entt::tag<FleeStateTag> >().connect<&DecisionMakingFSMSystem::OnTransitionToFlee>(this);
-	registry.on_construct<entt::tag<MeleeAttackStateTag> >().connect<&DecisionMakingFSMSystem::OnTransitionToHTH>(this);
+	registry.on_construct<PatrolStateTag>().connect<&DecisionMakingFSMSystem::OnTransitionToPatrol>(this);
+	registry.on_construct<FleeStateTag>().connect<&DecisionMakingFSMSystem::OnTransitionToFlee>(this);
+	registry.on_construct<MeleeAttackStateTag>().connect<&DecisionMakingFSMSystem::OnTransitionToHTH>(this);
 	registry.on_construct<HittedFromComponent>().connect<&DecisionMakingFSMSystem::OnHitNoticing>(this);
 
-	registry.on_destroy<entt::tag<PatrolStateTag> >().connect<&entt::registry::remove_if_exists<HittedFromComponent> >();
+	registry.on_destroy<PatrolStateTag>().connect<&entt::registry::remove_if_exists<HittedFromComponent> >();
 }
 
 void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& registry)

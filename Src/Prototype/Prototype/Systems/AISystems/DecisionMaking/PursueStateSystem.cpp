@@ -13,9 +13,9 @@
 
 void godot::PursueStateSystem::operator()(float delta, entt::registry& registry)
 {
-	auto players = registry.view<entt::tag<PlayerTag>, Spatial*>();
+	auto players = registry.view<PlayerTag, Spatial*>();
 
-	auto view = registry.view<entt::tag<BotTag>, PursuingStateComponent, PatrolmanComponent, MeleeAttackComponent, HealthComponent, Spatial*>();
+	auto view = registry.view<BotTag, PursuingStateComponent, PatrolmanComponent, MeleeAttackComponent, HealthComponent, Spatial*>();
 	view.less([this, &registry, &players](entt::entity entity, PursuingStateComponent& pursuingComp
 		, PatrolmanComponent patrolComp, MeleeAttackComponent& meleeComp, HealthComponent healthComp, Spatial* pSpatial)
 	{
@@ -33,18 +33,18 @@ void godot::PursueStateSystem::operator()(float delta, entt::registry& registry)
 
 		//to flee transition
 		if (healthComp.IsHealthCritical())
-			registry.assign<entt::tag<FleeStateTag> >(entity);
+			registry.assign<FleeStateTag>(entity);
 		else if (validTarget)
 		{
 			//to attack transition
 			if (meleeComp.maxDistance >= GetDistanceToTarget(registry, pursuingComp.target, pSpatial))
 			{
-				registry.assign<entt::tag<MeleeAttackStateTag> >(entity);
+				registry.assign<MeleeAttackStateTag>(entity);
 				registry.assign<TargetLockComponent>(entity).target = pursuingComp.target;
 			}
 		}
 		//to patrol transition
 		else
-			registry.assign<entt::tag<PatrolStateTag> >(entity);
+			registry.assign<PatrolStateTag>(entity);
 	});
 }

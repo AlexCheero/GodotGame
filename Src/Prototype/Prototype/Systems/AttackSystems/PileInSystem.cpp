@@ -4,7 +4,7 @@
 
 void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 {
-	auto checkForPileInView = registry.view<entt::tag<AttackActionTag>, TargetLockComponent, MeleeAttackComponent, Spatial*>(entt::exclude<entt::tag<PileInTag> >);
+	auto checkForPileInView = registry.view<AttackActionTag, TargetLockComponent, MeleeAttackComponent, Spatial*>(entt::exclude<PileInTag>);
 	checkForPileInView.less([&registry](entt::entity entity, TargetLockComponent lockComp, MeleeAttackComponent melee, Spatial* pSpatial)
 	{
 		ASSERT(registry.has<Spatial*>(lockComp.target), "target has no spatial");
@@ -12,10 +12,10 @@ void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 		Vector3 toTargetDirection = pTargetSpatial->get_global_transform().get_origin() - pSpatial->get_global_transform().get_origin();
 		float distanceToTarget = toTargetDirection.length();
 		if (distanceToTarget > melee.maxDistance)
-			registry.assign<entt::tag<PileInTag> >(entity);
+			registry.assign<PileInTag>(entity);
 	});
 
-	auto pileInView = registry.view<entt::tag<PileInTag>, AttackAnimPlayingComponent, TargetLockComponent, VelocityComponent, SpeedComponent,
+	auto pileInView = registry.view<PileInTag, AttackAnimPlayingComponent, TargetLockComponent, VelocityComponent, SpeedComponent,
 									MeleeAttackComponent, Spatial*>();
 	pileInView.less([&registry](entt::entity entity, AttackAnimPlayingComponent animPlayingComp, TargetLockComponent lockComp,
 												   VelocityComponent& velComp, SpeedComponent speedComp, MeleeAttackComponent melee, Spatial* pSpatial)

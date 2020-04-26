@@ -43,7 +43,7 @@ void godot::PickableNode::_on_Pickable_body_entered(KinematicBody* pBody)
 		attackComp.maxDistance = meleeWeaponComp.distance;
 		attackComp.damage = meleeWeaponComp.damage;
 		//if switch on pickup
-		registry.get_or_assign<entt::tag<CurrentWeaponMeleeTag> >(pickerEntity);
+		registry.get_or_assign<CurrentWeaponMeleeTag>(pickerEntity);
 		break;
 	}
 	case EPickableType::RangedWeapon:
@@ -51,7 +51,7 @@ void godot::PickableNode::_on_Pickable_body_entered(KinematicBody* pBody)
 		bool constructed = pPickableView->ConvertToComponent(registry.assign_or_replace<RangedAttackComponent>(pickerEntity));
 		ASSERT(constructed, "can't construct RangedAttackComponent");
 		//if switch on pickup
-		registry.get_or_assign<entt::tag<CurrentWeaponRangedTag> >(pickerEntity);
+		registry.get_or_assign<CurrentWeaponRangedTag>(pickerEntity);
 		break;
 	}
 	case EPickableType::ThrowableWeapon:
@@ -59,7 +59,7 @@ void godot::PickableNode::_on_Pickable_body_entered(KinematicBody* pBody)
 		bool constructed = pPickableView->ConvertToComponent(registry.assign_or_replace<ThrowableAttackComponent>(pickerEntity));
 		ASSERT(constructed, "can't construct ThrowableAttackComponent");
 		//if switch on pickup
-		registry.get_or_assign<entt::tag<CurrentWeaponThrowableTag> >(pickerEntity);
+		registry.get_or_assign<CurrentWeaponThrowableTag>(pickerEntity);
 		break;
 	}
 	case EPickableType::Medkit:

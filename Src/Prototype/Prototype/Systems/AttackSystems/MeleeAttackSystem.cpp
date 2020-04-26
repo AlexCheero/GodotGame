@@ -8,7 +8,7 @@
 void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 {
 	int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
-	auto startAttackView = registry.view<entt::tag<CurrentWeaponMeleeTag>, MeleeAttackComponent, InputComponent>(entt::exclude<entt::tag<AttackActionTag> >);
+	auto startAttackView = registry.view<CurrentWeaponMeleeTag, MeleeAttackComponent, InputComponent>(entt::exclude<AttackActionTag>);
 	startAttackView.less([this, &registry, currTimeMillis](entt::entity entity, MeleeAttackComponent& attackComp, InputComponent input)
 	{
 		if (!input.Test(EInput::Attack) || attackComp.prevHitTimeMillis + utils::SecondsToMillis(attackComp.attackTime) > currTimeMillis)
@@ -18,9 +18,9 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 		attackComp.prevHitTimeMillis = currTimeMillis;
 
 		if (millisSinceLastHit <= attackComp.maxComboIntervalMillis)
-			registry.assign<entt::tag<IncrementComboTag> >(entity);
+			registry.assign<IncrementComboTag>(entity);
 
-		registry.assign<entt::tag<AttackActionTag> >(entity);
+		registry.assign<AttackActionTag>(entity);
 	});
 
 	lockSystem(delta, registry);
@@ -40,21 +40,21 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 	pileInRemoveOnMoveInputView.each([&registry, delta](entt::entity entity, InputComponent inputComp)
 	{
 		if (inputComp.moveDir.length_squared() > 0)
-			registry.remove_if_exists<entt::tag<PileInTag> >(entity);
+			registry.remove_if_exists<PileInTag>(entity);
 	});
 
-	auto pileInRemoveOnAnimationEndView = registry.view<entt::tag<PileInTag> >(entt::exclude<AttackAnimPlayingComponent>);
-	registry.remove<entt::tag<PileInTag> >(pileInRemoveOnAnimationEndView.begin(), pileInRemoveOnAnimationEndView.end());
+	auto pileInRemoveOnAnimationEndView = registry.view<PileInTag>(entt::exclude<AttackAnimPlayingComponent>);
+	registry.remove<PileInTag>(pileInRemoveOnAnimationEndView.begin(), pileInRemoveOnAnimationEndView.end());
 
-	auto incrementComboView = registry.view<entt::tag<IncrementComboTag>, MeleeAttackComponent>();
+	auto incrementComboView = registry.view<IncrementComboTag, MeleeAttackComponent>();
 	incrementComboView.less([](MeleeAttackComponent& attackComp)
 	{
 		attackComp.comboSequenceNum++;
 		if (attackComp.comboSequenceNum > attackComp.comboLength - 1)
 			attackComp.comboSequenceNum = 0;
 	});
-	registry.remove<entt::tag<IncrementComboTag> >(incrementComboView.begin(), incrementComboView.end());
+	registry.remove<IncrementComboTag>(incrementComboView.begin(), incrementComboView.end());
 
-	auto inputClearView = registry.view<entt::tag<AttackActionTag> >();
-	registry.remove<entt::tag<AttackActionTag> >(inputClearView.begin(), inputClearView.end());
+	auto inputClearView = registry.view<AttackActionTag>();
+	registry.remove<AttackActionTag>(inputClearView.begin(), inputClearView.end());
 }

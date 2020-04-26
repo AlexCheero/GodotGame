@@ -32,14 +32,14 @@ void godot::GrenadeSystem::operator()(float delta, entt::registry& registry)
 {
 	int64_t currTime = godot::OS::get_singleton()->get_ticks_msec();
 
-	auto view = registry.view<GrenadeComponent, Spatial*>(entt::exclude<entt::tag<GrenadeExplodesTag> >);
+	auto view = registry.view<GrenadeComponent, Spatial*>(entt::exclude<GrenadeExplodesTag>);
 	view.each([&registry, currTime](entt::entity entity, GrenadeComponent grenComp, Spatial* pGrenSpatial)
 	{
 		if (grenComp.startTime + utils::SecondsToMillis(grenComp.explosionTime) <= currTime)
-			registry.assign<entt::tag<GrenadeExplodesTag> >(entity);
+			registry.assign<GrenadeExplodesTag>(entity);
 	});
 
-	auto explodedView = registry.view<entt::tag<GrenadeExplodesTag>, GrenadeComponent, Spatial*>(ExcludeDead);
+	auto explodedView = registry.view<GrenadeExplodesTag, GrenadeComponent, Spatial*>(ExcludeDead);
 	explodedView.less([this, &registry](entt::entity entity, GrenadeComponent grenComp, Spatial* pGrenSpatial)
 	{
 		m_attackShape->set_radius(grenComp.explosionRadius);
@@ -66,7 +66,7 @@ void godot::GrenadeSystem::operator()(float delta, entt::registry& registry)
 			}
 		}
 
-		registry.assign<entt::tag<DeadTag> >(entity);
+		registry.assign<DeadTag>(entity);
 		registry.assign<Node*>(entity, Object::cast_to<Node>(pGrenSpatial));
 	});
 }

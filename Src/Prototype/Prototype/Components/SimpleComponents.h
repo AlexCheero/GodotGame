@@ -6,17 +6,17 @@
 
 #include "ComponentsMeta.h"
 
-constexpr entt::hashed_string PlayerTag = "PlayerTag"_hs;
-constexpr entt::hashed_string BotTag = "BotTag"_hs;
-constexpr entt::hashed_string DeadTag = "DeadTag"_hs;
-constexpr entt::hashed_string MainCameraTag = "MainCameraTag"_hs;
+DECLARE_TAG(PlayerTag);
+DECLARE_TAG(BotTag);
+DECLARE_TAG(DeadTag);
+DECLARE_TAG(MainCameraTag);
 
 struct VelocityComponent { godot::Vector3 velocity; };
 struct SpeedComponent { float speed; }; REGISTER_COMPONENT(SpeedComponent, "speed");
 struct JumpSpeedComponent { float speed; }; REGISTER_COMPONENT(JumpSpeedComponent, "speed");
 struct RotationDirectionComponent { godot::Vector3 direction; };
 
-constexpr entt::exclude_t ExcludeDead = entt::exclude<entt::tag<DeadTag> >;
+constexpr entt::exclude_t ExcludeDead = entt::exclude<DeadTag>;
 
 struct GravityComponent
 {

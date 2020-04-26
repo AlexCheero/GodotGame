@@ -16,7 +16,7 @@ inline godot::Vector2 godot::PlayerInputSystem::GetInputDirection(const char* ac
 
 void godot::PlayerInputSystem::operator()(entt::registry& registry, InputEvent* e)
 {
-	auto view = registry.view<entt::tag<PlayerTag>, InputComponent>();
+	auto view = registry.view<PlayerTag, InputComponent>();
 	view.less([&registry, e](InputComponent& comp)
 	{
 		comp.Set(EInput::Attack, e->is_action_pressed("attack"));

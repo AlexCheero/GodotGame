@@ -13,3 +13,5 @@ struct ComponentsMeta<Type> \
 	constexpr static const char* properties[] = { __VA_ARGS__ }; \
 	constexpr static int propertiesCount = GetArraySize(ComponentsMeta<Type>::properties); \
 }
+
+#define DECLARE_TAG(Tag) using Tag = entt::tag<#Tag ## _hs>
