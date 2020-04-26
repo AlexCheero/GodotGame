@@ -6,10 +6,11 @@
 
 #include "ComponentsMeta.h"
 
-DECLARE_TAG(PlayerTag);
-DECLARE_TAG(BotTag);
+DECLARE_REGISTERED_TAG(PlayerTag);
+DECLARE_REGISTERED_TAG(BotTag);
+DECLARE_REGISTERED_TAG(MainCameraTag);
+
 DECLARE_TAG(DeadTag);
-DECLARE_TAG(MainCameraTag);
 
 struct VelocityComponent { godot::Vector3 velocity; };
 struct SpeedComponent { float speed; }; REGISTER_COMPONENT(SpeedComponent, "speed");

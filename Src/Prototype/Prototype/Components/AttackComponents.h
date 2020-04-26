@@ -12,7 +12,7 @@
 
 #include "ComponentsMeta.h"
 
-DECLARE_TAG(CurrentWeaponMeleeTag);
+DECLARE_REGISTERED_TAG(CurrentWeaponMeleeTag);
 //TODO: refactor this component. split into several separate ones
 struct MeleeAttackComponent
 {
@@ -49,7 +49,7 @@ struct MeleeWeaponComponent
 };
 REGISTER_COMPONENT(MeleeWeaponComponent, "damage", "attackTime", "distance");
 
-DECLARE_TAG(CurrentWeaponRangedTag);
+DECLARE_REGISTERED_TAG(CurrentWeaponRangedTag);
 struct RangedAttackComponent
 {
 	int ammoCount;
@@ -61,7 +61,7 @@ struct RangedAttackComponent
 REGISTER_COMPONENT(RangedAttackComponent, "ammoCount", "distance", "damage", "attackTime");
 
 //TODO make grenade as separate weapon type
-DECLARE_TAG(CurrentWeaponThrowableTag);
+DECLARE_REGISTERED_TAG(CurrentWeaponThrowableTag);
 struct ThrowableAttackComponent
 {
 	int ammoCount;

@@ -13,3 +13,4 @@ components = {
 "yAngle": -45.0
 }
 }
+tags = [ "MainCamera" ]

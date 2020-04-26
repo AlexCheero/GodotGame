@@ -67,12 +67,10 @@ void godot::ECSWorld::PreparePlayerEntity()
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Player/vanguard/AnimationTree"));
 
 	entityView->ConstructComponents(registry, entity);
-
+	entityView->ConstructTags(registry, entity);
 	//TODO: add some kind of reactive callback to automatically assign curr weapon tag on assigning attack comp
 	//		and remove manual tag assigning here and for bot too
-	registry.assign<CurrentWeaponMeleeTag>(entity);
-
-	registry.assign<PlayerTag>(entity);
+	//registry.assign<CurrentWeaponMeleeTag>(entity);
 
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<InputComponent>(entity);
@@ -93,13 +91,12 @@ void godot::ECSWorld::PrepareCameraEntity()
 	EntityView* entityView = Object::cast_to<EntityView>(pCameraNode->get_node("EntityView"));
 
 	entityView->ConstructComponents(registry, entity);
+	entityView->ConstructTags(registry, entity);
 
 	SimpleFollowComponent& followComp = registry.get<SimpleFollowComponent>(entity);
 
 	followComp.targetEntity = Object::cast_to<EntityView>(get_node("Player")->get_node("EntityView"))->GetEntity();
 	ASSERT(registry.valid(followComp.targetEntity), "invalid follow component target");
-
-	registry.assign<MainCameraTag>(entity);
 }
 
 void godot::ECSWorld::PrepareEnemyEntity()
@@ -119,7 +116,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	registry.assign<BoundsComponent>(entity, utils::GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));
 	
 	entityView->ConstructComponents(registry, entity);
-	registry.assign<CurrentWeaponMeleeTag>(entity);
+	entityView->ConstructTags(registry, entity);
 
 	registry.assign<VelocityComponent>(entity);
 	RotationDirectionComponent rot{ registry.get<Spatial*>(entity)->get_global_transform().get_basis().z };
@@ -144,8 +141,6 @@ void godot::ECSWorld::PrepareEnemyEntity()
 
 	//initial fsm state
 	registry.assign<PatrolStateTag>(entity);
-	
-	registry.assign<BotTag>(entity);
 }
 
 void godot::ECSWorld::PrepareSingletonEntities()

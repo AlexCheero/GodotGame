@@ -7,7 +7,7 @@
 
 void godot::FleeingSystem::operator()(float delta, entt::registry& registry)
 {
-	auto players = registry.view<PlayerTag, Spatial*>(entt::exclude<DeadTag>);
+	auto players = registry.view<PlayerTag, Spatial*>(ExcludeDead);
 	if (players.size() == 0)
 		return;
 

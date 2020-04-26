@@ -53,6 +53,7 @@ components = {
 "speed": 10.0
 }
 }
+tags = [ "Bot", "CurrentWeaponMelee" ]
 
 [node name="vanguard" parent="." instance=ExtResource( 9 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.8, 0 )
