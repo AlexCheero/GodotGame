@@ -12,7 +12,6 @@
 
 namespace godot
 {
-	//TODO: implement tag views
 	class EntityView : public Node
 	{
 		GODOT_CLASS(EntityView, Node)
