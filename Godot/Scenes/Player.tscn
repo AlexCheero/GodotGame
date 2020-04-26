@@ -34,7 +34,6 @@ components = {
 "attackTime": 0.5,
 "collisionLayerName": "Enemy",
 "damage": 20.0,
-"dashSpeed": 5.0,
 "maxComboIntervalMillis": 3000,
 "maxDistance": 2.0,
 "minDistance": 1.0,
@@ -42,6 +41,7 @@ components = {
 "stunTime": 1.0
 },
 "Speed": {
+"dashSpeed": 5.0,
 "speed": 30.0
 }
 }

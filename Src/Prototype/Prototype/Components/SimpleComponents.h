@@ -12,12 +12,18 @@ DECLARE_REGISTERED_TAG(MainCameraTag);
 
 DECLARE_TAG(DeadTag);
 
+constexpr entt::exclude_t ExcludeDead = entt::exclude<DeadTag>;
+
 struct VelocityComponent { godot::Vector3 velocity; };
-struct SpeedComponent { float speed; }; REGISTER_COMPONENT(SpeedComponent, "speed");
 struct JumpSpeedComponent { float speed; }; REGISTER_COMPONENT(JumpSpeedComponent, "speed");
 struct RotationDirectionComponent { godot::Vector3 direction; };
 
-constexpr entt::exclude_t ExcludeDead = entt::exclude<DeadTag>;
+struct SpeedComponent
+{
+	float speed;
+	float dashSpeed;
+};
+REGISTER_COMPONENT(SpeedComponent, "speed", "dashSpeed");
 
 struct GravityComponent
 {

@@ -28,7 +28,6 @@ struct MeleeAttackComponent
 	//<pile in
 	float maxDistance;
 	float minDistance;
-	float dashSpeed;
 	//pile in>
 
 	//TODO: remove hardcode
@@ -39,7 +38,7 @@ struct MeleeAttackComponent
 	int comboSequenceNum = 0;
 };
 REGISTER_COMPONENT(MeleeAttackComponent, "damage", "attackTime", "collisionLayerName", "maxComboIntervalMillis",
-	                                     "stunTime", "stunSpeedFactor", "maxDistance", "minDistance", "dashSpeed");
+	                                     "stunTime", "stunSpeedFactor", "maxDistance", "minDistance");
 
 struct MeleeWeaponComponent
 {
