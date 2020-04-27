@@ -32,6 +32,7 @@ static const char* paramNames[8] =
 	"RoundRightKick"
 };
 
+//TODO: don't interrupt previous hit by the next one
 void godot::HTHAnimSystem::operator()(float delta, entt::registry& registry)
 {
 	auto punchView = registry.view<AttackActionTag, MeleeAttackComponent, AnimationTree*>();

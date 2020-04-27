@@ -26,8 +26,8 @@ godot::GrenadeSystem::GrenadeSystem()
 	m_params->set_collide_with_bodies(true);
 
 	m_attackShape = Ref<SphereShape>(SphereShape::_new());
-	//TODO0: set proper layers
 	m_params->set_shape(m_attackShape);
+	m_params->set_collision_mask(utils::GetDamageableMask());
 }
 
 void godot::GrenadeSystem::operator()(float delta, entt::registry& registry)
@@ -58,9 +58,12 @@ void godot::GrenadeSystem::operator()(float delta, entt::registry& registry)
 			if (pTargetSpatial && pTargetSpatial->has_node("EntityView") && CheckVisibility(pGrenSpatial, pTargetSpatial, grenComp.explosionRadius))
 			{
 				EntityView* pEntityView = Object::cast_to<EntityView>(pTargetSpatial->get_node("EntityView"));
-				//cause is_instance_valid is not presented in the bindings
+				//because is_instance_valid is not presented in the bindings
 				if (!registry.valid(pEntityView->GetEntity()))
 					return;
+
+				//TODO: check teammate if friendly fire is off
+
 				ASSERT(registry.has<HealthComponent>(pEntityView->GetEntity()), "no health component on entity hitted by explosion");
 				registry.get<HealthComponent>(pEntityView->GetEntity()).hp -= grenComp.damage;
 			}

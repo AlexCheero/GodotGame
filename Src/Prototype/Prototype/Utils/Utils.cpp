@@ -36,25 +36,19 @@ int64_t utils::GetLayerByName(godot::String name)
 	return 0;
 }
 
-//TODO: find out why I can't inline this func
-int64_t utils::SecondsToMillis(float seconds)
-{
-	return static_cast<int64_t>(static_cast<double>(seconds) * 1000);
-}
-
-godot::Vector2 utils::FlatVector(godot::Vector3 vec3)
-{
-	return godot::Vector2{ vec3.x, vec3.z };
-}
-
 //TODO: return spatial instead of object
 godot::Object* utils::CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 direction, float distance, godot::String layerName)
+{
+	return CastFromSpatial(pSpatial, direction, distance, GetLayerByName(layerName));
+}
+
+godot::Object* utils::CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 direction, float distance, int64_t mask)
 {
 	godot::PhysicsDirectSpaceState* spaceState = pSpatial->get_world()->get_direct_space_state();
 	godot::Transform transform = pSpatial->get_transform();
 	godot::Vector3 from = transform.origin;
 	godot::Vector3 to = from + direction * distance;
-	godot::Dictionary rayHit = spaceState->intersect_ray(from, to, godot::Array(), GetLayerByName(layerName));
+	godot::Dictionary rayHit = spaceState->intersect_ray(from, to, godot::Array(), mask);
 
 	if (rayHit.empty())
 		return nullptr;

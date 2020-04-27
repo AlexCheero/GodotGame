@@ -25,10 +25,17 @@ namespace utils
 	const godot::Vector3 globalZ = godot::Vector3{ 0, 0, 1 };
 
 	void InitPhysicLayers();
+	//TODO: make GetMask function, with variadic params
 	int64_t GetLayerByName(godot::String name);
+	
+	int64_t GetDamageableMask();
+	inline int64_t utils::GetDamageableMask() { return GetLayerByName("Character") | GetLayerByName("Damageable"); }
+
 	int64_t SecondsToMillis(float seconds);
-	godot::Vector2 FlatVector(godot::Vector3 vec3);
-	godot::Object* CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 direction, float distance, godot::String layerName = "");
+	inline int64_t utils::SecondsToMillis(float seconds) { return static_cast<int64_t>(static_cast<double>(seconds) * 1000); }
+
+	godot::Object* CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 direction, float distance, godot::String layerName);
+	godot::Object* CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 direction, float distance, int64_t mask = ALL_LAYERS);
 	BoundsComponent GetCapsuleBounds(godot::Node* pCapsuleNode);
 	void Assert(bool assertion, const char* message, const char* file, int line);
 	

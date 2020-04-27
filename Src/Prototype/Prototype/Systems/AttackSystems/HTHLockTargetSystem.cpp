@@ -14,6 +14,10 @@ const float INTERSECT_RESULTS_NUM = 16.f;
 
 godot::Array godot::HTHLockTargetSystem::GetIntersects(Spatial* pAttackerSpatial, float distance, String layerName)
 {
+	Array exclude;
+	exclude.push_back(pAttackerSpatial);
+	m_params->set_exclude(exclude);
+
 	m_attackShape->set_radius(distance);
 	m_params->set_collision_mask(utils::GetLayerByName(layerName));
 	m_params->set_shape(m_attackShape);
@@ -45,7 +49,8 @@ void godot::HTHLockTargetSystem::operator()(float delta, entt::registry& registr
 	withoutTargetView.less([this, &registry](entt::entity entity, InputComponent input, MeleeAttackComponent attackComp, Spatial* pSpatial)
 	{
 		//TODO: same as for pile in- use different distance for each hit
-		Array intersects = GetIntersects(pSpatial, attackComp.maxDistance, attackComp.collisionLayerName);
+		//TODO: do not lock on ally even if friendly fire is on
+		Array intersects = GetIntersects(pSpatial, attackComp.maxDistance, "Character");
 		if (intersects.size() == 0)
 			return;
 
@@ -64,6 +69,8 @@ void godot::HTHLockTargetSystem::operator()(float delta, entt::registry& registr
 			return;
 
 		entt::entity targetEntity = pHittedEntityView->GetEntity();
+
+		ASSERT(targetEntity != entity, "overlapped self");
 		ASSERT(targetEntity != entt::null, "target entity is null");
 		ASSERT(registry.valid(targetEntity), "invalid target entity");
 		ASSERT(!registry.has<DeadTag>(targetEntity), "entity is already dead!");

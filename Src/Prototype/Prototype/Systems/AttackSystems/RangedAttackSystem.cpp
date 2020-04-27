@@ -31,18 +31,20 @@ void godot::RangedAttackSystem::operator()(float delta, entt::registry& registry
 		Godot::print("Bang!");
 
 		Vector3 castDirection = pAttackerSpatial->get_global_transform().get_basis().z;
-		//TODO0: set proper layers
-		Object* pObj = utils::CastFromSpatial(pAttackerSpatial, castDirection, attackComp.distance);
+		Object* pObj = utils::CastFromSpatial(pAttackerSpatial, castDirection, attackComp.distance, utils::GetDamageableMask());
 		if (!pObj)
 			return;
 
 		Node* pNode = Object::cast_to<Node>(pObj);
+		ASSERT(pNode != nullptr, "hitted object is not node");
 		if (!pNode->has_node("EntityView"))
 			return;
 
 		EntityView* pEntityView = Object::cast_to<EntityView>(pNode->get_node("EntityView"));
 		if (!pEntityView)
 			return;
+
+		//TODO: check teammate if friendly fire is off
 
 		entt::entity enemyEntity = pEntityView->GetEntity();
 

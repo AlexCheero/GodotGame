@@ -20,6 +20,7 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 		if (millisSinceLastHit <= attackComp.maxComboIntervalMillis)
 			registry.assign<IncrementComboTag>(entity);
 
+		//TODO: locks on target on every hit, this may cause bugs with many enemies
 		registry.assign<AttackActionTag>(entity);
 	});
 
