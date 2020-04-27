@@ -18,6 +18,9 @@ void godot::HTHDamagingArea::_register_methods()
 void godot::HTHDamagingArea::_ready()
 {
 	call_deferred("_assign_owner_entity");
+	//TODO0: remove this hardcode and set proper Character (+ World) layers in editor
+	set_collision_layer(0);
+	set_collision_mask(ALL_LAYERS);
 }
 
 void godot::HTHDamagingArea::_on_Area_body_entered(KinematicBody* pBody)
@@ -28,6 +31,11 @@ void godot::HTHDamagingArea::_on_Area_body_entered(KinematicBody* pBody)
 
 	EntityView* pEntityView = Object::cast_to<EntityView>(pBody->get_node("EntityView"));
 	entt::entity hittedEntity = pEntityView->GetEntity();
+
+	if (hittedEntity == ownerEntity)
+		return;
+
+	//TODO0: check teammate if friendly fire is off
 
 	entt::registry& registry = ECSWorld::GetInstance()->GetRegistry();
 	

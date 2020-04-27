@@ -26,6 +26,8 @@ godot::GrenadeSystem::GrenadeSystem()
 	m_params->set_collide_with_bodies(true);
 
 	m_attackShape = Ref<SphereShape>(SphereShape::_new());
+	//TODO0: set proper layers
+	m_params->set_shape(m_attackShape);
 }
 
 void godot::GrenadeSystem::operator()(float delta, entt::registry& registry)
@@ -43,8 +45,6 @@ void godot::GrenadeSystem::operator()(float delta, entt::registry& registry)
 	explodedView.less([this, &registry](entt::entity entity, GrenadeComponent grenComp, Spatial* pGrenSpatial)
 	{
 		m_attackShape->set_radius(grenComp.explosionRadius);
-		m_params->set_shape(m_attackShape);
-
 		m_params->set_transform(pGrenSpatial->get_global_transform());
 		PhysicsDirectSpaceState* spaceState = pGrenSpatial->get_world()->get_direct_space_state();
 		Array intersects = spaceState->intersect_shape(m_params, INTERSECT_RESULTS_NUM);

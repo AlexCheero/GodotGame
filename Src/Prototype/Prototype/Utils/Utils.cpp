@@ -27,7 +27,7 @@ void utils::InitPhysicLayers()
 int64_t utils::GetLayerByName(godot::String name)
 {
 	if (name.length() == 0)
-		return 2147483647;//const for all layers
+		return ALL_LAYERS;
 	for (int64_t i = 0; i < LayerNames.size(); i++)
 	{
 		if (LayerNames[i] == name)

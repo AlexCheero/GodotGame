@@ -16,6 +16,8 @@
 #define ASSERT(assertion, message)
 #endif
 
+constexpr int ALL_LAYERS = 2147483647;
+
 namespace utils
 {
 	const godot::Vector3 globalX = godot::Vector3{ 1, 0, 0 };

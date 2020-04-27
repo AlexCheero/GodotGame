@@ -8,7 +8,7 @@
 
 namespace godot
 {
-	//TODO: take collision layer from MeleeAttackComponent if it even needed
+	//TODO0: take collision layer from MeleeAttackComponent if it even needed
 	class HTHDamagingArea : public Area
 	{
 		GODOT_CLASS(HTHDamagingArea, Area)
