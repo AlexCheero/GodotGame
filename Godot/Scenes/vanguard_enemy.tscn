@@ -1,16 +1,23 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scripts/Nodes/HTHDamagingArea.gdns" type="Script" id=1]
 [ext_resource path="res://Characters3D/vanguard.dae" type="PackedScene" id=2]
 [ext_resource path="res://Characters/BlendTrees/character_blend_tree.tres" type="AnimationNodeBlendTree" id=3]
-[ext_resource path="res://Characters3D/Jab Left.tres" type="Animation" id=4]
-[ext_resource path="res://Characters3D/Kick Round Left.tres" type="Animation" id=5]
-[ext_resource path="res://Characters3D/Hook Left.tres" type="Animation" id=6]
-[ext_resource path="res://Characters3D/Hook Right.tres" type="Animation" id=7]
-[ext_resource path="res://Characters3D/Kick Front Right.tres" type="Animation" id=8]
-[ext_resource path="res://Characters3D/Kick Front Left.tres" type="Animation" id=9]
-[ext_resource path="res://Characters3D/Kick Round Right.tres" type="Animation" id=10]
-[ext_resource path="res://Characters3D/Jab Right.tres" type="Animation" id=11]
+[ext_resource path="res://Characters3D/Jab_Left.tres" type="Animation" id=4]
+[ext_resource path="res://Characters3D/Kick_Round_Left.tres" type="Animation" id=5]
+[ext_resource path="res://Characters3D/Hook_Left.tres" type="Animation" id=6]
+[ext_resource path="res://Characters3D/Hook_Right.tres" type="Animation" id=7]
+[ext_resource path="res://Characters3D/Kick_Front_Right.tres" type="Animation" id=8]
+[ext_resource path="res://Characters3D/Kick_Front_Left.tres" type="Animation" id=9]
+[ext_resource path="res://Characters3D/Kick_Round_Right.tres" type="Animation" id=10]
+[ext_resource path="res://Characters3D/Jab_Right.tres" type="Animation" id=11]
+[ext_resource path="res://Characters3D/Running_Backward-loop.tres" type="Animation" id=12]
+[ext_resource path="res://Characters3D/Jog_Strafe_Left-loop.tres" type="Animation" id=13]
+[ext_resource path="res://Characters3D/Idle-loop.tres" type="Animation" id=14]
+[ext_resource path="res://Characters3D/Jog_Strafe_Right-loop.tres" type="Animation" id=15]
+[ext_resource path="res://Characters3D/Running-loop.tres" type="Animation" id=16]
+[ext_resource path="res://Characters3D/Jumping.tres" type="Animation" id=17]
+[ext_resource path="res://Characters3D/default.tres" type="Animation" id=18]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 1, 0, 0, 1 )
@@ -29,11 +36,17 @@ radius = 0.15
 
 [node name="vanguard" instance=ExtResource( 2 )]
 
+[node name="Skeleton" parent="." index="0"]
+bones/15/bound_children = [ NodePath("LeftHandAttachment") ]
+bones/39/bound_children = [ NodePath("RightHandAttachment") ]
+bones/59/bound_children = [ NodePath("LeftFootAttachment") ]
+bones/64/bound_children = [ NodePath("RightFootAttachment") ]
+
 [node name="vanguard_Mesh" parent="Skeleton" index="1"]
 material/0 = SubResource( 1 )
 
 [node name="LeftHandAttachment" type="BoneAttachment" parent="Skeleton" index="2"]
-transform = Transform( 0.764353, 0.643904, -0.033919, -0.618399, 0.717147, -0.321372, -0.182609, 0.266617, 0.946346, 0.318047, 0.846452, 0.118367 )
+transform = Transform( 0.766693, 0.640501, -0.0440143, -0.616485, 0.715335, -0.328999, -0.17924, 0.279375, 0.943304, 0.31705, 0.844094, 0.120258 )
 bone_name = "mixamorig_LeftHandThumb4"
 
 [node name="Area" type="Area" parent="Skeleton/LeftHandAttachment" index="0"]
@@ -41,14 +54,13 @@ transform = Transform( 1, -2.98023e-08, -2.98023e-08, 0, 1, -1.49012e-08, -2.980
 collision_layer = 4
 collision_mask = 2
 script = ExtResource( 1 )
-damage = 25.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Skeleton/LeftHandAttachment/Area" index="0"]
 shape = SubResource( 2 )
 disabled = true
 
 [node name="RightHandAttachment" type="BoneAttachment" parent="Skeleton" index="3"]
-transform = Transform( 0.823778, -0.520904, 0.223716, 0.56674, 0.746977, -0.347607, 0.0139586, 0.413141, 0.910561, -0.288406, 0.823818, 0.0958338 )
+transform = Transform( 0.826401, -0.518874, 0.218697, 0.56275, 0.747766, -0.35236, 0.0192965, 0.414262, 0.909952, -0.293798, 0.826401, 0.095252 )
 bone_name = "mixamorig_RightHandThumb4"
 
 [node name="Area" type="Area" parent="Skeleton/RightHandAttachment" index="0"]
@@ -56,21 +68,19 @@ transform = Transform( 0.999686, 0.0219498, -0.0121652, -0.0215694, 0.999288, 0.
 collision_layer = 4
 collision_mask = 2
 script = ExtResource( 1 )
-damage = 25.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Skeleton/RightHandAttachment/Area" index="0"]
 shape = SubResource( 3 )
 disabled = true
 
 [node name="LeftFootAttachment" type="BoneAttachment" parent="Skeleton" index="4"]
-transform = Transform( 0.97071, -0.0216289, 0.239278, 0.00159232, 0.996497, 0.0836157, -0.240248, -0.0807855, 0.967344, 0.25314, 0.0151156, 0.218624 )
+transform = Transform( 0.970656, -0.0222539, 0.239438, 0.00213347, 0.996466, 0.0839657, -0.240461, -0.0809908, 0.967274, 0.253157, 0.0151915, 0.218653 )
 bone_name = "mixamorig_LeftToeBase"
 
 [node name="Area" type="Area" parent="Skeleton/LeftFootAttachment" index="0"]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource( 1 )
-damage = 25.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Skeleton/LeftFootAttachment/Area" index="0"]
 transform = Transform( 0.999998, 0.00221427, -0.000440657, -0.00221424, 0.999998, -0.000167295, 0.000440076, 0.000168435, 0.999999, 2.34544e-05, 0.101802, -0.0349443 )
@@ -78,14 +88,13 @@ shape = SubResource( 4 )
 disabled = true
 
 [node name="RightFootAttachment" type="BoneAttachment" parent="Skeleton" index="5"]
-transform = Transform( 0.892528, 0.0560222, -0.447499, 2.94531e-07, 0.992254, 0.12422, 0.450992, -0.11087, 0.885614, -0.193053, 0.0140748, 0.0864029 )
+transform = Transform( 0.892592, 0.0568641, -0.447264, 1.29397e-07, 0.992015, 0.126123, 0.450864, -0.112576, 0.885464, -0.193044, 0.0140745, 0.0864008 )
 bone_name = "mixamorig_RightToeBase"
 
 [node name="Area" type="Area" parent="Skeleton/RightFootAttachment" index="0"]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource( 1 )
-damage = 25.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Skeleton/RightFootAttachment/Area" index="0"]
 transform = Transform( 0.999999, 0.000198402, -0.000668138, -0.000201762, 0.999987, -0.00516585, 0.000667244, 0.00516596, 0.999987, -0.0206144, 0.117667, 0.0112326 )
@@ -93,37 +102,44 @@ shape = SubResource( 5 )
 disabled = true
 
 [node name="AnimationPlayer" parent="." index="1"]
-"anims/Hook Left" = ExtResource( 6 )
-"anims/Hook Right" = ExtResource( 7 )
-"anims/Jab Left" = ExtResource( 4 )
-"anims/Jab Right" = ExtResource( 11 )
-"anims/Kick Front Left" = ExtResource( 9 )
-"anims/Kick Front Right" = ExtResource( 8 )
-"anims/Kick Round Left" = ExtResource( 5 )
-"anims/Kick Round Right" = ExtResource( 10 )
+anims/Hook_Left = ExtResource( 6 )
+anims/Hook_Right = ExtResource( 7 )
+anims/Idle-loop = ExtResource( 14 )
+anims/Jab_Left = ExtResource( 4 )
+anims/Jab_Right = ExtResource( 11 )
+anims/Jog_Strafe_Left-loop = ExtResource( 13 )
+anims/Jog_Strafe_Right-loop = ExtResource( 15 )
+anims/Jumping = ExtResource( 17 )
+anims/Kick_Front_Left = ExtResource( 9 )
+anims/Kick_Front_Right = ExtResource( 8 )
+anims/Kick_Round_Left = ExtResource( 5 )
+anims/Kick_Round_Right = ExtResource( 10 )
+anims/Running-loop = ExtResource( 16 )
+anims/Running_Backward-loop = ExtResource( 12 )
+anims/default = ExtResource( 18 )
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = ExtResource( 3 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 root_motion_track = NodePath("Skeleton:root_doc")
-parameters/FrontLeftKickOneShot/active = false
-parameters/FrontLeftKickTimeScale/scale = 1.0
-parameters/FrontRightKickOneShot/active = false
-parameters/FrontRightKickTimeScale/scale = 1.0
-parameters/LeftHookOneShot/active = false
-parameters/LeftHookTimeScale/scale = 1.0
-parameters/LeftJabOneShot/active = false
-parameters/LeftJabTimeScale/scale = 1.0
+parameters/Hook_Left_OneShot/active = false
+parameters/Hook_Left_TimeScale/scale = 1.0
+parameters/Hook_Right_OneShot/active = false
+parameters/Hook_Right_TimeScale/scale = 1.0
+parameters/Jab_Left_OneShot/active = false
+parameters/Jab_Left_TimeScale/scale = 1.0
+parameters/Jab_Right_OneShot/active = false
+parameters/Jab_Right_TimeScale/scale = 1.0
+parameters/Kick_Front_Left_OneShot/active = false
+parameters/Kick_Front_Left_TimeScale/scale = 1.0
+parameters/Kick_Front_Right_OneShot/active = false
+parameters/Kick_Front_Right_TimeScale/scale = 1.0
+parameters/Kick_Round_Left_OneShot/active = false
+parameters/Kick_Round_Left_TimeScale/scale = 1.0
+parameters/Kick_Round_Right_OneShot/active = false
+parameters/Kick_Round_Right_TimeScale/scale = 1.0
 parameters/LocomotionBlendSpace/blend_position = Vector2( 0, 0 )
-parameters/RightHookOneShot/active = false
-parameters/RightHookTimeScale/scale = 1.0
-parameters/RightJabOneShot/active = false
-parameters/RightJabTimeScale/scale = 1.0
-parameters/RoundLeftKickOneShot/active = false
-parameters/RoundLeftKickTimeScale/scale = 1.0
-parameters/RoundRightKickOneShot/active = false
-parameters/RoundRightKickTimeScale/scale = 1.0
 [connection signal="body_entered" from="Skeleton/LeftHandAttachment/Area" to="Skeleton/LeftHandAttachment/Area" method="_on_Area_body_entered"]
 [connection signal="body_entered" from="Skeleton/RightHandAttachment/Area" to="Skeleton/RightHandAttachment/Area" method="_on_Area_body_entered"]
 [connection signal="body_entered" from="Skeleton/LeftFootAttachment/Area" to="Skeleton/LeftFootAttachment/Area" method="_on_Area_body_entered"]

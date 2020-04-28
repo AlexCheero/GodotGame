@@ -1,139 +1,139 @@
 [gd_resource type="AnimationNodeBlendTree" load_steps=31 format=2]
 
 [sub_resource type="AnimationNodeAnimation" id=1]
-animation = "Kick Front Left"
+animation = "Hook_Left"
 
 [sub_resource type="AnimationNodeOneShot" id=2]
 
 [sub_resource type="AnimationNodeTimeScale" id=3]
 
 [sub_resource type="AnimationNodeAnimation" id=4]
-animation = "Kick Front Right"
+animation = "Hook_Right"
 
 [sub_resource type="AnimationNodeOneShot" id=5]
 
 [sub_resource type="AnimationNodeTimeScale" id=6]
 
 [sub_resource type="AnimationNodeAnimation" id=7]
-animation = "Hook Left"
+animation = "Jab_Left"
 
 [sub_resource type="AnimationNodeOneShot" id=8]
 
 [sub_resource type="AnimationNodeTimeScale" id=9]
 
 [sub_resource type="AnimationNodeAnimation" id=10]
-animation = "Jab Left"
+animation = "Jab_Right"
 
 [sub_resource type="AnimationNodeOneShot" id=11]
 
 [sub_resource type="AnimationNodeTimeScale" id=12]
 
 [sub_resource type="AnimationNodeAnimation" id=13]
-animation = "Idle-loop"
+animation = "Kick_Front_Left"
 
-[sub_resource type="AnimationNodeAnimation" id=14]
-animation = "Running-loop"
+[sub_resource type="AnimationNodeOneShot" id=14]
 
-[sub_resource type="AnimationNodeAnimation" id=15]
-animation = "Running Backward-loop"
+[sub_resource type="AnimationNodeTimeScale" id=15]
 
 [sub_resource type="AnimationNodeAnimation" id=16]
-animation = "Jog Strafe Right-loop"
+animation = "Kick_Front_Right"
 
-[sub_resource type="AnimationNodeAnimation" id=17]
-animation = "Jog Strafe Left-loop"
+[sub_resource type="AnimationNodeOneShot" id=17]
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=18]
-blend_point_0/node = SubResource( 13 )
-blend_point_0/pos = Vector2( 0, 0 )
-blend_point_1/node = SubResource( 14 )
-blend_point_1/pos = Vector2( 0, 1 )
-blend_point_2/node = SubResource( 15 )
-blend_point_2/pos = Vector2( 0, -1 )
-blend_point_3/node = SubResource( 16 )
-blend_point_3/pos = Vector2( 1, 0 )
-blend_point_4/node = SubResource( 17 )
-blend_point_4/pos = Vector2( -1, 0 )
+[sub_resource type="AnimationNodeTimeScale" id=18]
 
 [sub_resource type="AnimationNodeAnimation" id=19]
-animation = "Hook Right"
+animation = "Kick_Round_Left"
 
 [sub_resource type="AnimationNodeOneShot" id=20]
 
 [sub_resource type="AnimationNodeTimeScale" id=21]
 
 [sub_resource type="AnimationNodeAnimation" id=22]
-animation = "Jab Right"
+animation = "Kick_Round_Right"
 
 [sub_resource type="AnimationNodeOneShot" id=23]
 
 [sub_resource type="AnimationNodeTimeScale" id=24]
 
 [sub_resource type="AnimationNodeAnimation" id=25]
-animation = "Kick Round Left"
+animation = "Idle-loop"
 
-[sub_resource type="AnimationNodeOneShot" id=26]
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "Running-loop"
 
-[sub_resource type="AnimationNodeTimeScale" id=27]
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "Running_Backward-loop"
 
 [sub_resource type="AnimationNodeAnimation" id=28]
-animation = "Kick Round Right"
+animation = "Jog_Strafe_Right-loop"
 
-[sub_resource type="AnimationNodeOneShot" id=29]
+[sub_resource type="AnimationNodeAnimation" id=29]
+animation = "Jog_Strafe_Left-loop"
 
-[sub_resource type="AnimationNodeTimeScale" id=30]
+[sub_resource type="AnimationNodeBlendSpace2D" id=30]
+blend_point_0/node = SubResource( 25 )
+blend_point_0/pos = Vector2( 0, 0 )
+blend_point_1/node = SubResource( 26 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 27 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 28 )
+blend_point_3/pos = Vector2( 1, 0 )
+blend_point_4/node = SubResource( 29 )
+blend_point_4/pos = Vector2( -1, 0 )
 
 [resource]
-graph_offset = Vector2( -577.374, 1209.5 )
-nodes/FrontLeftKickAnim/node = SubResource( 1 )
-nodes/FrontLeftKickAnim/position = Vector2( -460, 900 )
-nodes/FrontLeftKickOneShot/node = SubResource( 2 )
-nodes/FrontLeftKickOneShot/position = Vector2( 0, 900 )
-nodes/FrontLeftKickTimeScale/node = SubResource( 3 )
-nodes/FrontLeftKickTimeScale/position = Vector2( -240, 900 )
-nodes/FrontRightKickAnim/node = SubResource( 4 )
-nodes/FrontRightKickAnim/position = Vector2( -480, 1080 )
-nodes/FrontRightKickOneShot/node = SubResource( 5 )
-nodes/FrontRightKickOneShot/position = Vector2( 0, 1080 )
-nodes/FrontRightKickTimeScale/node = SubResource( 6 )
-nodes/FrontRightKickTimeScale/position = Vector2( -260, 1080 )
-nodes/LeftHookAnim/node = SubResource( 7 )
-nodes/LeftHookAnim/position = Vector2( -420, 540 )
-nodes/LeftHookOneShot/node = SubResource( 8 )
-nodes/LeftHookOneShot/position = Vector2( 0, 540 )
-nodes/LeftHookTimeScale/node = SubResource( 9 )
-nodes/LeftHookTimeScale/position = Vector2( -240, 540 )
-nodes/LeftJabAnim/node = SubResource( 10 )
-nodes/LeftJabAnim/position = Vector2( -360, 180 )
-nodes/LeftJabOneShot/node = SubResource( 11 )
-nodes/LeftJabOneShot/position = Vector2( 0, 180 )
-nodes/LeftJabTimeScale/node = SubResource( 12 )
-nodes/LeftJabTimeScale/position = Vector2( -200, 180 )
-nodes/LocomotionBlendSpace/node = SubResource( 18 )
+graph_offset = Vector2( -750.231, -129.75 )
+nodes/Hook_Left_Anim/node = SubResource( 1 )
+nodes/Hook_Left_Anim/position = Vector2( -420, 540 )
+nodes/Hook_Left_OneShot/node = SubResource( 2 )
+nodes/Hook_Left_OneShot/position = Vector2( 0, 540 )
+nodes/Hook_Left_TimeScale/node = SubResource( 3 )
+nodes/Hook_Left_TimeScale/position = Vector2( -240, 540 )
+nodes/Hook_Right_Anim/node = SubResource( 4 )
+nodes/Hook_Right_Anim/position = Vector2( -420, 720 )
+nodes/Hook_Right_OneShot/node = SubResource( 5 )
+nodes/Hook_Right_OneShot/position = Vector2( 0, 720 )
+nodes/Hook_Right_TimeScale/node = SubResource( 6 )
+nodes/Hook_Right_TimeScale/position = Vector2( -220, 720 )
+nodes/Jab_Left_Anim/node = SubResource( 7 )
+nodes/Jab_Left_Anim/position = Vector2( -360, 180 )
+nodes/Jab_Left_OneShot/node = SubResource( 8 )
+nodes/Jab_Left_OneShot/position = Vector2( 0, 180 )
+nodes/Jab_Left_TimeScale/node = SubResource( 9 )
+nodes/Jab_Left_TimeScale/position = Vector2( -200, 180 )
+nodes/Jab_Right_Anim/node = SubResource( 10 )
+nodes/Jab_Right_Anim/position = Vector2( -400, 360 )
+nodes/Jab_Right_OneShot/node = SubResource( 11 )
+nodes/Jab_Right_OneShot/position = Vector2( 0, 360 )
+nodes/Jab_Right_TimeScale/node = SubResource( 12 )
+nodes/Jab_Right_TimeScale/position = Vector2( -220, 360 )
+nodes/Kick_Front_Left_Anim/node = SubResource( 13 )
+nodes/Kick_Front_Left_Anim/position = Vector2( -460, 900 )
+nodes/Kick_Front_Left_OneShot/node = SubResource( 14 )
+nodes/Kick_Front_Left_OneShot/position = Vector2( 0, 900 )
+nodes/Kick_Front_Left_TimeScale/node = SubResource( 15 )
+nodes/Kick_Front_Left_TimeScale/position = Vector2( -240, 900 )
+nodes/Kick_Front_Right_Anim/node = SubResource( 16 )
+nodes/Kick_Front_Right_Anim/position = Vector2( -480, 1080 )
+nodes/Kick_Front_Right_OneShot/node = SubResource( 17 )
+nodes/Kick_Front_Right_OneShot/position = Vector2( 0, 1080 )
+nodes/Kick_Front_Right_TimeScale/node = SubResource( 18 )
+nodes/Kick_Front_Right_TimeScale/position = Vector2( -260, 1080 )
+nodes/Kick_Round_Left_Anim/node = SubResource( 19 )
+nodes/Kick_Round_Left_Anim/position = Vector2( -480, 1260 )
+nodes/Kick_Round_Left_OneShot/node = SubResource( 20 )
+nodes/Kick_Round_Left_OneShot/position = Vector2( 0, 1260 )
+nodes/Kick_Round_Left_TimeScale/node = SubResource( 21 )
+nodes/Kick_Round_Left_TimeScale/position = Vector2( -260, 1260 )
+nodes/Kick_Round_Right_Anim/node = SubResource( 22 )
+nodes/Kick_Round_Right_Anim/position = Vector2( -480, 1440 )
+nodes/Kick_Round_Right_OneShot/node = SubResource( 23 )
+nodes/Kick_Round_Right_OneShot/position = Vector2( 0, 1440 )
+nodes/Kick_Round_Right_TimeScale/node = SubResource( 24 )
+nodes/Kick_Round_Right_TimeScale/position = Vector2( -260, 1440 )
+nodes/LocomotionBlendSpace/node = SubResource( 30 )
 nodes/LocomotionBlendSpace/position = Vector2( -40, 20 )
-nodes/RightHookAnim/node = SubResource( 19 )
-nodes/RightHookAnim/position = Vector2( -420, 720 )
-nodes/RightHookOneShot/node = SubResource( 20 )
-nodes/RightHookOneShot/position = Vector2( 0, 720 )
-nodes/RightHookTimeScale/node = SubResource( 21 )
-nodes/RightHookTimeScale/position = Vector2( -220, 720 )
-nodes/RightJabAnim/node = SubResource( 22 )
-nodes/RightJabAnim/position = Vector2( -400, 360 )
-nodes/RightJabOneShot/node = SubResource( 23 )
-nodes/RightJabOneShot/position = Vector2( 0, 360 )
-nodes/RightJabTimeScale/node = SubResource( 24 )
-nodes/RightJabTimeScale/position = Vector2( -220, 360 )
-nodes/RoundLeftKickAnim/node = SubResource( 25 )
-nodes/RoundLeftKickAnim/position = Vector2( -480, 1260 )
-nodes/RoundLeftKickOneShot/node = SubResource( 26 )
-nodes/RoundLeftKickOneShot/position = Vector2( 0, 1260 )
-nodes/RoundLeftKickTimeScale/node = SubResource( 27 )
-nodes/RoundLeftKickTimeScale/position = Vector2( -260, 1260 )
-nodes/RoundRightKickAnim/node = SubResource( 28 )
-nodes/RoundRightKickAnim/position = Vector2( -480, 1440 )
-nodes/RoundRightKickOneShot/node = SubResource( 29 )
-nodes/RoundRightKickOneShot/position = Vector2( 0, 1440 )
-nodes/RoundRightKickTimeScale/node = SubResource( 30 )
-nodes/RoundRightKickTimeScale/position = Vector2( -260, 1440 )
 nodes/output/position = Vector2( 300, 940 )
-node_connections = [ "output", 0, "RoundRightKickOneShot", "LeftJabTimeScale", 0, "LeftJabAnim", "RightHookTimeScale", 0, "RightHookAnim", "RightJabTimeScale", 0, "RightJabAnim", "RoundLeftKickOneShot", 0, "FrontRightKickOneShot", "RoundLeftKickOneShot", 1, "RoundLeftKickTimeScale", "RightHookOneShot", 0, "LeftHookOneShot", "RightHookOneShot", 1, "RightHookTimeScale", "RightJabOneShot", 0, "LeftJabOneShot", "RightJabOneShot", 1, "RightJabTimeScale", "RoundRightKickTimeScale", 0, "RoundRightKickAnim", "LeftJabOneShot", 0, "LocomotionBlendSpace", "LeftJabOneShot", 1, "LeftJabTimeScale", "RoundLeftKickTimeScale", 0, "RoundLeftKickAnim", "FrontLeftKickTimeScale", 0, "FrontLeftKickAnim", "FrontRightKickOneShot", 0, "FrontLeftKickOneShot", "FrontRightKickOneShot", 1, "FrontRightKickTimeScale", "LeftHookTimeScale", 0, "LeftHookAnim", "FrontRightKickTimeScale", 0, "FrontRightKickAnim", "RoundRightKickOneShot", 0, "RoundLeftKickOneShot", "RoundRightKickOneShot", 1, "RoundRightKickTimeScale", "FrontLeftKickOneShot", 0, "RightHookOneShot", "FrontLeftKickOneShot", 1, "FrontLeftKickTimeScale", "LeftHookOneShot", 0, "RightJabOneShot", "LeftHookOneShot", 1, "LeftHookTimeScale" ]
+node_connections = [ "output", 0, "Kick_Round_Right_OneShot", "Hook_Left_OneShot", 0, "Jab_Right_OneShot", "Hook_Left_OneShot", 1, "Hook_Left_TimeScale", "Hook_Left_TimeScale", 0, "Hook_Left_Anim", "Hook_Right_OneShot", 0, "Hook_Left_OneShot", "Hook_Right_OneShot", 1, "Hook_Right_TimeScale", "Hook_Right_TimeScale", 0, "Hook_Right_Anim", "Jab_Left_TimeScale", 0, "Jab_Left_Anim", "Kick_Round_Left_OneShot", 0, "Kick_Front_Right_OneShot", "Kick_Round_Left_OneShot", 1, "Kick_Round_Left_TimeScale", "Kick_Round_Right_OneShot", 0, "Kick_Round_Left_OneShot", "Kick_Round_Right_OneShot", 1, "Kick_Round_Right_TimeScale", "Jab_Left_OneShot", 0, "LocomotionBlendSpace", "Jab_Left_OneShot", 1, "Jab_Left_TimeScale", "Kick_Round_Left_TimeScale", 0, "Kick_Round_Left_Anim", "Kick_Round_Right_TimeScale", 0, "Kick_Round_Right_Anim", "Jab_Right_TimeScale", 0, "Jab_Right_Anim", "Kick_Front_Right_TimeScale", 0, "Kick_Front_Right_Anim", "Kick_Front_Right_OneShot", 0, "Kick_Front_Left_OneShot", "Kick_Front_Right_OneShot", 1, "Kick_Front_Right_TimeScale", "Jab_Right_OneShot", 0, "Jab_Left_OneShot", "Jab_Right_OneShot", 1, "Jab_Right_TimeScale", "Kick_Front_Left_TimeScale", 0, "Kick_Front_Left_Anim", "Kick_Front_Left_OneShot", 0, "Hook_Right_OneShot", "Kick_Front_Left_OneShot", 1, "Kick_Front_Left_TimeScale" ]
