@@ -24,7 +24,6 @@ struct MeleeHit
 };
 
 DECLARE_REGISTERED_TAG(CurrentWeaponMeleeTag);
-//TODO: refactor this component. split into several separate ones
 struct MeleeAttackComponent
 {
 	std::vector<MeleeHit> hits;

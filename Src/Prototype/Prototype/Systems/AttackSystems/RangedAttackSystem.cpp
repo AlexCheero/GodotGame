@@ -18,7 +18,7 @@ void godot::RangedAttackSystem::operator()(float delta, entt::registry& registry
 	auto view = registry.view<CurrentWeaponRangedTag, RangedAttackComponent, InputComponent, Spatial*>(ExcludeDead);
 	view.less([&registry, this](entt::entity entity, RangedAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
 	{
-		if (!CanAttack(input, attackComp.attackTime, attackComp.prevHitTime))
+		if (!input.Test(EInput::Attack) || !utils::Expired(attackComp.attackTime, attackComp.prevHitTime))
 			return;
 
 		attackComp.ammoCount--;

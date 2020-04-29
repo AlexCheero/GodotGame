@@ -48,7 +48,6 @@ void godot::HTHLockTargetSystem::operator()(float delta, entt::registry& registr
 	auto withoutTargetView = registry.view<AttackActionTag, CurrentWeaponMeleeTag, InputComponent, MeleeAttackComponent, Spatial*>(entt::exclude<TargetLockComponent>);
 	withoutTargetView.less([this, &registry](entt::entity entity, InputComponent input, MeleeAttackComponent attackComp, Spatial* pSpatial)
 	{
-		//TODO: same as for pile in- use different distance for each hit
 		//TODO: do not lock on ally even if friendly fire is on
 		Array intersects = GetIntersects(pSpatial, attackComp.GetCurrentHit().maxDistance, "Character");
 		if (intersects.size() == 0)

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../BaseSystem.h"
-#include "AttackCooldown.h"
 
 #include "HTHLockTargetSystem.h"
 #include "PileInSystem.h"

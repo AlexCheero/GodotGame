@@ -9,12 +9,14 @@
 #include "../../Nodes/ThrowableWeaponNode.h"
 #include "../../Nodes/EntityView.h"
 
+#include "../../Utils/Utils.h"
+
 void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<CurrentWeaponThrowableTag, ThrowableAttackComponent, InputComponent, Spatial*>();
 	view.less([&registry, this](entt::entity entity, ThrowableAttackComponent& attackComp, InputComponent input, Spatial* pAttackerSpatial)
 	{
-		if (!CanAttack(input, attackComp.attackTime, attackComp.prevHitTime))
+		if (!input.Test(EInput::Attack) || !utils::Expired(attackComp.attackTime, attackComp.prevHitTime))
 			return;
 
 		Node* throwableNode = attackComp.throwableScene->instance();
@@ -38,6 +40,7 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 		pRB->set_transform(throwableTransform);
 		pRB->apply_central_impulse(attackerTransform.basis.z * attackComp.force);
 
+		//TODO0: new hittable layers system commit broke throwable. it hits carrier on throw
 		ThrowableWeaponNode* throwable = Object::cast_to<ThrowableWeaponNode>(throwableNode);
 		
 		//TODO: split grenades and throwables

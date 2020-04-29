@@ -120,9 +120,6 @@
     <ClCompile Include="Systems\LocomotionSystems\LookAtSystem.cpp">
       <Filter>Source Files\Systems\LocomotionSystems</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\AttackSystems\AttackCooldown.cpp">
-      <Filter>Source Files\Systems\AttackSystems</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\AISystems\PursuingSystem.cpp">
       <Filter>Source Files\Systems\AISystems</Filter>
     </ClCompile>
@@ -238,9 +235,6 @@
     </ClInclude>
     <ClInclude Include="Systems\LocomotionSystems\LookAtSystem.h">
       <Filter>Header Files\Systems\LocomotionSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\AttackSystems\AttackCooldown.h">
-      <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
     <ClInclude Include="Components\AIComponents\PatrolComponents.h">
       <Filter>Header Files\Components\AIComponents</Filter>

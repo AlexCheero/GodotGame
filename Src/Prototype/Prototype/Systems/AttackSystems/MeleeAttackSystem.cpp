@@ -1,6 +1,9 @@
 #include "MeleeAttackSystem.h"
 
+#include <OS.hpp>
+
 #include "../../Components/AttackComponents.h"
+#include "../../Components/InputComponents.h"
 
 //TODO: implement proper hth with blocks and stuff
 //TODO: call such systems only by input callback
