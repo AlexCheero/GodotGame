@@ -162,9 +162,6 @@
     <ClCompile Include="Systems\AttackSystems\PileInSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\LocomotionSystems\HTHStuckSystem.cpp">
-      <Filter>Source Files\Systems\LocomotionSystems</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\AISystems\DecisionMaking\DecisionMakingFSMSystem.cpp">
       <Filter>Source Files\Systems\AISystems\DecisionMaking</Filter>
     </ClCompile>
@@ -295,9 +292,6 @@
     </ClInclude>
     <ClInclude Include="Systems\AttackSystems\PileInSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\LocomotionSystems\HTHStuckSystem.h">
-      <Filter>Header Files\Systems\LocomotionSystems</Filter>
     </ClInclude>
     <ClInclude Include="Components\ComponentsMeta.h">
       <Filter>Header Files\Components</Filter>

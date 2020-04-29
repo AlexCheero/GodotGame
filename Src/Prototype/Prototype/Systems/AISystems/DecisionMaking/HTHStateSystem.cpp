@@ -19,6 +19,7 @@ void godot::HTHStateSystem::operator()(float delta, entt::registry& registry)
 	{
 		int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
 		bool attackInput = meleeComp.prevHitTimeMillis + utils::SecondsToMillis(meleeComp.attackTime) <= currTimeMillis;
+		//TODO: check if this could keep input even on state transition
 		inputComp.Set(EInput::Attack, attackInput);
 
 		//to flee transition

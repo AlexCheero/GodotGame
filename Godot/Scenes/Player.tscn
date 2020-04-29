@@ -35,9 +35,7 @@ components = {
 "damage": 20.0,
 "maxComboIntervalMillis": 3000,
 "maxDistance": 2.0,
-"minDistance": 1.0,
-"stunSpeedFactor": 0.1,
-"stunTime": 1.0
+"minDistance": 1.0
 },
 "Speed": {
 "dashSpeed": 5.0,

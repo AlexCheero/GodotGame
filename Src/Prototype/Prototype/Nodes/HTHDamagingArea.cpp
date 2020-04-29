@@ -42,10 +42,7 @@ void godot::HTHDamagingArea::_on_Area_body_entered(KinematicBody* pBody)
 	ASSERT(registry.has<MeleeAttackComponent>(ownerEntity), "ownerEntity has no MeleeAttackComponent");
 	registry.get<HealthComponent>(hittedEntity).hp -= registry.get<MeleeAttackComponent>(ownerEntity).damage;
 
-	ASSERT(registry.has<MeleeAttackComponent>(ownerEntity), "ownerEntity has no MeleeAttackComponent");
-	const MeleeAttackComponent& meleeComp = registry.get<MeleeAttackComponent>(ownerEntity);
-	registry.assign_or_replace<StunComponent>(hittedEntity, meleeComp.stunTime, meleeComp.stunSpeedFactor);
-	
+	//TODO: make bot fight in hth stuck state, if it has critical hp
 	if (registry.has<BotTag>(hittedEntity))
 	{
 		PatrolmanComponent& patrolManComp = registry.get<PatrolmanComponent>(hittedEntity);

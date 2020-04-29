@@ -20,9 +20,6 @@ struct MeleeAttackComponent
 	//TODO: set attack time in anim
 	float attackTime;
 	int64_t maxComboIntervalMillis;
-	//TODO: probably move this to ability component (or something like this)
-	float stunTime;
-	float stunSpeedFactor;
 
 	//<pile in
 	float maxDistance;
@@ -36,7 +33,7 @@ struct MeleeAttackComponent
 	int64_t prevHitTimeMillis = -utils::SecondsToMillis(attackTime);
 	int comboSequenceNum = 0;
 };
-REGISTER_COMPONENT(MeleeAttackComponent, "damage", "attackTime", "maxComboIntervalMillis", "stunTime", "stunSpeedFactor", "maxDistance", "minDistance");
+REGISTER_COMPONENT(MeleeAttackComponent, "damage", "attackTime", "maxComboIntervalMillis", "maxDistance", "minDistance");
 
 struct MeleeWeaponComponent
 {

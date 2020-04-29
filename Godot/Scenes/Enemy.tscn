@@ -32,9 +32,7 @@ components = {
 "damage": 10.0,
 "maxComboIntervalMillis": 3000,
 "maxDistance": 2.0,
-"minDistance": 1.0,
-"stunSpeedFactor": 0.1,
-"stunTime": 1.0
+"minDistance": 1.0
 },
 "NavMargin": {
 "margin": 1.0

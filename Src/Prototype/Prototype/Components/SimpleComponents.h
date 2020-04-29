@@ -59,9 +59,3 @@ struct HealthComponent
 	bool IsHealthCritical() { return hp / maxHp <= criticalProportion; }
 };
 REGISTER_COMPONENT(HealthComponent, "hp", "maxHp", "criticalProportion");
-
-struct StunComponent
-{
-	float secondsLeft;
-	float speedFactor;
-};
