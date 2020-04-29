@@ -17,7 +17,7 @@ void godot::PursueStateSystem::operator()(float delta, entt::registry& registry)
 
 	auto view = registry.view<BotTag, PursuingStateComponent, PatrolmanComponent, MeleeAttackComponent, HealthComponent, Spatial*>();
 	view.less([this, &registry, &players](entt::entity entity, PursuingStateComponent& pursuingComp
-		, PatrolmanComponent patrolComp, MeleeAttackComponent& meleeComp, HealthComponent healthComp, Spatial* pSpatial)
+		, PatrolmanComponent patrolComp, MeleeAttackComponent meleeComp, HealthComponent healthComp, Spatial* pSpatial)
 	{
 		bool validTarget = registry.valid(pursuingComp.target);
 		if (validTarget && CanSeeTarget(players.get<Spatial*>(pursuingComp.target), patrolComp, pSpatial))
@@ -37,7 +37,7 @@ void godot::PursueStateSystem::operator()(float delta, entt::registry& registry)
 		else if (validTarget)
 		{
 			//to attack transition
-			if (meleeComp.maxDistance >= GetDistanceToTarget(registry, pursuingComp.target, pSpatial))
+			if (meleeComp.GetCurrentHit().maxDistance >= GetDistanceToTarget(registry, pursuingComp.target, pSpatial))
 			{
 				registry.assign<MeleeAttackStateTag>(entity);
 				registry.assign<TargetLockComponent>(entity).target = pursuingComp.target;

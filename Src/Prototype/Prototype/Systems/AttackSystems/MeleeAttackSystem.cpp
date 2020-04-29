@@ -11,7 +11,7 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 	auto startAttackView = registry.view<CurrentWeaponMeleeTag, MeleeAttackComponent, InputComponent>(entt::exclude<AttackActionTag>);
 	startAttackView.less([this, &registry, currTimeMillis](entt::entity entity, MeleeAttackComponent& attackComp, InputComponent input)
 	{
-		if (!input.Test(EInput::Attack) || attackComp.prevHitTimeMillis + utils::SecondsToMillis(attackComp.attackTime) > currTimeMillis)
+		if (!input.Test(EInput::Attack) || attackComp.prevHitTimeMillis + utils::SecondsToMillis(attackComp.GetCurrentHit().attackTime) > currTimeMillis)
 			return;
 
 		int64_t millisSinceLastHit = currTimeMillis - attackComp.prevHitTimeMillis;
@@ -50,9 +50,9 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 	auto incrementComboView = registry.view<IncrementComboTag, MeleeAttackComponent>();
 	incrementComboView.less([](MeleeAttackComponent& attackComp)
 	{
-		attackComp.comboSequenceNum++;
-		if (attackComp.comboSequenceNum > attackComp.comboLength - 1)
-			attackComp.comboSequenceNum = 0;
+		attackComp.hitIdx++;
+		if (attackComp.hitIdx > attackComp.hits.size() - 1)
+			attackComp.hitIdx = 0;
 	});
 	registry.remove<IncrementComboTag>(incrementComboView.begin(), incrementComboView.end());
 

@@ -50,7 +50,7 @@ void godot::HTHLockTargetSystem::operator()(float delta, entt::registry& registr
 	{
 		//TODO: same as for pile in- use different distance for each hit
 		//TODO: do not lock on ally even if friendly fire is on
-		Array intersects = GetIntersects(pSpatial, attackComp.maxDistance, "Character");
+		Array intersects = GetIntersects(pSpatial, attackComp.GetCurrentHit().maxDistance, "Character");
 		if (intersects.size() == 0)
 			return;
 

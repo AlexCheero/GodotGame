@@ -38,10 +38,11 @@ void godot::PickableNode::_on_Pickable_body_entered(KinematicBody* pBody)
 		bool constructed = pPickableView->ConvertToComponent(meleeWeaponComp);
 		ASSERT(constructed, "can't construct MeleeAttackComponent");
 		ASSERT(registry.has<MeleeAttackComponent>(pickerEntity), "entity has no MeleeAttackComponent");
-		MeleeAttackComponent& attackComp = registry.get<MeleeAttackComponent>(pickerEntity);
-		attackComp.attackTime = meleeWeaponComp.attackTime;
-		attackComp.maxDistance = meleeWeaponComp.distance;
-		attackComp.damage = meleeWeaponComp.damage;
+		//TODO0: implement pickable melee weapon for new combo system
+		//MeleeAttackComponent& attackComp = registry.get<MeleeAttackComponent>(pickerEntity);
+		//attackComp.attackTime = meleeWeaponComp.attackTime;
+		//attackComp.maxDistance = meleeWeaponComp.distance;
+		//attackComp.damage = meleeWeaponComp.damage;
 		//if switch on pickup
 		registry.get_or_assign<CurrentWeaponMeleeTag>(pickerEntity);
 		break;

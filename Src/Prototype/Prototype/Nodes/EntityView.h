@@ -66,7 +66,6 @@ namespace godot
 		{
 			ConstructComponents_impl
 				<
-					MeleeAttackComponent,
 					RangedAttackComponent,
 					ThrowableAttackComponent,
 					HealthComponent,

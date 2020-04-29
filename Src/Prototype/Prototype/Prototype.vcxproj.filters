@@ -317,8 +317,5 @@
     <ClInclude Include="Systems\AISystems\DecisionMaking\PursueStateSystem.h">
       <Filter>Header Files\Systems\AISystems\DecisionMaking</Filter>
     </ClInclude>
-    <ClInclude Include="MeleeCombo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

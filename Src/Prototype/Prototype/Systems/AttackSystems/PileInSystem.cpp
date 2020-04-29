@@ -11,7 +11,7 @@ void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 		Spatial* pTargetSpatial = registry.get<Spatial*>(lockComp.target);
 		Vector3 toTargetDirection = pTargetSpatial->get_global_transform().get_origin() - pSpatial->get_global_transform().get_origin();
 		float distanceToTarget = toTargetDirection.length();
-		if (distanceToTarget > melee.maxDistance)
+		if (distanceToTarget > melee.GetCurrentHit().maxDistance)
 			registry.assign<PileInTag>(entity);
 	});
 
@@ -25,7 +25,7 @@ void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 		Vector3 toTargetDirection = pTargetSpatial->get_global_transform().get_origin() - pSpatial->get_global_transform().get_origin();
 		float distanceToTarget = toTargetDirection.length();
 		
-		if (distanceToTarget <= melee.minDistance)
+		if (distanceToTarget <= melee.GetCurrentHit().minDistance)
 			return;
 
 		Vector3 toTargetVelocity = toTargetDirection;

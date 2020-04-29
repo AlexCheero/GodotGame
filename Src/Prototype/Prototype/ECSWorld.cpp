@@ -42,6 +42,19 @@
 
 #include "Utils/Utils.h"
 
+//TODO: remove hardcode
+static const char* anims[8] =
+{
+	"Jab_Left",
+	"Jab_Right",
+	"Hook_Left",
+	"Hook_Right",
+	"Kick_Front_Left",
+	"Kick_Front_Right",
+	"Kick_Round_Left",
+	"Kick_Round_Right"
+};
+
 godot::ECSWorld* godot::ECSWorld::instance = nullptr;
 
 void godot::ECSWorld::UpdateSystems(float delta, SystemsVec& systems)
@@ -64,6 +77,12 @@ void godot::ECSWorld::PreparePlayerEntity()
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("Camera"));
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Player/vanguard/AnimationTree"));
+
+	//TODO0: init combos from some external file
+	std::vector<MeleeHit> hits;
+	for (int i = 0; i < 8; i++)
+		hits.push_back({ 20, 0.5f, anims[i], 2, 1 });
+	registry.assign<MeleeAttackComponent>(entity, MeleeAttackComponent{ hits });
 
 	entityView->ConstructComponents(registry, entity);
 	entityView->ConstructTags(registry, entity);
@@ -114,6 +133,12 @@ void godot::ECSWorld::PrepareEnemyEntity()
 
 	registry.assign<BoundsComponent>(entity, utils::GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));
 	
+	//TODO0: init combos from some external file
+	std::vector<MeleeHit> hits;
+	for (int i = 0; i < 8; i++)
+		hits.push_back({ 10, 1.f, anims[i], 2, 1 });
+	registry.assign<MeleeAttackComponent>(entity, MeleeAttackComponent{ hits });
+
 	entityView->ConstructComponents(registry, entity);
 	entityView->ConstructTags(registry, entity);
 

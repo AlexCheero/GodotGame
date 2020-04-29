@@ -14,11 +14,11 @@ void godot::HTHStateSystem::operator()(float delta, entt::registry& registry)
 	auto view = registry.view<BotTag, MeleeAttackStateTag, InputComponent
 		, MeleeAttackComponent, HealthComponent, Spatial*
 		, TargetLockComponent>();
-	view.less([this, &registry](entt::entity entity, InputComponent& inputComp, MeleeAttackComponent& meleeComp
+	view.less([this, &registry](entt::entity entity, InputComponent& inputComp, MeleeAttackComponent meleeComp
 		, HealthComponent healthComp, Spatial* pSpatial, TargetLockComponent lockComp)
 	{
 		int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
-		bool attackInput = meleeComp.prevHitTimeMillis + utils::SecondsToMillis(meleeComp.attackTime) <= currTimeMillis;
+		bool attackInput = meleeComp.prevHitTimeMillis + utils::SecondsToMillis(meleeComp.GetCurrentHit().attackTime) <= currTimeMillis;
 		//TODO: check if this could keep input even on state transition
 		inputComp.Set(EInput::Attack, attackInput);
 
@@ -26,7 +26,7 @@ void godot::HTHStateSystem::operator()(float delta, entt::registry& registry)
 		if (healthComp.IsHealthCritical())
 			registry.assign<FleeStateTag>(entity);
 		//to pursuit transition
-		else if (registry.valid(lockComp.target) && meleeComp.maxDistance < GetDistanceToTarget(registry, lockComp.target, pSpatial))
+		else if (registry.valid(lockComp.target) && meleeComp.GetCurrentHit().maxDistance < GetDistanceToTarget(registry, lockComp.target, pSpatial))
 			registry.assign<PursuingStateComponent>(entity, lockComp.target);
 		//to patrol transition
 		else if (!registry.valid(lockComp.target) || registry.has<DeadTag>(lockComp.target))

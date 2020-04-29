@@ -12,28 +12,31 @@
 
 #include "ComponentsMeta.h"
 
+struct MeleeHit
+{
+	float damage;
+	float attackTime;
+	godot::String anim;
+	float maxDistance;
+	float minDistance;
+	//TODO: implement
+	//std::vector<Effect> effects;
+};
+
 DECLARE_REGISTERED_TAG(CurrentWeaponMeleeTag);
 //TODO: refactor this component. split into several separate ones
 struct MeleeAttackComponent
 {
-	float damage;
-	//TODO: set attack time in anim
-	float attackTime;
-	int64_t maxComboIntervalMillis;
+	std::vector<MeleeHit> hits;
 
-	//<pile in
-	float maxDistance;
-	float minDistance;
-	//pile in>
-
-	//TODO: remove hardcode
-	int comboLength = 8;
-	
 	//TODO: maybe split into cold and hot data
-	int64_t prevHitTimeMillis = -utils::SecondsToMillis(attackTime);
-	int comboSequenceNum = 0;
+	int hitIdx = 0;
+	int64_t prevHitTimeMillis = -utils::SecondsToMillis(hits[0].attackTime);
+	//TODO: remove hardcode
+	static constexpr int64_t maxComboIntervalMillis = 3000;
+
+	MeleeHit GetCurrentHit() { return hits[hitIdx]; }
 };
-REGISTER_COMPONENT(MeleeAttackComponent, "damage", "attackTime", "maxComboIntervalMillis", "maxDistance", "minDistance");
 
 struct MeleeWeaponComponent
 {

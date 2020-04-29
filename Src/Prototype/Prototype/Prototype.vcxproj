@@ -195,7 +195,6 @@
     <ClInclude Include="Components\ComponentsMeta.h" />
     <ClInclude Include="Components\InputComponents.h" />
     <ClInclude Include="Components\SimpleComponents.h" />
-    <ClInclude Include="MeleeCombo.h" />
     <ClInclude Include="Nodes\EntityView.h" />
     <ClInclude Include="Nodes\HTHDamagingArea.h" />
     <ClInclude Include="Nodes\PickableNode.h" />
