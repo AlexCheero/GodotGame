@@ -78,7 +78,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("Camera"));
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Player/vanguard/AnimationTree"));
 
-	//TODO0: init combos from some external file
+	//TODO0: init combos from some external file (use ConfigFile)
 	std::vector<MeleeHit> hits;
 	for (int i = 0; i < 8; i++)
 		hits.push_back({ 20, 0.5f, anims[i], 2, 1 });
@@ -133,7 +133,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 
 	registry.assign<BoundsComponent>(entity, utils::GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));
 	
-	//TODO0: init combos from some external file
+	//TODO0: init combos from some external file (use ConfigFile)
 	std::vector<MeleeHit> hits;
 	for (int i = 0; i < 8; i++)
 		hits.push_back({ 10, 1.f, anims[i], 2, 1 });
