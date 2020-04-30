@@ -14,9 +14,9 @@
 
 struct MeleeHit
 {
+	godot::String anim;
 	float damage;
 	float attackTime;
-	godot::String anim;
 	float maxDistance;
 	float minDistance;
 	//TODO: implement

@@ -35,6 +35,8 @@ namespace godot
 		void PrepareCameraEntity();
 		void PrepareEnemyEntity();
 		void PrepareSingletonEntities();
+
+		std::vector<MeleeHit> LoadHits();
 	public:
 		entt::registry& GetRegistry() { return registry; }
 

@@ -11,6 +11,7 @@
 #include <CollisionShape.hpp>
 #include <CapsuleShape.hpp>
 #include <AnimationTree.hpp>
+#include <ConfigFile.hpp>
 
 #include "Components/AttackComponents.h"
 #include "Components/InputComponents.h"
@@ -78,11 +79,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("Camera"));
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Player/vanguard/AnimationTree"));
 
-	//TODO0: init combos from some external file (use ConfigFile)
-	std::vector<MeleeHit> hits;
-	for (int i = 0; i < 8; i++)
-		hits.push_back({ 20, 0.5f, anims[i], 2, 1 });
-	registry.assign<MeleeAttackComponent>(entity, MeleeAttackComponent{ hits });
+	registry.assign<MeleeAttackComponent>(entity, MeleeAttackComponent{ LoadHits() });
 
 	entityView->ConstructComponents(registry, entity);
 	entityView->ConstructTags(registry, entity);
@@ -133,11 +130,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 
 	registry.assign<BoundsComponent>(entity, utils::GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));
 	
-	//TODO0: init combos from some external file (use ConfigFile)
-	std::vector<MeleeHit> hits;
-	for (int i = 0; i < 8; i++)
-		hits.push_back({ 10, 1.f, anims[i], 2, 1 });
-	registry.assign<MeleeAttackComponent>(entity, MeleeAttackComponent{ hits });
+	registry.assign<MeleeAttackComponent>(entity, MeleeAttackComponent{ LoadHits() });
 
 	entityView->ConstructComponents(registry, entity);
 	entityView->ConstructTags(registry, entity);
@@ -174,6 +167,32 @@ void godot::ECSWorld::PrepareSingletonEntities()
 	Navigation* navigation = Object::cast_to<Navigation>(get_node("Navigation"));
 	entt::entity navigationEntity = registry.create();
 	registry.assign<Navigation*>(navigationEntity, navigation);
+}
+
+//TODO: maybe cache config and not load it every time
+std::vector<MeleeHit> godot::ECSWorld::LoadHits()
+{
+	std::vector<MeleeHit> hits;
+	//TODO0: read once more about godots refs and references to know what should I unreference/delete excplicitly
+	ConfigFile* hitsCfg = ConfigFile::_new();
+	Error err = hitsCfg->load("res://Configs/hits.cfg");
+	ASSERT(err == Error::OK, "cannot load hits.cfg");
+	PoolStringArray sections = hitsCfg->get_sections();
+	for (int i = 0; i < sections.size(); i++)
+	{
+		String section = sections[i];
+		MeleeHit hit =
+		{
+			section,
+			hitsCfg->get_value(section, "damage"),
+			hitsCfg->get_value(section, "attackTime"),
+			hitsCfg->get_value(section, "maxDistance"),
+			hitsCfg->get_value(section, "minDistance")
+		};
+		hits.push_back(hit);
+	}
+
+	return hits;
 }
 
 void godot::ECSWorld::_register_methods()
