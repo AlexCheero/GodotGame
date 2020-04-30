@@ -43,19 +43,6 @@
 
 #include "Utils/Utils.h"
 
-//TODO: remove hardcode
-static const char* anims[8] =
-{
-	"Jab_Left",
-	"Jab_Right",
-	"Hook_Left",
-	"Hook_Right",
-	"Kick_Front_Left",
-	"Kick_Front_Right",
-	"Kick_Round_Left",
-	"Kick_Round_Right"
-};
-
 godot::ECSWorld* godot::ECSWorld::instance = nullptr;
 
 void godot::ECSWorld::UpdateSystems(float delta, SystemsVec& systems)
