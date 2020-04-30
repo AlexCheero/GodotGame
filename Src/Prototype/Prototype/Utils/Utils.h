@@ -35,8 +35,8 @@ namespace utils
 	int64_t SecondsToMillis(float seconds);
 	inline int64_t utils::SecondsToMillis(float seconds) { return static_cast<int64_t>(static_cast<double>(seconds) * 1000); }
 
-	godot::Object* CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 direction, float distance, godot::String layerName);
-	godot::Object* CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 direction, float distance, int64_t mask = ALL_LAYERS);
+	godot::Spatial* CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 direction, float distance, godot::String layerName);
+	godot::Spatial* CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 direction, float distance, int64_t mask = ALL_LAYERS);
 	BoundsComponent GetCapsuleBounds(godot::Node* pCapsuleNode);
 	void Assert(bool assertion, const char* message, const char* file, int line);
 

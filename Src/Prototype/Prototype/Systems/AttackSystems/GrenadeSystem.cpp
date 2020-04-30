@@ -14,9 +14,8 @@ bool godot::GrenadeSystem::CheckVisibility(Spatial* pGrenade, Spatial* pTarget, 
 {
 	Vector3 castDirection = pTarget->get_global_transform().get_origin() - pGrenade->get_global_transform().get_origin();
 	castDirection.normalize();
-	Object* pHitResult = utils::CastFromSpatial(pGrenade, castDirection, explosionRadius);
 
-	return pTarget == Object::cast_to<Spatial>(pHitResult);
+	return pTarget == utils::CastFromSpatial(pGrenade, castDirection, explosionRadius);
 }
 
 godot::GrenadeSystem::GrenadeSystem()

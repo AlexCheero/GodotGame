@@ -36,13 +36,12 @@ int64_t utils::GetLayerByName(godot::String name)
 	return 0;
 }
 
-//TODO: return spatial instead of object
-godot::Object* utils::CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 direction, float distance, godot::String layerName)
+godot::Spatial* utils::CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 direction, float distance, godot::String layerName)
 {
 	return CastFromSpatial(pSpatial, direction, distance, GetLayerByName(layerName));
 }
 
-godot::Object* utils::CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 direction, float distance, int64_t mask)
+godot::Spatial* utils::CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 direction, float distance, int64_t mask)
 {
 	godot::PhysicsDirectSpaceState* spaceState = pSpatial->get_world()->get_direct_space_state();
 	godot::Transform transform = pSpatial->get_transform();
@@ -53,7 +52,8 @@ godot::Object* utils::CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 d
 	if (rayHit.empty())
 		return nullptr;
 
-	return godot::Node::___get_from_variant(rayHit["collider"]);
+	godot::Object* pObj = godot::Node::___get_from_variant(rayHit["collider"]);
+	return godot::Object::cast_to<godot::Spatial>(pObj);
 }
 
 BoundsComponent utils::GetCapsuleBounds(godot::Node* pCapsuleNode)

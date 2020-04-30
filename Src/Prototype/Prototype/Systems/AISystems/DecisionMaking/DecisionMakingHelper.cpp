@@ -17,10 +17,7 @@ bool godot::CanSeeTarget(Spatial* pTargetSpatial, PatrolmanComponent patrolman, 
 	{
 		float viewDistance = angle <= patrolman.viewAngleSmall ? patrolman.longViewDistance : patrolman.shortViewDistance;
 		if (distanceToTarget <= viewDistance)
-		{
-			Object* pObj = utils::CastFromSpatial(pPatrolSpatial, patrolFwd, distanceToTarget);
-			return pTargetSpatial == Object::cast_to<Spatial>(pObj);
-		}
+			return pTargetSpatial == utils::CastFromSpatial(pPatrolSpatial, patrolFwd, distanceToTarget);
 	}
 
 	return false;
