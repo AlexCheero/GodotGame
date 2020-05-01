@@ -160,7 +160,6 @@ void godot::ECSWorld::PrepareSingletonEntities()
 std::vector<MeleeHit> godot::ECSWorld::LoadHits()
 {
 	std::vector<MeleeHit> hits;
-	//TODO0: read once more about godots refs and references to know what should I unreference/delete excplicitly
 	ConfigFile* hitsCfg = ConfigFile::_new();
 	Error err = hitsCfg->load("res://Configs/hits.cfg");
 	ASSERT(err == Error::OK, "cannot load hits.cfg");
@@ -178,6 +177,7 @@ std::vector<MeleeHit> godot::ECSWorld::LoadHits()
 		};
 		hits.push_back(hit);
 	}
+	hitsCfg->free();
 
 	return hits;
 }
