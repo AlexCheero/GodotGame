@@ -10,8 +10,8 @@
 //TODO: try to implement anim system without AnimationTree
 void godot::HTHAnimSystem::operator()(float delta, entt::registry& registry)
 {
-	auto punchView = registry.view<AttackActionTag, MeleeAttackComponent, AnimationTree*>();
-	punchView.less([&registry](entt::entity entity, MeleeAttackComponent attackComp, AnimationTree* pAnimTree)
+	auto view = registry.view<AttackActionTag, MeleeAttackComponent, AnimationTree*>();
+	view.less([&registry](entt::entity entity, MeleeAttackComponent attackComp, AnimationTree* pAnimTree)
 	{
 		int prevAnimIdx = attackComp.hitIdx - 1;
 		if (prevAnimIdx < 0)

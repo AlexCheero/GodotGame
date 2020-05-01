@@ -206,6 +206,7 @@ void godot::ECSWorld::_init()
 
 	//TODO: try to move physics to separate thread
 	//TODO: check what systems should be reactive
+	//TODO0: remake all the physics systems, using polling to communicate with _process
 	//setup physics systems
 	m_physics_systems.emplace_back(new GravitySystem());
 	//must be called after GravitySystem
