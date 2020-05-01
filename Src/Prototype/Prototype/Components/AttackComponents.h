@@ -39,11 +39,9 @@ struct MeleeAttackComponent
 
 struct MeleeWeaponComponent
 {
-	float damage;
-	float attackTime;
-	float distance;
+	godot::String hitsConfigName;
 };
-REGISTER_COMPONENT(MeleeWeaponComponent, "damage", "attackTime", "distance");
+REGISTER_COMPONENT(MeleeWeaponComponent, "hitsConfigName");
 
 DECLARE_REGISTERED_TAG(CurrentWeaponRangedTag);
 struct RangedAttackComponent

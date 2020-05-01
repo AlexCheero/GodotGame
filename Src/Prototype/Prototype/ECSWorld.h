@@ -36,7 +36,6 @@ namespace godot
 		void PrepareEnemyEntity();
 		void PrepareSingletonEntities();
 
-		std::vector<MeleeHit> LoadHits();
 	public:
 		entt::registry& GetRegistry() { return registry; }
 
@@ -46,5 +45,7 @@ namespace godot
 		void HandleInputEvent(InputEvent * e);
 		void _process(float delta);
 		void _physics_process(float delta);
+
+		std::vector<MeleeHit> LoadHits(String hitsConfigName);
 	};
 }

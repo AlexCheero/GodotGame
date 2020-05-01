@@ -7,7 +7,7 @@
 #include "../../Components/InputComponents.h"
 #include "../../Components/AttackComponents.h"
 
-//TODO: don't interrupt previous hit by the next one
+//TODO: don't interrupt previous hit by the next one. bot hits very often
 void godot::HTHAnimSystem::operator()(float delta, entt::registry& registry)
 {
 	auto punchView = registry.view<AttackActionTag, MeleeAttackComponent, AnimationTree*>();

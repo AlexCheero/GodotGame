@@ -66,7 +66,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("Camera"));
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Player/vanguard/AnimationTree"));
 
-	registry.assign<MeleeAttackComponent>(entity, MeleeAttackComponent{ LoadHits() });
+	registry.assign<MeleeAttackComponent>(entity, MeleeAttackComponent{ LoadHits("barehanded_hits") });
 
 	entityView->ConstructComponents(registry, entity);
 	entityView->ConstructTags(registry, entity);
@@ -117,7 +117,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 
 	registry.assign<BoundsComponent>(entity, utils::GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));
 	
-	registry.assign<MeleeAttackComponent>(entity, MeleeAttackComponent{ LoadHits() });
+	registry.assign<MeleeAttackComponent>(entity, MeleeAttackComponent{ LoadHits("barehanded_hits") });
 
 	entityView->ConstructComponents(registry, entity);
 	entityView->ConstructTags(registry, entity);
@@ -157,11 +157,11 @@ void godot::ECSWorld::PrepareSingletonEntities()
 }
 
 //TODO: maybe cache config and not load it every time
-std::vector<MeleeHit> godot::ECSWorld::LoadHits()
+std::vector<MeleeHit> godot::ECSWorld::LoadHits(String hitsConfigName)
 {
 	std::vector<MeleeHit> hits;
 	ConfigFile* hitsCfg = ConfigFile::_new();
-	Error err = hitsCfg->load("res://Configs/hits.cfg");
+	Error err = hitsCfg->load("res://Configs/hits/" + hitsConfigName + ".cfg");
 	ASSERT(err == Error::OK, "cannot load hits.cfg");
 	PoolStringArray sections = hitsCfg->get_sections();
 	for (int i = 0; i < sections.size(); i++)
