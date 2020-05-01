@@ -18,12 +18,14 @@ shape = SubResource( 1 )
 [node name="EntityView" type="Node" parent="."]
 script = ExtResource( 2 )
 components = {
+"DecisionMaking": {
+"criticalHp": 50.0
+},
 "Gravity": {
 "accelerationDown": 20.0,
 "accelerationUp": 30.0
 },
 "Health": {
-"criticalProportion": 0.5,
 "hp": 100.0,
 "maxHp": 100.0
 },

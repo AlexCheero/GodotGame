@@ -9,6 +9,7 @@
 #include "../Components/SimpleComponents.h"
 #include "../Components/AIComponents/NavigationComponents.h"
 #include "../Components/AIComponents/PatrolComponents.h"
+#include "../Components/AIComponents/FSMStateComponents.h"
 
 namespace godot
 {
@@ -75,7 +76,8 @@ namespace godot
 					SimpleFollowComponent,
 					PatrolmanComponent,
 					NavMarginComponent,
-					MeleeWeaponComponent
+					MeleeWeaponComponent,
+					DecisionMakingComponent
 				>
 				(registry, entity);
 		}

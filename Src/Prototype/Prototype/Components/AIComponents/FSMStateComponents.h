@@ -6,6 +6,12 @@
 
 #include "entt/entt.hpp"
 
+struct DecisionMakingComponent
+{
+	float criticalHp;
+};
+REGISTER_COMPONENT(DecisionMakingComponent, "criticalHp");
+
 struct PursuingStateComponent
 {
 	entt::entity target = entt::null;
