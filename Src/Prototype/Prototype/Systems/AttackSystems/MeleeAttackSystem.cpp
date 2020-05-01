@@ -11,7 +11,7 @@
 void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 {
 	int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
-	auto startAttackView = registry.view<CurrentWeaponMeleeTag, MeleeAttackComponent, InputComponent>(entt::exclude<AttackActionTag>);
+	auto startAttackView = registry.view<CurrentWeaponMeleeTag, MeleeAttackComponent, InputComponent>(entt::exclude<AttackActionTag, AttackAnimPlayingComponent>);
 	startAttackView.less([this, &registry, currTimeMillis](entt::entity entity, MeleeAttackComponent& attackComp, InputComponent input)
 	{
 		if (!input.Test(EInput::Attack) || attackComp.prevHitTimeMillis + utils::SecondsToMillis(attackComp.GetCurrentHit().attackTime) > currTimeMillis)

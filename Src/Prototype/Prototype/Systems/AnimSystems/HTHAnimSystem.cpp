@@ -7,7 +7,7 @@
 #include "../../Components/InputComponents.h"
 #include "../../Components/AttackComponents.h"
 
-//TODO: don't interrupt previous hit by the next one. bot hits very often
+//TODO: try to implement anim system without AnimationTree
 void godot::HTHAnimSystem::operator()(float delta, entt::registry& registry)
 {
 	auto punchView = registry.view<AttackActionTag, MeleeAttackComponent, AnimationTree*>();
@@ -19,14 +19,12 @@ void godot::HTHAnimSystem::operator()(float delta, entt::registry& registry)
 		String animName = attackComp.GetCurrentHit().anim;
 		String prevAnimName = attackComp.hits[prevAnimIdx].anim;
 		
-		//TODO: same anim time for all animations, maybe use general anim scale for this
 		AnimationPlayer* pAnimPlayer = Object::cast_to<AnimationPlayer>(pAnimTree->get_node(pAnimTree->get_animation_player()));
 		Ref<Animation> anim = pAnimPlayer->get_animation(animName);
-		//float timeScale = anim->get_length() / attackComp.attackTime;
-		//pAnimTree->set("parameters/" + paramName + "_TimeScale/scale", timeScale);
-		
-		//TODO: take anim time scale into account
-		registry.assign_or_replace<AttackAnimPlayingComponent>(entity).playBackTimeLeft = anim->get_length();
+		float timeScale = anim->get_length() / attackComp.GetCurrentHit().attackTime;
+		pAnimTree->set("parameters/" + animName + "_TimeScale/scale", timeScale);
+
+		registry.assign_or_replace<AttackAnimPlayingComponent>(entity).playBackTimeLeft = anim->get_length() / timeScale;
 		
 		//TODO: blend between anims
 		pAnimTree->set("parameters/" + prevAnimName + "_OneShot/active", false);
