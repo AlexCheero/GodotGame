@@ -156,13 +156,22 @@ void godot::ECSWorld::PrepareSingletonEntities()
 	registry.assign<Navigation*>(navigationEntity, navigation);
 }
 
+int64_t MeleeAttackComponent::maxComboIntervalMillis;
+void godot::ECSWorld::LoadConfig()
+{
+	ConfigFile* hitsCfg = ConfigFile::_new();
+	Error err = hitsCfg->load("res://Configs/config.cfg");
+	ASSERT(err == Error::OK, "cannot load config.cfg");
+	MeleeAttackComponent::maxComboIntervalMillis = hitsCfg->get_value("maxComboIntervalMillis", "maxComboIntervalMillis");
+}
+
 //TODO: maybe cache config and not load it every time
 std::vector<MeleeHit> godot::ECSWorld::LoadHits(String hitsConfigName)
 {
 	std::vector<MeleeHit> hits;
 	ConfigFile* hitsCfg = ConfigFile::_new();
 	Error err = hitsCfg->load("res://Configs/hits/" + hitsConfigName + ".cfg");
-	ASSERT(err == Error::OK, "cannot load hits.cfg");
+	ASSERT(err == Error::OK, "cannot load hits config");
 	PoolStringArray sections = hitsCfg->get_sections();
 	for (int i = 0; i < sections.size(); i++)
 	{
@@ -232,6 +241,7 @@ void godot::ECSWorld::_init()
 
 void godot::ECSWorld::_ready()
 {
+	LoadConfig();
 	//create entities and components
 	PrepareSingletonEntities();
 	PreparePlayerEntity();

@@ -30,8 +30,8 @@ struct MeleeAttackComponent
 
 	int hitIdx = 0;
 	int64_t prevHitTimeMillis = -utils::SecondsToMillis(hits[0].attackTime);
-	//TODO: remove hardcode
-	static constexpr int64_t maxComboIntervalMillis = 3000;
+	
+	static int64_t maxComboIntervalMillis;
 
 	MeleeHit GetCurrentHit() { return hits[hitIdx]; }
 };

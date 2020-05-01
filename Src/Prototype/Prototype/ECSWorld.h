@@ -35,6 +35,7 @@ namespace godot
 		void PrepareCameraEntity();
 		void PrepareEnemyEntity();
 		void PrepareSingletonEntities();
+		void LoadConfig();
 
 	public:
 		entt::registry& GetRegistry() { return registry; }
