@@ -20,7 +20,7 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 		int64_t millisSinceLastHit = currTimeMillis - attackComp.prevHitTimeMillis;
 		attackComp.prevHitTimeMillis = currTimeMillis;
 
-		if (millisSinceLastHit <= attackComp.maxComboIntervalMillis)
+		if (millisSinceLastHit <= MeleeAttackComponent::maxComboIntervalMillis)
 			registry.assign<IncrementComboTag>(entity);
 
 		//TODO: locks on target on every hit, this may cause bugs with many enemies
