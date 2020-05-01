@@ -70,9 +70,6 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	entityView->ConstructComponents(registry, entity);
 	entityView->ConstructTags(registry, entity);
-	//TODO: add some kind of reactive callback to automatically assign curr weapon tag on assigning attack comp
-	//		and remove manual tag assigning here and for bot too
-	//registry.assign<CurrentWeaponMeleeTag>(entity);
 
 	registry.assign<VelocityComponent>(entity);
 	registry.assign<InputComponent>(entity);

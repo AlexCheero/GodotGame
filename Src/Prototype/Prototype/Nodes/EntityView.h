@@ -88,9 +88,6 @@ namespace godot
 				<
 					PlayerTag,
 					BotTag,
-					CurrentWeaponMeleeTag,
-					CurrentWeaponRangedTag,
-					CurrentWeaponThrowableTag,
 					MainCameraTag
 				>
 				(registry, entity);

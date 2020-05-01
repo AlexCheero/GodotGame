@@ -39,24 +39,18 @@ void godot::PickableNode::_on_Pickable_body_entered(KinematicBody* pBody)
 		ASSERT(constructed, "can't construct MeleeAttackComponent");
 		ASSERT(registry.has<MeleeAttackComponent>(pickerEntity), "entity has no MeleeAttackComponent");
 		registry.replace<MeleeAttackComponent>(pickerEntity, ECSWorld::GetInstance()->LoadHits(meleeWeaponComp.hitsConfigName));
-		//if switch on pickup
-		registry.get_or_assign<CurrentWeaponMeleeTag>(pickerEntity);
 		break;
 	}
 	case EPickableType::RangedWeapon:
 	{
 		bool constructed = pPickableView->ConvertToComponent(registry.assign_or_replace<RangedAttackComponent>(pickerEntity));
 		ASSERT(constructed, "can't construct RangedAttackComponent");
-		//if switch on pickup
-		registry.get_or_assign<CurrentWeaponRangedTag>(pickerEntity);
 		break;
 	}
 	case EPickableType::ThrowableWeapon:
 	{
 		bool constructed = pPickableView->ConvertToComponent(registry.assign_or_replace<ThrowableAttackComponent>(pickerEntity));
 		ASSERT(constructed, "can't construct ThrowableAttackComponent");
-		//if switch on pickup
-		registry.get_or_assign<CurrentWeaponThrowableTag>(pickerEntity);
 		break;
 	}
 	case EPickableType::Medkit:

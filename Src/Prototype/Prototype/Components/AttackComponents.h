@@ -23,7 +23,7 @@ struct MeleeHit
 	//std::vector<Effect> effects;
 };
 
-DECLARE_REGISTERED_TAG(CurrentWeaponMeleeTag);
+DECLARE_TAG(CurrentWeaponMeleeTag);
 struct MeleeAttackComponent
 {
 	std::vector<MeleeHit> hits;
@@ -42,7 +42,7 @@ struct MeleeWeaponComponent
 };
 REGISTER_COMPONENT(MeleeWeaponComponent, "hitsConfigName");
 
-DECLARE_REGISTERED_TAG(CurrentWeaponRangedTag);
+DECLARE_TAG(CurrentWeaponRangedTag);
 struct RangedAttackComponent
 {
 	int ammoCount;
@@ -54,7 +54,7 @@ struct RangedAttackComponent
 REGISTER_COMPONENT(RangedAttackComponent, "ammoCount", "distance", "damage", "attackTime");
 
 //TODO make grenade as separate weapon type
-DECLARE_REGISTERED_TAG(CurrentWeaponThrowableTag);
+DECLARE_TAG(CurrentWeaponThrowableTag);
 struct ThrowableAttackComponent
 {
 	int ammoCount;
