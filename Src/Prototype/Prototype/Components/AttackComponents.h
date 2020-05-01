@@ -53,7 +53,7 @@ struct RangedAttackComponent
 };
 REGISTER_COMPONENT(RangedAttackComponent, "ammoCount", "distance", "damage", "attackTime");
 
-//TODO make grenade as separate weapon type
+//TODO: make grenade as separate weapon type
 DECLARE_TAG(CurrentWeaponThrowableTag);
 struct ThrowableAttackComponent
 {

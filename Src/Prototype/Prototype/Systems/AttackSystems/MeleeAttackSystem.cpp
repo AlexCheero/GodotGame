@@ -7,7 +7,7 @@
 
 //TODO: implement proper hth with blocks and stuff
 //TODO: call such systems only by input callback
-//TODO: refactor all this mess
+//TODO: refactor all this mess. try to break into separate systems and spilt between phys and proc
 void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 {
 	int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();

@@ -204,15 +204,11 @@ void godot::ECSWorld::_init()
 	utils::InitPhysicLayers();
 
 	//TODO: try to move physics to separate thread
-	//TODO: check what systems really should be in phys proc
 	//TODO: check what systems should be reactive
 	//setup physics systems
-	m_physics_systems.emplace_back(new PlayerVelocitySystem());
 	m_physics_systems.emplace_back(new GravitySystem());
 	//must be called after GravitySystem
 	m_physics_systems.emplace_back(new JumpSystem());
-	m_physics_systems.emplace_back(new PlayerRotationSystem());
-	m_physics_systems.emplace_back(new LookAtSystem());
 	m_physics_systems.emplace_back(new MeleeAttackSystem());
 	m_physics_systems.emplace_back(new RangedAttackSystem());
 	m_physics_systems.emplace_back(new ThrowAttackSystem());
@@ -228,6 +224,9 @@ void godot::ECSWorld::_init()
 	m_physics_systems.emplace_back(new PursuingSystem());
 	
 	//setup systems
+	m_process_systems.emplace_back(new PlayerVelocitySystem());
+	m_process_systems.emplace_back(new PlayerRotationSystem());
+	m_process_systems.emplace_back(new LookAtSystem());
 	m_process_systems.emplace_back(new SimpleFollowSystem());
 	m_process_systems.emplace_back(new DestroyDeadSystem());
 	m_process_systems.emplace_back(new WeaponChooseSystem(registry));
