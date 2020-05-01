@@ -160,6 +160,7 @@ void godot::ECSWorld::LoadConfig()
 	Error err = hitsCfg->load("res://Configs/config.cfg");
 	ASSERT(err == Error::OK, "cannot load config.cfg");
 	MeleeAttackComponent::maxComboIntervalMillis = hitsCfg->get_value("maxComboIntervalMillis", "maxComboIntervalMillis");
+	hitsCfg->free();
 }
 
 //TODO: maybe cache config and not load it every time
