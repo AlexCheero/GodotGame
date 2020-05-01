@@ -28,7 +28,6 @@ struct MeleeAttackComponent
 {
 	std::vector<MeleeHit> hits;
 
-	//TODO: maybe split into cold and hot data
 	int hitIdx = 0;
 	int64_t prevHitTimeMillis = -utils::SecondsToMillis(hits[0].attackTime);
 	//TODO: remove hardcode
