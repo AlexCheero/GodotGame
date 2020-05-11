@@ -1,9 +1,6 @@
 #pragma once
 
 #include "../BaseSystem.h"
-#include "../../Components/SimpleComponents.h"
-
-#include <KinematicBody.hpp>
 
 namespace godot
 {

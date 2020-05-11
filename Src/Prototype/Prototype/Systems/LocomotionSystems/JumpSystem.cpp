@@ -1,23 +1,18 @@
 #include "JumpSystem.h"
 
-#include <KinematicBody.hpp>
 #include <Input.hpp>
 
 #include "../../Components/InputComponents.h"
-
-void godot::JumpSystem::Update(VelocityComponent& velocityComp, JumpSpeedComponent jump)
-{
-	velocityComp.velocity.y = jump.speed;
-}
+#include "../../Components/SimpleComponents.h"
 
 void godot::JumpSystem::operator()(float delta, entt::registry& registry)
 {
-	auto view = registry.view<VelocityComponent, JumpSpeedComponent, InputComponent, KinematicBody*>();
-	view.each([&registry](VelocityComponent& velocityComp, JumpSpeedComponent jump, InputComponent comp, KinematicBody* pBody)
+	auto view = registry.view<VelocityComponent, JumpSpeedComponent, InputComponent>(entt::exclude<InAirTag>);
+	view.each([&registry](VelocityComponent& velocityComp, JumpSpeedComponent jump, InputComponent comp)
 	{
-		if (!comp.Test(EInput::Jump) || !pBody->is_on_floor())
+		if (!comp.Test(EInput::Jump))
 			return;
 		
-		Update(velocityComp, jump);
+		velocityComp.velocity.y = jump.speed;
 	});
 }
