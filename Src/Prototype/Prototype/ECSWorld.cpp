@@ -209,22 +209,21 @@ void godot::ECSWorld::_init()
 	m_physics_systems.emplace_back(new GravitySystem());
 	//must be called after GravitySystem
 	m_physics_systems.emplace_back(new JumpSystem());
-	m_physics_systems.emplace_back(new MeleeAttackSystem());
-	m_physics_systems.emplace_back(new RangedAttackSystem());
-	m_physics_systems.emplace_back(new ThrowAttackSystem());
-
 	//must be called after all systems that affects velocity
 	m_physics_systems.emplace_back(new KinematicMovementSystem());
-
-	//comment to switch off bots
-	//TODO0: check what systems really should run in physics update
-	m_physics_systems.emplace_back(new DecisionMakingFSMSystem(registry));
-
-	m_physics_systems.emplace_back(new GrenadeSystem());
-	m_physics_systems.emplace_back(new NavAgentSystem());
-	m_physics_systems.emplace_back(new PursuingSystem());
 	
 	//setup systems
+	m_process_systems.emplace_back(new MeleeAttackSystem());
+	m_process_systems.emplace_back(new RangedAttackSystem());
+	m_process_systems.emplace_back(new ThrowAttackSystem());
+
+	//comment to switch off bots
+	m_process_systems.emplace_back(new DecisionMakingFSMSystem(registry));
+
+	m_process_systems.emplace_back(new GrenadeSystem());
+	m_process_systems.emplace_back(new NavAgentSystem());
+	m_process_systems.emplace_back(new PursuingSystem());
+	
 	m_process_systems.emplace_back(new PlayerVelocitySystem());
 	m_process_systems.emplace_back(new PlayerRotationSystem());
 	m_process_systems.emplace_back(new LookAtSystem());
