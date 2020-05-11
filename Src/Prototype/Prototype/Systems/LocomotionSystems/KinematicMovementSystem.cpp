@@ -14,7 +14,6 @@ void godot::KinematicMovementSystem::operator()(float delta, entt::registry& reg
 	auto onFloorCheckView = registry.view<InAirTag, VelocityComponent, KinematicBody*>();
 	onFloorCheckView.less([&registry](entt::entity entity, VelocityComponent& velocityComp, KinematicBody* pKBody)
 	{
-		//TODO0: delete usages of is_on_floor from all other systems and use InAirTag instead
 		if (!pKBody->is_on_floor())
 			return;
 
