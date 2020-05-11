@@ -7,17 +7,17 @@
 
 void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 {
-	auto checkForPileInView = registry.view<InputComponent, TargetLockComponent, MeleeAttackComponent, KinematicBody*>(entt::exclude<PileInTag>);
-	checkForPileInView.each([&registry](entt::entity entity, InputComponent inputComp, TargetLockComponent lockComp, MeleeAttackComponent melee, KinematicBody* pKBody)
+	auto checkForPileInView = registry.view<InputComponent, TargetLockComponent, MeleeAttackComponent, Spatial*>(entt::exclude<PileInTag, InAirTag>);
+	checkForPileInView.each([&registry](entt::entity entity, InputComponent inputComp, TargetLockComponent lockComp, MeleeAttackComponent melee, Spatial* pSpatial)
 	{
 		if (!inputComp.Test(EInput::Attack))
 			return;
 
 		ASSERT(registry.has<Spatial*>(lockComp.target), "target has no spatial");
 		Spatial* pTargetSpatial = registry.get<Spatial*>(lockComp.target);
-		Vector3 toTargetDirection = pTargetSpatial->get_global_transform().get_origin() - pKBody->get_global_transform().get_origin();
+		Vector3 toTargetDirection = pTargetSpatial->get_global_transform().get_origin() - pSpatial->get_global_transform().get_origin();
 		float distanceToTarget = toTargetDirection.length();
-		if (distanceToTarget > melee.GetCurrentHit().maxDistance && pKBody->is_on_floor())
+		if (distanceToTarget > melee.GetCurrentHit().maxDistance)
 			registry.assign<PileInTag>(entity);
 	});
 

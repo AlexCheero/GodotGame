@@ -1,6 +1,7 @@
 #include "NavAgentSystem.h"
 
 #include <KinematicBody.hpp>
+#include <Spatial.hpp>
 
 #include "../../Components/SimpleComponents.h"
 #include "../../Components/AIComponents/NavigationComponents.h"
@@ -8,16 +9,13 @@
 //TODO: smooth nav path following with bezier
 void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
 {
-	auto view = registry.view<KinematicBody*, VelocityComponent, NavMarginComponent, BoundsComponent
-		, SpeedComponent, NavPathComponent, RotationDirectionComponent>();
+	auto view = registry.view<Spatial*, VelocityComponent, NavMarginComponent, BoundsComponent
+		, SpeedComponent, NavPathComponent, RotationDirectionComponent>(entt::exclude<InAirTag>);
 	view.each(
-	[&registry](entt::entity entity, KinematicBody* pKBody, VelocityComponent& velocity,
+	[&registry](entt::entity entity, Spatial* pSpatial, VelocityComponent& velocity,
 		NavMarginComponent marginComp, BoundsComponent bounds, SpeedComponent speedComp,
 		NavPathComponent& pathComp, RotationDirectionComponent& rotDirComp)
 	{
-		if (!pKBody->is_on_floor())
-			return;
-
 		if (pathComp.PathComplete())
 		{
 			velocity.velocity.x = velocity.velocity.z = 0;
@@ -25,7 +23,7 @@ void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
 			return;
 		}
 
-		Vector3 origin = pKBody->get_global_transform().origin;
+		Vector3 origin = pSpatial->get_global_transform().origin;
 		origin.y -= bounds.height / 2;
 		Vector3 moveVec = pathComp.CurrentPathPoint() - origin;
 
