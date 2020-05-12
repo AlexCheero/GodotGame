@@ -183,6 +183,9 @@
     <ClCompile Include="ReactiveSystems\JumpRSystem.cpp">
       <Filter>Source Files\ReactiveSystems</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\StartMeleeAttackSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -316,6 +319,9 @@
     </ClInclude>
     <ClInclude Include="ReactiveSystems\JumpRSystem.h">
       <Filter>Header Files\ReactiveSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\StartMeleeAttackSystem.h">
+      <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

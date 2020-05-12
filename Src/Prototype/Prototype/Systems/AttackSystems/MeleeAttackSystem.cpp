@@ -10,28 +10,6 @@
 //TODO: refactor all this mess. try to break into separate systems and spilt between phys and proc
 void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 {
-	int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
-	auto startAttackView = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent>(entt::exclude<AttackAnimPlayingComponent>);
-	startAttackView.less([this, &registry, currTimeMillis](entt::entity entity, MeleeAttackComponent& attackComp)
-	{
-		if (attackComp.prevHitTimeMillis + utils::SecondsToMillis(attackComp.GetCurrentHit().attackTime) > currTimeMillis)
-		{
-			registry.remove<AttackPressedTag>(entity);
-			return;
-		}
-
-		int64_t millisSinceLastHit = currTimeMillis - attackComp.prevHitTimeMillis;
-		attackComp.prevHitTimeMillis = currTimeMillis;
-
-		if (millisSinceLastHit <= MeleeAttackComponent::maxComboIntervalMillis)
-			registry.assign<IncrementComboTag>(entity);
-	});
-	
-	//TODO: locks on target on every hit, this may cause bugs with many enemies
-	lockSystem(delta, registry);
-	pileInSystem(delta, registry);
-	animSystem(delta, registry);
-
 	auto animPlayingView = registry.view<AttackAnimPlayingComponent>();
 	animPlayingView.each([&registry, delta](entt::entity entity, AttackAnimPlayingComponent& attackPlayingComp)
 	{

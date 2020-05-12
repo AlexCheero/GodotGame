@@ -199,6 +199,8 @@ void godot::ECSWorld::_register_methods()
 	register_method((char*)"_physics_process", &ECSWorld::_physics_process);
 }
 
+#include "Systems/AttackSystems/StartMeleeAttackSystem.h"
+
 void godot::ECSWorld::_init()
 {
 	InitInstance(this);
@@ -216,7 +218,18 @@ void godot::ECSWorld::_init()
 	m_physics_systems.emplace_back(new KinematicMovementSystem());
 	
 	//setup systems
+	//<MeleeAttackSystem
+	
+	m_process_systems.emplace_back(new StartMeleeAttackSystem());
+	//TODO: locks on target on every hit, this may cause bugs with many enemies
+	m_process_systems.emplace_back(new HTHLockTargetSystem());
+	m_process_systems.emplace_back(new HTHAnimSystem());
+	m_process_systems.emplace_back(new PileInSystem());
 	m_process_systems.emplace_back(new MeleeAttackSystem()); //refactor and make some parts reactive
+
+
+	//MeleeAttackSystem>
+	
 	m_process_systems.emplace_back(new RangedAttackSystem()); //reactive
 	m_process_systems.emplace_back(new ThrowAttackSystem()); //reactive
 
