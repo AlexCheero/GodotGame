@@ -195,6 +195,9 @@
     <ClCompile Include="Systems\AttackSystems\CheckForPileInSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
+    <ClCompile Include="Nodes\EntityView.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">

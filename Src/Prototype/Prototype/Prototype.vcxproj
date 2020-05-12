@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp" />
+    <ClCompile Include="Nodes\EntityView.cpp" />
     <ClCompile Include="Nodes\HTHDamagingArea.cpp" />
     <ClCompile Include="Nodes\PickableNode.cpp" />
     <ClCompile Include="Nodes\ThrowableWeaponNode.cpp" />
