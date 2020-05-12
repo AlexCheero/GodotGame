@@ -189,6 +189,9 @@
     <ClCompile Include="Systems\AttackSystems\UpdateLockRotationSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\AnimSystems\EndAttackAnimSystem.cpp">
+      <Filter>Source Files\Systems\AnimSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -328,6 +331,9 @@
     </ClInclude>
     <ClInclude Include="Systems\AttackSystems\UpdateLockRotationSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AnimSystems\EndAttackAnimSystem.h">
+      <Filter>Header Files\Systems\AnimSystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

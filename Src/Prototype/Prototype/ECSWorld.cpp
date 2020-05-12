@@ -204,6 +204,7 @@ void godot::ECSWorld::_register_methods()
 #include "Systems/AttackSystems/PileInSystem.h"
 #include "Systems/AttackSystems/IncrementComboSystem.h"
 #include "Systems/AttackSystems/UpdateLockRotationSystem.h"
+#include "Systems/AnimSystems/EndAttackAnimSystem.h"
 
 void godot::ECSWorld::_init()
 {
@@ -230,7 +231,8 @@ void godot::ECSWorld::_init()
 	//TODO: locks on target on every hit, this may cause bugs with many enemies
 	m_process_systems.emplace_back(new HTHLockTargetSystem()); //reactive
 	m_process_systems.emplace_back(new UpdateLockRotationSystem());
-	m_process_systems.emplace_back(new HTHAnimSystem());
+	m_process_systems.emplace_back(new HTHAnimSystem()); //reactive
+	m_process_systems.emplace_back(new EndAttackAnimSystem());
 	m_process_systems.emplace_back(new PileInSystem());
 	m_process_systems.emplace_back(new IncrementComboSystem()); //refactor and make some parts reactive
 //MeleeAttackSystem>

@@ -21,6 +21,7 @@ void godot::StartMeleeAttackSystem::operator()(float delta, entt::registry& regi
 		attackComp.prevHitTimeMillis = currTimeMillis;
 
 		//TODO0: increment bug, when attack is pressed before animation stops playing
+		//       probably this because of wrong EndAttackAnimSystem update
 		if (millisSinceLastHit <= MeleeAttackComponent::maxComboIntervalMillis)
 			registry.assign<IncrementComboTag>(entity);
 	});
