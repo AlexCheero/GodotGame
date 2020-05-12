@@ -236,7 +236,7 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new EndAttackAnimSystem());
 	m_process_systems.emplace_back(new CheckForPileInSystem()); //reactive
 	m_process_systems.emplace_back(new PileInSystem());
-	m_process_systems.emplace_back(new IncrementComboSystem()); //refactor and make some parts reactive
+	m_process_systems.emplace_back(new IncrementComboSystem()); //reactive
 //MeleeAttackSystem>
 	
 	m_process_systems.emplace_back(new RangedAttackSystem()); //reactive
@@ -283,10 +283,8 @@ void godot::ECSWorld::HandleInputEvent(InputEvent* e)
 	else if (e->is_action_pressed("ui_cancel"))
 		get_tree()->quit();
 	else
-	{
-		PlayerInputSystem inputSystem;
-		inputSystem(registry, e);
-	}
+		 PlayerInputSystem::HandleInput(registry, e);
+	
 }
 
 void godot::ECSWorld::_process(float delta)
