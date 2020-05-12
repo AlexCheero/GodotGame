@@ -3,9 +3,8 @@
 #include <Input.hpp>
 
 #include "../../Components/InputComponents.h"
-#include "../../Components/SimpleComponents.h"
 
-inline godot::Vector2 godot::PlayerInputSystem::GetInputDirection(const char* actionPrefix)
+godot::Vector2 godot::PlayerInputSystem::GetInputDirection(const char* actionPrefix)
 {
 	Input* pInput = Input::get_singleton();
 	float horizontal = pInput->get_action_strength(actionPrefix + String("_right")) - pInput->get_action_strength(actionPrefix + String("_left"));
@@ -16,29 +15,16 @@ inline godot::Vector2 godot::PlayerInputSystem::GetInputDirection(const char* ac
 
 void godot::PlayerInputSystem::operator()(entt::registry& registry, InputEvent* e)
 {
-	auto pressedView = registry.view <PlayerTag, JumpPressedTag>();
-	pressedView.less([&registry, e](entt::entity entity)
-	{
-		if (!e->is_action_pressed("jump"))
-			registry.remove<JumpPressedTag>(entity);
-	});
+	ProcessInput<JumpPressedTag>(registry, e, e->is_action_pressed("jump"));
 
-	auto releasedView = registry.view <PlayerTag>(entt::exclude<JumpPressedTag>);
-	releasedView.less([&registry, e](entt::entity entity)
-	{
-		if (e->is_action_pressed("jump"))
-			registry.assign<JumpPressedTag>(entity);
-	});
-
-	return;
 	auto view = registry.view<PlayerTag, InputComponent>();
-	view.less([&registry, e](InputComponent& comp)
+	view.less([this, &registry, e](InputComponent& comp)
 	{
-		comp.Set(EInput::Attack, e->is_action_pressed("attack"));
-		comp.Set(EInput::Jump, e->is_action_pressed("jump"));
-		comp.Set(EInput::ChooseMelee, e->is_action_pressed("choose_melee"));
-		comp.Set(EInput::ChooseRanged, e->is_action_pressed("choose_ranged"));
-		comp.Set(EInput::ChooseThrowable, e->is_action_pressed("choose_throwable"));
+		//comp.Set(EInput::Attack, e->is_action_pressed("attack"));
+		//comp.Set(EInput::Jump, e->is_action_pressed("jump"));
+		//comp.Set(EInput::ChooseMelee, e->is_action_pressed("choose_melee"));
+		//comp.Set(EInput::ChooseRanged, e->is_action_pressed("choose_ranged"));
+		//comp.Set(EInput::ChooseThrowable, e->is_action_pressed("choose_throwable"));
 
 		//TODO: change to mouse and/or gamepad
 		comp.rotation = GetInputDirection("ui");

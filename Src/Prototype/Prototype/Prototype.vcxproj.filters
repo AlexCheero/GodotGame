@@ -73,6 +73,12 @@
     <Filter Include="Source Files\Systems\AISystems\DecisionMaking">
       <UniqueIdentifier>{6f3508e2-3c73-4fc5-81d6-1551a9f95a0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ReactiveSystems">
+      <UniqueIdentifier>{8813a17f-c695-44eb-a748-b0485b887687}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ReactiveSystems">
+      <UniqueIdentifier>{9532601f-8cf3-4bea-a55d-3882fd5a35ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp">
@@ -109,9 +115,6 @@
       <Filter>Source Files\Systems\PlayerSystems</Filter>
     </ClCompile>
     <ClCompile Include="Systems\LocomotionSystems\GravitySystem.cpp">
-      <Filter>Source Files\Systems\LocomotionSystems</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\LocomotionSystems\JumpSystem.cpp">
       <Filter>Source Files\Systems\LocomotionSystems</Filter>
     </ClCompile>
     <ClCompile Include="Systems\LocomotionSystems\KinematicMovementSystem.cpp">
@@ -177,6 +180,9 @@
     <ClCompile Include="Systems\AISystems\DecisionMaking\PursueStateSystem.cpp">
       <Filter>Source Files\Systems\AISystems\DecisionMaking</Filter>
     </ClCompile>
+    <ClCompile Include="ReactiveSystems\JumpRSystem.cpp">
+      <Filter>Source Files\ReactiveSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -225,9 +231,6 @@
       <Filter>Header Files\Systems\PlayerSystems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\LocomotionSystems\GravitySystem.h">
-      <Filter>Header Files\Systems\LocomotionSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\LocomotionSystems\JumpSystem.h">
       <Filter>Header Files\Systems\LocomotionSystems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\LocomotionSystems\KinematicMovementSystem.h">
@@ -310,6 +313,9 @@
     </ClInclude>
     <ClInclude Include="Systems\AISystems\DecisionMaking\PursueStateSystem.h">
       <Filter>Header Files\Systems\AISystems\DecisionMaking</Filter>
+    </ClInclude>
+    <ClInclude Include="ReactiveSystems\JumpRSystem.h">
+      <Filter>Header Files\ReactiveSystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

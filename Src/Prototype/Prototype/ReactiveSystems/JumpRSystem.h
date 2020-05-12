@@ -4,7 +4,7 @@
 
 namespace godot
 {
-	namespace ReactiveJumpSystem
+	namespace JumpRSystem
 	{
 		void Init(entt::registry& registry);
 		void OnInputPressed(entt::registry& registry, entt::entity entity);

@@ -155,6 +155,7 @@
     <ClCompile Include="Nodes\HTHDamagingArea.cpp" />
     <ClCompile Include="Nodes\PickableNode.cpp" />
     <ClCompile Include="Nodes\ThrowableWeaponNode.cpp" />
+    <ClCompile Include="ReactiveSystems\JumpRSystem.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\DecisionMakingFSMSystem.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\DecisionMakingHelper.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\FleeStateSystem.cpp" />
@@ -174,7 +175,6 @@
     <ClCompile Include="Systems\AttackSystems\MeleeAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\ThrowAttackSystem.cpp" />
     <ClCompile Include="Systems\LocomotionSystems\GravitySystem.cpp" />
-    <ClCompile Include="Systems\LocomotionSystems\JumpSystem.cpp" />
     <ClCompile Include="Systems\LocomotionSystems\KinematicMovementSystem.cpp" />
     <ClCompile Include="Systems\LocomotionSystems\LookAtSystem.cpp" />
     <ClCompile Include="Systems\PlayerSystems\PlayerInputSystem.cpp" />
@@ -198,6 +198,7 @@
     <ClInclude Include="Nodes\HTHDamagingArea.h" />
     <ClInclude Include="Nodes\PickableNode.h" />
     <ClInclude Include="Nodes\ThrowableWeaponNode.h" />
+    <ClInclude Include="ReactiveSystems\JumpRSystem.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Systems\AISystems\DecisionMaking\DecisionMakingFSMSystem.h" />
     <ClInclude Include="Systems\AISystems\DecisionMaking\DecisionMakingHelper.h" />
@@ -219,7 +220,6 @@
     <ClInclude Include="Systems\AttackSystems\ThrowAttackSystem.h" />
     <ClInclude Include="Systems\BaseSystem.h" />
     <ClInclude Include="Systems\LocomotionSystems\GravitySystem.h" />
-    <ClInclude Include="Systems\LocomotionSystems\JumpSystem.h" />
     <ClInclude Include="Systems\LocomotionSystems\KinematicMovementSystem.h" />
     <ClInclude Include="Systems\LocomotionSystems\LookAtSystem.h" />
     <ClInclude Include="Systems\PlayerSystems\PlayerInputSystem.h" />

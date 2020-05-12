@@ -19,10 +19,11 @@
 #include "Components/AIComponents/PatrolComponents.h"
 #include "Components/AIComponents/FSMStateComponents.h"
 
+#include "ReactiveSystems/JumpRSystem.h";
+
 #include "Systems/PlayerSystems/PlayerVelocitySystem.h"
 #include "Systems/LocomotionSystems/KinematicMovementSystem.h"
 #include "Systems/LocomotionSystems/GravitySystem.h";
-#include "Systems/LocomotionSystems/JumpSystem.h";
 #include "Systems/PlayerSystems/PlayerRotationSystem.h"
 #include "Systems/SimpleFollowSystem.h"
 #include "Systems/AttackSystems/MeleeAttackSystem.h"
@@ -205,11 +206,12 @@ void godot::ECSWorld::_init()
 	utils::InitPhysicLayers();
 
 	//TODO: check what systems should be reactive
+	//setup reactive systems
+	JumpRSystem::Init(registry);
+
 	//setup physics systems
 	m_physics_systems.emplace_back(new GravitySystem());
 	//must be called after GravitySystem
-	//m_physics_systems.emplace_back(new JumpSystem(registry)); //reactive
-	ReactiveJumpSystem::Init(registry);
 	//must be called after all systems that affects velocity
 	m_physics_systems.emplace_back(new KinematicMovementSystem()); //reactive?
 	
