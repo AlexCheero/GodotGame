@@ -170,9 +170,9 @@
     <ClCompile Include="Systems\AnimSystems\LocomotionAnimSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\GrenadeSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\HTHLockTargetSystem.cpp" />
+    <ClCompile Include="Systems\AttackSystems\IncrementComboSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\PileInSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\RangedAttackSystem.cpp" />
-    <ClCompile Include="Systems\AttackSystems\MeleeAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\StartMeleeAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\ThrowAttackSystem.cpp" />
     <ClCompile Include="Systems\LocomotionSystems\GravitySystem.cpp" />
@@ -215,9 +215,9 @@
     <ClInclude Include="Systems\AnimSystems\LocomotionAnimSystem.h" />
     <ClInclude Include="Systems\AttackSystems\GrenadeSystem.h" />
     <ClInclude Include="Systems\AttackSystems\HTHLockTargetSystem.h" />
+    <ClInclude Include="Systems\AttackSystems\IncrementComboSystem.h" />
     <ClInclude Include="Systems\AttackSystems\PileInSystem.h" />
     <ClInclude Include="Systems\AttackSystems\RangedAttackSystem.h" />
-    <ClInclude Include="Systems\AttackSystems\MeleeAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\StartMeleeAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\ThrowAttackSystem.h" />
     <ClInclude Include="Systems\BaseSystem.h" />

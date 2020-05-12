@@ -40,4 +40,14 @@ void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 
 		velComp.velocity = toTargetVelocity;
 	});
+
+	auto cancelPileInView = registry.view<InputComponent>();
+	cancelPileInView.each([&registry, delta](entt::entity entity, InputComponent inputComp)
+	{
+		if (inputComp.moveDir.length_squared() > 0)
+			registry.remove_if_exists<PileInTag>(entity);
+	});
+
+	auto pileInRemoveView = registry.view<PileInTag>(entt::exclude<AttackAnimPlayingComponent>);
+	registry.remove<PileInTag>(pileInRemoveView.begin(), pileInRemoveView.end());
 }

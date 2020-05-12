@@ -99,9 +99,6 @@
     <ClCompile Include="Systems\AISystems\NavAgentSystem.cpp">
       <Filter>Source Files\Systems\AISystems</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\AttackSystems\MeleeAttackSystem.cpp">
-      <Filter>Source Files\Systems\AttackSystems</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\AttackSystems\ThrowAttackSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
@@ -186,6 +183,9 @@
     <ClCompile Include="Systems\AttackSystems\StartMeleeAttackSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\IncrementComboSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -217,9 +217,6 @@
     </ClInclude>
     <ClInclude Include="Components\AIComponents\NavigationComponents.h">
       <Filter>Header Files\Components\AIComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\AttackSystems\MeleeAttackSystem.h">
-      <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\AttackSystems\ThrowAttackSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
@@ -321,6 +318,9 @@
       <Filter>Header Files\ReactiveSystems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\AttackSystems\StartMeleeAttackSystem.h">
+      <Filter>Header Files\Systems\AttackSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\IncrementComboSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
   </ItemGroup>

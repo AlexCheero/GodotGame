@@ -26,7 +26,6 @@
 #include "Systems/LocomotionSystems/GravitySystem.h";
 #include "Systems/PlayerSystems/PlayerRotationSystem.h"
 #include "Systems/SimpleFollowSystem.h"
-#include "Systems/AttackSystems/MeleeAttackSystem.h"
 #include "Systems/AttackSystems/RangedAttackSystem.h"
 #include "Systems/DestroyDeadSystem.h"
 #include "Systems/PlayerSystems/PlayerInputSystem.h"
@@ -199,7 +198,11 @@ void godot::ECSWorld::_register_methods()
 	register_method((char*)"_physics_process", &ECSWorld::_physics_process);
 }
 
+//TODO0: move includes upwards
 #include "Systems/AttackSystems/StartMeleeAttackSystem.h"
+#include "Systems/AttackSystems/HTHLockTargetSystem.h"
+#include "Systems/AttackSystems/PileInSystem.h"
+#include "Systems/AttackSystems/IncrementComboSystem.h"
 
 void godot::ECSWorld::_init()
 {
@@ -218,17 +221,17 @@ void godot::ECSWorld::_init()
 	m_physics_systems.emplace_back(new KinematicMovementSystem());
 	
 	//setup systems
-	//<MeleeAttackSystem
-	
+
+	//TODO: implement proper hth with blocks and stuff
+	//TODO0: make some parts reactive
+//<MeleeAttackSystem
 	m_process_systems.emplace_back(new StartMeleeAttackSystem());
 	//TODO: locks on target on every hit, this may cause bugs with many enemies
 	m_process_systems.emplace_back(new HTHLockTargetSystem());
 	m_process_systems.emplace_back(new HTHAnimSystem());
 	m_process_systems.emplace_back(new PileInSystem());
-	m_process_systems.emplace_back(new MeleeAttackSystem()); //refactor and make some parts reactive
-
-
-	//MeleeAttackSystem>
+	m_process_systems.emplace_back(new IncrementComboSystem()); //refactor and make some parts reactive
+//MeleeAttackSystem>
 	
 	m_process_systems.emplace_back(new RangedAttackSystem()); //reactive
 	m_process_systems.emplace_back(new ThrowAttackSystem()); //reactive

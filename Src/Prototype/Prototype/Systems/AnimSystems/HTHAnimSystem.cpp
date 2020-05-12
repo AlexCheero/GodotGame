@@ -30,4 +30,13 @@ void godot::HTHAnimSystem::operator()(float delta, entt::registry& registry)
 		pAnimTree->set("parameters/" + prevAnimName + "_OneShot/active", false);
 		pAnimTree->set("parameters/" + animName + "_OneShot/active", true);
 	});
+
+	auto animEndView = registry.view<AttackAnimPlayingComponent>();
+	animEndView.each([&registry, delta](entt::entity entity, AttackAnimPlayingComponent& attackPlayingComp)
+	{
+		attackPlayingComp.playBackTimeLeft -= delta;
+
+		if (attackPlayingComp.playBackTimeLeft <= 0)
+			registry.remove<AttackAnimPlayingComponent>(entity);
+	});
 }
