@@ -66,7 +66,6 @@ struct ThrowableAttackComponent
 };
 REGISTER_COMPONENT(ThrowableAttackComponent, "ammoCount", "throwableScene", "force", "attackTime");
 
-DECLARE_TAG(AttackActionTag);
 struct AttackAnimPlayingComponent
 {
 	float playBackTimeLeft;

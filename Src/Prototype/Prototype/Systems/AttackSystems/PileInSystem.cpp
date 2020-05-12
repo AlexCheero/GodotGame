@@ -7,12 +7,9 @@
 
 void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 {
-	auto checkForPileInView = registry.view<InputComponent, TargetLockComponent, MeleeAttackComponent, Spatial*>(entt::exclude<PileInTag, InAirTag>);
-	checkForPileInView.each([&registry](entt::entity entity, InputComponent inputComp, TargetLockComponent lockComp, MeleeAttackComponent melee, Spatial* pSpatial)
+	auto checkForPileInView = registry.view<AttackPressedTag, TargetLockComponent, MeleeAttackComponent, Spatial*>(entt::exclude<PileInTag, InAirTag>);
+	checkForPileInView.less([&registry](entt::entity entity, TargetLockComponent lockComp, MeleeAttackComponent melee, Spatial* pSpatial)
 	{
-		if (!inputComp.Test(EInput::Attack))
-			return;
-
 		ASSERT(registry.has<Spatial*>(lockComp.target), "target has no spatial");
 		Spatial* pTargetSpatial = registry.get<Spatial*>(lockComp.target);
 		Vector3 toTargetDirection = pTargetSpatial->get_global_transform().get_origin() - pSpatial->get_global_transform().get_origin();
@@ -31,6 +28,7 @@ void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 		Vector3 toTargetDirection = pTargetSpatial->get_global_transform().get_origin() - pSpatial->get_global_transform().get_origin();
 		float distanceToTarget = toTargetDirection.length();
 		
+		//TODO: probably remove PileInTag in this case
 		if (distanceToTarget <= melee.GetCurrentHit().minDistance)
 			return;
 

@@ -14,8 +14,6 @@ void godot::JumpRSystem::OnInputPressed(entt::registry& registry, entt::entity e
 	if (registry.has<InAirTag>(entity))
 		return;
 
-	Godot::print("Jump!");
-
 	ASSERT(registry.has<VelocityComponent>(entity), "entity has no VelocityComponent");
 	ASSERT(registry.has<JumpSpeedComponent>(entity), "entity has no JumpSpeedComponent");
 	registry.get<VelocityComponent>(entity).velocity.y = registry.get<JumpSpeedComponent>(entity).speed;

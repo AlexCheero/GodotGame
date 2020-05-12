@@ -15,6 +15,7 @@ godot::Vector2 godot::PlayerInputSystem::GetInputDirection(const char* actionPre
 
 void godot::PlayerInputSystem::operator()(entt::registry& registry, InputEvent* e)
 {
+	ProcessInput<AttackPressedTag>(registry, e, e->is_action_pressed("attack"));
 	ProcessInput<JumpPressedTag>(registry, e, e->is_action_pressed("jump"));
 
 	auto view = registry.view<PlayerTag, InputComponent>();

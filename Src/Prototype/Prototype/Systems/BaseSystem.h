@@ -3,6 +3,7 @@
 #include "entt/entt.hpp"
 
 #ifdef DEBUG
+//TODO: decide what to do with tests
 #define TESTABLE_CLASS __declspec(dllexport) 
 #else
 #define TESTABLE_CLASS

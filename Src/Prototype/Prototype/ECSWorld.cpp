@@ -213,7 +213,7 @@ void godot::ECSWorld::_init()
 	m_physics_systems.emplace_back(new GravitySystem());
 	//must be called after GravitySystem
 	//must be called after all systems that affects velocity
-	m_physics_systems.emplace_back(new KinematicMovementSystem()); //reactive?
+	m_physics_systems.emplace_back(new KinematicMovementSystem());
 	
 	//setup systems
 	m_process_systems.emplace_back(new MeleeAttackSystem()); //refactor and make some parts reactive
@@ -227,7 +227,8 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new NavAgentSystem()); //check better for reactivness
 	m_process_systems.emplace_back(new PursuingSystem());
 	
-	m_process_systems.emplace_back(new PlayerVelocitySystem()); //reactive
+	//TODO: pile in breaks if this system runs in _process
+	m_physics_systems.emplace_back(new PlayerVelocitySystem()); //reactive
 	m_process_systems.emplace_back(new PlayerRotationSystem()); //reactive
 	m_process_systems.emplace_back(new LookAtSystem());
 	m_process_systems.emplace_back(new SimpleFollowSystem());

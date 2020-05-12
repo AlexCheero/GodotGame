@@ -11,22 +11,23 @@
 void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 {
 	int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
-	auto startAttackView = registry.view<CurrentWeaponMeleeTag, MeleeAttackComponent, InputComponent>(entt::exclude<AttackActionTag, AttackAnimPlayingComponent>);
-	startAttackView.less([this, &registry, currTimeMillis](entt::entity entity, MeleeAttackComponent& attackComp, InputComponent input)
+	auto startAttackView = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent>(entt::exclude<AttackAnimPlayingComponent>);
+	startAttackView.less([this, &registry, currTimeMillis](entt::entity entity, MeleeAttackComponent& attackComp)
 	{
-		if (!input.Test(EInput::Attack) || attackComp.prevHitTimeMillis + utils::SecondsToMillis(attackComp.GetCurrentHit().attackTime) > currTimeMillis)
+		if (attackComp.prevHitTimeMillis + utils::SecondsToMillis(attackComp.GetCurrentHit().attackTime) > currTimeMillis)
+		{
+			registry.remove<AttackPressedTag>(entity);
 			return;
+		}
 
 		int64_t millisSinceLastHit = currTimeMillis - attackComp.prevHitTimeMillis;
 		attackComp.prevHitTimeMillis = currTimeMillis;
 
 		if (millisSinceLastHit <= MeleeAttackComponent::maxComboIntervalMillis)
 			registry.assign<IncrementComboTag>(entity);
-
-		//TODO: locks on target on every hit, this may cause bugs with many enemies
-		registry.assign<AttackActionTag>(entity);
 	});
-
+	
+	//TODO: locks on target on every hit, this may cause bugs with many enemies
 	lockSystem(delta, registry);
 	pileInSystem(delta, registry);
 	animSystem(delta, registry);
@@ -58,7 +59,4 @@ void godot::MeleeAttackSystem::operator()(float delta, entt::registry& registry)
 			attackComp.hitIdx = 0;
 	});
 	registry.remove<IncrementComboTag>(incrementComboView.begin(), incrementComboView.end());
-
-	auto inputClearView = registry.view<AttackActionTag>();
-	registry.remove<AttackActionTag>(inputClearView.begin(), inputClearView.end());
 }
