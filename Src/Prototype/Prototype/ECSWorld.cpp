@@ -199,7 +199,7 @@ void godot::ECSWorld::_register_methods()
 }
 
 //TODO0: move includes upwards
-#include "Systems/AttackSystems/StartMeleeAttackSystem.h"
+#include "ReactiveSystems/StartMeleeAttackRSystem.h"
 #include "Systems/AttackSystems/HTHLockTargetSystem.h"
 #include "Systems/AttackSystems/PileInSystem.h"
 #include "Systems/AttackSystems/IncrementComboSystem.h"
@@ -216,6 +216,7 @@ void godot::ECSWorld::_init()
 	//TODO: check what systems should be reactive
 	//setup reactive systems
 	JumpRSystem::Init(registry);
+	StartMeleeAttackRSystem::Init(registry);
 
 	//setup physics systems
 	m_physics_systems.emplace_back(new GravitySystem());
@@ -228,7 +229,6 @@ void godot::ECSWorld::_init()
 	//TODO: implement proper hth with blocks and stuff
 	//TODO0: make some parts reactive
 //<MeleeAttackSystem
-	m_process_systems.emplace_back(new StartMeleeAttackSystem()); //reactive
 	//TODO: locks on target on every hit, this may cause bugs with many enemies
 	m_process_systems.emplace_back(new HTHLockTargetSystem()); //reactive
 	m_process_systems.emplace_back(new UpdateLockRotationSystem());

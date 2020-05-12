@@ -157,6 +157,7 @@
     <ClCompile Include="Nodes\PickableNode.cpp" />
     <ClCompile Include="Nodes\ThrowableWeaponNode.cpp" />
     <ClCompile Include="ReactiveSystems\JumpRSystem.cpp" />
+    <ClCompile Include="ReactiveSystems\StartMeleeAttackRSystem.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\DecisionMakingFSMSystem.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\DecisionMakingHelper.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\FleeStateSystem.cpp" />
@@ -176,7 +177,6 @@
     <ClCompile Include="Systems\AttackSystems\IncrementComboSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\PileInSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\RangedAttackSystem.cpp" />
-    <ClCompile Include="Systems\AttackSystems\StartMeleeAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\ThrowAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\UpdateLockRotationSystem.cpp" />
     <ClCompile Include="Systems\LocomotionSystems\GravitySystem.cpp" />
@@ -204,6 +204,7 @@
     <ClInclude Include="Nodes\PickableNode.h" />
     <ClInclude Include="Nodes\ThrowableWeaponNode.h" />
     <ClInclude Include="ReactiveSystems\JumpRSystem.h" />
+    <ClInclude Include="ReactiveSystems\StartMeleeAttackRSystem.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Systems\AISystems\DecisionMaking\DecisionMakingFSMSystem.h" />
     <ClInclude Include="Systems\AISystems\DecisionMaking\DecisionMakingHelper.h" />
@@ -224,7 +225,6 @@
     <ClInclude Include="Systems\AttackSystems\IncrementComboSystem.h" />
     <ClInclude Include="Systems\AttackSystems\PileInSystem.h" />
     <ClInclude Include="Systems\AttackSystems\RangedAttackSystem.h" />
-    <ClInclude Include="Systems\AttackSystems\StartMeleeAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\ThrowAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\UpdateLockRotationSystem.h" />
     <ClInclude Include="Systems\BaseSystem.h" />

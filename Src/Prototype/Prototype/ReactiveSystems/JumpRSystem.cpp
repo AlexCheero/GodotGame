@@ -4,17 +4,20 @@
 #include "../Components/SimpleComponents.h"
 #include "../Utils/Utils.h"
 
-void godot::JumpRSystem::Init(entt::registry& registry)
+namespace //private
 {
-	registry.on_construct<JumpPressedTag>().connect<&JumpRSystem::OnInputPressed>();
+	void OnInputPressed(entt::registry& registry, entt::entity entity)
+	{
+		if (registry.has<InAirTag>(entity))
+			return;
+
+		ASSERT(registry.has<VelocityComponent>(entity), "entity has no VelocityComponent");
+		ASSERT(registry.has<JumpSpeedComponent>(entity), "ezntity has no JumpSpeedComponent");
+		registry.get<VelocityComponent>(entity).velocity.y = registry.get<JumpSpeedComponent>(entity).speed;
+	}
 }
 
-void godot::JumpRSystem::OnInputPressed(entt::registry& registry, entt::entity entity)
+void godot::JumpRSystem::Init(entt::registry& registry)
 {
-	if (registry.has<InAirTag>(entity))
-		return;
-
-	ASSERT(registry.has<VelocityComponent>(entity), "entity has no VelocityComponent");
-	ASSERT(registry.has<JumpSpeedComponent>(entity), "entity has no JumpSpeedComponent");
-	registry.get<VelocityComponent>(entity).velocity.y = registry.get<JumpSpeedComponent>(entity).speed;
+	registry.on_construct<JumpPressedTag>().connect<&OnInputPressed>();
 }

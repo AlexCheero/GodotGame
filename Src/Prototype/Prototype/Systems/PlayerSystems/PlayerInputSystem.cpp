@@ -4,7 +4,7 @@
 
 #include "../../Components/InputComponents.h"
 
-namespace internal
+namespace //private
 {
 	template<typename T>
 	inline void ProcessInput(entt::registry& registry, godot::InputEvent* e, bool pressed)
@@ -33,8 +33,8 @@ namespace internal
 
 void godot::PlayerInputSystem::HandleInput(entt::registry& registry, InputEvent* e)
 {
-	internal::ProcessInput<AttackPressedTag>(registry, e, e->is_action_pressed("attack"));
-	internal::ProcessInput<JumpPressedTag>(registry, e, e->is_action_pressed("jump"));
+	ProcessInput<AttackPressedTag>(registry, e, e->is_action_pressed("attack"));
+	ProcessInput<JumpPressedTag>(registry, e, e->is_action_pressed("jump"));
 
 	auto view = registry.view<PlayerTag, InputComponent>();
 	view.less([&registry, e](InputComponent& comp)
@@ -46,7 +46,7 @@ void godot::PlayerInputSystem::HandleInput(entt::registry& registry, InputEvent*
 		//comp.Set(EInput::ChooseThrowable, e->is_action_pressed("choose_throwable"));
 
 		//TODO: change to mouse and/or gamepad
-		comp.rotation = internal::GetInputDirection("ui");
-		comp.moveDir = internal::GetInputDirection("move");
+		comp.rotation = GetInputDirection("ui");
+		comp.moveDir = GetInputDirection("move");
 	});
 }

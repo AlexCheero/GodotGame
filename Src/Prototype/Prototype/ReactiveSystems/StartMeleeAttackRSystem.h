@@ -4,7 +4,7 @@
 
 namespace godot
 {
-	namespace JumpRSystem
+	namespace StartMeleeAttackRSystem
 	{
 		void Init(entt::registry& registry);
 	}
