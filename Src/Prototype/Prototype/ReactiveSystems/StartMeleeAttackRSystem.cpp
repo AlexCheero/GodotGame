@@ -9,7 +9,6 @@ namespace //private
 {
 	void OnInputPressed(entt::registry& registry, entt::entity entity)
 	{
-		//TODO0: try to abstract
 		if (!registry.has<CurrentWeaponMeleeTag>(entity) || registry.has<AttackAnimPlayingComponent>(entity))
 			return;
 
