@@ -1,6 +1,5 @@
 #include "NavAgentSystem.h"
 
-#include <KinematicBody.hpp>
 #include <Spatial.hpp>
 
 #include "../../Components/SimpleComponents.h"

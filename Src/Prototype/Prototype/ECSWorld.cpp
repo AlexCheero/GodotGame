@@ -205,6 +205,7 @@ void godot::ECSWorld::_register_methods()
 #include "Systems/AttackSystems/IncrementComboSystem.h"
 #include "Systems/AttackSystems/UpdateLockRotationSystem.h"
 #include "Systems/AnimSystems/EndAttackAnimSystem.h"
+#include "Systems/AttackSystems/CheckForPileInSystem.h"
 
 void godot::ECSWorld::_init()
 {
@@ -233,6 +234,7 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new UpdateLockRotationSystem());
 	m_process_systems.emplace_back(new HTHAnimSystem()); //reactive
 	m_process_systems.emplace_back(new EndAttackAnimSystem());
+	m_process_systems.emplace_back(new CheckForPileInSystem()); //reactive
 	m_process_systems.emplace_back(new PileInSystem());
 	m_process_systems.emplace_back(new IncrementComboSystem()); //refactor and make some parts reactive
 //MeleeAttackSystem>

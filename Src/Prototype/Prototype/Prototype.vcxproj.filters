@@ -192,6 +192,9 @@
     <ClCompile Include="Systems\AnimSystems\EndAttackAnimSystem.cpp">
       <Filter>Source Files\Systems\AnimSystems</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\CheckForPileInSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -334,6 +337,9 @@
     </ClInclude>
     <ClInclude Include="Systems\AnimSystems\EndAttackAnimSystem.h">
       <Filter>Header Files\Systems\AnimSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\CheckForPileInSystem.h">
+      <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
