@@ -20,6 +20,7 @@
 #include "Components/AIComponents/FSMStateComponents.h"
 
 #include "ReactiveSystems/JumpRSystem.h";
+#include "ReactiveSystems/HTHAnimRSystem.h"
 
 #include "Systems/PlayerSystems/PlayerVelocitySystem.h"
 #include "Systems/LocomotionSystems/KinematicMovementSystem.h"
@@ -37,7 +38,6 @@
 #include "Systems/AISystems/HealthMonitoringSystem.h"
 #include "Systems/AISystems/FleeingSystem.h"
 #include "Systems/AnimSystems/LocomotionAnimSystem.h"
-#include "Systems/AnimSystems/HTHAnimSystem.h"
 #include "Systems/AttackSystems/GrenadeSystem.h"
 #include "Systems/AISystems/DecisionMaking/DecisionMakingFSMSystem.h"
 
@@ -218,6 +218,7 @@ void godot::ECSWorld::_init()
 	JumpRSystem::Init(registry);
 	StartMeleeAttackRSystem::Init(registry);
 	HTHLockTargetRSystem::Init(registry);
+	HTHAnimRSystem::Init(registry);
 
 	//setup physics systems
 	m_physics_systems.emplace_back(new GravitySystem());
@@ -232,7 +233,6 @@ void godot::ECSWorld::_init()
 //<MeleeAttackSystem
 	//TODO: locks on target on every hit, this may cause bugs with many enemies
 	m_process_systems.emplace_back(new UpdateLockRotationSystem());
-	m_process_systems.emplace_back(new HTHAnimSystem()); //reactive
 	m_process_systems.emplace_back(new EndAttackAnimSystem());
 	m_process_systems.emplace_back(new CheckForPileInSystem()); //reactive
 	m_process_systems.emplace_back(new PileInSystem());
