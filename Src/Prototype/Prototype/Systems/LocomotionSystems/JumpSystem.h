@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../BaseSystem.h"
+#include "entt/entt.hpp"
 
 namespace godot
 {
-	class JumpSystem : public BaseSystem
+	namespace ReactiveJumpSystem
 	{
-	public:
-		virtual void operator()(float delta, entt::registry& registry) override;
-	};
+		void Init(entt::registry& registry);
+		void OnInputPressed(entt::registry& registry, entt::entity entity);
+	}
 }

@@ -208,29 +208,30 @@ void godot::ECSWorld::_init()
 	//setup physics systems
 	m_physics_systems.emplace_back(new GravitySystem());
 	//must be called after GravitySystem
-	m_physics_systems.emplace_back(new JumpSystem());
+	//m_physics_systems.emplace_back(new JumpSystem(registry)); //reactive
+	ReactiveJumpSystem::Init(registry);
 	//must be called after all systems that affects velocity
-	m_physics_systems.emplace_back(new KinematicMovementSystem());
+	m_physics_systems.emplace_back(new KinematicMovementSystem()); //reactive?
 	
 	//setup systems
-	m_process_systems.emplace_back(new MeleeAttackSystem());
-	m_process_systems.emplace_back(new RangedAttackSystem());
-	m_process_systems.emplace_back(new ThrowAttackSystem());
+	m_process_systems.emplace_back(new MeleeAttackSystem()); //refactor and make some parts reactive
+	m_process_systems.emplace_back(new RangedAttackSystem()); //reactive
+	m_process_systems.emplace_back(new ThrowAttackSystem()); //reactive
 
 	//comment to switch off bots
 	m_process_systems.emplace_back(new DecisionMakingFSMSystem(registry));
 
 	m_process_systems.emplace_back(new GrenadeSystem());
-	m_process_systems.emplace_back(new NavAgentSystem());
+	m_process_systems.emplace_back(new NavAgentSystem()); //check better for reactivness
 	m_process_systems.emplace_back(new PursuingSystem());
 	
-	m_process_systems.emplace_back(new PlayerVelocitySystem());
-	m_process_systems.emplace_back(new PlayerRotationSystem());
+	m_process_systems.emplace_back(new PlayerVelocitySystem()); //reactive
+	m_process_systems.emplace_back(new PlayerRotationSystem()); //reactive
 	m_process_systems.emplace_back(new LookAtSystem());
 	m_process_systems.emplace_back(new SimpleFollowSystem());
-	m_process_systems.emplace_back(new DestroyDeadSystem());
-	m_process_systems.emplace_back(new WeaponChooseSystem(registry));
-	m_process_systems.emplace_back(new HealthMonitoringSystem());
+	m_process_systems.emplace_back(new DestroyDeadSystem()); //reactive?
+	m_process_systems.emplace_back(new WeaponChooseSystem(registry)); //reactive
+	m_process_systems.emplace_back(new HealthMonitoringSystem()); //reactive?
 	m_process_systems.emplace_back(new FleeingSystem());
 	m_process_systems.emplace_back(new LocomotionAnimSystem());
 }

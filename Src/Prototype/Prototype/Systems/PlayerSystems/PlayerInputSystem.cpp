@@ -16,6 +16,21 @@ inline godot::Vector2 godot::PlayerInputSystem::GetInputDirection(const char* ac
 
 void godot::PlayerInputSystem::operator()(entt::registry& registry, InputEvent* e)
 {
+	auto pressedView = registry.view <PlayerTag, JumpPressedTag>();
+	pressedView.less([&registry, e](entt::entity entity)
+	{
+		if (!e->is_action_pressed("jump"))
+			registry.remove<JumpPressedTag>(entity);
+	});
+
+	auto releasedView = registry.view <PlayerTag>(entt::exclude<JumpPressedTag>);
+	releasedView.less([&registry, e](entt::entity entity)
+	{
+		if (e->is_action_pressed("jump"))
+			registry.assign<JumpPressedTag>(entity);
+	});
+
+	return;
 	auto view = registry.view<PlayerTag, InputComponent>();
 	view.less([&registry, e](InputComponent& comp)
 	{

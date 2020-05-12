@@ -1,18 +1,20 @@
 #include "JumpSystem.h"
 
-#include <Input.hpp>
-
 #include "../../Components/InputComponents.h"
 #include "../../Components/SimpleComponents.h"
+#include "../../Utils/Utils.h"
 
-void godot::JumpSystem::operator()(float delta, entt::registry& registry)
+void godot::ReactiveJumpSystem::Init(entt::registry& registry)
 {
-	auto view = registry.view<VelocityComponent, JumpSpeedComponent, InputComponent>(entt::exclude<InAirTag>);
-	view.each([&registry](VelocityComponent& velocityComp, JumpSpeedComponent jump, InputComponent comp)
-	{
-		if (!comp.Test(EInput::Jump))
-			return;
-		
-		velocityComp.velocity.y = jump.speed;
-	});
+	registry.on_construct<JumpPressedTag>().connect<&ReactiveJumpSystem::OnInputPressed>();
+}
+
+void godot::ReactiveJumpSystem::OnInputPressed(entt::registry& registry, entt::entity entity)
+{
+	if (registry.has<InAirTag>(entity))
+		return;
+
+	ASSERT(registry.has<VelocityComponent>(entity), "entity has no VelocityComponent");
+	ASSERT(registry.has<JumpSpeedComponent>(entity), "entity has no JumpSpeedComponent");
+	registry.get<VelocityComponent>(entity).velocity.y = registry.get<JumpSpeedComponent>(entity).speed;
 }

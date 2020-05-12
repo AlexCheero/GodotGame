@@ -6,6 +6,14 @@
 
 #include <bitset>
 
+#include "ComponentsMeta.h"
+
+DECLARE_TAG(AttackPressedTag);
+DECLARE_TAG(JumpPressedTag);
+DECLARE_TAG(ChooseMeleePressedTag);
+DECLARE_TAG(ChooseRangedPressedTag);
+DECLARE_TAG(ChooseThrowablePressedTag);
+
 enum class EInput
 {
 	Attack,
