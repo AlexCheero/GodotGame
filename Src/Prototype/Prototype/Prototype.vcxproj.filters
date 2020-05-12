@@ -186,6 +186,9 @@
     <ClCompile Include="Systems\AttackSystems\IncrementComboSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\UpdateLockRotationSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -321,6 +324,9 @@
       <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\AttackSystems\IncrementComboSystem.h">
+      <Filter>Header Files\Systems\AttackSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\UpdateLockRotationSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
   </ItemGroup>

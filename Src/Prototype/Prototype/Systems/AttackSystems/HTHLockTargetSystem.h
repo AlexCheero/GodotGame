@@ -16,7 +16,6 @@ namespace godot
 		Ref<SphereShape> m_attackShape;
 		
 		Array GetIntersects(Spatial* pAttackerSpatial, float distance, String layerName);
-		bool ChecktargetEntity(entt::registry& registry, entt::entity lockedTarget);
 	public:
 		HTHLockTargetSystem();
 		virtual void operator()(float delta, entt::registry& registry) override;

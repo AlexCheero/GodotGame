@@ -29,11 +29,6 @@ godot::Array godot::HTHLockTargetSystem::GetIntersects(Spatial* pAttackerSpatial
 	return spaceState->intersect_shape(m_params, INTERSECT_RESULTS_NUM);
 }
 
-bool godot::HTHLockTargetSystem::ChecktargetEntity(entt::registry& registry, entt::entity lockedTarget)
-{
-	return registry.valid(lockedTarget) && !registry.has<DeadTag>(lockedTarget);
-}
-
 godot::HTHLockTargetSystem::HTHLockTargetSystem()
 {
 	m_params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
@@ -76,19 +71,5 @@ void godot::HTHLockTargetSystem::operator()(float delta, entt::registry& registr
 		ASSERT(!registry.has<DeadTag>(targetEntity), "entity is already dead!");
 
 		registry.assign<TargetLockComponent>(entity).target = targetEntity;
-	});
-
-	auto lockedView = registry.view<CurrentWeaponMeleeTag, TargetLockComponent, RotationDirectionComponent, Spatial*>();
-	lockedView.less([this, &registry](entt::entity entity, TargetLockComponent lockComp, RotationDirectionComponent& rotComp, Spatial* pSpatial)
-	{
-		if (ChecktargetEntity(registry, lockComp.target))
-		{
-			ASSERT(registry.has<Spatial*>(lockComp.target), "target has no spatial");
-			Spatial* pTargetSpatial = registry.get<Spatial*>(lockComp.target);
-			Vector3 dirToTarget = pTargetSpatial->get_global_transform().get_origin() - pSpatial->get_global_transform().get_origin();
-			rotComp.direction = dirToTarget.normalized();
-		}
-		else
-			registry.remove<TargetLockComponent>(entity);
 	});
 }
