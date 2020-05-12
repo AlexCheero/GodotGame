@@ -150,9 +150,6 @@
     <ClCompile Include="Systems\AttackSystems\GrenadeSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\AnimSystems\HTHAnimSystem.cpp">
-      <Filter>Source Files\Systems\AnimSystems</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\AttackSystems\PileInSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
@@ -186,9 +183,6 @@
     <ClCompile Include="Systems\AnimSystems\EndAttackAnimSystem.cpp">
       <Filter>Source Files\Systems\AnimSystems</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\AttackSystems\CheckForPileInSystem.cpp">
-      <Filter>Source Files\Systems\AttackSystems</Filter>
-    </ClCompile>
     <ClCompile Include="Nodes\EntityView.cpp">
       <Filter>Source Files\Nodes</Filter>
     </ClCompile>
@@ -196,6 +190,12 @@
       <Filter>Source Files\ReactiveSystems</Filter>
     </ClCompile>
     <ClCompile Include="ReactiveSystems\HTHLockTargetSystem.cpp">
+      <Filter>Source Files\ReactiveSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="ReactiveSystems\HTHAnimRSystem.cpp">
+      <Filter>Source Files\ReactiveSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="ReactiveSystems\CheckForPileInSystem.cpp">
       <Filter>Source Files\ReactiveSystems</Filter>
     </ClCompile>
   </ItemGroup>
@@ -293,9 +293,6 @@
     <ClInclude Include="Systems\AttackSystems\GrenadeSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
-    <ClInclude Include="Systems\AnimSystems\HTHAnimSystem.h">
-      <Filter>Header Files\Systems\AnimSystems</Filter>
-    </ClInclude>
     <ClInclude Include="Systems\AttackSystems\PileInSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
@@ -335,13 +332,16 @@
     <ClInclude Include="Systems\AnimSystems\EndAttackAnimSystem.h">
       <Filter>Header Files\Systems\AnimSystems</Filter>
     </ClInclude>
-    <ClInclude Include="Systems\AttackSystems\CheckForPileInSystem.h">
-      <Filter>Header Files\Systems\AttackSystems</Filter>
-    </ClInclude>
     <ClInclude Include="ReactiveSystems\StartMeleeAttackRSystem.h">
       <Filter>Header Files\ReactiveSystems</Filter>
     </ClInclude>
     <ClInclude Include="ReactiveSystems\HTHLockTargetSystem.h">
+      <Filter>Header Files\ReactiveSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="ReactiveSystems\HTHAnimRSystem.h">
+      <Filter>Header Files\ReactiveSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="ReactiveSystems\CheckForPileInSystem.h">
       <Filter>Header Files\ReactiveSystems</Filter>
     </ClInclude>
   </ItemGroup>
