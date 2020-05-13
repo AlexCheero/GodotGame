@@ -13,6 +13,9 @@ namespace //private
 	//      and delete EndAttackAnimSystem and AttackAnimPlayingComponent as unnecessary
 	void OnInputPressed(entt::registry& registry, entt::entity entity)
 	{
+		if (!registry.has<CurrentWeaponMeleeTag>(entity))
+			return;
+
 		ASSERT(registry.has<MeleeAttackComponent>(entity), "entity has no MeleeAttackComponent");
 		ASSERT(registry.has<godot::AnimationTree*>(entity), "entity has no AnimationTree*");
 

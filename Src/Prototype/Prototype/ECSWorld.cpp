@@ -25,11 +25,11 @@
 #include "ReactiveSystems/HTHLockTargetSystem.h"
 #include "ReactiveSystems/CheckForPileInSystem.h"
 #include "ReactiveSystems/IncrementComboRSystem.h"
+#include "ReactiveSystems/RangedAttackRSystem.h"
 
 #include "Systems/AttackSystems/PileInSystem.h"
 #include "Systems/AttackSystems/UpdateLockRotationSystem.h"
 #include "Systems/AttackSystems/ComboDropSystem.h"
-#include "Systems/AttackSystems/RangedAttackSystem.h"
 #include "Systems/AttackSystems/ThrowAttackSystem.h"
 #include "Systems/AttackSystems/GrenadeSystem.h"
 
@@ -228,6 +228,8 @@ void godot::ECSWorld::_init()
 	CheckForPileInRSystem::Init(registry);
 	IncrementComboRSystem::Init(registry);
 
+	RangedAttackRSystem::Init(registry);
+
 //setup physics systems
 	m_physics_systems.emplace_back(new GravitySystem());
 	//must be called after GravitySystem
@@ -243,7 +245,6 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new PileInSystem());
 //melee systems>
 	
-	m_process_systems.emplace_back(new RangedAttackSystem()); //reactive
 	m_process_systems.emplace_back(new ThrowAttackSystem()); //reactive
 
 	//comment to switch off bots

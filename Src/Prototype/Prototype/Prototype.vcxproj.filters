@@ -132,9 +132,6 @@
     <ClCompile Include="Systems\AISystems\FleeingSystem.cpp">
       <Filter>Source Files\Systems\AISystems</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\AttackSystems\RangedAttackSystem.cpp">
-      <Filter>Source Files\Systems\AttackSystems</Filter>
-    </ClCompile>
     <ClCompile Include="Nodes\PickableNode.cpp">
       <Filter>Source Files\Nodes</Filter>
     </ClCompile>
@@ -199,6 +196,9 @@
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
     <ClCompile Include="ReactiveSystems\IncrementComboRSystem.cpp">
+      <Filter>Source Files\ReactiveSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="ReactiveSystems\RangedAttackRSystem.cpp">
       <Filter>Source Files\ReactiveSystems</Filter>
     </ClCompile>
   </ItemGroup>
@@ -275,9 +275,6 @@
     <ClInclude Include="Systems\AISystems\FleeingSystem.h">
       <Filter>Header Files\Systems\AISystems</Filter>
     </ClInclude>
-    <ClInclude Include="Systems\AttackSystems\RangedAttackSystem.h">
-      <Filter>Header Files\Systems\AttackSystems</Filter>
-    </ClInclude>
     <ClInclude Include="Nodes\PickableNode.h">
       <Filter>Header Files\Nodes</Filter>
     </ClInclude>
@@ -348,6 +345,9 @@
       <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
     <ClInclude Include="ReactiveSystems\IncrementComboRSystem.h">
+      <Filter>Header Files\ReactiveSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="ReactiveSystems\RangedAttackRSystem.h">
       <Filter>Header Files\ReactiveSystems</Filter>
     </ClInclude>
   </ItemGroup>

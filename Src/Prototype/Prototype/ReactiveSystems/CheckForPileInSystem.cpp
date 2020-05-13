@@ -7,7 +7,7 @@ namespace //private
 {
 	void OnInputPressed(entt::registry& registry, entt::entity entity)
 	{
-		if (!registry.has<TargetLockComponent>(entity) || registry.has<PileInTag, InAirTag>(entity))
+		if (!registry.has<TargetLockComponent, CurrentWeaponMeleeTag>(entity) || registry.has<PileInTag, InAirTag>(entity))
 			return;
 
 		ASSERT(registry.has<MeleeAttackComponent>(entity), "entity has no MeleeAttackComponent");
