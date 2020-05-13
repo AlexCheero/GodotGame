@@ -159,6 +159,7 @@
     <ClCompile Include="ReactiveSystems\CheckForPileInSystem.cpp" />
     <ClCompile Include="ReactiveSystems\HTHAnimRSystem.cpp" />
     <ClCompile Include="ReactiveSystems\HTHLockTargetSystem.cpp" />
+    <ClCompile Include="ReactiveSystems\IncrementComboRSystem.cpp" />
     <ClCompile Include="ReactiveSystems\JumpRSystem.cpp" />
     <ClCompile Include="ReactiveSystems\StartMeleeAttackRSystem.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\DecisionMakingFSMSystem.cpp" />
@@ -175,7 +176,6 @@
     <ClCompile Include="Systems\AnimSystems\LocomotionAnimSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\ComboDropSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\GrenadeSystem.cpp" />
-    <ClCompile Include="Systems\AttackSystems\IncrementComboSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\PileInSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\RangedAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\ThrowAttackSystem.cpp" />
@@ -207,6 +207,7 @@
     <ClInclude Include="ReactiveSystems\CheckForPileInSystem.h" />
     <ClInclude Include="ReactiveSystems\HTHAnimRSystem.h" />
     <ClInclude Include="ReactiveSystems\HTHLockTargetSystem.h" />
+    <ClInclude Include="ReactiveSystems\IncrementComboRSystem.h" />
     <ClInclude Include="ReactiveSystems\JumpRSystem.h" />
     <ClInclude Include="ReactiveSystems\StartMeleeAttackRSystem.h" />
     <ClInclude Include="Singleton.h" />
@@ -224,7 +225,6 @@
     <ClInclude Include="Systems\AnimSystems\LocomotionAnimSystem.h" />
     <ClInclude Include="Systems\AttackSystems\ComboDropSystem.h" />
     <ClInclude Include="Systems\AttackSystems\GrenadeSystem.h" />
-    <ClInclude Include="Systems\AttackSystems\IncrementComboSystem.h" />
     <ClInclude Include="Systems\AttackSystems\PileInSystem.h" />
     <ClInclude Include="Systems\AttackSystems\RangedAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\ThrowAttackSystem.h" />

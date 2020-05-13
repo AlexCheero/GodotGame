@@ -1,7 +1,7 @@
-#include "IncrementComboSystem.h"
+#include "IncrementComboRSystem.h"
 
-#include "../../Components/AttackComponents.h"
-#include "../../Components/InputComponents.h"
+#include "../Components/AttackComponents.h"
+#include "../Components/InputComponents.h"
 
 namespace //private
 {
@@ -16,9 +16,6 @@ namespace //private
 		attackComp.hitIdx++;
 		if (attackComp.hitIdx > attackComp.hits.size() - 1)
 			attackComp.hitIdx = 0;
-
-		godot::Godot::print("OnComboIncrement. from: " + godot::String::num_int64(prevIdx) + ", to: " + godot::String::num_int64(attackComp.hitIdx));
-	
 	}
 }
 

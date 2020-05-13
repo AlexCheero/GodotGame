@@ -174,9 +174,6 @@
     <ClCompile Include="ReactiveSystems\JumpRSystem.cpp">
       <Filter>Source Files\ReactiveSystems</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\AttackSystems\IncrementComboSystem.cpp">
-      <Filter>Source Files\Systems\AttackSystems</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\AttackSystems\UpdateLockRotationSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
@@ -200,6 +197,9 @@
     </ClCompile>
     <ClCompile Include="Systems\AttackSystems\ComboDropSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="ReactiveSystems\IncrementComboRSystem.cpp">
+      <Filter>Source Files\ReactiveSystems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -326,9 +326,6 @@
     <ClInclude Include="ReactiveSystems\JumpRSystem.h">
       <Filter>Header Files\ReactiveSystems</Filter>
     </ClInclude>
-    <ClInclude Include="Systems\AttackSystems\IncrementComboSystem.h">
-      <Filter>Header Files\Systems\AttackSystems</Filter>
-    </ClInclude>
     <ClInclude Include="Systems\AttackSystems\UpdateLockRotationSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
@@ -349,6 +346,9 @@
     </ClInclude>
     <ClInclude Include="Systems\AttackSystems\ComboDropSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="ReactiveSystems\IncrementComboRSystem.h">
+      <Filter>Header Files\ReactiveSystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

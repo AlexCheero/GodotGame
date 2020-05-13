@@ -24,25 +24,35 @@
 #include "ReactiveSystems/StartMeleeAttackRSystem.h"
 #include "ReactiveSystems/HTHLockTargetSystem.h"
 #include "ReactiveSystems/CheckForPileInSystem.h"
+#include "ReactiveSystems/IncrementComboRSystem.h"
+
+#include "Systems/AttackSystems/PileInSystem.h"
+#include "Systems/AttackSystems/UpdateLockRotationSystem.h"
+#include "Systems/AttackSystems/ComboDropSystem.h"
+#include "Systems/AttackSystems/RangedAttackSystem.h"
+#include "Systems/AttackSystems/ThrowAttackSystem.h"
+#include "Systems/AttackSystems/GrenadeSystem.h"
 
 #include "Systems/PlayerSystems/PlayerVelocitySystem.h"
+#include "Systems/PlayerSystems/PlayerRotationSystem.h"
+#include "Systems/PlayerSystems/PlayerInputSystem.h"
+
 #include "Systems/LocomotionSystems/KinematicMovementSystem.h"
 #include "Systems/LocomotionSystems/GravitySystem.h";
-#include "Systems/PlayerSystems/PlayerRotationSystem.h"
-#include "Systems/SimpleFollowSystem.h"
-#include "Systems/AttackSystems/RangedAttackSystem.h"
-#include "Systems/DestroyDeadSystem.h"
-#include "Systems/PlayerSystems/PlayerInputSystem.h"
-#include "Systems/WeaponChooseSystem.h"
-#include "Systems/AttackSystems/ThrowAttackSystem.h"
-#include "Systems/AISystems/NavAgentSystem.h"
 #include "Systems/LocomotionSystems/LookAtSystem.h"
+
+#include "Systems/SimpleFollowSystem.h"
+#include "Systems/DestroyDeadSystem.h"
+#include "Systems/WeaponChooseSystem.h"
+
+#include "Systems/AISystems/NavAgentSystem.h"
 #include "Systems/AISystems/PursuingSystem.h"
 #include "Systems/AISystems/HealthMonitoringSystem.h"
 #include "Systems/AISystems/FleeingSystem.h"
-#include "Systems/AnimSystems/LocomotionAnimSystem.h"
-#include "Systems/AttackSystems/GrenadeSystem.h"
 #include "Systems/AISystems/DecisionMaking/DecisionMakingFSMSystem.h"
+
+#include "Systems/AnimSystems/LocomotionAnimSystem.h"
+#include "Systems/AnimSystems/EndAttackAnimSystem.h"
 
 #include "Utils/Utils.h"
 
@@ -201,13 +211,6 @@ void godot::ECSWorld::_register_methods()
 	register_method((char*)"_physics_process", &ECSWorld::_physics_process);
 }
 
-//TODO0: move includes upwards
-#include "Systems/AttackSystems/PileInSystem.h"
-#include "Systems/AttackSystems/IncrementComboSystem.h"
-#include "Systems/AttackSystems/UpdateLockRotationSystem.h"
-#include "Systems/AnimSystems/EndAttackAnimSystem.h"
-#include "Systems/AttackSystems/ComboDropSystem.h"
-
 void godot::ECSWorld::_init()
 {
 	InitInstance(this);
@@ -215,7 +218,7 @@ void godot::ECSWorld::_init()
 	utils::InitPhysicLayers();
 
 	//TODO: check what systems should be reactive
-	//setup reactive systems
+//setup reactive systems
 	JumpRSystem::Init(registry);
 	StartMeleeAttackRSystem::Init(registry);
 	//TODO: locks on target on every hit, this may cause bugs with many enemies
@@ -225,17 +228,20 @@ void godot::ECSWorld::_init()
 	CheckForPileInRSystem::Init(registry);
 	IncrementComboRSystem::Init(registry);
 
-	//setup physics systems
+//setup physics systems
 	m_physics_systems.emplace_back(new GravitySystem());
 	//must be called after GravitySystem
 	//must be called after all systems that affects velocity
 	m_physics_systems.emplace_back(new KinematicMovementSystem());
 	
-	//setup systems
+//setup systems
+	//TODO: maybe move all melee systems to separate filter/folder
+//<melee systems
 	m_process_systems.emplace_back(new ComboDropSystem());
 	m_process_systems.emplace_back(new UpdateLockRotationSystem());
 	m_process_systems.emplace_back(new EndAttackAnimSystem());
 	m_process_systems.emplace_back(new PileInSystem());
+//melee systems>
 	
 	m_process_systems.emplace_back(new RangedAttackSystem()); //reactive
 	m_process_systems.emplace_back(new ThrowAttackSystem()); //reactive

@@ -41,6 +41,7 @@ namespace //private
 	{
 		if (!registry.has<CurrentWeaponMeleeTag>(entity) || registry.has<TargetLockComponent>(entity))
 			return;
+
 		//TODO: implement target change when already have locked target
 		ASSERT(registry.has<MeleeAttackComponent>(entity), "registry has no MeleeAttackComponent");
 		ASSERT(registry.has<godot::Spatial*>(entity), "registry has no Spatial*");
