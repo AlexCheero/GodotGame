@@ -35,16 +35,13 @@ void godot::PlayerInputSystem::HandleInput(entt::registry& registry, InputEvent*
 {
 	ProcessInput<AttackPressedTag>(registry, e, e->is_action_pressed("attack"));
 	ProcessInput<JumpPressedTag>(registry, e, e->is_action_pressed("jump"));
+	ProcessInput<ChooseMeleePressedTag>(registry, e, e->is_action_pressed("choose_melee"));
+	ProcessInput<ChooseRangedPressedTag>(registry, e, e->is_action_pressed("choose_ranged"));
+	ProcessInput<ChooseThrowablePressedTag>(registry, e, e->is_action_pressed("choose_throwable"));
 
 	auto view = registry.view<PlayerTag, InputComponent>();
 	view.less([&registry, e](InputComponent& comp)
 	{
-		//comp.Set(EInput::Attack, e->is_action_pressed("attack"));
-		//comp.Set(EInput::Jump, e->is_action_pressed("jump"));
-		//comp.Set(EInput::ChooseMelee, e->is_action_pressed("choose_melee"));
-		//comp.Set(EInput::ChooseRanged, e->is_action_pressed("choose_ranged"));
-		//comp.Set(EInput::ChooseThrowable, e->is_action_pressed("choose_throwable"));
-
 		//TODO: change to mouse and/or gamepad
 		comp.rotation = GetInputDirection("ui");
 		comp.moveDir = GetInputDirection("move");

@@ -164,6 +164,7 @@
     <ClCompile Include="ReactiveSystems\RangedAttackRSystem.cpp" />
     <ClCompile Include="ReactiveSystems\StartMeleeAttackRSystem.cpp" />
     <ClCompile Include="ReactiveSystems\ThrowAttackRSystem.cpp" />
+    <ClCompile Include="ReactiveSystems\WeaponChooseRSystem.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\DecisionMakingFSMSystem.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\DecisionMakingHelper.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\FleeStateSystem.cpp" />
@@ -189,7 +190,6 @@
     <ClCompile Include="Systems\SimpleFollowSystem.cpp" />
     <ClCompile Include="Systems\DestroyDeadSystem.cpp" />
     <ClCompile Include="ECSWorld.cpp" />
-    <ClCompile Include="Systems\WeaponChooseSystem.cpp" />
     <ClCompile Include="Utils\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -212,6 +212,7 @@
     <ClInclude Include="ReactiveSystems\RangedAttackRSystem.h" />
     <ClInclude Include="ReactiveSystems\StartMeleeAttackRSystem.h" />
     <ClInclude Include="ReactiveSystems\ThrowAttackRSystem.h" />
+    <ClInclude Include="ReactiveSystems\WeaponChooseRSystem.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Systems\AISystems\DecisionMaking\DecisionMakingFSMSystem.h" />
     <ClInclude Include="Systems\AISystems\DecisionMaking\DecisionMakingHelper.h" />
@@ -239,7 +240,6 @@
     <ClInclude Include="Systems\SimpleFollowSystem.h" />
     <ClInclude Include="Systems\DestroyDeadSystem.h" />
     <ClInclude Include="ECSWorld.h" />
-    <ClInclude Include="Systems\WeaponChooseSystem.h" />
     <ClInclude Include="Utils\Timer.h" />
     <ClInclude Include="Utils\Utils.h" />
   </ItemGroup>

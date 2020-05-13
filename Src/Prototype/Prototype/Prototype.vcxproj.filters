@@ -93,9 +93,6 @@
     <ClCompile Include="Systems\SimpleFollowSystem.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\WeaponChooseSystem.cpp">
-      <Filter>Source Files\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\AISystems\NavAgentSystem.cpp">
       <Filter>Source Files\Systems\AISystems</Filter>
     </ClCompile>
@@ -201,6 +198,9 @@
     <ClCompile Include="ReactiveSystems\ThrowAttackRSystem.cpp">
       <Filter>Source Files\ReactiveSystems</Filter>
     </ClCompile>
+    <ClCompile Include="ReactiveSystems\WeaponChooseRSystem.cpp">
+      <Filter>Source Files\ReactiveSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -223,9 +223,6 @@
     </ClInclude>
     <ClInclude Include="Components\AttackComponents.h">
       <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\WeaponChooseSystem.h">
-      <Filter>Header Files\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\AISystems\NavAgentSystem.h">
       <Filter>Header Files\Systems\AISystems</Filter>
@@ -348,6 +345,9 @@
       <Filter>Header Files\ReactiveSystems</Filter>
     </ClInclude>
     <ClInclude Include="ReactiveSystems\ThrowAttackRSystem.h">
+      <Filter>Header Files\ReactiveSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="ReactiveSystems\WeaponChooseRSystem.h">
       <Filter>Header Files\ReactiveSystems</Filter>
     </ClInclude>
   </ItemGroup>

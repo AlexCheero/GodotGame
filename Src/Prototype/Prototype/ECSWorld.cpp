@@ -27,6 +27,7 @@
 #include "ReactiveSystems/IncrementComboRSystem.h"
 #include "ReactiveSystems/RangedAttackRSystem.h"
 #include "ReactiveSystems/ThrowAttackRSystem.h"
+#include "ReactiveSystems/WeaponChooseRSystem.h"
 
 #include "Systems/AttackSystems/PileInSystem.h"
 #include "Systems/AttackSystems/UpdateLockRotationSystem.h"
@@ -43,7 +44,6 @@
 
 #include "Systems/SimpleFollowSystem.h"
 #include "Systems/DestroyDeadSystem.h"
-#include "Systems/WeaponChooseSystem.h"
 
 #include "Systems/AISystems/NavAgentSystem.h"
 #include "Systems/AISystems/PursuingSystem.h"
@@ -230,6 +230,8 @@ void godot::ECSWorld::_init()
 
 	RangedAttackRSystem::Init(registry);
 	ThrowAttackRSystem::Init(registry);
+	
+	WeaponChooseRSystem::Init(registry);
 
 //setup physics systems
 	m_physics_systems.emplace_back(new GravitySystem());
@@ -258,8 +260,7 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new PlayerRotationSystem()); //reactive
 	m_process_systems.emplace_back(new LookAtSystem());
 	m_process_systems.emplace_back(new SimpleFollowSystem());
-	m_process_systems.emplace_back(new DestroyDeadSystem()); //reactive?
-	m_process_systems.emplace_back(new WeaponChooseSystem(registry)); //reactive
+	m_process_systems.emplace_back(new DestroyDeadSystem()); //reactive (with ecs event only)
 	m_process_systems.emplace_back(new HealthMonitoringSystem()); //reactive?
 	m_process_systems.emplace_back(new FleeingSystem());
 	m_process_systems.emplace_back(new LocomotionAnimSystem());
