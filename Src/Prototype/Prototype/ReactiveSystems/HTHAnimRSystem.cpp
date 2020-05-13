@@ -10,6 +10,7 @@
 namespace //private
 {
 	//TODO: try to implement anim system without AnimationTree
+	//      and delete EndAttackAnimSystem and AttackAnimPlayingComponent as unnecessary
 	void OnInputPressed(entt::registry& registry, entt::entity entity)
 	{
 		ASSERT(registry.has<MeleeAttackComponent>(entity), "entity has no MeleeAttackComponent");

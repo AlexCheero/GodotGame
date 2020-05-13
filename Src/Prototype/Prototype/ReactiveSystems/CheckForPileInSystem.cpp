@@ -10,7 +10,6 @@ namespace //private
 		if (!registry.has<TargetLockComponent>(entity) || registry.has<PileInTag, InAirTag>(entity))
 			return;
 
-		ASSERT(registry.has<TargetLockComponent>(entity), "entity has no TargetLockComponent");
 		ASSERT(registry.has<MeleeAttackComponent>(entity), "entity has no MeleeAttackComponent");
 		ASSERT(registry.has<godot::Spatial*>(entity), "entity has no Spatial*");
 

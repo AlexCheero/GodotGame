@@ -1,12 +1,11 @@
 #pragma once
 
-#include "../BaseSystem.h"
+#include "entt/entt.hpp"
 
 namespace godot
 {
-	class IncrementComboSystem : public BaseSystem
+	namespace IncrementComboRSystem
 	{
-	public:
-		virtual void operator()(float delta, entt::registry& registry) override;
-	};
+		void Init(entt::registry& registry);
+	}
 }

@@ -173,6 +173,7 @@
     <ClCompile Include="Systems\AISystems\PursuingSystem.cpp" />
     <ClCompile Include="Systems\AnimSystems\EndAttackAnimSystem.cpp" />
     <ClCompile Include="Systems\AnimSystems\LocomotionAnimSystem.cpp" />
+    <ClCompile Include="Systems\AttackSystems\ComboDropSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\GrenadeSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\IncrementComboSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\PileInSystem.cpp" />
@@ -221,6 +222,7 @@
     <ClInclude Include="Systems\AISystems\PursuingSystem.h" />
     <ClInclude Include="Systems\AnimSystems\EndAttackAnimSystem.h" />
     <ClInclude Include="Systems\AnimSystems\LocomotionAnimSystem.h" />
+    <ClInclude Include="Systems\AttackSystems\ComboDropSystem.h" />
     <ClInclude Include="Systems\AttackSystems\GrenadeSystem.h" />
     <ClInclude Include="Systems\AttackSystems\IncrementComboSystem.h" />
     <ClInclude Include="Systems\AttackSystems\PileInSystem.h" />

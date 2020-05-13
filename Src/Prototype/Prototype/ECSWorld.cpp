@@ -206,6 +206,7 @@ void godot::ECSWorld::_register_methods()
 #include "Systems/AttackSystems/IncrementComboSystem.h"
 #include "Systems/AttackSystems/UpdateLockRotationSystem.h"
 #include "Systems/AnimSystems/EndAttackAnimSystem.h"
+#include "Systems/AttackSystems/ComboDropSystem.h"
 
 void godot::ECSWorld::_init()
 {
@@ -217,9 +218,12 @@ void godot::ECSWorld::_init()
 	//setup reactive systems
 	JumpRSystem::Init(registry);
 	StartMeleeAttackRSystem::Init(registry);
+	//TODO: locks on target on every hit, this may cause bugs with many enemies
 	HTHLockTargetRSystem::Init(registry);
+	//TODO: implement proper hth with blocks and stuff
 	HTHAnimRSystem::Init(registry);
 	CheckForPileInRSystem::Init(registry);
+	IncrementComboRSystem::Init(registry);
 
 	//setup physics systems
 	m_physics_systems.emplace_back(new GravitySystem());
@@ -228,16 +232,10 @@ void godot::ECSWorld::_init()
 	m_physics_systems.emplace_back(new KinematicMovementSystem());
 	
 	//setup systems
-
-	//TODO: implement proper hth with blocks and stuff
-	//TODO0: make some parts reactive
-//<MeleeAttackSystem
-	//TODO: locks on target on every hit, this may cause bugs with many enemies
+	m_process_systems.emplace_back(new ComboDropSystem());
 	m_process_systems.emplace_back(new UpdateLockRotationSystem());
 	m_process_systems.emplace_back(new EndAttackAnimSystem());
 	m_process_systems.emplace_back(new PileInSystem());
-	m_process_systems.emplace_back(new IncrementComboSystem()); //reactive
-//MeleeAttackSystem>
 	
 	m_process_systems.emplace_back(new RangedAttackSystem()); //reactive
 	m_process_systems.emplace_back(new ThrowAttackSystem()); //reactive
@@ -250,7 +248,7 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new PursuingSystem());
 	
 	//TODO: pile in breaks if this system runs in _process
-	m_physics_systems.emplace_back(new PlayerVelocitySystem()); //reactive
+	m_physics_systems.emplace_back(new PlayerVelocitySystem()); //reactive?
 	m_process_systems.emplace_back(new PlayerRotationSystem()); //reactive
 	m_process_systems.emplace_back(new LookAtSystem());
 	m_process_systems.emplace_back(new SimpleFollowSystem());

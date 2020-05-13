@@ -198,6 +198,9 @@
     <ClCompile Include="ReactiveSystems\CheckForPileInSystem.cpp">
       <Filter>Source Files\ReactiveSystems</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\ComboDropSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -343,6 +346,9 @@
     </ClInclude>
     <ClInclude Include="ReactiveSystems\CheckForPileInSystem.h">
       <Filter>Header Files\ReactiveSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\ComboDropSystem.h">
+      <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
