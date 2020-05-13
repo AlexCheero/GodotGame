@@ -28,13 +28,13 @@
 #include "ReactiveSystems/RangedAttackRSystem.h"
 #include "ReactiveSystems/ThrowAttackRSystem.h"
 #include "ReactiveSystems/WeaponChooseRSystem.h"
+#include "ReactiveSystems/PlayerVelocityRSystem.h"
 
 #include "Systems/AttackSystems/PileInSystem.h"
 #include "Systems/AttackSystems/UpdateLockRotationSystem.h"
 #include "Systems/AttackSystems/ComboDropSystem.h"
 #include "Systems/AttackSystems/GrenadeSystem.h"
 
-#include "Systems/PlayerSystems/PlayerVelocitySystem.h"
 #include "Systems/PlayerSystems/PlayerRotationSystem.h"
 #include "Systems/PlayerSystems/PlayerInputSystem.h"
 
@@ -85,7 +85,11 @@ void godot::ECSWorld::PreparePlayerEntity()
 	entityView->ConstructTags(registry, entity);
 
 	registry.assign<VelocityComponent>(entity);
-	registry.assign<InputComponent>(entity);
+	
+	//registry.assign<InputComponent>(entity);
+	registry.assign<RotationInputComponent>(entity);
+	registry.assign<MoveDirInputComponent>(entity);
+
 	RotationDirectionComponent rot { registry.get<Spatial*>(entity)->get_global_transform().get_basis().z };
 	registry.assign<RotationDirectionComponent>(entity, rot);
 
@@ -135,7 +139,10 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	registry.assign<VelocityComponent>(entity);
 	RotationDirectionComponent rot{ registry.get<Spatial*>(entity)->get_global_transform().get_basis().z };
 	registry.assign<RotationDirectionComponent>(entity, rot);
-	registry.assign<InputComponent>(entity);
+	
+	//registry.assign<InputComponent>(entity);
+	registry.assign<RotationInputComponent>(entity);
+	registry.assign<MoveDirInputComponent>(entity);
 
 //<prepare patrol route
 	PatrolRouteComponent& route = registry.assign<PatrolRouteComponent>(entity);
@@ -232,6 +239,8 @@ void godot::ECSWorld::_init()
 	ThrowAttackRSystem::Init(registry);
 	
 	WeaponChooseRSystem::Init(registry);
+	
+	PlayerVelocityRSystem::Init(registry);
 
 //setup physics systems
 	m_physics_systems.emplace_back(new GravitySystem());
@@ -256,12 +265,11 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new PursuingSystem());
 	
 	//TODO: pile in breaks if this system runs in _process
-	m_physics_systems.emplace_back(new PlayerVelocitySystem()); //reactive?
-	m_process_systems.emplace_back(new PlayerRotationSystem()); //reactive
+	m_process_systems.emplace_back(new PlayerRotationSystem()); //reactive?
 	m_process_systems.emplace_back(new LookAtSystem());
 	m_process_systems.emplace_back(new SimpleFollowSystem());
 	m_process_systems.emplace_back(new DestroyDeadSystem()); //reactive (with ecs event only)
-	m_process_systems.emplace_back(new HealthMonitoringSystem()); //reactive?
+	m_process_systems.emplace_back(new HealthMonitoringSystem());
 	m_process_systems.emplace_back(new FleeingSystem());
 	m_process_systems.emplace_back(new LocomotionAnimSystem());
 }
@@ -288,7 +296,7 @@ void godot::ECSWorld::HandleInputEvent(InputEvent* e)
 	else if (e->is_action_pressed("ui_cancel"))
 		get_tree()->quit();
 	else
-		 PlayerInputSystem::HandleInput(registry, e);
+		 PlayerInputSystem::HandleInput(registry);
 	
 }
 

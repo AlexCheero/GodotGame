@@ -161,6 +161,7 @@
     <ClCompile Include="ReactiveSystems\HTHLockTargetSystem.cpp" />
     <ClCompile Include="ReactiveSystems\IncrementComboRSystem.cpp" />
     <ClCompile Include="ReactiveSystems\JumpRSystem.cpp" />
+    <ClCompile Include="ReactiveSystems\PlayerVelocityRSystem.cpp" />
     <ClCompile Include="ReactiveSystems\RangedAttackRSystem.cpp" />
     <ClCompile Include="ReactiveSystems\StartMeleeAttackRSystem.cpp" />
     <ClCompile Include="ReactiveSystems\ThrowAttackRSystem.cpp" />
@@ -186,7 +187,6 @@
     <ClCompile Include="Systems\LocomotionSystems\LookAtSystem.cpp" />
     <ClCompile Include="Systems\PlayerSystems\PlayerInputSystem.cpp" />
     <ClCompile Include="Systems\PlayerSystems\PlayerRotationSystem.cpp" />
-    <ClCompile Include="Systems\PlayerSystems\PlayerVelocitySystem.cpp" />
     <ClCompile Include="Systems\SimpleFollowSystem.cpp" />
     <ClCompile Include="Systems\DestroyDeadSystem.cpp" />
     <ClCompile Include="ECSWorld.cpp" />
@@ -209,6 +209,7 @@
     <ClInclude Include="ReactiveSystems\HTHLockTargetSystem.h" />
     <ClInclude Include="ReactiveSystems\IncrementComboRSystem.h" />
     <ClInclude Include="ReactiveSystems\JumpRSystem.h" />
+    <ClInclude Include="ReactiveSystems\PlayerVelocityRSystem.h" />
     <ClInclude Include="ReactiveSystems\RangedAttackRSystem.h" />
     <ClInclude Include="ReactiveSystems\StartMeleeAttackRSystem.h" />
     <ClInclude Include="ReactiveSystems\ThrowAttackRSystem.h" />
@@ -236,7 +237,6 @@
     <ClInclude Include="Systems\LocomotionSystems\LookAtSystem.h" />
     <ClInclude Include="Systems\PlayerSystems\PlayerInputSystem.h" />
     <ClInclude Include="Systems\PlayerSystems\PlayerRotationSystem.h" />
-    <ClInclude Include="Systems\PlayerSystems\PlayerVelocitySystem.h" />
     <ClInclude Include="Systems\SimpleFollowSystem.h" />
     <ClInclude Include="Systems\DestroyDeadSystem.h" />
     <ClInclude Include="ECSWorld.h" />

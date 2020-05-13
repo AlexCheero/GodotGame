@@ -8,6 +8,7 @@ void godot::KinematicMovementSystem::operator()(float delta, entt::registry& reg
 {
 	registry.view<VelocityComponent, KinematicBody*>().each([](VelocityComponent velocityComp, KinematicBody* pKBody)
 	{
+		//TODO: try to use PhysicsServer instead
 		pKBody->move_and_slide(velocityComp.velocity, Vector3(0, 1, 0));
 	});
 

@@ -78,3 +78,18 @@ void utils::Assert(bool assertion, const char* message, const char* file, int li
 	std::cerr << message << "\n" << "file: " << file << ", line: " << line << "\n";
 	abort();
 }
+
+bool utils::Expired(float time, int64_t& sinceMillis)
+{
+	int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
+	if (sinceMillis + utils::SecondsToMillis(time) > currTimeMillis)
+		return false;
+
+	sinceMillis = currTimeMillis;
+	return true;
+}
+
+bool utils::Vector2Equals(godot::Vector2 a, godot::Vector2 b, float eps /*= 0.01f*/)
+{
+	return RealEquals(a.x, b.x, eps) && RealEquals(a.y, b.y, eps);
+}

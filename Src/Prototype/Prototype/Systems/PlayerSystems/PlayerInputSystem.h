@@ -10,6 +10,6 @@ namespace godot
 {
 	namespace PlayerInputSystem
 	{
-		void HandleInput(entt::registry& registry, InputEvent* e);
+		void HandleInput(entt::registry& registry/*, InputEvent* e*/);
 	}
 }

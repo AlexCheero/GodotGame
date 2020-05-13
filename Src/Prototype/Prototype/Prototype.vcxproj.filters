@@ -102,9 +102,6 @@
     <ClCompile Include="Systems\PlayerSystems\PlayerRotationSystem.cpp">
       <Filter>Source Files\Systems\PlayerSystems</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\PlayerSystems\PlayerVelocitySystem.cpp">
-      <Filter>Source Files\Systems\PlayerSystems</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\LocomotionSystems\GravitySystem.cpp">
       <Filter>Source Files\Systems\LocomotionSystems</Filter>
     </ClCompile>
@@ -201,6 +198,9 @@
     <ClCompile Include="ReactiveSystems\WeaponChooseRSystem.cpp">
       <Filter>Source Files\ReactiveSystems</Filter>
     </ClCompile>
+    <ClCompile Include="ReactiveSystems\PlayerVelocityRSystem.cpp">
+      <Filter>Source Files\ReactiveSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -234,9 +234,6 @@
       <Filter>Header Files\Systems\PlayerSystems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\PlayerSystems\PlayerRotationSystem.h">
-      <Filter>Header Files\Systems\PlayerSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\PlayerSystems\PlayerVelocitySystem.h">
       <Filter>Header Files\Systems\PlayerSystems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\LocomotionSystems\GravitySystem.h">
@@ -348,6 +345,9 @@
       <Filter>Header Files\ReactiveSystems</Filter>
     </ClInclude>
     <ClInclude Include="ReactiveSystems\WeaponChooseRSystem.h">
+      <Filter>Header Files\ReactiveSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="ReactiveSystems\PlayerVelocityRSystem.h">
       <Filter>Header Files\ReactiveSystems</Filter>
     </ClInclude>
   </ItemGroup>

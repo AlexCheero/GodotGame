@@ -39,29 +39,31 @@ namespace utils
 	godot::Spatial* CastFromSpatial(godot::Spatial* pSpatial, godot::Vector3 direction, float distance, int64_t mask = ALL_LAYERS);
 	BoundsComponent GetCapsuleBounds(godot::Node* pCapsuleNode);
 	void Assert(bool assertion, const char* message, const char* file, int line);
-
 	bool Expired(float time, int64_t& sinceMillis);
-	inline bool Expired(float time, int64_t& sinceMillis)
-	{
-		int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
-		if (sinceMillis + utils::SecondsToMillis(time) > currTimeMillis)
-			return false;
-
-		sinceMillis = currTimeMillis;
-		return true;
-	}
+	bool Vector2Equals(godot::Vector2 a, godot::Vector2 b, float eps = 0.01f);
 	
 	template<typename T>
-	T* GetParentOfType(godot::Node* pNode)
-	{
-		godot::Node* pParentNode = pNode->get_parent();
-		if (!pParentNode)
-			return nullptr;
+	T* GetParentOfType(godot::Node* pNode);
+	template<typename T>
+	bool RealEquals(T a, T b, T eps = std::numeric_limits<T>::epsilon());
+}
 
-		T* castedParent = godot::Object::cast_to<T>(pParentNode);
-		if (castedParent)
-			return castedParent;
-		else
-			return GetParentOfType<T>(pParentNode);
-	}
+template<typename T>
+T* utils::GetParentOfType(godot::Node* pNode)
+{
+	godot::Node* pParentNode = pNode->get_parent();
+	if (!pParentNode)
+		return nullptr;
+
+	T* castedParent = godot::Object::cast_to<T>(pParentNode);
+	if (castedParent)
+		return castedParent;
+	else
+		return GetParentOfType<T>(pParentNode);
+}
+
+template<typename T>
+bool utils::RealEquals(T a, T b, T eps/* = std::numeric_limits<T>::epsilon()*/)
+{
+	return std::abs(a - b) <= eps;
 }
