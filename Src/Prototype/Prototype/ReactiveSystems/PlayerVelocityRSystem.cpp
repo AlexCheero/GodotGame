@@ -13,13 +13,13 @@ namespace //private
 {
 	void OnMoveDirChanged(entt::registry& registry, entt::entity entity)
 	{
-		//TODO0: check all reactive player input systems for appropriate tag
-		if (!registry.has<PlayerTag, godot::Camera*>(entity))
+		if (!registry.has<PlayerTag>(entity))
 			return;
 
 		ASSERT(registry.has<VelocityComponent>(entity), "entity has no VelocityComponent");
 		ASSERT(registry.has<MoveDirInputComponent>(entity), "entity has no MoveDirInputComponent");
 		ASSERT(registry.has<SpeedComponent>(entity), "entity has no SpeedComponent");
+		ASSERT(registry.has<godot::Camera*>(entity), "entity has no Camera*");
 
 		VelocityComponent& velocityComp = registry.get<VelocityComponent>(entity);
 		MoveDirInputComponent moveInput = registry.get<MoveDirInputComponent>(entity);

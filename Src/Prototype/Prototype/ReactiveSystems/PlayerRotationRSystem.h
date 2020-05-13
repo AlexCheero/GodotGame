@@ -4,7 +4,7 @@
 
 namespace godot
 {
-	namespace PlayerVelocityRSystem
+	namespace PlayerRotationRSystem
 	{
 		void Init(entt::registry& registry);
 	}

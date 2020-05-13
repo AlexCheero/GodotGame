@@ -29,13 +29,13 @@
 #include "ReactiveSystems/ThrowAttackRSystem.h"
 #include "ReactiveSystems/WeaponChooseRSystem.h"
 #include "ReactiveSystems/PlayerVelocityRSystem.h"
+#include "ReactiveSystems/PlayerRotationRSystem.h"
 
 #include "Systems/AttackSystems/PileInSystem.h"
 #include "Systems/AttackSystems/UpdateLockRotationSystem.h"
 #include "Systems/AttackSystems/ComboDropSystem.h"
 #include "Systems/AttackSystems/GrenadeSystem.h"
 
-#include "Systems/PlayerSystems/PlayerRotationSystem.h"
 #include "Systems/PlayerSystems/PlayerInputSystem.h"
 
 #include "Systems/LocomotionSystems/KinematicMovementSystem.h"
@@ -86,7 +86,6 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	registry.assign<VelocityComponent>(entity);
 	
-	//registry.assign<InputComponent>(entity);
 	registry.assign<RotationInputComponent>(entity);
 	registry.assign<MoveDirInputComponent>(entity);
 
@@ -140,7 +139,6 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	RotationDirectionComponent rot{ registry.get<Spatial*>(entity)->get_global_transform().get_basis().z };
 	registry.assign<RotationDirectionComponent>(entity, rot);
 	
-	//registry.assign<InputComponent>(entity);
 	registry.assign<RotationInputComponent>(entity);
 	registry.assign<MoveDirInputComponent>(entity);
 
@@ -241,6 +239,7 @@ void godot::ECSWorld::_init()
 	WeaponChooseRSystem::Init(registry);
 	
 	PlayerVelocityRSystem::Init(registry);
+	PlayerRotationRSystem::Init(registry);
 
 //setup physics systems
 	m_physics_systems.emplace_back(new GravitySystem());
@@ -265,7 +264,6 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new PursuingSystem());
 	
 	//TODO: pile in breaks if this system runs in _process
-	m_process_systems.emplace_back(new PlayerRotationSystem()); //reactive?
 	m_process_systems.emplace_back(new LookAtSystem());
 	m_process_systems.emplace_back(new SimpleFollowSystem());
 	m_process_systems.emplace_back(new DestroyDeadSystem()); //reactive (with ecs event only)

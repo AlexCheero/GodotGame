@@ -38,7 +38,7 @@ enum class EInput
 	End
 };
 
-//TODO: remove or use only for network synchronization if needed
+//TODO0: remove or use only for network synchronization if needed
 struct InputComponent
 {
 	std::bitset<static_cast<int>(EInput::End)> inputSet;
