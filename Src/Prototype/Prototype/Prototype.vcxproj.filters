@@ -99,9 +99,6 @@
     <ClCompile Include="Systems\AISystems\NavAgentSystem.cpp">
       <Filter>Source Files\Systems\AISystems</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\AttackSystems\ThrowAttackSystem.cpp">
-      <Filter>Source Files\Systems\AttackSystems</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\PlayerSystems\PlayerInputSystem.cpp">
       <Filter>Source Files\Systems\PlayerSystems</Filter>
     </ClCompile>
@@ -201,6 +198,9 @@
     <ClCompile Include="ReactiveSystems\RangedAttackRSystem.cpp">
       <Filter>Source Files\ReactiveSystems</Filter>
     </ClCompile>
+    <ClCompile Include="ReactiveSystems\ThrowAttackRSystem.cpp">
+      <Filter>Source Files\ReactiveSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -232,9 +232,6 @@
     </ClInclude>
     <ClInclude Include="Components\AIComponents\NavigationComponents.h">
       <Filter>Header Files\Components\AIComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\AttackSystems\ThrowAttackSystem.h">
-      <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\PlayerSystems\PlayerInputSystem.h">
       <Filter>Header Files\Systems\PlayerSystems</Filter>
@@ -348,6 +345,9 @@
       <Filter>Header Files\ReactiveSystems</Filter>
     </ClInclude>
     <ClInclude Include="ReactiveSystems\RangedAttackRSystem.h">
+      <Filter>Header Files\ReactiveSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="ReactiveSystems\ThrowAttackRSystem.h">
       <Filter>Header Files\ReactiveSystems</Filter>
     </ClInclude>
   </ItemGroup>

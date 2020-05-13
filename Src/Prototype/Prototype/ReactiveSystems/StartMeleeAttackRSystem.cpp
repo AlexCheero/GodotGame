@@ -7,7 +7,7 @@
 
 namespace //private
 {
-	//TODO0: convert to attack cooldown check
+	//TODO0: convert to attack cooldown check. probably remove utils::Expired after converting
 	void OnInputPressed(entt::registry& registry, entt::entity entity)
 	{
 		if (!registry.has<CurrentWeaponMeleeTag>(entity) || registry.has<AttackAnimPlayingComponent>(entity))

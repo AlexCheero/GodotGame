@@ -163,6 +163,7 @@
     <ClCompile Include="ReactiveSystems\JumpRSystem.cpp" />
     <ClCompile Include="ReactiveSystems\RangedAttackRSystem.cpp" />
     <ClCompile Include="ReactiveSystems\StartMeleeAttackRSystem.cpp" />
+    <ClCompile Include="ReactiveSystems\ThrowAttackRSystem.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\DecisionMakingFSMSystem.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\DecisionMakingHelper.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\FleeStateSystem.cpp" />
@@ -178,7 +179,6 @@
     <ClCompile Include="Systems\AttackSystems\ComboDropSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\GrenadeSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\PileInSystem.cpp" />
-    <ClCompile Include="Systems\AttackSystems\ThrowAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\UpdateLockRotationSystem.cpp" />
     <ClCompile Include="Systems\LocomotionSystems\GravitySystem.cpp" />
     <ClCompile Include="Systems\LocomotionSystems\KinematicMovementSystem.cpp" />
@@ -211,6 +211,7 @@
     <ClInclude Include="ReactiveSystems\JumpRSystem.h" />
     <ClInclude Include="ReactiveSystems\RangedAttackRSystem.h" />
     <ClInclude Include="ReactiveSystems\StartMeleeAttackRSystem.h" />
+    <ClInclude Include="ReactiveSystems\ThrowAttackRSystem.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Systems\AISystems\DecisionMaking\DecisionMakingFSMSystem.h" />
     <ClInclude Include="Systems\AISystems\DecisionMaking\DecisionMakingHelper.h" />
@@ -227,7 +228,6 @@
     <ClInclude Include="Systems\AttackSystems\ComboDropSystem.h" />
     <ClInclude Include="Systems\AttackSystems\GrenadeSystem.h" />
     <ClInclude Include="Systems\AttackSystems\PileInSystem.h" />
-    <ClInclude Include="Systems\AttackSystems\ThrowAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\UpdateLockRotationSystem.h" />
     <ClInclude Include="Systems\BaseSystem.h" />
     <ClInclude Include="Systems\LocomotionSystems\GravitySystem.h" />
