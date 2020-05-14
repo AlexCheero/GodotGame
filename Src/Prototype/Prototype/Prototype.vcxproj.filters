@@ -171,13 +171,7 @@
     <ClCompile Include="ReactiveSystems\StartMeleeAttackRSystem.cpp">
       <Filter>Source Files\ReactiveSystems</Filter>
     </ClCompile>
-    <ClCompile Include="ReactiveSystems\HTHLockTargetSystem.cpp">
-      <Filter>Source Files\ReactiveSystems</Filter>
-    </ClCompile>
     <ClCompile Include="ReactiveSystems\HTHAnimRSystem.cpp">
-      <Filter>Source Files\ReactiveSystems</Filter>
-    </ClCompile>
-    <ClCompile Include="ReactiveSystems\CheckForPileInSystem.cpp">
       <Filter>Source Files\ReactiveSystems</Filter>
     </ClCompile>
     <ClCompile Include="Systems\AttackSystems\ComboDropSystem.cpp">
@@ -199,6 +193,12 @@
       <Filter>Source Files\ReactiveSystems</Filter>
     </ClCompile>
     <ClCompile Include="ReactiveSystems\PlayerRotationRSystem.cpp">
+      <Filter>Source Files\ReactiveSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="ReactiveSystems\CheckForPileInRSystem.cpp">
+      <Filter>Source Files\ReactiveSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="ReactiveSystems\HTHLockTargetRSystem.cpp">
       <Filter>Source Files\ReactiveSystems</Filter>
     </ClCompile>
   </ItemGroup>
@@ -320,13 +320,7 @@
     <ClInclude Include="ReactiveSystems\StartMeleeAttackRSystem.h">
       <Filter>Header Files\ReactiveSystems</Filter>
     </ClInclude>
-    <ClInclude Include="ReactiveSystems\HTHLockTargetSystem.h">
-      <Filter>Header Files\ReactiveSystems</Filter>
-    </ClInclude>
     <ClInclude Include="ReactiveSystems\HTHAnimRSystem.h">
-      <Filter>Header Files\ReactiveSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="ReactiveSystems\CheckForPileInSystem.h">
       <Filter>Header Files\ReactiveSystems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\AttackSystems\ComboDropSystem.h">
@@ -348,6 +342,12 @@
       <Filter>Header Files\ReactiveSystems</Filter>
     </ClInclude>
     <ClInclude Include="ReactiveSystems\PlayerRotationRSystem.h">
+      <Filter>Header Files\ReactiveSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="ReactiveSystems\CheckForPileInRSystem.h">
+      <Filter>Header Files\ReactiveSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="ReactiveSystems\HTHLockTargetRSystem.h">
       <Filter>Header Files\ReactiveSystems</Filter>
     </ClInclude>
   </ItemGroup>

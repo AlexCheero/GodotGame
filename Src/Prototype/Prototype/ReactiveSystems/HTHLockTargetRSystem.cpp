@@ -1,4 +1,4 @@
-#include "HTHLockTargetSystem.h"
+#include "HTHLockTargetRSystem.h"
 
 #include <PhysicsDirectSpaceState.hpp>
 #include <World.hpp>

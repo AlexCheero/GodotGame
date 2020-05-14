@@ -156,9 +156,9 @@
     <ClCompile Include="Nodes\HTHDamagingArea.cpp" />
     <ClCompile Include="Nodes\PickableNode.cpp" />
     <ClCompile Include="Nodes\ThrowableWeaponNode.cpp" />
-    <ClCompile Include="ReactiveSystems\CheckForPileInSystem.cpp" />
+    <ClCompile Include="ReactiveSystems\CheckForPileInRSystem.cpp" />
     <ClCompile Include="ReactiveSystems\HTHAnimRSystem.cpp" />
-    <ClCompile Include="ReactiveSystems\HTHLockTargetSystem.cpp" />
+    <ClCompile Include="ReactiveSystems\HTHLockTargetRSystem.cpp" />
     <ClCompile Include="ReactiveSystems\IncrementComboRSystem.cpp" />
     <ClCompile Include="ReactiveSystems\JumpRSystem.cpp" />
     <ClCompile Include="ReactiveSystems\PlayerRotationRSystem.cpp" />
@@ -204,9 +204,9 @@
     <ClInclude Include="Nodes\HTHDamagingArea.h" />
     <ClInclude Include="Nodes\PickableNode.h" />
     <ClInclude Include="Nodes\ThrowableWeaponNode.h" />
-    <ClInclude Include="ReactiveSystems\CheckForPileInSystem.h" />
+    <ClInclude Include="ReactiveSystems\CheckForPileInRSystem.h" />
     <ClInclude Include="ReactiveSystems\HTHAnimRSystem.h" />
-    <ClInclude Include="ReactiveSystems\HTHLockTargetSystem.h" />
+    <ClInclude Include="ReactiveSystems\HTHLockTargetRSystem.h" />
     <ClInclude Include="ReactiveSystems\IncrementComboRSystem.h" />
     <ClInclude Include="ReactiveSystems\JumpRSystem.h" />
     <ClInclude Include="ReactiveSystems\PlayerRotationRSystem.h" />

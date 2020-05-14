@@ -22,8 +22,8 @@
 #include "ReactiveSystems/JumpRSystem.h";
 #include "ReactiveSystems/HTHAnimRSystem.h"
 #include "ReactiveSystems/StartMeleeAttackRSystem.h"
-#include "ReactiveSystems/HTHLockTargetSystem.h"
-#include "ReactiveSystems/CheckForPileInSystem.h"
+#include "ReactiveSystems/HTHLockTargetRSystem.h"
+#include "ReactiveSystems/CheckForPileInRSystem.h"
 #include "ReactiveSystems/IncrementComboRSystem.h"
 #include "ReactiveSystems/RangedAttackRSystem.h"
 #include "ReactiveSystems/ThrowAttackRSystem.h"
