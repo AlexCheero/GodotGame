@@ -7,7 +7,6 @@ namespace //private
 {
 	void OnInputPressed(entt::registry& registry, entt::entity entity)
 	{
-		//TODO0: make revision of all reactive includes/excludes!!!
 		if (!registry.has<TargetLockComponent, CurrentWeaponMeleeTag>(entity) || registry.any<InAirTag, PileInTag>(entity))
 			return;
 
