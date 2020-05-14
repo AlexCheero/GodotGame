@@ -222,7 +222,6 @@ void godot::ECSWorld::_init()
 
 	utils::InitPhysicLayers();
 
-	//TODO: check what systems should be reactive
 //setup reactive systems
 	JumpRSystem::Init(registry);
 	StartMeleeAttackRSystem::Init(registry);
@@ -238,6 +237,7 @@ void godot::ECSWorld::_init()
 	
 	WeaponChooseRSystem::Init(registry);
 	
+	//TODO0: Breaks PileIn!!!
 	PlayerVelocityRSystem::Init(registry);
 	PlayerRotationRSystem::Init(registry);
 
@@ -263,10 +263,10 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new NavAgentSystem()); //check better for reactivness
 	m_process_systems.emplace_back(new PursuingSystem());
 	
-	//TODO: pile in breaks if this system runs in _process
 	m_process_systems.emplace_back(new LookAtSystem());
 	m_process_systems.emplace_back(new SimpleFollowSystem());
-	m_process_systems.emplace_back(new DestroyDeadSystem()); //reactive (with ecs event only)
+	//TODO0: implement ecs events and make this system reactive via events
+	m_process_systems.emplace_back(new DestroyDeadSystem());
 	m_process_systems.emplace_back(new HealthMonitoringSystem());
 	m_process_systems.emplace_back(new FleeingSystem());
 	m_process_systems.emplace_back(new LocomotionAnimSystem());
