@@ -39,7 +39,7 @@ namespace //private
 
 	void OnInputPressed(entt::registry& registry, entt::entity entity)
 	{
-		if (!registry.has<CurrentWeaponMeleeTag>(entity) || registry.has<TargetLockComponent>(entity))
+		if (!registry.has<CurrentWeaponMeleeTag>(entity) || registry.any<TargetLockComponent>(entity))
 			return;
 
 		//TODO: implement target change when already have locked target

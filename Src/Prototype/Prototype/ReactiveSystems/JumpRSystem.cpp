@@ -8,7 +8,7 @@ namespace //private
 {
 	void OnInputPressed(entt::registry& registry, entt::entity entity)
 	{
-		if (registry.has<InAirTag>(entity))
+		if (registry.any<InAirTag>(entity))
 			return;
 
 		ASSERT(registry.has<VelocityComponent>(entity), "entity has no VelocityComponent");
