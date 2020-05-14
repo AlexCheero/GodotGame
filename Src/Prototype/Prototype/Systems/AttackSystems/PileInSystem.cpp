@@ -3,6 +3,22 @@
 #include "../../Components/AttackComponents.h"
 #include "../../Components/InputComponents.h"
 
+void godot::PileInSystem::OnPileInTagDestroyed(entt::registry& registry, entt::entity entity)
+{
+	ASSERT(registry.has<VelocityComponent>(entity), "entity has no VelocityComponent");
+
+	VelocityComponent& velComp = registry.get<VelocityComponent>(entity);
+	velComp.velocity.x = velComp.velocity.z = 0;
+}
+
+godot::PileInSystem::PileInSystem(entt::registry& registry)
+{
+	registry.on_destroy<AttackAnimPlayingComponent>().connect<&entt::registry::remove_if_exists<PileInTag>>();
+	registry.on_destroy<PileInTag>().connect<&PileInSystem::OnPileInTagDestroyed>(this);
+	
+	registry.on_construct<MoveDirChangedTag>().connect<&entt::registry::remove_if_exists<PileInTag>>();
+}
+
 void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 {
 	auto pileInView = registry.view<PileInTag, TargetLockComponent, VelocityComponent, SpeedComponent,
@@ -15,7 +31,8 @@ void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 		Vector3 toTargetDirection = pTargetSpatial->get_global_transform().get_origin() - pSpatial->get_global_transform().get_origin();
 		float distanceToTarget = toTargetDirection.length();
 		
-		//TODO: probably remove PileInTag in this case
+		//TODO: probably remove PileInTag in this case. upd: bad idea to remove. whole pile in system needs refactoring
+		//      and minDistance should be removed or at least renamed after that
 		if (distanceToTarget <= melee.GetCurrentHit().minDistance)
 			return;
 
@@ -27,14 +44,4 @@ void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 
 		velComp.velocity = toTargetVelocity;
 	});
-
-	auto cancelPileInView = registry.view<InputComponent>();
-	cancelPileInView.each([&registry, delta](entt::entity entity, InputComponent inputComp)
-	{
-		if (inputComp.moveDir.length_squared() > 0)
-			registry.remove_if_exists<PileInTag>(entity);
-	});
-
-	auto pileInRemoveView = registry.view<PileInTag>(entt::exclude<AttackAnimPlayingComponent>);
-	registry.remove<PileInTag>(pileInRemoveView.begin(), pileInRemoveView.end());
 }

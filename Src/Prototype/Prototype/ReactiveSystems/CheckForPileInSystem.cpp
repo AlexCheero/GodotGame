@@ -7,7 +7,8 @@ namespace //private
 {
 	void OnInputPressed(entt::registry& registry, entt::entity entity)
 	{
-		if (!registry.has<TargetLockComponent, CurrentWeaponMeleeTag>(entity) || registry.has<PileInTag, InAirTag>(entity))
+		//TODO0: make revision of all reactive includes/excludes!!!
+		if (!registry.has<TargetLockComponent, CurrentWeaponMeleeTag>(entity) || registry.has<InAirTag>(entity) || registry.has<PileInTag>(entity))
 			return;
 
 		ASSERT(registry.has<MeleeAttackComponent>(entity), "entity has no MeleeAttackComponent");

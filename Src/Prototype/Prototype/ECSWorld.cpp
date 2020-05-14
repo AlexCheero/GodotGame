@@ -237,7 +237,6 @@ void godot::ECSWorld::_init()
 	
 	WeaponChooseRSystem::Init(registry);
 	
-	//TODO0: Breaks PileIn!!!
 	PlayerVelocityRSystem::Init(registry);
 	PlayerRotationRSystem::Init(registry);
 
@@ -253,7 +252,7 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new ComboDropSystem());
 	m_process_systems.emplace_back(new UpdateLockRotationSystem());
 	m_process_systems.emplace_back(new EndAttackAnimSystem());
-	m_process_systems.emplace_back(new PileInSystem());
+	m_process_systems.emplace_back(new PileInSystem(registry));
 //melee systems>
 	
 	//comment to switch off bots
@@ -265,7 +264,6 @@ void godot::ECSWorld::_init()
 	
 	m_process_systems.emplace_back(new LookAtSystem());
 	m_process_systems.emplace_back(new SimpleFollowSystem());
-	//TODO0: implement ecs events and make this system reactive via events
 	m_process_systems.emplace_back(new DestroyDeadSystem());
 	m_process_systems.emplace_back(new HealthMonitoringSystem());
 	m_process_systems.emplace_back(new FleeingSystem());
