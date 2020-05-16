@@ -3,25 +3,17 @@
 #include "../Components/AttackComponents.h"
 #include "../Components/InputComponents.h"
 
-namespace //private
+//TODO0: combo doesnt increment if attack pressed before anim stops playing
+void godot::IncrementComboSystem::operator()(float delta, entt::registry& registry)
 {
-	void OnComboIncrement(entt::registry& registry, entt::entity entity)
+	auto view = registry.view<AttackPressedTag, MeleeAttackComponent>();
+	view.less([](MeleeAttackComponent& attackComp)
 	{
-		ASSERT(registry.has<MeleeAttackComponent>(entity), "entity has no MeleeAttackComponent");
-
-		MeleeAttackComponent& attackComp = registry.get<MeleeAttackComponent>(entity);
-
 		int prevIdx = attackComp.hitIdx;
 
 		//TODO: drop combo on switching from melee here or in ComboDropSystem
 		attackComp.hitIdx++;
 		if (attackComp.hitIdx > attackComp.hits.size() - 1)
 			attackComp.hitIdx = 0;
-	}
-}
-
-void godot::IncrementComboRSystem::Init(entt::registry& registry)
-{
-	//TODO0: combo doesnt increment if attack pressed before anim stops playing
-	registry.on_destroy<AttackAnimPlayingComponent>().connect<&OnComboIncrement>();
+	});
 }

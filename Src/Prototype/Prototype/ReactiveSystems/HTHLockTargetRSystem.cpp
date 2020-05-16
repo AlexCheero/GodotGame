@@ -2,9 +2,6 @@
 
 #include <PhysicsDirectSpaceState.hpp>
 #include <World.hpp>
-#include <PhysicsShapeQueryParameters.hpp>
-#include <Spatial.hpp>
-#include <SphereShape.hpp>
 
 //TODO: remove usages of this header
 #include "core/math/math_funcs.h"
@@ -14,41 +11,37 @@
 
 #include "../Nodes/EntityView.h"
 
-namespace //private
+godot::Array godot::HTHLockTargetSystem::GetIntersects(Spatial* pAttackerSpatial, float distance, String layerName)
 {
-	const float INTERSECT_RESULTS_NUM = 16.f;
+	Array exclude;
+	exclude.push_back(pAttackerSpatial);
+	m_params->set_exclude(exclude);
 
-	godot::Ref<godot::PhysicsShapeQueryParameters> m_params;
-	godot::Ref<godot::SphereShape> m_attackShape;
+	m_attackShape->set_radius(distance);
+	m_params->set_collision_mask(utils::GetLayerByName(layerName));
+	m_params->set_shape(m_attackShape);
+	Transform attackerTransform = pAttackerSpatial->get_global_transform();
+	m_params->set_transform(attackerTransform);
 
-	godot::Array GetIntersects(godot::Spatial* pAttackerSpatial, float distance, godot::String layerName)
+	PhysicsDirectSpaceState* spaceState = pAttackerSpatial->get_world()->get_direct_space_state();
+	return spaceState->intersect_shape(m_params, INTERSECT_RESULTS_NUM);
+}
+
+godot::HTHLockTargetSystem::HTHLockTargetSystem()
+{
+	m_params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
+	m_params->set_collide_with_areas(false);
+	m_params->set_collide_with_bodies(true);
+
+	m_attackShape = Ref<SphereShape>(SphereShape::_new());
+}
+
+void godot::HTHLockTargetSystem::operator()(float delta, entt::registry& registry)
+{
+	auto view = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent, Spatial*>(entt::exclude<TargetLockComponent>);
+	view.less([this, &registry](entt::entity entity, MeleeAttackComponent attackComp, Spatial* pSpatial)
 	{
-		godot::Array exclude;
-		exclude.push_back(pAttackerSpatial);
-		m_params->set_exclude(exclude);
-
-		m_attackShape->set_radius(distance);
-		m_params->set_collision_mask(utils::GetLayerByName(layerName));
-		m_params->set_shape(m_attackShape);
-		godot::Transform attackerTransform = pAttackerSpatial->get_global_transform();
-		m_params->set_transform(attackerTransform);
-
-		godot::PhysicsDirectSpaceState* spaceState = pAttackerSpatial->get_world()->get_direct_space_state();
-		return spaceState->intersect_shape(m_params, INTERSECT_RESULTS_NUM);
-	}
-
-	void OnInputPressed(entt::registry& registry, entt::entity entity)
-	{
-		if (!registry.has<CurrentWeaponMeleeTag>(entity) || registry.any<TargetLockComponent>(entity))
-			return;
-
 		//TODO: implement target change when already have locked target
-		ASSERT(registry.has<MeleeAttackComponent>(entity), "registry has no MeleeAttackComponent");
-		ASSERT(registry.has<godot::Spatial*>(entity), "registry has no Spatial*");
-
-		godot::Spatial* pSpatial = registry.get<godot::Spatial*>(entity);
-		MeleeAttackComponent attackComp = registry.get<MeleeAttackComponent>(entity);
-
 		//TODO: do not lock on ally even if friendly fire is on
 		godot::Array intersects = GetIntersects(pSpatial, attackComp.GetCurrentHit().maxDistance, "Character");
 		if (intersects.size() == 0)
@@ -76,16 +69,5 @@ namespace //private
 		ASSERT(!registry.has<DeadTag>(targetEntity), "entity is already dead!");
 
 		registry.assign<TargetLockComponent>(entity).target = targetEntity;
-	}
-}
-
-void godot::HTHLockTargetRSystem::Init(entt::registry& registry)
-{
-	m_params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
-	m_params->set_collide_with_areas(false);
-	m_params->set_collide_with_bodies(true);
-
-	m_attackShape = Ref<SphereShape>(SphereShape::_new());
-
-	registry.on_construct<AttackPressedTag>().connect<&OnInputPressed>();
+	});
 }

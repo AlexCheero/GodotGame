@@ -224,26 +224,8 @@ void godot::ECSWorld::_init()
 	utils::InitPhysicLayers();
 
 //setup reactive systems
-	JumpRSystem::Init(registry);
-
-	//<melee reactive systems
-	StartMeleeAttackRSystem::Init(registry);
-	//TODO: locks on target on every hit, this may cause bugs with many enemies
-	HTHLockTargetRSystem::Init(registry);
-	//TODO: implement proper hth with blocks and stuff
-	HTHAnimRSystem::Init(registry);
-	CheckForPileInRSystem::Init(registry);
-	IncrementComboRSystem::Init(registry);
-	//melee reactive systems>
-
-	RangedAttackRSystem::Init(registry);
-	ThrowAttackRSystem::Init(registry);
-	
 	WeaponChooseRSystem::Init(registry);
 	
-	PlayerVelocityRSystem::Init(registry);
-	PlayerRotationRSystem::Init(registry);
-
 //setup physics systems
 	m_physics_systems.emplace_back(new GravitySystem());
 	//must be called after GravitySystem
@@ -251,14 +233,31 @@ void godot::ECSWorld::_init()
 	m_physics_systems.emplace_back(new KinematicMovementSystem());
 	
 //setup systems
+
+	//<converted from reactive
+	m_process_systems.emplace_back(new JumpSystem());
+	m_process_systems.emplace_back(new PlayerVelocitySystem());
+	m_process_systems.emplace_back(new PlayerRotationSystem());
+	//converted from reactive>
+
 	//TODO: maybe move all melee systems to separate filter/folder
 //<melee systems
-	m_process_systems.emplace_back(new ComboDropSystem());
+	m_process_systems.emplace_back(new StartMeleeAttackSystem());//converted from reactive
+	//TODO: locks on target on every hit, this may cause bugs with many enemies
+	m_process_systems.emplace_back(new HTHLockTargetSystem());//converted from reactive
 	m_process_systems.emplace_back(new UpdateLockRotationSystem());
-	m_process_systems.emplace_back(new EndAttackAnimSystem());
+	//TODO: implement proper hth with blocks and stuff
+	m_process_systems.emplace_back(new HTHAnimSystem());//converted from reactive
+	m_process_systems.emplace_back(new CheckForPileInSystem());//converted from reactive
 	m_process_systems.emplace_back(new PileInSystem(registry));
+	m_process_systems.emplace_back(new ComboDropSystem());
+	m_process_systems.emplace_back(new IncrementComboSystem());//converted from reactive
+	m_process_systems.emplace_back(new EndAttackAnimSystem());
 //melee systems>
 	
+	m_process_systems.emplace_back(new RangedAttackSystem());//converted from reactive
+	m_process_systems.emplace_back(new ThrowAttackSystem());//converted from reactive
+
 	//comment to switch off bots
 	m_process_systems.emplace_back(new DecisionMakingFSMSystem(registry));
 

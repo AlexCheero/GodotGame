@@ -2,10 +2,13 @@
 
 #include "entt/entt.hpp"
 
+#include "../Systems/BaseSystem.h"
+
 namespace godot
 {
-	namespace StartMeleeAttackRSystem
+	class StartMeleeAttackSystem : public BaseSystem
 	{
-		void Init(entt::registry& registry);
-	}
+	public:
+		virtual void operator()(float delta, entt::registry& registry) override;
+	};
 }

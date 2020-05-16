@@ -76,6 +76,7 @@ godot::DecisionMakingFSMSystem::DecisionMakingFSMSystem(entt::registry& registry
 
 	registry.on_destroy<PatrolStateTag>().connect<&entt::registry::remove_if_exists<HittedFromComponent> >();
 
+	//TODO0: check why we even need to clear velocity. maybe should zero velocity after KinematicMovementSystem run
 	//clear velocity on state change
 	registry.on_construct<PursuingStateComponent>().connect<&DecisionMakingFSMSystem::ResetVelocityOnStateChanged>(this);
 	registry.on_construct<PatrolStateTag>().connect<&DecisionMakingFSMSystem::ResetVelocityOnStateChanged>(this);

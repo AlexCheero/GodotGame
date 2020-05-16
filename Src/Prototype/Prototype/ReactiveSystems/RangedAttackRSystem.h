@@ -1,11 +1,12 @@
 #pragma once
 
-#include "entt/entt.hpp"
+#include "../Systems/BaseSystem.h"
 
 namespace godot
 {
-	namespace RangedAttackRSystem
+	class RangedAttackSystem : public BaseSystem
 	{
-		void Init(entt::registry& registry);
-	}
+	public:
+		virtual void operator()(float delta, entt::registry& registry) override;
+	};
 }

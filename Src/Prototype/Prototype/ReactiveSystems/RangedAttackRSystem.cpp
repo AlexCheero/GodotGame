@@ -13,18 +13,11 @@
 
 #include "../Utils/Utils.h"
 
-namespace //private
+void godot::RangedAttackSystem::operator()(float delta, entt::registry& registry)
 {
-	void OnInputPressed(entt::registry& registry, entt::entity entity)
+	auto view = registry.view<AttackPressedTag, CurrentWeaponRangedTag, RangedAttackComponent, Spatial*>();
+	view.less([&registry](entt::entity entity, RangedAttackComponent& attackComp, Spatial* pAttackerSpatial)
 	{
-		if (!registry.has<CurrentWeaponRangedTag, RangedAttackComponent>(entity))
-			return;
-
-		ASSERT(registry.has<godot::Spatial*>(entity), "entity has no Spatial*");
-		
-		RangedAttackComponent& attackComp = registry.get<RangedAttackComponent>(entity);
-		godot::Spatial* pAttackerSpatial = registry.get<godot::Spatial*>(entity);
-
 		if (!utils::Expired(attackComp.attackTime, attackComp.prevHitTime))
 			return;
 
@@ -57,10 +50,5 @@ namespace //private
 		enemyHealthComp.hp -= attackComp.damage;
 
 		godot::Godot::print("ranged hit");
-	}
-}
-
-void godot::RangedAttackRSystem::Init(entt::registry& registry)
-{
-	registry.on_construct<AttackPressedTag>().connect<&OnInputPressed>();
+	});
 }

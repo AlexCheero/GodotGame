@@ -11,20 +11,11 @@
 
 #include "../Utils/Utils.h"
 
-namespace //private
+void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 {
-	void OnInputPressed(entt::registry& registry, entt::entity entity)
+	auto view = registry.view<AttackPressedTag, CurrentWeaponThrowableTag, ThrowableAttackComponent, BoundsComponent, Spatial*>();
+	view.less([&registry](entt::entity entity, ThrowableAttackComponent& attackComp, BoundsComponent bounds, Spatial* pAttackerSpatial)
 	{
-		if (!registry.has<CurrentWeaponThrowableTag, ThrowableAttackComponent>(entity))
-			return;
-
-		ASSERT(registry.has<BoundsComponent>(entity), "entity has no VelocityComponent");
-		ASSERT(registry.has<godot::Spatial*>(entity), "entity has no Spatial*");
-
-		ThrowableAttackComponent& attackComp = registry.get<ThrowableAttackComponent>(entity);
-		BoundsComponent bounds = registry.get<BoundsComponent>(entity);
-		godot::Spatial* pAttackerSpatial = registry.get<godot::Spatial*>(entity);
-
 		if (!utils::Expired(attackComp.attackTime, attackComp.prevHitTime))
 			return;
 
@@ -69,10 +60,5 @@ namespace //private
 
 			registry.assign<GrenadeComponent>(grenadeEntity, grenComp);
 		}
-	}
-}
-
-void godot::ThrowAttackRSystem::Init(entt::registry& registry)
-{
-	registry.on_construct<AttackPressedTag>().connect<&OnInputPressed>();
+	});
 }
