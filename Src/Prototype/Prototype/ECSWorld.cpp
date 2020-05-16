@@ -225,6 +225,8 @@ void godot::ECSWorld::_init()
 
 //setup reactive systems
 	JumpRSystem::Init(registry);
+
+	//<melee reactive systems
 	StartMeleeAttackRSystem::Init(registry);
 	//TODO: locks on target on every hit, this may cause bugs with many enemies
 	HTHLockTargetRSystem::Init(registry);
@@ -232,6 +234,7 @@ void godot::ECSWorld::_init()
 	HTHAnimRSystem::Init(registry);
 	CheckForPileInRSystem::Init(registry);
 	IncrementComboRSystem::Init(registry);
+	//melee reactive systems>
 
 	RangedAttackRSystem::Init(registry);
 	ThrowAttackRSystem::Init(registry);

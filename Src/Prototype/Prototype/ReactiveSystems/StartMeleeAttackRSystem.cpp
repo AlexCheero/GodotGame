@@ -7,7 +7,7 @@
 
 namespace //private
 {
-	//TODO0: convert to attack cooldown check. probably remove utils::Expired after converting
+	//TODO: convert to attack cooldown check. probably remove utils::Expired after converting
 	void OnInputPressed(entt::registry& registry, entt::entity entity)
 	{
 		if (!registry.has<CurrentWeaponMeleeTag>(entity) || registry.any<AttackAnimPlayingComponent>(entity))
@@ -21,6 +21,10 @@ namespace //private
 		{
 			int64_t millisSinceLastHit = currTimeMillis - attackComp.prevHitTimeMillis;
 			attackComp.prevHitTimeMillis = currTimeMillis;
+		}
+		else
+		{
+			//TODO0: must drop input here to prevent other reactive systems working on AttackPressedTag to run
 		}
 	}
 }

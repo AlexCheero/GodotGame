@@ -29,7 +29,7 @@ struct MeleeAttackComponent
 	std::vector<MeleeHit> hits;
 
 	int hitIdx = 0;
-	//TODO0: maybe move to antother more hot component
+	//TODO: maybe move to antother more hot component
 	int64_t prevHitTimeMillis = -utils::SecondsToMillis(hits[0].attackTime);
 	
 	static int64_t maxComboIntervalMillis;
