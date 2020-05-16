@@ -1,11 +1,17 @@
 #pragma once
 
-#include "entt/entt.hpp"
+#include "../Systems/BaseSystem.h"
+
+#include <Basis.hpp>
+#include <Vector2.hpp>
 
 namespace godot
 {
-	namespace PlayerRotationRSystem
+	class PlayerRotationSystem : public BaseSystem
 	{
-		void Init(entt::registry& registry);
-	}
+	private:
+		Vector3 GetTargetDirection(Vector2 inputDir, Basis camBasis);
+	public:
+		virtual void operator()(float delta, entt::registry& registry) override;
+	};
 }

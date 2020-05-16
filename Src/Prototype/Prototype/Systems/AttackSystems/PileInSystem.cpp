@@ -7,16 +7,16 @@ void godot::PileInSystem::OnPileInTagDestroyed(entt::registry& registry, entt::e
 {
 	ASSERT(registry.has<VelocityComponent>(entity), "entity has no VelocityComponent");
 
+	//TODO0: don't reset bots VelocityComponent after refactoring VelocityComponent changing in ai systems
 	VelocityComponent& velComp = registry.get<VelocityComponent>(entity);
 	velComp.velocity.x = velComp.velocity.z = 0;
 }
 
 godot::PileInSystem::PileInSystem(entt::registry& registry)
 {
+	//TODO: also cancel if target is dead or when hit is ended, not the whole animation
 	registry.on_destroy<AttackAnimPlayingComponent>().connect<&entt::registry::remove_if_exists<PileInTag>>();
 	registry.on_destroy<PileInTag>().connect<&PileInSystem::OnPileInTagDestroyed>(this);
-	
-	registry.on_construct<MoveDirChangedTag>().connect<&entt::registry::remove_if_exists<PileInTag>>();
 }
 
 void godot::PileInSystem::operator()(float delta, entt::registry& registry)
@@ -44,5 +44,12 @@ void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 		toTargetVelocity.y = velComp.velocity.y;
 
 		velComp.velocity = toTargetVelocity;
+	});
+
+	auto cancelPilInView = registry.view<PileInTag, MoveDirInputComponent>();
+	cancelPilInView.less([&registry](entt::entity entity, MoveDirInputComponent inputComp)
+	{
+		if (inputComp.dir.length_squared() != 0)
+			registry.remove<PileInTag>(entity);
 	});
 }

@@ -71,6 +71,7 @@ godot::DecisionMakingFSMSystem::DecisionMakingFSMSystem(entt::registry& registry
 	registry.on_construct<PursuingStateComponent>().connect<&DecisionMakingFSMSystem::OnTransitionToPursuing>(this);
 	registry.on_construct<PatrolStateTag>().connect<&DecisionMakingFSMSystem::OnTransitionToPatrol>(this);
 	registry.on_construct<FleeStateTag>().connect<&DecisionMakingFSMSystem::OnTransitionToFlee>(this);
+	//TODO0: bot doesn't attack!!!
 	registry.on_construct<MeleeAttackStateTag>().connect<&DecisionMakingFSMSystem::OnTransitionToHTH>(this);
 	registry.on_construct<HittedFromComponent>().connect<&DecisionMakingFSMSystem::OnHitNoticing>(this);
 
