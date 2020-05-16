@@ -18,7 +18,11 @@ namespace //private
 		int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
 		MeleeAttackComponent& attackComp = registry.get<MeleeAttackComponent>(entity);
 		if (attackComp.prevHitTimeMillis + utils::SecondsToMillis(attackComp.GetCurrentHit().attackTime) > currTimeMillis)
-			registry.remove<AttackPressedTag>(entity);
+		{
+			//TODO0: shouldn't remove same component in on_construct callback. leads to failure!
+			//       also doesn't get here becasuse AttackPressedTag didn't assigned while anim is playing
+			//registry.remove<AttackPressedTag>(entity);
+		}
 		else
 		{
 			int64_t millisSinceLastHit = currTimeMillis - attackComp.prevHitTimeMillis;

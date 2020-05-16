@@ -34,7 +34,7 @@ void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
 			moveVec.normalize();
 			rotDirComp.direction = moveVec;
 			moveVec *= speedComp.speed;
-			//direct assign not to discard gravity's y influence
+			//direct assign to not discard gravity's y influence
 			velocity.velocity.x = moveVec.x;
 			velocity.velocity.z = moveVec.z;
 		}

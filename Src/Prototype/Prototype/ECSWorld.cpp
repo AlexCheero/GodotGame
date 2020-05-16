@@ -50,6 +50,7 @@
 #include "Systems/AISystems/HealthMonitoringSystem.h"
 #include "Systems/AISystems/FleeingSystem.h"
 #include "Systems/AISystems/DecisionMaking/DecisionMakingFSMSystem.h"
+#include "Systems/AISystems/ClearBotInputSystem.h"
 
 #include "Systems/AnimSystems/LocomotionAnimSystem.h"
 #include "Systems/AnimSystems/EndAttackAnimSystem.h"
@@ -268,6 +269,8 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new HealthMonitoringSystem());
 	m_process_systems.emplace_back(new FleeingSystem());
 	m_process_systems.emplace_back(new LocomotionAnimSystem());
+	//place after all bot systems that depends on input
+	m_process_systems.emplace_back(new ClearBotInputSystem());
 }
 
 void godot::ECSWorld::_ready()

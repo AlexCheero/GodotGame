@@ -201,6 +201,9 @@
     <ClCompile Include="ReactiveSystems\HTHLockTargetRSystem.cpp">
       <Filter>Source Files\ReactiveSystems</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\AISystems\ClearBotInputSystem.cpp">
+      <Filter>Source Files\Systems\AISystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -349,6 +352,9 @@
     </ClInclude>
     <ClInclude Include="ReactiveSystems\HTHLockTargetRSystem.h">
       <Filter>Header Files\ReactiveSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AISystems\ClearBotInputSystem.h">
+      <Filter>Header Files\Systems\AISystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

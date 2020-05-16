@@ -167,6 +167,7 @@
     <ClCompile Include="ReactiveSystems\StartMeleeAttackRSystem.cpp" />
     <ClCompile Include="ReactiveSystems\ThrowAttackRSystem.cpp" />
     <ClCompile Include="ReactiveSystems\WeaponChooseRSystem.cpp" />
+    <ClCompile Include="Systems\AISystems\ClearBotInputSystem.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\DecisionMakingFSMSystem.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\DecisionMakingHelper.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\FleeStateSystem.cpp" />
@@ -216,6 +217,7 @@
     <ClInclude Include="ReactiveSystems\ThrowAttackRSystem.h" />
     <ClInclude Include="ReactiveSystems\WeaponChooseRSystem.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="Systems\AISystems\ClearBotInputSystem.h" />
     <ClInclude Include="Systems\AISystems\DecisionMaking\DecisionMakingFSMSystem.h" />
     <ClInclude Include="Systems\AISystems\DecisionMaking\DecisionMakingHelper.h" />
     <ClInclude Include="Systems\AISystems\DecisionMaking\FleeStateSystem.h" />

@@ -11,16 +11,17 @@
 
 void godot::HTHStateSystem::operator()(float delta, entt::registry& registry)
 {
-	auto view = registry.view<BotTag, MeleeAttackStateTag, InputComponent
+	auto view = registry.view<BotTag, MeleeAttackStateTag
 		, MeleeAttackComponent, HealthComponent, Spatial*
-		, TargetLockComponent, DecisionMakingComponent>();
-	view.less([this, &registry](entt::entity entity, InputComponent& inputComp, MeleeAttackComponent meleeComp
+		, TargetLockComponent, DecisionMakingComponent>(entt::exclude<AttackPressedTag>);
+	view.less([this, &registry](entt::entity entity, MeleeAttackComponent meleeComp
 		, HealthComponent healthComp, Spatial* pSpatial, TargetLockComponent lockComp, DecisionMakingComponent decisionComp)
 	{
 		int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
 		bool attackInput = meleeComp.prevHitTimeMillis + utils::SecondsToMillis(meleeComp.GetCurrentHit().attackTime) <= currTimeMillis;
-		//TODO: check if this could keep input even on state transition
-		inputComp.Set(EInput::Attack, attackInput);
+		//TODO: check if this could keep input event on state transition
+		if (attackInput)
+			registry.assign<AttackPressedTag>(entity);
 
 		//to flee transition
 		if (healthComp.hp <= decisionComp.criticalHp)
