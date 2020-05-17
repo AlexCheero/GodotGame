@@ -9,7 +9,6 @@
 #include "../../Utils/Utils.h"
 
 //TODO: speed should be different, depending on player's orientation. probably should merge
-//TODO0: make it more real time, as it was and don't reset bots VelocityComponent after that
 void godot::PlayerVelocitySystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<PlayerTag, VelocityComponent, MoveDirInputComponent, SpeedComponent, Camera*>();
