@@ -27,7 +27,7 @@
 #include "Systems/AttackSystems/ThrowAttackSystem.h"
 
 #include "Systems/AttackSystems/Melee/HTHAnimSystem.h"
-#include "Systems/AttackSystems/Melee/StartMeleeAttackSystem.h"
+#include "Systems/AttackSystems/Melee/MeleeAttackCooldownSystem.h"
 #include "Systems/AttackSystems/Melee/HTHLockTargetSystem.h"
 #include "Systems/AttackSystems/Melee/CheckForPileInSystem.h"
 #include "Systems/AttackSystems/Melee/IncrementComboSystem.h"
@@ -236,29 +236,26 @@ void godot::ECSWorld::_init()
 	m_physics_systems.emplace_back(new KinematicMovementSystem());
 	
 //setup systems
-
-	//<converted from reactive
 	m_process_systems.emplace_back(new JumpSystem());
 	m_process_systems.emplace_back(new PlayerVelocitySystem());
 	m_process_systems.emplace_back(new PlayerRotationSystem());
-	//converted from reactive>
 
 //<melee systems
-	m_process_systems.emplace_back(new StartMeleeAttackSystem());//converted from reactive
+	m_process_systems.emplace_back(new MeleeAttackCooldownSystem());
 	//TODO: locks on target on every hit, this may cause bugs with many enemies
-	m_process_systems.emplace_back(new HTHLockTargetSystem());//converted from reactive
+	m_process_systems.emplace_back(new HTHLockTargetSystem());
 	m_process_systems.emplace_back(new UpdateLockRotationSystem());
 	//TODO: implement proper hth with blocks and stuff
-	m_process_systems.emplace_back(new HTHAnimSystem());//converted from reactive
-	m_process_systems.emplace_back(new CheckForPileInSystem());//converted from reactive
+	m_process_systems.emplace_back(new HTHAnimSystem());
+	m_process_systems.emplace_back(new CheckForPileInSystem());
 	m_process_systems.emplace_back(new PileInSystem(registry));
 	m_process_systems.emplace_back(new ComboDropSystem());
-	m_process_systems.emplace_back(new IncrementComboSystem());//converted from reactive
+	m_process_systems.emplace_back(new IncrementComboSystem());
 	m_process_systems.emplace_back(new EndAttackAnimSystem());
 //melee systems>
 	
-	m_process_systems.emplace_back(new RangedAttackSystem());//converted from reactive
-	m_process_systems.emplace_back(new ThrowAttackSystem());//converted from reactive
+	m_process_systems.emplace_back(new RangedAttackSystem());
+	m_process_systems.emplace_back(new ThrowAttackSystem());
 
 	//place before any ai systems
 	m_process_systems.emplace_back(new ClearBotInputSystem());
@@ -266,7 +263,7 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new DecisionMakingFSMSystem(registry));
 
 	m_process_systems.emplace_back(new GrenadeSystem());
-	m_process_systems.emplace_back(new NavAgentSystem()); //check better for reactivness
+	m_process_systems.emplace_back(new NavAgentSystem());
 	m_process_systems.emplace_back(new PursuingSystem());
 	
 	m_process_systems.emplace_back(new LookAtSystem());

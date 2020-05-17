@@ -1,12 +1,11 @@
-#include "StartMeleeAttackSystem.h"
+#include "MeleeAttackCooldownSystem.h"
 
 #include <OS.hpp>
 
 #include "../../../Components/AttackComponents.h"
 #include "../../../Components/InputComponents.h"
 
-//TODO: convert to attack cooldown check. probably remove utils::Expired after converting
-void godot::StartMeleeAttackSystem::operator()(float delta, entt::registry& registry)
+void godot::MeleeAttackCooldownSystem::operator()(float delta, entt::registry& registry)
 {
 	int64_t currTimeMillis = OS::get_singleton()->get_ticks_msec();
 	auto view = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent, PrevAttackTime>();

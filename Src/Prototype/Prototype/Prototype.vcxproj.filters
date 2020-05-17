@@ -195,9 +195,6 @@
     <ClCompile Include="Systems\AttackSystems\melee\IncrementComboSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems\Melee</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\AttackSystems\melee\StartMeleeAttackSystem.cpp">
-      <Filter>Source Files\Systems\AttackSystems\Melee</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\AttackSystems\RangedAttackSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
@@ -208,6 +205,9 @@
       <Filter>Source Files\Systems\AttackSystems\Melee</Filter>
     </ClCompile>
     <ClCompile Include="Systems\AttackSystems\Melee\PileInSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\melee\MeleeAttackCooldownSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems\Melee</Filter>
     </ClCompile>
   </ItemGroup>
@@ -347,9 +347,6 @@
     <ClInclude Include="Systems\AttackSystems\Melee\IncrementComboSystem.h">
       <Filter>Header Files\Systems\AttackSystems\Melee</Filter>
     </ClInclude>
-    <ClInclude Include="Systems\AttackSystems\Melee\StartMeleeAttackSystem.h">
-      <Filter>Header Files\Systems\AttackSystems\Melee</Filter>
-    </ClInclude>
     <ClInclude Include="Systems\AttackSystems\RangedAttackSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
@@ -360,6 +357,9 @@
       <Filter>Header Files\Systems\AttackSystems\Melee</Filter>
     </ClInclude>
     <ClInclude Include="Systems\AttackSystems\Melee\PileInSystem.h">
+      <Filter>Header Files\Systems\AttackSystems\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\Melee\MeleeAttackCooldownSystem.h">
       <Filter>Header Files\Systems\AttackSystems\Melee</Filter>
     </ClInclude>
   </ItemGroup>

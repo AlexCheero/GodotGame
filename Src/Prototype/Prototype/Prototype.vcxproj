@@ -177,7 +177,7 @@
     <ClCompile Include="Systems\AttackSystems\melee\HTHLockTargetSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\melee\IncrementComboSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\Melee\PileInSystem.cpp" />
-    <ClCompile Include="Systems\AttackSystems\melee\StartMeleeAttackSystem.cpp" />
+    <ClCompile Include="Systems\AttackSystems\melee\MeleeAttackCooldownSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\RangedAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\ThrowAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\UpdateLockRotationSystem.cpp" />
@@ -227,7 +227,7 @@
     <ClInclude Include="Systems\AttackSystems\Melee\HTHLockTargetSystem.h" />
     <ClInclude Include="Systems\AttackSystems\Melee\IncrementComboSystem.h" />
     <ClInclude Include="Systems\AttackSystems\Melee\PileInSystem.h" />
-    <ClInclude Include="Systems\AttackSystems\Melee\StartMeleeAttackSystem.h" />
+    <ClInclude Include="Systems\AttackSystems\Melee\MeleeAttackCooldownSystem.h" />
     <ClInclude Include="Systems\AttackSystems\RangedAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\ThrowAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\UpdateLockRotationSystem.h" />
