@@ -43,7 +43,6 @@ void godot::HTHDamagingArea::_on_Area_body_entered(KinematicBody* pBody)
 	float damage = registry.get<MeleeAttackComponent>(ownerEntity).GetCurrentHit().damage;
 	registry.get<HealthComponent>(hittedEntity).hp -= damage;
 
-	//TODO: make bot fight in hth stuck state, if it has critical hp
 	if (registry.has<BotTag>(hittedEntity))
 	{
 		PatrolmanComponent& patrolManComp = registry.get<PatrolmanComponent>(hittedEntity);

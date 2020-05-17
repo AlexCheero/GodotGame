@@ -23,9 +23,10 @@ void godot::HTHStateSystem::operator()(float delta, entt::registry& registry)
 		if (attackInput)
 			registry.assign<AttackPressedTag>(entity);
 
+		//TODO: make better hth system. to flee transition commented for now
 		//to flee transition
-		if (healthComp.hp <= decisionComp.criticalHp)
-			registry.assign<FleeStateTag>(entity);
+		//if (healthComp.hp <= decisionComp.criticalHp)
+		//	registry.assign<FleeStateTag>(entity);
 		//to pursuit transition
 		else if (registry.valid(lockComp.target) && meleeComp.GetCurrentHit().maxDistance < GetDistanceToTarget(registry, lockComp.target, pSpatial))
 			registry.assign<PursuingStateComponent>(entity, lockComp.target);
