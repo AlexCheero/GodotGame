@@ -24,8 +24,6 @@ namespace godot
 		void OnTransitionToFlee(entt::registry& registry, entt::entity entity);
 		void OnTransitionToHTH(entt::registry& registry, entt::entity entity);
 		void OnHitNoticing(entt::registry& registry, entt::entity entity);
-
-		void ResetVelocityOnStateChanged(entt::registry& registry, entt::entity entity);
 	public:
 		DecisionMakingFSMSystem(entt::registry& registry);
 

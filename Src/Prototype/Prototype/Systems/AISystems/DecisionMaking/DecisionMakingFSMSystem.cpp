@@ -55,17 +55,6 @@ void godot::DecisionMakingFSMSystem::OnHitNoticing(entt::registry& registry, ent
 	}
 }
 
-//TODO: probably needs clearing of whole bot input on state change
-void godot::DecisionMakingFSMSystem::ResetVelocityOnStateChanged(entt::registry& registry, entt::entity entity)
-{
-	//not assert beacuse VelocityComponent is destroyed before any state tag destroy, on bot death
-	if (registry.has<VelocityComponent>(entity))
-		return;
-
-	VelocityComponent& velComp = registry.get<VelocityComponent>(entity);
-	velComp.velocity.x = velComp.velocity.z = 0;
-}
-
 godot::DecisionMakingFSMSystem::DecisionMakingFSMSystem(entt::registry& registry)
 {
 	registry.on_construct<PursuingStateComponent>().connect<&DecisionMakingFSMSystem::OnTransitionToPursuing>(this);
@@ -75,14 +64,6 @@ godot::DecisionMakingFSMSystem::DecisionMakingFSMSystem(entt::registry& registry
 	registry.on_construct<HittedFromComponent>().connect<&DecisionMakingFSMSystem::OnHitNoticing>(this);
 
 	registry.on_destroy<PatrolStateTag>().connect<&entt::registry::remove_if_exists<HittedFromComponent> >();
-
-	//TODO0: check why we even need to clear velocity. maybe should zero velocity after KinematicMovementSystem run
-	//clear velocity on state change
-	registry.on_construct<PursuingStateComponent>().connect<&DecisionMakingFSMSystem::ResetVelocityOnStateChanged>(this);
-	registry.on_construct<PatrolStateTag>().connect<&DecisionMakingFSMSystem::ResetVelocityOnStateChanged>(this);
-	registry.on_construct<FleeStateTag>().connect<&DecisionMakingFSMSystem::ResetVelocityOnStateChanged>(this);
-	registry.on_construct<MeleeAttackStateTag>().connect<&DecisionMakingFSMSystem::ResetVelocityOnStateChanged>(this);
-	registry.on_construct<HittedFromComponent>().connect<&DecisionMakingFSMSystem::ResetVelocityOnStateChanged>(this);
 }
 
 void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& registry)

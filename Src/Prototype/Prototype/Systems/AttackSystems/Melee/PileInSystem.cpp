@@ -6,10 +6,6 @@
 void godot::PileInSystem::OnPileInTagDestroyed(entt::registry& registry, entt::entity entity)
 {
 	ASSERT(registry.has<VelocityComponent>(entity), "entity has no VelocityComponent");
-
-	//TODO0: don't reset bots VelocityComponent after refactoring VelocityComponent changing in ai systems
-	VelocityComponent& velComp = registry.get<VelocityComponent>(entity);
-	velComp.velocity.x = velComp.velocity.z = 0;
 }
 
 godot::PileInSystem::PileInSystem(entt::registry& registry)
