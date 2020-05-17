@@ -241,7 +241,6 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new PlayerRotationSystem());
 	//converted from reactive>
 
-	//TODO: maybe move all melee systems to separate filter/folder
 //<melee systems
 	m_process_systems.emplace_back(new StartMeleeAttackSystem());//converted from reactive
 	//TODO: locks on target on every hit, this may cause bugs with many enemies

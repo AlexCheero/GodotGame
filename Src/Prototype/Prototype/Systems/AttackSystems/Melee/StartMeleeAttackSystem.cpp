@@ -9,7 +9,7 @@
 void godot::StartMeleeAttackSystem::operator()(float delta, entt::registry& registry)
 {
 	int64_t currTimeMillis = OS::get_singleton()->get_ticks_msec();
-	auto view = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent>(entt::exclude<AttackAnimPlayingComponent>);
+	auto view = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent>();
 	view.less([&registry, currTimeMillis](entt::entity entity, MeleeAttackComponent& attackComp)
 	{
 		if (attackComp.prevHitTimeMillis + utils::SecondsToMillis(attackComp.GetCurrentHit().attackTime) <= currTimeMillis)
@@ -17,6 +17,7 @@ void godot::StartMeleeAttackSystem::operator()(float delta, entt::registry& regi
 			int64_t millisSinceLastHit = currTimeMillis - attackComp.prevHitTimeMillis;
 			attackComp.prevHitTimeMillis = currTimeMillis;
 		}
+		//TODO: accumulate next input for continuing combo
 		else
 			registry.remove<AttackPressedTag>(entity);
 	});
