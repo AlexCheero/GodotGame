@@ -12,13 +12,13 @@
 void godot::HTHStateSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<BotTag, MeleeAttackStateTag
-		, MeleeAttackComponent, HealthComponent, Spatial*
+		, MeleeAttackComponent, PrevAttackTime, HealthComponent, Spatial*
 		, TargetLockComponent, DecisionMakingComponent>(entt::exclude<AttackPressedTag>);
-	view.less([this, &registry](entt::entity entity, MeleeAttackComponent meleeComp
+	view.less([this, &registry](entt::entity entity, MeleeAttackComponent meleeComp, PrevAttackTime prevAttack
 		, HealthComponent healthComp, Spatial* pSpatial, TargetLockComponent lockComp, DecisionMakingComponent decisionComp)
 	{
 		int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
-		bool attackInput = meleeComp.prevHitTimeMillis + utils::SecondsToMillis(meleeComp.GetCurrentHit().attackTime) <= currTimeMillis;
+		bool attackInput = prevAttack.millis + utils::SecondsToMillis(meleeComp.GetCurrentHit().attackTime) <= currTimeMillis;
 		//TODO: check if this could keep input event on state transition
 		if (attackInput)
 			registry.assign<AttackPressedTag>(entity);

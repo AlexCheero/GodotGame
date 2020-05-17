@@ -12,6 +12,13 @@
 
 #include "ComponentsMeta.h"
 
+//TODO: implement component dependance system, to autovatically assign on component on assignation dependant to it.
+//      e.g. assign PrevAttackTime on assignation of MeleeAttackComponent
+struct PrevAttackTime
+{
+	int64_t millis = -std::numeric_limits<int64_t>::max();
+};
+
 struct MeleeHit
 {
 	godot::String anim;
@@ -29,8 +36,6 @@ struct MeleeAttackComponent
 	std::vector<MeleeHit> hits;
 
 	int hitIdx = 0;
-	//TODO: maybe move to antother more hot component
-	int64_t prevHitTimeMillis = -utils::SecondsToMillis(hits[0].attackTime);
 	
 	static int64_t maxComboIntervalMillis;
 

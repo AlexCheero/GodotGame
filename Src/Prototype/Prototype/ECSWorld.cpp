@@ -82,6 +82,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Player/vanguard/AnimationTree"));
 
 	registry.assign<MeleeAttackComponent>(entity, MeleeAttackComponent{ LoadHits("barehanded_hits") });
+	registry.assign<PrevAttackTime>(entity);
 
 	entityView->ConstructComponents(registry, entity);
 	entityView->ConstructTags(registry, entity);
@@ -133,6 +134,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	registry.assign<BoundsComponent>(entity, utils::GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));
 	
 	registry.assign<MeleeAttackComponent>(entity, MeleeAttackComponent{ LoadHits("barehanded_hits") });
+	registry.assign<PrevAttackTime>(entity);
 
 	entityView->ConstructComponents(registry, entity);
 	entityView->ConstructTags(registry, entity);
