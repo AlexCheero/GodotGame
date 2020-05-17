@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Systems/BaseSystem.h"
+#include "../../BaseSystem.h"
 
 #include <Spatial.hpp>
 #include <PhysicsShapeQueryParameters.hpp>

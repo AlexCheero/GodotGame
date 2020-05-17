@@ -1,7 +1,7 @@
-#include "IncrementComboRSystem.h"
+#include "IncrementComboSystem.h"
 
-#include "../Components/AttackComponents.h"
-#include "../Components/InputComponents.h"
+#include "../../../Components/AttackComponents.h"
+#include "../../../Components/InputComponents.h"
 
 //TODO0: combo doesnt increment if attack pressed before anim stops playing
 void godot::IncrementComboSystem::operator()(float delta, entt::registry& registry)

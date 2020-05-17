@@ -1,4 +1,4 @@
-#include "HTHLockTargetRSystem.h"
+#include "HTHLockTargetSystem.h"
 
 #include <PhysicsDirectSpaceState.hpp>
 #include <World.hpp>
@@ -6,10 +6,10 @@
 //TODO: remove usages of this header
 #include "core/math/math_funcs.h"
 
-#include "../Components/AttackComponents.h"
-#include "../Components/InputComponents.h"
+#include "../../../Components/AttackComponents.h"
+#include "../../../Components/InputComponents.h"
 
-#include "../Nodes/EntityView.h"
+#include "../../../Nodes/EntityView.h"
 
 godot::Array godot::HTHLockTargetSystem::GetIntersects(Spatial* pAttackerSpatial, float distance, String layerName)
 {
@@ -43,21 +43,21 @@ void godot::HTHLockTargetSystem::operator()(float delta, entt::registry& registr
 	{
 		//TODO: implement target change when already have locked target
 		//TODO: do not lock on ally even if friendly fire is on
-		godot::Array intersects = GetIntersects(pSpatial, attackComp.GetCurrentHit().maxDistance, "Character");
+		Array intersects = GetIntersects(pSpatial, attackComp.GetCurrentHit().maxDistance, "Character");
 		if (intersects.size() == 0)
 			return;
 
-		godot::Dictionary dict = intersects[0];//TODO: hits only first intersected, choose between multiple enemies
-		godot::Object* pHittedObj = godot::Node::___get_from_variant(dict["collider"]);
+		Dictionary dict = intersects[0];//TODO: hits only first intersected, choose between multiple enemies
+		Object* pHittedObj = Node::___get_from_variant(dict["collider"]);
 
 		if (!pHittedObj)
 			return;
 
-		godot::Node* pHittedNode = godot::Object::cast_to<godot::Node>(pHittedObj);
+		Node* pHittedNode = Object::cast_to<Node>(pHittedObj);
 		if (!pHittedNode->has_node("EntityView"))
 			return;
 
-		godot::EntityView* pHittedEntityView = godot::Object::cast_to<godot::EntityView>(pHittedNode->get_node("EntityView"));
+		EntityView* pHittedEntityView = Object::cast_to<EntityView>(pHittedNode->get_node("EntityView"));
 		if (!pHittedEntityView)
 			return;
 

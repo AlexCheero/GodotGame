@@ -1,7 +1,7 @@
 #include "PileInSystem.h"
 
-#include "../../Components/AttackComponents.h"
-#include "../../Components/InputComponents.h"
+#include "../../../Components/AttackComponents.h"
+#include "../../../Components/InputComponents.h"
 
 void godot::PileInSystem::OnPileInTagDestroyed(entt::registry& registry, entt::entity entity)
 {

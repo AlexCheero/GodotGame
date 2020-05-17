@@ -1,15 +1,15 @@
-#include "ThrowAttackRSystem.h"
+#include "ThrowAttackSystem.h"
 
 #include <OS.hpp>
 #include <SceneTree.hpp>
 #include <Viewport.hpp>
 
-#include "../Components/AttackComponents.h"
-#include "../Components/InputComponents.h"
-#include "../Nodes/ThrowableWeaponNode.h"
-#include "../Nodes/EntityView.h"
+#include "../../Components/AttackComponents.h"
+#include "../../Components/InputComponents.h"
+#include "../../Nodes/ThrowableWeaponNode.h"
+#include "../../Nodes/EntityView.h"
 
-#include "../Utils/Utils.h"
+#include "../../Utils/Utils.h"
 
 void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 {
@@ -19,7 +19,7 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 		if (!utils::Expired(attackComp.attackTime, attackComp.prevHitTime))
 			return;
 
-		godot::Node* throwableNode = attackComp.throwableScene->instance();
+		Node* throwableNode = attackComp.throwableScene->instance();
 		attackComp.ammoCount--;
 		ASSERT(attackComp.ammoCount >= 0, "negative ammo count");
 		//TODO: instantly melee hits or don't changes weapon at all, after throwing weapon. fix this after refactoring whole input system
@@ -27,20 +27,20 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 		if (attackComp.ammoCount == 0 /*&& throw on out of ammo*/)
 			registry.remove<ThrowableAttackComponent>(entity);
 
-		godot::Godot::print("Throw!");
+		Godot::print("Throw!");
 
 		pAttackerSpatial->get_tree()->get_current_scene()->add_child(throwableNode);
 
-		godot::RigidBody* pRB = godot::Object::cast_to<godot::RigidBody>(throwableNode);
+		RigidBody* pRB = Object::cast_to<RigidBody>(throwableNode);
 
-		godot::Transform throwableTransform = pRB->get_transform();
-		godot::Transform attackerTransform = pAttackerSpatial->get_transform();
+		Transform throwableTransform = pRB->get_transform();
+		Transform attackerTransform = pAttackerSpatial->get_transform();
 		//TODO: hits thrower. take throwable dimension into account
 		throwableTransform.origin = attackerTransform.origin + attackerTransform.basis.z * bounds.length;
 		pRB->set_transform(throwableTransform);
 		pRB->apply_central_impulse(attackerTransform.basis.z * attackComp.force);
 
-		godot::ThrowableWeaponNode* throwable = godot::Object::cast_to<godot::ThrowableWeaponNode>(throwableNode);
+		ThrowableWeaponNode* throwable = Object::cast_to<ThrowableWeaponNode>(throwableNode);
 
 		//TODO: split grenades and throwables
 		if (throwable)
@@ -48,15 +48,15 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 		else
 		{
 			entt::entity grenadeEntity = registry.create();
-			registry.assign<godot::Spatial*>(grenadeEntity, godot::Object::cast_to<godot::Spatial>(throwableNode));
+			registry.assign<Spatial*>(grenadeEntity, Object::cast_to<Spatial>(throwableNode));
 
-			godot::EntityView* pGrenadeView = godot::Object::cast_to<godot::EntityView>(throwableNode->get_node("EntityView"));
+			EntityView* pGrenadeView = Object::cast_to<EntityView>(throwableNode->get_node("EntityView"));
 			ASSERT(pGrenadeView != nullptr, "grenade entity view is null");
 
 			GrenadeComponent grenComp;
 			bool converted = pGrenadeView->ConvertToComponent(grenComp);
 			ASSERT(converted, "grenade view have no GrenadeComponent");
-			grenComp.startTime = godot::OS::get_singleton()->get_ticks_msec();
+			grenComp.startTime = OS::get_singleton()->get_ticks_msec();
 
 			registry.assign<GrenadeComponent>(grenadeEntity, grenComp);
 		}

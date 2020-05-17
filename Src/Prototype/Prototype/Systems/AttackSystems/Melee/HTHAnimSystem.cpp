@@ -1,11 +1,11 @@
-#include "HTHAnimRSystem.h"
+#include "HTHAnimSystem.h"
 
 #include <AnimationTree.hpp>
 #include <Animation.hpp>
 #include <AnimationPlayer.hpp>
 
-#include "../Components/InputComponents.h"
-#include "../Components/AttackComponents.h"
+#include "../../../Components/InputComponents.h"
+#include "../../../Components/AttackComponents.h"
 
 //TODO: try to implement anim system without AnimationTree
 //      and delete EndAttackAnimSystem and AttackAnimPlayingComponent as unnecessary
@@ -20,8 +20,8 @@ void godot::HTHAnimSystem::operator()(float delta, entt::registry& registry)
 		String animName = attackComp.GetCurrentHit().anim;
 		String prevAnimName = attackComp.hits[prevAnimIdx].anim;
 
-		AnimationPlayer* pAnimPlayer = godot::Object::cast_to<godot::AnimationPlayer>(pAnimTree->get_node(pAnimTree->get_animation_player()));
-		Ref<godot::Animation> anim = pAnimPlayer->get_animation(animName);
+		AnimationPlayer* pAnimPlayer = Object::cast_to<AnimationPlayer>(pAnimTree->get_node(pAnimTree->get_animation_player()));
+		Ref<Animation> anim = pAnimPlayer->get_animation(animName);
 		float timeScale = anim->get_length() / attackComp.GetCurrentHit().attackTime;
 		pAnimTree->set("parameters/" + animName + "_TimeScale/scale", timeScale);
 

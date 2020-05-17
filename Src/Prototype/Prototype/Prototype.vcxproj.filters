@@ -79,6 +79,12 @@
     <Filter Include="Source Files\ReactiveSystems">
       <UniqueIdentifier>{9532601f-8cf3-4bea-a55d-3882fd5a35ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Systems\AttackSystems\Melee">
+      <UniqueIdentifier>{b4f5f4d0-86ec-48f8-93c5-415111a56dbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Systems\AttackSystems\Melee">
+      <UniqueIdentifier>{0d7b59a3-4293-4213-b7a6-224479622122}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GodotLibrary.cpp">
@@ -135,9 +141,6 @@
     <ClCompile Include="Systems\AttackSystems\GrenadeSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\AttackSystems\PileInSystem.cpp">
-      <Filter>Source Files\Systems\AttackSystems</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\AISystems\DecisionMaking\DecisionMakingFSMSystem.cpp">
       <Filter>Source Files\Systems\AISystems\DecisionMaking</Filter>
     </ClCompile>
@@ -156,9 +159,6 @@
     <ClCompile Include="Systems\AISystems\DecisionMaking\PursueStateSystem.cpp">
       <Filter>Source Files\Systems\AISystems\DecisionMaking</Filter>
     </ClCompile>
-    <ClCompile Include="ReactiveSystems\JumpRSystem.cpp">
-      <Filter>Source Files\ReactiveSystems</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\AttackSystems\UpdateLockRotationSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
@@ -168,41 +168,47 @@
     <ClCompile Include="Nodes\EntityView.cpp">
       <Filter>Source Files\Nodes</Filter>
     </ClCompile>
-    <ClCompile Include="ReactiveSystems\StartMeleeAttackRSystem.cpp">
-      <Filter>Source Files\ReactiveSystems</Filter>
-    </ClCompile>
-    <ClCompile Include="ReactiveSystems\HTHAnimRSystem.cpp">
-      <Filter>Source Files\ReactiveSystems</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\AttackSystems\ComboDropSystem.cpp">
-      <Filter>Source Files\Systems\AttackSystems</Filter>
-    </ClCompile>
-    <ClCompile Include="ReactiveSystems\IncrementComboRSystem.cpp">
-      <Filter>Source Files\ReactiveSystems</Filter>
-    </ClCompile>
-    <ClCompile Include="ReactiveSystems\RangedAttackRSystem.cpp">
-      <Filter>Source Files\ReactiveSystems</Filter>
-    </ClCompile>
-    <ClCompile Include="ReactiveSystems\ThrowAttackRSystem.cpp">
-      <Filter>Source Files\ReactiveSystems</Filter>
-    </ClCompile>
     <ClCompile Include="ReactiveSystems\WeaponChooseRSystem.cpp">
-      <Filter>Source Files\ReactiveSystems</Filter>
-    </ClCompile>
-    <ClCompile Include="ReactiveSystems\PlayerVelocityRSystem.cpp">
-      <Filter>Source Files\ReactiveSystems</Filter>
-    </ClCompile>
-    <ClCompile Include="ReactiveSystems\PlayerRotationRSystem.cpp">
-      <Filter>Source Files\ReactiveSystems</Filter>
-    </ClCompile>
-    <ClCompile Include="ReactiveSystems\CheckForPileInRSystem.cpp">
-      <Filter>Source Files\ReactiveSystems</Filter>
-    </ClCompile>
-    <ClCompile Include="ReactiveSystems\HTHLockTargetRSystem.cpp">
       <Filter>Source Files\ReactiveSystems</Filter>
     </ClCompile>
     <ClCompile Include="Systems\AISystems\ClearBotInputSystem.cpp">
       <Filter>Source Files\Systems\AISystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\LocomotionSystems\JumpSystem.cpp">
+      <Filter>Source Files\Systems\LocomotionSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\PlayerSystems\PlayerRotationSystem.cpp">
+      <Filter>Source Files\Systems\PlayerSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\PlayerSystems\PlayerVelocitySystem.cpp">
+      <Filter>Source Files\Systems\PlayerSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\melee\CheckForPileInSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\melee\HTHAnimSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\melee\HTHLockTargetSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\melee\IncrementComboSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\melee\StartMeleeAttackSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\RangedAttackSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\ThrowAttackSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\Melee\ComboDropSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\Melee\PileInSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems\Melee</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -284,9 +290,6 @@
     <ClInclude Include="Systems\AttackSystems\GrenadeSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
-    <ClInclude Include="Systems\AttackSystems\PileInSystem.h">
-      <Filter>Header Files\Systems\AttackSystems</Filter>
-    </ClInclude>
     <ClInclude Include="Components\ComponentsMeta.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
@@ -311,50 +314,53 @@
     <ClInclude Include="Systems\AISystems\DecisionMaking\PursueStateSystem.h">
       <Filter>Header Files\Systems\AISystems\DecisionMaking</Filter>
     </ClInclude>
-    <ClInclude Include="ReactiveSystems\JumpRSystem.h">
-      <Filter>Header Files\ReactiveSystems</Filter>
-    </ClInclude>
     <ClInclude Include="Systems\AttackSystems\UpdateLockRotationSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\AnimSystems\EndAttackAnimSystem.h">
       <Filter>Header Files\Systems\AnimSystems</Filter>
     </ClInclude>
-    <ClInclude Include="ReactiveSystems\StartMeleeAttackRSystem.h">
-      <Filter>Header Files\ReactiveSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="ReactiveSystems\HTHAnimRSystem.h">
-      <Filter>Header Files\ReactiveSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\AttackSystems\ComboDropSystem.h">
-      <Filter>Header Files\Systems\AttackSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="ReactiveSystems\IncrementComboRSystem.h">
-      <Filter>Header Files\ReactiveSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="ReactiveSystems\RangedAttackRSystem.h">
-      <Filter>Header Files\ReactiveSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="ReactiveSystems\ThrowAttackRSystem.h">
-      <Filter>Header Files\ReactiveSystems</Filter>
-    </ClInclude>
     <ClInclude Include="ReactiveSystems\WeaponChooseRSystem.h">
-      <Filter>Header Files\ReactiveSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="ReactiveSystems\PlayerVelocityRSystem.h">
-      <Filter>Header Files\ReactiveSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="ReactiveSystems\PlayerRotationRSystem.h">
-      <Filter>Header Files\ReactiveSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="ReactiveSystems\CheckForPileInRSystem.h">
-      <Filter>Header Files\ReactiveSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="ReactiveSystems\HTHLockTargetRSystem.h">
       <Filter>Header Files\ReactiveSystems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\AISystems\ClearBotInputSystem.h">
       <Filter>Header Files\Systems\AISystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\LocomotionSystems\JumpSystem.h">
+      <Filter>Header Files\Systems\LocomotionSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\PlayerSystems\PlayerRotationSystem.h">
+      <Filter>Header Files\Systems\PlayerSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\PlayerSystems\PlayerVelocitySystem.h">
+      <Filter>Header Files\Systems\PlayerSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\Melee\CheckForPileInSystem.h">
+      <Filter>Header Files\Systems\AttackSystems\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\Melee\HTHAnimSystem.h">
+      <Filter>Header Files\Systems\AttackSystems\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\Melee\HTHLockTargetSystem.h">
+      <Filter>Header Files\Systems\AttackSystems\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\Melee\IncrementComboSystem.h">
+      <Filter>Header Files\Systems\AttackSystems\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\Melee\StartMeleeAttackSystem.h">
+      <Filter>Header Files\Systems\AttackSystems\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\RangedAttackSystem.h">
+      <Filter>Header Files\Systems\AttackSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\ThrowAttackSystem.h">
+      <Filter>Header Files\Systems\AttackSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\Melee\ComboDropSystem.h">
+      <Filter>Header Files\Systems\AttackSystems\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\Melee\PileInSystem.h">
+      <Filter>Header Files\Systems\AttackSystems\Melee</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

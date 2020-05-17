@@ -1,8 +1,8 @@
-#include "JumpRSystem.h"
+#include "JumpSystem.h"
 
-#include "../Components/InputComponents.h"
-#include "../Components/SimpleComponents.h"
-#include "../Utils/Utils.h"
+#include "../../Components/InputComponents.h"
+#include "../../Components/SimpleComponents.h"
+#include "../../Utils/Utils.h"
 
 void godot::JumpSystem::operator()(float delta, entt::registry& registry)
 {

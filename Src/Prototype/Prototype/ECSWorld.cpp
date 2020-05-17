@@ -19,28 +19,29 @@
 #include "Components/AIComponents/PatrolComponents.h"
 #include "Components/AIComponents/FSMStateComponents.h"
 
-#include "ReactiveSystems/JumpRSystem.h";
-#include "ReactiveSystems/HTHAnimRSystem.h"
-#include "ReactiveSystems/StartMeleeAttackRSystem.h"
-#include "ReactiveSystems/HTHLockTargetRSystem.h"
-#include "ReactiveSystems/CheckForPileInRSystem.h"
-#include "ReactiveSystems/IncrementComboRSystem.h"
-#include "ReactiveSystems/RangedAttackRSystem.h"
-#include "ReactiveSystems/ThrowAttackRSystem.h"
 #include "ReactiveSystems/WeaponChooseRSystem.h"
-#include "ReactiveSystems/PlayerVelocityRSystem.h"
-#include "ReactiveSystems/PlayerRotationRSystem.h"
 
-#include "Systems/AttackSystems/PileInSystem.h"
 #include "Systems/AttackSystems/UpdateLockRotationSystem.h"
-#include "Systems/AttackSystems/ComboDropSystem.h"
 #include "Systems/AttackSystems/GrenadeSystem.h"
+#include "Systems/AttackSystems/RangedAttackSystem.h"
+#include "Systems/AttackSystems/ThrowAttackSystem.h"
+
+#include "Systems/AttackSystems/Melee/HTHAnimSystem.h"
+#include "Systems/AttackSystems/Melee/StartMeleeAttackSystem.h"
+#include "Systems/AttackSystems/Melee/HTHLockTargetSystem.h"
+#include "Systems/AttackSystems/Melee/CheckForPileInSystem.h"
+#include "Systems/AttackSystems/Melee/IncrementComboSystem.h"
+#include "Systems/AttackSystems/Melee/PileInSystem.h"
+#include "Systems/AttackSystems/Melee/ComboDropSystem.h"
 
 #include "Systems/PlayerSystems/PlayerInputSystem.h"
+#include "Systems/PlayerSystems/PlayerVelocitySystem.h"
+#include "Systems/PlayerSystems/PlayerRotationSystem.h"
 
 #include "Systems/LocomotionSystems/KinematicMovementSystem.h"
 #include "Systems/LocomotionSystems/GravitySystem.h";
 #include "Systems/LocomotionSystems/LookAtSystem.h"
+#include "Systems/LocomotionSystems/JumpSystem.h"
 
 #include "Systems/SimpleFollowSystem.h"
 #include "Systems/DestroyDeadSystem.h"
