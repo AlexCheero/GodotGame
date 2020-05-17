@@ -41,8 +41,8 @@ void godot::HTHLockTargetSystem::operator()(float delta, entt::registry& registr
 	auto view = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent, Spatial*>(entt::exclude<TargetLockComponent>);
 	view.less([this, &registry](entt::entity entity, MeleeAttackComponent attackComp, Spatial* pSpatial)
 	{
-		//TODO: implement target change when already have locked target
-		//TODO: do not lock on ally even if friendly fire is on
+		//TODO_hth: implement target change when already have locked target
+		//TODO_hth: do not lock on ally even if friendly fire is on
 		Array intersects = GetIntersects(pSpatial, attackComp.GetCurrentHit().maxDistance, "Character");
 		if (intersects.size() == 0)
 			return;

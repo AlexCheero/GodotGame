@@ -245,7 +245,7 @@ void godot::ECSWorld::_init()
 	//TODO: locks on target on every hit, this may cause bugs with many enemies
 	m_process_systems.emplace_back(new HTHLockTargetSystem());
 	m_process_systems.emplace_back(new UpdateLockRotationSystem());
-	//TODO: implement proper hth with blocks and stuff
+	//TODO_hth: implement proper hth with blocks and stuff
 	m_process_systems.emplace_back(new HTHAnimSystem());
 	m_process_systems.emplace_back(new CheckForPileInSystem());
 	m_process_systems.emplace_back(new PileInSystem(registry));
