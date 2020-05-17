@@ -9,8 +9,9 @@
 struct DecisionMakingComponent
 {
 	float criticalHp;
+	float targetPosRecalcDistance;
 };
-REGISTER_COMPONENT(DecisionMakingComponent, "criticalHp");
+REGISTER_COMPONENT(DecisionMakingComponent, "criticalHp", "targetPosRecalcDistance");
 
 struct PursuingStateComponent
 {

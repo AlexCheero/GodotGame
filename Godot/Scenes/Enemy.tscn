@@ -19,7 +19,8 @@ shape = SubResource( 1 )
 script = ExtResource( 2 )
 components = {
 "DecisionMaking": {
-"criticalHp": 50.0
+"criticalHp": 50.0,
+"targetPosRecalcDistance": 1.0
 },
 "Gravity": {
 "accelerationDown": 20.0,
