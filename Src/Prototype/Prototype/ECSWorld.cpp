@@ -259,6 +259,8 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new RangedAttackSystem());//converted from reactive
 	m_process_systems.emplace_back(new ThrowAttackSystem());//converted from reactive
 
+	//place before any ai systems
+	m_process_systems.emplace_back(new ClearBotInputSystem());
 	//comment to switch off bots
 	m_process_systems.emplace_back(new DecisionMakingFSMSystem(registry));
 
@@ -272,8 +274,6 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new HealthMonitoringSystem());
 	m_process_systems.emplace_back(new FleeingSystem());
 	m_process_systems.emplace_back(new LocomotionAnimSystem());
-	//place after all bot systems that depends on input
-	m_process_systems.emplace_back(new ClearBotInputSystem());
 }
 
 void godot::ECSWorld::_ready()
