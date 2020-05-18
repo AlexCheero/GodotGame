@@ -3,9 +3,6 @@
 #include <PhysicsDirectSpaceState.hpp>
 #include <World.hpp>
 
-//TODO: remove usages of this header
-#include "core/math/math_funcs.h"
-
 #include "../../../Components/AttackComponents.h"
 #include "../../../Components/InputComponents.h"
 
@@ -47,7 +44,7 @@ void godot::HTHLockTargetSystem::operator()(float delta, entt::registry& registr
 		if (intersects.size() == 0)
 			return;
 
-		Dictionary dict = intersects[0];//TODO: hits only first intersected, choose between multiple enemies
+		Dictionary dict = intersects[0];//TODO_hth: hits only first intersected, choose between multiple enemies
 		Object* pHittedObj = Node::___get_from_variant(dict["collider"]);
 
 		if (!pHittedObj)

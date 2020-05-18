@@ -1,7 +1,5 @@
 #include "DecisionMakingHelper.h"
 
-#include "core/math/math_funcs.h"
-
 #include "../../../Utils/Utils.h"
 
 //doesn't take target's and agent's bounds into account
@@ -11,7 +9,7 @@ bool godot::CanSeeTarget(Spatial* pTargetSpatial, PatrolmanComponent patrolman, 
 	Vector3 toTargetDir = pTargetSpatial->get_global_transform().origin - pPatrolSpatial->get_global_transform().origin;
 	float distanceToTarget = toTargetDir.length();
 	toTargetDir.normalize();
-	float angle = Math::rad2deg(Math::acos(patrolFwd.dot(toTargetDir)));
+	float angle = utils::Rad2deg(acos(patrolFwd.dot(toTargetDir)));
 
 	if (angle <= patrolman.viewAngleBig)
 	{

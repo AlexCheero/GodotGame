@@ -7,7 +7,7 @@
 #include "../../../Components/InputComponents.h"
 #include "../../../Components/AttackComponents.h"
 
-//TODO: try to implement anim system without AnimationTree
+//TODO: try to use AnimationNodeStateMachine, get is_playing via AnimationNodeStateMachinePlayback
 //      and delete EndAttackAnimSystem and AttackAnimPlayingComponent as unnecessary
 void godot::HTHAnimSystem::operator()(float delta, entt::registry& registry)
 {

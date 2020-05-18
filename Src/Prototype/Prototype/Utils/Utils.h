@@ -17,6 +17,8 @@
 #define ASSERT(assertion, message)
 #endif
 
+constexpr float PI = 3.1415927;
+
 constexpr int ALL_LAYERS = 2147483647;
 
 namespace utils
@@ -42,6 +44,11 @@ namespace utils
 	bool Expired(float time, int64_t& sinceMillis);
 	bool Vector2Equals(godot::Vector2 a, godot::Vector2 b, float eps = 0.01f);
 	godot::Vector3 GetRelativeFlatDirection(godot::Vector2 inputDir, godot::Vector3 left, godot::Vector3 forward);
+
+	float Deg2rad(float p_y);
+	inline float Deg2rad(float p_y) { return p_y * PI / 180.0; }
+	float Rad2deg(float p_y);
+	inline float Rad2deg(float p_y) { return p_y * 180.0 / PI; }
 	
 	template<typename T>
 	T* GetParentOfType(godot::Node* pNode);
