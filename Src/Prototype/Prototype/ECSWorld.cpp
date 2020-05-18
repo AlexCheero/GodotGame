@@ -71,6 +71,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 {
 	entt::entity entity = registry.create();
 
+	//TODO: use node paths and remove hardcodes. separate abstract ECSWorld from level specific. and move all node paths there
 	Node* pPlayerNode = get_node("Player");
 	EntityView* entityView = Object::cast_to<EntityView>(pPlayerNode->get_node("EntityView"));
 	entityView->SetEntity(entity);
@@ -80,7 +81,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
 	//TODO: refactor camera GDScript, use interpolated camera and check why spring arm doesn't works properly
-	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("CameraGimbal/InnerGimbal/SpringArm/Camera"));//TODO: use node paths and remove hardcodes
+	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("CameraGimbal/InnerGimbal/SpringArm/Camera"));
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Player/vanguard/AnimationTree"));
 
 	registry.assign<MeleeAttackComponent>(entity, MeleeAttackComponent{ LoadHits("barehanded_hits") });
