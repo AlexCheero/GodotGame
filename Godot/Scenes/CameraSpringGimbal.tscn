@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://GDScripts/CameraGimbal.gd" type="Script" id=1]
+
+[node name="CameraGimbal" type="Spatial"]
+script = ExtResource( 1 )
+mouse_control = true
+
+[node name="InnerGimbal" type="Spatial" parent="."]
+
+[node name="SpringArm" type="SpringArm" parent="InnerGimbal"]
+spring_length = 5.0
+
+[node name="Camera" type="Camera" parent="InnerGimbal/SpringArm"]
