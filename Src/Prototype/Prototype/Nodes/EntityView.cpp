@@ -53,7 +53,6 @@ void godot::EntityView::ConstructComponents(entt::registry& registry, entt::enti
 			GravityComponent,
 			JumpSpeedComponent,
 			SpeedComponent,
-			SimpleFollowComponent,
 			PatrolmanComponent,
 			NavMarginComponent,
 			MeleeWeaponComponent,

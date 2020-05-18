@@ -32,7 +32,6 @@ namespace godot
 		void UpdateSystems(float delta, SystemsVec& systems);
 
 		void PreparePlayerEntity();
-		void PrepareCameraEntity();
 		void PrepareEnemyEntity();
 		void PrepareSingletonEntities();
 		void LoadConfig();

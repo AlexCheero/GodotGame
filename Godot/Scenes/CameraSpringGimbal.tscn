@@ -9,6 +9,6 @@ mouse_control = true
 [node name="InnerGimbal" type="Spatial" parent="."]
 
 [node name="SpringArm" type="SpringArm" parent="InnerGimbal"]
-spring_length = 5.0
+spring_length = 10.0
 
 [node name="Camera" type="Camera" parent="InnerGimbal/SpringArm"]

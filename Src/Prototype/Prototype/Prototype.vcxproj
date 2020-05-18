@@ -188,7 +188,6 @@
     <ClCompile Include="Systems\PlayerSystems\PlayerInputSystem.cpp" />
     <ClCompile Include="Systems\PlayerSystems\PlayerRotationSystem.cpp" />
     <ClCompile Include="Systems\PlayerSystems\PlayerVelocitySystem.cpp" />
-    <ClCompile Include="Systems\SimpleFollowSystem.cpp" />
     <ClCompile Include="Systems\DestroyDeadSystem.cpp" />
     <ClCompile Include="ECSWorld.cpp" />
     <ClCompile Include="Utils\Utils.cpp" />
@@ -239,7 +238,6 @@
     <ClInclude Include="Systems\PlayerSystems\PlayerInputSystem.h" />
     <ClInclude Include="Systems\PlayerSystems\PlayerRotationSystem.h" />
     <ClInclude Include="Systems\PlayerSystems\PlayerVelocitySystem.h" />
-    <ClInclude Include="Systems\SimpleFollowSystem.h" />
     <ClInclude Include="Systems\DestroyDeadSystem.h" />
     <ClInclude Include="ECSWorld.h" />
     <ClInclude Include="Utils\Timer.h" />

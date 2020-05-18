@@ -13,6 +13,8 @@
 #include <AnimationTree.hpp>
 #include <ConfigFile.hpp>
 
+#include <Input.hpp>
+
 #include "Components/AttackComponents.h"
 #include "Components/InputComponents.h"
 #include "Components/AIComponents/NavigationComponents.h"
@@ -43,7 +45,6 @@
 #include "Systems/LocomotionSystems/LookAtSystem.h"
 #include "Systems/LocomotionSystems/JumpSystem.h"
 
-#include "Systems/SimpleFollowSystem.h"
 #include "Systems/DestroyDeadSystem.h"
 
 #include "Systems/AISystems/NavAgentSystem.h"
@@ -57,9 +58,6 @@
 #include "Systems/AnimSystems/EndAttackAnimSystem.h"
 
 #include "Utils/Utils.h"
-
-//TODO_asap: remove debug code
-const char* camPath = "CameraGimbal/InnerGimbal/SpringArm/Camera";
 
 godot::ECSWorld* godot::ECSWorld::instance = nullptr;
 
@@ -81,7 +79,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
-	AssignNodeInheritedComponent<Camera>(registry, entity, get_node(camPath));
+	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("CameraGimbal/InnerGimbal/SpringArm/Camera"));//TODO: use node paths and remove hardcodes
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Player/vanguard/AnimationTree"));
 
 	registry.assign<MeleeAttackComponent>(entity, MeleeAttackComponent{ LoadHits("barehanded_hits") });
@@ -99,31 +97,6 @@ void godot::ECSWorld::PreparePlayerEntity()
 	registry.assign<RotationDirectionComponent>(entity, rot);
 
 	registry.assign<BoundsComponent>(entity, utils::GetCapsuleBounds(pPlayerNode->get_node("CollisionShape")));
-}
-
-void godot::ECSWorld::PrepareCameraEntity()
-{
-	entt::entity entity = registry.create();
-
-	Node* pCameraNode = get_node(camPath);
-
-	if (!pCameraNode)
-	{
-		Godot::print("fuck!");
-		return;
-	}
-
-	AssignNodeInheritedComponent<Camera>(registry, entity, pCameraNode);
-	AssignNodeInheritedComponent<Spatial>(registry, entity, pCameraNode);
-
-	//TODO_asap: remove or uncomment when camera will be done
-	//EntityView* entityView = Object::cast_to<EntityView>(pCameraNode->get_node("EntityView"));
-	//entityView->ConstructComponents(registry, entity);
-	//entityView->ConstructTags(registry, entity);
-
-	//SimpleFollowComponent& followComp = registry.get<SimpleFollowComponent>(entity);
-	//followComp.targetEntity = Object::cast_to<EntityView>(get_node("Player")->get_node("EntityView"))->GetEntity();
-	//ASSERT(registry.valid(followComp.targetEntity), "invalid follow component target");
 }
 
 void godot::ECSWorld::PrepareEnemyEntity()
@@ -229,11 +202,9 @@ void godot::ECSWorld::_register_methods()
 	register_method((char*)"_physics_process", &ECSWorld::_physics_process);
 }
 
-#include <Input.hpp>
-
 void godot::ECSWorld::_init()
 {
-	//TODO_asap: remove test code (and include above)
+	//TODO: move to more appropriate place (with #include <Input.hpp>)
 	Input::get_singleton()->set_mouse_mode(Input::MOUSE_MODE_CAPTURED);
 
 	InitInstance(this);
@@ -281,7 +252,6 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new PursuingSystem());
 	
 	m_process_systems.emplace_back(new LookAtSystem());
-	//m_process_systems.emplace_back(new SimpleFollowSystem());
 	m_process_systems.emplace_back(new DestroyDeadSystem());
 	m_process_systems.emplace_back(new HealthMonitoringSystem());
 	m_process_systems.emplace_back(new FleeingSystem());
@@ -294,7 +264,6 @@ void godot::ECSWorld::_ready()
 	//create entities and components
 	PrepareSingletonEntities();
 	PreparePlayerEntity();
-	PrepareCameraEntity();
 	PrepareEnemyEntity();
 }
 

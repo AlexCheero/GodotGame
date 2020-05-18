@@ -96,9 +96,6 @@
     <ClCompile Include="ECSWorld.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\SimpleFollowSystem.cpp">
-      <Filter>Source Files\Systems</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\AISystems\NavAgentSystem.cpp">
       <Filter>Source Files\Systems\AISystems</Filter>
     </ClCompile>
@@ -223,9 +220,6 @@
     </ClInclude>
     <ClInclude Include="ECSWorld.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\SimpleFollowSystem.h">
-      <Filter>Header Files\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Components\InputComponents.h">
       <Filter>Header Files\Components</Filter>

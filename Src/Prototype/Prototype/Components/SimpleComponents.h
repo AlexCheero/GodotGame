@@ -34,15 +34,6 @@ struct GravityComponent
 };
 REGISTER_COMPONENT(GravityComponent, "accelerationUp", "accelerationDown");
 
-struct SimpleFollowComponent
-{
-	float distance;
-	float xAngle;
-	float yAngle;
-	entt::entity targetEntity;
-};
-REGISTER_COMPONENT(SimpleFollowComponent, "distance", "xAngle", "yAngle");
-
 struct BoundsComponent
 {
 	float width;
