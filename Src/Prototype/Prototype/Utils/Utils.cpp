@@ -93,3 +93,16 @@ bool utils::Vector2Equals(godot::Vector2 a, godot::Vector2 b, float eps /*= 0.01
 {
 	return RealEquals(a.x, b.x, eps) && RealEquals(a.y, b.y, eps);
 }
+
+godot::Vector3 utils::GetRelativeFlatDirection(godot::Vector2 inputDir, godot::Vector3 left, godot::Vector3 forward)
+{
+	static const godot::Plane xzPlane(globalY, 0);
+
+	godot::Vector3 relativeLeft = xzPlane.project(left).normalized();
+	godot::Vector3 relativeFwd = xzPlane.project(forward).normalized();
+	godot::Vector3 dir{ 0, 0, 0 };
+	dir += relativeLeft * inputDir.x - relativeFwd * inputDir.y;
+	dir.y = 0;
+
+	return dir.normalized();
+}

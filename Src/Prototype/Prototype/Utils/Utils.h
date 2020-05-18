@@ -41,6 +41,7 @@ namespace utils
 	void Assert(bool assertion, const char* message, const char* file, int line);
 	bool Expired(float time, int64_t& sinceMillis);
 	bool Vector2Equals(godot::Vector2 a, godot::Vector2 b, float eps = 0.01f);
+	godot::Vector3 GetRelativeFlatDirection(godot::Vector2 inputDir, godot::Vector3 left, godot::Vector3 forward);
 	
 	template<typename T>
 	T* GetParentOfType(godot::Node* pNode);
