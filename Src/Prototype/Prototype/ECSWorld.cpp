@@ -79,6 +79,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
+	//TODO: refactor camera GDScript, use interpolated camera and check why spring arm doesn't works properly
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("CameraGimbal/InnerGimbal/SpringArm/Camera"));//TODO: use node paths and remove hardcodes
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Player/vanguard/AnimationTree"));
 
@@ -227,7 +228,6 @@ void godot::ECSWorld::_init()
 
 //<melee systems
 	m_process_systems.emplace_back(new MeleeAttackCooldownSystem());
-	//TODO: locks on target on every hit, this may cause bugs with many enemies
 	m_process_systems.emplace_back(new HTHLockTargetSystem());
 	m_process_systems.emplace_back(new UpdateLockRotationSystem());
 	//TODO_hth: implement proper hth with blocks and stuff
