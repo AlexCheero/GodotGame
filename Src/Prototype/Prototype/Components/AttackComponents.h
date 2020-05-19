@@ -12,14 +12,6 @@
 
 #include "ComponentsMeta.h"
 
-//TODO: implement component dependance system, to automatically assign on component on assignation dependant to it.
-//      e.g. assign PrevAttackTime on assignation of MeleeAttackComponent
-struct PrevAttackTime
-{
-	//TODO: use for other attack types and reset on changing attack type
-	int64_t millis = -std::numeric_limits<int64_t>::max();
-};
-
 struct MeleeHit
 {
 	godot::String anim;
@@ -39,6 +31,7 @@ struct MeleeAttackComponent
 	std::vector<MeleeHit> hits;
 
 	int hitIdx = 0;
+	int64_t prevHitTime = -std::numeric_limits<int64_t>::max();
 	
 	static int64_t maxComboIntervalMillis;
 
@@ -55,12 +48,11 @@ REGISTER_COMPONENT(MeleeWeaponComponent, "hitsConfigName");
 DECLARE_TAG(CurrentWeaponRangedTag);
 struct RangedAttackComponent
 {
-	//TODO: move to more hot component and use for throwables too
 	int ammoCount;
 	float distance;
 	float damage;
 	float attackTime;
-	int64_t prevHitTime = -utils::SecondsToMillis(attackTime);
+	int64_t prevHitTime = -std::numeric_limits<int64_t>::max();
 };
 REGISTER_COMPONENT(RangedAttackComponent, "ammoCount", "distance", "damage", "attackTime");
 
@@ -73,7 +65,7 @@ struct ThrowableAttackComponent
 	godot::Ref<godot::PackedScene> throwableScene;
 	float force;
 	float attackTime;
-	int64_t prevHitTime = -utils::SecondsToMillis(attackTime);
+	int64_t prevHitTime = -std::numeric_limits<int64_t>::max();
 };
 REGISTER_COMPONENT(ThrowableAttackComponent, "ammoCount", "throwableScene", "force", "attackTime");
 

@@ -87,7 +87,6 @@ void godot::ECSWorld::PreparePlayerEntity()
 	entityView->ConstructComponents(registry, entity);
 	entityView->ConstructTags(registry, entity);
 
-	registry.assign<PrevAttackTime>(entity);
 	registry.get<MeleeAttackComponent>(entity).hits = LoadHits("barehanded_hits");
 
 	registry.assign<VelocityComponent>(entity);
@@ -120,7 +119,6 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	entityView->ConstructComponents(registry, entity);
 	entityView->ConstructTags(registry, entity);
 
-	registry.assign<PrevAttackTime>(entity);
 	registry.get<MeleeAttackComponent>(entity).hits = LoadHits("barehanded_hits");
 
 	registry.assign<VelocityComponent>(entity);

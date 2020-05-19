@@ -5,19 +5,19 @@
 
 namespace //private
 {
-	void OnMeleeChose(entt::registry& registry, entt::entity entity)
+	void OnMeleeChoose(entt::registry& registry, entt::entity entity)
 	{
 		if (!registry.has<CurrentWeaponMeleeTag>(entity))
 			registry.assign<CurrentWeaponMeleeTag>(entity);
 	}
 
-	void OnRangedChose(entt::registry& registry, entt::entity entity)
+	void OnRangedChoose(entt::registry& registry, entt::entity entity)
 	{
 		if (!registry.has<CurrentWeaponRangedTag>(entity))
 			registry.assign<CurrentWeaponRangedTag>(entity);
 	}
 
-	void OnThrowableChose(entt::registry& registry, entt::entity entity)
+	void OnThrowableChoose(entt::registry& registry, entt::entity entity)
 	{
 		if (!registry.has<CurrentWeaponThrowableTag>(entity))
 			registry.assign<CurrentWeaponThrowableTag>(entity);
@@ -62,9 +62,9 @@ namespace //private
 
 void godot::WeaponChooseRSystem::Init(entt::registry& registry)
 {
-	registry.on_construct<ChooseMeleePressedTag>().connect<&OnMeleeChose>();
-	registry.on_construct<ChooseRangedPressedTag>().connect<&OnRangedChose>();
-	registry.on_construct<ChooseThrowablePressedTag>().connect<&OnThrowableChose>();
+	registry.on_construct<ChooseMeleePressedTag>().connect<&OnMeleeChoose>();
+	registry.on_construct<ChooseRangedPressedTag>().connect<&OnRangedChoose>();
+	registry.on_construct<ChooseThrowablePressedTag>().connect<&OnThrowableChoose>();
 
 	//<changing current weapon tag
 	registry.on_construct<MeleeAttackComponent>().connect<&OnMeleeAttackComponentAssign>();

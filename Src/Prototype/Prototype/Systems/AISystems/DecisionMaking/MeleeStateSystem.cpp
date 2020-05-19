@@ -12,13 +12,13 @@
 void godot::MeleeStateSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<BotTag, MeleeAttackStateTag
-		, MeleeAttackComponent, PrevAttackTime, HealthComponent, Spatial*
+		, MeleeAttackComponent, HealthComponent, Spatial*
 		, TargetLockComponent, DecisionMakingComponent>(entt::exclude<AttackPressedTag>);
-	view.less([this, &registry](entt::entity entity, MeleeAttackComponent meleeComp, PrevAttackTime prevAttack
-		, HealthComponent healthComp, Spatial* pSpatial, TargetLockComponent lockComp, DecisionMakingComponent decisionComp)
+	view.less([this, &registry](entt::entity entity, MeleeAttackComponent meleeComp, HealthComponent healthComp
+		, Spatial* pSpatial, TargetLockComponent lockComp, DecisionMakingComponent decisionComp)
 	{
 		int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
-		bool attackInput = prevAttack.millis + utils::SecondsToMillis(meleeComp.GetCurrentHit().attackTime) <= currTimeMillis;
+		bool attackInput = meleeComp.prevHitTime + utils::SecondsToMillis(meleeComp.GetCurrentHit().attackTime) <= currTimeMillis;
 		if (attackInput)
 			registry.assign<AttackPressedTag>(entity);
 
