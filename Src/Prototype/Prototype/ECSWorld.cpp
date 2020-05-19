@@ -231,7 +231,7 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new MeleeAttackCooldownSystem());
 	m_process_systems.emplace_back(new MeleeLockTargetSystem());
 	m_process_systems.emplace_back(new UpdateLockRotationSystem());
-	//TODO_hth: implement proper hth with blocks and stuff
+	//TODO_melee: implement proper melee with blocks and stuff
 	m_process_systems.emplace_back(new MeleeAnimSystem());
 	m_process_systems.emplace_back(new CheckForPileInSystem());
 	m_process_systems.emplace_back(new PileInSystem(registry));

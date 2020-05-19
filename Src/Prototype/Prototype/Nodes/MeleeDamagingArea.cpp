@@ -1,4 +1,4 @@
-#include "HTHDamagingArea.h"
+#include "MeleeDamagingArea.h"
 
 #include <SceneTree.hpp>
 
@@ -8,21 +8,21 @@
 #include "../Nodes/EntityView.h"
 #include "../Components/AIComponents/PatrolComponents.h"
 
-void godot::HTHDamagingArea::_register_methods()
+void godot::MeleeDamagingArea::_register_methods()
 {
-	register_method((char*)"_on_Area_body_entered", &HTHDamagingArea::_on_Area_body_entered);
-	register_method((char*)"_assign_owner_entity", &HTHDamagingArea::_assign_owner_entity);
-	register_method((char*)"_ready", &HTHDamagingArea::_ready);
+	register_method((char*)"_on_Area_body_entered", &MeleeDamagingArea::_on_Area_body_entered);
+	register_method((char*)"_assign_owner_entity", &MeleeDamagingArea::_assign_owner_entity);
+	register_method((char*)"_ready", &MeleeDamagingArea::_ready);
 }
 
-void godot::HTHDamagingArea::_ready()
+void godot::MeleeDamagingArea::_ready()
 {
 	call_deferred("_assign_owner_entity");
 	set_collision_layer(0);
 	set_collision_mask(utils::GetDamageableMask());
 }
 
-void godot::HTHDamagingArea::_on_Area_body_entered(KinematicBody* pBody)
+void godot::MeleeDamagingArea::_on_Area_body_entered(KinematicBody* pBody)
 {
 	ASSERT(pBody != nullptr, "kinematic body is null");
 	if (!pBody->has_node("EntityView"))
@@ -50,11 +50,11 @@ void godot::HTHDamagingArea::_on_Area_body_entered(KinematicBody* pBody)
 	}
 }
 
-void godot::HTHDamagingArea::_assign_owner_entity()
+void godot::MeleeDamagingArea::_assign_owner_entity()
 {
 	ASSERT(get_owner()->has_node("../EntityView"), "there is no entity view in hierarchy");
 	EntityView* pEntityView = Object::cast_to<EntityView>(get_owner()->get_node("../EntityView"));
 	ASSERT(pEntityView != nullptr, "cant cast to EntityView");
 	ownerEntity = pEntityView->GetEntity();
-	ASSERT(ECSWorld::GetInstance()->GetRegistry().valid(ownerEntity), "HTHDamagingArea invalid holder entity");
+	ASSERT(ECSWorld::GetInstance()->GetRegistry().valid(ownerEntity), "MeleeDamagingArea invalid holder entity");
 }

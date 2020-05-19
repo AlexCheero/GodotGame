@@ -38,13 +38,13 @@ void godot::MeleeLockTargetSystem::operator()(float delta, entt::registry& regis
 	auto view = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent, Spatial*>(entt::exclude<TargetLockComponent>);
 	view.less([this, &registry](entt::entity entity, MeleeAttackComponent attackComp, Spatial* pSpatial)
 	{
-		//TODO_hth: implement target change when already have locked target
-		//TODO_hth: do not lock on ally even if friendly fire is on
+		//TODO_melee: implement target change when already have locked target
+		//TODO_melee: do not lock on ally even if friendly fire is on
 		Array intersects = GetIntersects(pSpatial, attackComp.GetCurrentHit().maxDistance, "Character");
 		if (intersects.size() == 0)
 			return;
 
-		Dictionary dict = intersects[0];//TODO_hth: hits only first intersected, choose between multiple enemies
+		Dictionary dict = intersects[0];//TODO_melee: hits only first intersected, choose between multiple enemies
 		Object* pHittedObj = Node::___get_from_variant(dict["collider"]);
 
 		if (!pHittedObj)

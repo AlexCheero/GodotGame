@@ -10,7 +10,7 @@ void godot::PileInSystem::OnPileInTagDestroyed(entt::registry& registry, entt::e
 
 godot::PileInSystem::PileInSystem(entt::registry& registry)
 {
-	//TODO_hth: also cancel if target is dead or when hit is ended, not the whole animation
+	//TODO_melee: also cancel if target is dead or when hit is ended, not the whole animation
 	registry.on_destroy<AttackAnimPlayingComponent>().connect<&entt::registry::remove_if_exists<PileInTag>>();
 	registry.on_destroy<PileInTag>().connect<&PileInSystem::OnPileInTagDestroyed>(this);
 }
@@ -27,7 +27,7 @@ void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 		Vector3 toTargetDirection = pTargetSpatial->get_global_transform().get_origin() - pSpatial->get_global_transform().get_origin();
 		float distanceToTarget = toTargetDirection.length();
 		
-		//TODO_hth: probably remove PileInTag in this case. upd: bad idea to remove. whole pile in system needs refactoring
+		//TODO_melee: probably remove PileInTag in this case. upd: bad idea to remove. whole pile in system needs refactoring
 		//      and minDistance should be removed or at least renamed after that
 		if (distanceToTarget <= melee.GetCurrentHit().minDistance)
 			return;

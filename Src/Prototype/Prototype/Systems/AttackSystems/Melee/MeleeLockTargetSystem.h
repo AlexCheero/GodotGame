@@ -8,7 +8,6 @@
 
 namespace godot
 {
-	//TODO: choose hth or melee and use only one prefix
 	class MeleeLockTargetSystem : public BaseSystem
 	{
 	private:

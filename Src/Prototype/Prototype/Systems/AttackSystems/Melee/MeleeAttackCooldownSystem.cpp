@@ -14,6 +14,6 @@ void godot::MeleeAttackCooldownSystem::operator()(float delta, entt::registry& r
 		if (prevAttack.millis + utils::SecondsToMillis(attackComp.GetCurrentHit().attackTime) <= currTimeMillis)
 			prevAttack.millis = currTimeMillis;
 		else
-			registry.remove<AttackPressedTag>(entity); //TODO_hth: accumulate next input for continuing combo
+			registry.remove<AttackPressedTag>(entity); //TODO_melee: accumulate next input for continuing combo
 	});
 }

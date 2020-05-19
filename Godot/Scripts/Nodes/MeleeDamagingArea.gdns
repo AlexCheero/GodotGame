@@ -4,5 +4,5 @@
 
 [resource]
 resource_name = "HTHDamagingArea"
-class_name = "HTHDamagingArea"
+class_name = "MeleeDamagingArea"
 library = ExtResource( 1 )

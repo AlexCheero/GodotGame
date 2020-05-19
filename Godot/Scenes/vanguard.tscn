@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Characters3D/vanguard.dae" type="PackedScene" id=1]
-[ext_resource path="res://Scripts/Nodes/HTHDamagingArea.gdns" type="Script" id=2]
+[ext_resource path="res://Scripts/Nodes/MeleeDamagingArea.gdns" type="Script" id=2]
 [ext_resource path="res://Characters/BlendTrees/character_blend_tree.tres" type="AnimationNodeBlendTree" id=3]
 [ext_resource path="res://Characters3D/Jab_Left.tres" type="Animation" id=4]
 [ext_resource path="res://Characters3D/Hook_Left.tres" type="Animation" id=5]
@@ -40,7 +40,7 @@ bones/59/bound_children = [ NodePath("LeftFootAttachment") ]
 bones/64/bound_children = [ NodePath("RightFootAttachment") ]
 
 [node name="LeftHandAttachment" type="BoneAttachment" parent="Skeleton" index="2"]
-transform = Transform( 0.767592, 0.63951, -0.0427513, -0.620174, 0.724231, -0.301449, -0.161818, 0.257903, 0.952522, 0.30626, 0.850093, 0.142176 )
+transform = Transform( 0.765807, 0.641862, -0.0393822, -0.620543, 0.721526, -0.307127, -0.168717, 0.259638, 0.950853, 0.311414, 0.848818, 0.129033 )
 bone_name = "mixamorig_LeftHandThumb4"
 
 [node name="Area" type="Area" parent="Skeleton/LeftHandAttachment" index="0"]
@@ -54,7 +54,7 @@ shape = SubResource( 1 )
 disabled = true
 
 [node name="RightHandAttachment" type="BoneAttachment" parent="Skeleton" index="3"]
-transform = Transform( 0.814146, -0.532493, 0.231555, 0.580518, 0.7376, -0.344881, 0.0128516, 0.415206, 0.909636, -0.29309, 0.81907, 0.106784 )
+transform = Transform( 0.819044, -0.523864, 0.233952, 0.57373, 0.747324, -0.335171, 0.000746176, 0.408745, 0.912648, -0.293309, 0.821495, 0.106831 )
 bone_name = "mixamorig_RightHandThumb4"
 
 [node name="Area" type="Area" parent="Skeleton/RightHandAttachment" index="0"]
@@ -68,7 +68,7 @@ shape = SubResource( 2 )
 disabled = true
 
 [node name="LeftFootAttachment" type="BoneAttachment" parent="Skeleton" index="4"]
-transform = Transform( 0.970354, -0.0236405, 0.240529, 0.00664038, 0.997437, 0.0712447, -0.241596, -0.0675354, 0.968023, 0.249582, 0.0133867, 0.216398 )
+transform = Transform( 0.970159, -0.0210171, 0.241554, 0.00497281, 0.997751, 0.0668396, -0.242415, -0.0636441, 0.968082, 0.251314, 0.0127213, 0.213669 )
 bone_name = "mixamorig_LeftToeBase"
 
 [node name="Area" type="Area" parent="Skeleton/LeftFootAttachment" index="0"]
@@ -82,7 +82,7 @@ shape = SubResource( 3 )
 disabled = true
 
 [node name="RightFootAttachment" type="BoneAttachment" parent="Skeleton" index="5"]
-transform = Transform( 0.893665, 0.0537955, -0.445496, 0.00125457, 0.992484, 0.122363, 0.448731, -0.109911, 0.886881, -0.196154, 0.0137881, 0.0927132 )
+transform = Transform( 0.892697, 0.0535154, -0.447468, 0.000225441, 0.992871, 0.119193, 0.450657, -0.106504, 0.886321, -0.191517, 0.0132924, 0.0870844 )
 bone_name = "mixamorig_RightToeBase"
 
 [node name="Area" type="Area" parent="Skeleton/RightFootAttachment" index="0"]

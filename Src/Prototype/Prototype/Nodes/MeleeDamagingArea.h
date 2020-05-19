@@ -8,9 +8,9 @@
 
 namespace godot
 {
-	class HTHDamagingArea : public Area
+	class MeleeDamagingArea : public Area
 	{
-		GODOT_CLASS(HTHDamagingArea, Area)
+		GODOT_CLASS(MeleeDamagingArea, Area)
 	private:
 		entt::entity ownerEntity;
 

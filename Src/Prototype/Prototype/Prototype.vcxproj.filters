@@ -132,9 +132,6 @@
     <ClCompile Include="Systems\AnimSystems\LocomotionAnimSystem.cpp">
       <Filter>Source Files\Systems\AnimSystems</Filter>
     </ClCompile>
-    <ClCompile Include="Nodes\HTHDamagingArea.cpp">
-      <Filter>Source Files\Nodes</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\AttackSystems\GrenadeSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
@@ -207,6 +204,9 @@
     <ClCompile Include="Systems\AISystems\DecisionMaking\MeleeStateSystem.cpp">
       <Filter>Source Files\Systems\AISystems\DecisionMaking</Filter>
     </ClCompile>
+    <ClCompile Include="Nodes\MeleeDamagingArea.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -274,9 +274,6 @@
     </ClInclude>
     <ClInclude Include="Systems\AnimSystems\LocomotionAnimSystem.h">
       <Filter>Header Files\Systems\AnimSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="Nodes\HTHDamagingArea.h">
-      <Filter>Header Files\Nodes</Filter>
     </ClInclude>
     <ClInclude Include="Singleton.h">
       <Filter>Header Files</Filter>
@@ -355,6 +352,9 @@
     </ClInclude>
     <ClInclude Include="Systems\AISystems\DecisionMaking\MeleeStateSystem.h">
       <Filter>Header Files\Systems\AISystems\DecisionMaking</Filter>
+    </ClInclude>
+    <ClInclude Include="Nodes\MeleeDamagingArea.h">
+      <Filter>Header Files\Nodes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

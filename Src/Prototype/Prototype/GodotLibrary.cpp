@@ -5,7 +5,7 @@
 
 #include "Nodes/PickableNode.h"
 #include "Nodes/ThrowableWeaponNode.h"
-#include "Nodes/HTHDamagingArea.h"
+#include "Nodes/MeleeDamagingArea.h"
 
 using namespace godot;
 
@@ -26,5 +26,5 @@ extern "C" void GDN_EXPORT godot_nativescript_init(void* handle)
 	register_class<ThrowableWeaponNode>();
 	register_class<EntityView>();
 	register_class<PickableNode>();
-	register_class<HTHDamagingArea>();
+	register_class<MeleeDamagingArea>();
 }
