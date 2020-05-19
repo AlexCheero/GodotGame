@@ -32,11 +32,13 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 		pAttackerSpatial->get_tree()->get_current_scene()->add_child(throwableNode);
 
 		RigidBody* pRB = Object::cast_to<RigidBody>(throwableNode);
+		
+		pRB->add_collision_exception_with(pAttackerSpatial);
 
 		Transform throwableTransform = pRB->get_transform();
 		Transform attackerTransform = pAttackerSpatial->get_transform();
-		//TODO: hits thrower. take throwable dimension into account
-		throwableTransform.origin = attackerTransform.origin + attackerTransform.basis.z * bounds.length;
+		static constexpr float throwMargin = 1.f;
+		throwableTransform.origin = attackerTransform.origin + attackerTransform.basis.z * (bounds.length + throwMargin);
 		pRB->set_transform(throwableTransform);
 		pRB->apply_central_impulse(attackerTransform.basis.z * attackComp.force);
 
