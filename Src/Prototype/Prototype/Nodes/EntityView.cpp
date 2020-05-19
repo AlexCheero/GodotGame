@@ -47,6 +47,7 @@ void godot::EntityView::ConstructComponents(entt::registry& registry, entt::enti
 {
 	ConstructComponents_impl
 		<
+			MeleeAttackComponent,
 			RangedAttackComponent,
 			ThrowableAttackComponent,
 			HealthComponent,

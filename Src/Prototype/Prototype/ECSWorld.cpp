@@ -84,11 +84,11 @@ void godot::ECSWorld::PreparePlayerEntity()
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("CameraGimbal/InnerGimbal/SpringArm/Camera"));
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Player/vanguard/AnimationTree"));
 
-	registry.assign<MeleeAttackComponent>(entity, MeleeAttackComponent{ LoadHits("barehanded_hits") });
-	registry.assign<PrevAttackTime>(entity);
-
 	entityView->ConstructComponents(registry, entity);
 	entityView->ConstructTags(registry, entity);
+
+	registry.assign<PrevAttackTime>(entity);
+	registry.get<MeleeAttackComponent>(entity).hits = LoadHits("barehanded_hits");
 
 	registry.assign<VelocityComponent>(entity);
 	
@@ -116,12 +116,12 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Enemy/vanguard/AnimationTree"));
 
 	registry.assign<BoundsComponent>(entity, utils::GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));
-	
-	registry.assign<MeleeAttackComponent>(entity, MeleeAttackComponent{ LoadHits("barehanded_hits") });
-	registry.assign<PrevAttackTime>(entity);
 
 	entityView->ConstructComponents(registry, entity);
 	entityView->ConstructTags(registry, entity);
+
+	registry.assign<PrevAttackTime>(entity);
+	registry.get<MeleeAttackComponent>(entity).hits = LoadHits("barehanded_hits");
 
 	registry.assign<VelocityComponent>(entity);
 	RotationDirectionComponent rot{ registry.get<Spatial*>(entity)->get_global_transform().get_basis().z };

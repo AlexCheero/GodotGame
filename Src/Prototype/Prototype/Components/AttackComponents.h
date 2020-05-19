@@ -34,6 +34,8 @@ struct MeleeHit
 DECLARE_TAG(CurrentWeaponMeleeTag);
 struct MeleeAttackComponent
 {
+	float maxPileInDistance;
+
 	std::vector<MeleeHit> hits;
 
 	int hitIdx = 0;
@@ -42,6 +44,7 @@ struct MeleeAttackComponent
 
 	MeleeHit GetCurrentHit() { return hits[hitIdx]; }
 };
+REGISTER_COMPONENT(MeleeAttackComponent, "maxPileInDistance");
 
 struct MeleeWeaponComponent
 {

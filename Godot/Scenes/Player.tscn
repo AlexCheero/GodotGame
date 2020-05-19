@@ -29,6 +29,9 @@ components = {
 "JumpSpeed": {
 "speed": 30.0
 },
+"MeleeAttack": {
+"maxPileInDistance": 10.0
+},
 "Speed": {
 "dashSpeed": 5.0,
 "speed": 30.0

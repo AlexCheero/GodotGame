@@ -40,7 +40,7 @@ void godot::MeleeLockTargetSystem::operator()(float delta, entt::registry& regis
 	{
 		//TODO_melee: implement target change when already have locked target
 		//TODO_melee: do not lock on ally even if friendly fire is on
-		Array intersects = GetIntersects(pSpatial, attackComp.GetCurrentHit().maxDistance, "Character");
+		Array intersects = GetIntersects(pSpatial, attackComp.maxPileInDistance, "Character");
 		if (intersects.size() == 0)
 			return;
 

@@ -27,7 +27,7 @@ void godot::MeleeStateSystem::operator()(float delta, entt::registry& registry)
 		//if (healthComp.hp <= decisionComp.criticalHp)
 		//	registry.assign<FleeStateTag>(entity);
 		//to pursuit transition
-		else if (registry.valid(lockComp.target) && meleeComp.GetCurrentHit().maxDistance < GetDistanceToTarget(registry, lockComp.target, pSpatial))
+		else if (registry.valid(lockComp.target) && meleeComp.maxPileInDistance < GetDistanceToTarget(registry, lockComp.target, pSpatial))
 			registry.assign<PursuingStateComponent>(entity, lockComp.target);
 		//to patrol transition
 		else if (!registry.valid(lockComp.target) || registry.has<DeadTag>(lockComp.target))
