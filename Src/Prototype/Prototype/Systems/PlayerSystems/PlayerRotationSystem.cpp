@@ -12,7 +12,7 @@
 void godot::PlayerRotationSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<PlayerTag, RotationDirectionComponent, RotationInputComponent, Camera*>();
-	view.less([this](RotationDirectionComponent& rotDir, RotationInputComponent input, Camera* pCam)
+	view.less([](RotationDirectionComponent& rotDir, RotationInputComponent input, Camera* pCam)
 	{
 		if (input.dir.length_squared() == 0)
 			return;
