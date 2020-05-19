@@ -80,7 +80,6 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
-	//TODO0: fix camera gdscript error, on player dead
 	//TODO: refactor camera GDScript, use interpolated camera and check why spring arm doesn't works properly
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("CameraGimbal/InnerGimbal/SpringArm/Camera"));
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Player/vanguard/AnimationTree"));

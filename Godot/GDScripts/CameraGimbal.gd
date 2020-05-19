@@ -56,6 +56,6 @@ func _process(delta):
 		get_input_keyboard(delta)
 	$InnerGimbal.rotation.x = clamp($InnerGimbal.rotation.x, -1.4, -0.01)
 	scale = lerp(scale, Vector3.ONE * zoom, zoom_speed)
-	if target:
+	if target && has_node(target):
 		global_transform.origin = get_node(target).global_transform.origin
 		
