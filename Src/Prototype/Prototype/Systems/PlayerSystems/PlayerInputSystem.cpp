@@ -49,5 +49,5 @@ void godot::PlayerInputSystem::HandleInput(entt::registry& registry)
 	ProcessInputKey<ChooseThrowablePressedTag>(registry, pInput->is_action_pressed("choose_throwable"));
 
 	ProcessInputAxis<MoveDirInputComponent>(registry, GetInputDirection(pInput, "move"));
-	ProcessInputAxis<RotationInputComponent>(registry, GetInputDirection(pInput, "ui"));//TODO: use more appropriate prefix
+	ProcessInputAxis<RotationInputComponent>(registry, GetInputDirection(pInput, "rotate"));
 }
