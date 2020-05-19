@@ -44,7 +44,7 @@ void godot::MeleeLockTargetSystem::operator()(float delta, entt::registry& regis
 		if (intersects.size() == 0)
 			return;
 
-		Dictionary dict = intersects[0];//TODO_melee: hits only first intersected, choose between multiple enemies
+		Dictionary dict = intersects[0];//TODO_melee: hits first intersected, choose most aligned one
 		Object* pHittedObj = Node::___get_from_variant(dict["collider"]);
 
 		if (!pHittedObj)

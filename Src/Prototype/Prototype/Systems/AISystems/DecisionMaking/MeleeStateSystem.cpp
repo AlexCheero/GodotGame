@@ -22,7 +22,7 @@ void godot::MeleeStateSystem::operator()(float delta, entt::registry& registry)
 		if (attackInput)
 			registry.emplace<AttackPressedTag>(entity);
 
-		//TODO: make better melee system. to flee transition commented for now
+		//TODO_melee: make better melee system. to flee transition commented for now
 		//to flee transition
 		//if (healthComp.hp <= decisionComp.criticalHp)
 		//	registry.assign<FleeStateTag>(entity);
