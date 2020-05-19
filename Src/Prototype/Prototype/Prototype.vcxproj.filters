@@ -147,9 +147,6 @@
     <ClCompile Include="Systems\AISystems\DecisionMaking\FleeStateSystem.cpp">
       <Filter>Source Files\Systems\AISystems\DecisionMaking</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\AISystems\DecisionMaking\HTHStateSystem.cpp">
-      <Filter>Source Files\Systems\AISystems\DecisionMaking</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\AISystems\DecisionMaking\PatrolStateSystem.cpp">
       <Filter>Source Files\Systems\AISystems\DecisionMaking</Filter>
     </ClCompile>
@@ -183,12 +180,6 @@
     <ClCompile Include="Systems\AttackSystems\melee\CheckForPileInSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems\Melee</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\AttackSystems\melee\HTHAnimSystem.cpp">
-      <Filter>Source Files\Systems\AttackSystems\Melee</Filter>
-    </ClCompile>
-    <ClCompile Include="Systems\AttackSystems\melee\HTHLockTargetSystem.cpp">
-      <Filter>Source Files\Systems\AttackSystems\Melee</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\AttackSystems\melee\IncrementComboSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems\Melee</Filter>
     </ClCompile>
@@ -206,6 +197,15 @@
     </ClCompile>
     <ClCompile Include="Systems\AttackSystems\melee\MeleeAttackCooldownSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\melee\MeleeAnimSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AttackSystems\melee\MeleeLockTargetSystem.cpp">
+      <Filter>Source Files\Systems\AttackSystems\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\AISystems\DecisionMaking\MeleeStateSystem.cpp">
+      <Filter>Source Files\Systems\AISystems\DecisionMaking</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -299,9 +299,6 @@
     <ClInclude Include="Systems\AISystems\DecisionMaking\FleeStateSystem.h">
       <Filter>Header Files\Systems\AISystems\DecisionMaking</Filter>
     </ClInclude>
-    <ClInclude Include="Systems\AISystems\DecisionMaking\HTHStateSystem.h">
-      <Filter>Header Files\Systems\AISystems\DecisionMaking</Filter>
-    </ClInclude>
     <ClInclude Include="Systems\AISystems\DecisionMaking\PatrolStateSystem.h">
       <Filter>Header Files\Systems\AISystems\DecisionMaking</Filter>
     </ClInclude>
@@ -332,12 +329,6 @@
     <ClInclude Include="Systems\AttackSystems\Melee\CheckForPileInSystem.h">
       <Filter>Header Files\Systems\AttackSystems\Melee</Filter>
     </ClInclude>
-    <ClInclude Include="Systems\AttackSystems\Melee\HTHAnimSystem.h">
-      <Filter>Header Files\Systems\AttackSystems\Melee</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\AttackSystems\Melee\HTHLockTargetSystem.h">
-      <Filter>Header Files\Systems\AttackSystems\Melee</Filter>
-    </ClInclude>
     <ClInclude Include="Systems\AttackSystems\Melee\IncrementComboSystem.h">
       <Filter>Header Files\Systems\AttackSystems\Melee</Filter>
     </ClInclude>
@@ -355,6 +346,15 @@
     </ClInclude>
     <ClInclude Include="Systems\AttackSystems\Melee\MeleeAttackCooldownSystem.h">
       <Filter>Header Files\Systems\AttackSystems\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\Melee\MeleeAnimSystem.h">
+      <Filter>Header Files\Systems\AttackSystems\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AttackSystems\Melee\MeleeLockTargetSystem.h">
+      <Filter>Header Files\Systems\AttackSystems\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\AISystems\DecisionMaking\MeleeStateSystem.h">
+      <Filter>Header Files\Systems\AISystems\DecisionMaking</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@
 
 namespace godot
 {
-	class HTHStateSystem : public BaseSystem
+	class MeleeAnimSystem : public BaseSystem
 	{
 	public:
 		virtual void operator()(float delta, entt::registry& registry) override;

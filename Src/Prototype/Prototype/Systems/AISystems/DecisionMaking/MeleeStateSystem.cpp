@@ -1,4 +1,4 @@
-#include "HTHStateSystem.h"
+#include "MeleeStateSystem.h"
 
 #include <OS.hpp>
 
@@ -9,7 +9,7 @@
 
 #include "DecisionMakingHelper.h"
 
-void godot::HTHStateSystem::operator()(float delta, entt::registry& registry)
+void godot::MeleeStateSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<BotTag, MeleeAttackStateTag
 		, MeleeAttackComponent, PrevAttackTime, HealthComponent, Spatial*
@@ -23,7 +23,7 @@ void godot::HTHStateSystem::operator()(float delta, entt::registry& registry)
 		if (attackInput)
 			registry.assign<AttackPressedTag>(entity);
 
-		//TODO: make better hth system. to flee transition commented for now
+		//TODO: make better melee system. to flee transition commented for now
 		//to flee transition
 		//if (healthComp.hp <= decisionComp.criticalHp)
 		//	registry.assign<FleeStateTag>(entity);

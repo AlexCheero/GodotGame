@@ -161,7 +161,7 @@
     <ClCompile Include="Systems\AISystems\DecisionMaking\DecisionMakingFSMSystem.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\DecisionMakingHelper.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\FleeStateSystem.cpp" />
-    <ClCompile Include="Systems\AISystems\DecisionMaking\HTHStateSystem.cpp" />
+    <ClCompile Include="Systems\AISystems\DecisionMaking\MeleeStateSystem.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\PatrolStateSystem.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\PursueStateSystem.cpp" />
     <ClCompile Include="Systems\AISystems\FleeingSystem.cpp" />
@@ -173,8 +173,8 @@
     <ClCompile Include="Systems\AttackSystems\GrenadeSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\melee\CheckForPileInSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\Melee\ComboDropSystem.cpp" />
-    <ClCompile Include="Systems\AttackSystems\melee\HTHAnimSystem.cpp" />
-    <ClCompile Include="Systems\AttackSystems\melee\HTHLockTargetSystem.cpp" />
+    <ClCompile Include="Systems\AttackSystems\melee\MeleeAnimSystem.cpp" />
+    <ClCompile Include="Systems\AttackSystems\melee\MeleeLockTargetSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\melee\IncrementComboSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\Melee\PileInSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\melee\MeleeAttackCooldownSystem.cpp" />
@@ -210,7 +210,7 @@
     <ClInclude Include="Systems\AISystems\DecisionMaking\DecisionMakingFSMSystem.h" />
     <ClInclude Include="Systems\AISystems\DecisionMaking\DecisionMakingHelper.h" />
     <ClInclude Include="Systems\AISystems\DecisionMaking\FleeStateSystem.h" />
-    <ClInclude Include="Systems\AISystems\DecisionMaking\HTHStateSystem.h" />
+    <ClInclude Include="Systems\AISystems\DecisionMaking\MeleeStateSystem.h" />
     <ClInclude Include="Systems\AISystems\DecisionMaking\PatrolStateSystem.h" />
     <ClInclude Include="Systems\AISystems\DecisionMaking\PursueStateSystem.h" />
     <ClInclude Include="Systems\AISystems\FleeingSystem.h" />
@@ -222,8 +222,8 @@
     <ClInclude Include="Systems\AttackSystems\GrenadeSystem.h" />
     <ClInclude Include="Systems\AttackSystems\Melee\CheckForPileInSystem.h" />
     <ClInclude Include="Systems\AttackSystems\Melee\ComboDropSystem.h" />
-    <ClInclude Include="Systems\AttackSystems\Melee\HTHAnimSystem.h" />
-    <ClInclude Include="Systems\AttackSystems\Melee\HTHLockTargetSystem.h" />
+    <ClInclude Include="Systems\AttackSystems\Melee\MeleeAnimSystem.h" />
+    <ClInclude Include="Systems\AttackSystems\Melee\MeleeLockTargetSystem.h" />
     <ClInclude Include="Systems\AttackSystems\Melee\IncrementComboSystem.h" />
     <ClInclude Include="Systems\AttackSystems\Melee\PileInSystem.h" />
     <ClInclude Include="Systems\AttackSystems\Melee\MeleeAttackCooldownSystem.h" />

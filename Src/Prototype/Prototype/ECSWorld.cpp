@@ -28,9 +28,9 @@
 #include "Systems/AttackSystems/RangedAttackSystem.h"
 #include "Systems/AttackSystems/ThrowAttackSystem.h"
 
-#include "Systems/AttackSystems/Melee/HTHAnimSystem.h"
+#include "Systems/AttackSystems/Melee/MeleeAnimSystem.h"
 #include "Systems/AttackSystems/Melee/MeleeAttackCooldownSystem.h"
-#include "Systems/AttackSystems/Melee/HTHLockTargetSystem.h"
+#include "Systems/AttackSystems/Melee/MeleeLockTargetSystem.h"
 #include "Systems/AttackSystems/Melee/CheckForPileInSystem.h"
 #include "Systems/AttackSystems/Melee/IncrementComboSystem.h"
 #include "Systems/AttackSystems/Melee/PileInSystem.h"
@@ -80,7 +80,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
-	//TODO: refactor camera GDScript, use interpolated camera and check why spring arm doesn't works properly
+	//TODO: refactor camera GDScript, use interpolated camera and check why spring arm doesn't works properly. and fix error, on player dead
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("CameraGimbal/InnerGimbal/SpringArm/Camera"));
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Player/vanguard/AnimationTree"));
 
@@ -229,10 +229,10 @@ void godot::ECSWorld::_init()
 
 //<melee systems
 	m_process_systems.emplace_back(new MeleeAttackCooldownSystem());
-	m_process_systems.emplace_back(new HTHLockTargetSystem());
+	m_process_systems.emplace_back(new MeleeLockTargetSystem());
 	m_process_systems.emplace_back(new UpdateLockRotationSystem());
 	//TODO_hth: implement proper hth with blocks and stuff
-	m_process_systems.emplace_back(new HTHAnimSystem());
+	m_process_systems.emplace_back(new MeleeAnimSystem());
 	m_process_systems.emplace_back(new CheckForPileInSystem());
 	m_process_systems.emplace_back(new PileInSystem(registry));
 	m_process_systems.emplace_back(new ComboDropSystem());

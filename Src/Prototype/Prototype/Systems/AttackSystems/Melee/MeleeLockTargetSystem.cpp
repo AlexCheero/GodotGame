@@ -1,4 +1,4 @@
-#include "HTHLockTargetSystem.h"
+#include "MeleeLockTargetSystem.h"
 
 #include <PhysicsDirectSpaceState.hpp>
 #include <World.hpp>
@@ -8,7 +8,7 @@
 
 #include "../../../Nodes/EntityView.h"
 
-godot::Array godot::HTHLockTargetSystem::GetIntersects(Spatial* pAttackerSpatial, float distance, String layerName)
+godot::Array godot::MeleeLockTargetSystem::GetIntersects(Spatial* pAttackerSpatial, float distance, String layerName)
 {
 	Array exclude;
 	exclude.push_back(pAttackerSpatial);
@@ -24,7 +24,7 @@ godot::Array godot::HTHLockTargetSystem::GetIntersects(Spatial* pAttackerSpatial
 	return spaceState->intersect_shape(m_params, INTERSECT_RESULTS_NUM);
 }
 
-godot::HTHLockTargetSystem::HTHLockTargetSystem()
+godot::MeleeLockTargetSystem::MeleeLockTargetSystem()
 {
 	m_params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
 	m_params->set_collide_with_areas(false);
@@ -33,7 +33,7 @@ godot::HTHLockTargetSystem::HTHLockTargetSystem()
 	m_attackShape = Ref<SphereShape>(SphereShape::_new());
 }
 
-void godot::HTHLockTargetSystem::operator()(float delta, entt::registry& registry)
+void godot::MeleeLockTargetSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent, Spatial*>(entt::exclude<TargetLockComponent>);
 	view.less([this, &registry](entt::entity entity, MeleeAttackComponent attackComp, Spatial* pSpatial)
