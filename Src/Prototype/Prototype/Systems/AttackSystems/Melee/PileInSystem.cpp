@@ -19,7 +19,7 @@ void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 {
 	auto pileInView = registry.view<PileInTag, TargetLockComponent, VelocityComponent, SpeedComponent,
 									MeleeAttackComponent, Spatial*>();
-	pileInView.less([&registry](entt::entity entity, TargetLockComponent lockComp,
+	pileInView.each([&registry](entt::entity entity, TargetLockComponent lockComp,
 												   VelocityComponent& velComp, SpeedComponent speedComp, MeleeAttackComponent melee, Spatial* pSpatial)
 	{
 		ASSERT(registry.has<Spatial*>(lockComp.target), "target has no spatial");
@@ -42,7 +42,7 @@ void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 	});
 
 	auto cancelPilInView = registry.view<PileInTag, MoveDirInputComponent>();
-	cancelPilInView.less([&registry](entt::entity entity, MoveDirInputComponent inputComp)
+	cancelPilInView.each([&registry](entt::entity entity, MoveDirInputComponent inputComp)
 	{
 		if (inputComp.dir.length_squared() != 0)
 			registry.remove<PileInTag>(entity);

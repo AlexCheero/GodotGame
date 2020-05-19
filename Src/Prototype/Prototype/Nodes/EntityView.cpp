@@ -5,7 +5,7 @@ void godot::EntityView::ConstructComponents_impl(entt::registry& registry, entt:
 {
 	Type component{};
 	if (ConvertToComponent(component))
-		registry.assign<Type>(entity, component);
+		registry.emplace<Type>(entity, component);
 	if constexpr (sizeof...(Types))
 		ConstructComponents_impl<Types...>(registry, entity);
 }
@@ -32,7 +32,7 @@ template<typename Tag, typename ...Tags>
 void godot::EntityView::ConstructTags_impl(entt::registry& registry, entt::entity entity)
 {
 	if (HasTag<Tag>())
-		registry.assign<Tag>(entity);
+		registry.emplace<Tag>(entity);
 	if constexpr (sizeof...(Tags))
 		ConstructTags_impl<Tags...>(registry, entity);
 }

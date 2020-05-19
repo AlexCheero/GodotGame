@@ -12,6 +12,6 @@ void godot::HealthMonitoringSystem::operator()(float delta, entt::registry& regi
 		
 		Godot::print("Died!");
 		healthComp.hp = 0;
-		registry.assign<DeadTag>(entity);
+		registry.emplace<DeadTag>(entity);
 	});
 }

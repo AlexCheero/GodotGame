@@ -13,7 +13,7 @@ namespace //private
 		if (pressed)
 		{
 			auto view = registry.view<PlayerTag>(entt::exclude<T>);
-			registry.assign<T>(view.begin(), view.end());
+			registry.insert<T>(view.begin(), view.end());
 		}
 		else
 		{
@@ -34,7 +34,7 @@ namespace //private
 	void ProcessInputAxis(entt::registry& registry, godot::Vector2 direction)
 	{
 		auto view = registry.view<PlayerTag, T>();
-		view.less([direction](T& inputComp) { inputComp.dir = direction; });
+		view.each([direction](T& inputComp) { inputComp.dir = direction; });
 	}
 }
 

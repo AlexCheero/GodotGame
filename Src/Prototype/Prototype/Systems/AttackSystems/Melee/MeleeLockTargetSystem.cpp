@@ -36,7 +36,7 @@ godot::MeleeLockTargetSystem::MeleeLockTargetSystem()
 void godot::MeleeLockTargetSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent, Spatial*>(entt::exclude<TargetLockComponent>);
-	view.less([this, &registry](entt::entity entity, MeleeAttackComponent attackComp, Spatial* pSpatial)
+	view.each([this, &registry](entt::entity entity, MeleeAttackComponent attackComp, Spatial* pSpatial)
 	{
 		//TODO_melee: implement target change when already have locked target
 		//TODO_melee: do not lock on ally even if friendly fire is on
@@ -65,6 +65,6 @@ void godot::MeleeLockTargetSystem::operator()(float delta, entt::registry& regis
 		ASSERT(registry.valid(targetEntity), "invalid target entity");
 		ASSERT(!registry.has<DeadTag>(targetEntity), "entity is already dead!");
 
-		registry.assign<TargetLockComponent>(entity).target = targetEntity;
+		registry.emplace<TargetLockComponent>(entity).target = targetEntity;
 	});
 }

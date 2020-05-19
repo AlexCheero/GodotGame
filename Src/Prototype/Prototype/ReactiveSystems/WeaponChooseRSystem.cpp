@@ -8,34 +8,34 @@ namespace //private
 	void OnMeleeChoose(entt::registry& registry, entt::entity entity)
 	{
 		if (!registry.has<CurrentWeaponMeleeTag>(entity))
-			registry.assign<CurrentWeaponMeleeTag>(entity);
+			registry.emplace<CurrentWeaponMeleeTag>(entity);
 	}
 
 	void OnRangedChoose(entt::registry& registry, entt::entity entity)
 	{
 		if (!registry.has<CurrentWeaponRangedTag>(entity))
-			registry.assign<CurrentWeaponRangedTag>(entity);
+			registry.emplace<CurrentWeaponRangedTag>(entity);
 	}
 
 	void OnThrowableChoose(entt::registry& registry, entt::entity entity)
 	{
 		if (!registry.has<CurrentWeaponThrowableTag>(entity))
-			registry.assign<CurrentWeaponThrowableTag>(entity);
+			registry.emplace<CurrentWeaponThrowableTag>(entity);
 	}
 
 	void OnMeleeAttackComponentAssign(entt::registry& registry, entt::entity entity)
 	{
-		registry.assign_or_replace<CurrentWeaponMeleeTag>(entity);
+		registry.emplace_or_replace<CurrentWeaponMeleeTag>(entity);
 	}
 
 	void OnRangedAttackComponentAssign(entt::registry& registry, entt::entity entity)
 	{
-		registry.assign_or_replace<CurrentWeaponRangedTag>(entity);
+		registry.emplace_or_replace<CurrentWeaponRangedTag>(entity);
 	}
 
 	void OnThrowableAttackComponentAssign(entt::registry& registry, entt::entity entity)
 	{
-		registry.assign_or_replace<CurrentWeaponThrowableTag>(entity);
+		registry.emplace_or_replace<CurrentWeaponThrowableTag>(entity);
 	}
 
 	void OnMeleeTagConstruct(entt::registry& registry, entt::entity entity)
@@ -68,11 +68,11 @@ void godot::WeaponChooseRSystem::Init(entt::registry& registry)
 
 	//<changing current weapon tag
 	registry.on_construct<MeleeAttackComponent>().connect<&OnMeleeAttackComponentAssign>();
-	registry.on_replace<MeleeAttackComponent>().connect<&OnMeleeAttackComponentAssign>();
+	registry.on_update<MeleeAttackComponent>().connect<&OnMeleeAttackComponentAssign>();
 	registry.on_construct<RangedAttackComponent>().connect<&OnRangedAttackComponentAssign>();
-	registry.on_replace<RangedAttackComponent>().connect<&OnRangedAttackComponentAssign>();
+	registry.on_update<RangedAttackComponent>().connect<&OnRangedAttackComponentAssign>();
 	registry.on_construct<ThrowableAttackComponent>().connect<&OnThrowableAttackComponentAssign>();
-	registry.on_replace<ThrowableAttackComponent>().connect<&OnThrowableAttackComponentAssign>();
+	registry.on_update<ThrowableAttackComponent>().connect<&OnThrowableAttackComponentAssign>();
 	//changing current weapon tag>
 
 	//<removing other weapon tags

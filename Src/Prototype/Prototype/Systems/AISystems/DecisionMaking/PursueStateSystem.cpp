@@ -16,7 +16,7 @@ void godot::PursueStateSystem::operator()(float delta, entt::registry& registry)
 	auto players = registry.view<PlayerTag, Spatial*>();
 
 	auto view = registry.view<BotTag, PursuingStateComponent, PatrolmanComponent, MeleeAttackComponent, HealthComponent, Spatial*, DecisionMakingComponent>();
-	view.less([this, &registry, &players](entt::entity entity, PursuingStateComponent& pursuingComp
+	view.each([this, &registry, &players](entt::entity entity, PursuingStateComponent& pursuingComp
 		, PatrolmanComponent patrolComp, MeleeAttackComponent meleeComp, HealthComponent healthComp, Spatial* pSpatial, DecisionMakingComponent decisionComp)
 	{
 		bool validTarget = registry.valid(pursuingComp.target);
@@ -33,18 +33,18 @@ void godot::PursueStateSystem::operator()(float delta, entt::registry& registry)
 
 		//to flee transition
 		if (healthComp.hp <= decisionComp.criticalHp)
-			registry.assign<FleeStateTag>(entity);
+			registry.emplace<FleeStateTag>(entity);
 		else if (validTarget)
 		{
 			//to attack transition
 			if (meleeComp.maxPileInDistance >= GetDistanceToTarget(registry, pursuingComp.target, pSpatial))
 			{
-				registry.assign<MeleeAttackStateTag>(entity);
-				registry.assign<TargetLockComponent>(entity).target = pursuingComp.target;
+				registry.emplace<MeleeAttackStateTag>(entity);
+				registry.emplace<TargetLockComponent>(entity).target = pursuingComp.target;
 			}
 		}
 		//to patrol transition
 		else
-			registry.assign<PatrolStateTag>(entity);
+			registry.emplace<PatrolStateTag>(entity);
 	});
 }

@@ -7,7 +7,7 @@
 void godot::JumpSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<JumpPressedTag, VelocityComponent, JumpSpeedComponent>(entt::exclude<InAirTag>);
-	view.less([](VelocityComponent& velComp, JumpSpeedComponent jumpComp)
+	view.each([](VelocityComponent& velComp, JumpSpeedComponent jumpComp)
 	{
 		velComp.velocity.y = jumpComp.speed;
 	});

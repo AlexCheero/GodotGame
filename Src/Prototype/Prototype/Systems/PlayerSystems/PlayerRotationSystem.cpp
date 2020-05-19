@@ -13,7 +13,7 @@ void godot::PlayerRotationSystem::operator()(float delta, entt::registry& regist
 {
 	//TODO: MoveDirInputComponent used instead, until aimed view will be implemented
 	auto view = registry.view<PlayerTag, RotationDirectionComponent, /*RotationInputComponent*/MoveDirInputComponent, Camera*>();
-	view.less([](RotationDirectionComponent& rotDir, /*RotationInputComponent*/MoveDirInputComponent input, Camera* pCam)
+	view.each([](RotationDirectionComponent& rotDir, /*RotationInputComponent*/MoveDirInputComponent input, Camera* pCam)
 	{
 		if (input.dir.length_squared() == 0)
 			return;

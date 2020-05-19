@@ -26,7 +26,7 @@ namespace godot
 		T* AssignNodeInheritedComponent(entt::registry& registry, entt::entity entity, Node* pNode)
 		{
 			T* pComp = Object::cast_to<T>(pNode);
-			return registry.assign<T*>(entity, pComp);
+			return registry.emplace<T*>(entity, pComp);
 		}
 
 		void UpdateSystems(float delta, SystemsVec& systems);

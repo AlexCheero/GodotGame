@@ -14,7 +14,7 @@ void godot::PatrolStateSystem::operator()(float delta, entt::registry& registry)
 {
 	auto players = registry.view<PlayerTag, Spatial*>();
 	auto patrolView = registry.view<BotTag, PatrolStateTag, PatrolmanComponent, Spatial*>();
-	patrolView.less([this, &registry, &players](entt::entity entity, PatrolmanComponent patrolComp, Spatial* pSpatial)
+	patrolView.each([this, &registry, &players](entt::entity entity, PatrolmanComponent patrolComp, Spatial* pSpatial)
 	{
 		entt::entity targetEntity = entt::null;
 		for (auto entity : players)
@@ -28,21 +28,21 @@ void godot::PatrolStateSystem::operator()(float delta, entt::registry& registry)
 
 		//to pursuit transition
 		if (registry.valid(targetEntity))
-			registry.assign<PursuingStateComponent>(entity, targetEntity);
+			registry.emplace<PursuingStateComponent>(entity, targetEntity);
 	});
 
 	entt::entity navEntity = registry.view<Navigation*>()[0];
 	Navigation* pNavigation = registry.get<Navigation*>(navEntity);
 
 	auto advanceView = registry.view<PatrolStateTag, PatrolRouteComponent, Spatial*>(entt::exclude<NavPathComponent, HittedFromComponent>);
-	advanceView.less([this, &registry, pNavigation] (entt::entity entity, PatrolRouteComponent& route, Spatial* pSpatial)
+	advanceView.each([this, &registry, pNavigation] (entt::entity entity, PatrolRouteComponent& route, Spatial* pSpatial)
 	{
 		if (route.current < route.routePoints.size() - 1)
 			route.current++;
 		else
 			route.current = 0;
 
-		NavPathComponent& newPath = registry.assign<NavPathComponent>(entity);
+		NavPathComponent& newPath = registry.emplace<NavPathComponent>(entity);
 		newPath.pathIndex = 0;
 		newPath.path = pNavigation->get_simple_path(pSpatial->get_global_transform().origin, route.GetCurrentPatrolPoint());
 	});

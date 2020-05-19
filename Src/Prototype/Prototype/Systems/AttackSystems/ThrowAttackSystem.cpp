@@ -14,7 +14,7 @@
 void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<AttackPressedTag, CurrentWeaponThrowableTag, ThrowableAttackComponent, BoundsComponent, Spatial*>();
-	view.less([&registry](entt::entity entity, ThrowableAttackComponent& attackComp, BoundsComponent bounds, Spatial* pAttackerSpatial)
+	view.each([&registry](entt::entity entity, ThrowableAttackComponent& attackComp, BoundsComponent bounds, Spatial* pAttackerSpatial)
 	{
 		if (!utils::Expired(attackComp.attackTime, attackComp.prevHitTime))
 			return;
@@ -50,7 +50,7 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 		else
 		{
 			entt::entity grenadeEntity = registry.create();
-			registry.assign<Spatial*>(grenadeEntity, Object::cast_to<Spatial>(throwableNode));
+			registry.emplace<Spatial*>(grenadeEntity, Object::cast_to<Spatial>(throwableNode));
 
 			EntityView* pGrenadeView = Object::cast_to<EntityView>(throwableNode->get_node("EntityView"));
 			ASSERT(pGrenadeView != nullptr, "grenade entity view is null");
@@ -60,7 +60,7 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 			ASSERT(converted, "grenade view have no GrenadeComponent");
 			grenComp.startTime = OS::get_singleton()->get_ticks_msec();
 
-			registry.assign<GrenadeComponent>(grenadeEntity, grenComp);
+			registry.emplace<GrenadeComponent>(grenadeEntity, grenComp);
 		}
 	});
 }

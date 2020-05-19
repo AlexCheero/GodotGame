@@ -12,7 +12,7 @@ void godot::FleeingSystem::operator()(float delta, entt::registry& registry)
 		return;
 
 	auto view = registry.view<FleeStateTag, VelocityComponent, SpeedComponent, Spatial*>();
-	view.less([&players](VelocityComponent& velocityComp, SpeedComponent speedComp, Spatial* pSpatial)
+	view.each([&players](VelocityComponent& velocityComp, SpeedComponent speedComp, Spatial* pSpatial)
 	{
 		Vector3 vectorToNearestEnemy = Vector3{ 1, 1, 1 } * std::numeric_limits<float>::infinity();
 		for (auto player : players)

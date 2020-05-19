@@ -12,7 +12,7 @@
 void godot::MeleeAnimSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent, AnimationTree*>();
-	view.less([&registry](entt::entity entity, MeleeAttackComponent attackComp, AnimationTree* pAnimTree)
+	view.each([&registry](entt::entity entity, MeleeAttackComponent attackComp, AnimationTree* pAnimTree)
 	{
 		int prevAnimIdx = attackComp.hitIdx - 1;
 		if (prevAnimIdx < 0)
@@ -25,7 +25,7 @@ void godot::MeleeAnimSystem::operator()(float delta, entt::registry& registry)
 		float timeScale = anim->get_length() / attackComp.GetCurrentHit().attackTime;
 		pAnimTree->set("parameters/" + animName + "_TimeScale/scale", timeScale);
 
-		registry.assign_or_replace<AttackAnimPlayingComponent>(entity).playBackTimeLeft = anim->get_length() / timeScale;
+		registry.emplace_or_replace<AttackAnimPlayingComponent>(entity).playBackTimeLeft = anim->get_length() / timeScale;
 
 		//TODO: blend between anims
 		pAnimTree->set("parameters/" + prevAnimName + "_OneShot/active", false);

@@ -76,7 +76,7 @@ void godot::ECSWorld::PreparePlayerEntity()
 	EntityView* entityView = Object::cast_to<EntityView>(pPlayerNode->get_node("EntityView"));
 	entityView->SetEntity(entity);
 
-	registry.assign<Node*>(entity, pPlayerNode);
+	registry.emplace<Node*>(entity, pPlayerNode);
 
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
@@ -89,15 +89,15 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	registry.get<MeleeAttackComponent>(entity).hits = LoadHits("barehanded_hits");
 
-	registry.assign<VelocityComponent>(entity);
+	registry.emplace<VelocityComponent>(entity);
 	
-	registry.assign<RotationInputComponent>(entity);
-	registry.assign<MoveDirInputComponent>(entity);
+	registry.emplace<RotationInputComponent>(entity);
+	registry.emplace<MoveDirInputComponent>(entity);
 
 	RotationDirectionComponent rot { registry.get<Spatial*>(entity)->get_global_transform().get_basis().z };
-	registry.assign<RotationDirectionComponent>(entity, rot);
+	registry.emplace<RotationDirectionComponent>(entity, rot);
 
-	registry.assign<BoundsComponent>(entity, utils::GetCapsuleBounds(pPlayerNode->get_node("CollisionShape")));
+	registry.emplace<BoundsComponent>(entity, utils::GetCapsuleBounds(pPlayerNode->get_node("CollisionShape")));
 }
 
 void godot::ECSWorld::PrepareEnemyEntity()
@@ -108,29 +108,29 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	EntityView* entityView = Object::cast_to<EntityView>(pEnemyNode->get_node("EntityView"));
 	entityView->SetEntity(entity);
 
-	registry.assign<Node*>(entity, pEnemyNode);
+	registry.emplace<Node*>(entity, pEnemyNode);
 
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pEnemyNode);
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pEnemyNode);
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Enemy/vanguard/AnimationTree"));
 
-	registry.assign<BoundsComponent>(entity, utils::GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));
+	registry.emplace<BoundsComponent>(entity, utils::GetCapsuleBounds(pEnemyNode->get_node("CollisionShape")));
 
 	entityView->ConstructComponents(registry, entity);
 	entityView->ConstructTags(registry, entity);
 
 	registry.get<MeleeAttackComponent>(entity).hits = LoadHits("barehanded_hits");
 
-	registry.assign<VelocityComponent>(entity);
+	registry.emplace<VelocityComponent>(entity);
 	RotationDirectionComponent rot{ registry.get<Spatial*>(entity)->get_global_transform().get_basis().z };
-	registry.assign<RotationDirectionComponent>(entity, rot);
+	registry.emplace<RotationDirectionComponent>(entity, rot);
 	
 	//commented because enemy probably don't need this
 	//registry.assign<RotationInputComponent>(entity);
 	//registry.assign<MoveDirInputComponent>(entity);
 
 //<prepare patrol route
-	PatrolRouteComponent& route = registry.assign<PatrolRouteComponent>(entity);
+	PatrolRouteComponent& route = registry.emplace<PatrolRouteComponent>(entity);
 	route.routePoints.clear();
 
 	Node* pPatrolRoute = get_node("PatrolRoute");
@@ -146,7 +146,7 @@ void godot::ECSWorld::PrepareEnemyEntity()
 //prepare patrol route>
 
 	//initial fsm state
-	registry.assign<PatrolStateTag>(entity);
+	registry.emplace<PatrolStateTag>(entity);
 }
 
 void godot::ECSWorld::PrepareSingletonEntities()
@@ -155,7 +155,7 @@ void godot::ECSWorld::PrepareSingletonEntities()
 
 	Navigation* navigation = Object::cast_to<Navigation>(get_node("Navigation"));
 	entt::entity navigationEntity = registry.create();
-	registry.assign<Navigation*>(navigationEntity, navigation);
+	registry.emplace<Navigation*>(navigationEntity, navigation);
 }
 
 int64_t MeleeAttackComponent::maxComboIntervalMillis;

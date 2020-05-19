@@ -9,7 +9,7 @@ void godot::MeleeAttackCooldownSystem::operator()(float delta, entt::registry& r
 {
 	int64_t currTimeMillis = OS::get_singleton()->get_ticks_msec();
 	auto view = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent>();
-	view.less([&registry, currTimeMillis](entt::entity entity, MeleeAttackComponent& attackComp)
+	view.each([&registry, currTimeMillis](entt::entity entity, MeleeAttackComponent& attackComp)
 	{
 		if (attackComp.prevHitTime + utils::SecondsToMillis(attackComp.GetCurrentHit().attackTime) <= currTimeMillis)
 			attackComp.prevHitTime = currTimeMillis;

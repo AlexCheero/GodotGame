@@ -16,7 +16,7 @@
 void godot::RangedAttackSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<AttackPressedTag, CurrentWeaponRangedTag, RangedAttackComponent, Spatial*>();
-	view.less([&registry](entt::entity entity, RangedAttackComponent& attackComp, Spatial* pAttackerSpatial)
+	view.each([&registry](entt::entity entity, RangedAttackComponent& attackComp, Spatial* pAttackerSpatial)
 	{
 		if (!utils::Expired(attackComp.attackTime, attackComp.prevHitTime))
 			return;

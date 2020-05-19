@@ -6,7 +6,7 @@
 void godot::IncrementComboSystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent>();
-	view.less([](MeleeAttackComponent& attackComp)
+	view.each([](MeleeAttackComponent& attackComp)
 	{
 		int prevIdx = attackComp.hitIdx;
 

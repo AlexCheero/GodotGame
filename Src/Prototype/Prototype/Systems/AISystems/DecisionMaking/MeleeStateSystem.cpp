@@ -14,13 +14,13 @@ void godot::MeleeStateSystem::operator()(float delta, entt::registry& registry)
 	auto view = registry.view<BotTag, MeleeAttackStateTag
 		, MeleeAttackComponent, HealthComponent, Spatial*
 		, TargetLockComponent, DecisionMakingComponent>(entt::exclude<AttackPressedTag>);
-	view.less([this, &registry](entt::entity entity, MeleeAttackComponent meleeComp, HealthComponent healthComp
+	view.each([this, &registry](entt::entity entity, MeleeAttackComponent meleeComp, HealthComponent healthComp
 		, Spatial* pSpatial, TargetLockComponent lockComp, DecisionMakingComponent decisionComp)
 	{
 		int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
 		bool attackInput = meleeComp.prevHitTime + utils::SecondsToMillis(meleeComp.GetCurrentHit().attackTime) <= currTimeMillis;
 		if (attackInput)
-			registry.assign<AttackPressedTag>(entity);
+			registry.emplace<AttackPressedTag>(entity);
 
 		//TODO: make better melee system. to flee transition commented for now
 		//to flee transition
@@ -28,9 +28,9 @@ void godot::MeleeStateSystem::operator()(float delta, entt::registry& registry)
 		//	registry.assign<FleeStateTag>(entity);
 		//to pursuit transition
 		else if (registry.valid(lockComp.target) && meleeComp.maxPileInDistance < GetDistanceToTarget(registry, lockComp.target, pSpatial))
-			registry.assign<PursuingStateComponent>(entity, lockComp.target);
+			registry.emplace<PursuingStateComponent>(entity, lockComp.target);
 		//to patrol transition
 		else if (!registry.valid(lockComp.target) || registry.has<DeadTag>(lockComp.target))
-			registry.assign<PatrolStateTag>(entity);
+			registry.emplace<PatrolStateTag>(entity);
 	});
 }

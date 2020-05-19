@@ -11,7 +11,7 @@ void godot::UpdateLockRotationSystem::operator()(float delta, entt::registry& re
 {
 	//TODO_melee: make unlock logick
 	auto lockedView = registry.view<CurrentWeaponMeleeTag, TargetLockComponent, RotationDirectionComponent, Spatial*>();
-	lockedView.less([this, &registry](entt::entity entity, TargetLockComponent lockComp, RotationDirectionComponent& rotComp, Spatial* pSpatial)
+	lockedView.each([this, &registry](entt::entity entity, TargetLockComponent lockComp, RotationDirectionComponent& rotComp, Spatial* pSpatial)
 	{
 		if (ChecktargetEntity(registry, lockComp.target))
 		{

@@ -13,7 +13,7 @@ void godot::KinematicMovementSystem::operator()(float delta, entt::registry& reg
 	});
 
 	auto onFloorCheckView = registry.view<InAirTag, VelocityComponent, KinematicBody*>();
-	onFloorCheckView.less([&registry](entt::entity entity, VelocityComponent& velocityComp, KinematicBody* pKBody)
+	onFloorCheckView.each([&registry](entt::entity entity, VelocityComponent& velocityComp, KinematicBody* pKBody)
 	{
 		if (!pKBody->is_on_floor())
 			return;
@@ -26,6 +26,6 @@ void godot::KinematicMovementSystem::operator()(float delta, entt::registry& reg
 	inAirCheckView.each([&registry](entt::entity entity, KinematicBody* pKBody)
 	{
 		if (!pKBody->is_on_floor())
-			registry.assign<InAirTag>(entity);
+			registry.emplace<InAirTag>(entity);
 	});
 }

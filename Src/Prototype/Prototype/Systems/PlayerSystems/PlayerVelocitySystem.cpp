@@ -12,7 +12,7 @@
 void godot::PlayerVelocitySystem::operator()(float delta, entt::registry& registry)
 {
 	auto view = registry.view<PlayerTag, VelocityComponent, MoveDirInputComponent, SpeedComponent, Camera*>();
-	view.less([](VelocityComponent& velocityComp, MoveDirInputComponent moveInput, SpeedComponent speedComp, Camera* pCam)
+	view.each([](VelocityComponent& velocityComp, MoveDirInputComponent moveInput, SpeedComponent speedComp, Camera* pCam)
 	{
 		Basis camBasis = pCam->get_global_transform().get_basis();
 		Vector3 flatVelocity = utils::GetRelativeFlatDirection(moveInput.dir, camBasis.x, camBasis.z) * speedComp.speed;

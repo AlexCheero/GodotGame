@@ -46,7 +46,7 @@ void godot::MeleeDamagingArea::_on_Area_body_entered(KinematicBody* pBody)
 	if (registry.has<BotTag>(hittedEntity))
 	{
 		PatrolmanComponent& patrolManComp = registry.get<PatrolmanComponent>(hittedEntity);
-		registry.assign_or_replace<HittedFromComponent>(hittedEntity, get_global_transform().get_origin(), patrolManComp.lookAroundTime);
+		registry.emplace_or_replace<HittedFromComponent>(hittedEntity, get_global_transform().get_origin(), patrolManComp.lookAroundTime);
 	}
 }
 
