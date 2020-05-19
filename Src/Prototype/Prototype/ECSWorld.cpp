@@ -80,7 +80,8 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	AssignNodeInheritedComponent<KinematicBody>(registry, entity, pPlayerNode);
 	AssignNodeInheritedComponent<Spatial>(registry, entity, pPlayerNode);
-	//TODO: refactor camera GDScript, use interpolated camera and check why spring arm doesn't works properly. and fix error, on player dead
+	//TODO0: fix camera gdscript error, on player dead
+	//TODO: refactor camera GDScript, use interpolated camera and check why spring arm doesn't works properly
 	AssignNodeInheritedComponent<Camera>(registry, entity, get_node("CameraGimbal/InnerGimbal/SpringArm/Camera"));
 	AssignNodeInheritedComponent<AnimationTree>(registry, entity, get_node("Player/vanguard/AnimationTree"));
 
@@ -218,46 +219,46 @@ void godot::ECSWorld::_init()
 	WeaponChooseRSystem::Init(registry);
 	
 //setup physics systems
-	m_physics_systems.emplace_back(new GravitySystem());
+	physics_systems.emplace_back(new GravitySystem());
 	//must be called after GravitySystem
 	//must be called after all systems that affects velocity
-	m_physics_systems.emplace_back(new KinematicMovementSystem());
+	physics_systems.emplace_back(new KinematicMovementSystem());
 	
 //setup systems
-	m_process_systems.emplace_back(new JumpSystem());
-	m_process_systems.emplace_back(new PlayerVelocitySystem());
-	m_process_systems.emplace_back(new PlayerRotationSystem());
+	process_systems.emplace_back(new JumpSystem());
+	process_systems.emplace_back(new PlayerVelocitySystem());
+	process_systems.emplace_back(new PlayerRotationSystem());
 
 //<melee systems
-	m_process_systems.emplace_back(new MeleeAttackCooldownSystem());
-	m_process_systems.emplace_back(new MeleeLockTargetSystem());
-	m_process_systems.emplace_back(new UpdateLockRotationSystem());
+	process_systems.emplace_back(new MeleeAttackCooldownSystem());
+	process_systems.emplace_back(new MeleeLockTargetSystem());
+	process_systems.emplace_back(new UpdateLockRotationSystem());
 	//TODO_melee: implement proper melee with blocks and stuff
-	m_process_systems.emplace_back(new MeleeAnimSystem());
-	m_process_systems.emplace_back(new CheckForPileInSystem());
-	m_process_systems.emplace_back(new PileInSystem(registry));
-	m_process_systems.emplace_back(new ComboDropSystem(registry));
-	m_process_systems.emplace_back(new IncrementComboSystem());
-	m_process_systems.emplace_back(new EndAttackAnimSystem());
+	process_systems.emplace_back(new MeleeAnimSystem());
+	process_systems.emplace_back(new CheckForPileInSystem());
+	process_systems.emplace_back(new PileInSystem(registry));
+	process_systems.emplace_back(new ComboDropSystem(registry));
+	process_systems.emplace_back(new IncrementComboSystem());
+	process_systems.emplace_back(new EndAttackAnimSystem());
 //melee systems>
 	
-	m_process_systems.emplace_back(new RangedAttackSystem());
-	m_process_systems.emplace_back(new ThrowAttackSystem());
+	process_systems.emplace_back(new RangedAttackSystem());
+	process_systems.emplace_back(new ThrowAttackSystem());
 
 	//place before any ai systems
-	m_process_systems.emplace_back(new ClearBotInputSystem());
+	process_systems.emplace_back(new ClearBotInputSystem());
 	//comment to switch off bots
-	m_process_systems.emplace_back(new DecisionMakingFSMSystem(registry));
+	process_systems.emplace_back(new DecisionMakingFSMSystem(registry));
 
-	m_process_systems.emplace_back(new GrenadeSystem());
-	m_process_systems.emplace_back(new NavAgentSystem());
-	m_process_systems.emplace_back(new PursuingSystem());
+	process_systems.emplace_back(new GrenadeSystem());
+	process_systems.emplace_back(new NavAgentSystem());
+	process_systems.emplace_back(new PursuingSystem());
 	
-	m_process_systems.emplace_back(new LookAtSystem());
-	m_process_systems.emplace_back(new DestroyDeadSystem());
-	m_process_systems.emplace_back(new HealthMonitoringSystem());
-	m_process_systems.emplace_back(new FleeingSystem());
-	m_process_systems.emplace_back(new LocomotionAnimSystem());
+	process_systems.emplace_back(new LookAtSystem());
+	process_systems.emplace_back(new DestroyDeadSystem());
+	process_systems.emplace_back(new HealthMonitoringSystem());
+	process_systems.emplace_back(new FleeingSystem());
+	process_systems.emplace_back(new LocomotionAnimSystem());
 }
 
 void godot::ECSWorld::_ready()
@@ -287,10 +288,10 @@ void godot::ECSWorld::HandleInputEvent(InputEvent* e)
 
 void godot::ECSWorld::_process(float delta)
 {
-	UpdateSystems(delta, m_process_systems);
+	UpdateSystems(delta, process_systems);
 }
 
 void godot::ECSWorld::_physics_process(float delta)
 {
-	UpdateSystems(delta, m_physics_systems);
+	UpdateSystems(delta, physics_systems);
 }

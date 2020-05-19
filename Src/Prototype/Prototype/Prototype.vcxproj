@@ -240,7 +240,6 @@
     <ClInclude Include="Systems\PlayerSystems\PlayerVelocitySystem.h" />
     <ClInclude Include="Systems\DestroyDeadSystem.h" />
     <ClInclude Include="ECSWorld.h" />
-    <ClInclude Include="Utils\Timer.h" />
     <ClInclude Include="Utils\Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

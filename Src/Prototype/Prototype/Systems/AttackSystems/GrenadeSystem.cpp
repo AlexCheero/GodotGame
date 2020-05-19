@@ -20,13 +20,13 @@ bool godot::GrenadeSystem::CheckVisibility(Spatial* pGrenade, Spatial* pTarget, 
 
 godot::GrenadeSystem::GrenadeSystem()
 {
-	m_params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
-	m_params->set_collide_with_areas(false);
-	m_params->set_collide_with_bodies(true);
+	params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
+	params->set_collide_with_areas(false);
+	params->set_collide_with_bodies(true);
 
-	m_attackShape = Ref<SphereShape>(SphereShape::_new());
-	m_params->set_shape(m_attackShape);
-	m_params->set_collision_mask(utils::GetDamageableMask());
+	attackShape = Ref<SphereShape>(SphereShape::_new());
+	params->set_shape(attackShape);
+	params->set_collision_mask(utils::GetDamageableMask());
 }
 
 void godot::GrenadeSystem::operator()(float delta, entt::registry& registry)
@@ -43,10 +43,10 @@ void godot::GrenadeSystem::operator()(float delta, entt::registry& registry)
 	auto explodedView = registry.view<GrenadeExplodesTag, GrenadeComponent, Spatial*>(ExcludeDead);
 	explodedView.less([this, &registry](entt::entity entity, GrenadeComponent grenComp, Spatial* pGrenSpatial)
 	{
-		m_attackShape->set_radius(grenComp.explosionRadius);
-		m_params->set_transform(pGrenSpatial->get_global_transform());
+		attackShape->set_radius(grenComp.explosionRadius);
+		params->set_transform(pGrenSpatial->get_global_transform());
 		PhysicsDirectSpaceState* spaceState = pGrenSpatial->get_world()->get_direct_space_state();
-		Array intersects = spaceState->intersect_shape(m_params, INTERSECT_RESULTS_NUM);
+		Array intersects = spaceState->intersect_shape(params, INTERSECT_RESULTS_NUM);
 
 		for (int i = 0; i < intersects.size(); i++)
 		{

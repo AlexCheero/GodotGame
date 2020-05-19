@@ -13,7 +13,6 @@ DECLARE_REGISTERED_TAG(MainCameraTag);
 DECLARE_TAG(DeadTag);
 DECLARE_TAG(InAirTag);
 
-//TODO: remove or use everywhere
 constexpr entt::exclude_t ExcludeDead = entt::exclude<DeadTag>;
 
 struct VelocityComponent { godot::Vector3 velocity; };

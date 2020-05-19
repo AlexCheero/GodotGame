@@ -11,8 +11,8 @@ namespace godot
 	class GrenadeSystem : public BaseSystem
 	{
 	private:
-		Ref<PhysicsShapeQueryParameters> m_params;
-		Ref<SphereShape> m_attackShape;
+		Ref<PhysicsShapeQueryParameters> params;
+		Ref<SphereShape> attackShape;
 
 		bool CheckVisibility(Spatial* pGrenade, Spatial* pTarget, float explosionRadius);
 	public:

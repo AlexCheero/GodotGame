@@ -13,8 +13,8 @@ namespace godot
 	private:
 		const float INTERSECT_RESULTS_NUM = 16.f;
 
-		Ref<PhysicsShapeQueryParameters> m_params;
-		Ref<SphereShape> m_attackShape;
+		Ref<PhysicsShapeQueryParameters> params;
+		Ref<SphereShape> attackShape;
 
 		Array GetIntersects(Spatial* pAttackerSpatial, float distance, String layerName);
 	public:

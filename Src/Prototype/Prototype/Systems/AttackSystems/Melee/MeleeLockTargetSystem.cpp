@@ -12,25 +12,25 @@ godot::Array godot::MeleeLockTargetSystem::GetIntersects(Spatial* pAttackerSpati
 {
 	Array exclude;
 	exclude.push_back(pAttackerSpatial);
-	m_params->set_exclude(exclude);
+	params->set_exclude(exclude);
 
-	m_attackShape->set_radius(distance);
-	m_params->set_collision_mask(utils::GetLayerByName(layerName));
-	m_params->set_shape(m_attackShape);
+	attackShape->set_radius(distance);
+	params->set_collision_mask(utils::GetLayerByName(layerName));
+	params->set_shape(attackShape);
 	Transform attackerTransform = pAttackerSpatial->get_global_transform();
-	m_params->set_transform(attackerTransform);
+	params->set_transform(attackerTransform);
 
 	PhysicsDirectSpaceState* spaceState = pAttackerSpatial->get_world()->get_direct_space_state();
-	return spaceState->intersect_shape(m_params, INTERSECT_RESULTS_NUM);
+	return spaceState->intersect_shape(params, INTERSECT_RESULTS_NUM);
 }
 
 godot::MeleeLockTargetSystem::MeleeLockTargetSystem()
 {
-	m_params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
-	m_params->set_collide_with_areas(false);
-	m_params->set_collide_with_bodies(true);
+	params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
+	params->set_collide_with_areas(false);
+	params->set_collide_with_bodies(true);
 
-	m_attackShape = Ref<SphereShape>(SphereShape::_new());
+	attackShape = Ref<SphereShape>(SphereShape::_new());
 }
 
 void godot::MeleeLockTargetSystem::operator()(float delta, entt::registry& registry)

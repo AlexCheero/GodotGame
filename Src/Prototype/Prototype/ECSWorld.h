@@ -19,8 +19,8 @@ namespace godot
 	private:
 		entt::registry registry;
 		using SystemsVec = std::vector<std::unique_ptr<BaseSystem>>;
-		SystemsVec m_physics_systems;
-		SystemsVec m_process_systems;
+		SystemsVec physics_systems;
+		SystemsVec process_systems;
 
 		template<typename T>
 		T* AssignNodeInheritedComponent(entt::registry& registry, entt::entity entity, Node* pNode)
