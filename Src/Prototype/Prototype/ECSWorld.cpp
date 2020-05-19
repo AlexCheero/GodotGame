@@ -235,7 +235,7 @@ void godot::ECSWorld::_init()
 	m_process_systems.emplace_back(new MeleeAnimSystem());
 	m_process_systems.emplace_back(new CheckForPileInSystem());
 	m_process_systems.emplace_back(new PileInSystem(registry));
-	m_process_systems.emplace_back(new ComboDropSystem());
+	m_process_systems.emplace_back(new ComboDropSystem(registry));
 	m_process_systems.emplace_back(new IncrementComboSystem());
 	m_process_systems.emplace_back(new EndAttackAnimSystem());
 //melee systems>

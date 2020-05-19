@@ -19,7 +19,6 @@ void godot::MeleeStateSystem::operator()(float delta, entt::registry& registry)
 	{
 		int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
 		bool attackInput = prevAttack.millis + utils::SecondsToMillis(meleeComp.GetCurrentHit().attackTime) <= currTimeMillis;
-		//TODO: check if this could keep input event on state transition
 		if (attackInput)
 			registry.assign<AttackPressedTag>(entity);
 
