@@ -47,6 +47,7 @@ void godot::PlayerInputSystem::HandleInput(entt::registry& registry)
 	ProcessInputKey<ChooseMeleePressedTag>(registry, pInput->is_action_pressed("choose_melee"));
 	ProcessInputKey<ChooseRangedPressedTag>(registry, pInput->is_action_pressed("choose_ranged"));
 	ProcessInputKey<ChooseThrowablePressedTag>(registry, pInput->is_action_pressed("choose_throwable"));
+	ProcessInputKey<ChooseGrenadePressedTag>(registry, pInput->is_action_pressed("choose_grenade"));
 
 	ProcessInputAxis<MoveDirInputComponent>(registry, GetInputDirection(pInput, "move"));
 	ProcessInputAxis<RotationInputComponent>(registry, GetInputDirection(pInput, "rotate"));

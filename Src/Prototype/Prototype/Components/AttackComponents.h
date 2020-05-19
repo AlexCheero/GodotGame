@@ -56,18 +56,28 @@ struct RangedAttackComponent
 };
 REGISTER_COMPONENT(RangedAttackComponent, "ammoCount", "distance", "damage", "attackTime");
 
-//TODO: make grenade as separate weapon type
 DECLARE_TAG(CurrentWeaponThrowableTag);
 struct ThrowableAttackComponent
 {
 	int ammoCount;
-	//TODO: implement object pools. keep pooled objects outside of scene tree
+	//TODO: implement object pools (for grenades too). keep pooled objects outside of scene tree
 	godot::Ref<godot::PackedScene> throwableScene;
 	float force;
 	float attackTime;
 	int64_t prevHitTime = -std::numeric_limits<int64_t>::max();
 };
 REGISTER_COMPONENT(ThrowableAttackComponent, "ammoCount", "throwableScene", "force", "attackTime");
+
+DECLARE_TAG(CurrentWeaponGrenadeTag);
+struct GrenadeAttackComponent
+{
+	int ammoCount;
+	godot::Ref<godot::PackedScene> grenadeScene;
+	float force;
+	float attackTime;
+	int64_t prevHitTime = -std::numeric_limits<int64_t>::max();
+};
+REGISTER_COMPONENT(GrenadeAttackComponent, "ammoCount", "grenadeScene", "force", "attackTime");
 
 struct AttackAnimPlayingComponent
 {

@@ -15,7 +15,7 @@ params_billboard_mode = 2
 
 [node name="PickableGrenade" type="Area"]
 script = ExtResource( 1 )
-type = 2
+type = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
@@ -28,11 +28,11 @@ texture = ExtResource( 2 )
 [node name="EntityView" type="Node" parent="."]
 script = ExtResource( 3 )
 components = {
-"ThrowableAttack": {
+"GrenadeAttack": {
 "ammoCount": 100,
 "attackTime": 0.5,
 "force": 50.0,
-"throwableScene": ExtResource( 5 )
+"grenadeScene": ExtResource( 5 )
 }
 }
 [connection signal="body_entered" from="." to="." method="_on_Pickable_body_entered"]

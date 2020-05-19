@@ -50,6 +50,7 @@ void godot::EntityView::ConstructComponents(entt::registry& registry, entt::enti
 			MeleeAttackComponent,
 			RangedAttackComponent,
 			ThrowableAttackComponent,
+			GrenadeAttackComponent,
 			HealthComponent,
 			GravityComponent,
 			JumpSpeedComponent,

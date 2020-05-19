@@ -44,23 +44,8 @@ void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
 
 		ThrowableWeaponNode* throwable = Object::cast_to<ThrowableWeaponNode>(throwableNode);
 
-		//TODO: split grenades and throwables
-		if (throwable)
-			throwable->SetThrowForce(attackComp.force);
-		else
-		{
-			entt::entity grenadeEntity = registry.create();
-			registry.emplace<Spatial*>(grenadeEntity, Object::cast_to<Spatial>(throwableNode));
+		ASSERT(throwable != nullptr, "throwable is null");
 
-			EntityView* pGrenadeView = Object::cast_to<EntityView>(throwableNode->get_node("EntityView"));
-			ASSERT(pGrenadeView != nullptr, "grenade entity view is null");
-
-			GrenadeComponent grenComp;
-			bool converted = pGrenadeView->ConvertToComponent(grenComp);
-			ASSERT(converted, "grenade view have no GrenadeComponent");
-			grenComp.startTime = OS::get_singleton()->get_ticks_msec();
-
-			registry.emplace<GrenadeComponent>(grenadeEntity, grenComp);
-		}
+		throwable->SetThrowForce(attackComp.force);
 	});
 }

@@ -53,6 +53,12 @@ void godot::PickableNode::_on_Pickable_body_entered(KinematicBody* pBody)
 		ASSERT(constructed, "can't construct ThrowableAttackComponent");
 		break;
 	}
+	case EPickableType::Grenade:
+	{
+		bool constructed = pPickableView->ConvertToComponent(registry.emplace_or_replace<GrenadeAttackComponent>(pickerEntity));
+		ASSERT(constructed, "can't construct GrenadeAttackComponent");
+		break;
+	}
 	case EPickableType::Medkit:
 		Godot::print("Picked up Medkit");
 		break;
@@ -72,7 +78,7 @@ void godot::PickableNode::_register_methods()
 {
 	register_property<PickableNode, int>("type", &PickableNode::SetType, &PickableNode::GetType, -1
 		, GODOT_METHOD_RPC_MODE_DISABLED, GODOT_PROPERTY_USAGE_DEFAULT, GODOT_PROPERTY_HINT_ENUM
-		, "MeleeWeapon, RangedWeapon, ThrowableWeapon, Medkit, Buff, Key");
+		, "MeleeWeapon, RangedWeapon, ThrowableWeapon, Grenade, Medkit, Buff, Key");
 
 	register_method((char*)"_on_Pickable_body_entered", &PickableNode::_on_Pickable_body_entered);
 }

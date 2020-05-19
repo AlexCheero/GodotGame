@@ -180,6 +180,7 @@
     <ClCompile Include="Systems\AttackSystems\melee\MeleeAttackCooldownSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\RangedAttackSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\ThrowAttackSystem.cpp" />
+    <ClCompile Include="Systems\AttackSystems\ThrowGrenadeSystem.cpp" />
     <ClCompile Include="Systems\AttackSystems\UpdateLockRotationSystem.cpp" />
     <ClCompile Include="Systems\LocomotionSystems\GravitySystem.cpp" />
     <ClCompile Include="Systems\LocomotionSystems\JumpSystem.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="Systems\AttackSystems\Melee\MeleeAttackCooldownSystem.h" />
     <ClInclude Include="Systems\AttackSystems\RangedAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\ThrowAttackSystem.h" />
+    <ClInclude Include="Systems\AttackSystems\ThrowGrenadeSystem.h" />
     <ClInclude Include="Systems\AttackSystems\UpdateLockRotationSystem.h" />
     <ClInclude Include="Systems\BaseSystem.h" />
     <ClInclude Include="Systems\LocomotionSystems\GravitySystem.h" />

@@ -20,7 +20,8 @@ void godot::ClearBotInputSystem::operator()(float delta, entt::registry& registr
 		    AttackPressedTag,
 		    ChooseMeleePressedTag,
 		    ChooseRangedPressedTag,
-		    ChooseThrowablePressedTag
+		    ChooseThrowablePressedTag,
+			ChooseGrenadePressedTag
 		>
 		(registry);
 }

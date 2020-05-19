@@ -27,6 +27,7 @@
 #include "Systems/AttackSystems/GrenadeSystem.h"
 #include "Systems/AttackSystems/RangedAttackSystem.h"
 #include "Systems/AttackSystems/ThrowAttackSystem.h"
+#include "Systems/AttackSystems/ThrowGrenadeSystem.h"
 
 #include "Systems/AttackSystems/Melee/MeleeAnimSystem.h"
 #include "Systems/AttackSystems/Melee/MeleeAttackCooldownSystem.h"
@@ -241,6 +242,7 @@ void godot::ECSWorld::_init()
 	
 	process_systems.emplace_back(new RangedAttackSystem());
 	process_systems.emplace_back(new ThrowAttackSystem());
+	process_systems.emplace_back(new ThrowGrenadeSystem());
 
 	//place before any ai systems
 	process_systems.emplace_back(new ClearBotInputSystem());

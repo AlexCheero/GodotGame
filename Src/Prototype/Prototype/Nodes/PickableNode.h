@@ -16,6 +16,7 @@ namespace godot
 		MeleeWeapon,
 		RangedWeapon,
 		ThrowableWeapon,
+		Grenade,
 		Medkit,
 		Buff,
 		Key,
