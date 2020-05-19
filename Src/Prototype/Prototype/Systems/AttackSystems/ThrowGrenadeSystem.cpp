@@ -23,8 +23,6 @@ void godot::ThrowGrenadeSystem::operator()(float delta, entt::registry& registry
 		Node* grenadeNode = attackComp.grenadeScene->instance();
 		attackComp.ammoCount--;
 		ASSERT(attackComp.ammoCount >= 0, "negative ammo count");
-		//TODO: instantly melee hits or don't changes weapon at all, after throwing weapon. fix this after refactoring whole input system
-		//		input system already refactored
 		if (attackComp.ammoCount == 0 /*&& throw on out of ammo*/)
 			registry.remove<GrenadeAttackComponent>(entity);
 

@@ -34,6 +34,12 @@ namespace //private
 		registry.emplace_or_replace<CurrentWeaponMeleeTag>(entity);
 	}
 
+	void SwitchToMeleeOnWeaponThrow(entt::registry& registry, entt::entity entity)
+	{
+		registry.emplace_or_replace<CurrentWeaponMeleeTag>(entity);
+		registry.remove_if_exists<AttackPressedTag>(entity);
+	}
+
 	void OnRangedAttackComponentAssign(entt::registry& registry, entt::entity entity)
 	{
 		registry.emplace_or_replace<CurrentWeaponRangedTag>(entity);
@@ -94,10 +100,13 @@ void godot::WeaponChooseRSystem::Init(entt::registry& registry)
 	registry.on_update<MeleeAttackComponent>().connect<&OnMeleeAttackComponentAssign>();
 	registry.on_construct<RangedAttackComponent>().connect<&OnRangedAttackComponentAssign>();
 	registry.on_update<RangedAttackComponent>().connect<&OnRangedAttackComponentAssign>();
+	registry.on_destroy<RangedAttackComponent>().connect<&SwitchToMeleeOnWeaponThrow>();
 	registry.on_construct<ThrowableAttackComponent>().connect<&OnThrowableAttackComponentAssign>();
 	registry.on_update<ThrowableAttackComponent>().connect<&OnThrowableAttackComponentAssign>();
+	registry.on_destroy<ThrowableAttackComponent>().connect<&SwitchToMeleeOnWeaponThrow>();
 	registry.on_construct<GrenadeAttackComponent>().connect<&OnGrenadeAttackComponentAssign>();
 	registry.on_update<GrenadeAttackComponent>().connect<&OnGrenadeAttackComponentAssign>();
+	registry.on_destroy<GrenadeAttackComponent>().connect<&SwitchToMeleeOnWeaponThrow>();
 	//changing current weapon tag>
 
 	//<removing other weapon tags
