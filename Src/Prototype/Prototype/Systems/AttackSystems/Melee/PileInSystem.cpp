@@ -32,7 +32,6 @@ void godot::PileInSystem::operator()(float delta, entt::registry& registry)
 		if (distanceToTarget <= melee.GetCurrentHit().minDistance)
 			return;
 
-		//TODO: probably use input axis instead whenever it possible. for pile in and bot ai systems
 		Vector3 toTargetVelocity = toTargetDirection;
 		toTargetVelocity.y = 0;
 		toTargetVelocity.normalize();

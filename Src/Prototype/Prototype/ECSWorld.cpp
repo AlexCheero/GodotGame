@@ -127,8 +127,9 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	RotationDirectionComponent rot{ registry.get<Spatial*>(entity)->get_global_transform().get_basis().z };
 	registry.assign<RotationDirectionComponent>(entity, rot);
 	
-	registry.assign<RotationInputComponent>(entity);
-	registry.assign<MoveDirInputComponent>(entity);
+	//commented because enemy probably don't need this
+	//registry.assign<RotationInputComponent>(entity);
+	//registry.assign<MoveDirInputComponent>(entity);
 
 //<prepare patrol route
 	PatrolRouteComponent& route = registry.assign<PatrolRouteComponent>(entity);
