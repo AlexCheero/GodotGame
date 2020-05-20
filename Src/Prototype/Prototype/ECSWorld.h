@@ -4,8 +4,6 @@
 #include <Node.hpp>
 #include <InputEvent.hpp>
 
-#include "Systems/BaseSystem.h"
-
 #include "Components/SimpleComponents.h"
 #include "Nodes/EntityView.h"
 
@@ -18,7 +16,7 @@ namespace godot
 		GODOT_CLASS(ECSWorld, Node)
 	private:
 		entt::registry registry;
-		using SystemsVec = std::vector<std::unique_ptr<BaseSystem>>;
+		using SystemsVec = std::vector<std::function<void(float, entt::registry&)>>;
 		SystemsVec physics_systems;
 		SystemsVec process_systems;
 

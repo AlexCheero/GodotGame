@@ -9,7 +9,7 @@
 
 //TODO: try to use AnimationNodeStateMachine, get is_playing via AnimationNodeStateMachinePlayback
 //      and delete EndAttackAnimSystem and AttackAnimPlayingComponent as unnecessary
-void godot::MeleeAnimSystem::operator()(float delta, entt::registry& registry)
+void godot::MeleeAnimSystem::Tick(float delta, entt::registry& registry)
 {
 	auto view = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent, AnimationTree*>();
 	view.each([&registry](entt::entity entity, MeleeAttackComponent attackComp, AnimationTree* pAnimTree)

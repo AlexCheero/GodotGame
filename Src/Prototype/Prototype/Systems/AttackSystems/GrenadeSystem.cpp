@@ -10,6 +10,9 @@
 
 const float INTERSECT_RESULTS_NUM = 32.f;
 
+godot::Ref<godot::PhysicsShapeQueryParameters> godot::GrenadeSystem::params;
+godot::Ref<godot::SphereShape> godot::GrenadeSystem::attackShape;
+
 bool godot::GrenadeSystem::CheckVisibility(Spatial* pGrenade, Spatial* pTarget, float explosionRadius)
 {
 	Vector3 castDirection = pTarget->get_global_transform().get_origin() - pGrenade->get_global_transform().get_origin();
@@ -18,7 +21,7 @@ bool godot::GrenadeSystem::CheckVisibility(Spatial* pGrenade, Spatial* pTarget, 
 	return pTarget == utils::CastFromSpatial(pGrenade, castDirection, explosionRadius);
 }
 
-godot::GrenadeSystem::GrenadeSystem()
+void godot::GrenadeSystem::Init()
 {
 	params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
 	params->set_collide_with_areas(false);
@@ -29,7 +32,7 @@ godot::GrenadeSystem::GrenadeSystem()
 	params->set_collision_mask(utils::GetDamageableMask());
 }
 
-void godot::GrenadeSystem::operator()(float delta, entt::registry& registry)
+void godot::GrenadeSystem::Tick(float delta, entt::registry& registry)
 {
 	int64_t currTime = godot::OS::get_singleton()->get_ticks_msec();
 
@@ -41,7 +44,7 @@ void godot::GrenadeSystem::operator()(float delta, entt::registry& registry)
 	});
 
 	auto explodedView = registry.view<GrenadeExplodesTag, GrenadeComponent, Spatial*>(ExcludeDead);
-	explodedView.each([this, &registry](entt::entity entity, GrenadeComponent grenComp, Spatial* pGrenSpatial)
+	explodedView.each([&registry](entt::entity entity, GrenadeComponent grenComp, Spatial* pGrenSpatial)
 	{
 		attackShape->set_radius(grenComp.explosionRadius);
 		params->set_transform(pGrenSpatial->get_global_transform());

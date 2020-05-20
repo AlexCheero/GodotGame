@@ -4,7 +4,7 @@
 
 #include "../../Components/SimpleComponents.h"
 
-void godot::LookAtSystem::operator()(float delta, entt::registry& registry)
+void godot::LookAtSystem::Tick(float delta, entt::registry& registry)
 {
 	auto view = registry.view<RotationDirectionComponent, Spatial*>(ExcludeDead);
 	view.each([](RotationDirectionComponent rotationDir, Spatial* pTarget)

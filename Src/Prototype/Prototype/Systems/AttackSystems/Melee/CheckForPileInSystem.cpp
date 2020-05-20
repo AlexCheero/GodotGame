@@ -3,7 +3,7 @@
 #include "../../../Components/AttackComponents.h"
 #include "../../../Components/InputComponents.h"
 
-void godot::CheckForPileInSystem::operator()(float delta, entt::registry& registry)
+void godot::CheckForPileInSystem::Tick(float delta, entt::registry& registry)
 {
 	auto view = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, TargetLockComponent, MeleeAttackComponent, Spatial*>(entt::exclude<InAirTag, PileInTag>);
 	view.each([&registry](entt::entity entity, TargetLockComponent lockComp, MeleeAttackComponent melee, Spatial* pSpatial)

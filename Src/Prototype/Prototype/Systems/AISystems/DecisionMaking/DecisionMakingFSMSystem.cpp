@@ -55,22 +55,22 @@ void godot::DecisionMakingFSMSystem::OnHitNoticing(entt::registry& registry, ent
 	}
 }
 
-godot::DecisionMakingFSMSystem::DecisionMakingFSMSystem(entt::registry& registry)
+void godot::DecisionMakingFSMSystem::Init(entt::registry& registry)
 {
-	registry.on_construct<PursuingStateComponent>().connect<&DecisionMakingFSMSystem::OnTransitionToPursuing>(this);
-	registry.on_construct<PatrolStateTag>().connect<&DecisionMakingFSMSystem::OnTransitionToPatrol>(this);
-	registry.on_construct<FleeStateTag>().connect<&DecisionMakingFSMSystem::OnTransitionToFlee>(this);
-	registry.on_construct<MeleeAttackStateTag>().connect<&DecisionMakingFSMSystem::OnTransitionToMelee>(this);
-	registry.on_construct<HittedFromComponent>().connect<&DecisionMakingFSMSystem::OnHitNoticing>(this);
+	registry.on_construct<PursuingStateComponent>().connect<&DecisionMakingFSMSystem::OnTransitionToPursuing>();
+	registry.on_construct<PatrolStateTag>().connect<&DecisionMakingFSMSystem::OnTransitionToPatrol>();
+	registry.on_construct<FleeStateTag>().connect<&DecisionMakingFSMSystem::OnTransitionToFlee>();
+	registry.on_construct<MeleeAttackStateTag>().connect<&DecisionMakingFSMSystem::OnTransitionToMelee>();
+	registry.on_construct<HittedFromComponent>().connect<&DecisionMakingFSMSystem::OnHitNoticing>();
 
 	registry.on_destroy<PatrolStateTag>().connect<&entt::registry::remove_if_exists<HittedFromComponent> >();
 }
 
-void godot::DecisionMakingFSMSystem::operator()(float delta, entt::registry& registry)
+void godot::DecisionMakingFSMSystem::Tick(float delta, entt::registry& registry)
 {
 	//DecisionMakingFSMSystem (or its states) should be the only system to manage states and set input for bot
-	patrolSystem(delta, registry);
-	pursueSystem(delta, registry);
-	meleeSystem(delta, registry);
-	fleeSystem(delta, registry);
+	PatrolStateSystem::Tick(delta, registry);
+	PursueStateSystem::Tick(delta, registry);
+	MeleeStateSystem::Tick(delta, registry);
+	FleeStateSystem::Tick(delta, registry);
 }

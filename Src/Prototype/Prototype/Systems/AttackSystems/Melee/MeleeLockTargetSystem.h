@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../BaseSystem.h"
+#include "entt/entt.hpp"
 
 #include <Spatial.hpp>
 #include <PhysicsShapeQueryParameters.hpp>
@@ -8,17 +8,17 @@
 
 namespace godot
 {
-	class MeleeLockTargetSystem : public BaseSystem
+	class MeleeLockTargetSystem
 	{
 	private:
-		const float INTERSECT_RESULTS_NUM = 16.f;
+		static constexpr float INTERSECT_RESULTS_NUM = 16.f;
 
-		Ref<PhysicsShapeQueryParameters> params;
-		Ref<SphereShape> attackShape;
+		static Ref<PhysicsShapeQueryParameters> params;
+		static Ref<SphereShape> attackShape;
 
-		Array GetIntersects(Spatial* pAttackerSpatial, float distance, String layerName);
+		static Array GetIntersects(Spatial* pAttackerSpatial, float distance, String layerName);
 	public:
-		MeleeLockTargetSystem();
-		virtual void operator()(float delta, entt::registry& registry) override;
+		static void Init();
+		static void Tick(float delta, entt::registry& registry);
 	};
 }

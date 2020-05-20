@@ -2,7 +2,7 @@
 
 #include <Node.hpp>
 
-void godot::DestroyDeadSystem::operator()(float delta, entt::registry& registry)
+void godot::DestroyDeadSystem::Tick(float delta, entt::registry& registry)
 {
 	auto view = registry.view<DeadTag, Node*>();
 	view.each([&registry](entt::entity entity, Node* pNode)

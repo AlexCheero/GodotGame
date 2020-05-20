@@ -6,7 +6,7 @@
 #include "../../Components/AIComponents/NavigationComponents.h"
 
 //TODO: smooth nav path following with bezier
-void godot::NavAgentSystem::operator()(float delta, entt::registry& registry)
+void godot::NavAgentSystem::Tick(float delta, entt::registry& registry)
 {
 	auto view = registry.view<Spatial*, VelocityComponent, NavMarginComponent, BoundsComponent
 		, SpeedComponent, NavPathComponent, RotationDirectionComponent>(entt::exclude<InAirTag>);

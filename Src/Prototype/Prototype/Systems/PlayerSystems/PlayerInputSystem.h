@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../BaseSystem.h"
-
 #include <InputEvent.hpp>
 
 #include "../../Components/SimpleComponents.h"

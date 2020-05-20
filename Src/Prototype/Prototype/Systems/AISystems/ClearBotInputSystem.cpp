@@ -12,7 +12,7 @@ void godot::ClearBotInputSystem::ClearInput(entt::registry& registry)
 		ClearInput<Types...>(registry);
 }
 
-void godot::ClearBotInputSystem::operator()(float delta, entt::registry& registry)
+void godot::ClearBotInputSystem::Tick(float delta, entt::registry& registry)
 {
 	ClearInput
 		<

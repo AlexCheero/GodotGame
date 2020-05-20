@@ -13,7 +13,7 @@
 
 #include "../../Utils/Utils.h"
 
-void godot::RangedAttackSystem::operator()(float delta, entt::registry& registry)
+void godot::RangedAttackSystem::Tick(float delta, entt::registry& registry)
 {
 	auto view = registry.view<AttackPressedTag, CurrentWeaponRangedTag, RangedAttackComponent, Spatial*>();
 	view.each([&registry](entt::entity entity, RangedAttackComponent& attackComp, Spatial* pAttackerSpatial)

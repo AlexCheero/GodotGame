@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../../BaseSystem.h"
+#include "entt/entt.hpp"
 
 namespace godot
 {
-	class MeleeAnimSystem : public BaseSystem
+	class MeleeAnimSystem
 	{
 	public:
-		virtual void operator()(float delta, entt::registry& registry) override;
+		static void Tick(float delta, entt::registry& registry);
 	};
 }

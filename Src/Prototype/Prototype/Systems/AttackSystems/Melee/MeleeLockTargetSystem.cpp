@@ -8,6 +8,9 @@
 
 #include "../../../Nodes/EntityView.h"
 
+godot::Ref<godot::PhysicsShapeQueryParameters> godot::MeleeLockTargetSystem::params;
+godot::Ref<godot::SphereShape> godot::MeleeLockTargetSystem::attackShape;
+
 godot::Array godot::MeleeLockTargetSystem::GetIntersects(Spatial* pAttackerSpatial, float distance, String layerName)
 {
 	Array exclude;
@@ -24,7 +27,7 @@ godot::Array godot::MeleeLockTargetSystem::GetIntersects(Spatial* pAttackerSpati
 	return spaceState->intersect_shape(params, INTERSECT_RESULTS_NUM);
 }
 
-godot::MeleeLockTargetSystem::MeleeLockTargetSystem()
+void godot::MeleeLockTargetSystem::Init()
 {
 	params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
 	params->set_collide_with_areas(false);
@@ -33,10 +36,10 @@ godot::MeleeLockTargetSystem::MeleeLockTargetSystem()
 	attackShape = Ref<SphereShape>(SphereShape::_new());
 }
 
-void godot::MeleeLockTargetSystem::operator()(float delta, entt::registry& registry)
+void godot::MeleeLockTargetSystem::Tick(float delta, entt::registry& registry)
 {
 	auto view = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent, Spatial*>(entt::exclude<TargetLockComponent>);
-	view.each([this, &registry](entt::entity entity, MeleeAttackComponent attackComp, Spatial* pSpatial)
+	view.each([&registry](entt::entity entity, MeleeAttackComponent attackComp, Spatial* pSpatial)
 	{
 		//TODO_melee: implement target change when already have locked target
 		//TODO_melee: do not lock on ally even if friendly fire is on

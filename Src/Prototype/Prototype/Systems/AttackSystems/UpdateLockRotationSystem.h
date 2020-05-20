@@ -1,15 +1,15 @@
 #pragma once
 
-#include "../BaseSystem.h"
+#include "entt/entt.hpp"
 
 namespace godot
 {
-	class UpdateLockRotationSystem : public BaseSystem
+	class UpdateLockRotationSystem
 	{
 	private:
-		bool ChecktargetEntity(entt::registry& registry, entt::entity lockedTarget);
+		static bool ChecktargetEntity(entt::registry& registry, entt::entity lockedTarget);
 	public:
-		virtual void operator()(float delta, entt::registry& registry) override;
+		static void Tick(float delta, entt::registry& registry);
 	};
 }
 #pragma once

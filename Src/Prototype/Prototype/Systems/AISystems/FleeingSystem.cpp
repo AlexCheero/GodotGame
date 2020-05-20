@@ -5,7 +5,7 @@
 #include "../../Components/AIComponents/FSMStateComponents.h"
 #include "../../Components/SimpleComponents.h"
 
-void godot::FleeingSystem::operator()(float delta, entt::registry& registry)
+void godot::FleeingSystem::Tick(float delta, entt::registry& registry)
 {
 	auto players = registry.view<PlayerTag, Spatial*>(ExcludeDead);
 	if (players.size() == 0)

@@ -7,7 +7,7 @@
 #include "../../Utils/Utils.h"
 
 //TODO: ajust animation to move speed
-void godot::LocomotionAnimSystem::operator()(float delta, entt::registry& registry)
+void godot::LocomotionAnimSystem::Tick(float delta, entt::registry& registry)
 {
 	auto view = registry.view<VelocityComponent, RotationDirectionComponent, AnimationTree*>();
 	view.each([](VelocityComponent velComp, RotationDirectionComponent rotComp, AnimationTree* pAnimTree)

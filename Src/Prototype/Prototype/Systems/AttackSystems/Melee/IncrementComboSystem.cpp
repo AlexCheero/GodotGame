@@ -3,7 +3,7 @@
 #include "../../../Components/AttackComponents.h"
 #include "../../../Components/InputComponents.h"
 
-void godot::IncrementComboSystem::operator()(float delta, entt::registry& registry)
+void godot::IncrementComboSystem::Tick(float delta, entt::registry& registry)
 {
 	auto view = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent>();
 	view.each([](MeleeAttackComponent& attackComp)

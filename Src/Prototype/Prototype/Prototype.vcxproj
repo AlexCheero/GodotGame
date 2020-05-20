@@ -232,7 +232,6 @@
     <ClInclude Include="Systems\AttackSystems\ThrowAttackSystem.h" />
     <ClInclude Include="Systems\AttackSystems\ThrowGrenadeSystem.h" />
     <ClInclude Include="Systems\AttackSystems\UpdateLockRotationSystem.h" />
-    <ClInclude Include="Systems\BaseSystem.h" />
     <ClInclude Include="Systems\LocomotionSystems\GravitySystem.h" />
     <ClInclude Include="Systems\LocomotionSystems\JumpSystem.h" />
     <ClInclude Include="Systems\LocomotionSystems\KinematicMovementSystem.h" />

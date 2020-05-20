@@ -11,7 +11,7 @@
 
 #include "../../Utils/Utils.h"
 
-void godot::ThrowAttackSystem::operator()(float delta, entt::registry& registry)
+void godot::ThrowAttackSystem::Tick(float delta, entt::registry& registry)
 {
 	auto view = registry.view<AttackPressedTag, CurrentWeaponThrowableTag, ThrowableAttackComponent, BoundsComponent, Spatial*>();
 	view.each([&registry](entt::entity entity, ThrowableAttackComponent& attackComp, BoundsComponent bounds, Spatial* pAttackerSpatial)

@@ -6,7 +6,7 @@
 #include "../../Components/AIComponents/NavigationComponents.h"
 #include "../../Components/AIComponents/FSMStateComponents.h"
 
-void godot::PursuingSystem::operator()(float delta, entt::registry& registry)
+void godot::PursuingSystem::Tick(float delta, entt::registry& registry)
 {
 	entt::entity navEntity = registry.view<Navigation*>()[0];
 	Navigation* pNavigation = registry.get<Navigation*>(navEntity);

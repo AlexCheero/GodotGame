@@ -9,7 +9,7 @@
 
 #include "../../Utils/Utils.h"
 
-void godot::PlayerRotationSystem::operator()(float delta, entt::registry& registry)
+void godot::PlayerRotationSystem::Tick(float delta, entt::registry& registry)
 {
 	//TODO: MoveDirInputComponent used instead, until aimed view will be implemented
 	auto view = registry.view<PlayerTag, RotationDirectionComponent, /*RotationInputComponent*/MoveDirInputComponent, Camera*>();

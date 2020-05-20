@@ -1,15 +1,15 @@
 #pragma once
 
-#include "../../BaseSystem.h"
+#include "entt/entt.hpp"
 
 namespace godot
 {
-	class ComboDropSystem : public BaseSystem
+	class ComboDropSystem
 	{
 	private:
-		void OnMeleeHide(entt::registry& registry, entt::entity entity);
+		static void OnMeleeHide(entt::registry& registry, entt::entity entity);
 	public:
-		ComboDropSystem(entt::registry& registry);
-		virtual void operator()(float delta, entt::registry& registry) override;
+		static void Init(entt::registry& registry);
+		static void Tick(float delta, entt::registry& registry);
 	};
 }

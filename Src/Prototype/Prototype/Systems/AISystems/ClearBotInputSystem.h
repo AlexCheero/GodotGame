@@ -1,15 +1,15 @@
 #pragma once
 
-#include "../BaseSystem.h"
+#include "entt/entt.hpp"
 
 namespace godot
 {
-	class ClearBotInputSystem : public BaseSystem
+	class ClearBotInputSystem
 	{
 	private:
 		template<typename Type, typename... Types>
-		void ClearInput(entt::registry& registry);
+		static void ClearInput(entt::registry& registry);
 	public:
-		virtual void operator()(float delta, entt::registry& registry) override;
+		static void Tick(float delta, entt::registry& registry);
 	};
 }

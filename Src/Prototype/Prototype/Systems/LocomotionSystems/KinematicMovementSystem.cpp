@@ -4,7 +4,7 @@
 
 #include <KinematicBody.hpp>
 
-void godot::KinematicMovementSystem::operator()(float delta, entt::registry& registry)
+void godot::KinematicMovementSystem::Tick(float delta, entt::registry& registry)
 {
 	registry.view<VelocityComponent, KinematicBody*>().each([](VelocityComponent velocityComp, KinematicBody* pKBody)
 	{

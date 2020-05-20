@@ -12,7 +12,7 @@
 #include "../../Utils/Utils.h"
 
 //TODO: almost entirely copied from ThrowAttackSystem. implement different logick
-void godot::ThrowGrenadeSystem::operator()(float delta, entt::registry& registry)
+void godot::ThrowGrenadeSystem::Tick(float delta, entt::registry& registry)
 {
 	auto view = registry.view<AttackPressedTag, CurrentWeaponGrenadeTag, GrenadeAttackComponent, BoundsComponent, Spatial*>();
 	view.each([&registry](entt::entity entity, GrenadeAttackComponent& attackComp, BoundsComponent bounds, Spatial* pAttackerSpatial)

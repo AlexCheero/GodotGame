@@ -9,7 +9,7 @@
 #include "../../Utils/Utils.h"
 
 //TODO: speed should be different, depending on player's orientation, when aimed view will be implemented
-void godot::PlayerVelocitySystem::operator()(float delta, entt::registry& registry)
+void godot::PlayerVelocitySystem::Tick(float delta, entt::registry& registry)
 {
 	auto view = registry.view<PlayerTag, VelocityComponent, MoveDirInputComponent, SpeedComponent, Camera*>();
 	view.each([](VelocityComponent& velocityComp, MoveDirInputComponent moveInput, SpeedComponent speedComp, Camera* pCam)

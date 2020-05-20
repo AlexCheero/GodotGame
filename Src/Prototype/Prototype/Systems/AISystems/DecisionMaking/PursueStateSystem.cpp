@@ -11,12 +11,12 @@
 
 #include "DecisionMakingHelper.h"
 
-void godot::PursueStateSystem::operator()(float delta, entt::registry& registry)
+void godot::PursueStateSystem::Tick(float delta, entt::registry& registry)
 {
 	auto players = registry.view<PlayerTag, Spatial*>();
 
 	auto view = registry.view<BotTag, PursuingStateComponent, PatrolmanComponent, MeleeAttackComponent, HealthComponent, Spatial*, DecisionMakingComponent>();
-	view.each([this, &registry, &players](entt::entity entity, PursuingStateComponent& pursuingComp
+	view.each([&registry, &players](entt::entity entity, PursuingStateComponent& pursuingComp
 		, PatrolmanComponent patrolComp, MeleeAttackComponent meleeComp, HealthComponent healthComp, Spatial* pSpatial, DecisionMakingComponent decisionComp)
 	{
 		bool validTarget = registry.valid(pursuingComp.target);

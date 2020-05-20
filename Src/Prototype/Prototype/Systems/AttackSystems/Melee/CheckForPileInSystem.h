@@ -1,13 +1,13 @@
 #pragma once
 
-#include "../../BaseSystem.h"
+#include "entt/entt.hpp"
 
 namespace godot
 {
-	class CheckForPileInSystem : public BaseSystem
+	class CheckForPileInSystem
 	{
 	public:
-		virtual void operator()(float delta, entt::registry& registry) override;
+		static void Tick(float delta, entt::registry& registry);
 	};
 }
 

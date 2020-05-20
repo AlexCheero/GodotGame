@@ -1,13 +1,14 @@
 #pragma once
 
-#include "../BaseSystem.h"
+#include "entt/entt.hpp"
+
 #include "../../Components/SimpleComponents.h"
 
 namespace godot
 {
-	class LookAtSystem : public BaseSystem
+	class LookAtSystem
 	{
 	public:
-		virtual void operator()(float delta, entt::registry& registry) override;
+		static void Tick(float delta, entt::registry& registry);
 	};
 }

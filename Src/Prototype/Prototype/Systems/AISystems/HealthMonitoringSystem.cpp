@@ -2,7 +2,7 @@
 
 #include "../../Components/SimpleComponents.h"
 
-void godot::HealthMonitoringSystem::operator()(float delta, entt::registry& registry)
+void godot::HealthMonitoringSystem::Tick(float delta, entt::registry& registry)
 {
 	auto view = registry.view<HealthComponent>();
 	view.each([&registry](entt::entity entity, HealthComponent& healthComp)

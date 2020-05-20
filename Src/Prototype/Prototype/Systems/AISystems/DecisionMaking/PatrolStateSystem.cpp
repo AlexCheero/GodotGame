@@ -10,11 +10,11 @@
 
 #include "DecisionMakingHelper.h"
 
-void godot::PatrolStateSystem::operator()(float delta, entt::registry& registry)
+void godot::PatrolStateSystem::Tick(float delta, entt::registry& registry)
 {
 	auto players = registry.view<PlayerTag, Spatial*>();
 	auto patrolView = registry.view<BotTag, PatrolStateTag, PatrolmanComponent, Spatial*>();
-	patrolView.each([this, &registry, &players](entt::entity entity, PatrolmanComponent patrolComp, Spatial* pSpatial)
+	patrolView.each([&registry, &players](entt::entity entity, PatrolmanComponent patrolComp, Spatial* pSpatial)
 	{
 		entt::entity targetEntity = entt::null;
 		for (auto entity : players)
@@ -35,7 +35,7 @@ void godot::PatrolStateSystem::operator()(float delta, entt::registry& registry)
 	Navigation* pNavigation = registry.get<Navigation*>(navEntity);
 
 	auto advanceView = registry.view<PatrolStateTag, PatrolRouteComponent, Spatial*>(entt::exclude<NavPathComponent, HittedFromComponent>);
-	advanceView.each([this, &registry, pNavigation] (entt::entity entity, PatrolRouteComponent& route, Spatial* pSpatial)
+	advanceView.each([&registry, pNavigation] (entt::entity entity, PatrolRouteComponent& route, Spatial* pSpatial)
 	{
 		if (route.current < route.routePoints.size() - 1)
 			route.current++;

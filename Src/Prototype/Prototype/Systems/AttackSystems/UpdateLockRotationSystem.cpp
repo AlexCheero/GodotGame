@@ -7,11 +7,11 @@ bool godot::UpdateLockRotationSystem::ChecktargetEntity(entt::registry& registry
 	return registry.valid(lockedTarget) && !registry.has<DeadTag>(lockedTarget);
 }
 
-void godot::UpdateLockRotationSystem::operator()(float delta, entt::registry& registry)
+void godot::UpdateLockRotationSystem::Tick(float delta, entt::registry& registry)
 {
 	//TODO_melee: make unlock logick
 	auto lockedView = registry.view<CurrentWeaponMeleeTag, TargetLockComponent, RotationDirectionComponent, Spatial*>();
-	lockedView.each([this, &registry](entt::entity entity, TargetLockComponent lockComp, RotationDirectionComponent& rotComp, Spatial* pSpatial)
+	lockedView.each([&registry](entt::entity entity, TargetLockComponent lockComp, RotationDirectionComponent& rotComp, Spatial* pSpatial)
 	{
 		if (ChecktargetEntity(registry, lockComp.target))
 		{

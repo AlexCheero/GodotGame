@@ -1,15 +1,15 @@
 #pragma once
 
-#include "../../BaseSystem.h"
+#include "entt/entt.hpp"
 
 namespace godot
 {
-	class PileInSystem : public BaseSystem
+	class PileInSystem
 	{
 	private:
-		void OnPileInTagDestroyed(entt::registry& registry, entt::entity entity);
+		static void OnPileInTagDestroyed(entt::registry& registry, entt::entity entity);
 	public:
-		PileInSystem(entt::registry& registry);
-		virtual void operator()(float delta, entt::registry& registry) override;
+		static void Init(entt::registry& registry);
+		static void Tick(float delta, entt::registry& registry);
 	};
 }

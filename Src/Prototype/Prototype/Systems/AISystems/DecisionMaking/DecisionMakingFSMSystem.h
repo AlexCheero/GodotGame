@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../../BaseSystem.h"
-
 #include <Spatial.hpp>
 
 #include "PatrolStateSystem.h"
@@ -11,22 +9,17 @@
 
 namespace godot
 {
-	class DecisionMakingFSMSystem : public BaseSystem
+	class DecisionMakingFSMSystem
 	{
 	private:
-		PatrolStateSystem patrolSystem;
-		PursueStateSystem pursueSystem;
-		MeleeStateSystem meleeSystem;
-		FleeStateSystem fleeSystem;
-
-		void OnTransitionToPatrol(entt::registry& registry, entt::entity entity);
-		void OnTransitionToPursuing(entt::registry& registry, entt::entity entity);
-		void OnTransitionToFlee(entt::registry& registry, entt::entity entity);
-		void OnTransitionToMelee(entt::registry& registry, entt::entity entity);
-		void OnHitNoticing(entt::registry& registry, entt::entity entity);
+		static void OnTransitionToPatrol(entt::registry& registry, entt::entity entity);
+		static void OnTransitionToPursuing(entt::registry& registry, entt::entity entity);
+		static void OnTransitionToFlee(entt::registry& registry, entt::entity entity);
+		static void OnTransitionToMelee(entt::registry& registry, entt::entity entity);
+		static void OnHitNoticing(entt::registry& registry, entt::entity entity);
 	public:
-		DecisionMakingFSMSystem(entt::registry& registry);
+		static void Init(entt::registry& registry);
 
-		virtual void operator()(float delta, entt::registry& registry) override;
+		static void Tick(float delta, entt::registry& registry);
 	};
 }

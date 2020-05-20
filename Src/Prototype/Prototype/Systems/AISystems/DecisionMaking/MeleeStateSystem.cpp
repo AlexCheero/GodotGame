@@ -9,12 +9,12 @@
 
 #include "DecisionMakingHelper.h"
 
-void godot::MeleeStateSystem::operator()(float delta, entt::registry& registry)
+void godot::MeleeStateSystem::Tick(float delta, entt::registry& registry)
 {
 	auto view = registry.view<BotTag, MeleeAttackStateTag
 		, MeleeAttackComponent, HealthComponent, Spatial*
 		, TargetLockComponent, DecisionMakingComponent>(entt::exclude<AttackPressedTag>);
-	view.each([this, &registry](entt::entity entity, MeleeAttackComponent meleeComp, HealthComponent healthComp
+	view.each([&registry](entt::entity entity, MeleeAttackComponent meleeComp, HealthComponent healthComp
 		, Spatial* pSpatial, TargetLockComponent lockComp, DecisionMakingComponent decisionComp)
 	{
 		int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();

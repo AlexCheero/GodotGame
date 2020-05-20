@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../BaseSystem.h"
+#include "entt/entt.hpp"
 
 #include <PhysicsShapeQueryParameters.hpp>
 #include <SphereShape.hpp>
@@ -8,16 +8,16 @@
 
 namespace godot
 {
-	class GrenadeSystem : public BaseSystem
+	class GrenadeSystem
 	{
 	private:
-		Ref<PhysicsShapeQueryParameters> params;
-		Ref<SphereShape> attackShape;
+		static Ref<PhysicsShapeQueryParameters> params;
+		static Ref<SphereShape> attackShape;
 
-		bool CheckVisibility(Spatial* pGrenade, Spatial* pTarget, float explosionRadius);
+		static bool CheckVisibility(Spatial* pGrenade, Spatial* pTarget, float explosionRadius);
 	public:
-		GrenadeSystem();
+		static void Init();
 
-		virtual void operator()(float delta, entt::registry& registry) override;
+		static void Tick(float delta, entt::registry& registry);
 	};
 }
