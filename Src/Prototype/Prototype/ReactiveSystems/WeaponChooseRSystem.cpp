@@ -3,89 +3,86 @@
 #include "../Components/InputComponents.h"
 #include "../Components/AttackComponents.h"
 
-namespace //private
+void godot::WeaponChooseRSystem::OnMeleeChoose(entt::registry& registry, entt::entity entity)
 {
-	void OnMeleeChoose(entt::registry& registry, entt::entity entity)
-	{
-		if (!registry.has<CurrentWeaponMeleeTag>(entity))
-			registry.emplace<CurrentWeaponMeleeTag>(entity);
-	}
+	if (!registry.has<CurrentWeaponMeleeTag>(entity))
+		registry.emplace<CurrentWeaponMeleeTag>(entity);
+}
 
-	void OnRangedChoose(entt::registry& registry, entt::entity entity)
-	{
-		if (!registry.has<CurrentWeaponRangedTag>(entity))
-			registry.emplace<CurrentWeaponRangedTag>(entity);
-	}
+void godot::WeaponChooseRSystem::OnRangedChoose(entt::registry& registry, entt::entity entity)
+{
+	if (!registry.has<CurrentWeaponRangedTag>(entity))
+		registry.emplace<CurrentWeaponRangedTag>(entity);
+}
 
-	void OnThrowableChoose(entt::registry& registry, entt::entity entity)
-	{
-		if (!registry.has<CurrentWeaponThrowableTag>(entity))
-			registry.emplace<CurrentWeaponThrowableTag>(entity);
-	}
+void godot::WeaponChooseRSystem::OnThrowableChoose(entt::registry& registry, entt::entity entity)
+{
+	if (!registry.has<CurrentWeaponThrowableTag>(entity))
+		registry.emplace<CurrentWeaponThrowableTag>(entity);
+}
 
-	void OnGrenadeChoose(entt::registry& registry, entt::entity entity)
-	{
-		if (!registry.has<CurrentWeaponGrenadeTag>(entity))
-			registry.emplace<CurrentWeaponGrenadeTag>(entity);
-	}
+void godot::WeaponChooseRSystem::OnGrenadeChoose(entt::registry& registry, entt::entity entity)
+{
+	if (!registry.has<CurrentWeaponGrenadeTag>(entity))
+		registry.emplace<CurrentWeaponGrenadeTag>(entity);
+}
 
-	void OnMeleeAttackComponentAssign(entt::registry& registry, entt::entity entity)
-	{
-		registry.emplace_or_replace<CurrentWeaponMeleeTag>(entity);
-	}
+void godot::WeaponChooseRSystem::OnMeleeAttackComponentAssign(entt::registry& registry, entt::entity entity)
+{
+	registry.emplace_or_replace<CurrentWeaponMeleeTag>(entity);
+}
 
-	void SwitchToMeleeOnWeaponThrow(entt::registry& registry, entt::entity entity)
-	{
-		registry.emplace_or_replace<CurrentWeaponMeleeTag>(entity);
-		registry.remove_if_exists<AttackPressedTag>(entity);
-	}
+void godot::WeaponChooseRSystem::SwitchToMeleeOnWeaponThrow(entt::registry& registry, entt::entity entity)
+{
+	registry.emplace_or_replace<CurrentWeaponMeleeTag>(entity);
+	registry.remove_if_exists<AttackPressedTag>(entity);
+}
 
-	void OnRangedAttackComponentAssign(entt::registry& registry, entt::entity entity)
-	{
-		registry.emplace_or_replace<CurrentWeaponRangedTag>(entity);
-	}
+void godot::WeaponChooseRSystem::OnRangedAttackComponentAssign(entt::registry& registry, entt::entity entity)
+{
+	registry.emplace_or_replace<CurrentWeaponRangedTag>(entity);
+}
 
-	void OnThrowableAttackComponentAssign(entt::registry& registry, entt::entity entity)
-	{
-		registry.emplace_or_replace<CurrentWeaponThrowableTag>(entity);
-	}
+void godot::WeaponChooseRSystem::OnThrowableAttackComponentAssign(entt::registry& registry, entt::entity entity)
+{
+	registry.emplace_or_replace<CurrentWeaponThrowableTag>(entity);
+}
 
-	void OnGrenadeAttackComponentAssign(entt::registry& registry, entt::entity entity)
-	{
-		registry.emplace_or_replace<CurrentWeaponGrenadeTag>(entity);
-	}
+void godot::WeaponChooseRSystem::OnGrenadeAttackComponentAssign(entt::registry& registry, entt::entity entity)
+{
+	registry.emplace_or_replace<CurrentWeaponGrenadeTag>(entity);
+}
 
-	void OnMeleeTagConstruct(entt::registry& registry, entt::entity entity)
-	{
-		ASSERT(registry.has<MeleeAttackComponent>(entity), "registry has no MeleeAttackComponent");
-		registry.remove_if_exists<CurrentWeaponRangedTag>(entity);
-		registry.remove_if_exists<CurrentWeaponThrowableTag>(entity);
-		registry.remove_if_exists<CurrentWeaponGrenadeTag>(entity);
-	}
+void godot::WeaponChooseRSystem::OnMeleeTagConstruct(entt::registry& registry, entt::entity entity)
+{
+	ASSERT(registry.has<MeleeAttackComponent>(entity), "registry has no MeleeAttackComponent");
+	registry.remove_if_exists<CurrentWeaponRangedTag>(entity);
+	registry.remove_if_exists<CurrentWeaponThrowableTag>(entity);
+	registry.remove_if_exists<CurrentWeaponGrenadeTag>(entity);
+}
 
-	void OnRangedTagConstruct(entt::registry& registry, entt::entity entity)
-	{
-		ASSERT(registry.has<RangedAttackComponent>(entity), "registry has no RangedAttackComponent");
-		registry.remove_if_exists<CurrentWeaponMeleeTag>(entity);
-		registry.remove_if_exists<CurrentWeaponThrowableTag>(entity);
-		registry.remove_if_exists<CurrentWeaponGrenadeTag>(entity);
-	}
+void godot::WeaponChooseRSystem::OnRangedTagConstruct(entt::registry& registry, entt::entity entity)
+{
+	ASSERT(registry.has<RangedAttackComponent>(entity), "registry has no RangedAttackComponent");
+	registry.remove_if_exists<CurrentWeaponMeleeTag>(entity);
+	registry.remove_if_exists<CurrentWeaponThrowableTag>(entity);
+	registry.remove_if_exists<CurrentWeaponGrenadeTag>(entity);
+}
 
-	void OnThrowableTagConstruct(entt::registry& registry, entt::entity entity)
-	{
-		ASSERT(registry.has<ThrowableAttackComponent>(entity), "registry has no ThrowableAttackComponent");
-		registry.remove_if_exists<CurrentWeaponMeleeTag>(entity);
-		registry.remove_if_exists<CurrentWeaponRangedTag>(entity);
-		registry.remove_if_exists<CurrentWeaponGrenadeTag>(entity);
-	}
+void godot::WeaponChooseRSystem::OnThrowableTagConstruct(entt::registry& registry, entt::entity entity)
+{
+	ASSERT(registry.has<ThrowableAttackComponent>(entity), "registry has no ThrowableAttackComponent");
+	registry.remove_if_exists<CurrentWeaponMeleeTag>(entity);
+	registry.remove_if_exists<CurrentWeaponRangedTag>(entity);
+	registry.remove_if_exists<CurrentWeaponGrenadeTag>(entity);
+}
 
-	void OnGrenadeTagConstruct(entt::registry& registry, entt::entity entity)
-	{
-		ASSERT(registry.has<GrenadeAttackComponent>(entity), "registry has no ThrowableAttackComponent");
-		registry.remove_if_exists<CurrentWeaponMeleeTag>(entity);
-		registry.remove_if_exists<CurrentWeaponRangedTag>(entity);
-		registry.remove_if_exists<CurrentWeaponThrowableTag>(entity);
-	}
+void godot::WeaponChooseRSystem::OnGrenadeTagConstruct(entt::registry& registry, entt::entity entity)
+{
+	ASSERT(registry.has<GrenadeAttackComponent>(entity), "registry has no ThrowableAttackComponent");
+	registry.remove_if_exists<CurrentWeaponMeleeTag>(entity);
+	registry.remove_if_exists<CurrentWeaponRangedTag>(entity);
+	registry.remove_if_exists<CurrentWeaponThrowableTag>(entity);
 }
 
 void godot::WeaponChooseRSystem::Init(entt::registry& registry)
