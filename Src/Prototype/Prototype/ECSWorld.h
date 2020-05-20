@@ -20,6 +20,22 @@ namespace godot
 		SystemsVec physics_systems;
 		SystemsVec process_systems;
 
+		template<typename Type, typename... Types>
+		void InitSystems(entt::registry& registry)
+		{
+			Type::Init(registry);
+			if constexpr (sizeof...(Types))
+				InitSystems<Types...>(registry);
+		}
+
+		template<typename Type, typename... Types>
+		void EmplaceSystems(SystemsVec& systems)
+		{
+			systems.emplace_back(Type::Tick);
+			if constexpr (sizeof...(Types))
+				EmplaceSystems<Types...>(systems);
+		}
+
 		template<typename T>
 		T* AssignNodeInheritedComponent(entt::registry& registry, entt::entity entity, Node* pNode)
 		{

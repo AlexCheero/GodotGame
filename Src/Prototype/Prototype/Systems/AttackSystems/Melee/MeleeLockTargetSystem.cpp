@@ -27,7 +27,7 @@ godot::Array godot::MeleeLockTargetSystem::GetIntersects(Spatial* pAttackerSpati
 	return spaceState->intersect_shape(params, INTERSECT_RESULTS_NUM);
 }
 
-void godot::MeleeLockTargetSystem::Init()
+void godot::MeleeLockTargetSystem::Init(entt::registry& /*not used*/)
 {
 	params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
 	params->set_collide_with_areas(false);

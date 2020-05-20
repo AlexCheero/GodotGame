@@ -21,7 +21,7 @@ bool godot::GrenadeSystem::CheckVisibility(Spatial* pGrenade, Spatial* pTarget, 
 	return pTarget == utils::CastFromSpatial(pGrenade, castDirection, explosionRadius);
 }
 
-void godot::GrenadeSystem::Init()
+void godot::GrenadeSystem::Init(entt::registry& /*not used*/)
 {
 	params = Ref<PhysicsShapeQueryParameters>(PhysicsShapeQueryParameters::_new());
 	params->set_collide_with_areas(false);

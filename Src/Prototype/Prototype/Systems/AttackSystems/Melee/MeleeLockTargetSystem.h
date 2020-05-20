@@ -18,7 +18,7 @@ namespace godot
 
 		static Array GetIntersects(Spatial* pAttackerSpatial, float distance, String layerName);
 	public:
-		static void Init();
+		static void Init(entt::registry& /*not used*/);
 		static void Tick(float delta, entt::registry& registry);
 	};
 }

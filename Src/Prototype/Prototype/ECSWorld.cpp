@@ -213,62 +213,62 @@ void godot::ECSWorld::_init()
 
 	utils::InitPhysicLayers();
 
-//setup reactive systems
-	WeaponChooseRSystem::Init(registry);
-	
+	InitSystems
+		<
+			WeaponChooseRSystem,
+			MeleeLockTargetSystem,
+			PileInSystem,
+			ComboDropSystem,
+			DecisionMakingFSMSystem,
+			GrenadeSystem
+		>(registry);
+
 //setup physics systems
-	physics_systems.emplace_back(GravitySystem::Tick);
-	//must be called after GravitySystem
-	//must be called after all systems that affects velocity
-	physics_systems.emplace_back(KinematicMovementSystem::Tick);
-	
+	EmplaceSystems
+		<
+			GravitySystem,
+			KinematicMovementSystem //must be called after all systems that affects velocity
+		>(physics_systems);
 //setup systems
-	process_systems.emplace_back(JumpSystem::Tick);
-	process_systems.emplace_back(PlayerVelocitySystem::Tick);
-	process_systems.emplace_back(PlayerRotationSystem::Tick);
+
+	EmplaceSystems
+		<
+			JumpSystem,
+		    PlayerVelocitySystem,
+		    PlayerRotationSystem,
 
 //<melee systems
-	process_systems.emplace_back(MeleeAttackCooldownSystem::Tick);
-	
-	MeleeLockTargetSystem::Init();
-	process_systems.emplace_back(MeleeLockTargetSystem::Tick);
-
-	process_systems.emplace_back(UpdateLockRotationSystem::Tick);
-	//TODO_melee: implement proper melee with blocks and stuff
-	process_systems.emplace_back(MeleeAnimSystem::Tick);
-	process_systems.emplace_back(CheckForPileInSystem::Tick);
-
-	PileInSystem::Init(registry);
-	process_systems.emplace_back(PileInSystem::Tick);
-
-	ComboDropSystem::Init(registry);
-	process_systems.emplace_back(ComboDropSystem::Tick);
-
-	process_systems.emplace_back(IncrementComboSystem::Tick);
-	process_systems.emplace_back(EndAttackAnimSystem::Tick);
+            MeleeAttackCooldownSystem,
+            MeleeLockTargetSystem,
+            UpdateLockRotationSystem,
+            //TODO_melee: implement proper melee with blocks and stuff
+            MeleeAnimSystem,
+            CheckForPileInSystem,
+            PileInSystem,
+            ComboDropSystem,
+            IncrementComboSystem,
+            EndAttackAnimSystem,
 //melee systems>
-	
-	process_systems.emplace_back(RangedAttackSystem::Tick);
-	process_systems.emplace_back(ThrowAttackSystem::Tick);
-	process_systems.emplace_back(ThrowGrenadeSystem::Tick);
 
-	//place before any ai systems
-	process_systems.emplace_back(ClearBotInputSystem::Tick);
-	//comment to switch off bots
-	DecisionMakingFSMSystem::Init(registry);
-	process_systems.emplace_back(DecisionMakingFSMSystem::Tick);
+            RangedAttackSystem,
+            ThrowAttackSystem,
+	        ThrowGrenadeSystem,
+		    //place before any ai systems
+		    ClearBotInputSystem,
+		    //comment to switch off bots
+		    DecisionMakingFSMSystem,
 
-	GrenadeSystem::Init();
-	process_systems.emplace_back(GrenadeSystem::Tick);//init too
+		    GrenadeSystem,
 
-	process_systems.emplace_back(NavAgentSystem::Tick);
-	process_systems.emplace_back(PursuingSystem::Tick);
-	
-	process_systems.emplace_back(LookAtSystem::Tick);
-	process_systems.emplace_back(DestroyDeadSystem::Tick);
-	process_systems.emplace_back(HealthMonitoringSystem::Tick);
-	process_systems.emplace_back(FleeingSystem::Tick);
-	process_systems.emplace_back(LocomotionAnimSystem::Tick);
+		    NavAgentSystem,
+		    PursuingSystem,
+
+		    LookAtSystem,
+		    DestroyDeadSystem,
+			HealthMonitoringSystem,
+			FleeingSystem,
+			LocomotionAnimSystem
+		>(process_systems);
 }
 
 void godot::ECSWorld::_ready()

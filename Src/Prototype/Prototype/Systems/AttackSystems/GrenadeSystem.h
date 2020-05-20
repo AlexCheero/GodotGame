@@ -16,7 +16,7 @@ namespace godot
 
 		static bool CheckVisibility(Spatial* pGrenade, Spatial* pTarget, float explosionRadius);
 	public:
-		static void Init();
+		static void Init(entt::registry& /*not used*/);
 
 		static void Tick(float delta, entt::registry& registry);
 	};
