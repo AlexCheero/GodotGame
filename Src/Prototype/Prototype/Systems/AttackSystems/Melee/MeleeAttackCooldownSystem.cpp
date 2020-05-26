@@ -27,7 +27,7 @@ void godot::MeleeAttackCooldownSystem::Tick(float delta, entt::registry& registr
 		}
 	});
 
-	//TODO_asap: try to use only AttackPressedTag and remove MeleeAttackEvent
+	//TODO: try to use only AttackPressedTag and remove MeleeAttackEvent
 	auto inputView = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent>(entt::exclude<MeleeAttackBuffered>);
 	inputView.each([&registry, currTimeMillis](entt::entity entity, MeleeAttackComponent& attackComp)
 	{
