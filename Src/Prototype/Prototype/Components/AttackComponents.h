@@ -12,6 +12,9 @@
 
 #include "ComponentsMeta.h"
 
+//used instead of -std::numeric_limits<int64_t>::max() to prevent underflow
+constexpr int64_t DEFAULT_PREV_HIT_TIME = -10000;
+
 struct MeleeHit
 {
 	godot::String anim;
@@ -31,8 +34,9 @@ struct MeleeAttackComponent
 	std::vector<MeleeHit> hits;
 
 	int hitIdx = 0;
-	int64_t prevHitTime = -std::numeric_limits<int64_t>::max();
+	int64_t prevHitTime = DEFAULT_PREV_HIT_TIME;
 	
+	//TODO: maybe move outside of the class
 	static int64_t maxComboIntervalMillis;
 
 	MeleeHit GetCurrentHit() { return hits[hitIdx]; }
@@ -55,7 +59,7 @@ struct RangedAttackComponent
 	float distance;
 	float damage;
 	float attackTime;
-	int64_t prevHitTime = -std::numeric_limits<int64_t>::max();
+	int64_t prevHitTime = DEFAULT_PREV_HIT_TIME;
 };
 REGISTER_COMPONENT(RangedAttackComponent, "ammoCount", "distance", "damage", "attackTime");
 
@@ -67,7 +71,7 @@ struct ThrowableAttackComponent
 	godot::Ref<godot::PackedScene> throwableScene;
 	float force;
 	float attackTime;
-	int64_t prevHitTime = -std::numeric_limits<int64_t>::max();
+	int64_t prevHitTime = DEFAULT_PREV_HIT_TIME;
 };
 REGISTER_COMPONENT(ThrowableAttackComponent, "ammoCount", "throwableScene", "force", "attackTime");
 
@@ -78,7 +82,7 @@ struct GrenadeAttackComponent
 	godot::Ref<godot::PackedScene> grenadeScene;
 	float force;
 	float attackTime;
-	int64_t prevHitTime = -std::numeric_limits<int64_t>::max();
+	int64_t prevHitTime = DEFAULT_PREV_HIT_TIME;
 };
 REGISTER_COMPONENT(GrenadeAttackComponent, "ammoCount", "grenadeScene", "force", "attackTime");
 

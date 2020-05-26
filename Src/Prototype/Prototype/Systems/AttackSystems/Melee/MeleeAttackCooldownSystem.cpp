@@ -5,7 +5,7 @@
 #include "../../../Components/AttackComponents.h"
 #include "../../../Components/InputComponents.h"
 
-//TODO: move to config and tweak value
+//TODO: move to config.cfg and tweak value
 #define MILLIS_TO_KEEP_COMBO 500
 
 void godot::MeleeAttackCooldownSystem::Tick(float delta, entt::registry& registry)
@@ -16,7 +16,8 @@ void godot::MeleeAttackCooldownSystem::Tick(float delta, entt::registry& registr
 	bufferedView.each([&registry, currTimeMillis](entt::entity entity, MeleeAttackComponent& attackComp)
 	{
 		int64_t attackTimeMillis = utils::SecondsToMillis(attackComp.GetCurrentHit().attackTime);
-		if (attackComp.prevHitTime + attackTimeMillis <= currTimeMillis)
+		int64_t millisSinceLastHit = currTimeMillis - attackComp.prevHitTime;
+		if (millisSinceLastHit >= attackTimeMillis)
 		{
 			attackComp.prevHitTime = currTimeMillis;
 
@@ -30,19 +31,17 @@ void godot::MeleeAttackCooldownSystem::Tick(float delta, entt::registry& registr
 	auto inputView = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent>(entt::exclude<MeleeAttackBuffered>);
 	inputView.each([&registry, currTimeMillis](entt::entity entity, MeleeAttackComponent& attackComp)
 	{
-		//do not use timePassedSinceLastAttack because attackComp.prevHitTime is initialy -std::numeric_limits<int64_t>::max()
-		//and this cause type underflow
-		//int64_t timePassedSinceLastAttack = currTimeMillis - attackComp.prevHitTime;
-		//if (timePassedSinceLastAttack >= attackTimeMillis)
-
 		int64_t attackTimeMillis = utils::SecondsToMillis(attackComp.GetCurrentHit().attackTime);
-		if (attackComp.prevHitTime + attackTimeMillis <= currTimeMillis)
+		//TODO: use interval between hits (not including attack time) instead of this assert or use this as feature to implement non combobale hits
+		ASSERT(attackTimeMillis < MeleeAttackComponent::maxComboIntervalMillis, "attack time is smaller than max combo interval");
+		int64_t millisSinceLastHit = currTimeMillis - attackComp.prevHitTime;
+		if (millisSinceLastHit >= attackTimeMillis)
 		{
 			attackComp.prevHitTime = currTimeMillis;
 			ASSERT(!registry.has<MeleeAttackEvent>(entity), "MeleeAttackEvent didn't cleared properly");
 			registry.emplace<MeleeAttackEvent>(entity);
 		}
-		else if (attackComp.prevHitTime + MILLIS_TO_KEEP_COMBO <= currTimeMillis) //TODO_asap: keep only if incrementing combo
+		else if (millisSinceLastHit >= MILLIS_TO_KEEP_COMBO && millisSinceLastHit < MeleeAttackComponent::maxComboIntervalMillis)
 		{
 			registry.emplace<MeleeAttackBuffered>(entity);
 		}

@@ -251,7 +251,7 @@ void godot::ECSWorld::_init()
 		{ auto view = registry.view<MeleeAttackEvent>(); registry.remove<MeleeAttackEvent>(view.begin(), view.end()); }
 	);
 
-	//TODO_asap: remove test code and implement event clean up system
+	//TODO_asap: remove test code and implement event clean up system and implement proper just pressed input system
 	//process_systems.emplace_back([](float delta, entt::registry& registry)
 	//	{ auto view = registry.view<AttackPressedTag>(); registry.remove<AttackPressedTag>(view.begin(), view.end()); }
 	//);
