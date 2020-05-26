@@ -227,6 +227,7 @@ void godot::ECSWorld::_init()
 	process_systems.emplace_back(PlayerVelocitySystem::Tick);
 	process_systems.emplace_back(PlayerRotationSystem::Tick);
 
+	//TODO: try to make some of the systems reactive back
 //<melee systems
 	process_systems.emplace_back(MeleeAttackCooldownSystem::Tick);
 	

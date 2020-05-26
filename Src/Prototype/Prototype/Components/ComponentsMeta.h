@@ -5,6 +5,7 @@ constexpr size_t GetArraySize(T(&)[N]) { return N; }
 
 template <typename T>
 struct ComponentsMeta {};
+//TODO: try to implement type registartor as a separate project/application
 //should add type into EntityView::ConstructComponents_impl types list
 #define REGISTER_COMPONENT(Type, ...) template<> \
 struct ComponentsMeta<Type> \
