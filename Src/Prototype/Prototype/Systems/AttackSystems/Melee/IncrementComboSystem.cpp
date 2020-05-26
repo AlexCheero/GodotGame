@@ -5,7 +5,7 @@
 
 void godot::IncrementComboSystem::Tick(float delta, entt::registry& registry)
 {
-	auto view = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent>();
+	auto view = registry.view<MeleeAttackEvent, CurrentWeaponMeleeTag, MeleeAttackComponent>();
 	view.each([](MeleeAttackComponent& attackComp)
 	{
 		int prevIdx = attackComp.hitIdx;

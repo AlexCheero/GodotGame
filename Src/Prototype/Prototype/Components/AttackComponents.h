@@ -45,6 +45,9 @@ struct MeleeWeaponComponent
 };
 REGISTER_COMPONENT(MeleeWeaponComponent, "hitsConfigName");
 
+DECLARE_TAG(MeleeAttackEvent);
+DECLARE_TAG(MeleeAttackBuffered);
+
 DECLARE_TAG(CurrentWeaponRangedTag);
 struct RangedAttackComponent
 {

@@ -11,7 +11,7 @@
 //      and delete EndAttackAnimSystem and AttackAnimPlayingComponent as unnecessary
 void godot::MeleeAnimSystem::Tick(float delta, entt::registry& registry)
 {
-	auto view = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent, AnimationTree*>();
+	auto view = registry.view<MeleeAttackEvent, CurrentWeaponMeleeTag, MeleeAttackComponent, AnimationTree*>();
 	view.each([&registry](entt::entity entity, MeleeAttackComponent attackComp, AnimationTree* pAnimTree)
 	{
 		int prevAnimIdx = attackComp.hitIdx - 1;

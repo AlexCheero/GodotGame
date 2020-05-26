@@ -5,7 +5,7 @@
 
 void godot::CheckForPileInSystem::Tick(float delta, entt::registry& registry)
 {
-	auto view = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, TargetLockComponent, MeleeAttackComponent, Spatial*>(entt::exclude<InAirTag, PileInTag>);
+	auto view = registry.view<MeleeAttackEvent, CurrentWeaponMeleeTag, TargetLockComponent, MeleeAttackComponent, Spatial*>(entt::exclude<InAirTag, PileInTag>);
 	view.each([&registry](entt::entity entity, TargetLockComponent lockComp, MeleeAttackComponent melee, Spatial* pSpatial)
 	{
 		ASSERT(registry.has<Spatial*>(lockComp.target), "target has no spatial");
