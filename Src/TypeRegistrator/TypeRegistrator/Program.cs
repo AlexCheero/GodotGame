@@ -59,9 +59,10 @@ namespace TypeRegistrator
 
             if (types.Count > 0)
             {
+                //TODO: fix inconsistent line endings
                 //TODO: make it via FileStream or try to use File.WriteAllText, File.ReadAllText and StringBuilder only once
                 WriteHeaders(outputFile, headers);
-                //TODO: fix adding empty lines on re adding types
+                //TODO: fix adding empty lines on re adding types. Probably this is because of StringBuilder.Remove
                 WriteRegisteredTypes(outputFile, types, getRegisteredMacro);
             }
         }
@@ -174,11 +175,16 @@ namespace TypeRegistrator
         {
             string src = srcBuilder.ToString();
 
+            //TODO: clear is broken
             int endLineIndex = src.IndexOf('\n', insertIndex);
             if (endLineIndex < 0)
+            {
+                Console.WriteLine("clear last");
                 srcBuilder.Remove(insertIndex, src.Length - insertIndex);
+            }
             else
             {
+                Console.WriteLine("clear string");
                 if (src[endLineIndex - 1] == '\\')
                     ClearPreviouslyDefined(srcBuilder, endLineIndex + 1);
                 srcBuilder.Remove(insertIndex, endLineIndex - insertIndex);
