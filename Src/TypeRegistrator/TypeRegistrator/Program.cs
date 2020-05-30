@@ -59,10 +59,10 @@ namespace TypeRegistrator
 
             if (types.Count > 0)
             {
-                //TODO: make it via FileStream and fix not consistent line endings
+                //TODO: make it via FileStream or try to use File.WriteAllText, File.ReadAllText and StringBuilder only once
                 WriteHeaders(outputFile, headers);
-                string macroDefinition = GetMacroDefinitionForTypes(types);
-                WriteRegisteredTypes(outputFile, macroDefinition, getRegisteredMacro);
+                //TODO: fix adding empty lines on re adding types
+                WriteRegisteredTypes(outputFile, types, getRegisteredMacro);
             }
         }
 
@@ -146,10 +146,10 @@ namespace TypeRegistrator
             }
         }
 
-        static void WriteRegisteredTypes(string path, string macroDefinition, string macro)
+        static void WriteRegisteredTypes(string path, HashSet<string> types, string macro)
         {
+            string macroDefinition = GetMacroDefinitionForTypes(types);
             string src = File.ReadAllText(path);
-
             StringBuilder srcBuilder = new StringBuilder(src);
 
             string macroDefine = "#define " + macro + " ";
@@ -185,20 +185,41 @@ namespace TypeRegistrator
             }
         }
 
-        //TODO: fix appending new line on every WriteHeaders
+        static string GetHeadersString(HashSet<string> headers, string srcStr)
+        {
+            StringBuilder headersStr = new StringBuilder();
+            foreach (var header in headers)
+            {
+                if (srcStr.IndexOf(header) < 0)
+                    headersStr.Append("#include \"" + header + "\"\n");
+            }
+
+            return headersStr.ToString();
+        }
+
         static void WriteHeaders(string path, HashSet<string> headers)
         {
             StringBuilder srcBuilder = new StringBuilder(File.ReadAllText(path));
-            
-            int insertIndex = GetHeaderInsertIndex(srcBuilder);
+            string srcStr = srcBuilder.ToString();
 
-            var headersEnumerator = headers.GetEnumerator();
-            while (headersEnumerator.MoveNext())
-            {
-                string include = "#include \"" + headersEnumerator.Current + "\"";
-                if (srcBuilder.ToString().IndexOf(include) < 0)
-                    srcBuilder.Insert(insertIndex, include + '\n');
-            }
+            string headersStr = GetHeadersString(headers, srcStr);
+            if (headersStr.Length == 0)
+                return;
+
+            int insertIndex = GetHeaderInsertIndex(srcBuilder);
+            if (srcStr.Length < insertIndex + 1)
+                srcBuilder.Append("\n\n"); //nothing after pragma
+            else if (srcStr[insertIndex] != '\n')
+                srcBuilder.Insert(insertIndex, "\n\n"); //no new line after pragma
+            else if (srcStr.Length < insertIndex + 2 || srcStr[insertIndex + 1] != '\n')
+                srcBuilder.Insert(insertIndex, '\n'); //no empty line after pragma
+
+            insertIndex += 2;
+            
+            srcBuilder.Insert(insertIndex, headersStr);
+            int lastHeadersIndex = insertIndex + headersStr.Length;
+            if (srcBuilder.ToString()[lastHeadersIndex] != '\n')
+                srcBuilder.Insert(lastHeadersIndex, '\n');
 
             File.WriteAllText(path, srcBuilder.ToString());
         }
@@ -221,16 +242,6 @@ namespace TypeRegistrator
                 Console.WriteLine("Something went horribly wrong!");
                 Environment.Exit(4);
             }
-
-            if (srcStr.Length == insertIndex)
-                srcBuilder.Insert(insertIndex, '\n');
-            srcStr = srcBuilder.ToString();
-
-            if (srcStr[insertIndex] != '\n')
-                srcBuilder.Insert(insertIndex, '\n');
-            srcBuilder.Insert(insertIndex, '\n');
-
-            insertIndex += 2;
 
             return insertIndex;
         }
