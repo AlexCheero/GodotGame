@@ -21,21 +21,26 @@ namespace TypeRegistrator
         static void RegisterTypes(string sourceDirectory, string registerationMacro, string getRegisteredMacro, string outputFile)
         {
             string[] allfiles = Directory.GetFiles(sourceDirectory, "*.h", SearchOption.AllDirectories);
-            HashSet<string> types = new HashSet<string>();
-            foreach (var file in allfiles)
+            HashSet<Tuple<string, string>> types = new HashSet<Tuple<string, string>>();
+
+            for (int i = 0; i < allfiles.Length; i++)
             {
-                if (file.Replace('\\', '/').Equals(outputFile))
+                string file = allfiles[i].Replace('\\', '/');
+                if (file.Equals(outputFile))
                     continue;
 
                 var src = File.ReadAllText(file);
-                GatherRegisteredTypes(src, registerationMacro, ref types);
+                GatherRegisteredTypes(src, registerationMacro, file, ref types);
             }
 
             if (types.Count > 0)
+            {
+                WriteHeaders(outputFile, types);
                 WriteRegisteredTypes(outputFile, types, getRegisteredMacro);
+            }
         }
 
-        static void GatherRegisteredTypes(string src, string tag, ref HashSet<string> types)
+        static void GatherRegisteredTypes(string src, string tag, string filePath, ref HashSet<Tuple<string, string>> types)
         {
             for (int tagIndex = 0; ; tagIndex += tag.Length)
             {
@@ -53,7 +58,7 @@ namespace TypeRegistrator
 
                 string type = src.Substring(typeStartIndex, typeEndIndex - typeStartIndex);
 
-                if (!types.Add(type))
+                if (!types.Add(Tuple.Create(filePath, type)))
                 {
                     Console.WriteLine("Error in source code. Type registered more than once");
                     Environment.Exit(2);
@@ -61,9 +66,8 @@ namespace TypeRegistrator
             }
         }
 
-        static void WriteRegisteredTypes(string path, HashSet<string> types, string macro)
+        static void WriteRegisteredTypes(string path, HashSet<Tuple<string, string>> types, string macro)
         {
-            //TODO: include headers of registered types
             string src = File.ReadAllText(path);
 
             StringBuilder newSrc = new StringBuilder(src);
@@ -79,12 +83,19 @@ namespace TypeRegistrator
                 int insertIndex = regIndex + macroDefine.Length;
                 //TODO: implement multiline macro
                 int endLineIndex = src.IndexOf('\n', insertIndex);
-                newSrc.Remove(insertIndex, endLineIndex - insertIndex);
-                newSrc.Insert(insertIndex, typeSetEnumerator.Current);
-                insertIndex += typeSetEnumerator.Current.Length;
+                if (endLineIndex < 0)
+                    newSrc.Remove(insertIndex, src.Length - insertIndex);
+                else
+                    newSrc.Remove(insertIndex, endLineIndex - insertIndex);
+
+                string currentType = typeSetEnumerator.Current.Item2;
+                newSrc.Insert(insertIndex, currentType);
+                insertIndex += currentType.Length;
+
                 while (typeSetEnumerator.MoveNext())
                 {
-                    string insertion = ", " + typeSetEnumerator.Current;
+                    currentType = typeSetEnumerator.Current.Item2;
+                    string insertion = ", " + currentType;
                     newSrc.Insert(insertIndex, insertion);
                     insertIndex += insertion.Length;
                 }
@@ -92,9 +103,29 @@ namespace TypeRegistrator
             else
             {
                 newSrc.Append("\n" + macroDefine);
-                newSrc.Append(typeSetEnumerator.Current);
+                string currentType = typeSetEnumerator.Current.Item2;
+                newSrc.Append(currentType);
                 while (typeSetEnumerator.MoveNext())
-                    newSrc.Append(", " + typeSetEnumerator.Current);
+                {
+                    currentType = typeSetEnumerator.Current.Item2;
+                    newSrc.Append(", " + currentType);
+                }
+            }
+
+            File.WriteAllText(path, newSrc.ToString());
+        }
+
+        static void WriteHeaders(string path, HashSet<Tuple<string, string>> types)
+        {
+            StringBuilder newSrc = new StringBuilder(File.ReadAllText(path));
+            newSrc.Insert(0, '\n');
+
+            var typeSetEnumerator = types.GetEnumerator();
+            while (typeSetEnumerator.MoveNext())
+            {
+                string include = "#include \"" + typeSetEnumerator.Current.Item1 + "\"";
+                if (newSrc.ToString().IndexOf(include) < 0)
+                    newSrc.Insert(0, include + '\n');
             }
 
             File.WriteAllText(path, newSrc.ToString());
