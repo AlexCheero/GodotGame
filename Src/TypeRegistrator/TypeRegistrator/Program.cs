@@ -11,8 +11,11 @@ namespace TypeRegistrator
         static void Main(string[] args)
         {
             //TODO: pass this via args
-            string registerationMacro = "DECLARE_REGISTERED_TAG";
-            string getRegisteredMacro = "REGISTERED_TAGS";
+            //string registerationMacro = "DECLARE_REGISTERED_TAG";
+            //string getRegisteredMacro = "REGISTERED_TAGS";
+
+            string registerationMacro = "REGISTER_COMPONENT";
+            string getRegisteredMacro = "REGISTERED_COMPONENTS";
 
             string sourceDirectory = "C:/Users/Alex/Documents/GodotProjects/Projects/Prototype/Src/Prototype";
             string outputFile = "C:/Users/Alex/Documents/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/RegisteredTypes.h";
@@ -61,6 +64,28 @@ namespace TypeRegistrator
             }
         }
 
+        static int GetTypeEndIndex(string src, int typeStartIndex)
+        {
+            char[] closingChars = new char[] { ')', ',' };
+            int typeEndIndex = -1;
+            foreach (var closingChar in closingChars)
+            {
+                int closingCharIndex = src.IndexOf(closingChar, typeStartIndex);
+                if (typeEndIndex < 0)
+                    typeEndIndex = closingCharIndex;
+                else if (closingCharIndex > 0 && closingCharIndex < typeEndIndex)
+                    typeEndIndex = closingCharIndex;
+            }
+
+            if (typeEndIndex < 0)
+            {
+                Console.WriteLine("Error in source code. No closing braket");
+                Environment.Exit(1);
+            }
+
+            return typeEndIndex;
+        }
+
         static void GatherRegisteredTypes(string src, string tag, string filePath, ref HashSet<Tuple<string, string>> types)
         {
             for (int tagIndex = 0; ; tagIndex += tag.Length)
@@ -70,12 +95,13 @@ namespace TypeRegistrator
                     return;
 
                 int typeStartIndex = tagIndex + tag.Length + 1;
-                int typeEndIndex = src.IndexOf(')', typeStartIndex);
-                if (typeEndIndex == -1)
-                {
-                    Console.WriteLine("Error in source code. No closing braket");
-                    Environment.Exit(1);
-                }
+                int typeEndIndex = GetTypeEndIndex(src, typeStartIndex);
+                //int typeEndIndex = src.IndexOf(')', typeStartIndex);
+                //if (typeEndIndex == -1)
+                //{
+                //    Console.WriteLine("Error in source code. No closing braket");
+                //    Environment.Exit(1);
+                //}
 
                 string type = src.Substring(typeStartIndex, typeEndIndex - typeStartIndex);
                 if (!types.Add(Tuple.Create(filePath, type)))

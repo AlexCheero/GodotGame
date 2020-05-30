@@ -47,22 +47,7 @@ void godot::EntityView::_register_methods()
 
 void godot::EntityView::ConstructComponents(entt::registry& registry, entt::entity entity)
 {
-	ConstructComponents_impl
-		<
-			MeleeAttackComponent,
-			RangedAttackComponent,
-			ThrowableAttackComponent,
-			GrenadeAttackComponent,
-			HealthComponent,
-			GravityComponent,
-			JumpSpeedComponent,
-			SpeedComponent,
-			PatrolmanComponent,
-			NavMarginComponent,
-			MeleeWeaponComponent,
-			DecisionMakingComponent
-		>
-		(registry, entity);
+	ConstructComponents_impl<REGISTERED_COMPONENTS>(registry, entity);
 }
 
 void godot::EntityView::ConstructTags(entt::registry& registry, entt::entity entity)
