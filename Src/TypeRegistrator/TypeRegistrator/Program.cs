@@ -118,17 +118,39 @@ namespace TypeRegistrator
         static void WriteHeaders(string path, HashSet<Tuple<string, string>> types)
         {
             StringBuilder newSrc = new StringBuilder(File.ReadAllText(path));
-            newSrc.Insert(0, '\n');
+            
+            int insertIndex = GetHeaderInsertIndex(newSrc);
 
             var typeSetEnumerator = types.GetEnumerator();
             while (typeSetEnumerator.MoveNext())
             {
                 string include = "#include \"" + typeSetEnumerator.Current.Item1 + "\"";
                 if (newSrc.ToString().IndexOf(include) < 0)
-                    newSrc.Insert(0, include + '\n');
+                    newSrc.Insert(insertIndex, include + '\n');
             }
 
             File.WriteAllText(path, newSrc.ToString());
+        }
+
+        static int GetHeaderInsertIndex(StringBuilder newSrc)
+        {
+            string pragma = "#pragma once";
+            int insertIndex = newSrc.ToString().IndexOf(pragma);
+
+            if (insertIndex < 0)
+            {
+                Console.WriteLine("Error in source code. No #pragma once directive");
+                Environment.Exit(3);
+            }
+
+            insertIndex += pragma.Length;
+            if (newSrc.ToString()[insertIndex + 1] != '\n')
+                newSrc.Insert(insertIndex, '\n');
+            newSrc.Insert(insertIndex, '\n');
+
+            insertIndex += 2;
+
+            return insertIndex;
         }
     }
 }
