@@ -7,5 +7,11 @@
 
 #include "C:/Users/Alex/Documents/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/SimpleComponents.h"
 
-#define REGISTERED_TAGS PlayerTag, BotTag, MainCameraTag
-#define REGISTERED_COMPONENTS MeleeAttackComponent, MeleeWeaponComponent, RangedAttackComponent, ThrowableAttackComponent, GrenadeAttackComponent, GrenadeComponent, JumpSpeedComponent, SpeedComponent, GravityComponent, HealthComponent, DecisionMakingComponent, NavMarginComponent, PatrolmanComponent
+#define REGISTERED_TAGS \
+    PlayerTag, BotTag, MainCameraTag
+
+#define REGISTERED_COMPONENTS \
+    MeleeAttackComponent, MeleeWeaponComponent, RangedAttackComponent, ThrowableAttackComponent, \
+    GrenadeAttackComponent, GrenadeComponent, JumpSpeedComponent, SpeedComponent, \
+    GravityComponent, HealthComponent, DecisionMakingComponent, NavMarginComponent, \
+    PatrolmanComponent

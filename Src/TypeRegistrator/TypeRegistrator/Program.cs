@@ -45,6 +45,7 @@ namespace TypeRegistrator
         static void RegisterTypes(string sourceDirectory, string registerationMacro, string getRegisteredMacro, string outputFile, string[] excludes)
         {
             string[] allfiles = Directory.GetFiles(sourceDirectory, "*.h", SearchOption.AllDirectories);
+            //TODO: split into two different sets
             HashSet<Tuple<string, string>> types = new HashSet<Tuple<string, string>>();
 
             for (int i = 0; i < allfiles.Length; i++)
@@ -54,15 +55,49 @@ namespace TypeRegistrator
                     continue;
 
                 var src = File.ReadAllText(file);
-                GatherRegisteredTypes(src, registerationMacro, file, ref types);
+                GatherRegisteredTypes(src, registerationMacro, file, types);
             }
 
             if (types.Count > 0)
             {
-                //TODO: make it via FileStream and fix not sonsistent line endings
+                //TODO: make it via FileStream and fix not consistent line endings
                 WriteHeaders(outputFile, types);
                 WriteRegisteredTypes(outputFile, types, getRegisteredMacro);
             }
+        }
+
+        const int MAX_DEFINITION_LINE_LENGTH = 100;
+        static string GetMacroDefinitionForTypes(HashSet<Tuple<string, string>> types)
+        {
+            StringBuilder macro = new StringBuilder();
+
+            var typeSetEnumerator = types.GetEnumerator();
+            typeSetEnumerator.MoveNext();
+            
+            string currentType = typeSetEnumerator.Current.Item2;
+            macro.Append("    " + currentType);
+
+            int lineLengthCounter = currentType.Length;
+
+            while (typeSetEnumerator.MoveNext())
+            {
+                currentType = typeSetEnumerator.Current.Item2;
+
+                if (lineLengthCounter + currentType.Length + 2 > MAX_DEFINITION_LINE_LENGTH)
+                {
+                    macro.Append(", \\\n    " + currentType);
+                    lineLengthCounter = currentType.Length + 8;
+                }
+                else
+                {
+                    macro.Append(", " + currentType);
+                    lineLengthCounter += currentType.Length + 2;
+                }
+            }
+
+            macro.Insert(0, "\\\n");
+
+            return macro.ToString();
         }
 
         static int GetTypeEndIndex(string src, int typeStartIndex)
@@ -87,7 +122,7 @@ namespace TypeRegistrator
             return typeEndIndex;
         }
 
-        static void GatherRegisteredTypes(string src, string tag, string filePath, ref HashSet<Tuple<string, string>> types)
+        static void GatherRegisteredTypes(string src, string tag, string filePath, HashSet<Tuple<string, string>> types)
         {
             for (int tagIndex = 0; ; tagIndex += tag.Length)
             {
@@ -97,12 +132,6 @@ namespace TypeRegistrator
 
                 int typeStartIndex = tagIndex + tag.Length + 1;
                 int typeEndIndex = GetTypeEndIndex(src, typeStartIndex);
-                //int typeEndIndex = src.IndexOf(')', typeStartIndex);
-                //if (typeEndIndex == -1)
-                //{
-                //    Console.WriteLine("Error in source code. No closing braket");
-                //    Environment.Exit(1);
-                //}
 
                 string type = src.Substring(typeStartIndex, typeEndIndex - typeStartIndex);
                 if (!types.Add(Tuple.Create(filePath, type)))
@@ -117,72 +146,65 @@ namespace TypeRegistrator
         {
             string src = File.ReadAllText(path);
 
-            StringBuilder newSrc = new StringBuilder(src);
+            StringBuilder srcBuilder = new StringBuilder(src);
 
             string macroDefine = "#define " + macro + " ";
-            int regIndex = src.IndexOf(macroDefine);
+            int defineIndex = src.IndexOf(macroDefine);
 
-            var typeSetEnumerator = types.GetEnumerator();
-            typeSetEnumerator.MoveNext();
+            string macroDefinition = GetMacroDefinitionForTypes(types);
 
-            if (regIndex > 0)
+            if (defineIndex > 0)
             {
-                int insertIndex = regIndex + macroDefine.Length;
-                //TODO: implement multiline macro
-                int endLineIndex = src.IndexOf('\n', insertIndex);
-                if (endLineIndex < 0)
-                    newSrc.Remove(insertIndex, src.Length - insertIndex);
-                else
-                    newSrc.Remove(insertIndex, endLineIndex - insertIndex);
-
-                string currentType = typeSetEnumerator.Current.Item2;
-                newSrc.Insert(insertIndex, currentType);
-                insertIndex += currentType.Length;
-
-                while (typeSetEnumerator.MoveNext())
-                {
-                    currentType = typeSetEnumerator.Current.Item2;
-                    string insertion = ", " + currentType;
-                    newSrc.Insert(insertIndex, insertion);
-                    insertIndex += insertion.Length;
-                }
+                int insertIndex = defineIndex + macroDefine.Length;
+                ClearPreviouslyDefined(srcBuilder, insertIndex);
+                srcBuilder.Insert(insertIndex, macroDefinition);
             }
             else
             {
-                newSrc.Append("\n" + macroDefine);
-                string currentType = typeSetEnumerator.Current.Item2;
-                newSrc.Append(currentType);
-                while (typeSetEnumerator.MoveNext())
-                {
-                    currentType = typeSetEnumerator.Current.Item2;
-                    newSrc.Append(", " + currentType);
-                }
+                srcBuilder.Append("\n" + macroDefine);
+                srcBuilder.Append(macroDefinition);
             }
 
-            File.WriteAllText(path, newSrc.ToString());
+            File.WriteAllText(path, srcBuilder.ToString());
         }
 
+        static void ClearPreviouslyDefined(StringBuilder srcBuilder, int insertIndex)
+        {
+            string src = srcBuilder.ToString();
+
+            int endLineIndex = src.IndexOf('\n', insertIndex);
+            if (endLineIndex < 0)
+                srcBuilder.Remove(insertIndex, src.Length - insertIndex);
+            else
+            {
+                if (src[endLineIndex - 1] == '\\')
+                    ClearPreviouslyDefined(srcBuilder, endLineIndex + 1);
+                srcBuilder.Remove(insertIndex, endLineIndex - insertIndex);
+            }
+        }
+
+        //TODO: fix appending new line on every WriteHeaders
         static void WriteHeaders(string path, HashSet<Tuple<string, string>> types)
         {
-            StringBuilder newSrc = new StringBuilder(File.ReadAllText(path));
+            StringBuilder srcBuilder = new StringBuilder(File.ReadAllText(path));
             
-            int insertIndex = GetHeaderInsertIndex(newSrc);
+            int insertIndex = GetHeaderInsertIndex(srcBuilder);
 
             var typeSetEnumerator = types.GetEnumerator();
             while (typeSetEnumerator.MoveNext())
             {
                 string include = "#include \"" + typeSetEnumerator.Current.Item1 + "\"";
-                if (newSrc.ToString().IndexOf(include) < 0)
-                    newSrc.Insert(insertIndex, include + '\n');
+                if (srcBuilder.ToString().IndexOf(include) < 0)
+                    srcBuilder.Insert(insertIndex, include + '\n');
             }
 
-            File.WriteAllText(path, newSrc.ToString());
+            File.WriteAllText(path, srcBuilder.ToString());
         }
 
-        static int GetHeaderInsertIndex(StringBuilder newSrc)
+        static int GetHeaderInsertIndex(StringBuilder srcBuilder)
         {
             string pragma = "#pragma once";
-            string srcStr = newSrc.ToString();
+            string srcStr = srcBuilder.ToString();
             int insertIndex = srcStr.IndexOf(pragma);
 
             if (insertIndex < 0)
@@ -199,12 +221,12 @@ namespace TypeRegistrator
             }
 
             if (srcStr.Length == insertIndex)
-                newSrc.Insert(insertIndex, '\n');
-            srcStr = newSrc.ToString();
+                srcBuilder.Insert(insertIndex, '\n');
+            srcStr = srcBuilder.ToString();
 
             if (srcStr[insertIndex] != '\n')
-                newSrc.Insert(insertIndex, '\n');
-            newSrc.Insert(insertIndex, '\n');
+                srcBuilder.Insert(insertIndex, '\n');
+            srcBuilder.Insert(insertIndex, '\n');
 
             insertIndex += 2;
 
