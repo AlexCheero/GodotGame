@@ -1,5 +1,7 @@
 #include "EntityView.h"
 
+#include "../Components/RegisteredTypes.h"
+
 template<typename Type, typename... Types>
 void godot::EntityView::ConstructComponents_impl(entt::registry& registry, entt::entity entity)
 {
@@ -65,11 +67,5 @@ void godot::EntityView::ConstructComponents(entt::registry& registry, entt::enti
 
 void godot::EntityView::ConstructTags(entt::registry& registry, entt::entity entity)
 {
-	ConstructTags_impl
-		<
-			PlayerTag,
-			BotTag,
-			MainCameraTag
-		>
-		(registry, entity);
+	ConstructTags_impl<REGISTERED_TAGS>(registry, entity);
 }

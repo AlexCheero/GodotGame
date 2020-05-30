@@ -356,5 +356,8 @@
     <ClInclude Include="Systems\AttackSystems\ThrowGrenadeSystem.h">
       <Filter>Header Files\Systems\AttackSystems</Filter>
     </ClInclude>
+    <ClInclude Include="Components\RegisteredTypes.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

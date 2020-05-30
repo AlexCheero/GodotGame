@@ -5,20 +5,40 @@ using System.Text;
 
 namespace TypeRegistrator
 {
+    //TODO: exclude registrator exe from gitignore
     class Program
     {
         static void Main(string[] args)
         {
             //TODO: pass this via args
-            string sourceDirectory = "C:/RegistratorTest";
-            string registerationMacro = "REGISTER_TYPE";
-            string getRegisteredMacro = "REGISTERED_TYPES";
-            string outputFile = "C:/RegistratorTest/output/output.h";
+            string registerationMacro = "DECLARE_REGISTERED_TAG";
+            string getRegisteredMacro = "REGISTERED_TAGS";
 
-            RegisterTypes(sourceDirectory, registerationMacro, getRegisteredMacro, outputFile);
+            string sourceDirectory = "C:/Users/Alex/Documents/GodotProjects/Projects/Prototype/Src/Prototype";
+            string outputFile = "C:/Users/Alex/Documents/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/RegisteredTypes.h";
+            string registerationMacroMacroDefinitionFile = "C:/Users/Alex/Documents/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/ComponentsMeta.h";
+
+            sourceDirectory.Replace('\\', '/');
+            outputFile.Replace('\\', '/');
+            registerationMacroMacroDefinitionFile.Replace('\\', '/');
+
+            string[] fileExcludes = new string[] { outputFile, registerationMacroMacroDefinitionFile };
+
+            RegisterTypes(sourceDirectory, registerationMacro, getRegisteredMacro, outputFile, fileExcludes);
         }
 
-        static void RegisterTypes(string sourceDirectory, string registerationMacro, string getRegisteredMacro, string outputFile)
+        static bool Exclude(string file, string[] excludes)
+        {
+            foreach (var exclude in excludes)
+            {
+                if (file.Equals(exclude))
+                    return true;
+            }
+
+            return false;
+        }
+
+        static void RegisterTypes(string sourceDirectory, string registerationMacro, string getRegisteredMacro, string outputFile, string[] excludes)
         {
             string[] allfiles = Directory.GetFiles(sourceDirectory, "*.h", SearchOption.AllDirectories);
             HashSet<Tuple<string, string>> types = new HashSet<Tuple<string, string>>();
@@ -26,7 +46,7 @@ namespace TypeRegistrator
             for (int i = 0; i < allfiles.Length; i++)
             {
                 string file = allfiles[i].Replace('\\', '/');
-                if (file.Equals(outputFile))
+                if (Exclude(file, excludes))
                     continue;
 
                 var src = File.ReadAllText(file);
@@ -35,6 +55,7 @@ namespace TypeRegistrator
 
             if (types.Count > 0)
             {
+                //TODO: make it via FileStream and fix not sonsistent line endings
                 WriteHeaders(outputFile, types);
                 WriteRegisteredTypes(outputFile, types, getRegisteredMacro);
             }
@@ -57,7 +78,6 @@ namespace TypeRegistrator
                 }
 
                 string type = src.Substring(typeStartIndex, typeEndIndex - typeStartIndex);
-
                 if (!types.Add(Tuple.Create(filePath, type)))
                 {
                     Console.WriteLine("Error in source code. Type registered more than once");
@@ -135,7 +155,8 @@ namespace TypeRegistrator
         static int GetHeaderInsertIndex(StringBuilder newSrc)
         {
             string pragma = "#pragma once";
-            int insertIndex = newSrc.ToString().IndexOf(pragma);
+            string srcStr = newSrc.ToString();
+            int insertIndex = srcStr.IndexOf(pragma);
 
             if (insertIndex < 0)
             {
@@ -144,7 +165,17 @@ namespace TypeRegistrator
             }
 
             insertIndex += pragma.Length;
-            if (newSrc.ToString()[insertIndex + 1] != '\n')
+            if (srcStr.Length < insertIndex)
+            {
+                Console.WriteLine("Something went horribly wrong!");
+                Environment.Exit(4);
+            }
+
+            if (srcStr.Length == insertIndex)
+                newSrc.Insert(insertIndex, '\n');
+            srcStr = newSrc.ToString();
+
+            if (srcStr[insertIndex] != '\n')
                 newSrc.Insert(insertIndex, '\n');
             newSrc.Insert(insertIndex, '\n');
 

@@ -200,6 +200,7 @@
     <ClInclude Include="Components\AttackComponents.h" />
     <ClInclude Include="Components\ComponentsMeta.h" />
     <ClInclude Include="Components\InputComponents.h" />
+    <ClInclude Include="Components\RegisteredTypes.h" />
     <ClInclude Include="Components\SimpleComponents.h" />
     <ClInclude Include="Nodes\EntityView.h" />
     <ClInclude Include="Nodes\MeleeDamagingArea.h" />
