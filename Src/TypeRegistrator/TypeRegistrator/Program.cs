@@ -6,6 +6,7 @@ using System.Text;
 namespace TypeRegistrator
 {
     //TODO: exclude registrator exe from gitignore
+    //TODO: run exe on project build prestep
     class Program
     {
         static void Main(string[] args)
