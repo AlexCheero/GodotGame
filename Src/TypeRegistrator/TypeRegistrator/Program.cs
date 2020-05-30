@@ -45,8 +45,8 @@ namespace TypeRegistrator
         static void RegisterTypes(string sourceDirectory, string registerationMacro, string getRegisteredMacro, string outputFile, string[] excludes)
         {
             string[] allfiles = Directory.GetFiles(sourceDirectory, "*.h", SearchOption.AllDirectories);
-            //TODO: split into two different sets
-            HashSet<Tuple<string, string>> types = new HashSet<Tuple<string, string>>();
+            HashSet<string> headers = new HashSet<string>();
+            HashSet<string> types = new HashSet<string>();
 
             for (int i = 0; i < allfiles.Length; i++)
             {
@@ -54,34 +54,34 @@ namespace TypeRegistrator
                 if (Exclude(file, excludes))
                     continue;
 
-                var src = File.ReadAllText(file);
-                GatherRegisteredTypes(src, registerationMacro, file, types);
+                GatherRegisteredTypes(file, registerationMacro, types, headers);
             }
 
             if (types.Count > 0)
             {
                 //TODO: make it via FileStream and fix not consistent line endings
-                WriteHeaders(outputFile, types);
-                WriteRegisteredTypes(outputFile, types, getRegisteredMacro);
+                WriteHeaders(outputFile, headers);
+                string macroDefinition = GetMacroDefinitionForTypes(types);
+                WriteRegisteredTypes(outputFile, macroDefinition, getRegisteredMacro);
             }
         }
 
         const int MAX_DEFINITION_LINE_LENGTH = 100;
-        static string GetMacroDefinitionForTypes(HashSet<Tuple<string, string>> types)
+        static string GetMacroDefinitionForTypes(HashSet<string> types)
         {
             StringBuilder macro = new StringBuilder();
 
             var typeSetEnumerator = types.GetEnumerator();
             typeSetEnumerator.MoveNext();
             
-            string currentType = typeSetEnumerator.Current.Item2;
+            string currentType = typeSetEnumerator.Current;
             macro.Append("    " + currentType);
 
             int lineLengthCounter = currentType.Length;
 
             while (typeSetEnumerator.MoveNext())
             {
-                currentType = typeSetEnumerator.Current.Item2;
+                currentType = typeSetEnumerator.Current;
 
                 if (lineLengthCounter + currentType.Length + 2 > MAX_DEFINITION_LINE_LENGTH)
                 {
@@ -122,19 +122,23 @@ namespace TypeRegistrator
             return typeEndIndex;
         }
 
-        static void GatherRegisteredTypes(string src, string tag, string filePath, HashSet<Tuple<string, string>> types)
+        static void GatherRegisteredTypes(string file, string tag, HashSet<string> types, HashSet<string> headers)
         {
+            var src = File.ReadAllText(file);
+
             for (int tagIndex = 0; ; tagIndex += tag.Length)
             {
                 tagIndex = src.IndexOf(tag, tagIndex);
                 if (tagIndex == -1)
                     return;
 
+                headers.Add(file);
+
                 int typeStartIndex = tagIndex + tag.Length + 1;
                 int typeEndIndex = GetTypeEndIndex(src, typeStartIndex);
 
                 string type = src.Substring(typeStartIndex, typeEndIndex - typeStartIndex);
-                if (!types.Add(Tuple.Create(filePath, type)))
+                if (!types.Add(type))
                 {
                     Console.WriteLine("Error in source code. Type registered more than once");
                     Environment.Exit(2);
@@ -142,7 +146,7 @@ namespace TypeRegistrator
             }
         }
 
-        static void WriteRegisteredTypes(string path, HashSet<Tuple<string, string>> types, string macro)
+        static void WriteRegisteredTypes(string path, string macroDefinition, string macro)
         {
             string src = File.ReadAllText(path);
 
@@ -150,8 +154,6 @@ namespace TypeRegistrator
 
             string macroDefine = "#define " + macro + " ";
             int defineIndex = src.IndexOf(macroDefine);
-
-            string macroDefinition = GetMacroDefinitionForTypes(types);
 
             if (defineIndex > 0)
             {
@@ -184,16 +186,16 @@ namespace TypeRegistrator
         }
 
         //TODO: fix appending new line on every WriteHeaders
-        static void WriteHeaders(string path, HashSet<Tuple<string, string>> types)
+        static void WriteHeaders(string path, HashSet<string> headers)
         {
             StringBuilder srcBuilder = new StringBuilder(File.ReadAllText(path));
             
             int insertIndex = GetHeaderInsertIndex(srcBuilder);
 
-            var typeSetEnumerator = types.GetEnumerator();
-            while (typeSetEnumerator.MoveNext())
+            var headersEnumerator = headers.GetEnumerator();
+            while (headersEnumerator.MoveNext())
             {
-                string include = "#include \"" + typeSetEnumerator.Current.Item1 + "\"";
+                string include = "#include \"" + headersEnumerator.Current + "\"";
                 if (srcBuilder.ToString().IndexOf(include) < 0)
                     srcBuilder.Insert(insertIndex, include + '\n');
             }
