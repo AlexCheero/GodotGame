@@ -12,15 +12,15 @@ namespace TypeRegistrator
         static void Main(string[] args)
         {
             //TODO: pass this via args
-            //string registerationMacro = "DECLARE_REGISTERED_TAG";
-            //string getRegisteredMacro = "REGISTERED_TAGS";
+            string registerationMacro = "DECLARE_REGISTERED_TAG";
+            string getRegisteredMacro = "REGISTERED_TAGS";
 
-            string registerationMacro = "REGISTER_COMPONENT";
-            string getRegisteredMacro = "REGISTERED_COMPONENTS";
+            //string registerationMacro = "REGISTER_COMPONENT";
+            //string getRegisteredMacro = "REGISTERED_COMPONENTS";
 
-            string sourceDirectory = "C:/Users/Alex/Documents/GodotProjects/Projects/Prototype/Src/Prototype";
-            string outputFile = "C:/Users/Alex/Documents/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/RegisteredTypes.h";
-            string registerationMacroMacroDefinitionFile = "C:/Users/Alex/Documents/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/ComponentsMeta.h";
+            string sourceDirectory = "C:/Users/Alex/OneDrive/Документы/GodotProjects/Projects/Prototype/Src/Prototype";
+            string outputFile = "C:/Users/Alex/OneDrive/Документы/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/RegisteredTypes.h";
+            string registerationMacroMacroDefinitionFile = "C:/Users/Alex/OneDrive/Документы/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/ComponentsMeta.h";
 
             sourceDirectory.Replace('\\', '/');
             outputFile.Replace('\\', '/');
@@ -85,8 +85,19 @@ namespace TypeRegistrator
                 if (Exclude(file, excludes))
                     continue;
 
-                GatherRegisteredTypes(file, registerationMacro, types, headers);
+                if (GatherRegisteredTypes(file, registerationMacro, types))
+                    headers.Add(GetRelativeHeaderPath(outputFile, file));
             }
+
+            Console.WriteLine("headers: ");
+            foreach (var header in headers)
+                Console.WriteLine(header);
+            Console.WriteLine();
+            Console.WriteLine("types: ");
+            foreach (var type in types)
+                Console.WriteLine(type);
+
+            return;
 
             if (types.Count > 0)
             {
@@ -154,17 +165,19 @@ namespace TypeRegistrator
             return typeEndIndex;
         }
 
-        static void GatherRegisteredTypes(string file, string tag, HashSet<string> types, HashSet<string> headers)
+        static bool GatherRegisteredTypes(string file, string tag, HashSet<string> types)
         {
             var src = File.ReadAllText(file);
+
+            bool anyTypeGathered = false;
 
             for (int tagIndex = 0; ; tagIndex += tag.Length)
             {
                 tagIndex = src.IndexOf(tag, tagIndex);
                 if (tagIndex == -1)
-                    return;
+                    break;
 
-                headers.Add(file);
+                anyTypeGathered = true;
 
                 int typeStartIndex = tagIndex + tag.Length + 1;
                 int typeEndIndex = GetTypeEndIndex(src, typeStartIndex);
@@ -176,6 +189,8 @@ namespace TypeRegistrator
                     Environment.Exit(2);
                 }
             }
+
+            return anyTypeGathered;
         }
 
         static void WriteRegisteredTypes(string path, HashSet<string> types, string macro)
