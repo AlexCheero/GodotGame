@@ -1,11 +1,11 @@
 #pragma once
 
-#include "C:/Users/Alex/Documents/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/AIComponents/PatrolComponents.h"
-#include "C:/Users/Alex/Documents/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/AIComponents/NavigationComponents.h"
-#include "C:/Users/Alex/Documents/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/AIComponents/FSMStateComponents.h"
-#include "C:/Users/Alex/Documents/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/AttackComponents.h"
+#include "AIComponents/PatrolComponents.h"
+#include "AIComponents/NavigationComponents.h"
+#include "AIComponents/FSMStateComponents.h"
+#include "AttackComponents.h"
 
-#include "C:/Users/Alex/Documents/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/SimpleComponents.h"
+#include "SimpleComponents.h"
 
 #define REGISTERED_TAGS \
     PlayerTag, BotTag, MainCameraTag
