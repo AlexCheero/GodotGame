@@ -11,6 +11,7 @@ namespace TypeRegistrator
     {
         static void Main(string[] args)
         {
+#region Prepare args
             //TODO: pass this via args
             string registerationMacro = "DECLARE_REGISTERED_TAG";
             string getRegisteredMacro = "REGISTERED_TAGS";
@@ -27,67 +28,15 @@ namespace TypeRegistrator
             registerationMacroMacroDefinitionFile.Replace('\\', '/');
 
             string[] fileExcludes = new string[] { outputFile, registerationMacroMacroDefinitionFile };
+#endregion
 
-            RegisterTypes(sourceDirectory, registerationMacro, getRegisteredMacro, outputFile, fileExcludes);
-        }
+#region Gather
+            var gatherer = new TypeGatherer();
 
-        static string GetRelativeHeaderPath(string path, string headerPath)
-        {
-            var splittedPath = path.Split('/');
-            var splittedHeaderPath = headerPath.Split('/');
+            var headers = new HashSet<string>();
+            var types = new HashSet<string>();
 
-            int firstDifferentPathPartIndex = 0;
-            for (; firstDifferentPathPartIndex < splittedPath.Length; firstDifferentPathPartIndex++)
-            {
-                //TODO: assert index stuff
-
-                var pathPart = splittedPath[firstDifferentPathPartIndex];
-                var headerPathPart = splittedHeaderPath[firstDifferentPathPartIndex];
-                if (!pathPart.Equals(headerPathPart))
-                    break;
-            }
-
-            List<string> splittedRelPathList = new List<string>();
-
-            int pathDiffLength = splittedPath.Length - firstDifferentPathPartIndex;
-            if (pathDiffLength > 1)
-            {
-                for (int i = 0; i < pathDiffLength - 1; i++)
-                    splittedRelPathList.Add("..");
-            }
-
-            for (int i = 0; i < splittedHeaderPath.Length - firstDifferentPathPartIndex; i++)
-                splittedRelPathList.Add(splittedHeaderPath[i + firstDifferentPathPartIndex]);
-
-            return string.Join("/", splittedRelPathList);
-        }
-
-        static bool Exclude(string file, string[] excludes)
-        {
-            foreach (var exclude in excludes)
-            {
-                if (file.Equals(exclude))
-                    return true;
-            }
-
-            return false;
-        }
-
-        static void RegisterTypes(string sourceDirectory, string registerationMacro, string getRegisteredMacro, string outputFile, string[] excludes)
-        {
-            string[] allfiles = Directory.GetFiles(sourceDirectory, "*.h", SearchOption.AllDirectories);
-            HashSet<string> headers = new HashSet<string>();
-            HashSet<string> types = new HashSet<string>();
-
-            for (int i = 0; i < allfiles.Length; i++)
-            {
-                string file = allfiles[i].Replace('\\', '/');
-                if (Exclude(file, excludes))
-                    continue;
-
-                if (GatherRegisteredTypes(file, registerationMacro, types))
-                    headers.Add(GetRelativeHeaderPath(outputFile, file));
-            }
+            gatherer.GatherRegisteredTypes(sourceDirectory, registerationMacro, outputFile, fileExcludes, headers, types);
 
             Console.WriteLine("headers: ");
             foreach (var header in headers)
@@ -96,17 +45,21 @@ namespace TypeRegistrator
             Console.WriteLine("types: ");
             foreach (var type in types)
                 Console.WriteLine(type);
+#endregion
 
             return;
 
             if (types.Count > 0)
-            {
-                //TODO: fix inconsistent line endings
-                //TODO: make it via FileStream or try to use File.WriteAllText, File.ReadAllText and StringBuilder only once
-                WriteHeaders(outputFile, headers);
-                //TODO: fix adding empty lines on re adding types. Probably this is because of StringBuilder.Remove
-                WriteRegisteredTypes(outputFile, types, getRegisteredMacro);
-            }
+                RegisterTypes(getRegisteredMacro, outputFile, headers, types);
+        }
+
+        static void RegisterTypes(string getRegisteredMacro, string outputFile, HashSet<string> headers, HashSet<string> types)
+        {
+            //TODO: fix inconsistent line endings
+            //TODO: make it via FileStream or try to use File.WriteAllText, File.ReadAllText and StringBuilder only once
+            WriteHeaders(outputFile, headers);
+            //TODO: fix adding empty lines on re adding types. Probably this is because of StringBuilder.Remove
+            WriteRegisteredTypes(outputFile, types, getRegisteredMacro);
         }
 
         const int MAX_DEFINITION_LINE_LENGTH = 100;
@@ -141,56 +94,6 @@ namespace TypeRegistrator
             macro.Insert(0, "\\\n");
 
             return macro.ToString();
-        }
-
-        static int GetTypeEndIndex(string src, int typeStartIndex)
-        {
-            char[] closingChars = new char[] { ')', ',' };
-            int typeEndIndex = -1;
-            foreach (var closingChar in closingChars)
-            {
-                int closingCharIndex = src.IndexOf(closingChar, typeStartIndex);
-                if (typeEndIndex < 0)
-                    typeEndIndex = closingCharIndex;
-                else if (closingCharIndex > 0 && closingCharIndex < typeEndIndex)
-                    typeEndIndex = closingCharIndex;
-            }
-
-            if (typeEndIndex < 0)
-            {
-                Console.WriteLine("Error in source code. No closing braket");
-                Environment.Exit(1);
-            }
-
-            return typeEndIndex;
-        }
-
-        static bool GatherRegisteredTypes(string file, string tag, HashSet<string> types)
-        {
-            var src = File.ReadAllText(file);
-
-            bool anyTypeGathered = false;
-
-            for (int tagIndex = 0; ; tagIndex += tag.Length)
-            {
-                tagIndex = src.IndexOf(tag, tagIndex);
-                if (tagIndex == -1)
-                    break;
-
-                anyTypeGathered = true;
-
-                int typeStartIndex = tagIndex + tag.Length + 1;
-                int typeEndIndex = GetTypeEndIndex(src, typeStartIndex);
-
-                string type = src.Substring(typeStartIndex, typeEndIndex - typeStartIndex);
-                if (!types.Add(type))
-                {
-                    Console.WriteLine("Error in source code. Type registered more than once");
-                    Environment.Exit(2);
-                }
-            }
-
-            return anyTypeGathered;
         }
 
         static void WriteRegisteredTypes(string path, HashSet<string> types, string macro)
