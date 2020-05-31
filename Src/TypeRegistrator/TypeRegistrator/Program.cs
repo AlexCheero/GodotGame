@@ -31,6 +31,37 @@ namespace TypeRegistrator
             RegisterTypes(sourceDirectory, registerationMacro, getRegisteredMacro, outputFile, fileExcludes);
         }
 
+        static string GetRelativeHeaderPath(string path, string headerPath)
+        {
+            var splittedPath = path.Split('/');
+            var splittedHeaderPath = headerPath.Split('/');
+
+            int firstDifferentPathPartIndex = 0;
+            for (; firstDifferentPathPartIndex < splittedPath.Length; firstDifferentPathPartIndex++)
+            {
+                //TODO: assert index stuff
+
+                var pathPart = splittedPath[firstDifferentPathPartIndex];
+                var headerPathPart = splittedHeaderPath[firstDifferentPathPartIndex];
+                if (!pathPart.Equals(headerPathPart))
+                    break;
+            }
+
+            List<string> splittedRelPathList = new List<string>();
+
+            int pathDiffLength = splittedPath.Length - firstDifferentPathPartIndex;
+            if (pathDiffLength > 1)
+            {
+                for (int i = 0; i < pathDiffLength - 1; i++)
+                    splittedRelPathList.Add("..");
+            }
+
+            for (int i = 0; i < splittedHeaderPath.Length - firstDifferentPathPartIndex; i++)
+                splittedRelPathList.Add(splittedHeaderPath[i + firstDifferentPathPartIndex]);
+
+            return string.Join("/", splittedRelPathList);
+        }
+
         static bool Exclude(string file, string[] excludes)
         {
             foreach (var exclude in excludes)
