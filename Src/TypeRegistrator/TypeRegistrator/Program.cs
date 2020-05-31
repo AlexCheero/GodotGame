@@ -5,6 +5,7 @@ using System.Text;
 
 namespace TypeRegistrator
 {
+    //TODO: clean file before any registration to ensure unused headers and types removed
     //TODO: exclude registrator exe from gitignore
     //TODO: run exe on project build prestep
     class Program
@@ -31,12 +32,10 @@ namespace TypeRegistrator
 #endregion
 
 #region Gather
-            var gatherer = new TypeGatherer();
-
             var headers = new HashSet<string>();
             var types = new HashSet<string>();
 
-            gatherer.GatherRegisteredTypes(sourceDirectory, registerationMacro, outputFile, fileExcludes, headers, types);
+            new TypeGatherer().GatherRegisteredTypes(sourceDirectory, registerationMacro, outputFile, fileExcludes, headers, types);
 
             Console.WriteLine("headers: ");
             foreach (var header in headers)
@@ -47,10 +46,13 @@ namespace TypeRegistrator
                 Console.WriteLine(type);
 #endregion
 
-            return;
-
             if (types.Count > 0)
-                RegisterTypes(getRegisteredMacro, outputFile, headers, types);
+            {
+                //RegisterTypes(getRegisteredMacro, outputFile, headers, types);
+
+                //WriteHeaders(outputFile, headers);
+                //WriteRegisteredTypes(outputFile, types, getRegisteredMacro);
+            }
         }
 
         static void RegisterTypes(string getRegisteredMacro, string outputFile, HashSet<string> headers, HashSet<string> types)
