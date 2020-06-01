@@ -115,6 +115,10 @@
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>libgodot-cpp.windows.$(Platform).$(Configuration).lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>$(ProjectDir)..\..\TypeRegistrator\TypeRegistrator\bin\Debug\netcoreapp3.1\TypeRegistrator.exe true DECLARE_REGISTERED_TAG REGISTERED_TAGS $(ProjectDir)..\  $(ProjectDir)Components\RegisteredTypes.h $(ProjectDir)Components\ComponentsMeta.h
+$(ProjectDir)..\..\TypeRegistrator\TypeRegistrator\bin\Debug\netcoreapp3.1\TypeRegistrator.exe false REGISTER_COMPONENT REGISTERED_COMPONENTS $(ProjectDir)..\  $(ProjectDir)Components\RegisteredTypes.h $(ProjectDir)Components\ComponentsMeta.h</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

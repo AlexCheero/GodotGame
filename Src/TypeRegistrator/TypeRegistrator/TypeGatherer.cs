@@ -11,6 +11,14 @@ namespace TypeRegistrator
         {
             string[] allfiles = Directory.GetFiles(sourceDirectory, "*.h", SearchOption.AllDirectories);
 
+            //TODO: remove test code
+            Console.WriteLine("Excludes:");
+            for (int i = 0; i < excludes.Length; i++)
+                Console.WriteLine("    " + excludes[i]);
+            Console.WriteLine("Files:");
+            for (int i = 0; i < allfiles.Length; i++)
+                Console.WriteLine("    " + allfiles[i].Replace('\\', '/'));
+
             for (int i = 0; i < allfiles.Length; i++)
             {
                 string file = allfiles[i].Replace('\\', '/');
@@ -27,7 +35,11 @@ namespace TypeRegistrator
             foreach (var exclude in excludes)
             {
                 if (file.Equals(exclude))
+                {
+                    //TODO: remove test code
+                    Console.WriteLine("exclude!");
                     return true;
+                }
             }
 
             return false;
@@ -83,6 +95,7 @@ namespace TypeRegistrator
             return typeEndIndex;
         }
 
+        //TODO: take ../ into account
         private string GetRelativeHeaderPath(string path, string headerPath)
         {
             var splittedPath = path.Split('/');
@@ -111,7 +124,10 @@ namespace TypeRegistrator
             for (int i = 0; i < splittedHeaderPath.Length - firstDifferentPathPartIndex; i++)
                 splittedRelPathList.Add(splittedHeaderPath[i + firstDifferentPathPartIndex]);
 
-            return string.Join("/", splittedRelPathList);
+            //TODO: remove test code
+            var result = string.Join("/", splittedRelPathList);
+
+            return result;
         }
     }
 }
