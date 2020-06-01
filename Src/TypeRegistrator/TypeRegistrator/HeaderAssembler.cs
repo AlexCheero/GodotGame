@@ -65,7 +65,7 @@ namespace TypeRegistrator
         {
             var outputStr = output.ToString();
 
-            string macroDeclaration = "#define " + getMacro + " \\\r\n"; //TODO: don't forget about \r in other places
+            string macroDeclaration = "#define " + getMacro + " \\\r\n";
             int macroIndex = outputStr.IndexOf(macroDeclaration);
             if (macroIndex == -1)
                 return;
