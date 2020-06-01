@@ -1,9 +1,9 @@
 #pragma once
 
-#include "AIComponents/PatrolComponents.h"
-#include "AIComponents/NavigationComponents.h"
-#include "AIComponents/FSMStateComponents.h"
 #include "AttackComponents.h"
+#include "AIComponents/FSMStateComponents.h"
+#include "AIComponents/NavigationComponents.h"
+#include "AIComponents/PatrolComponents.h"
 
 #include "SimpleComponents.h"
 

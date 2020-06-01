@@ -1,55 +1,29 @@
 ﻿using System.IO;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace TypeRegistrator
 {
-    //TODO: clean file before any registration to ensure unused headers and types removed
     //TODO: exclude registrator exe from gitignore
-    //TODO: run exe on project build prestep
     class Program
     {
         static void Main(string[] args)
         {
             bool newOutput = bool.Parse(args[0]);
             
-            string setMacro = args[1];//"DECLARE_REGISTERED_TAG";
-            string getMacro = args[2];//"REGISTERED_TAGS";
+            string setMacro = args[1];
+            string getMacro = args[2];
             
-            //string doc = /*"Documents"; //*/ "OneDrive/Документы";
-            
-            string sourceDirectory = args[3];//"C:/Users/Alex/" + doc + "/GodotProjects/Projects/Prototype/Src/Prototype";
-            string outputFile = args[4];//"C:/Users/Alex/" + doc + "/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/RegisteredTypes.h";
-            string registerationMacroMacroDefinitionFile = args[5];//"C:/Users/Alex/" + doc + "/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/ComponentsMeta.h";
+            string sourceDirectory = args[3];
+            string outputFile = args[4];
+            string registerationMacroMacroDefinitionFile = args[5];
 
-            sourceDirectory = sourceDirectory.Replace('\\', '/');
-            outputFile = outputFile.Replace('\\', '/');
-            registerationMacroMacroDefinitionFile = registerationMacroMacroDefinitionFile.Replace('\\', '/');
+            sourceDirectory = GetFixedPath(sourceDirectory);
+            outputFile = GetFixedPath(outputFile);
+            registerationMacroMacroDefinitionFile = GetFixedPath(registerationMacroMacroDefinitionFile);
 
             string[] fileExcludes = new string[] { outputFile, registerationMacroMacroDefinitionFile };
-
-#region Prepare args
-            //TODO: pass this via args
-            //bool newOutput = false;
-            //
-            ////string setMacro = "DECLARE_REGISTERED_TAG";
-            ////string getMacro = "REGISTERED_TAGS";
-            //
-            //string setMacro = "REGISTER_COMPONENT";
-            //string getMacro = "REGISTERED_COMPONENTS";
-            //
-            //string doc = /*"Documents"; //*/ "OneDrive/Документы";
-            //
-            //string sourceDirectory = "C:/Users/Alex/" + doc + "/GodotProjects/Projects/Prototype/Src/Prototype";
-            //string outputFile = "C:/Users/Alex/" + doc + "/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/RegisteredTypes.h";
-            //string registerationMacroMacroDefinitionFile = "C:/Users/Alex/" + doc + "/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/ComponentsMeta.h";
-            //
-            //sourceDirectory.Replace('\\', '/');
-            //outputFile.Replace('\\', '/');
-            //registerationMacroMacroDefinitionFile.Replace('\\', '/');
-            //
-            //string[] fileExcludes = new string[] { outputFile, registerationMacroMacroDefinitionFile };
-#endregion
 
             var headers = new HashSet<string>();
             var types = new HashSet<string>();
@@ -61,6 +35,23 @@ namespace TypeRegistrator
                 string output = new HeaderAssembler().GetHeaderSource(newOutput, outputFile, headers, types, getMacro);
                 File.WriteAllText(outputFile, output);
             }
+        }
+
+        static string GetFixedPath(string path)
+        {
+            path = path.Replace('\\', '/');
+            var splittedPath = path.Split('/');
+            var fixedSplittedPath = new Stack<string>();
+
+            foreach (var pathPart in splittedPath)
+            {
+                if (pathPart != "..")
+                    fixedSplittedPath.Push(pathPart);
+                else
+                    fixedSplittedPath.Pop();
+            }
+
+            return string.Join("/", fixedSplittedPath.Reverse());
         }
     }
 }
