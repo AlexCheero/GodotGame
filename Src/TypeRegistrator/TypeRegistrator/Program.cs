@@ -14,15 +14,19 @@ namespace TypeRegistrator
         {
 #region Prepare args
             //TODO: pass this via args
-            string registerationMacro = "DECLARE_REGISTERED_TAG";
-            string getRegisteredMacro = "REGISTERED_TAGS";
+            bool newOutput = false;
 
-            //string registerationMacro = "REGISTER_COMPONENT";
-            //string getRegisteredMacro = "REGISTERED_COMPONENTS";
+            //string setMacro = "DECLARE_REGISTERED_TAG";
+            //string getMacro = "REGISTERED_TAGS";
 
-            string sourceDirectory = "C:/Users/Alex/OneDrive/Документы/GodotProjects/Projects/Prototype/Src/Prototype";
-            string outputFile = "C:/Users/Alex/OneDrive/Документы/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/RegisteredTypes.h";
-            string registerationMacroMacroDefinitionFile = "C:/Users/Alex/OneDrive/Документы/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/ComponentsMeta.h";
+            string setMacro = "REGISTER_COMPONENT";
+            string getMacro = "REGISTERED_COMPONENTS";
+
+            string doc = "Documents"; // "OneDrive/Документы";
+
+            string sourceDirectory = "C:/Users/Alex/" + doc + "/GodotProjects/Projects/Prototype/Src/Prototype";
+            string outputFile = "C:/Users/Alex/" + doc + "/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/RegisteredTypes.h";
+            string registerationMacroMacroDefinitionFile = "C:/Users/Alex/" + doc + "/GodotProjects/Projects/Prototype/Src/Prototype/Prototype/Components/ComponentsMeta.h";
 
             sourceDirectory.Replace('\\', '/');
             outputFile.Replace('\\', '/');
@@ -35,33 +39,96 @@ namespace TypeRegistrator
             var headers = new HashSet<string>();
             var types = new HashSet<string>();
 
-            new TypeGatherer().GatherRegisteredTypes(sourceDirectory, registerationMacro, outputFile, fileExcludes, headers, types);
+            new TypeGatherer().GatherRegisteredTypes(sourceDirectory, setMacro, outputFile, fileExcludes, headers, types);
 
-            Console.WriteLine("headers: ");
-            foreach (var header in headers)
-                Console.WriteLine(header);
-            Console.WriteLine();
-            Console.WriteLine("types: ");
-            foreach (var type in types)
-                Console.WriteLine(type);
+            //Console.WriteLine("headers: ");
+            //foreach (var header in headers)
+            //    Console.WriteLine(header);
+            //Console.WriteLine();
+            //Console.WriteLine("types: ");
+            //foreach (var type in types)
+            //    Console.WriteLine(type);
 #endregion
 
             if (types.Count > 0)
             {
-                //RegisterTypes(getRegisteredMacro, outputFile, headers, types);
+                string output;
+                if (newOutput)
+                    output = AssembleOutput(headers, types, getMacro);
+                else
+                    output = MergeWithExistingOutput(outputFile, headers, types, getMacro);
+
+                File.WriteAllText(outputFile, output);
+                //RegisterTypes(getMacro, outputFile, headers, types);
 
                 //WriteHeaders(outputFile, headers);
-                //WriteRegisteredTypes(outputFile, types, getRegisteredMacro);
+                //WriteRegisteredTypes(outputFile, types, getMacro);
             }
         }
 
-        static void RegisterTypes(string getRegisteredMacro, string outputFile, HashSet<string> headers, HashSet<string> types)
+        static string AssembleOutput(HashSet<string> headers, HashSet<string> types, string getMacro)
         {
-            //TODO: fix inconsistent line endings
-            //TODO: make it via FileStream or try to use File.WriteAllText, File.ReadAllText and StringBuilder only once
-            WriteHeaders(outputFile, headers);
-            //TODO: fix adding empty lines on re adding types. Probably this is because of StringBuilder.Remove
-            WriteRegisteredTypes(outputFile, types, getRegisteredMacro);
+            var output = new StringBuilder();
+            output.Append("#pragma once\r\n\n");
+
+            foreach (var header in headers)
+                output.Append("#include \"" + header + "\"\r\n");
+            output.Append("\r\n");
+
+            output.Append("#define " + getMacro + " \\\r\n");
+            output.Append(GetMacroDefinitionForTypes(types));
+
+            return output.ToString();
+        }
+
+        static string MergeWithExistingOutput(string outputFile, HashSet<string> headers, HashSet<string> types, string getMacro)
+        {
+            var output = new StringBuilder(File.ReadAllText(outputFile));
+
+            MergeHeaders(output, headers);
+
+            ClearPreviouslyDefinedMacro(output, getMacro);
+            output.Append("\r\n#define " + getMacro + " \\\r\n");
+            output.Append(GetMacroDefinitionForTypes(types));
+
+            return output.ToString();
+        }
+
+        static void MergeHeaders(StringBuilder output, HashSet<string> headers)
+        {
+            var pragma = "#pragma once\r\n\n";
+
+            var outputStr = output.ToString();
+            var concatedHeaders = new StringBuilder();
+            foreach (var header in headers)
+            {
+                if (outputStr.IndexOf(header) == -1)
+                    concatedHeaders.Append("#include \"" + header + "\"\r\n");
+            }
+            if (concatedHeaders.Length > 0)
+                concatedHeaders.Append("\r\n");
+
+            output.Insert(pragma.Length, concatedHeaders);
+        }
+
+        static void ClearPreviouslyDefinedMacro(StringBuilder output, string getMacro)
+        {
+            var outputStr = output.ToString();
+
+            string macroDeclaration = "#define " + getMacro + " \\\r\n"; //TODO: don't forget about \r in other places
+            int macroIndex = outputStr.IndexOf(macroDeclaration);
+            if (macroIndex == -1)
+                return;
+            int macroEndIndex = macroIndex + macroDeclaration.Length;
+            for ( ; macroEndIndex < outputStr.Length; macroEndIndex++)
+            {
+                if (outputStr[macroEndIndex] == '\n' && macroEndIndex > 1 && outputStr[macroEndIndex - 2] != '\\')
+                    break;
+            }
+
+            if (macroIndex > 0)
+                macroIndex -= 2;
+            output.Remove(macroIndex, macroEndIndex - macroIndex);
         }
 
         const int MAX_DEFINITION_LINE_LENGTH = 100;
@@ -71,7 +138,7 @@ namespace TypeRegistrator
 
             var typeSetEnumerator = types.GetEnumerator();
             typeSetEnumerator.MoveNext();
-            
+
             string currentType = typeSetEnumerator.Current;
             macro.Append("    " + currentType);
 
@@ -83,7 +150,7 @@ namespace TypeRegistrator
 
                 if (lineLengthCounter + currentType.Length + 2 > MAX_DEFINITION_LINE_LENGTH)
                 {
-                    macro.Append(", \\\n    " + currentType);
+                    macro.Append(", \\\r\n    " + currentType);
                     lineLengthCounter = currentType.Length + 8;
                 }
                 else
@@ -93,9 +160,17 @@ namespace TypeRegistrator
                 }
             }
 
-            macro.Insert(0, "\\\n");
-
             return macro.ToString();
+        }
+
+#region Old code
+        static void RegisterTypes(string getMacro, string outputFile, HashSet<string> headers, HashSet<string> types)
+        {
+            //TODO: fix inconsistent line endings
+            //TODO: make it via FileStream or try to use File.WriteAllText, File.ReadAllText and StringBuilder only once
+            WriteHeaders(outputFile, headers);
+            //TODO: fix adding empty lines on re adding types. Probably this is because of StringBuilder.Remove
+            WriteRegisteredTypes(outputFile, types, getMacro);
         }
 
         static void WriteRegisteredTypes(string path, HashSet<string> types, string macro)
@@ -202,5 +277,6 @@ namespace TypeRegistrator
 
             return insertIndex;
         }
+#endregion
     }
 }
