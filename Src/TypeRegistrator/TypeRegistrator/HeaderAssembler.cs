@@ -19,7 +19,7 @@ namespace TypeRegistrator
         private string AssembleOutput(HashSet<string> headers, HashSet<string> types, string getMacro)
         {
             var output = new StringBuilder();
-            output.Append("#pragma once\r\n\n");
+            output.Append("#pragma once\r\n\r\n");
 
             foreach (var header in headers)
                 output.Append("#include \"" + header + "\"\r\n");
@@ -46,7 +46,7 @@ namespace TypeRegistrator
 
         private void MergeHeaders(StringBuilder output, HashSet<string> headers)
         {
-            var pragma = "#pragma once\r\n\n";
+            var pragma = "#pragma once\r\n\r\n";
 
             var outputStr = output.ToString();
             var concatedHeaders = new StringBuilder();
@@ -78,7 +78,7 @@ namespace TypeRegistrator
 
             if (macroIndex > 0)
                 macroIndex -= 2;
-            output.Remove(macroIndex, macroEndIndex - macroIndex);
+            output.Remove(macroIndex, macroEndIndex - macroIndex - 1);
         }
 
         private string GetMacroDefinitionForTypes(HashSet<string> types)
