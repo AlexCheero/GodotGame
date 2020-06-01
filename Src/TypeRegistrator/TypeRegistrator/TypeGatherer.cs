@@ -6,7 +6,7 @@ namespace TypeRegistrator
 {
     class TypeGatherer
     {
-        public void GatherRegisteredTypes(string sourceDirectory, string registerationMacro, string outputFile, string[] excludes,
+        public void GatherRegisteredTypes(string sourceDirectory, string setMacro, string outputFile, string[] excludes,
             HashSet<string> headers, HashSet<string> types)
         {
             string[] allfiles = Directory.GetFiles(sourceDirectory, "*.h", SearchOption.AllDirectories);
@@ -17,7 +17,7 @@ namespace TypeRegistrator
                 if (Exclude(file, excludes))
                     continue;
 
-                if (GatherFromSource(file, registerationMacro, types))
+                if (GatherFromSource(file, setMacro, types))
                     headers.Add(GetRelativeHeaderPath(outputFile, file));
             }
         }
