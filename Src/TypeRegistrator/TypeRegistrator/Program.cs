@@ -13,6 +13,8 @@ namespace TypeRegistrator
 
             string setMacro = args[1];
             string getMacro = args[2];
+
+            Console.WriteLine("registering " + setMacro + " types, with " + getMacro);
             
             string sourceDirectory = args[3];
             string outputFile = args[4];
