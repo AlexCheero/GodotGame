@@ -5,13 +5,12 @@ using System.Linq;
 
 namespace TypeRegistrator
 {
-    //TODO: exclude registrator exe from gitignore
     class Program
     {
         static void Main(string[] args)
         {
             bool newOutput = bool.Parse(args[0]);
-            
+
             string setMacro = args[1];
             string getMacro = args[2];
             
