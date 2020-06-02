@@ -7,6 +7,7 @@ namespace TypeRegistrator
 {
     class Program
     {
+        //TODO: add different modes: clear, reg tag, reg component etc.
         static void Main(string[] args)
         {
             bool newOutput = bool.Parse(args[0]);
@@ -22,6 +23,7 @@ namespace TypeRegistrator
 
             sourceDirectory = GetFixedPath(sourceDirectory);
             outputFile = GetFixedPath(outputFile);
+            //TODO: exclude by "#define" in front of macro and not pass this path as parameter
             registerationMacroMacroDefinitionFile = GetFixedPath(registerationMacroMacroDefinitionFile);
 
             string[] fileExcludes = new string[] { outputFile, registerationMacroMacroDefinitionFile };
