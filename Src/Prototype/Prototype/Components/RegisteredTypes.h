@@ -9,12 +9,12 @@
 
 //registered types
 
-//meta types declaration
-
-#define REGISTERED_TAGS \
-    PlayerTag, BotTag, MainCameraTag
 #define REGISTERED_COMPONENTS \
     MeleePileInComponent, MeleeWeaponComponent, RangedAttackComponent, ThrowableAttackComponent, \
     GrenadeAttackComponent, GrenadeComponent, JumpSpeedComponent, SpeedComponent, \
     GravityComponent, HealthComponent, DecisionMakingComponent, NavMarginComponent, \
     PatrolmanComponent
+#define REGISTERED_TAGS \
+    PlayerTag, BotTag, MainCameraTag
+
+//meta types declaration

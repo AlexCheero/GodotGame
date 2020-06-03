@@ -6,31 +6,33 @@ namespace TypeRegistrator
 {
     class HeaderAssembler
     {
-        public const string HEADER_TEMPLATE = "#pragma once" +
-                                              "\r\n\r\n" +
-                                              "//registered types" +
-                                              "\r\n\r\n" +
-                                              "//meta types declaration\r\n";
-
         private const int MAX_DEFINITION_LINE_LENGTH = 100;
+        private const string PRAGMA = "#pragma once\r\n\r\n";
+        private const string REG_TYPES_SECTION_TAG = "//registered types\r\n";
+        private const string META_TYPES_SECTION_TAG = "//meta types declaration\r\n";
+
+        public const string HEADER_TEMPLATE = PRAGMA + REG_TYPES_SECTION_TAG + "\r\n\r\n" + META_TYPES_SECTION_TAG;
 
         public string GetHeaderSource(string outputFile, HashSet<string> headers, HashSet<string> types, string getMacro)
         {
             var output = new StringBuilder(File.ReadAllText(outputFile));
-
+            
             MergeHeaders(output, headers);
-
             ClearPreviouslyDefinedMacro(output, getMacro);
-            output.Append("\r\n#define " + getMacro + " \\\r\n");
-            output.Append(GetMacroDefinitionForTypes(types));
+
+            var outputStr = output.ToString();
+
+            int regTypesSectionIndex = outputStr.IndexOf(REG_TYPES_SECTION_TAG) + REG_TYPES_SECTION_TAG.Length;
+
+            string macroDeclaration = "\r\n#define " + getMacro + " \\\r\n";
+            output.Insert(regTypesSectionIndex, macroDeclaration);
+            output.Insert(regTypesSectionIndex + macroDeclaration.Length, GetMacroDefinitionForTypes(types));
 
             return output.ToString();
         }
 
         private void MergeHeaders(StringBuilder output, HashSet<string> headers)
         {
-            var pragma = "#pragma once\r\n\r\n";
-
             var outputStr = output.ToString();
             var concatedHeaders = new StringBuilder();
             foreach (var header in headers)
@@ -41,7 +43,7 @@ namespace TypeRegistrator
             if (concatedHeaders.Length > 0)
                 concatedHeaders.Append("\r\n");
 
-            output.Insert(pragma.Length, concatedHeaders);
+            output.Insert(PRAGMA.Length, concatedHeaders);
         }
 
         private void ClearPreviouslyDefinedMacro(StringBuilder output, string getMacro)
