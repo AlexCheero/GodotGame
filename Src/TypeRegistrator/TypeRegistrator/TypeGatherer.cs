@@ -6,7 +6,7 @@ namespace TypeRegistrator
 {
     class TypeGatherer
     {
-        public void GatherRegisteredTypes(string sourceDirectory, string setMacro, string outputFile, HashSet<string> headers, HashSet<string> types)
+        public void GatherRegisteredTypes(string sourceDirectory, string setMacro, string outputFile, HashSet<string> headers, Dictionary<string, List<string>> types, bool gatherWithFields)
         {
             string[] allfiles = Directory.GetFiles(sourceDirectory, "*.h", SearchOption.AllDirectories);
 
@@ -16,12 +16,12 @@ namespace TypeRegistrator
                 if (file.Equals(outputFile))
                     continue;
 
-                if (GatherFromSource(file, setMacro, types))
+                if (GatherFromSource(file, setMacro, types, gatherWithFields))
                     headers.Add(GetRelativeHeaderPath(outputFile, file));
             }
         }
 
-        private bool GatherFromSource(string file, string tag, HashSet<string> types)
+        private bool GatherFromSource(string file, string tag, Dictionary<string, List<string>> types, bool gatherWithFields)
         {
             var src = File.ReadAllText(file);
 
@@ -42,7 +42,7 @@ namespace TypeRegistrator
                 int typeEndIndex = GetTypeEndIndex(src, typeStartIndex);
 
                 string type = src.Substring(typeStartIndex, typeEndIndex - typeStartIndex);
-                if (!types.Add(type))
+                if (!types.TryAdd(type, new List<string>()))
                 {
                     Console.WriteLine("Error in source code. Type registered more than once");
                     Environment.Exit(2);

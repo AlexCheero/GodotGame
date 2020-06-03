@@ -20,16 +20,18 @@ namespace TypeRegistrator
 
             string setMacro = args[0];
             string getMacro = args[1];
-
-            Console.WriteLine("registering " + setMacro + " types, with " + getMacro);
             
             string sourceDirectory = GetFixedPath(args[2]);
             string outputFile = GetFixedPath(args[3]);
-            
-            var headers = new HashSet<string>();
-            var types = new HashSet<string>();
 
-            new TypeGatherer().GatherRegisteredTypes(sourceDirectory, setMacro, outputFile, headers, types);
+            bool gatherWithFields = bool.Parse(args[4]);
+
+            Console.WriteLine("registering " + setMacro + " types, with " + getMacro + (gatherWithFields ? " with fields" : " without fields"));
+
+            var headers = new HashSet<string>();
+            var types = new Dictionary<string, List<string>>();
+
+            new TypeGatherer().GatherRegisteredTypes(sourceDirectory, setMacro, outputFile, headers, types, gatherWithFields);
 
             if (types.Count > 0)
             {

@@ -13,7 +13,7 @@ namespace TypeRegistrator
 
         public const string HEADER_TEMPLATE = PRAGMA + REG_TYPES_SECTION_TAG + "\r\n\r\n" + META_TYPES_SECTION_TAG;
 
-        public string GetHeaderSource(string outputFile, HashSet<string> headers, HashSet<string> types, string getMacro)
+        public string GetHeaderSource(string outputFile, HashSet<string> headers, Dictionary<string, List<string>> types, string getMacro)
         {
             var output = new StringBuilder(File.ReadAllText(outputFile));
             
@@ -67,11 +67,11 @@ namespace TypeRegistrator
             output.Remove(macroIndex, macroEndIndex - macroIndex - 1);
         }
 
-        private string GetMacroDefinitionForTypes(HashSet<string> types)
+        private string GetMacroDefinitionForTypes(Dictionary<string, List<string>> types)
         {
             StringBuilder macro = new StringBuilder();
 
-            var typeSetEnumerator = types.GetEnumerator();
+            var typeSetEnumerator = types.Keys.GetEnumerator();
             typeSetEnumerator.MoveNext();
 
             string currentType = typeSetEnumerator.Current;

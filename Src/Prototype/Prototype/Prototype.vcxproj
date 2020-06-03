@@ -121,8 +121,8 @@
     </Link>
     <PreBuildEvent>
       <Command>$(TypeRegistratorDir)TypeRegistrator.exe clear $(ProjectDir)Components\RegisteredTypes.h
-$(TypeRegistratorDir)TypeRegistrator.exe DECLARE_REGISTERED_TAG REGISTERED_TAGS $(ProjectDir)..\  $(ProjectDir)Components\RegisteredTypes.h
-$(TypeRegistratorDir)TypeRegistrator.exe COMPONENTS_META REGISTERED_COMPONENTS $(ProjectDir)..\  $(ProjectDir)Components\RegisteredTypes.h</Command>
+$(TypeRegistratorDir)TypeRegistrator.exe DECLARE_REGISTERED_TAG REGISTERED_TAGS $(ProjectDir)..\  $(ProjectDir)Components\RegisteredTypes.h false
+$(TypeRegistratorDir)TypeRegistrator.exe COMPONENTS_META REGISTERED_COMPONENTS $(ProjectDir)..\  $(ProjectDir)Components\RegisteredTypes.h true</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
