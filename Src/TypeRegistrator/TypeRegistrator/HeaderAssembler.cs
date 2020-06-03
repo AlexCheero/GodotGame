@@ -24,6 +24,7 @@ namespace TypeRegistrator
 
             int regTypesSectionIndex = outputStr.IndexOf(REG_TYPES_SECTION_TAG) + REG_TYPES_SECTION_TAG.Length;
 
+            //TODO: move #define and other literals to separate file with string constants
             string macroDeclaration = "\r\n#define " + getMacro + " \\\r\n";
             output.Insert(regTypesSectionIndex, macroDeclaration);
             output.Insert(regTypesSectionIndex + macroDeclaration.Length, GetMacroDefinitionForTypes(types));

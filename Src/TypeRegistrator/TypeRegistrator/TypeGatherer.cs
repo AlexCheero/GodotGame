@@ -25,9 +25,6 @@ namespace TypeRegistrator
         {
             var src = File.ReadAllText(file);
 
-            if (src.IndexOf("#define " + tag) != -1)
-                return false;
-
             bool anyTypeGathered = false;
 
             for (int tagIndex = 0; ; tagIndex += tag.Length)
@@ -35,6 +32,9 @@ namespace TypeRegistrator
                 tagIndex = src.IndexOf(tag, tagIndex);
                 if (tagIndex == -1)
                     break;
+
+                if (tagIndex > 7 && src.Substring(tagIndex - 8, 8).Equals("#define ")) //length of "#define " == 8
+                    continue;
 
                 anyTypeGathered = true;
 
