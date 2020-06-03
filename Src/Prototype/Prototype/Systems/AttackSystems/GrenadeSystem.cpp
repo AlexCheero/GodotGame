@@ -36,10 +36,10 @@ void godot::GrenadeSystem::Tick(float delta, entt::registry& registry)
 {
 	int64_t currTime = godot::OS::get_singleton()->get_ticks_msec();
 
-	auto view = registry.view<GrenadeComponent, Spatial*>(entt::exclude<GrenadeExplodesTag>);
-	view.each([&registry, currTime](entt::entity entity, GrenadeComponent grenComp, Spatial* pGrenSpatial)
+	auto view = registry.view<GrenadeComponent, GrenadeTimerComponent, Spatial*>(entt::exclude<GrenadeExplodesTag>);
+	view.each([&registry, currTime](entt::entity entity, GrenadeComponent grenComp, GrenadeTimerComponent timerComp, Spatial* pGrenSpatial)
 	{
-		if (grenComp.startTime + utils::SecondsToMillis(grenComp.explosionTime) <= currTime)
+		if (timerComp.startTime + utils::SecondsToMillis(grenComp.explosionTime) <= currTime)
 			registry.emplace<GrenadeExplodesTag>(entity);
 	});
 

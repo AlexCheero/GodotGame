@@ -99,13 +99,17 @@ struct TargetLockComponent
 	entt::entity target = entt::null;
 };
 
+struct GrenadeTimerComponent
+{
+	float startTime;
+};
+
 DECLARE_TAG(GrenadeExplodesTag);
 struct GrenadeComponent
 {
 	float explosionTime;
 	float explosionRadius;
 	float damage;
-	float startTime;
 };
 REGISTER_COMPONENT(GrenadeComponent, "explosionTime", "explosionRadius", "damage");
 

@@ -50,8 +50,8 @@ void godot::ThrowGrenadeSystem::Tick(float delta, entt::registry& registry)
 		GrenadeComponent grenComp;
 		bool converted = pGrenadeView->ConvertToComponent(grenComp);
 		ASSERT(converted, "grenade view have no GrenadeComponent");
-		grenComp.startTime = OS::get_singleton()->get_ticks_msec();
 
 		registry.emplace<GrenadeComponent>(grenadeEntity, grenComp);
+		registry.emplace<GrenadeTimerComponent>(grenadeEntity).startTime = OS::get_singleton()->get_ticks_msec();
 	});
 }
