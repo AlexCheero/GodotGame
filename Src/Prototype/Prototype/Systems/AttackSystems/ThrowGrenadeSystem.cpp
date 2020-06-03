@@ -14,10 +14,10 @@
 //TODO: almost entirely copied from ThrowAttackSystem. implement different logick
 void godot::ThrowGrenadeSystem::Tick(float delta, entt::registry& registry)
 {
-	auto view = registry.view<AttackPressedTag, CurrentWeaponGrenadeTag, GrenadeAttackComponent, BoundsComponent, Spatial*>();
-	view.each([&registry](entt::entity entity, GrenadeAttackComponent& attackComp, BoundsComponent bounds, Spatial* pAttackerSpatial)
+	auto view = registry.view<AttackPressedTag, CurrentWeaponGrenadeTag, GrenadeAttackComponent, AttackCooldownComponent, BoundsComponent, Spatial*>();
+	view.each([&registry](entt::entity entity, GrenadeAttackComponent& attackComp, AttackCooldownComponent& cdComp, BoundsComponent bounds, Spatial* pAttackerSpatial)
 	{
-		if (!utils::Expired(attackComp.attackTime, attackComp.prevHitTime))
+		if (!utils::Expired(attackComp.attackTime, cdComp.prevHitTime))
 			return;
 
 		Node* grenadeNode = attackComp.grenadeScene->instance();

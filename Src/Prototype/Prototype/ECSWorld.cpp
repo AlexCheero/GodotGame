@@ -88,7 +88,8 @@ void godot::ECSWorld::PreparePlayerEntity()
 	entityView->ConstructComponents(registry, entity);
 	entityView->ConstructTags(registry, entity);
 
-	registry.get<MeleeAttackComponent>(entity).hits = LoadHits("barehanded_hits");
+	registry.emplace<MeleeAttackComponent>(entity).hits = LoadHits("barehanded_hits");
+	registry.emplace<AttackCooldownComponent>(entity);
 
 	registry.emplace<VelocityComponent>(entity);
 	
@@ -120,7 +121,8 @@ void godot::ECSWorld::PrepareEnemyEntity()
 	entityView->ConstructComponents(registry, entity);
 	entityView->ConstructTags(registry, entity);
 
-	registry.get<MeleeAttackComponent>(entity).hits = LoadHits("barehanded_hits");
+	registry.emplace<MeleeAttackComponent>(entity).hits = LoadHits("barehanded_hits");
+	registry.emplace<AttackCooldownComponent>(entity);
 
 	registry.emplace<VelocityComponent>(entity);
 	RotationDirectionComponent rot{ registry.get<Spatial*>(entity)->get_global_transform().get_basis().z };
@@ -159,13 +161,12 @@ void godot::ECSWorld::PrepareSingletonEntities()
 	registry.emplace<Navigation*>(navigationEntity, navigation);
 }
 
-int64_t MeleeAttackComponent::maxComboIntervalMillis;
 void godot::ECSWorld::LoadConfig()
 {
 	ConfigFile* hitsCfg = ConfigFile::_new();
 	Error err = hitsCfg->load("res://Configs/config.cfg");
 	ASSERT(err == Error::OK, "cannot load config.cfg");
-	MeleeAttackComponent::maxComboIntervalMillis = hitsCfg->get_value("maxComboIntervalMillis", "maxComboIntervalMillis");
+	maxComboIntervalMillis = hitsCfg->get_value("maxComboIntervalMillis", "maxComboIntervalMillis");
 	hitsCfg->free();
 }
 

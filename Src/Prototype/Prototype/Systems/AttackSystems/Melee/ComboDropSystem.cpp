@@ -18,11 +18,11 @@ void godot::ComboDropSystem::Init(entt::registry& registry)
 void godot::ComboDropSystem::Tick(float delta, entt::registry& registry)
 {
 	int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
-	auto view = registry.view<MeleeAttackComponent>();
-	view.each([currTimeMillis](MeleeAttackComponent& attackComp)
+	auto view = registry.view<MeleeAttackComponent, AttackCooldownComponent>();
+	view.each([currTimeMillis](MeleeAttackComponent& attackComp, AttackCooldownComponent cdComp)
 	{
-		int64_t millisSinceLastHit = currTimeMillis - attackComp.prevHitTime;
-		if (millisSinceLastHit > MeleeAttackComponent::maxComboIntervalMillis)
+		int64_t millisSinceLastHit = currTimeMillis - cdComp.prevHitTime;
+		if (millisSinceLastHit > maxComboIntervalMillis)
 			attackComp.hitIdx = 0;
 	});
 }

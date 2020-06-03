@@ -15,9 +15,9 @@ void godot::PursueStateSystem::Tick(float delta, entt::registry& registry)
 {
 	auto players = registry.view<PlayerTag, Spatial*>();
 
-	auto view = registry.view<BotTag, PursuingStateComponent, PatrolmanComponent, MeleeAttackComponent, HealthComponent, Spatial*, DecisionMakingComponent>();
+	auto view = registry.view<BotTag, PursuingStateComponent, PatrolmanComponent, MeleePileInComponent, HealthComponent, Spatial*, DecisionMakingComponent>();
 	view.each([&registry, &players](entt::entity entity, PursuingStateComponent& pursuingComp
-		, PatrolmanComponent patrolComp, MeleeAttackComponent meleeComp, HealthComponent healthComp, Spatial* pSpatial, DecisionMakingComponent decisionComp)
+		, PatrolmanComponent patrolComp, MeleePileInComponent pileInComp, HealthComponent healthComp, Spatial* pSpatial, DecisionMakingComponent decisionComp)
 	{
 		bool validTarget = registry.valid(pursuingComp.target);
 		if (validTarget && CanSeeTarget(players.get<Spatial*>(pursuingComp.target), patrolComp, pSpatial))
@@ -37,7 +37,7 @@ void godot::PursueStateSystem::Tick(float delta, entt::registry& registry)
 		else if (validTarget)
 		{
 			//to attack transition
-			if (meleeComp.maxPileInDistance >= GetDistanceToTarget(registry, pursuingComp.target, pSpatial))
+			if (pileInComp.maxPileInDistance >= GetDistanceToTarget(registry, pursuingComp.target, pSpatial))
 			{
 				registry.emplace<MeleeAttackStateTag>(entity);
 				registry.emplace<TargetLockComponent>(entity).target = pursuingComp.target;

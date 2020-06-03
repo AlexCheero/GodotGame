@@ -38,12 +38,12 @@ void godot::MeleeLockTargetSystem::Init()
 
 void godot::MeleeLockTargetSystem::Tick(float delta, entt::registry& registry)
 {
-	auto view = registry.view<MeleeAttackEvent, CurrentWeaponMeleeTag, MeleeAttackComponent, Spatial*>(entt::exclude<TargetLockComponent>);
-	view.each([&registry](entt::entity entity, MeleeAttackComponent attackComp, Spatial* pSpatial)
+	auto view = registry.view<MeleeAttackEvent, CurrentWeaponMeleeTag, MeleePileInComponent, Spatial*>(entt::exclude<TargetLockComponent>);
+	view.each([&registry](entt::entity entity, MeleePileInComponent pileInComp, Spatial* pSpatial)
 	{
 		//TODO_melee: implement target change when already have locked target
 		//TODO_melee: do not lock on ally even if friendly fire is on
-		Array intersects = GetIntersects(pSpatial, attackComp.maxPileInDistance, "Character");
+		Array intersects = GetIntersects(pSpatial, pileInComp.maxPileInDistance, "Character");
 		if (intersects.size() == 0)
 			return;
 

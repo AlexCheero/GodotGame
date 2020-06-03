@@ -13,10 +13,10 @@
 
 void godot::ThrowAttackSystem::Tick(float delta, entt::registry& registry)
 {
-	auto view = registry.view<AttackPressedTag, CurrentWeaponThrowableTag, ThrowableAttackComponent, BoundsComponent, Spatial*>();
-	view.each([&registry](entt::entity entity, ThrowableAttackComponent& attackComp, BoundsComponent bounds, Spatial* pAttackerSpatial)
+	auto view = registry.view<AttackPressedTag, CurrentWeaponThrowableTag, ThrowableAttackComponent, AttackCooldownComponent, BoundsComponent, Spatial*>();
+	view.each([&registry](entt::entity entity, ThrowableAttackComponent& attackComp, AttackCooldownComponent& cdComp, BoundsComponent bounds, Spatial* pAttackerSpatial)
 	{
-		if (!utils::Expired(attackComp.attackTime, attackComp.prevHitTime))
+		if (!utils::Expired(attackComp.attackTime, cdComp.prevHitTime))
 			return;
 
 		Node* throwableNode = attackComp.throwableScene->instance();

@@ -12,14 +12,14 @@ void godot::MeleeAttackCooldownSystem::Tick(float delta, entt::registry& registr
 {
 	int64_t currTimeMillis = OS::get_singleton()->get_ticks_msec();
 
-	auto bufferedView = registry.view<MeleeAttackBuffered, CurrentWeaponMeleeTag, MeleeAttackComponent>();
-	bufferedView.each([&registry, currTimeMillis](entt::entity entity, MeleeAttackComponent& attackComp)
+	auto bufferedView = registry.view<MeleeAttackBuffered, CurrentWeaponMeleeTag, MeleeAttackComponent, AttackCooldownComponent>();
+	bufferedView.each([&registry, currTimeMillis](entt::entity entity, MeleeAttackComponent& attackComp, AttackCooldownComponent& cdComp)
 	{
 		int64_t attackTimeMillis = utils::SecondsToMillis(attackComp.GetCurrentHit().attackTime);
-		int64_t millisSinceLastHit = currTimeMillis - attackComp.prevHitTime;
+		int64_t millisSinceLastHit = currTimeMillis - cdComp.prevHitTime;
 		if (millisSinceLastHit >= attackTimeMillis)
 		{
-			attackComp.prevHitTime = currTimeMillis;
+			cdComp.prevHitTime = currTimeMillis;
 
 			registry.remove<MeleeAttackBuffered>(entity);
 			ASSERT(!registry.has<MeleeAttackEvent>(entity), "MeleeAttackEvent didn't cleared properly");
@@ -28,20 +28,20 @@ void godot::MeleeAttackCooldownSystem::Tick(float delta, entt::registry& registr
 	});
 
 	//TODO: try to use only AttackPressedTag and remove MeleeAttackEvent
-	auto inputView = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent>(entt::exclude<MeleeAttackBuffered>);
-	inputView.each([&registry, currTimeMillis](entt::entity entity, MeleeAttackComponent& attackComp)
+	auto inputView = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent, AttackCooldownComponent>(entt::exclude<MeleeAttackBuffered>);
+	inputView.each([&registry, currTimeMillis](entt::entity entity, MeleeAttackComponent& attackComp, AttackCooldownComponent& cdComp)
 	{
 		int64_t attackTimeMillis = utils::SecondsToMillis(attackComp.GetCurrentHit().attackTime);
 		//TODO: use interval between hits (not including attack time) instead of this assert or use this as feature to implement non combobale hits
-		ASSERT(attackTimeMillis < MeleeAttackComponent::maxComboIntervalMillis, "attack time is smaller than max combo interval");
-		int64_t millisSinceLastHit = currTimeMillis - attackComp.prevHitTime;
+		ASSERT(attackTimeMillis < maxComboIntervalMillis, "attack time is smaller than max combo interval");
+		int64_t millisSinceLastHit = currTimeMillis - cdComp.prevHitTime;
 		if (millisSinceLastHit >= attackTimeMillis)
 		{
-			attackComp.prevHitTime = currTimeMillis;
+			cdComp.prevHitTime = currTimeMillis;
 			ASSERT(!registry.has<MeleeAttackEvent>(entity), "MeleeAttackEvent didn't cleared properly");
 			registry.emplace<MeleeAttackEvent>(entity);
 		}
-		else if (millisSinceLastHit >= MILLIS_TO_KEEP_COMBO && millisSinceLastHit < MeleeAttackComponent::maxComboIntervalMillis)
+		else if (millisSinceLastHit >= MILLIS_TO_KEEP_COMBO && millisSinceLastHit < maxComboIntervalMillis)
 		{
 			registry.emplace<MeleeAttackBuffered>(entity);
 		}

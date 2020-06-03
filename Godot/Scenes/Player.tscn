@@ -29,7 +29,7 @@ components = {
 "JumpSpeed": {
 "speed": 30.0
 },
-"MeleeAttack": {
+"MeleePileIn": {
 "maxPileInDistance": 10.0
 },
 "Speed": {

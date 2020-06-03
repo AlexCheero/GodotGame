@@ -15,10 +15,10 @@
 
 void godot::RangedAttackSystem::Tick(float delta, entt::registry& registry)
 {
-	auto view = registry.view<AttackPressedTag, CurrentWeaponRangedTag, RangedAttackComponent, Spatial*>();
-	view.each([&registry](entt::entity entity, RangedAttackComponent& attackComp, Spatial* pAttackerSpatial)
+	auto view = registry.view<AttackPressedTag, CurrentWeaponRangedTag, RangedAttackComponent, AttackCooldownComponent, Spatial*>();
+	view.each([&registry](entt::entity entity, RangedAttackComponent& attackComp, AttackCooldownComponent& cdComp, Spatial* pAttackerSpatial)
 	{
-		if (!utils::Expired(attackComp.attackTime, attackComp.prevHitTime))
+		if (!utils::Expired(attackComp.attackTime, cdComp.prevHitTime))
 			return;
 
 		attackComp.ammoCount--;

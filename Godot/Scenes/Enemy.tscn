@@ -30,7 +30,7 @@ components = {
 "hp": 100.0,
 "maxHp": 100.0
 },
-"MeleeAttack": {
+"MeleePileIn": {
 "maxPileInDistance": 10.0
 },
 "NavMargin": {

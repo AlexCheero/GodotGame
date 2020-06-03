@@ -5,24 +5,32 @@
 
 void godot::WeaponChooseRSystem::OnMeleeChoose(entt::registry& registry, entt::entity entity)
 {
+	ASSERT(registry.has<AttackCooldownComponent>(entity), "entity has no AttackCooldownComponent");
+	registry.get<AttackCooldownComponent>(entity).prevHitTime = DEFAULT_PREV_HIT_TIME;
 	if (!registry.has<CurrentWeaponMeleeTag>(entity))
 		registry.emplace<CurrentWeaponMeleeTag>(entity);
 }
 
 void godot::WeaponChooseRSystem::OnRangedChoose(entt::registry& registry, entt::entity entity)
 {
+	ASSERT(registry.has<AttackCooldownComponent>(entity), "entity has no AttackCooldownComponent");
+	registry.get<AttackCooldownComponent>(entity).prevHitTime = DEFAULT_PREV_HIT_TIME;
 	if (!registry.has<CurrentWeaponRangedTag>(entity))
 		registry.emplace<CurrentWeaponRangedTag>(entity);
 }
 
 void godot::WeaponChooseRSystem::OnThrowableChoose(entt::registry& registry, entt::entity entity)
 {
+	ASSERT(registry.has<AttackCooldownComponent>(entity), "entity has no AttackCooldownComponent");
+	registry.get<AttackCooldownComponent>(entity).prevHitTime = DEFAULT_PREV_HIT_TIME;
 	if (!registry.has<CurrentWeaponThrowableTag>(entity))
 		registry.emplace<CurrentWeaponThrowableTag>(entity);
 }
 
 void godot::WeaponChooseRSystem::OnGrenadeChoose(entt::registry& registry, entt::entity entity)
 {
+	ASSERT(registry.has<AttackCooldownComponent>(entity), "entity has no AttackCooldownComponent");
+	registry.get<AttackCooldownComponent>(entity).prevHitTime = DEFAULT_PREV_HIT_TIME;
 	if (!registry.has<CurrentWeaponGrenadeTag>(entity))
 		registry.emplace<CurrentWeaponGrenadeTag>(entity);
 }
