@@ -47,6 +47,8 @@ namespace TypeRegistrator
                     Console.WriteLine("Error in source code. Type registered more than once");
                     Environment.Exit(2);
                 }
+                else if (gatherWithFields)
+                    GatherTypeFields(src, typeEndIndex, types[type]);
             }
 
             return anyTypeGathered;
@@ -72,6 +74,20 @@ namespace TypeRegistrator
             }
 
             return typeEndIndex;
+        }
+
+        private char[] whiteSpaceChars = new char[] { ' ', '\t', '\n', '\r' };
+        private void GatherTypeFields(string src, int typeBodyStartIndex, List<string> fields)
+        {
+            int typeBodyEndIndex = src.IndexOf('}', typeBodyStartIndex);
+
+            int semicolonIndex = src.IndexOf(';', typeBodyStartIndex);
+            while (semicolonIndex < typeBodyEndIndex)
+            {
+                int fieldStartIndex = src.LastIndexOfAny(whiteSpaceChars, semicolonIndex) + 1;
+                fields.Add(src.Substring(fieldStartIndex, semicolonIndex - fieldStartIndex));
+                semicolonIndex = src.IndexOf(';', semicolonIndex + 1);
+            }
         }
 
         private string GetRelativeHeaderPath(string path, string headerPath)

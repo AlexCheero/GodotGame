@@ -16,7 +16,7 @@ struct PatrolRouteComponent
 	godot::Vector3 GetCurrentPatrolPoint() { return routePoints[current]; }
 };
 
-struct PatrolmanComponent
+REGISTRABLE_COMPONENT(PatrolmanComponent)
 {
 	float viewAngleSmall;
 	float viewAngleBig;

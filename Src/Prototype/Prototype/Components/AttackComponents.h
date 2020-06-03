@@ -34,7 +34,7 @@ struct MeleeHit
 	//std::vector<Effect> effects;
 };
 
-struct MeleePileInComponent
+REGISTRABLE_COMPONENT(MeleePileInComponent)
 {
 	float maxPileInDistance;
 };
@@ -49,7 +49,7 @@ struct MeleeAttackComponent
 	MeleeHit GetCurrentHit() { return hits[hitIdx]; }
 };
 
-struct MeleeWeaponComponent
+REGISTRABLE_COMPONENT(MeleeWeaponComponent)
 {
 	godot::String hitsConfigName;
 };
@@ -59,7 +59,7 @@ TAG(MeleeAttackEvent);
 TAG(MeleeAttackBuffered);
 
 TAG(CurrentWeaponRangedTag);
-struct RangedAttackComponent
+REGISTRABLE_COMPONENT(RangedAttackComponent)
 {
 	int ammoCount;
 	float distance;
@@ -69,7 +69,7 @@ struct RangedAttackComponent
 COMPONENTS_META(RangedAttackComponent, "ammoCount", "distance", "damage", "attackTime");
 
 TAG(CurrentWeaponThrowableTag);
-struct ThrowableAttackComponent
+REGISTRABLE_COMPONENT(ThrowableAttackComponent)
 {
 	int ammoCount;
 	//TODO: implement object pools (for grenades too). keep pooled objects outside of scene tree
@@ -80,7 +80,7 @@ struct ThrowableAttackComponent
 COMPONENTS_META(ThrowableAttackComponent, "ammoCount", "throwableScene", "force", "attackTime");
 
 TAG(CurrentWeaponGrenadeTag);
-struct GrenadeAttackComponent
+REGISTRABLE_COMPONENT(GrenadeAttackComponent)
 {
 	int ammoCount;
 	godot::Ref<godot::PackedScene> grenadeScene;
@@ -105,7 +105,7 @@ struct GrenadeTimerComponent
 };
 
 TAG(GrenadeExplodesTag);
-struct GrenadeComponent
+REGISTRABLE_COMPONENT(GrenadeComponent)
 {
 	float explosionTime;
 	float explosionRadius;

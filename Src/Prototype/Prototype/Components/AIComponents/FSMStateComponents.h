@@ -6,7 +6,7 @@
 
 #include "entt/entt.hpp"
 
-struct DecisionMakingComponent
+REGISTRABLE_COMPONENT(DecisionMakingComponent)
 {
 	float criticalHp;
 	float targetPosRecalcDistance;

@@ -15,7 +15,7 @@ struct NavPathComponent
 	godot::Vector3 CurrentPathPoint() { return path[pathIndex]; }
 };
 
-struct NavMarginComponent
+REGISTRABLE_COMPONENT(NavMarginComponent)
 {
 	float margin;
 };
