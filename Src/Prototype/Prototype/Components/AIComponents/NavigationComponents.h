@@ -19,4 +19,4 @@ struct NavMarginComponent
 {
 	float margin;
 };
-REGISTER_COMPONENT(NavMarginComponent, "margin");
+COMPONENTS_META(NavMarginComponent, "margin");

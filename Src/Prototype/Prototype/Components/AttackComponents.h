@@ -38,9 +38,9 @@ struct MeleePileInComponent
 {
 	float maxPileInDistance;
 };
-REGISTER_COMPONENT(MeleePileInComponent, "maxPileInDistance");
+COMPONENTS_META(MeleePileInComponent, "maxPileInDistance");
 
-DECLARE_TAG(CurrentWeaponMeleeTag);
+TAG(CurrentWeaponMeleeTag);
 struct MeleeAttackComponent
 {
 	std::vector<MeleeHit> hits;
@@ -53,12 +53,12 @@ struct MeleeWeaponComponent
 {
 	godot::String hitsConfigName;
 };
-REGISTER_COMPONENT(MeleeWeaponComponent, "hitsConfigName");
+COMPONENTS_META(MeleeWeaponComponent, "hitsConfigName");
 
-DECLARE_TAG(MeleeAttackEvent);
-DECLARE_TAG(MeleeAttackBuffered);
+TAG(MeleeAttackEvent);
+TAG(MeleeAttackBuffered);
 
-DECLARE_TAG(CurrentWeaponRangedTag);
+TAG(CurrentWeaponRangedTag);
 struct RangedAttackComponent
 {
 	int ammoCount;
@@ -66,9 +66,9 @@ struct RangedAttackComponent
 	float damage;
 	float attackTime;
 };
-REGISTER_COMPONENT(RangedAttackComponent, "ammoCount", "distance", "damage", "attackTime");
+COMPONENTS_META(RangedAttackComponent, "ammoCount", "distance", "damage", "attackTime");
 
-DECLARE_TAG(CurrentWeaponThrowableTag);
+TAG(CurrentWeaponThrowableTag);
 struct ThrowableAttackComponent
 {
 	int ammoCount;
@@ -77,9 +77,9 @@ struct ThrowableAttackComponent
 	float force;
 	float attackTime;
 };
-REGISTER_COMPONENT(ThrowableAttackComponent, "ammoCount", "throwableScene", "force", "attackTime");
+COMPONENTS_META(ThrowableAttackComponent, "ammoCount", "throwableScene", "force", "attackTime");
 
-DECLARE_TAG(CurrentWeaponGrenadeTag);
+TAG(CurrentWeaponGrenadeTag);
 struct GrenadeAttackComponent
 {
 	int ammoCount;
@@ -87,7 +87,7 @@ struct GrenadeAttackComponent
 	float force;
 	float attackTime;
 };
-REGISTER_COMPONENT(GrenadeAttackComponent, "ammoCount", "grenadeScene", "force", "attackTime");
+COMPONENTS_META(GrenadeAttackComponent, "ammoCount", "grenadeScene", "force", "attackTime");
 
 struct AttackAnimPlayingComponent
 {
@@ -104,13 +104,13 @@ struct GrenadeTimerComponent
 	float startTime;
 };
 
-DECLARE_TAG(GrenadeExplodesTag);
+TAG(GrenadeExplodesTag);
 struct GrenadeComponent
 {
 	float explosionTime;
 	float explosionRadius;
 	float damage;
 };
-REGISTER_COMPONENT(GrenadeComponent, "explosionTime", "explosionRadius", "damage");
+COMPONENTS_META(GrenadeComponent, "explosionTime", "explosionRadius", "damage");
 
-DECLARE_TAG(PileInTag);
+TAG(PileInTag);

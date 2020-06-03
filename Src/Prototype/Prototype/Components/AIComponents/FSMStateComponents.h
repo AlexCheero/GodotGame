@@ -11,7 +11,7 @@ struct DecisionMakingComponent
 	float criticalHp;
 	float targetPosRecalcDistance;
 };
-REGISTER_COMPONENT(DecisionMakingComponent, "criticalHp", "targetPosRecalcDistance");
+COMPONENTS_META(DecisionMakingComponent, "criticalHp", "targetPosRecalcDistance");
 
 struct PursuingStateComponent
 {
@@ -26,6 +26,6 @@ struct HittedFromComponent
 	float lookAroundTime;
 };
 
-DECLARE_TAG(PatrolStateTag);
-DECLARE_TAG(MeleeAttackStateTag);
-DECLARE_TAG(FleeStateTag);
+TAG(PatrolStateTag);
+TAG(MeleeAttackStateTag);
+TAG(FleeStateTag);

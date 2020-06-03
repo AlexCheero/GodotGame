@@ -10,13 +10,13 @@ DECLARE_REGISTERED_TAG(PlayerTag);
 DECLARE_REGISTERED_TAG(BotTag);
 DECLARE_REGISTERED_TAG(MainCameraTag);
 
-DECLARE_TAG(DeadTag);
-DECLARE_TAG(InAirTag);
+TAG(DeadTag);
+TAG(InAirTag);
 
 constexpr entt::exclude_t ExcludeDead = entt::exclude<DeadTag>;
 
 struct VelocityComponent { godot::Vector3 velocity; };
-struct JumpSpeedComponent { float speed; }; REGISTER_COMPONENT(JumpSpeedComponent, "speed");
+struct JumpSpeedComponent { float speed; }; COMPONENTS_META(JumpSpeedComponent, "speed");
 struct RotationDirectionComponent { godot::Vector3 direction; };
 
 struct SpeedComponent
@@ -24,14 +24,14 @@ struct SpeedComponent
 	float speed;
 	float dashSpeed;
 };
-REGISTER_COMPONENT(SpeedComponent, "speed", "dashSpeed");
+COMPONENTS_META(SpeedComponent, "speed", "dashSpeed");
 
 struct GravityComponent
 {
 	float accUp;
 	float accDown;
 };
-REGISTER_COMPONENT(GravityComponent, "accelerationUp", "accelerationDown");
+COMPONENTS_META(GravityComponent, "accelerationUp", "accelerationDown");
 
 struct BoundsComponent
 {
@@ -46,4 +46,4 @@ struct HealthComponent
 	float hp;
 	float maxHp;
 };
-REGISTER_COMPONENT(HealthComponent, "hp", "maxHp");
+COMPONENTS_META(HealthComponent, "hp", "maxHp");

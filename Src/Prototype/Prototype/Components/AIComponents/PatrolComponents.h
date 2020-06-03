@@ -25,4 +25,4 @@ struct PatrolmanComponent
 	float looseTargetTime;
 	float lookAroundTime;
 };
-REGISTER_COMPONENT(PatrolmanComponent, "viewAngleSmall", "viewAngleBig", "longViewDistance", "shortViewDistance", "looseTargetTime", "lookAroundTime");
+COMPONENTS_META(PatrolmanComponent, "viewAngleSmall", "viewAngleBig", "longViewDistance", "shortViewDistance", "looseTargetTime", "lookAroundTime");
