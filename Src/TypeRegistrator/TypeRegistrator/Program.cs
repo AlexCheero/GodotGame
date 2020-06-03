@@ -25,15 +25,11 @@ namespace TypeRegistrator
             
             string sourceDirectory = GetFixedPath(args[2]);
             string outputFile = GetFixedPath(args[3]);
-            //TODO: exclude by "#define" in front of macro and not pass this path as parameter
-            string registerationMacroMacroDefinitionFile = GetFixedPath(args[4]);
-
-            string[] fileExcludes = new string[] { outputFile, registerationMacroMacroDefinitionFile };
-
+            
             var headers = new HashSet<string>();
             var types = new HashSet<string>();
 
-            new TypeGatherer().GatherRegisteredTypes(sourceDirectory, setMacro, outputFile, fileExcludes, headers, types);
+            new TypeGatherer().GatherRegisteredTypes(sourceDirectory, setMacro, outputFile, headers, types);
 
             if (types.Count > 0)
             {

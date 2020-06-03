@@ -6,15 +6,14 @@ namespace TypeRegistrator
 {
     class TypeGatherer
     {
-        public void GatherRegisteredTypes(string sourceDirectory, string setMacro, string outputFile, string[] excludes,
-            HashSet<string> headers, HashSet<string> types)
+        public void GatherRegisteredTypes(string sourceDirectory, string setMacro, string outputFile, HashSet<string> headers, HashSet<string> types)
         {
             string[] allfiles = Directory.GetFiles(sourceDirectory, "*.h", SearchOption.AllDirectories);
 
             for (int i = 0; i < allfiles.Length; i++)
             {
                 string file = allfiles[i].Replace('\\', '/');
-                if (Exclude(file, excludes))
+                if (file.Equals(outputFile))
                     continue;
 
                 if (GatherFromSource(file, setMacro, types))
@@ -22,20 +21,12 @@ namespace TypeRegistrator
             }
         }
 
-        private bool Exclude(string file, string[] excludes)
-        {
-            foreach (var exclude in excludes)
-            {
-                if (file.Equals(exclude))
-                    return true;
-            }
-
-            return false;
-        }
-
         private bool GatherFromSource(string file, string tag, HashSet<string> types)
         {
             var src = File.ReadAllText(file);
+
+            if (src.IndexOf("#define " + tag) != -1)
+                return false;
 
             bool anyTypeGathered = false;
 
