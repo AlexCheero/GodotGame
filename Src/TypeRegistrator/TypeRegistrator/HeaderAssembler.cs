@@ -6,32 +6,15 @@ namespace TypeRegistrator
 {
     class HeaderAssembler
     {
-        const int MAX_DEFINITION_LINE_LENGTH = 100;
+        public const string HEADER_TEMPLATE = "#pragma once" +
+                                              "\r\n\r\n" +
+                                              "//registered types" +
+                                              "\r\n\r\n" +
+                                              "//meta types declaration\r\n";
 
-        public string GetHeaderSource(bool newOutput, string outputFile, HashSet<string> headers, HashSet<string> types, string getMacro)
-        {
-            if (newOutput)
-                return AssembleOutput(headers, types, getMacro);
-            else
-                return MergeWithExistingOutput(outputFile, headers, types, getMacro);
-        }
+        private const int MAX_DEFINITION_LINE_LENGTH = 100;
 
-        private string AssembleOutput(HashSet<string> headers, HashSet<string> types, string getMacro)
-        {
-            var output = new StringBuilder();
-            output.Append("#pragma once\r\n\r\n");
-
-            foreach (var header in headers)
-                output.Append("#include \"" + header + "\"\r\n");
-            output.Append("\r\n");
-
-            output.Append("#define " + getMacro + " \\\r\n");
-            output.Append(GetMacroDefinitionForTypes(types));
-
-            return output.ToString();
-        }
-
-        private string MergeWithExistingOutput(string outputFile, HashSet<string> headers, HashSet<string> types, string getMacro)
+        public string GetHeaderSource(string outputFile, HashSet<string> headers, HashSet<string> types, string getMacro)
         {
             var output = new StringBuilder(File.ReadAllText(outputFile));
 

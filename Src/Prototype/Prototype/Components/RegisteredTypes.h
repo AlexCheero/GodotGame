@@ -7,6 +7,10 @@
 
 #include "SimpleComponents.h"
 
+//registered types
+
+//meta types declaration
+
 #define REGISTERED_TAGS \
     PlayerTag, BotTag, MainCameraTag
 #define REGISTERED_COMPONENTS \

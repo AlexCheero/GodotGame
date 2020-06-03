@@ -10,21 +10,23 @@ namespace TypeRegistrator
         //TODO: add different modes: clear, reg tag, reg component etc.
         static void Main(string[] args)
         {
-            bool newOutput = bool.Parse(args[0]);
+            if (args[0].Equals("clear"))
+            {
+                Console.WriteLine("clear header");
+                string outFile = GetFixedPath(args[1]);
+                File.WriteAllText(outFile, HeaderAssembler.HEADER_TEMPLATE);
+                return;
+            }
 
-            string setMacro = args[1];
-            string getMacro = args[2];
+            string setMacro = args[0];
+            string getMacro = args[1];
 
             Console.WriteLine("registering " + setMacro + " types, with " + getMacro);
             
-            string sourceDirectory = args[3];
-            string outputFile = args[4];
-            string registerationMacroMacroDefinitionFile = args[5];
-
-            sourceDirectory = GetFixedPath(sourceDirectory);
-            outputFile = GetFixedPath(outputFile);
+            string sourceDirectory = GetFixedPath(args[2]);
+            string outputFile = GetFixedPath(args[3]);
             //TODO: exclude by "#define" in front of macro and not pass this path as parameter
-            registerationMacroMacroDefinitionFile = GetFixedPath(registerationMacroMacroDefinitionFile);
+            string registerationMacroMacroDefinitionFile = GetFixedPath(args[4]);
 
             string[] fileExcludes = new string[] { outputFile, registerationMacroMacroDefinitionFile };
 
@@ -35,7 +37,7 @@ namespace TypeRegistrator
 
             if (types.Count > 0)
             {
-                string output = new HeaderAssembler().GetHeaderSource(newOutput, outputFile, headers, types, getMacro);
+                string output = new HeaderAssembler().GetHeaderSource(outputFile, headers, types, getMacro);
                 File.WriteAllText(outputFile, output);
             }
         }
