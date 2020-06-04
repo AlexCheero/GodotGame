@@ -6,9 +6,9 @@
 
 #include "ComponentsMeta.h"
 
-DECLARE_REGISTERED_TAG(PlayerTag);
-DECLARE_REGISTERED_TAG(BotTag);
-DECLARE_REGISTERED_TAG(MainCameraTag);
+REGISTRABLE_TAG(PlayerTag);
+REGISTRABLE_TAG(BotTag);
+REGISTRABLE_TAG(MainCameraTag);
 
 TAG(DeadTag);
 TAG(InAirTag);

@@ -19,16 +19,20 @@
 
 //meta types declaration
 
-COMPONENTS_META(MeleePileInComponent, "maxPileInDistance");
-COMPONENTS_META(MeleeWeaponComponent, "hitsConfigName");
-COMPONENTS_META(RangedAttackComponent, "ammoCount", "distance", "damage", "attackTime");
-COMPONENTS_META(ThrowableAttackComponent, "ammoCount", "throwableScene", "force", "attackTime");
-COMPONENTS_META(GrenadeAttackComponent, "ammoCount", "grenadeScene", "force", "attackTime");
-COMPONENTS_META(GrenadeComponent, "explosionTime", "explosionRadius", "damage");
-COMPONENTS_META(JumpSpeedComponent, "speed");
-COMPONENTS_META(SpeedComponent, "speed", "dashSpeed");
-COMPONENTS_META(GravityComponent, "accelerationUp", "accelerationDown");
-COMPONENTS_META(HealthComponent, "hp", "maxHp");
-COMPONENTS_META(DecisionMakingComponent, "criticalHp", "targetPosRecalcDistance");
-COMPONENTS_META(NavMarginComponent, "margin");
-COMPONENTS_META(PatrolmanComponent, "viewAngleSmall", "viewAngleBig", "longViewDistance", "shortViewDistance", "looseTargetTime", "lookAroundTime");
+COMPONENT_META(MeleePileInComponent, "maxPileInDistance");
+COMPONENT_META(MeleeWeaponComponent, "hitsConfigName");
+COMPONENT_META(RangedAttackComponent, "ammoCount", "distance", "damage", "attackTime");
+COMPONENT_META(ThrowableAttackComponent, "ammoCount", "throwableScene", "force", "attackTime");
+COMPONENT_META(GrenadeAttackComponent, "ammoCount", "grenadeScene", "force", "attackTime");
+COMPONENT_META(GrenadeComponent, "explosionTime", "explosionRadius", "damage");
+COMPONENT_META(JumpSpeedComponent, "speed");
+COMPONENT_META(SpeedComponent, "speed", "dashSpeed");
+COMPONENT_META(GravityComponent, "accelerationUp", "accelerationDown");
+COMPONENT_META(HealthComponent, "hp", "maxHp");
+COMPONENT_META(DecisionMakingComponent, "criticalHp", "targetPosRecalcDistance");
+COMPONENT_META(NavMarginComponent, "margin");
+COMPONENT_META(PatrolmanComponent, "viewAngleSmall", "viewAngleBig", "longViewDistance", "shortViewDistance", "looseTargetTime", "lookAroundTime");
+
+TAG_META(PlayerTag, "");
+TAG_META(BotTag, "");
+TAG_META(MainCameraTag, "");
