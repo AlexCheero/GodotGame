@@ -11,10 +11,6 @@
 #include "../Components/AIComponents/PatrolComponents.h"
 #include "../Components/AIComponents/FSMStateComponents.h"
 
-//TODO: possible problems with increased compilation time, try to move this include
-//      and implementation of anything that uses ComponentsMeta into cpp
-#include "../Components/RegisteredTypes.h"
-
 namespace godot
 {
 	class EntityView : public Node
@@ -40,16 +36,10 @@ namespace godot
 		bool HasTag();
 
 		template<typename T, std::size_t... I>
-		T ConvertComponentFromDict_impl(const Dictionary& dict, std::index_sequence<I...>)
-		{
-			return T{ dict[ComponentMeta<T>::properties[I]]... };
-		}
+		T ConvertComponentFromDict_impl(const Dictionary& dict, std::index_sequence<I...>);
 
 		template<typename T>
-		T ConvertComponentFromDict(const Dictionary& dict)
-		{
-			return ConvertComponentFromDict_impl<T>(dict, std::make_index_sequence<ComponentMeta<T>::propertiesCount>{});
-		}
+		T ConvertComponentFromDict(const Dictionary& dict);
 
 	public:
 		static void _register_methods();
@@ -66,42 +56,4 @@ namespace godot
 		void ConstructComponents(entt::registry& registry, entt::entity entity);
 		void ConstructTags(entt::registry& registry, entt::entity entity);
 	};
-}
-
-#ifdef DEBUG
-template<typename T>
-bool godot::EntityView::CheckKeys(Dictionary& dict)
-{
-	if (dict.size() != ComponentMeta<T>::propertiesCount)
-		return false;
-
-	for (int i = 0; i < ComponentMeta<T>::propertiesCount; i++)
-	{
-		if (!dict.has(ComponentMeta<T>::properties[i]))
-			return false;
-	}
-
-	return true;
-}
-#endif
-
-template<typename T>
-bool godot::EntityView::ConvertToComponent(T& comp)
-{
-	String componentKey(ComponentMeta<T>::typeName);
-	//assert that component's type name always ends with "Component"
-	ASSERT(componentKey.find_last("Component") == componentKey.length() - 9, "component's type name doesn't ends with \"Component\"");
-	componentKey = componentKey.substr(0, componentKey.length() - 9);
-	if (!componentsDict.has(componentKey))
-		return false;
-
-	Dictionary dict = componentsDict[componentKey];
-
-#ifdef DEBUG
-	ASSERT(CheckKeys<T>(dict), "wrong keys in components dict of entity view");
-#endif
-
-	comp = ConvertComponentFromDict<T>(dict);
-
-	return true;
 }
