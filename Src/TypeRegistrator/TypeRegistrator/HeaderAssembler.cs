@@ -13,7 +13,7 @@ namespace TypeRegistrator
 
         public const string HEADER_TEMPLATE = PRAGMA + REG_TYPES_SECTION_TAG + "\r\n\r\n" + META_TYPES_SECTION_TAG;
 
-        public string GetHeaderSource(string outputFile, HashSet<string> headers, Dictionary<string, List<string>> types, string getMacro)
+        public string GetHeaderSource(string outputFile, HashSet<string> headers, Dictionary<string, List<string>> types, string getMacro, bool gatherWithFields)
         {
             var output = new StringBuilder(File.ReadAllText(outputFile));
             
@@ -28,6 +28,14 @@ namespace TypeRegistrator
             string macroDeclaration = "\r\n#define " + getMacro + " \\\r\n";
             output.Insert(regTypesSectionIndex, macroDeclaration);
             output.Insert(regTypesSectionIndex + macroDeclaration.Length, GetMacroDefinitionForTypes(types));
+
+            if (gatherWithFields)
+            {
+                outputStr = output.ToString();
+                int metaTypesSectionIndex = outputStr.IndexOf(META_TYPES_SECTION_TAG) + META_TYPES_SECTION_TAG.Length;
+                output.Insert(metaTypesSectionIndex, "\r\n");
+                output.Insert(metaTypesSectionIndex + 2, GetMetaTypeDeclarations(types));
+            }
 
             return output.ToString();
         }
@@ -69,7 +77,7 @@ namespace TypeRegistrator
 
         private string GetMacroDefinitionForTypes(Dictionary<string, List<string>> types)
         {
-            StringBuilder macro = new StringBuilder();
+            var macro = new StringBuilder();
 
             var typeSetEnumerator = types.Keys.GetEnumerator();
             typeSetEnumerator.MoveNext();
@@ -96,6 +104,21 @@ namespace TypeRegistrator
             }
 
             return macro.ToString();
+        }
+
+        private string GetMetaTypeDeclarations(Dictionary<string, List<string>> types, string declarationMacro = "COMPONENTS_META")//TODO_asap: remove hardcode!
+        {
+            var declarations = new StringBuilder();
+
+            foreach (var type in types)
+                declarations.Append("//" + declarationMacro + '(' + type.Key + ", " + GetFieldsEnumeration(type.Value) + ");\r\n");
+
+            return declarations.ToString();
+        }
+
+        private string GetFieldsEnumeration(List<string> fields)
+        {
+            return '\"' + string.Join("\", ", fields) + '\"';
         }
     }
 }

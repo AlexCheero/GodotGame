@@ -35,18 +35,18 @@ namespace TypeRegistrator
 
             if (types.Count > 0)
             {
-                //TODO_asap: write fields, rename all fileds in code to match their meta names
-                if (gatherWithFields)
-                {
-                    foreach (var type in types)
-                    {
-                        Console.WriteLine(type.Key + " fields:");
-                        foreach (var field in type.Value)
-                            Console.WriteLine("    =" + field + "=");
-                    }
-                }
+                //TODO_asap: write fields
+                //if (gatherWithFields)
+                //{
+                //    foreach (var type in types)
+                //    {
+                //        Console.WriteLine(type.Key + " fields:");
+                //        foreach (var field in type.Value)
+                //            Console.WriteLine("    =" + field + "=");
+                //    }
+                //}
 
-                string output = new HeaderAssembler().GetHeaderSource(outputFile, headers, types, getMacro);
+                string output = new HeaderAssembler().GetHeaderSource(outputFile, headers, types, getMacro, gatherWithFields);
                 File.WriteAllText(outputFile, output);
             }
         }
