@@ -28,8 +28,8 @@ COMPONENTS_META(SpeedComponent, "speed", "dashSpeed");
 
 REGISTRABLE_COMPONENT(GravityComponent)
 {
-	float accUp;
-	float accDown;
+	float accelerationUp;
+	float accelerationDown;
 };
 COMPONENTS_META(GravityComponent, "accelerationUp", "accelerationDown");
 
