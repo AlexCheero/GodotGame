@@ -13,7 +13,8 @@ namespace TypeRegistrator
 
         public const string HEADER_TEMPLATE = PRAGMA + REG_TYPES_SECTION_TAG + "\r\n\r\n" + META_TYPES_SECTION_TAG;
 
-        public string GetHeaderSource(string outputFile, HashSet<string> headers, Dictionary<string, List<string>> types, string getMacro, string declareMetaMacro)
+        public string GetHeaderSource(string outputFile, HashSet<string> headers, Dictionary<string, List<string>> types,
+            string getMacro, string declareMetaMacro, bool gatherWithFields)
         {
             var output = new StringBuilder(File.ReadAllText(outputFile));
             
@@ -32,7 +33,7 @@ namespace TypeRegistrator
             outputStr = output.ToString();
             int metaTypesSectionIndex = outputStr.IndexOf(META_TYPES_SECTION_TAG) + META_TYPES_SECTION_TAG.Length;
             output.Insert(metaTypesSectionIndex, "\r\n");
-            output.Insert(metaTypesSectionIndex + 2, GetMetaTypeDeclarations(types, declareMetaMacro));
+            output.Insert(metaTypesSectionIndex + 2, GetMetaTypeDeclarations(types, declareMetaMacro, gatherWithFields));
 
             return output.ToString();
         }
@@ -103,12 +104,17 @@ namespace TypeRegistrator
             return macro.ToString();
         }
 
-        private string GetMetaTypeDeclarations(Dictionary<string, List<string>> types, string declarationMacro)
+        private string GetMetaTypeDeclarations(Dictionary<string, List<string>> types, string declarationMacro, bool gatherWithFields)
         {
             var declarations = new StringBuilder();
 
             foreach (var type in types)
-                declarations.Append(declarationMacro + '(' + type.Key + ", " + GetFieldsEnumeration(type.Value) + ");\r\n");
+            {
+                if (gatherWithFields)
+                    declarations.Append(declarationMacro + '(' + type.Key + ", " + GetFieldsEnumeration(type.Value) + ");\r\n");
+                else
+                    declarations.Append(declarationMacro + '(' + type.Key + ");\r\n");
+            }
 
             return declarations.ToString();
         }

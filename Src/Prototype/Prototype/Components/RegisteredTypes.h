@@ -33,6 +33,6 @@ COMPONENT_META(DecisionMakingComponent, "criticalHp", "targetPosRecalcDistance")
 COMPONENT_META(NavMarginComponent, "margin");
 COMPONENT_META(PatrolmanComponent, "viewAngleSmall", "viewAngleBig", "longViewDistance", "shortViewDistance", "looseTargetTime", "lookAroundTime");
 
-TAG_META(PlayerTag, "");
-TAG_META(BotTag, "");
-TAG_META(MainCameraTag, "");
+TAG_META(PlayerTag);
+TAG_META(BotTag);
+TAG_META(MainCameraTag);

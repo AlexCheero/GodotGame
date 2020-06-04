@@ -26,6 +26,8 @@ namespace TypeRegistrator
 
             bool gatherWithFields = bool.Parse(args[4]);
 
+            string declareMetaMacro = args[5];
+
             Console.WriteLine("registering " + setMacro + " types, with " + getMacro + (gatherWithFields ? " with fields" : " without fields"));
 
             var headers = new HashSet<string>();
@@ -35,7 +37,7 @@ namespace TypeRegistrator
 
             if (types.Count > 0)
             {
-                string output = new HeaderAssembler().GetHeaderSource(outputFile, headers, types, getMacro, args[5]);
+                string output = new HeaderAssembler().GetHeaderSource(outputFile, headers, types, getMacro, declareMetaMacro, gatherWithFields);
                 File.WriteAllText(outputFile, output);
             }
         }
