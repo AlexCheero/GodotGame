@@ -111,14 +111,14 @@ namespace TypeRegistrator
             var declarations = new StringBuilder();
 
             foreach (var type in types)
-                declarations.Append("//" + declarationMacro + '(' + type.Key + ", " + GetFieldsEnumeration(type.Value) + ");\r\n");
+                declarations.Append(declarationMacro + '(' + type.Key + ", " + GetFieldsEnumeration(type.Value) + ");\r\n");
 
             return declarations.ToString();
         }
 
         private string GetFieldsEnumeration(List<string> fields)
         {
-            return '\"' + string.Join("\", ", fields) + '\"';
+            return '\"' + string.Join("\", \"", fields) + '\"';
         }
     }
 }

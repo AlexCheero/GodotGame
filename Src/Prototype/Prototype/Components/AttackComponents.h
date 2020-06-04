@@ -38,7 +38,6 @@ REGISTRABLE_COMPONENT(MeleePileInComponent)
 {
 	float maxPileInDistance;
 };
-COMPONENTS_META(MeleePileInComponent, "maxPileInDistance");
 
 TAG(CurrentWeaponMeleeTag);
 struct MeleeAttackComponent
@@ -53,7 +52,6 @@ REGISTRABLE_COMPONENT(MeleeWeaponComponent)
 {
 	godot::String hitsConfigName;
 };
-COMPONENTS_META(MeleeWeaponComponent, "hitsConfigName");
 
 TAG(MeleeAttackEvent);
 TAG(MeleeAttackBuffered);
@@ -66,7 +64,6 @@ REGISTRABLE_COMPONENT(RangedAttackComponent)
 	float damage;
 	float attackTime;
 };
-COMPONENTS_META(RangedAttackComponent, "ammoCount", "distance", "damage", "attackTime");
 
 TAG(CurrentWeaponThrowableTag);
 REGISTRABLE_COMPONENT(ThrowableAttackComponent)
@@ -77,7 +74,6 @@ REGISTRABLE_COMPONENT(ThrowableAttackComponent)
 	float force;
 	float attackTime;
 };
-COMPONENTS_META(ThrowableAttackComponent, "ammoCount", "throwableScene", "force", "attackTime");
 
 TAG(CurrentWeaponGrenadeTag);
 REGISTRABLE_COMPONENT(GrenadeAttackComponent)
@@ -87,7 +83,6 @@ REGISTRABLE_COMPONENT(GrenadeAttackComponent)
 	float force;
 	float attackTime;
 };
-COMPONENTS_META(GrenadeAttackComponent, "ammoCount", "grenadeScene", "force", "attackTime");
 
 struct AttackAnimPlayingComponent
 {
@@ -111,6 +106,5 @@ REGISTRABLE_COMPONENT(GrenadeComponent)
 	float explosionRadius;
 	float damage;
 };
-COMPONENTS_META(GrenadeComponent, "explosionTime", "explosionRadius", "damage");
 
 TAG(PileInTag);

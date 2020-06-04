@@ -19,4 +19,3 @@ REGISTRABLE_COMPONENT(NavMarginComponent)
 {
 	float margin;
 };
-COMPONENTS_META(NavMarginComponent, "margin");

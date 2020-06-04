@@ -16,7 +16,7 @@ TAG(InAirTag);
 constexpr entt::exclude_t ExcludeDead = entt::exclude<DeadTag>;
 
 struct VelocityComponent { godot::Vector3 velocity; };
-REGISTRABLE_COMPONENT(JumpSpeedComponent) { float speed; }; COMPONENTS_META(JumpSpeedComponent, "speed");
+REGISTRABLE_COMPONENT(JumpSpeedComponent) { float speed; };
 struct RotationDirectionComponent { godot::Vector3 direction; };
 
 REGISTRABLE_COMPONENT(SpeedComponent)
@@ -24,14 +24,12 @@ REGISTRABLE_COMPONENT(SpeedComponent)
 	float speed;
 	float dashSpeed;
 };
-COMPONENTS_META(SpeedComponent, "speed", "dashSpeed");
 
 REGISTRABLE_COMPONENT(GravityComponent)
 {
 	float accelerationUp;
 	float accelerationDown;
 };
-COMPONENTS_META(GravityComponent, "accelerationUp", "accelerationDown");
 
 struct BoundsComponent
 {
@@ -46,4 +44,3 @@ REGISTRABLE_COMPONENT(HealthComponent)
 	float hp;
 	float maxHp;
 };
-COMPONENTS_META(HealthComponent, "hp", "maxHp");

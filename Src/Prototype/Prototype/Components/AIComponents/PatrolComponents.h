@@ -25,4 +25,3 @@ REGISTRABLE_COMPONENT(PatrolmanComponent)
 	float looseTargetTime;
 	float lookAroundTime;
 };
-COMPONENTS_META(PatrolmanComponent, "viewAngleSmall", "viewAngleBig", "longViewDistance", "shortViewDistance", "looseTargetTime", "lookAroundTime");

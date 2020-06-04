@@ -11,6 +11,10 @@
 #include "../Components/AIComponents/PatrolComponents.h"
 #include "../Components/AIComponents/FSMStateComponents.h"
 
+//TODO: possible problems with increased compilation time, try to move this include
+//      and implementation of anything that uses ComponentsMeta into cpp
+#include "../Components/RegisteredTypes.h"
+
 namespace godot
 {
 	class EntityView : public Node

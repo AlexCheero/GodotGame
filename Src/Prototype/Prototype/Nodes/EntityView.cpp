@@ -1,7 +1,5 @@
 #include "EntityView.h"
 
-#include "../Components/RegisteredTypes.h"
-
 template<typename Type, typename... Types>
 void godot::EntityView::ConstructComponents_impl(entt::registry& registry, entt::entity entity)
 {

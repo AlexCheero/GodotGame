@@ -11,7 +11,6 @@ REGISTRABLE_COMPONENT(DecisionMakingComponent)
 	float criticalHp;
 	float targetPosRecalcDistance;
 };
-COMPONENTS_META(DecisionMakingComponent, "criticalHp", "targetPosRecalcDistance");
 
 struct PursuingStateComponent
 {
