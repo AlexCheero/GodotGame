@@ -7,7 +7,6 @@ namespace TypeRegistrator
 {
     class Program
     {
-        //TODO: add different modes: clear, reg tag, reg component etc.
         static void Main(string[] args)
         {
             if (args[0].Equals("clear"))
