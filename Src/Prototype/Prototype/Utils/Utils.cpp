@@ -79,7 +79,7 @@ void utils::Assert(bool assertion, const char* message, const char* file, int li
 	abort();
 }
 
-//TODO: not readable func. refactor it
+//TODO: not readable func. refactor it. it isn't clear that sinceMillis should be changed after calling this
 bool utils::Expired(float time, int64_t& sinceMillis)
 {
 	int64_t currTimeMillis = godot::OS::get_singleton()->get_ticks_msec();
