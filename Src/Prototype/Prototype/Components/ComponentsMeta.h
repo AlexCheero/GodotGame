@@ -8,6 +8,7 @@ constexpr size_t GetArraySize(T(&)[N]) { return N; }
 //needed as tags for type registrator
 #define REGISTRABLE_COMPONENT(Component) struct Component
 #define REGISTRABLE_TAG(Tag) TAG(Tag)
+#define ECS_EVENT(Evt) TAG(Evt)
 
 template <typename T>
 struct ComponentMeta {};

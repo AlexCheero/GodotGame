@@ -1,14 +1,23 @@
 #pragma once
 
 #include <InputEvent.hpp>
+#include <Input.hpp>
 
 #include "../../Components/SimpleComponents.h"
 
 namespace godot
 {
-	//TODO0: turn into class
-	namespace PlayerInputSystem
+	class PlayerInputSystem
 	{
-		void HandleInput(entt::registry& registry/*, InputEvent* e*/);
-	}
+	private:
+		template<typename T>
+		static void ProcessInputKey(entt::registry& registry, bool pressed);
+
+		template<typename T>
+		static void ProcessInputAxis(entt::registry& registry, Vector2 direction);
+
+		static Vector2 GetInputDirection(Input* pInput, String actionPrefix);
+	public:
+		static void HandleInput(entt::registry& registry/*, InputEvent* e*/);
+	};
 }

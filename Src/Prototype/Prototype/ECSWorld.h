@@ -21,11 +21,10 @@ namespace godot
 		SystemsVec process_systems;
 
 		template<typename T>
-		T* AssignNodeInheritedComponent(entt::registry& registry, entt::entity entity, Node* pNode)
-		{
-			T* pComp = Object::cast_to<T>(pNode);
-			return registry.emplace<T*>(entity, pComp);
-		}
+		T* AssignNodeInheritedComponent(entt::registry& registry, entt::entity entity, Node* pNode);
+
+		template<typename Type, typename... Types>
+		void PrepareEcsEventsClearingSystems();
 
 		void UpdateSystems(float delta, SystemsVec& systems);
 

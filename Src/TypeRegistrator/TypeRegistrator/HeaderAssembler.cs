@@ -14,7 +14,7 @@ namespace TypeRegistrator
         public const string HEADER_TEMPLATE = PRAGMA + REG_TYPES_SECTION_TAG + "\r\n\r\n" + META_TYPES_SECTION_TAG;
 
         public string GetHeaderSource(string outputFile, HashSet<string> headers, Dictionary<string, List<string>> types,
-            string getMacro, string declareMetaMacro, bool gatherWithFields)
+            string getMacro, bool gatherWithFields, string declareMetaMacro = "")
         {
             var output = new StringBuilder(File.ReadAllText(outputFile));
             
@@ -30,10 +30,13 @@ namespace TypeRegistrator
             output.Insert(regTypesSectionIndex, macroDeclaration);
             output.Insert(regTypesSectionIndex + macroDeclaration.Length, GetMacroDefinitionForTypes(types));
 
-            outputStr = output.ToString();
-            int metaTypesSectionIndex = outputStr.IndexOf(META_TYPES_SECTION_TAG) + META_TYPES_SECTION_TAG.Length;
-            output.Insert(metaTypesSectionIndex, "\r\n");
-            output.Insert(metaTypesSectionIndex + 2, GetMetaTypeDeclarations(types, declareMetaMacro, gatherWithFields));
+            if (declareMetaMacro.Length > 0)
+            {
+                outputStr = output.ToString();
+                int metaTypesSectionIndex = outputStr.IndexOf(META_TYPES_SECTION_TAG) + META_TYPES_SECTION_TAG.Length;
+                output.Insert(metaTypesSectionIndex, "\r\n");
+                output.Insert(metaTypesSectionIndex + 2, GetMetaTypeDeclarations(types, declareMetaMacro, gatherWithFields));
+            }
 
             return output.ToString();
         }

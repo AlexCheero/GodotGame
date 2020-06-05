@@ -53,7 +53,7 @@ REGISTRABLE_COMPONENT(MeleeWeaponComponent)
 	godot::String hitsConfigName;
 };
 
-TAG(MeleeAttackEvent);
+ECS_EVENT(MeleeAttackEvent);
 TAG(MeleeAttackBuffered);
 
 TAG(CurrentWeaponRangedTag);

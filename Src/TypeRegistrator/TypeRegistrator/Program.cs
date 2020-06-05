@@ -25,9 +25,10 @@ namespace TypeRegistrator
 
             bool gatherWithFields = bool.Parse(args[4]);
 
-            string declareMetaMacro = args[5];
+            string declareMetaMacro = args.Length > 5 ? args[5] : string.Empty;
 
-            Console.WriteLine("registering " + setMacro + " types, with " + getMacro + (gatherWithFields ? " with fields" : " without fields"));
+            Console.WriteLine("registering " + setMacro + " types, with " + getMacro + (gatherWithFields ? " with fields" : " without fields") +
+                ", " +(declareMetaMacro.Length > 0 ? "with meta" : "without meta"));
 
             var headers = new HashSet<string>();
             var types = new Dictionary<string, List<string>>();
@@ -36,7 +37,7 @@ namespace TypeRegistrator
 
             if (types.Count > 0)
             {
-                string output = new HeaderAssembler().GetHeaderSource(outputFile, headers, types, getMacro, declareMetaMacro, gatherWithFields);
+                string output = new HeaderAssembler().GetHeaderSource(outputFile, headers, types, getMacro, gatherWithFields, declareMetaMacro);
                 File.WriteAllText(outputFile, output);
             }
         }

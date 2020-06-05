@@ -21,6 +21,8 @@
 #include "Components/AIComponents/PatrolComponents.h"
 #include "Components/AIComponents/FSMStateComponents.h"
 
+#include "Components/RegisteredTypes.h" //TODO: look for todo above ECS_EVENTS declaration in this file
+
 #include "ReactiveSystems/WeaponChooseRSystem.h"
 
 #include "Systems/AttackSystems/UpdateLockRotationSystem.h"
@@ -61,6 +63,23 @@
 #include "Utils/Utils.h"
 
 godot::ECSWorld* godot::ECSWorld::instance = nullptr;
+
+template<typename T>
+T* godot::ECSWorld::AssignNodeInheritedComponent(entt::registry& registry, entt::entity entity, Node* pNode)
+{
+	T* pComp = Object::cast_to<T>(pNode);
+	return registry.emplace<T*>(entity, pComp);
+}
+
+template<typename Type, typename ...Types>
+inline void godot::ECSWorld::PrepareEcsEventsClearingSystems()
+{
+	process_systems.emplace_back([](float delta, entt::registry& registry)
+		{ auto view = registry.view<Type>(); registry.remove<Type>(view.begin(), view.end()); }
+	);
+	if constexpr (sizeof...(Types))
+		PrepareEcsEventsClearingSystems<Types...>();
+}
 
 void godot::ECSWorld::UpdateSystems(float delta, SystemsVec& systems)
 {
@@ -224,21 +243,21 @@ void godot::ECSWorld::_init()
 	physics_systems.emplace_back(KinematicMovementSystem::Tick);
 	
 //setup systems
-	process_systems.emplace_back(JumpSystem::Tick);
-	process_systems.emplace_back(PlayerVelocitySystem::Tick);
-	process_systems.emplace_back(PlayerRotationSystem::Tick);
+	process_systems.emplace_back(JumpSystem::Tick);//recative
+	process_systems.emplace_back(PlayerVelocitySystem::Tick);//recative?
+	process_systems.emplace_back(PlayerRotationSystem::Tick);//recative?
 
 	//TODO: try to make some of the systems reactive back
 //<melee systems
 	process_systems.emplace_back(MeleeAttackCooldownSystem::Tick);
 	
 	MeleeLockTargetSystem::Init();
-	process_systems.emplace_back(MeleeLockTargetSystem::Tick);
+	process_systems.emplace_back(MeleeLockTargetSystem::Tick);//recative
 
 	process_systems.emplace_back(UpdateLockRotationSystem::Tick);
 	//TODO_melee: implement proper melee with blocks and stuff
-	process_systems.emplace_back(MeleeAnimSystem::Tick);
-	process_systems.emplace_back(CheckForPileInSystem::Tick);
+	process_systems.emplace_back(MeleeAnimSystem::Tick);//recative
+	process_systems.emplace_back(CheckForPileInSystem::Tick);//recative
 
 	PileInSystem::Init(registry);
 	process_systems.emplace_back(PileInSystem::Tick);
@@ -246,17 +265,8 @@ void godot::ECSWorld::_init()
 	ComboDropSystem::Init(registry);
 	process_systems.emplace_back(ComboDropSystem::Tick);
 
-	process_systems.emplace_back(IncrementComboSystem::Tick);
+	process_systems.emplace_back(IncrementComboSystem::Tick);//recative
 	process_systems.emplace_back(EndAttackAnimSystem::Tick);
-
-	process_systems.emplace_back([](float delta, entt::registry& registry)
-		{ auto view = registry.view<MeleeAttackEvent>(); registry.remove<MeleeAttackEvent>(view.begin(), view.end()); }
-	);
-
-	//TODO_asap: remove test code and implement event clean up system and implement proper just pressed input system
-	//process_systems.emplace_back([](float delta, entt::registry& registry)
-	//	{ auto view = registry.view<AttackPressedTag>(); registry.remove<AttackPressedTag>(view.begin(), view.end()); }
-	//);
 //melee systems>
 	
 	process_systems.emplace_back(RangedAttackSystem::Tick);
@@ -280,6 +290,9 @@ void godot::ECSWorld::_init()
 	process_systems.emplace_back(HealthMonitoringSystem::Tick);
 	process_systems.emplace_back(FleeingSystem::Tick);
 	process_systems.emplace_back(LocomotionAnimSystem::Tick);
+
+	//TODO_asap: implement proper just pressed input system
+	PrepareEcsEventsClearingSystems<ECS_EVENTS>();
 }
 
 void godot::ECSWorld::_ready()

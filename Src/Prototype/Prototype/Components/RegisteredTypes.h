@@ -9,6 +9,8 @@
 
 //registered types
 
+#define ECS_EVENTS \
+    MeleeAttackEvent
 #define REGISTERED_COMPONENTS \
     MeleePileInComponent, MeleeWeaponComponent, RangedAttackComponent, ThrowableAttackComponent, \
     GrenadeAttackComponent, GrenadeComponent, JumpSpeedComponent, SpeedComponent, \
