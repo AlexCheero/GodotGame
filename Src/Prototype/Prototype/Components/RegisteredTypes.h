@@ -1,5 +1,7 @@
 #pragma once
 
+#include "InputComponents.h"
+
 #include "AttackComponents.h"
 #include "AIComponents/FSMStateComponents.h"
 #include "AIComponents/NavigationComponents.h"
@@ -10,7 +12,8 @@
 //registered types
 
 #define ECS_EVENTS \
-    MeleeAttackEvent
+    MeleeAttackEvent, AttackPressedTag, JumpPressedTag, ChooseMeleePressedTag, ChooseRangedPressedTag, \
+    ChooseThrowablePressedTag, ChooseGrenadePressedTag
 #define REGISTERED_COMPONENTS \
     MeleePileInComponent, MeleeWeaponComponent, RangedAttackComponent, ThrowableAttackComponent, \
     GrenadeAttackComponent, GrenadeComponent, JumpSpeedComponent, SpeedComponent, \

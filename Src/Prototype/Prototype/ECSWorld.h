@@ -24,7 +24,7 @@ namespace godot
 		T* AssignNodeInheritedComponent(entt::registry& registry, entt::entity entity, Node* pNode);
 
 		template<typename Type, typename... Types>
-		void PrepareEcsEventsClearingSystems();
+		void PrepareEcsEventsClearingSystems(SystemsVec systems);
 
 		void UpdateSystems(float delta, SystemsVec& systems);
 

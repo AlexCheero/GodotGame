@@ -16,6 +16,7 @@ namespace TypeRegistrator
                 if (file.Equals(outputFile))
                     continue;
 
+                //TODO: ignore comments near setMacro and it usages in comments
                 if (GatherFromSource(file, setMacro, types, gatherWithFields))
                     headers.Add(GetRelativeHeaderPath(outputFile, file));
             }

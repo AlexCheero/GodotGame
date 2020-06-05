@@ -14,6 +14,9 @@ namespace godot
 		static void ProcessInputKey(entt::registry& registry, bool pressed);
 
 		template<typename T>
+		static void ProcessJustPressedKey(entt::registry& registry, Input* pInput, String action);
+
+		template<typename T>
 		static void ProcessInputAxis(entt::registry& registry, Vector2 direction);
 
 		static Vector2 GetInputDirection(Input* pInput, String actionPrefix);
