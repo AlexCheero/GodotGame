@@ -234,6 +234,7 @@ void godot::ECSWorld::_init()
 	utils::InitPhysicLayers();
 
 //setup reactive systems
+	//TODO_asap: make it common system
 	WeaponChooseRSystem::Init(registry);
 	
 //setup physics systems
