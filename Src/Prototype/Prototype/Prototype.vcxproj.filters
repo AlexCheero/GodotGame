@@ -162,9 +162,6 @@
     <ClCompile Include="ReactiveSystems\WeaponChooseRSystem.cpp">
       <Filter>Source Files\ReactiveSystems</Filter>
     </ClCompile>
-    <ClCompile Include="Systems\AISystems\ClearBotInputSystem.cpp">
-      <Filter>Source Files\Systems\AISystems</Filter>
-    </ClCompile>
     <ClCompile Include="Systems\LocomotionSystems\JumpSystem.cpp">
       <Filter>Source Files\Systems\LocomotionSystems</Filter>
     </ClCompile>
@@ -307,9 +304,6 @@
     </ClInclude>
     <ClInclude Include="ReactiveSystems\WeaponChooseRSystem.h">
       <Filter>Header Files\ReactiveSystems</Filter>
-    </ClInclude>
-    <ClInclude Include="Systems\AISystems\ClearBotInputSystem.h">
-      <Filter>Header Files\Systems\AISystems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\LocomotionSystems\JumpSystem.h">
       <Filter>Header Files\Systems\LocomotionSystems</Filter>

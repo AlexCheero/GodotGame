@@ -167,7 +167,6 @@ $(TypeRegistratorDir)TypeRegistrator.exe ECS_EVENT ECS_EVENTS $(ProjectDir)..\  
     <ClCompile Include="Nodes\PickableNode.cpp" />
     <ClCompile Include="Nodes\ThrowableWeaponNode.cpp" />
     <ClCompile Include="ReactiveSystems\WeaponChooseRSystem.cpp" />
-    <ClCompile Include="Systems\AISystems\ClearBotInputSystem.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\DecisionMakingFSMSystem.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\DecisionMakingHelper.cpp" />
     <ClCompile Include="Systems\AISystems\DecisionMaking\FleeStateSystem.cpp" />
@@ -218,7 +217,6 @@ $(TypeRegistratorDir)TypeRegistrator.exe ECS_EVENT ECS_EVENTS $(ProjectDir)..\  
     <ClInclude Include="Nodes\ThrowableWeaponNode.h" />
     <ClInclude Include="ReactiveSystems\WeaponChooseRSystem.h" />
     <ClInclude Include="Singleton.h" />
-    <ClInclude Include="Systems\AISystems\ClearBotInputSystem.h" />
     <ClInclude Include="Systems\AISystems\DecisionMaking\DecisionMakingFSMSystem.h" />
     <ClInclude Include="Systems\AISystems\DecisionMaking\DecisionMakingHelper.h" />
     <ClInclude Include="Systems\AISystems\DecisionMaking\FleeStateSystem.h" />

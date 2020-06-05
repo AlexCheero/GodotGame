@@ -55,7 +55,6 @@
 #include "Systems/AISystems/HealthMonitoringSystem.h"
 #include "Systems/AISystems/FleeingSystem.h"
 #include "Systems/AISystems/DecisionMaking/DecisionMakingFSMSystem.h"
-#include "Systems/AISystems/ClearBotInputSystem.h"
 
 #include "Systems/AnimSystems/LocomotionAnimSystem.h"
 #include "Systems/AnimSystems/EndAttackAnimSystem.h"
@@ -246,6 +245,11 @@ void godot::ECSWorld::_init()
 	physics_systems.emplace_back(KinematicMovementSystem::Tick);
 	
 //setup systems
+	//produce input, should be placed before any input related system
+	//comment to switch off bots
+	DecisionMakingFSMSystem::Init(registry);
+	process_systems.emplace_back(DecisionMakingFSMSystem::Tick);
+
 	process_systems.emplace_back(JumpSystem::Tick);//recative
 	process_systems.emplace_back(PlayerVelocitySystem::Tick);
 	process_systems.emplace_back(PlayerRotationSystem::Tick);
@@ -276,13 +280,6 @@ void godot::ECSWorld::_init()
 	process_systems.emplace_back(ThrowAttackSystem::Tick);
 	process_systems.emplace_back(ThrowGrenadeSystem::Tick);
 
-	//place before any ai systems
-	//TODO: remove when just pressed input system will be implemented
-	process_systems.emplace_back(ClearBotInputSystem::Tick);
-	//comment to switch off bots
-	DecisionMakingFSMSystem::Init(registry);
-	process_systems.emplace_back(DecisionMakingFSMSystem::Tick);
-
 	GrenadeSystem::Init();
 	process_systems.emplace_back(GrenadeSystem::Tick);
 
@@ -295,7 +292,6 @@ void godot::ECSWorld::_init()
 	process_systems.emplace_back(FleeingSystem::Tick);
 	process_systems.emplace_back(LocomotionAnimSystem::Tick);
 
-	//TODO_asap: events don't reach bot systems
 	PrepareEcsEventsClearingSystems<ECS_EVENTS>(process_systems);PrepareEcsEventsClearingSystems<ECS_EVENTS>(process_systems);
 }
 
