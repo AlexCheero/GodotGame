@@ -295,8 +295,8 @@ void godot::ECSWorld::_init()
 	process_systems.emplace_back(FleeingSystem::Tick);
 	process_systems.emplace_back(LocomotionAnimSystem::Tick);
 
-	//TODO_asap: implement proper just pressed input system
-	PrepareEcsEventsClearingSystems<ECS_EVENTS>(process_systems);
+	//TODO_asap: events don't reach bot systems
+	PrepareEcsEventsClearingSystems<ECS_EVENTS>(process_systems);PrepareEcsEventsClearingSystems<ECS_EVENTS>(process_systems);
 }
 
 void godot::ECSWorld::_ready()
