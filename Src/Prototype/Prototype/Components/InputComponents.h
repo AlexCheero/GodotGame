@@ -8,7 +8,6 @@
 
 #include "ComponentsMeta.h"
 
-//TODO_asap: use ecs_event macro when just pressed input system will be implemented
 ECS_EVENT(AttackPressedTag);
 ECS_EVENT(JumpPressedTag);
 ECS_EVENT(ChooseMeleePressedTag);

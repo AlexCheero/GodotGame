@@ -21,7 +21,9 @@
 #include "Components/AIComponents/PatrolComponents.h"
 #include "Components/AIComponents/FSMStateComponents.h"
 
-#include "Components/RegisteredTypes.h" //TODO: look for todo above ECS_EVENTS declaration in this file
+//TODO: move E CS_EVENTS macro to separate header or split meta types and type enumerations
+//      into separate headers
+#include "Components/RegisteredTypes.h"
 
 #include "ReactiveSystems/WeaponChooseRSystem.h"
 
@@ -233,7 +235,6 @@ void godot::ECSWorld::_init()
 	utils::InitPhysicLayers();
 
 //setup reactive systems
-	//TODO_asap: make it common system
 	//TODO: probably make registration and auto init of all initable systems via registartor
 	//      or implement emplacing method that will Init systems automatically
 	WeaponChooseRSystem::Init(registry);
@@ -254,7 +255,6 @@ void godot::ECSWorld::_init()
 	process_systems.emplace_back(PlayerVelocitySystem::Tick);
 	process_systems.emplace_back(PlayerRotationSystem::Tick);
 
-	//TODO: try to make some of the systems reactive back
 //<melee systems
 	process_systems.emplace_back(MeleeAttackCooldownSystem::Tick);
 	
@@ -292,7 +292,7 @@ void godot::ECSWorld::_init()
 	process_systems.emplace_back(FleeingSystem::Tick);
 	process_systems.emplace_back(LocomotionAnimSystem::Tick);
 
-	PrepareEcsEventsClearingSystems<ECS_EVENTS>(process_systems);PrepareEcsEventsClearingSystems<ECS_EVENTS>(process_systems);
+	PrepareEcsEventsClearingSystems<ECS_EVENTS>(process_systems);
 }
 
 void godot::ECSWorld::_ready()
