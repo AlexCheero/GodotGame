@@ -236,7 +236,7 @@ void godot::ECSWorld::_init()
 //setup reactive systems
 	//TODO_asap: make it common system
 	//TODO: probably make registration and auto init of all initable systems via registartor
-	//      implement emplacing method that will Init systems automatically
+	//      or implement emplacing method that will Init systems automatically
 	WeaponChooseRSystem::Init(registry);
 	
 //setup physics systems
