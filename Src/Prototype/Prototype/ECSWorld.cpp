@@ -72,7 +72,7 @@ T* godot::ECSWorld::AssignNodeInheritedComponent(entt::registry& registry, entt:
 }
 
 template<typename Type, typename ...Types>
-inline void godot::ECSWorld::PrepareEcsEventsClearingSystems(SystemsVec systems)
+inline void godot::ECSWorld::PrepareEcsEventsClearingSystems(SystemsVec& systems)
 {
 	systems.emplace_back([](float delta, entt::registry& registry)
 		{ auto view = registry.view<Type>(); registry.remove<Type>(view.begin(), view.end()); }
