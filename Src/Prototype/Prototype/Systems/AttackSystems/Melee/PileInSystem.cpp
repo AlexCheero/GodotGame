@@ -3,16 +3,10 @@
 #include "../../../Components/AttackComponents.h"
 #include "../../../Components/InputComponents.h"
 
-void godot::PileInSystem::OnPileInTagDestroyed(entt::registry& registry, entt::entity entity)
-{
-	ASSERT(registry.has<VelocityComponent>(entity), "entity has no VelocityComponent");
-}
-
 void godot::PileInSystem::Init(entt::registry& registry)
 {
 	//TODO_melee: also cancel if target is dead or when hit is ended, not the whole animation
 	registry.on_destroy<AttackAnimPlayingComponent>().connect<&entt::registry::remove_if_exists<PileInTag>>();
-	registry.on_destroy<PileInTag>().connect<&PileInSystem::OnPileInTagDestroyed>();
 }
 
 void godot::PileInSystem::Tick(float delta, entt::registry& registry)

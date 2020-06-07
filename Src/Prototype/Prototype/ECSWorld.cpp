@@ -241,7 +241,6 @@ void godot::ECSWorld::_init()
 	
 //setup physics systems
 	physics_systems.emplace_back(GravitySystem::Tick);
-	//must be called after GravitySystem
 	//must be called after all systems that affects velocity
 	physics_systems.emplace_back(KinematicMovementSystem::Tick);
 	
@@ -251,7 +250,7 @@ void godot::ECSWorld::_init()
 	DecisionMakingFSMSystem::Init(registry);
 	process_systems.emplace_back(DecisionMakingFSMSystem::Tick);
 
-	process_systems.emplace_back(JumpSystem::Tick);//recative
+	process_systems.emplace_back(JumpSystem::Tick);
 	process_systems.emplace_back(PlayerVelocitySystem::Tick);
 	process_systems.emplace_back(PlayerRotationSystem::Tick);
 
