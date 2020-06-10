@@ -301,10 +301,25 @@ void godot::ECSWorld::_ready()
 	PrepareSingletonEntities();
 	PreparePlayerEntity();
 	PrepareEnemyEntity();
+
+	indicator = Object::cast_to<Spatial>(get_node("Player/StickIndicator"));
 }
 
 void godot::ECSWorld::HandleInputEvent(InputEvent* e)
 {
+	Input* pInput = godot::Input::get_singleton();
+	float horizontal = pInput->get_action_strength("attack_area_left") - pInput->get_action_strength("attack_area_right");
+	float vertical = pInput->get_action_strength("attack_area_up") - pInput->get_action_strength("attack_area_down");
+
+	Vector3 newOrigin(indicator->get_transform().origin);
+	newOrigin.x = horizontal;
+	newOrigin.z = vertical;
+	
+	Transform newTransform(indicator->get_transform());
+	newTransform.set_origin(newOrigin);
+
+	indicator->set_transform(newTransform);
+
 	if (e->is_action_pressed("ui_accept"))
 	{
 		ResetInstance();
