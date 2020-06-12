@@ -21,7 +21,6 @@ struct RotationInputComponent { godot::Vector2 dir; };
 struct AttackInputComponent { godot::Vector2 dir; };
 struct AttackInputAggregatorComponent
 {
-	std::array<godot::Vector2, 4> dirs;
-
-	std::array<int, 3> attacks = { -1, -1, -1 };
+	using AggregatorType = std::array<float, 4>;
+	AggregatorType angles = { -1, -1, -1, -1 };//size is max count of gesture parts
 };

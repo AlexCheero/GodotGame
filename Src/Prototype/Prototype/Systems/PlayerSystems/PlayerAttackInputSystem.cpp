@@ -3,7 +3,6 @@
 #include <Spatial.hpp>
 
 #include "../../Components/SimpleComponents.h"
-#include "../../Components/InputComponents.h"
 
 #include "../../Utils/Utils.h"
 
@@ -40,24 +39,60 @@ float godot::PlayerAttackInputSystem::ClampInputAngle(Vector2 dir)
 	return resultAngle;
 }
 
+bool godot::PlayerAttackInputSystem::MatchPattern(AttackInputAggregatorComponent::AggregatorType aggregation, std::vector<float> pattern)
+{
+	int i = 0;
+	int patternIndex = 0;
+	for (; i < aggregation.size() - (pattern.size() - patternIndex - 1); i++)
+	{
+		if (aggregation[i] == pattern[patternIndex])
+			patternIndex++;
+		else
+			patternIndex = 0;
+
+		if (patternIndex == pattern.size())
+			return true;
+	}
+
+	return false;
+}
+
 void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 {
 	auto view = registry.view<PlayerTag, AttackInputComponent, AttackInputAggregatorComponent, Node*>();
 	view.each([](AttackInputComponent input, AttackInputAggregatorComponent& inputAggregator, Node* pNode)
 	{
-		float angle = ClampInputAngle(input.dir);
-		for (auto& pattern : attackPatterns)
+		if (input.dir.length_squared() == 0 || inputAggregator.angles[inputAggregator.angles.size() - 1] > 0)
 		{
-			for (int i = 0; i < inputAggregator.attacks.size(); i++)
+			for (int i = 0; i < attackPatterns.size(); i++)
 			{
-				
+				//TODO0: choose longest pattern if more than one matched
+				if (MatchPattern(inputAggregator.angles, attackPatterns[i]))
+				{
+					Godot::print(String::num_int64(i) + " pattern matched");
+				}
+			}
+
+			//TODO0: also add reset by CD
+			for (int i = 0; i < inputAggregator.angles.size(); i++)
+				inputAggregator.angles[i] = -1;
+			return;
+		}
+
+		float angle = ClampInputAngle(input.dir);
+		for (int i = 0; i < inputAggregator.angles.size(); i++)
+		{
+			if (inputAggregator.angles[i] < 0)
+			{
+				if (i > 0 && inputAggregator.angles[i - 1] == angle)
+					return;
+
+				inputAggregator.angles[i] = angle;
+				break;
 			}
 		}
 
 		return;
-
-		//if (input.dir.length_squared() > 0)
-		//	Godot::print("input x: " + String::num(input.dir.x) + ", y: " + String::num(input.dir.y));
 
 		//====DEBUG INDICATOR STUFF====
 		/*
@@ -73,56 +108,5 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 		indicator->set_transform(newTransform);
 		*/
 		//====DEBUG INDICATOR STUFF====
-
-		auto& dirs = inputAggregator.dirs;
-
-		bool prevDirHold = false;
-		//TODO0: also add reset by CD and by finished move
-		if (input.dir.length_squared() == 0)
-		{
-			//Reset aggregator
-			for (size_t i = 0; i < inputAggregator.dirs.size(); i++)
-				dirs[i] = Vector2(0, 0);
-		}
-		else
-		{
-			for (size_t i = 0; i < inputAggregator.dirs.size(); i++)
-			{
-				//TODO0: remake with approx eq
-				if (dirs[i].x == input.dir.x && dirs[i].y == input.dir.y)
-				{
-					prevDirHold = true;
-					break;
-				}
-
-				if (dirs[i].length_squared() == 0)
-				{
-					dirs[i] = input.dir;
-					Godot::print(String::num_int64(i) + ". save dir " + ", x: " + String::num(dirs[i].x) + ", y: " + String::num(dirs[i].y));
-					break;
-				}
-			}
-		}
-
-		//TODO0: remake with approx eq
-		//TODO0: read from config
-		bool jab = dirs[0].x == 0 && dirs[0].y > 0;
-		//bool rightHook = dirs[0].x > 0 && dirs[0].y == 0 && dirs[1].x > 0 && dirs[1].y > 0;
-		bool rightHook = dirs[0].x > 0 && dirs[0].y > 0 && dirs[1].x == 0 && dirs[1].y > 0;
-		bool leftHook = dirs[0].x < 0 && dirs[0].y == 0 && dirs[1].x < 0 && dirs[1].y > 0;
-
-		//implement pattern matching and on matched cutout
-
-		bool inputSchemeMatch = jab || rightHook || leftHook;
-
-		if (!prevDirHold)
-		{
-			if (jab)
-				Godot::print("jab!");
-			if (rightHook)
-				Godot::print("right hook!");
-			if (leftHook)
-				Godot::print("left hook!");
-		}
 	});
 }
