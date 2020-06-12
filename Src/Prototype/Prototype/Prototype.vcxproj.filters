@@ -207,6 +207,9 @@
     <ClCompile Include="Systems\AttackSystems\ThrowGrenadeSystem.cpp">
       <Filter>Source Files\Systems\AttackSystems</Filter>
     </ClCompile>
+    <ClCompile Include="Systems\PlayerSystems\PlayerAttackInputSystem.cpp">
+      <Filter>Source Files\Systems\PlayerSystems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\SimpleComponents.h">
@@ -352,6 +355,9 @@
     </ClInclude>
     <ClInclude Include="Components\RegisteredTypes.h">
       <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems\PlayerSystems\PlayerAttackInputSystem.h">
+      <Filter>Header Files\Systems\PlayerSystems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

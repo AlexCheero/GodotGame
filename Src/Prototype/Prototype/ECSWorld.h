@@ -33,8 +33,6 @@ namespace godot
 		void PrepareSingletonEntities();
 		void LoadConfig();
 
-		Spatial* indicator;
-
 	public:
 		entt::registry& GetRegistry() { return registry; }
 

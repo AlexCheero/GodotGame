@@ -44,6 +44,7 @@
 #include "Systems/PlayerSystems/PlayerInputSystem.h"
 #include "Systems/PlayerSystems/PlayerVelocitySystem.h"
 #include "Systems/PlayerSystems/PlayerRotationSystem.h"
+#include "Systems/PlayerSystems/PlayerAttackInputSystem.h"
 
 #include "Systems/LocomotionSystems/KinematicMovementSystem.h"
 #include "Systems/LocomotionSystems/GravitySystem.h";
@@ -78,7 +79,16 @@ inline void godot::ECSWorld::PrepareEcsEventsClearingSystems(SystemsVec& systems
 	systems.emplace_back([](float delta, entt::registry& registry)
 		{ auto view = registry.view<Type>(); registry.remove<Type>(view.begin(), view.end()); }
 	);
-	if constexpr (sizeof...(Types))//TODO: think about how to make this without templates to avoid code bloating
+	//TODO: think about how to make this without templates to avoid code bloating
+	//      use fold expressions like: 
+	/*
+	template <typename ...Types>
+    void DoSmthForAllTypes()
+    {
+      (DoSmthForType<Types>(), ...);
+    }
+	*/
+	if constexpr (sizeof...(Types))
 		PrepareEcsEventsClearingSystems<Types...>(systems);
 }
 
@@ -113,8 +123,11 @@ void godot::ECSWorld::PreparePlayerEntity()
 
 	registry.emplace<VelocityComponent>(entity);
 	
+	//TODO: probably assign all input components at once in method or something
 	registry.emplace<RotationInputComponent>(entity);
 	registry.emplace<MoveDirInputComponent>(entity);
+	registry.emplace<AttackInputComponent>(entity);
+	registry.emplace<AttackInputAggregatorComponent>(entity);
 
 	RotationDirectionComponent rot { registry.get<Spatial*>(entity)->get_global_transform().get_basis().z };
 	registry.emplace<RotationDirectionComponent>(entity, rot);
@@ -228,7 +241,7 @@ void godot::ECSWorld::_register_methods()
 void godot::ECSWorld::_init()
 {
 	//TODO: move to more appropriate place (with #include <Input.hpp>)
-	Input::get_singleton()->set_mouse_mode(Input::MOUSE_MODE_CAPTURED);
+	//Input::get_singleton()->set_mouse_mode(Input::MOUSE_MODE_CAPTURED);
 
 	InitInstance(this);
 
@@ -253,6 +266,7 @@ void godot::ECSWorld::_init()
 	process_systems.emplace_back(JumpSystem::Tick);
 	process_systems.emplace_back(PlayerVelocitySystem::Tick);
 	process_systems.emplace_back(PlayerRotationSystem::Tick);
+	process_systems.emplace_back(PlayerAttackInputSystem::Tick);
 
 //<melee systems
 	process_systems.emplace_back(MeleeAttackCooldownSystem::Tick);
@@ -301,25 +315,10 @@ void godot::ECSWorld::_ready()
 	PrepareSingletonEntities();
 	PreparePlayerEntity();
 	PrepareEnemyEntity();
-
-	indicator = Object::cast_to<Spatial>(get_node("Player/StickIndicator"));
 }
 
 void godot::ECSWorld::HandleInputEvent(InputEvent* e)
 {
-	Input* pInput = godot::Input::get_singleton();
-	float horizontal = pInput->get_action_strength("attack_area_left") - pInput->get_action_strength("attack_area_right");
-	float vertical = pInput->get_action_strength("attack_area_up") - pInput->get_action_strength("attack_area_down");
-
-	Vector3 newOrigin(indicator->get_transform().origin);
-	newOrigin.x = horizontal;
-	newOrigin.z = vertical;
-	
-	Transform newTransform(indicator->get_transform());
-	newTransform.set_origin(newOrigin);
-
-	indicator->set_transform(newTransform);
-
 	if (e->is_action_pressed("ui_accept"))
 	{
 		ResetInstance();

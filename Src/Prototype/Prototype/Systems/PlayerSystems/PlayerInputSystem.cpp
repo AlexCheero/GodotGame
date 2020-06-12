@@ -55,4 +55,5 @@ void godot::PlayerInputSystem::HandleInput(entt::registry& registry)
 
 	ProcessInputAxis<MoveDirInputComponent>(registry, GetInputDirection(pInput, "move"));
 	ProcessInputAxis<RotationInputComponent>(registry, GetInputDirection(pInput, "rotate"));
+	ProcessInputAxis<AttackInputComponent>(registry, GetInputDirection(pInput, "attack_area"));
 }
