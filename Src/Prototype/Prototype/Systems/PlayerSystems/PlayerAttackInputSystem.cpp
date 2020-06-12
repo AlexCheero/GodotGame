@@ -62,6 +62,7 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 	auto view = registry.view<PlayerTag, AttackInputComponent, AttackInputAggregatorComponent, Node*>();
 	view.each([](AttackInputComponent input, AttackInputAggregatorComponent& inputAggregator, Node* pNode)
 	{
+		//TODO0: cant use patterns that goes through the center if using zero length check
 		if (input.dir.length_squared() == 0 || inputAggregator.angles[inputAggregator.angles.size() - 1] > 0)
 		{
 			for (int i = 0; i < attackPatterns.size(); i++)
