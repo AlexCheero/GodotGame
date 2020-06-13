@@ -93,7 +93,6 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 			int patternLength = 0;
 			for (int i = 0; i < attackPatterns.size(); i++)
 			{
-				//TODO0: choose longest pattern if more than one matched
 				if (MatchPattern(inputAggregator.angles, attackPatterns[i]))
 				{
 					if (attackPatterns[i].size() > patternLength)
