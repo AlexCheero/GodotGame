@@ -102,22 +102,5 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 				break;
 			}
 		}
-
-		return;
-
-		//====DEBUG INDICATOR STUFF====
-		/*
-		Spatial* indicator = Object::cast_to<Spatial>(pNode->get_node("StickIndicator"));
-
-		Vector3 newOrigin(indicator->get_transform().origin);
-		newOrigin.x = -input.dir.x;//x is inverted some why
-		newOrigin.z = input.dir.y;
-
-		Transform newTransform(indicator->get_transform());
-		newTransform.set_origin(newOrigin);
-
-		indicator->set_transform(newTransform);
-		*/
-		//====DEBUG INDICATOR STUFF====
 	});
 }
