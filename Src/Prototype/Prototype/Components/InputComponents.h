@@ -23,4 +23,5 @@ struct AttackInputAggregatorComponent
 {
 	using AggregatorType = std::array<float, 4>;
 	AggregatorType angles = { -1, -1, -1, -1 };//size is max count of gesture parts
+	int64_t startTime;
 };

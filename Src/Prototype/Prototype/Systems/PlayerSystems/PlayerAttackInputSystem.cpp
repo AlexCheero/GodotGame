@@ -1,6 +1,7 @@
 #include "PlayerAttackInputSystem.h"
 
 #include <Spatial.hpp>
+#include <OS.hpp>
 
 #include "../../Components/SimpleComponents.h"
 
@@ -12,8 +13,11 @@ std::vector<float> angles = { 0, 45, 90, 135, 180, 225, 270, 315, 360 };
 std::vector<float> jabPattern = { 90 };
 std::vector<float> rightHookPattern = { 45, 90 };
 std::vector<float> leftHookPattern = { 135, 90 };
+std::vector<float> test1 = { 0, 180 };
+std::vector<float> test2 = { 90, 270 };
+constexpr int64_t patternMatchingTime = 400;
 
-std::vector<std::vector<float>> attackPatterns = { jabPattern, rightHookPattern, leftHookPattern };
+std::vector<std::vector<float>> attackPatterns = { jabPattern, rightHookPattern, leftHookPattern, test1, test2 };
 
 float godot::PlayerAttackInputSystem::ClampInputAngle(Vector2 dir)
 {
@@ -60,10 +64,14 @@ bool godot::PlayerAttackInputSystem::MatchPattern(AttackInputAggregatorComponent
 void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 {
 	auto view = registry.view<PlayerTag, AttackInputComponent, AttackInputAggregatorComponent, Node*>();
-	view.each([](AttackInputComponent input, AttackInputAggregatorComponent& inputAggregator, Node* pNode)
+	view.each([delta](AttackInputComponent input, AttackInputAggregatorComponent& inputAggregator, Node* pNode)
 	{
-		//TODO0: cant use patterns that goes through the center if using zero length check
-		if (input.dir.length_squared() == 0 || inputAggregator.angles[inputAggregator.angles.size() - 1] > 0)
+		//TODO?: reset on every input
+		if (inputAggregator.angles[0] == -1)
+			inputAggregator.startTime = OS::get_singleton()->get_ticks_msec();
+
+		if (inputAggregator.angles[inputAggregator.angles.size() - 1] > 0 ||
+			OS::get_singleton()->get_ticks_msec() - inputAggregator.startTime >= patternMatchingTime) //TODO0: reset earlier if out of patterns to match
 		{
 			for (int i = 0; i < attackPatterns.size(); i++)
 			{
@@ -74,11 +82,13 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 				}
 			}
 
-			//TODO0: also add reset by CD
 			for (int i = 0; i < inputAggregator.angles.size(); i++)
 				inputAggregator.angles[i] = -1;
 			return;
 		}
+
+		if (input.dir.length_squared() == 0)
+			return;
 
 		float angle = ClampInputAngle(input.dir);
 		for (int i = 0; i < inputAggregator.angles.size(); i++)
