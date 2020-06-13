@@ -89,14 +89,20 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 		if (inputAggregator.angles[inputAggregator.angles.size() - 1] > 0 ||
 			OS::get_singleton()->get_ticks_msec() - inputAggregator.startTime >= patternMatchingTime) //TODO0: reset earlier if out of patterns to match
 		{
+			int patternIndex = -1;
+			int patternLength = 0;
 			for (int i = 0; i < attackPatterns.size(); i++)
 			{
 				//TODO0: choose longest pattern if more than one matched
 				if (MatchPattern(inputAggregator.angles, attackPatterns[i]))
 				{
-					Godot::print(String::num_int64(i) + " pattern matched");
+					if (attackPatterns[i].size() > patternLength)
+						patternIndex = i;
 				}
 			}
+
+			if (patternIndex >= 0)
+				Godot::print(String::num_int64(patternIndex) + " pattern matched");
 
 			for (int i = 0; i < inputAggregator.angles.size(); i++)
 				inputAggregator.angles[i] = -1;
