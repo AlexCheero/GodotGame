@@ -70,6 +70,22 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 		if (inputAggregator.angles[0] == -1)
 			inputAggregator.startTime = OS::get_singleton()->get_ticks_msec();
 
+		if (input.dir.length_squared() > 0)
+		{
+			float angle = ClampInputAngle(input.dir);
+			for (int i = 0; i < inputAggregator.angles.size(); i++)
+			{
+				if (inputAggregator.angles[i] < 0)
+				{
+					if (i > 0 && inputAggregator.angles[i - 1] == angle)
+						return;
+
+					inputAggregator.angles[i] = angle;
+					break;
+				}
+			}
+		}
+
 		if (inputAggregator.angles[inputAggregator.angles.size() - 1] > 0 ||
 			OS::get_singleton()->get_ticks_msec() - inputAggregator.startTime >= patternMatchingTime) //TODO0: reset earlier if out of patterns to match
 		{
@@ -84,23 +100,6 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 
 			for (int i = 0; i < inputAggregator.angles.size(); i++)
 				inputAggregator.angles[i] = -1;
-			return;
-		}
-
-		if (input.dir.length_squared() == 0)
-			return;
-
-		float angle = ClampInputAngle(input.dir);
-		for (int i = 0; i < inputAggregator.angles.size(); i++)
-		{
-			if (inputAggregator.angles[i] < 0)
-			{
-				if (i > 0 && inputAggregator.angles[i - 1] == angle)
-					return;
-
-				inputAggregator.angles[i] = angle;
-				break;
-			}
 		}
 	});
 }
