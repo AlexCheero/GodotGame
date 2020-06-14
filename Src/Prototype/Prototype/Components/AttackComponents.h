@@ -25,11 +25,12 @@ struct AttackCooldownComponent
 
 struct MeleeHit
 {
-	godot::String anim;
+	godot::String name;
 	float damage;
 	float attackTime;
 	float maxDistance;
 	float minDistance;
+	std::vector<float> inputPattern;
 	//TODO: implement
 	//std::vector<Effect> effects;
 };
@@ -42,6 +43,8 @@ REGISTRABLE_COMPONENT(MeleePileInComponent)
 TAG(CurrentWeaponMeleeTag);
 struct MeleeAttackComponent
 {
+	static std::vector<MeleeHit> hitsData;
+
 	std::vector<MeleeHit> hits;
 	int hitIdx = 0;
 	

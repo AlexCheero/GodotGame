@@ -229,6 +229,37 @@ std::vector<MeleeHit> godot::ECSWorld::LoadHits(String hitsConfigName)
 	return hits;
 }
 
+std::vector<MeleeHit> MeleeAttackComponent::hitsData;
+
+void godot::ECSWorld::LoadMeleeAttacksConfig()
+{
+	MeleeAttackComponent::hitsData.clear();
+
+	ConfigFile* hitsCfg = ConfigFile::_new();
+	Error err = hitsCfg->load("res://Configs/melee_attack.cfg");
+	ASSERT(err == Error::OK, "cannot load melee attack config");
+	PoolStringArray sections = hitsCfg->get_sections();
+	for (int i = 0; i < sections.size(); i++)
+	{
+		String section = sections[i];
+		MeleeHit hit =
+		{
+			section,
+			hitsCfg->get_value(section, "damage"),
+			hitsCfg->get_value(section, "attackTime"),
+			hitsCfg->get_value(section, "maxDistance"),
+			hitsCfg->get_value(section, "minDistance")
+		};
+
+		Array arr = hitsCfg->get_value(section, "pattern");
+		for (int i = 0; i < arr.size(); i++)
+			hit.inputPattern.push_back(arr[i]);
+
+		MeleeAttackComponent::hitsData.push_back(hit);
+	}
+	hitsCfg->free();
+}
+
 void godot::ECSWorld::_register_methods()
 {
 	register_method((char*)"_init", &ECSWorld::_init);
@@ -245,7 +276,11 @@ void godot::ECSWorld::_init()
 
 	InitInstance(this);
 
+	Godot::print("Init!");
+
+	//TODO: do only once, not after every reset
 	utils::InitPhysicLayers();
+	LoadMeleeAttacksConfig();
 
 //setup reactive systems
 	//TODO: probably make registration and auto init of all initable systems via registartor
@@ -322,7 +357,7 @@ void godot::ECSWorld::HandleInputEvent(InputEvent* e)
 {
 	if (e->is_action_pressed("ui_accept"))
 	{
-		ResetInstance();
+		DeleteInstance();
 		registry.clear();
 		PrepareSingletonEntities();
 		get_tree()->reload_current_scene();

@@ -32,6 +32,7 @@ namespace godot
 		void PrepareEnemyEntity();
 		void PrepareSingletonEntities();
 		void LoadConfig();
+		void LoadMeleeAttacksConfig();
 
 	public:
 		entt::registry& GetRegistry() { return registry; }

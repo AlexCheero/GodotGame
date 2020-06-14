@@ -5,20 +5,16 @@
 #include <ConfigFile.hpp>
 
 #include "../../Components/SimpleComponents.h"
+#include "../../Components/AttackComponents.h"
 
 #include "../../Utils/Utils.h"
 
 std::unordered_map<godot::String, std::vector<float>> godot::PlayerAttackInputSystem::patterns;
 
 //TODO0: read from config
-std::vector<float> angles = { 0, 45, 90, 135, 180, 225, 270, 315, 360 };
 //TODO0: needed different patterns and CD for mouse
-std::vector<float> jabPattern = { 90 };
-std::vector<float> rightHookPattern = { 45, 90 };
-std::vector<float> leftHookPattern = { 135, 90 };
+std::vector<float> angles = { 0, 45, 90, 135, 180, 225, 270, 315, 360 };
 constexpr int64_t patternMatchingTime = 400;
-
-std::vector<std::vector<float>> attackPatterns = { jabPattern, rightHookPattern, leftHookPattern };
 
 float godot::PlayerAttackInputSystem::ClampInputAngle(Vector2 dir)
 {
@@ -118,17 +114,18 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 		{
 			int patternIndex = -1;
 			int patternLength = 0;
-			for (int i = 0; i < attackPatterns.size(); i++)
+			for (int i = 0; i < MeleeAttackComponent::hitsData.size(); i++)
 			{
-				if (MatchPattern(inputAggregator.angles, attackPatterns[i]))
+				auto& pattern = MeleeAttackComponent::hitsData[i].inputPattern;
+				if (MatchPattern(inputAggregator.angles, pattern))
 				{
-					if (attackPatterns[i].size() > patternLength)
+					if (pattern.size() > patternLength)
 						patternIndex = i;
 				}
 			}
 
 			if (patternIndex >= 0)
-				Godot::print(String::num_int64(patternIndex) + " pattern matched");
+				Godot::print(MeleeAttackComponent::hitsData[patternIndex].name + " matched");
 
 			for (int i = 0; i < inputAggregator.angles.size(); i++)
 				inputAggregator.angles[i] = -1;

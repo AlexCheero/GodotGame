@@ -17,8 +17,8 @@ void godot::MeleeAnimSystem::Tick(float delta, entt::registry& registry)
 		int prevAnimIdx = attackComp.hitIdx - 1;
 		if (prevAnimIdx < 0)
 			prevAnimIdx = attackComp.hits.size() - 1;
-		String animName = attackComp.GetCurrentHit().anim;
-		String prevAnimName = attackComp.hits[prevAnimIdx].anim;
+		String animName = attackComp.GetCurrentHit().name;
+		String prevAnimName = attackComp.hits[prevAnimIdx].name;
 
 		AnimationPlayer* pAnimPlayer = Object::cast_to<AnimationPlayer>(pAnimTree->get_node(pAnimTree->get_animation_player()));
 		Ref<Animation> anim = pAnimPlayer->get_animation(animName);

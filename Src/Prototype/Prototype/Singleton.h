@@ -1,5 +1,6 @@
 #pragma once
 
+//TODO: implement separate NodeSingleton with auto init on _init/_ready and auto delete on _exit_tree
 template <typename T>
 class Singleton
 {
@@ -14,7 +15,7 @@ protected:
 		instance = inst;
 	}
 
-	static void ResetInstance() { instance = nullptr; }
+	static void DeleteInstance() { instance = nullptr; }
 public:
 	static T* GetInstance() { return instance; }
 };
