@@ -266,6 +266,7 @@ void godot::ECSWorld::_init()
 	process_systems.emplace_back(JumpSystem::Tick);
 	process_systems.emplace_back(PlayerVelocitySystem::Tick);
 	process_systems.emplace_back(PlayerRotationSystem::Tick);
+	PlayerAttackInputSystem::Init();
 	process_systems.emplace_back(PlayerAttackInputSystem::Tick);
 
 //<melee systems
