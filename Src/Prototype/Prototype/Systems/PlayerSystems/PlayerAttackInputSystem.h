@@ -14,6 +14,9 @@ namespace godot
 		static float ClampInputAngle(Vector2 dir);
 		static bool MatchPattern(AttackInputAggregatorComponent::AggregatorType aggregation, std::vector<float> pattern);
 	public:
+		static std::vector<float> angles;
+		static int64_t patternMatchingTime;
+
 		static void Tick(float delta, entt::registry& registry);
 	};
 }

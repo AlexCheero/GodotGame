@@ -194,12 +194,22 @@ void godot::ECSWorld::PrepareSingletonEntities()
 	registry.emplace<Navigation*>(navigationEntity, navigation);
 }
 
+std::vector<float> godot::PlayerAttackInputSystem::angles;
+int64_t godot::PlayerAttackInputSystem::patternMatchingTime;
+
 void godot::ECSWorld::LoadConfig()
 {
 	ConfigFile* hitsCfg = ConfigFile::_new();
 	Error err = hitsCfg->load("res://Configs/config.cfg");
 	ASSERT(err == Error::OK, "cannot load config.cfg");
 	maxComboIntervalMillis = hitsCfg->get_value("maxComboIntervalMillis", "maxComboIntervalMillis");
+
+	Array angles = hitsCfg->get_value("meleeAttackInputPatternsAngles", "angles");
+	for (int i = 0; i < angles.size(); i++)
+		PlayerAttackInputSystem::angles.push_back(angles[i]);
+
+	PlayerAttackInputSystem::patternMatchingTime = hitsCfg->get_value("meleeAttackInputPatternMatchingTime", "msec");
+
 	hitsCfg->free();
 }
 

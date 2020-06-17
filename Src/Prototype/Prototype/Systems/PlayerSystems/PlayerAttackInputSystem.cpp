@@ -9,11 +9,6 @@
 
 #include "../../Utils/Utils.h"
 
-//TODO0: read from config
-//TODO0: needed different patterns and CD for mouse
-std::vector<float> angles = { 0, 45, 90, 135, 180, 225, 270, 315, 360 };
-constexpr int64_t patternMatchingTime = 400;
-
 float godot::PlayerAttackInputSystem::ClampInputAngle(Vector2 dir)
 {
 	float angle = utils::Rad2deg(dir.angle());
@@ -38,6 +33,7 @@ float godot::PlayerAttackInputSystem::ClampInputAngle(Vector2 dir)
 	return resultAngle;
 }
 
+//TODO0: needed different patterns for mouse
 bool godot::PlayerAttackInputSystem::MatchPattern(AttackInputAggregatorComponent::AggregatorType aggregation, std::vector<float> pattern)
 {
 	int i = 0;
