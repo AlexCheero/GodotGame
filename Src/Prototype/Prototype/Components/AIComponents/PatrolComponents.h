@@ -10,6 +10,7 @@
 
 struct PatrolRouteComponent
 {
+	//TODO: try to use godot internal or binding containers instead
 	std::vector<godot::Vector3> routePoints;
 	int current = 0;
 

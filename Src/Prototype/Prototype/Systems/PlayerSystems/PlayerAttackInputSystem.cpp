@@ -9,8 +9,6 @@
 
 #include "../../Utils/Utils.h"
 
-std::unordered_map<godot::String, std::vector<float>> godot::PlayerAttackInputSystem::patterns;
-
 //TODO0: read from config
 //TODO0: needed different patterns and CD for mouse
 std::vector<float> angles = { 0, 45, 90, 135, 180, 225, 270, 315, 360 };
@@ -56,32 +54,6 @@ bool godot::PlayerAttackInputSystem::MatchPattern(AttackInputAggregatorComponent
 	}
 
 	return false;
-}
-
-void godot::PlayerAttackInputSystem::Init()
-{
-	ConfigFile* cfg = ConfigFile::_new();
-	Error err = cfg->load("res://Configs/hit_patterns.cfg");
-	ASSERT(err == Error::OK, "cannot load hit_patterns config");
-	PoolStringArray sections = cfg->get_sections();
-	for (int i = 0; i < sections.size(); i++)
-	{
-		String section = sections[i];
-		Array arr = cfg->get_value(section, "pattern");
-
-		patterns.insert({ section, {} });
-		for (int i = 0; i < arr.size(); i++)
-			patterns[section].push_back(arr[i]);
-	}
-
-	cfg->free();
-
-	for (const auto& pair : patterns)
-	{
-		Godot::print(String(pair.first) + ":");
-		for (auto val : patterns[pair.first])
-			Godot::print("    " + String::num(val));
-	}
 }
 
 void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
