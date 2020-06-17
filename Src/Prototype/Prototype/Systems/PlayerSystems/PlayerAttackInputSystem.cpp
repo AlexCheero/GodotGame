@@ -58,10 +58,6 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 	auto view = registry.view<PlayerTag, AttackInputComponent, AttackInputAggregatorComponent, Node*>();
 	view.each([&registry, delta](entt::entity entity, AttackInputComponent input, AttackInputAggregatorComponent& inputAggregator, Node* pNode)
 	{
-		//TODO0: reset on every input
-		if (inputAggregator.angles[0] == -1)
-			inputAggregator.startTime = OS::get_singleton()->get_ticks_msec();
-
 		if (input.dir.length_squared() > 0)
 		{
 			float angle = ClampInputAngle(input.dir);
@@ -72,6 +68,7 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 					if (i > 0 && inputAggregator.angles[i - 1] == angle)
 						return;
 
+					inputAggregator.startTime = OS::get_singleton()->get_ticks_msec();
 					inputAggregator.angles[i] = angle;
 					break;
 				}
