@@ -56,8 +56,15 @@ REGISTRABLE_COMPONENT(MeleeWeaponComponent)
 	godot::String hitsConfigName;
 };
 
-ECS_EVENT(MeleeAttackEvent);
-TAG(MeleeAttackBuffered);
+struct MeleeAttackBuffered
+{
+	godot::String attackName;
+};
+//TODO: implement parameterized events
+struct MeleeAttackParameterizedEvent
+{
+	godot::String attackName;
+};
 
 TAG(CurrentWeaponRangedTag);
 REGISTRABLE_COMPONENT(RangedAttackComponent)

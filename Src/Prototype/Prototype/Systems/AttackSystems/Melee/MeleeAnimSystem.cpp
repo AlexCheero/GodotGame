@@ -11,14 +11,15 @@
 //      and delete EndAttackAnimSystem and AttackAnimPlayingComponent as unnecessary
 void godot::MeleeAnimSystem::Tick(float delta, entt::registry& registry)
 {
-	auto view = registry.view<MeleeAttackEvent, CurrentWeaponMeleeTag, MeleeAttackComponent, AnimationTree*>();
-	view.each([&registry](entt::entity entity, MeleeAttackComponent attackComp, AnimationTree* pAnimTree)
+	auto view = registry.view<CurrentWeaponMeleeTag, MeleeAttackParameterizedEvent, MeleeAttackComponent, AnimationTree*>();
+	view.each([&registry](entt::entity entity, MeleeAttackParameterizedEvent evt, MeleeAttackComponent attackComp, AnimationTree* pAnimTree)
 	{
 		int prevAnimIdx = attackComp.hitIdx - 1;
 		if (prevAnimIdx < 0)
 			prevAnimIdx = attackComp.hits.size() - 1;
-		String animName = attackComp.GetCurrentHit().name;
-		String prevAnimName = attackComp.hits[prevAnimIdx].name;
+		String animName = evt.attackName;// attackComp.GetCurrentHit().name;
+		//TODO0: remove old incremental combo system
+		//String prevAnimName = attackComp.hits[prevAnimIdx].name;
 
 		AnimationPlayer* pAnimPlayer = Object::cast_to<AnimationPlayer>(pAnimTree->get_node(pAnimTree->get_animation_player()));
 		Ref<Animation> anim = pAnimPlayer->get_animation(animName);
@@ -28,7 +29,7 @@ void godot::MeleeAnimSystem::Tick(float delta, entt::registry& registry)
 		registry.emplace_or_replace<AttackAnimPlayingComponent>(entity).playBackTimeLeft = anim->get_length() / timeScale;
 
 		//TODO: blend between anims
-		pAnimTree->set("parameters/" + prevAnimName + "_OneShot/active", false);
+		//pAnimTree->set("parameters/" + prevAnimName + "_OneShot/active", false);
 		pAnimTree->set("parameters/" + animName + "_OneShot/active", true);
 	});
 }

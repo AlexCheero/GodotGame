@@ -12,8 +12,8 @@ void godot::MeleeAttackCooldownSystem::Tick(float delta, entt::registry& registr
 {
 	int64_t currTimeMillis = OS::get_singleton()->get_ticks_msec();
 
-	auto bufferedView = registry.view<MeleeAttackBuffered, CurrentWeaponMeleeTag, MeleeAttackComponent, AttackCooldownComponent>();
-	bufferedView.each([&registry, currTimeMillis](entt::entity entity, MeleeAttackComponent& attackComp, AttackCooldownComponent& cdComp)
+	auto bufferedView = registry.view<CurrentWeaponMeleeTag, MeleeAttackBuffered, MeleeAttackComponent, AttackCooldownComponent>();
+	bufferedView.each([&registry, currTimeMillis](entt::entity entity, MeleeAttackBuffered buffered, MeleeAttackComponent& attackComp, AttackCooldownComponent& cdComp)
 	{
 		int64_t attackTimeMillis = utils::SecondsToMillis(attackComp.GetCurrentHit().attackTime);
 		int64_t millisSinceLastHit = currTimeMillis - cdComp.prevHitTime;
@@ -21,15 +21,14 @@ void godot::MeleeAttackCooldownSystem::Tick(float delta, entt::registry& registr
 		{
 			cdComp.prevHitTime = currTimeMillis;
 
+			registry.emplace_or_replace<MeleeAttackParameterizedEvent>(entity).attackName = buffered.attackName;
 			registry.remove<MeleeAttackBuffered>(entity);
-			ASSERT(!registry.has<MeleeAttackEvent>(entity), "MeleeAttackEvent didn't cleared properly");
-			registry.emplace<MeleeAttackEvent>(entity);
 		}
 	});
 
 	//TODO: try to use only AttackPressedTag and remove MeleeAttackEvent
-	auto inputView = registry.view<AttackPressedTag, CurrentWeaponMeleeTag, MeleeAttackComponent, AttackCooldownComponent>(entt::exclude<MeleeAttackBuffered>);
-	inputView.each([&registry, currTimeMillis](entt::entity entity, MeleeAttackComponent& attackComp, AttackCooldownComponent& cdComp)
+	auto inputView = registry.view<CurrentWeaponMeleeTag, MeleeAttackParameterizedEvent, MeleeAttackComponent, AttackCooldownComponent>(entt::exclude<MeleeAttackBuffered>);
+	inputView.each([&registry, currTimeMillis](entt::entity entity, MeleeAttackParameterizedEvent attackEvent, MeleeAttackComponent& attackComp, AttackCooldownComponent& cdComp)
 	{
 		int64_t attackTimeMillis = utils::SecondsToMillis(attackComp.GetCurrentHit().attackTime);
 		//TODO: use interval between hits (not including attack time) instead of this assert or use this as feature to implement non combobale hits
@@ -38,12 +37,11 @@ void godot::MeleeAttackCooldownSystem::Tick(float delta, entt::registry& registr
 		if (millisSinceLastHit >= attackTimeMillis)
 		{
 			cdComp.prevHitTime = currTimeMillis;
-			ASSERT(!registry.has<MeleeAttackEvent>(entity), "MeleeAttackEvent didn't cleared properly");
-			registry.emplace<MeleeAttackEvent>(entity);
 		}
 		else if (millisSinceLastHit >= MILLIS_TO_KEEP_COMBO && millisSinceLastHit < maxComboIntervalMillis)
 		{
-			registry.emplace<MeleeAttackBuffered>(entity);
+			registry.emplace<MeleeAttackBuffered>(entity).attackName = attackEvent.attackName;
+			registry.remove<MeleeAttackParameterizedEvent>(entity);
 		}
 	});
 }

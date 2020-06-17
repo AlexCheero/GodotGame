@@ -52,12 +52,13 @@ bool godot::PlayerAttackInputSystem::MatchPattern(AttackInputAggregatorComponent
 	return false;
 }
 
+//TODO0: probably merge with MeleeAttackCooldownSystem
 void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 {
 	auto view = registry.view<PlayerTag, AttackInputComponent, AttackInputAggregatorComponent, Node*>();
-	view.each([delta](AttackInputComponent input, AttackInputAggregatorComponent& inputAggregator, Node* pNode)
+	view.each([&registry, delta](entt::entity entity, AttackInputComponent input, AttackInputAggregatorComponent& inputAggregator, Node* pNode)
 	{
-		//TODO?: reset on every input
+		//TODO0: reset on every input
 		if (inputAggregator.angles[0] == -1)
 			inputAggregator.startTime = OS::get_singleton()->get_ticks_msec();
 
@@ -93,7 +94,10 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 			}
 
 			if (patternIndex >= 0)
-				Godot::print(MeleeAttackComponent::hitsData[patternIndex].name + " matched");
+			{
+				//Godot::print(MeleeAttackComponent::hitsData[patternIndex].name + " matched");
+				registry.emplace<MeleeAttackParameterizedEvent>(entity).attackName = MeleeAttackComponent::hitsData[patternIndex].name;
+			}
 
 			for (int i = 0; i < inputAggregator.angles.size(); i++)
 				inputAggregator.angles[i] = -1;

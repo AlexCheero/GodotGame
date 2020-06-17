@@ -12,7 +12,7 @@
 //registered types
 
 #define ECS_EVENTS \
-    MeleeAttackEvent, AttackPressedTag, JumpPressedTag, ChooseMeleePressedTag, ChooseRangedPressedTag, \
+    AttackPressedTag, JumpPressedTag, ChooseMeleePressedTag, ChooseRangedPressedTag, \
     ChooseThrowablePressedTag, ChooseGrenadePressedTag
 #define REGISTERED_COMPONENTS \
     MeleePileInComponent, MeleeWeaponComponent, RangedAttackComponent, ThrowableAttackComponent, \

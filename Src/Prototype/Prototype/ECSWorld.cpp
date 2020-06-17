@@ -286,8 +286,6 @@ void godot::ECSWorld::_init()
 
 	InitInstance(this);
 
-	Godot::print("Init!");
-
 	//TODO: do only once, not after every reset
 	utils::InitPhysicLayers();
 	LoadMeleeAttacksConfig();
@@ -350,7 +348,18 @@ void godot::ECSWorld::_init()
 	process_systems.emplace_back(FleeingSystem::Tick);
 	process_systems.emplace_back(LocomotionAnimSystem::Tick);
 
+	//TODO: clear events before system where it was assigned, not in the end of frame
 	PrepareEcsEventsClearingSystems<ECS_EVENTS>(process_systems);
+
+	//TODO: remove when parameterized events will bew implemented
+	process_systems.emplace_back([](float delta, entt::registry& registry)
+	{
+		auto view = registry.view<MeleeAttackParameterizedEvent>();
+		view.each([&registry](entt::entity entity, MeleeAttackParameterizedEvent evt)
+		{
+			registry.remove_if_exists<MeleeAttackParameterizedEvent>(entity);
+		});
+	});
 }
 
 void godot::ECSWorld::_ready()
