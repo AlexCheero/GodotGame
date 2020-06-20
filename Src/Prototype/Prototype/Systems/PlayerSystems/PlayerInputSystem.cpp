@@ -55,5 +55,15 @@ void godot::PlayerInputSystem::HandleInput(entt::registry& registry)
 
 	ProcessInputAxis<MoveDirInputComponent>(registry, GetInputDirection(pInput, "move"));
 	ProcessInputAxis<RotationInputComponent>(registry, GetInputDirection(pInput, "rotate"));
-	ProcessInputAxis<AttackInputComponent>(registry, GetInputDirection(pInput, "attack_area"));
+	
+	Vector2 attackDirection = GetInputDirection(pInput, "attack_area");
+	bool altAttack = pInput->is_action_pressed("alt_melee_attack");
+	bool legAttack = pInput->is_action_pressed("leg_melee_attack");
+	auto attackInputView = registry.view<PlayerTag, AttackInputComponent>();
+	attackInputView.each([attackDirection, altAttack, legAttack](AttackInputComponent& inputComp)
+	{
+		inputComp.dir = attackDirection;
+		inputComp.alt = altAttack;
+		inputComp.leg = legAttack;
+	});
 }

@@ -52,7 +52,7 @@ bool godot::PlayerAttackInputSystem::MatchPattern(AttackInputAggregatorComponent
 	return false;
 }
 
-//TODO0: probably merge with MeleeAttackCooldownSystem
+//TODO0: probably merge with MeleeAttackCooldownSystem or opposite- split into several systems
 void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 {
 	auto view = registry.view<PlayerTag, AttackInputComponent, AttackInputAggregatorComponent, Node*>();
@@ -75,6 +75,9 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 			}
 		}
 
+		if (inputAggregator.angles[0] < 0)
+			return;
+
 		if (inputAggregator.angles[inputAggregator.angles.size() - 1] > 0 ||
 			OS::get_singleton()->get_ticks_msec() - inputAggregator.startTime >= patternMatchingTime) //TODO: try to reset earlier if out of patterns to match
 		{
@@ -82,10 +85,13 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 			int patternLength = 0;
 			for (int i = 0; i < MeleeAttackComponent::hitsData.size(); i++)
 			{
-				auto& pattern = MeleeAttackComponent::hitsData[i].inputPattern;
-				if (MatchPattern(inputAggregator.angles, pattern))
+				const MeleeHit& currentHit = MeleeAttackComponent::hitsData[i];
+				if (input.alt != currentHit.alt || input.leg != currentHit.leg)
+					continue;
+
+				if (MatchPattern(inputAggregator.angles, currentHit.inputPattern))
 				{
-					if (pattern.size() > patternLength)
+					if (currentHit.inputPattern.size() > patternLength)
 						patternIndex = i;
 				}
 			}

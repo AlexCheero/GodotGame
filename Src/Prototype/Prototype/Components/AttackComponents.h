@@ -31,6 +31,8 @@ struct MeleeHit
 	float maxDistance;
 	float minDistance;
 	std::vector<float> inputPattern;
+	bool alt;
+	bool leg;
 	//TODO: implement
 	//std::vector<Effect> effects;
 };

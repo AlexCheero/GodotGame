@@ -18,7 +18,12 @@ ECS_EVENT(ChooseGrenadePressedTag);
 struct MoveDirInputComponent { godot::Vector2 dir; };
 struct RotationInputComponent { godot::Vector2 dir; };
 
-struct AttackInputComponent { godot::Vector2 dir; };
+struct AttackInputComponent
+{
+	godot::Vector2 dir;
+	bool alt;
+	bool leg;
+};
 struct AttackInputAggregatorComponent
 {
 	using AggregatorType = std::array<float, 4>;

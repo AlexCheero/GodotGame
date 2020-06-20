@@ -258,7 +258,10 @@ void godot::ECSWorld::LoadMeleeAttacksConfig()
 			hitsCfg->get_value(section, "damage"),
 			hitsCfg->get_value(section, "attackTime"),
 			hitsCfg->get_value(section, "maxDistance"),
-			hitsCfg->get_value(section, "minDistance")
+			hitsCfg->get_value(section, "minDistance"),
+			std::vector<float>(),
+			hitsCfg->get_value(section, "alt"),
+			hitsCfg->get_value(section, "leg")
 		};
 
 		Array arr = hitsCfg->get_value(section, "pattern");
