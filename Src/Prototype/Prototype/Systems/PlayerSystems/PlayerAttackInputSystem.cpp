@@ -76,7 +76,7 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 		}
 
 		if (inputAggregator.angles[inputAggregator.angles.size() - 1] > 0 ||
-			OS::get_singleton()->get_ticks_msec() - inputAggregator.startTime >= patternMatchingTime) //TODO0: reset earlier if out of patterns to match
+			OS::get_singleton()->get_ticks_msec() - inputAggregator.startTime >= patternMatchingTime) //TODO: try to reset earlier if out of patterns to match
 		{
 			int patternIndex = -1;
 			int patternLength = 0;
@@ -91,10 +91,7 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 			}
 
 			if (patternIndex >= 0)
-			{
-				//Godot::print(MeleeAttackComponent::hitsData[patternIndex].name + " matched");
-				registry.emplace<MeleeAttackParameterizedEvent>(entity).attackName = MeleeAttackComponent::hitsData[patternIndex].name;
-			}
+				registry.emplace<MeleeAttackParameterizedEvent>(entity).hitIndex = patternIndex;
 
 			for (int i = 0; i < inputAggregator.angles.size(); i++)
 				inputAggregator.angles[i] = -1;

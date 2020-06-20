@@ -17,13 +17,15 @@ void godot::MeleeAnimSystem::Tick(float delta, entt::registry& registry)
 		int prevAnimIdx = attackComp.hitIdx - 1;
 		if (prevAnimIdx < 0)
 			prevAnimIdx = attackComp.hits.size() - 1;
-		String animName = evt.attackName;// attackComp.GetCurrentHit().name;
+
+		const MeleeHit& currentHit = MeleeAttackComponent::hitsData[evt.hitIndex];
+		String animName = currentHit.name;
 		//TODO0: remove old incremental combo system
 		//String prevAnimName = attackComp.hits[prevAnimIdx].name;
 
 		AnimationPlayer* pAnimPlayer = Object::cast_to<AnimationPlayer>(pAnimTree->get_node(pAnimTree->get_animation_player()));
 		Ref<Animation> anim = pAnimPlayer->get_animation(animName);
-		float timeScale = anim->get_length() / attackComp.GetCurrentHit().attackTime;
+		float timeScale = anim->get_length() / currentHit.attackTime;
 		pAnimTree->set("parameters/" + animName + "_TimeScale/scale", timeScale);
 
 		registry.emplace_or_replace<AttackAnimPlayingComponent>(entity).playBackTimeLeft = anim->get_length() / timeScale;

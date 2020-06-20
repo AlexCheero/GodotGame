@@ -58,12 +58,14 @@ REGISTRABLE_COMPONENT(MeleeWeaponComponent)
 
 struct MeleeAttackBuffered
 {
-	godot::String attackName;
+	int hitIndex;
 };
-//TODO: implement parameterized events
+
+//TODO0: implement parameterized events
+//TODO0: many systems uses this as tag. refactor it
 struct MeleeAttackParameterizedEvent
 {
-	godot::String attackName;
+	int hitIndex;
 };
 
 TAG(CurrentWeaponRangedTag);

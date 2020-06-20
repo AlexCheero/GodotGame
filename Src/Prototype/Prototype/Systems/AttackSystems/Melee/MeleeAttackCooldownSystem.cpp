@@ -21,7 +21,7 @@ void godot::MeleeAttackCooldownSystem::Tick(float delta, entt::registry& registr
 		{
 			cdComp.prevHitTime = currTimeMillis;
 
-			registry.emplace_or_replace<MeleeAttackParameterizedEvent>(entity).attackName = buffered.attackName;
+			registry.emplace_or_replace<MeleeAttackParameterizedEvent>(entity).hitIndex = buffered.hitIndex;
 			registry.remove<MeleeAttackBuffered>(entity);
 		}
 	});
@@ -40,7 +40,7 @@ void godot::MeleeAttackCooldownSystem::Tick(float delta, entt::registry& registr
 		}
 		else if (millisSinceLastHit >= MILLIS_TO_KEEP_COMBO && millisSinceLastHit < maxComboIntervalMillis)
 		{
-			registry.emplace<MeleeAttackBuffered>(entity).attackName = attackEvent.attackName;
+			registry.emplace<MeleeAttackBuffered>(entity).hitIndex = attackEvent.hitIndex;
 			registry.remove<MeleeAttackParameterizedEvent>(entity);
 		}
 	});

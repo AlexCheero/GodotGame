@@ -348,10 +348,10 @@ void godot::ECSWorld::_init()
 	process_systems.emplace_back(FleeingSystem::Tick);
 	process_systems.emplace_back(LocomotionAnimSystem::Tick);
 
-	//TODO: clear events before system where it was assigned, not in the end of frame
+	//TODO0: clear events before system where it was assigned, not in the end of frame
 	PrepareEcsEventsClearingSystems<ECS_EVENTS>(process_systems);
 
-	//TODO: remove when parameterized events will bew implemented
+	//TODO0: remove when parameterized events will bew implemented
 	process_systems.emplace_back([](float delta, entt::registry& registry)
 	{
 		auto view = registry.view<MeleeAttackParameterizedEvent>();
