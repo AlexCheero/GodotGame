@@ -86,6 +86,7 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 			for (int i = 0; i < MeleeAttackComponent::hitsData.size(); i++)
 			{
 				const MeleeHit& currentHit = MeleeAttackComponent::hitsData[i];
+				//TODO0: don't skip if pattern does not provide alt/leg hit
 				if (input.alt != currentHit.alt || input.leg != currentHit.leg)
 					continue;
 
