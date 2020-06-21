@@ -21,6 +21,6 @@ namespace godot
 
 		static Vector2 GetInputDirection(Input* pInput, String actionPrefix);
 	public:
-		static void HandleInput(entt::registry& registry/*, InputEvent* e*/);
+		static void HandleInput(entt::registry& registry, InputEvent* e);
 	};
 }

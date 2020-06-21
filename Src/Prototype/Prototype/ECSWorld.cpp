@@ -354,7 +354,7 @@ void godot::ECSWorld::_init()
 	//TODO0: clear events before system where it was assigned, not in the end of frame
 	PrepareEcsEventsClearingSystems<ECS_EVENTS>(process_systems);
 
-	//TODO0: remove when parameterized events will bew implemented
+	//TODO0: remove when parameterized events will be implemented
 	process_systems.emplace_back([](float delta, entt::registry& registry)
 	{
 		auto view = registry.view<MeleeAttackParameterizedEvent>();
@@ -386,7 +386,7 @@ void godot::ECSWorld::HandleInputEvent(InputEvent* e)
 	else if (e->is_action_pressed("ui_cancel"))
 		get_tree()->quit();
 	else
-		 PlayerInputSystem::HandleInput(registry);
+		 PlayerInputSystem::HandleInput(registry, e);
 	
 }
 

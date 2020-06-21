@@ -1,5 +1,7 @@
 #include "PlayerInputSystem.h"
 
+#include <InputEventMouseMotion.hpp>
+
 #include "../../Components/InputComponents.h"
 #include "../../Utils/Utils.h"
 
@@ -42,7 +44,7 @@ void godot::PlayerInputSystem::ProcessInputAxis(entt::registry& registry, godot:
 	view.each([direction](T& inputComp) { inputComp.dir = direction; });
 }
 
-void godot::PlayerInputSystem::HandleInput(entt::registry& registry)
+void godot::PlayerInputSystem::HandleInput(entt::registry& registry, InputEvent* e)
 {
 	godot::Input* pInput = godot::Input::get_singleton();
 
@@ -56,6 +58,21 @@ void godot::PlayerInputSystem::HandleInput(entt::registry& registry)
 	ProcessInputAxis<MoveDirInputComponent>(registry, GetInputDirection(pInput, "move"));
 	ProcessInputAxis<RotationInputComponent>(registry, GetInputDirection(pInput, "rotate"));
 	
+	InputEventMouseMotion* pMouseEvent = Object::cast_to<InputEventMouseMotion>(e);
+	if (pMouseEvent)
+	{
+		static real_t prevAngle = 0;
+		Vector2 speed = pMouseEvent->get_speed();
+		real_t angle = speed.angle();
+
+		if (utils::RealEquals(prevAngle, angle, 0.01f))
+			return;
+
+		prevAngle = angle;
+		//process mouse motion events
+		Godot::print("angle: " + String::num(utils::Rad2deg(angle)) + ", speed: " + String::num(speed.x) + ", " + String::num(speed.y));
+	}
+
 	Vector2 attackDirection = GetInputDirection(pInput, "attack_area");
 	bool altAttack = pInput->is_action_pressed("alt_melee_attack");
 	bool legAttack = pInput->is_action_pressed("leg_melee_attack");

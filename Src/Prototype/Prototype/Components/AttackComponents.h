@@ -47,6 +47,7 @@ struct MeleeAttackComponent
 {
 	static std::vector<MeleeHit> hitsData;
 
+	//TODO0: deprecated stuff. remove when I decide what to do with combo system
 	std::vector<MeleeHit> hits;
 	int hitIdx = 0;
 	
