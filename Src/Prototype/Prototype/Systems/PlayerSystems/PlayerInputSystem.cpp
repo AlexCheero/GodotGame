@@ -61,16 +61,12 @@ void godot::PlayerInputSystem::HandleInput(entt::registry& registry, InputEvent*
 	InputEventMouseMotion* pMouseEvent = Object::cast_to<InputEventMouseMotion>(e);
 	if (pMouseEvent)
 	{
-		static real_t prevAngle = 0;
-		Vector2 speed = pMouseEvent->get_speed();
-		real_t angle = speed.angle();
+		Vector2 relative = pMouseEvent->get_relative();
+		relative.y *= -1;
+		real_t angle = utils::Rad2deg(relative.angle());
 
-		if (utils::RealEquals(prevAngle, angle, 0.01f))
-			return;
-
-		prevAngle = angle;
-		//process mouse motion events
-		Godot::print("angle: " + String::num(utils::Rad2deg(angle)) + ", speed: " + String::num(speed.x) + ", " + String::num(speed.y));
+		if (angle < 0)
+			angle += 360;
 	}
 
 	Vector2 attackDirection = GetInputDirection(pInput, "attack_area");

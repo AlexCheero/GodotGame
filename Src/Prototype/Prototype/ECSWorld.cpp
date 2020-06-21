@@ -285,7 +285,7 @@ void godot::ECSWorld::_register_methods()
 void godot::ECSWorld::_init()
 {
 	//TODO: move to more appropriate place (with #include <Input.hpp>)
-	//Input::get_singleton()->set_mouse_mode(Input::MOUSE_MODE_CAPTURED);
+	Input::get_singleton()->set_mouse_mode(Input::MOUSE_MODE_CAPTURED);
 
 	InitInstance(this);
 
