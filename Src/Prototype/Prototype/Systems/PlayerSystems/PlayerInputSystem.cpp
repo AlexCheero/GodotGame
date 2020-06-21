@@ -69,6 +69,7 @@ void godot::PlayerInputSystem::HandleInput(entt::registry& registry, InputEvent*
 			angle += 360;
 	}
 
+	//TODO: use joystick style keyboard arrows as alternative to mouse movement
 	Vector2 attackDirection = GetInputDirection(pInput, "attack_area");
 	bool altAttack = pInput->is_action_pressed("alt_melee_attack");
 	bool legAttack = pInput->is_action_pressed("leg_melee_attack");

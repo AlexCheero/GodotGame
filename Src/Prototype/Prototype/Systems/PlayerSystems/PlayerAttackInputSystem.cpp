@@ -78,6 +78,7 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 		if (inputAggregator.angles[0] < 0)
 			return;
 
+		//TODO0: don't reset on CD for mouse, without additional input
 		if (inputAggregator.angles[inputAggregator.angles.size() - 1] > 0 ||
 			OS::get_singleton()->get_ticks_msec() - inputAggregator.startTime >= patternMatchingTime) //TODO: try to reset earlier if out of patterns to match
 		{
