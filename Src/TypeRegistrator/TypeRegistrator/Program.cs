@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace TypeRegistrator
 {
+    //TODO: implement static assert checking registartor version in project
     class Program
     {
         static void Main(string[] args)
