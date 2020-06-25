@@ -56,14 +56,19 @@ bool godot::PlayerAttackInputSystem::MatchPattern(AttackInputAggregatorComponent
 void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 {
 	auto aggregateView = registry.view<PlayerTag, AttackInputComponent, AttackInputAggregatorComponent>();
-	aggregateView.each([](AttackInputComponent& input, AttackInputAggregatorComponent& inputAggregator)
+	aggregateView.each([&registry](entt::entity entity, AttackInputComponent& input, AttackInputAggregatorComponent& inputAggregator)
 	{
 		if (input.dir.length_squared() == 0)
 			return;
 		
 		float angle = ClampInputAngle(input.dir);
+
 		//reset input for mouse
 		input.dir = Vector2(0, 0);
+
+		//TODO0: try to refactor it in more ecs/dod way. move up into separate system or something
+		if (registry.has<AttackAnimPlayingComponent>(entity))
+			return;
 
 		if (inputAggregator.angles[0] < 0)
 		{
@@ -74,12 +79,15 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 		{
 			for (int i = 1; i < inputAggregator.angles.size(); i++)
 			{
-				if (inputAggregator.angles[i] > -1 || utils::RealEquals(inputAggregator.angles[i - 1], angle, 0.1f))
+				if (inputAggregator.angles[i] > -1)
 					continue;
+
+				if (utils::RealEquals(inputAggregator.angles[i - 1], angle, 0.1f))
+					break;
 
 				inputAggregator.startTime = OS::get_singleton()->get_ticks_msec();
 				inputAggregator.angles[i] = angle;
-				
+
 				break;
 			}
 		}

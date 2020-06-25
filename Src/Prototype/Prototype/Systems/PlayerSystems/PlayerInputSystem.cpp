@@ -62,18 +62,12 @@ void godot::PlayerInputSystem::HandleInput(entt::registry& registry, InputEvent*
 	Vector2 attackDirection = GetInputDirection(pInput, "attack_area");
 
 	//TODO0: check if mouse used as attack input
-	//TODO0: extra attacks because of input spam
+	//TODO0: and also should check if in melee mode no difference mouse or joystick mode
 	InputEventMouseMotion* pMouseEvent = Object::cast_to<InputEventMouseMotion>(e);
 	if (pMouseEvent)
 	{
-		Vector2 relative = pMouseEvent->get_relative();
-		relative.y *= -1;
-		real_t angle = utils::Rad2deg(relative.angle());
-
-		if (angle < 0)
-			angle += 360;
-
-		attackDirection = relative;
+		attackDirection = pMouseEvent->get_relative();
+		attackDirection.y *= -1;
 	}
 
 	bool altAttack = pInput->is_action_pressed("alt_melee_attack");
