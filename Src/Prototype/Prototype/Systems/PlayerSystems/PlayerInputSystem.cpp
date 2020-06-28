@@ -63,20 +63,24 @@ void godot::PlayerInputSystem::HandleInput(entt::registry& registry, InputEvent*
 
 	//TODO0: check if mouse used as attack input
 	//TODO0: and also should check if in melee mode no difference mouse or joystick mode
+	bool isAttackByMosue = false;
 	InputEventMouseMotion* pMouseEvent = Object::cast_to<InputEventMouseMotion>(e);
 	if (pMouseEvent)
 	{
+		//TODO0: mouse direction could change smoothly resulting in wrong intermediate angles
 		attackDirection = pMouseEvent->get_relative();
 		attackDirection.y *= -1;
+		isAttackByMosue = true;
 	}
 
 	bool altAttack = pInput->is_action_pressed("alt_melee_attack");
 	bool legAttack = pInput->is_action_pressed("leg_melee_attack");
 	auto attackInputView = registry.view<PlayerTag, AttackInputComponent>();
-	attackInputView.each([attackDirection, altAttack, legAttack](AttackInputComponent& inputComp)
+	attackInputView.each([attackDirection, altAttack, legAttack, isAttackByMosue](AttackInputComponent& inputComp)
 	{
 		inputComp.dir = attackDirection;
 		inputComp.alt = altAttack;
 		inputComp.leg = legAttack;
+		inputComp.mouseInput = isAttackByMosue;
 	});
 }

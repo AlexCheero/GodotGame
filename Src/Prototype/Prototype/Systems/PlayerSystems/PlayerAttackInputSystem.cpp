@@ -33,8 +33,8 @@ float godot::PlayerAttackInputSystem::ClampInputAngle(Vector2 dir)
 	return resultAngle;
 }
 
-//TODO0: needed different patterns for mouse
-bool godot::PlayerAttackInputSystem::MatchPattern(AttackInputAggregatorComponent::AggregatorType aggregation, std::vector<float> pattern)
+//TODO: problem with matching patterns, that starts from diagonal angles, on arrow keys
+bool godot::PlayerAttackInputSystem::MatchPattern(const AttackInputAggregatorComponent::AggregatorType& aggregation, const std::vector<float>& pattern)
 {
 	int i = 0;
 	int patternIndex = 0;
@@ -50,6 +50,35 @@ bool godot::PlayerAttackInputSystem::MatchPattern(AttackInputAggregatorComponent
 	}
 
 	return false;
+}
+
+//TODO0: convert once on config load
+//TODO0: convert mouse input to stick angles because mouse patterns can have more angles than stcik patterns
+std::vector<float> godot::PlayerAttackInputSystem::ConvertToMousePattern(const std::vector<float>& pattern)
+{
+	ASSERT(pattern.size() > 0, "trying to convert empty pattern");
+	if (pattern.size() == 1)
+		return pattern;
+
+	std::vector<float> convertedpattern;
+	convertedpattern.push_back(pattern[0]);
+	for (int i = 1; i < pattern.size(); i++)
+	{
+		Vector2 prevDir = GetDirFromAngle(pattern[i - 1]);
+		Vector2 currDir = GetDirFromAngle(pattern[i]);
+		
+		float convertedAngle = ClampInputAngle(currDir - prevDir);
+		convertedpattern.push_back(convertedAngle);
+	}
+
+	return convertedpattern;
+}
+
+//TODO: this conversion fails if there will be more than 8 sectors!!!
+godot::Vector2 godot::PlayerAttackInputSystem::GetDirFromAngle(float angle)
+{
+	float radAngle = utils::Deg2rad(angle);
+	return Vector2(utils::sign(cos(radAngle)), utils::sign(sin(radAngle)));
 }
 
 //TODO0: probably merge with MeleeAttackCooldownSystem or opposite- split into several systems
@@ -112,7 +141,8 @@ void godot::PlayerAttackInputSystem::Tick(float delta, entt::registry& registry)
 			if (input.alt != currentHit.alt || input.leg != currentHit.leg)
 				continue;
 
-			if (MatchPattern(inputAggregator.angles, currentHit.inputPattern))
+			const std::vector<float>& pattern = !input.mouseInput ? currentHit.inputPattern : ConvertToMousePattern(currentHit.inputPattern);
+			if (MatchPattern(inputAggregator.angles, pattern))
 			{
 				if (currentHit.inputPattern.size() > patternLength)
 					patternIndex = i;

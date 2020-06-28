@@ -23,7 +23,9 @@ struct AttackInputComponent
 	godot::Vector2 dir;
 	bool alt;
 	bool leg;
+	bool mouseInput;
 };
+
 struct AttackInputAggregatorComponent
 {
 	using AggregatorType = std::array<float, 4>;
