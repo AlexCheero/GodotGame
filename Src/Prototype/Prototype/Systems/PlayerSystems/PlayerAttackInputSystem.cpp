@@ -33,7 +33,7 @@ float godot::PlayerAttackInputSystem::ClampInputAngle(Vector2 dir)
 	return resultAngle;
 }
 
-//TODO0: problem with matching patterns, that starts from diagonal angles, on arrow keys
+//TODO: hard to use arrow keys, maybe implement some kind of minimal press time/input events to make input more responsive
 bool godot::PlayerAttackInputSystem::MatchPattern(const AttackInputAggregatorComponent::AggregatorType& aggregation, const std::vector<float>& pattern)
 {
 	int i = 0;
