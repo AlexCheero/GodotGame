@@ -21,6 +21,7 @@ struct RotationInputComponent { godot::Vector2 dir; };
 struct AttackInputComponent
 {
 	godot::Vector2 dir;
+	//TODO: or should I use 4 different buttons for every limb?
 	bool alt;
 	bool leg;
 };
