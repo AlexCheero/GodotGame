@@ -23,7 +23,6 @@ struct AttackInputComponent
 	godot::Vector2 dir;
 	bool alt;
 	bool leg;
-	bool mouseInput;
 };
 
 struct AttackInputAggregatorComponent

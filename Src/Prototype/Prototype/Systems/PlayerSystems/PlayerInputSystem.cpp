@@ -58,29 +58,25 @@ void godot::PlayerInputSystem::HandleInput(entt::registry& registry, InputEvent*
 	ProcessInputAxis<MoveDirInputComponent>(registry, GetInputDirection(pInput, "move"));
 	ProcessInputAxis<RotationInputComponent>(registry, GetInputDirection(pInput, "rotate"));
 
-	//TODO: use joystick style keyboard arrows as alternative to mouse movement
 	Vector2 attackDirection = GetInputDirection(pInput, "attack_area");
 
 	//TODO0: check if mouse used as attack input
 	//TODO0: and also should check if in melee mode no difference mouse or joystick mode
-	bool isAttackByMosue = false;
+	//TODO0: try to assign if direction.length > 0 and remove check from PlayerAttackInputSystem::Tick
 	InputEventMouseMotion* pMouseEvent = Object::cast_to<InputEventMouseMotion>(e);
 	if (pMouseEvent)
 	{
-		//TODO0: mouse direction could change smoothly resulting in wrong intermediate angles
-		attackDirection = pMouseEvent->get_relative();
+		attackDirection += pMouseEvent->get_relative();
 		attackDirection.y *= -1;
-		isAttackByMosue = true;
 	}
 
 	bool altAttack = pInput->is_action_pressed("alt_melee_attack");
 	bool legAttack = pInput->is_action_pressed("leg_melee_attack");
 	auto attackInputView = registry.view<PlayerTag, AttackInputComponent>();
-	attackInputView.each([attackDirection, altAttack, legAttack, isAttackByMosue](AttackInputComponent& inputComp)
+	attackInputView.each([attackDirection, altAttack, legAttack](AttackInputComponent& inputComp)
 	{
 		inputComp.dir = attackDirection;
 		inputComp.alt = altAttack;
 		inputComp.leg = legAttack;
-		inputComp.mouseInput = isAttackByMosue;
 	});
 }
